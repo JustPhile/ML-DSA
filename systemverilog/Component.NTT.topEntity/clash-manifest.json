@@ -1,0 +1,108 @@
+{
+    "components": [
+        "NTT256"
+    ],
+    "dependencies": {
+        "transitive": []
+    },
+    "domains": {
+        "IntelSystem": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Asynchronous",
+            "reset_polarity": "ActiveHigh"
+        },
+        "System": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Asynchronous",
+            "reset_polarity": "ActiveHigh"
+        },
+        "XilinxSystem": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Synchronous",
+            "reset_polarity": "ActiveHigh"
+        }
+    },
+    "files": [
+        {
+            "name": "NTT256.sdc",
+            "sha256": "13d4c1aafcc09a84d81d3b60d513cb901384a10e27e5a5a16572a600f15895f3"
+        },
+        {
+            "name": "NTT256_types.sv",
+            "sha256": "b2f65f549304e38e133fc10920ca21bf9044a5c75bafa183517962c651e291df"
+        },
+        {
+            "name": "NTT256.sv",
+            "sha256": "902d3766631f989c33f6af6dc2418d91339fbf91c834863eddb9c02607b8ee1d"
+        }
+    ],
+    "flags": [
+        20,
+        20
+    ],
+    "hash": "8b7fa0c2cdd5c28f2b5843a53779d672977e8985830f274fdd742bdc384c51e3",
+    "top_component": {
+        "name": "NTT256",
+        "ports_flat": [
+            {
+                "direction": "in",
+                "domain": "System",
+                "is_clock": true,
+                "name": "clk",
+                "type_name": "logic",
+                "width": 1
+            },
+            {
+                "direction": "in",
+                "domain": "System",
+                "is_clock": false,
+                "name": "rst",
+                "type_name": "logic",
+                "width": 1
+            },
+            {
+                "direction": "in",
+                "domain": "System",
+                "is_clock": false,
+                "name": "en",
+                "type_name": "logic",
+                "width": 1
+            },
+            {
+                "direction": "in",
+                "is_clock": false,
+                "name": "start",
+                "type_name": "logic",
+                "width": 1
+            },
+            {
+                "direction": "in",
+                "is_clock": false,
+                "name": "poly",
+                "type_name": "logic [5887:0]",
+                "width": 5888
+            },
+            {
+                "direction": "out",
+                "is_clock": false,
+                "name": "done",
+                "type_name": "logic",
+                "width": 1
+            },
+            {
+                "direction": "out",
+                "is_clock": false,
+                "name": "result",
+                "type_name": "logic [5887:0]",
+                "width": 5888
+            }
+        ]
+    },
+    "version": "unstable"
+}

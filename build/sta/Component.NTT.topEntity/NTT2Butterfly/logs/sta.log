@@ -1,0 +1,45 @@
+OpenSTA 3.1.0 3ce15f0f72 Copyright (c) 2026, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+ML-DSA OpenSTA Analysis
+===========================
+Liberty File: /workspace/ML-DSA/lib/nangate45/NangateOpenCellLibrary_typical.lib
+Netlist File: /workspace/ML-DSA/build/synth/Component.NTT.topEntity/netlist/NTT2Butterfly.mapped.v
+SDC File: /workspace/ML-DSA/build/sta/NTT2Butterfly.sdc
+Top Module: NTT2Butterfly
+Reports Dir: /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT2Butterfly/reports
+
+Reading liberty file...
+Reading netlist...
+Linking design...
+Reading timing constraints...
+create_clock -name {clk} -period 5.000 -waveform {0.000 2.500} [get_ports {clk}]
+
+===================================================================
+PURE COMBINATIONAL DESIGN DETECTED
+===================================================================
+No registers found in design. This is a pure combinational module.
+Adding input/output delay constraints for in2out path analysis...
+
+Using clock 'clk' for I/O delay constraints
+Input/output delay constraints added for combinational analysis
+===================================================================
+
+Design setup completed.
+
+Found 141 input ports and 92 output ports
+Generating overall timing report...
+Reporting overall timing to /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT2Butterfly/reports/timing/overall.rpt and /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT2Butterfly/reports/timing/overall.csv.rpt
+Setting up path groups...
+Found path groups: in2out
+Generating report for path group: in2out
+Reporting in2out to /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT2Butterfly/reports/timing/in2out.rpt and /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT2Butterfly/reports/timing/in2out.csv.rpt
+Generating area report...
+Generating clock report...
+Generating summary metrics report...
+
+Static timing analysis completed!
+Reports available in: /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT2Butterfly/reports

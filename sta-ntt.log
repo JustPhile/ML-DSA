@@ -1,0 +1,133 @@
+ML-DSA Static Timing Analysis (Docker mode)
+  Target: NTT
+  Process: nangate45
+Building Docker image ML-DSA/sta:latest...
+This may take several minutes on first run...
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 DONE 0.0s
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.49kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/ubuntu:22.04
+#2 DONE 1.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/9] FROM docker.io/library/ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982
+#4 resolve docker.io/library/ubuntu:22.04@sha256:0e0a0fc6d18feda9db1590da249ac93e8d5abfea8f4c3c0c849ce512b5ef8982 done
+#4 DONE 0.0s
+
+#5 [8/9] RUN pip3 install --no-cache-dir pyyaml numpy
+#5 CACHED
+
+#6 [7/9] RUN git clone --depth 1         https://github.com/The-OpenROAD-Project/OpenSTA.git /opt/OpenSTA &&     cmake -S /opt/OpenSTA -B /opt/OpenSTA/build         -DCMAKE_BUILD_TYPE=Release         -DCMAKE_C_COMPILER=/usr/bin/gcc         -DCMAKE_CXX_COMPILER=/usr/bin/g++         -DCMAKE_CXX_STANDARD=20         -DCMAKE_CXX_STANDARD_REQUIRED=ON         -DCUDD_DIR=/usr/local &&     cmake --build /opt/OpenSTA/build --parallel "8"
+#6 CACHED
+
+#7 [3/9] RUN command -v gcc && gcc --version &&     command -v g++ && g++ --version
+#7 CACHED
+
+#8 [4/9] RUN wget -qO /usr/local/bin/yq         https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 &&     chmod +x /usr/local/bin/yq
+#8 CACHED
+
+#9 [2/9] RUN apt-get update &&     apt-get install -y --no-install-recommends         tzdata         vim         gcc         g++         make         cmake         git         wget         python3         python3-pip         swig         flex         libfl-dev         bison         tcl-dev         tk-dev         libeigen3-dev         libgtest-dev         libc6-dev         libffi-dev         libgmp-dev         zlib1g-dev         xz-utils         gnupg         netbase         m4         tcsh         gdb         autoconf         automake         libtool &&     apt-get clean &&     rm -rf /var/lib/apt/lists/*
+#9 CACHED
+
+#10 [5/9] RUN wget -q         https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2023-07-19/oss-cad-suite-linux-x64-20230719.tgz         -O /tmp/oss-cad-suite.tgz &&     tar -xzf /tmp/oss-cad-suite.tgz -C / &&     rm /tmp/oss-cad-suite.tgz
+#10 CACHED
+
+#11 [6/9] RUN git clone --depth 1 --branch 3.0.0         https://github.com/cuddorg/cudd.git /opt/cudd &&     cd /opt/cudd &&     autoreconf -fiv &&     ./configure         --prefix=/usr/local         --enable-shared         --enable-obj &&     make -j"8" &&     make install &&     ldconfig
+#11 CACHED
+
+#12 [9/9] WORKDIR /workspace/ML-DSA
+#12 CACHED
+
+#13 exporting to image
+#13 exporting layers done
+#13 exporting manifest sha256:57d0d0de48c98053b4352c4c9e41d1df77bdc8e232d60df278e719ed6c377fd2 done
+#13 exporting config sha256:68e511cd9b11bd6967b0187c2df455a819715f2cb3a9e56001a874992ec13bd6 done
+#13 exporting attestation manifest sha256:007ace9c4d0ebba3e0c4ad4755c8d5dcd8d47cadaca126e1062e48336e52332a done
+#13 exporting manifest list sha256:b6adafd4ba3de47ade3d4248ef5d8197d4f3fa9a3316e0f1a4399d0cbaee716f done
+#13 naming to ML-DSA/sta:latest done
+#13 unpacking to ML-DSA/sta:latest done
+#13 DONE 0.0s
+ML-DSA Static Timing Analysis Starting...
+  Process: nangate45
+  Target: NTT
+Using nangate45 library: /workspace/ML-DSA/lib/nangate45/NangateOpenCellLibrary_typical.lib
+✓ Yosys found: Yosys 0.31+1 (git sha1 83c9261d6, clang 10.0.0-4ubuntu1 -fPIC -Os)
+Using Clash-generated SDC: /workspace/ML-DSA/systemverilog/Component.NTT.topEntity/NTT.sdc
+  Resolved top module: NTT
+ML-DSA Static Timing Analysis Configuration:
+  Process: nangate45
+  Liberty File: /workspace/ML-DSA/lib/nangate45/NangateOpenCellLibrary_typical.lib
+  Netlist File: /workspace/ML-DSA/build/synth/Component.NTT.topEntity/netlist/NTT.mapped.v
+  SDC File: /workspace/ML-DSA/build/sta/NTT.sdc
+  Top Module: NTT
+  Output Dir: /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT
+
+Running OpenSTA...
+OpenSTA 3.1.0 3ce15f0f72 Copyright (c) 2026, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+ML-DSA OpenSTA Analysis
+===========================
+Liberty File: /workspace/ML-DSA/lib/nangate45/NangateOpenCellLibrary_typical.lib
+Netlist File: /workspace/ML-DSA/build/synth/Component.NTT.topEntity/netlist/NTT.mapped.v
+SDC File: /workspace/ML-DSA/build/sta/NTT.sdc
+Top Module: NTT
+Reports Dir: /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT/reports
+
+Reading liberty file...
+Reading netlist...
+Linking design...
+Reading timing constraints...
+create_clock -name {clk} -period 5.000 -waveform {0.000 2.500} [get_ports {clk}]
+
+===================================================================
+PURE COMBINATIONAL DESIGN DETECTED
+===================================================================
+No registers found in design. This is a pure combinational module.
+Adding input/output delay constraints for in2out path analysis...
+
+Using clock 'clk' for I/O delay constraints
+Input/output delay constraints added for combinational analysis
+===================================================================
+
+Design setup completed.
+
+Found 72 input ports and 46 output ports
+Generating overall timing report...
+Reporting overall timing to /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT/reports/timing/overall.rpt and /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT/reports/timing/overall.csv.rpt
+Setting up path groups...
+Found path groups: in2out
+Generating report for path group: in2out
+Reporting in2out to /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT/reports/timing/in2out.rpt and /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT/reports/timing/in2out.csv.rpt
+Generating area report...
+Generating clock report...
+Generating summary metrics report...
+
+Static timing analysis completed!
+Reports available in: /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT/reports
+✓ Static Timing Analysis completed successfully!
+Reports generated in: /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT/reports
+Log: /workspace/ML-DSA/build/sta/Component.NTT.topEntity/NTT/logs/sta.log
+
+Timing Summary:
+==================================================
+  Design Type:     Pure Combinational (No Registers)
+  
+  Combinational Delay: 11.440 ns
+  Required Time:       5.000 ns
+  Slack:               -6.440 ns
+  
+  Max Frequency:       87.41 MHz (if used combinationally)
+==================================================

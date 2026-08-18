@@ -1,0 +1,115 @@
+{
+    "components": [
+        "Butterfly"
+    ],
+    "dependencies": {
+        "transitive": []
+    },
+    "domains": {
+        "IntelSystem": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Asynchronous",
+            "reset_polarity": "ActiveHigh"
+        },
+        "System": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Asynchronous",
+            "reset_polarity": "ActiveHigh"
+        },
+        "XilinxSystem": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Synchronous",
+            "reset_polarity": "ActiveHigh"
+        }
+    },
+    "files": [
+        {
+            "name": "Butterfly.sdc",
+            "sha256": "13d4c1aafcc09a84d81d3b60d513cb901384a10e27e5a5a16572a600f15895f3"
+        },
+        {
+            "name": "Butterfly_types.sv",
+            "sha256": "ac08e7520c81c978d06e4a446a9c30a9fcafb9e3afeffe0fc881421c7c80d3cc"
+        },
+        {
+            "name": "Butterfly.sv",
+            "sha256": "e6c0074ca8cbbf2b93aae28cc362cac1d4f5052116e49f635e782de721845b16"
+        }
+    ],
+    "flags": [
+        20,
+        20
+    ],
+    "hash": "60e95d2b0aabbbe6018ff472498aecb2a15a25aac56ec29314a7aaf086393312",
+    "top_component": {
+        "name": "Butterfly",
+        "ports_flat": [
+            {
+                "direction": "in",
+                "domain": "System",
+                "is_clock": true,
+                "name": "clk",
+                "type_name": "logic",
+                "width": 1
+            },
+            {
+                "direction": "in",
+                "domain": "System",
+                "is_clock": false,
+                "name": "rst",
+                "type_name": "logic",
+                "width": 1
+            },
+            {
+                "direction": "in",
+                "domain": "System",
+                "is_clock": false,
+                "name": "en",
+                "type_name": "logic",
+                "width": 1
+            },
+            {
+                "direction": "in",
+                "is_clock": false,
+                "name": "a",
+                "type_name": "logic [22:0]",
+                "width": 23
+            },
+            {
+                "direction": "in",
+                "is_clock": false,
+                "name": "b",
+                "type_name": "logic [22:0]",
+                "width": 23
+            },
+            {
+                "direction": "in",
+                "is_clock": false,
+                "name": "zeta",
+                "type_name": "logic [22:0]",
+                "width": 23
+            },
+            {
+                "direction": "out",
+                "is_clock": false,
+                "name": "outA",
+                "type_name": "logic [22:0]",
+                "width": 23
+            },
+            {
+                "direction": "out",
+                "is_clock": false,
+                "name": "outB",
+                "type_name": "logic [22:0]",
+                "width": 23
+            }
+        ]
+    },
+    "version": "unstable"
+}

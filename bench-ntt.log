@@ -1,0 +1,15 @@
+NTT
+  build           running...
+  build           run       4.61 s
+  hdl             running...
+  hdl             run      13.84 s
+  synth           running...
+  synth           run    5220.20 s
+  sta             running...
+clash-hash Static Timing Analysis (Docker mode)
+  Target: NTT
+  Process: nangate45
+Docker directory not found, cannot build image
+✗ Failed to prepare Docker image
+
+[bench] ERROR: STA for NTT failed (exit 1)

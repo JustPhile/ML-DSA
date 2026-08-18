@@ -10,10 +10,6 @@ cabal.project.local
 cabal.project.freeze
 
 # Clash / synthesis output
-verilog/
-vhdl/
-systemverilog/
-result/
 
 # Haskell generated files
 *.o
@@ -30,4 +26,3 @@ clash.env
 .idea/
 
 # Logs
-*.log

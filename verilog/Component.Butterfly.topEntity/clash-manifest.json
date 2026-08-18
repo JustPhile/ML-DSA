@@ -1,0 +1,111 @@
+{
+    "components": [
+        "Butterfly"
+    ],
+    "dependencies": {
+        "transitive": []
+    },
+    "domains": {
+        "IntelSystem": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Asynchronous",
+            "reset_polarity": "ActiveHigh"
+        },
+        "System": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Asynchronous",
+            "reset_polarity": "ActiveHigh"
+        },
+        "XilinxSystem": {
+            "active_edge": "Rising",
+            "init_behavior": "Defined",
+            "period": 10000,
+            "reset_kind": "Synchronous",
+            "reset_polarity": "ActiveHigh"
+        }
+    },
+    "files": [
+        {
+            "name": "Butterfly.sdc",
+            "sha256": "13d4c1aafcc09a84d81d3b60d513cb901384a10e27e5a5a16572a600f15895f3"
+        },
+        {
+            "name": "Butterfly.v",
+            "sha256": "44474ddb8a5ed99c5b6c561faa7673e9ab514581c97ad667e5f28ad2a95020e9"
+        }
+    ],
+    "flags": [
+        20,
+        20
+    ],
+    "hash": "bc507f0382e5b96eb698fa6655dc5be5222f3b8d7913e24d5736019264763cd3",
+    "top_component": {
+        "name": "Butterfly",
+        "ports_flat": [
+            {
+                "direction": "in",
+                "domain": "System",
+                "is_clock": true,
+                "name": "clk",
+                "type_name": "",
+                "width": 1
+            },
+            {
+                "direction": "in",
+                "domain": "System",
+                "is_clock": false,
+                "name": "rst",
+                "type_name": "",
+                "width": 1
+            },
+            {
+                "direction": "in",
+                "domain": "System",
+                "is_clock": false,
+                "name": "en",
+                "type_name": "",
+                "width": 1
+            },
+            {
+                "direction": "in",
+                "is_clock": false,
+                "name": "a",
+                "type_name": "[22:0]",
+                "width": 23
+            },
+            {
+                "direction": "in",
+                "is_clock": false,
+                "name": "b",
+                "type_name": "[22:0]",
+                "width": 23
+            },
+            {
+                "direction": "in",
+                "is_clock": false,
+                "name": "zeta",
+                "type_name": "[22:0]",
+                "width": 23
+            },
+            {
+                "direction": "out",
+                "is_clock": false,
+                "name": "outA",
+                "type_name": "[22:0]",
+                "width": 23
+            },
+            {
+                "direction": "out",
+                "is_clock": false,
+                "name": "outB",
+                "type_name": "[22:0]",
+                "width": 23
+            }
+        ]
+    },
+    "version": "unstable"
+}
