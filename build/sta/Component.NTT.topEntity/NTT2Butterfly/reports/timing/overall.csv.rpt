@@ -1,0 +1,11 @@
+startpoint,endpoint,slack
+input_butterfly0_b0[9],output_butterfly0_outA0[7],-7.0101
+input_butterfly0_b0[9],output_butterfly0_outA0[16],-7.0015
+input_butterfly1_zeta1[4],output_butterfly1_outA1[12],-6.9976
+input_butterfly0_b0[9],output_butterfly0_outA0[13],-6.9890
+input_butterfly0_b0[9],output_butterfly0_outA0[22],-6.9886
+input_butterfly0_b0[9],output_butterfly0_outA0[4],-6.9869
+input_butterfly0_b0[9],output_butterfly0_outA0[3],-6.9848
+input_butterfly0_b0[9],output_butterfly0_outA0[21],-6.9813
+input_butterfly0_b0[9],output_butterfly0_outA0[2],-6.9772
+input_butterfly0_b0[9],output_butterfly0_outA0[6],-6.9771

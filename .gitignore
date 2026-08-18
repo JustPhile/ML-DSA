@@ -13,7 +13,6 @@ cabal.project.freeze
 verilog/
 vhdl/
 systemverilog/
-build/
 result/
 
 # Haskell generated files

@@ -1,0 +1,34 @@
+{
+  "stages": {
+    "hdl": {
+      "artifacts": [
+        "/home/user/ML-DSA/systemverilog/Component.NTT.topEntity/clash-manifest.json",
+        "/home/user/ML-DSA/systemverilog/Component.NTT.topEntity/NTT256.sdc",
+        "/home/user/ML-DSA/systemverilog/Component.NTT.topEntity/NTT256_types.sv",
+        "/home/user/ML-DSA/systemverilog/Component.NTT.topEntity/NTT256.sv",
+        "/home/user/ML-DSA/verilog/Component.NTT.topEntity/clash-manifest.json",
+        "/home/user/ML-DSA/verilog/Component.NTT.topEntity/NTT256.sdc",
+        "/home/user/ML-DSA/verilog/Component.NTT.topEntity/NTT256.v"
+      ],
+      "key": "4d600328c734f37f47546d87df3f6b4422c73407c4b06cbd729103efb79666cf",
+      "success": true
+    },
+    "sta": {
+      "artifacts": [
+        "/home/user/ML-DSA/build/bench-sta/Component.NTT.topEntity/reports/summary.rpt"
+      ],
+      "key": "93adf8139f86a8664231bee591d2e4293b09b1067102cec506efb72b6a3fd12f",
+      "success": true
+    },
+    "synth": {
+      "artifacts": [
+        "/home/user/ML-DSA/build/synth/Component.NTT.topEntity/netlist/NTT256.mapped.v",
+        "/home/user/ML-DSA/build/synth/Component.NTT.topEntity/reports/yosys.log"
+      ],
+      "key": "2b3f1b584db50d6eaa1bf1adabff5aa512817f77491076855095872494390e9f",
+      "success": true
+    }
+  },
+  "target": "NTT",
+  "top": "NTT256"
+}

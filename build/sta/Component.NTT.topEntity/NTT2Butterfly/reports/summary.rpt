@@ -1,0 +1,7 @@
+Design Type:     Pure Combinational (No Registers)
+
+Combinational Delay: 12.010 ns
+Required Time:       5.000 ns
+Slack:               -7.010 ns
+
+Max Frequency:       83.26 MHz (if used combinationally)

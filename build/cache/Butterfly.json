@@ -1,0 +1,34 @@
+{
+  "stages": {
+    "hdl": {
+      "artifacts": [
+        "/home/user/ML-DSA/systemverilog/Component.Butterfly.topEntity/clash-manifest.json",
+        "/home/user/ML-DSA/systemverilog/Component.Butterfly.topEntity/Butterfly.sdc",
+        "/home/user/ML-DSA/systemverilog/Component.Butterfly.topEntity/Butterfly_types.sv",
+        "/home/user/ML-DSA/systemverilog/Component.Butterfly.topEntity/Butterfly.sv",
+        "/home/user/ML-DSA/verilog/Component.Butterfly.topEntity/clash-manifest.json",
+        "/home/user/ML-DSA/verilog/Component.Butterfly.topEntity/Butterfly.sdc",
+        "/home/user/ML-DSA/verilog/Component.Butterfly.topEntity/Butterfly.v"
+      ],
+      "key": "1e87d695fe680139fd37d6c7145d49730e0e5e09f5a984e3b7c7cde18100fbf5",
+      "success": true
+    },
+    "sta": {
+      "artifacts": [
+        "/home/user/ML-DSA/build/bench-sta/Component.Butterfly.topEntity/reports/summary.rpt"
+      ],
+      "key": "69ec2307dfb92d810153b5919c3e4638fee567b8054450a95c5804a639d67e23",
+      "success": true
+    },
+    "synth": {
+      "artifacts": [
+        "/home/user/ML-DSA/build/synth/Component.Butterfly.topEntity/netlist/Butterfly.mapped.v",
+        "/home/user/ML-DSA/build/synth/Component.Butterfly.topEntity/reports/yosys.log"
+      ],
+      "key": "1e817514ecccae9508fe6e38119b89ca4f32958298cdc8e5a5c72a5927fa8356",
+      "success": true
+    }
+  },
+  "target": "Butterfly",
+  "top": "Butterfly"
+}
