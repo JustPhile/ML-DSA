@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Component.NTT
   ( topEntity
@@ -21,28 +22,12 @@ import Prelude hiding ((!!), repeat, not, (&&))
 
 type Poly = Vec 256 Coeff
 
--- Pipeline request/response
-data ButterflyRequest = ButterflyRequest
-  { reqAIndex    :: Index 256
-  , reqBIndex    :: Index 256
-  , reqA         :: Coeff
-  , reqB         :: Coeff
-  , reqZeta      :: Coeff
-  , reqLastGroup :: Bool
-  }
-  deriving (Generic, NFDataX)
+-- ------------------------------------------------------------------
+-- Controller state
+-- stateUseA == True  : read A, write B
+-- stateUseA == False : read B, write A
+-- ------------------------------------------------------------------
 
-
-data ButterflyResponse = ButterflyResponse
-  { rspAIndex    :: Index 256
-  , rspBIndex    :: Index 256
-  , rspA         :: Coeff
-  , rspB         :: Coeff
-  , rspLastGroup :: Bool
-  }
-  deriving (Generic, NFDataX)
-
--- Controller phase
 data NTTPhase
   = Idle
   | Issue
@@ -50,26 +35,34 @@ data NTTPhase
   deriving (Generic, NFDataX, Eq)
 
 data NTTState = NTTState
-  { statePhase  :: NTTPhase
-  , stateDone   :: Bool
-  , stateStage  :: Index 8
-  , stateOpBase :: Unsigned 9
-  , statePoly   :: Poly
+  { statePhase :: NTTPhase
+  , stateDone  :: Bool
+  , stateStage :: Index 8
+  , stateOp    :: Unsigned 8
+  , stateUseA  :: Bool
+  , stateBufA  :: Poly
+  , stateBufB  :: Poly
   }
   deriving (Generic, NFDataX)
 
 initialState :: NTTState
 initialState =
   NTTState
-    { statePhase  = Idle
-    , stateDone   = False
-    , stateStage  = 0
-    , stateOpBase = 0
-    , statePoly   = repeat 0
+    { statePhase = Idle
+    , stateDone  = False
+    , stateStage = 0
+    , stateOp    = 0
+    , stateUseA  = True
+    , stateBufA  = repeat 0
+    , stateBufB  = repeat 0
     }
 
--- Stage parameters
-stageParameters :: Index 8 -> (Unsigned 9, Unsigned 9)
+-- ------------------------------------------------------------------
+-- NTT stage addressing
+-- ------------------------------------------------------------------
+stageParameters
+  :: Index 8
+  -> (Unsigned 9, Unsigned 9)
 stageParameters stage =
   case stage of
     0 -> (128,   1)
@@ -81,34 +74,27 @@ stageParameters stage =
     6 -> (  2,  64)
     7 -> (  1, 128)
 
--- Generate one butterfly request
-makeRequest :: Unsigned 9 -> NTTState -> (Bool, ButterflyRequest)
-makeRequest lane state =
-  if statePhase state == Issue
-    then
-      (True, request)
-    else
-      (False, request)
+makeIndices
+  :: Index 8
+  -> Unsigned 8
+  -> (Index 256, Index 256, Index 256)
+makeIndices stage opNumber =
+  (aIndex, bIndex, zetaIndex)
   where
-    poly =
-      statePoly state
-
-    stage =
-      stateStage state
-
-    opNumber =
-      stateOpBase state + lane
-
     (len, zetaBase) =
       stageParameters stage
 
+    opWide :: Unsigned 9
+    opWide =
+      resize opNumber
+
     groupIndex :: Unsigned 9
     groupIndex =
-      opNumber `div` len
+      opWide `div` len
 
     position :: Unsigned 9
     position =
-      opNumber `mod` len
+      opWide `mod` len
 
     groupSize :: Unsigned 9
     groupSize =
@@ -134,314 +120,366 @@ makeRequest lane state =
     zetaIndex =
       fromIntegral (zetaBase + groupIndex)
 
-    request =
-      ButterflyRequest
-        { reqAIndex    = aIndex
-        , reqBIndex    = bIndex
-        , reqA         = poly !! aIndex
-        , reqB         = poly !! bIndex
-        , reqZeta      = zetasMont !! zetaIndex
-        , reqLastGroup = stateOpBase state == 124
-        }
+-- ------------------------------------------------------------------
+-- Registered address request
+-- ------------------------------------------------------------------
+data ReadRequest = ReadRequest
+  { rrValid     :: Bool
+  , rrAIndex    :: Index 256
+  , rrBIndex    :: Index 256
+  , rrZetaIndex :: Index 256
+  , rrLast      :: Bool
+  }
+  deriving (Generic, NFDataX)
 
+zeroReadRequest :: ReadRequest
+zeroReadRequest =
+  ReadRequest
+    { rrValid     = False
+    , rrAIndex    = 0
+    , rrBIndex    = 0
+    , rrZetaIndex = 0
+    , rrLast      = False
+    }
 
--- Pipeline one butterfly lane
-pipelineLane :: HiddenClockResetEnable dom
-             => Signal dom (Bool, ButterflyRequest)
-             -> Signal dom (Bool, ButterflyResponse)
-pipelineLane requestSignal =
-  bundle (validDelayed, responseSignal)
+makeReadRequest :: NTTState -> ReadRequest
+makeReadRequest state =
+  ReadRequest
+    { rrValid     = statePhase state == Issue
+    , rrAIndex    = aIndex
+    , rrBIndex    = bIndex
+    , rrZetaIndex = zetaIndex
+    , rrLast      = stateOp state == 127
+    }
   where
+    (aIndex, bIndex, zetaIndex) =
+      makeIndices
+        (stateStage state)
+        (stateOp state)
 
-    -- Extract arithmetic input.
-    butterflyInput =
+-- ------------------------------------------------------------------
+-- Registered coefficient packet
+-- ------------------------------------------------------------------
+data ButterflyPacket = ButterflyPacket
+  { bpValid  :: Bool
+  , bpAIndex :: Index 256
+  , bpBIndex :: Index 256
+  , bpA      :: Coeff
+  , bpB      :: Coeff
+  , bpZeta   :: Coeff
+  , bpLast   :: Bool
+  }
+  deriving (Generic, NFDataX)
+
+zeroButterflyPacket :: ButterflyPacket
+zeroButterflyPacket =
+  ButterflyPacket
+    { bpValid  = False
+    , bpAIndex = 0
+    , bpBIndex = 0
+    , bpA      = 0
+    , bpB      = 0
+    , bpZeta   = 0
+    , bpLast   = False
+    }
+
+readPacket
+  :: NTTState
+  -> ReadRequest
+  -> ButterflyPacket
+readPacket state request =
+  ButterflyPacket
+    { bpValid  = rrValid request
+    , bpAIndex = rrAIndex request
+    , bpBIndex = rrBIndex request
+    , bpA      = sourcePoly !! rrAIndex request
+    , bpB      = sourcePoly !! rrBIndex request
+    , bpZeta   = zetasMont !! rrZetaIndex request
+    , bpLast   = rrLast request
+    }
+  where
+    sourcePoly =
+      if stateUseA state
+        then stateBufA state
+        else stateBufB state
+
+-- ------------------------------------------------------------------
+-- Pipeline response
+-- ------------------------------------------------------------------
+data ButterflyResponse = ButterflyResponse
+  { rspValid  :: Bool
+  , rspAIndex :: Index 256
+  , rspBIndex :: Index 256
+  , rspA      :: Coeff
+  , rspB      :: Coeff
+  , rspLast   :: Bool
+  }
+  deriving (Generic, NFDataX)
+
+zeroButterflyResponse :: ButterflyResponse
+zeroButterflyResponse =
+  ButterflyResponse
+    { rspValid  = False
+    , rspAIndex = 0
+    , rspBIndex = 0
+    , rspA      = 0
+    , rspB      = 0
+    , rspLast   = False
+    }
+
+pipelineLane
+  :: forall dom.
+     HiddenClockResetEnable dom
+  => Signal dom ButterflyPacket
+  -> Signal dom ButterflyResponse
+pipelineLane packetSignal =
+  responseSignal
+  where
+    arithmeticInput :: Signal dom (Coeff, Coeff, Coeff)
+    arithmeticInput =
       fmap
-        (\(_, request) ->
-          ( reqA request
-          , reqB request
-          , reqZeta request
+        (\packet ->
+          ( bpA packet
+          , bpB packet
+          , bpZeta packet
           )
         )
-        requestSignal
+        packetSignal
 
-    -- Actual 3-cycle butterfly datapath.
-    butterflyOutput =
-      butterflyPipeline butterflyInput
+    arithmeticOutput :: Signal dom (Coeff, Coeff)
+    arithmeticOutput =
+      butterflyPipeline arithmeticInput
 
-    -- Metadata travelling alongside butterfly
+    metadata :: Signal dom (Bool, Index 256, Index 256, Bool)
     metadata =
       fmap
-        (\(valid, request) ->
-          ( valid
-          , reqAIndex request
-          , reqBIndex request
-          , reqLastGroup request
+        (\packet ->
+          ( bpValid packet
+          , bpAIndex packet
+          , bpBIndex packet
+          , bpLast packet
           )
         )
-        requestSignal
+        packetSignal
 
-
+    -- butterflyPipeline currently has three register stages.
+    metaReg1 :: Signal dom (Bool, Index 256, Index 256, Bool)
     metaReg1 =
-      register
-        (False, 0, 0, False)
-        metadata
+      register (False, 0, 0, False) metadata
 
+    metaReg2 :: Signal dom (Bool, Index 256, Index 256, Bool)
     metaReg2 =
-      register
-        (False, 0, 0, False)
-        metaReg1
+      register (False, 0, 0, False) metaReg1
 
+    metaReg3 :: Signal dom (Bool, Index 256, Index 256, Bool)
     metaReg3 =
-      register
-        (False, 0, 0, False)
-        metaReg2
+      register (False, 0, 0, False) metaReg2
 
-
-    validDelayed =
-      fmap
-        (\(valid, _, _, _) -> valid)
-        metaReg3
-
-
+    responseSignal :: Signal dom ButterflyResponse
     responseSignal =
       liftA2
-        (\(_, aIndex, bIndex, lastGroup) (outA, outB) ->
+        (\(valid, aIndex, bIndex, lastResult) (outA, outB) ->
           ButterflyResponse
-            { rspAIndex    = aIndex
-            , rspBIndex    = bIndex
-            , rspA         = outA
-            , rspB         = outB
-            , rspLastGroup = lastGroup
+            { rspValid  = valid
+            , rspAIndex = aIndex
+            , rspBIndex = bIndex
+            , rspA      = outA
+            , rspB      = outB
+            , rspLast   = lastResult
             }
         )
         metaReg3
-        butterflyOutput
+        arithmeticOutput
 
+-- ------------------------------------------------------------------
+-- Ping-pong writeback
+-- ------------------------------------------------------------------
+writeResponse
+  :: ButterflyResponse
+  -> NTTState
+  -> NTTState
+writeResponse response state
+  | not (rspValid response) =
+      state
 
--- Write one butterfly result into the polynomial
-writeResponse :: (Bool, ButterflyResponse)
-  -> Poly
-  -> Poly
-writeResponse (valid, response) poly =
-  if valid
-    then
-      let
-        p1 =
-          replace
-            (rspAIndex response)
-            (rspA response)
-            poly
+  | stateUseA state =
+      -- source A -> destination B
+      state
+        { stateBufB =
+            replace
+              (rspBIndex response)
+              (rspB response)
+              (replace
+                (rspAIndex response)
+                (rspA response)
+                (stateBufB state))
+        }
 
-        p2 =
-          replace
-            (rspBIndex response)
-            (rspB response)
-            p1
-      in
-        p2
+  | otherwise =
+      -- source B -> destination A
+      state
+        { stateBufA =
+            replace
+              (rspBIndex response)
+              (rspB response)
+              (replace
+                (rspAIndex response)
+                (rspA response)
+                (stateBufA state))
+        }
 
-    else
-      poly
-
-
--- Write four pipeline outputs
-writeFourResponses
-  :: ( (Bool, ButterflyResponse)
-     , (Bool, ButterflyResponse)
-     , (Bool, ButterflyResponse)
-     , (Bool, ButterflyResponse)
-     )
-  -> Poly
-  -> Poly
-writeFourResponses
-  (response0, response1, response2, response3)
-  poly =
-    let
-      p1 = writeResponse response0 poly
-      p2 = writeResponse response1 p1
-      p3 = writeResponse response2 p2
-      p4 = writeResponse response3 p3
-    in
-      p4
-
+-- ------------------------------------------------------------------
 -- Controller
+-- ------------------------------------------------------------------
 nttNextState
   :: NTTState
   -> (Bool, Poly)
-  -> ( (Bool, ButterflyResponse)
-     , (Bool, ButterflyResponse)
-     , (Bool, ButterflyResponse)
-     , (Bool, ButterflyResponse)
-     )
+  -> ButterflyResponse
   -> NTTState
-nttNextState state (start, inputPoly) responses =
+nttNextState state (start, inputPoly) response =
   case statePhase state of
-
-    -- IDLE
     Idle ->
       if start
         then
           NTTState
-            { statePhase  = Issue
-            , stateDone   = False
-            , stateStage  = 0
-            , stateOpBase = 0
-            , statePoly   = inputPoly
+            { statePhase = Issue
+            , stateDone  = False
+            , stateStage = 0
+            , stateOp    = 0
+            , stateUseA  = True
+            , stateBufA  = inputPoly
+            , stateBufB  = repeat 0
             }
-
         else
           state
             { stateDone = False
             }
 
-    -- ISSUE
     Issue ->
       let
-
-        updatedPoly =
-          writeFourResponses
-            responses
-            (statePoly state)
-
-        currentOp =
-          stateOpBase state
+        stateAfterWrite =
+          writeResponse response state
 
         lastIssue =
-          currentOp == 124
-
+          stateOp state == 127
       in
-
         if lastIssue
           then
-            NTTState
-              { statePhase  = Drain
-              , stateDone   = False
-              , stateStage  = stateStage state
-              , stateOpBase = currentOp
-              , statePoly   = updatedPoly
+            stateAfterWrite
+              { statePhase = Drain
+              , stateDone  = False
               }
-
           else
-            NTTState
-              { statePhase  = Issue
-              , stateDone   = False
-              , stateStage  = stateStage state
-              , stateOpBase = currentOp + 4
-              , statePoly   = updatedPoly
+            stateAfterWrite
+              { statePhase = Issue
+              , stateDone  = False
+              , stateOp    = stateOp state + 1
               }
 
-    -- DRAIN
     Drain ->
       let
+        stateAfterWrite =
+          writeResponse response state
 
-        updatedPoly =
-          writeFourResponses
-            responses
-            (statePoly state)
-
-        (valid0, response0) =
-          case responses of
-            (r0, _, _, _) -> r0
-
-        finalGroupReturned =
-          valid0 && rspLastGroup response0
+        finalReturned =
+          rspValid response && rspLast response
 
         lastStage =
           stateStage state == 7
-
       in
-
-        if finalGroupReturned
+        if finalReturned
           then
-
             if lastStage
               then
-                -- Entire NTT is complete.
-                NTTState
-                  { statePhase  = Idle
-                  , stateDone   = True
-                  , stateStage  = 7
-                  , stateOpBase = 0
-                  , statePoly   = updatedPoly
+                -- Toggle once more so stateUseA points to the
+                -- buffer that now contains the final result.
+                stateAfterWrite
+                  { statePhase = Idle
+                  , stateDone  = True
+                  , stateOp    = 0
+                  , stateUseA  = not (stateUseA state)
                   }
-
               else
-                NTTState
-                  { statePhase  = Issue
-                  , stateDone   = False
-                  , stateStage  = stateStage state + 1
-                  , stateOpBase = 0
-                  , statePoly   = updatedPoly
+                stateAfterWrite
+                  { statePhase = Issue
+                  , stateDone  = False
+                  , stateStage = stateStage state + 1
+                  , stateOp    = 0
+                  , stateUseA  = not (stateUseA state)
                   }
-
           else
-            state
+            stateAfterWrite
               { stateDone = False
-              , statePoly = updatedPoly
               }
 
+currentResult :: NTTState -> Poly
+currentResult state =
+  if stateUseA state
+    then stateBufA state
+    else stateBufB state
 
+-- ------------------------------------------------------------------
 -- Complete pipelined NTT
-nttPipelined :: HiddenClockResetEnable dom
+--
+-- issue request
+--   -> request register
+--   -> coefficient read/register
+--   -> 3-cycle butterfly pipeline
+--   -> writeback
+--
+-- ------------------------------------------------------------------
+nttPipelined
+  :: forall dom.
+     HiddenClockResetEnable dom
   => Signal dom (Bool, Poly)
   -> Signal dom (Bool, Poly)
 nttPipelined inputSignal =
   bundle
     ( fmap stateDone stateSignal
-    , fmap statePoly stateSignal
+    , fmap currentResult stateSignal
     )
   where
-
+    stateSignal :: Signal dom NTTState
     stateSignal =
       register initialState nextStateSignal
 
-    -- Generate four requests every cycle
-    request0 =
-      fmap (makeRequest 0) stateSignal
+    requestSignal :: Signal dom ReadRequest
+    requestSignal =
+      fmap makeReadRequest stateSignal
 
-    request1 =
-      fmap (makeRequest 1) stateSignal
+    -- Stage A: register address/control.
+    requestReg :: Signal dom ReadRequest
+    requestReg =
+      register zeroReadRequest requestSignal
 
-    request2 =
-      fmap (makeRequest 2) stateSignal
+    -- Stage B: dynamic coefficient read, then register it.
+    packetCombinational :: Signal dom ButterflyPacket
+    packetCombinational =
+      liftA2
+        readPacket
+        stateSignal
+        requestReg
 
-    request3 =
-      fmap (makeRequest 3) stateSignal
+    packetReg :: Signal dom ButterflyPacket
+    packetReg =
+      register zeroButterflyPacket packetCombinational
 
+    -- Stages C/D/E: arithmetic pipeline in NTTCore.
+    responseSignal :: Signal dom ButterflyResponse
+    responseSignal =
+      pipelineLane packetReg
 
-    -- Four parallel pipelined butterfly lanes
-    response0 =
-      pipelineLane request0
-
-    response1 =
-      pipelineLane request1
-
-    response2 =
-      pipelineLane request2
-
-    response3 =
-      pipelineLane request3
-
-
-    responses =
-      bundle
-        ( response0
-        , response1
-        , response2
-        , response3
-        )
-
-
-    -- Controller next-state logic
+    nextStateSignal :: Signal dom NTTState
     nextStateSignal =
       liftA3
         nttNextState
         stateSignal
         inputSignal
-        responses
+        responseSignal
 
-
+-- ------------------------------------------------------------------
 -- Top entity
+-- ------------------------------------------------------------------
 topEntity
   :: Clock System
   -> Reset System
@@ -454,7 +492,6 @@ topEntity
 topEntity clk rst en start poly =
   unbundle result
   where
-
     result =
       exposeClockResetEnable
         nttPipelined
@@ -462,7 +499,6 @@ topEntity clk rst en start poly =
         rst
         en
         (bundle (start, poly))
-
 
 {-# ANN topEntity
   (Synthesize

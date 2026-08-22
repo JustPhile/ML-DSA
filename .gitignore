@@ -10,6 +10,9 @@ cabal.project.local
 cabal.project.freeze
 
 # Clash / synthesis output
+verilog/
+hdl/
+synthesis
 
 # Haskell generated files
 *.o

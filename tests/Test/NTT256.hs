@@ -23,7 +23,7 @@ type Poly = Vec 256 Coeff
 -- Number of clocks we allow a complete hardware NTT to take.
 -- The current 4-lane / 3-stage butterfly design should finish well before this.
 maxSimulationCycles :: P.Int
-maxSimulationCycles = 512
+maxSimulationCycles = 2048
 
 -- Keep start low long enough for resetGen to be safely deasserted,
 -- then pulse it for exactly one clock.

@@ -35,14 +35,14 @@
         },
         {
             "name": "NTT256.v",
-            "sha256": "0a4260fc490e91c33ea9334b5d78790dc09c7fd5674ae58cccbee7e8dea7aadc"
+            "sha256": "c24014f288fef4b4495fd8ece8cb4e009788910a865603cdeef9a33846969f87"
         }
     ],
     "flags": [
         20,
         20
     ],
-    "hash": "8149942fe32f90f8b9f51d6724ee5214564e24dd56e90612a55e33039892277c",
+    "hash": "3b73dff17f073c31a67f910efd1b0eea9d25ef14e4e5ac91be4fd4c606a3ac2f",
     "top_component": {
         "name": "NTT256",
         "ports_flat": [

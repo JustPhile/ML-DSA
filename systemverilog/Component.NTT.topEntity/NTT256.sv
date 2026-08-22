@@ -15,41 +15,37 @@ module NTT256
     , output logic done
     , output logic [5887:0] result
     );
-  NTT256_types::Tuple2 result_3;
-  logic signed [63:0] c$case_scrut;
-  logic [22:0] request;
-  logic [7:0] bIndex;
-  logic [7:0] aIndex;
-  logic signed [63:0] c$request_app_arg;
-  logic signed [63:0] c$bIndex_app_arg;
-  logic signed [63:0] c$aIndex_app_arg;
+  logic signed [63:0] c$app_arg;
+  logic signed [63:0] c$app_arg_0;
+  logic signed [63:0] c$app_arg_1;
   logic [8:0] aRaw;
+  logic c$case_alt;
+  logic signed [63:0] c$case_scrut;
   logic [8:0] groupIndex;
-  logic [8:0] opNumber;
+  logic [8:0] opWide;
   logic [8:0] len;
-  NTT256_types::Tuple2_0 ds5;
-  NTT256_types::Tuple2_0 c$ds5_case_alt;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_0;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_1;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_2;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_3;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_4;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_5;
-  logic [22:0] outB;
-  logic [22:0] outA;
-  logic lastGroup;
-  logic [7:0] bIndex_0;
-  logic [7:0] aIndex_0;
-  NTT256_types::Tuple2_1 ds = {23'd0,23'd0};
+  NTT256_types::Tuple2 c$ds_case_alt;
+  NTT256_types::Tuple2 c$ds_case_alt_0;
+  NTT256_types::Tuple2 c$ds_case_alt_1;
+  NTT256_types::Tuple2 c$ds_case_alt_2;
+  NTT256_types::Tuple2 c$ds_case_alt_3;
+  NTT256_types::Tuple2 c$ds_case_alt_4;
+  NTT256_types::Tuple2 c$ds_case_alt_5;
+  NTT256_types::Tuple2 c$ds_case_alt_6;
+  NTT256_types::ReadRequest c$packetSignal_app_arg = {1'b0,8'd0,8'd0,8'd0,1'b0};
+  NTT256_types::array_of_256_logic_vector_23 c$sourcePoly_case_alt;
+  NTT256_types::Tuple4 c$ds_app_arg = {1'b0,8'd0,8'd0,1'b0};
+  NTT256_types::Tuple4 c$ds_app_arg_0 = {1'b0,8'd0,8'd0,1'b0};
+  NTT256_types::Tuple2_0 ds = {23'd0,23'd0};
   logic [22:0] a;
   logic [22:0] t;
-  logic [22:0] c$app_arg;
+  logic [22:0] c$app_arg_2;
   logic [23:0] sumWide;
-  logic [22:0] result_4;
-  NTT256_types::Tuple2_2 ds_0 = {23'd0,46'd0};
+  logic [22:0] result_3;
+  NTT256_types::Tuple2_1 ds_0 = {23'd0,46'd0};
   logic [22:0] a_0;
   logic [45:0] productWide;
-  logic [24:0] result_5;
+  logic [24:0] result_4;
   logic [24:0] shifted;
   logic [47:0] mWide;
   logic [46:0] c$mWide_app_arg;
@@ -57,172 +53,23 @@ module NTT256
   logic [22:0] a_1;
   logic [22:0] b;
   logic [22:0] zeta;
-  logic [45:0] c$ds_app_arg;
-  NTT256_types::Tuple2_1 result_6 = {23'd0,23'd0};
-  NTT256_types::Tuple4 metaReg3 = {1'b0,8'd0,8'd0,1'b0};
-  NTT256_types::Tuple4 c$metaReg3_app_arg = {1'b0,8'd0,8'd0,1'b0};
-  NTT256_types::Tuple4 c$metaReg3_app_arg_0 = {1'b0,8'd0,8'd0,1'b0};
-  logic valid;
-  NTT256_types::ButterflyRequest request_0;
-  NTT256_types::Tuple2 result_7;
-  logic signed [63:0] c$case_scrut_0;
-  logic [22:0] request_1;
-  logic [7:0] bIndex_1;
-  logic [7:0] aIndex_1;
-  logic signed [63:0] c$request_app_arg_0;
-  logic signed [63:0] c$bIndex_app_arg_0;
-  logic signed [63:0] c$aIndex_app_arg_0;
-  logic [8:0] aRaw_0;
-  logic [8:0] groupIndex_0;
-  logic [8:0] opNumber_0;
-  logic [8:0] len_0;
-  NTT256_types::Tuple2_0 ds5_0;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_6;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_7;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_8;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_9;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_10;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_11;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_12;
-  logic [22:0] outB_0;
-  logic [22:0] outA_0;
-  logic lastGroup_0;
-  logic [7:0] bIndex_2;
-  logic [7:0] aIndex_2;
-  NTT256_types::Tuple2_1 ds_1 = {23'd0,23'd0};
-  logic [22:0] a_2;
-  logic [22:0] t_0;
-  logic [22:0] c$app_arg_0;
-  logic [23:0] sumWide_0;
-  logic [22:0] result_8;
-  NTT256_types::Tuple2_2 ds_2 = {23'd0,46'd0};
-  logic [22:0] a_3;
-  logic [45:0] productWide_0;
-  logic [24:0] result_9;
-  logic [24:0] shifted_0;
-  logic [47:0] mWide_0;
-  logic [46:0] c$mWide_app_arg_0;
-  logic [23:0] xLow_0;
-  logic [22:0] a_4;
-  logic [22:0] b_0;
-  logic [22:0] zeta_0;
-  logic [45:0] c$ds_app_arg_0;
-  NTT256_types::Tuple2_1 result_10 = {23'd0,23'd0};
-  NTT256_types::Tuple4 metaReg3_0 = {1'b0,8'd0,8'd0,1'b0};
-  NTT256_types::Tuple4 c$metaReg3_app_arg_1 = {1'b0,8'd0,8'd0,1'b0};
-  NTT256_types::Tuple4 c$metaReg3_app_arg_2 = {1'b0,8'd0,8'd0,1'b0};
-  logic valid_0;
-  NTT256_types::ButterflyRequest request_2;
-  NTT256_types::Tuple2 result_11;
-  logic signed [63:0] c$case_scrut_1;
-  logic [22:0] request_3;
-  logic [7:0] bIndex_3;
-  logic [7:0] aIndex_3;
-  logic signed [63:0] c$request_app_arg_1;
-  logic signed [63:0] c$bIndex_app_arg_1;
-  logic signed [63:0] c$aIndex_app_arg_1;
-  logic [8:0] aRaw_1;
-  logic [8:0] groupIndex_1;
-  logic [8:0] opNumber_1;
-  logic [8:0] len_1;
-  NTT256_types::Tuple2_0 ds5_1;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_13;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_14;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_15;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_16;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_17;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_18;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_19;
-  logic [22:0] outB_1;
-  logic [22:0] outA_1;
-  logic lastGroup_1;
-  logic [7:0] bIndex_4;
-  logic [7:0] aIndex_4;
-  NTT256_types::Tuple2_1 ds_3 = {23'd0,23'd0};
-  logic [22:0] a_5;
-  logic [22:0] t_1;
-  logic [22:0] c$app_arg_1;
-  logic [23:0] sumWide_1;
-  logic [22:0] result_12;
-  NTT256_types::Tuple2_2 ds_4 = {23'd0,46'd0};
-  logic [22:0] a_6;
-  logic [45:0] productWide_1;
-  logic [24:0] result_13;
-  logic [24:0] shifted_1;
-  logic [47:0] mWide_1;
-  logic [46:0] c$mWide_app_arg_1;
-  logic [23:0] xLow_1;
-  logic [22:0] a_7;
-  logic [22:0] b_1;
-  logic [22:0] zeta_1;
   logic [45:0] c$ds_app_arg_1;
-  NTT256_types::Tuple2_1 result_14 = {23'd0,23'd0};
-  NTT256_types::Tuple4 metaReg3_1 = {1'b0,8'd0,8'd0,1'b0};
-  NTT256_types::Tuple4 c$metaReg3_app_arg_3 = {1'b0,8'd0,8'd0,1'b0};
-  NTT256_types::Tuple4 c$metaReg3_app_arg_4 = {1'b0,8'd0,8'd0,1'b0};
-  logic valid_1;
-  NTT256_types::ButterflyRequest request_4;
-  NTT256_types::Tuple2 result_15;
-  logic signed [63:0] c$case_scrut_2;
-  logic [22:0] request_5;
-  logic [7:0] bIndex_5;
-  logic [7:0] aIndex_5;
-  logic signed [63:0] c$request_app_arg_2;
-  logic signed [63:0] c$bIndex_app_arg_2;
-  logic signed [63:0] c$aIndex_app_arg_2;
-  logic [8:0] aRaw_2;
-  logic [8:0] groupIndex_2;
-  logic [8:0] opNumber_2;
-  logic [8:0] len_2;
-  NTT256_types::Tuple2_0 ds5_2;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_20;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_21;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_22;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_23;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_24;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_25;
-  NTT256_types::Tuple2_0 c$ds5_case_alt_26;
-  logic [22:0] outB_2;
-  logic [22:0] outA_2;
-  logic lastGroup_2;
-  logic [7:0] bIndex_6;
-  logic [7:0] aIndex_6;
-  NTT256_types::Tuple2_1 ds_5 = {23'd0,23'd0};
-  logic [22:0] a_8;
-  logic [22:0] t_2;
-  logic [22:0] c$app_arg_2;
-  logic [23:0] sumWide_2;
-  logic [22:0] result_16;
-  NTT256_types::Tuple2_2 ds_6 = {23'd0,46'd0};
-  logic [22:0] a_9;
-  logic [45:0] productWide_2;
-  logic [24:0] result_17;
-  logic [24:0] shifted_2;
-  logic [47:0] mWide_2;
-  logic [46:0] c$mWide_app_arg_2;
-  logic [23:0] xLow_2;
-  logic [22:0] a_10;
-  logic [22:0] b_2;
-  logic [22:0] zeta_2;
-  logic [45:0] c$ds_app_arg_2;
-  NTT256_types::Tuple2_1 result_18 = {23'd0,23'd0};
-  NTT256_types::Tuple4 metaReg3_2 = {1'b0,8'd0,8'd0,1'b0};
-  NTT256_types::Tuple4 c$metaReg3_app_arg_5 = {1'b0,8'd0,8'd0,1'b0};
-  NTT256_types::Tuple4 c$metaReg3_app_arg_6 = {1'b0,8'd0,8'd0,1'b0};
-  logic valid_2;
-  NTT256_types::ButterflyRequest request_6;
-  NTT256_types::NTTState result_19;
-  NTT256_types::NTTState c$case_alt;
-  NTT256_types::NTTState result_20;
+  NTT256_types::Tuple2_0 result_5 = {23'd0,23'd0};
+  NTT256_types::NTTState result_6;
   NTT256_types::NTTState c$case_alt_0;
-  NTT256_types::ButterflyResponse response0;
-  NTT256_types::NTTState result_21;
-  NTT256_types::array_of_256_logic_vector_23 c$case_alt_1;
-  logic valid_3;
-  NTT256_types::array_of_256_logic_vector_23 c$case_alt_2;
-  logic [22:0] c$case_alt_3;
-  logic [22:0] c$case_alt_4;
-  logic [22:0] c$case_alt_5;
+  NTT256_types::NTTState c$case_alt_1;
+  NTT256_types::NTTState c$case_alt_2;
+  NTT256_types::NTTState c$case_alt_3;
+  logic c$app_arg_3;
+  logic [1:0] eta1;
+  logic [7:0] stateOp1;
+  NTT256_types::array_of_256_logic_vector_23 stateBufB1;
+  NTT256_types::array_of_256_logic_vector_23 stateBufA1;
+  logic stateUseA1;
+  logic [2:0] stateStage1;
+  NTT256_types::NTTState result_7;
+  NTT256_types::NTTState c$case_alt_4;
+  NTT256_types::array_of_256_logic_vector_23 c$case_alt_5;
   logic [22:0] c$case_alt_6;
   logic [22:0] c$case_alt_7;
   logic [22:0] c$case_alt_8;
@@ -476,12 +323,11 @@ module NTT256
   logic [22:0] c$case_alt_256;
   logic [22:0] c$case_alt_257;
   logic [22:0] c$case_alt_258;
-  NTT256_types::ButterflyResponse response;
-  NTT256_types::array_of_256_logic_vector_23 c$case_alt_259;
-  logic valid_4;
-  NTT256_types::array_of_256_logic_vector_23 c$case_alt_260;
+  logic [22:0] c$case_alt_259;
+  logic [22:0] c$case_alt_260;
   logic [22:0] c$case_alt_261;
-  logic [22:0] c$case_alt_262;
+  NTT256_types::array_of_256_logic_vector_23 c$case_alt_262;
+  logic signed [63:0] c$app_arg_4;
   logic [22:0] c$case_alt_263;
   logic [22:0] c$case_alt_264;
   logic [22:0] c$case_alt_265;
@@ -736,531 +582,277 @@ module NTT256
   logic [22:0] c$case_alt_514;
   logic [22:0] c$case_alt_515;
   logic [22:0] c$case_alt_516;
-  NTT256_types::ButterflyResponse response_0;
-  NTT256_types::array_of_256_logic_vector_23 c$case_alt_517;
-  logic valid_5;
-  NTT256_types::array_of_256_logic_vector_23 c$case_alt_518;
-  logic [22:0] c$case_alt_519;
-  logic [22:0] c$case_alt_520;
-  logic [22:0] c$case_alt_521;
-  logic [22:0] c$case_alt_522;
-  logic [22:0] c$case_alt_523;
-  logic [22:0] c$case_alt_524;
-  logic [22:0] c$case_alt_525;
-  logic [22:0] c$case_alt_526;
-  logic [22:0] c$case_alt_527;
-  logic [22:0] c$case_alt_528;
-  logic [22:0] c$case_alt_529;
-  logic [22:0] c$case_alt_530;
-  logic [22:0] c$case_alt_531;
-  logic [22:0] c$case_alt_532;
-  logic [22:0] c$case_alt_533;
-  logic [22:0] c$case_alt_534;
-  logic [22:0] c$case_alt_535;
-  logic [22:0] c$case_alt_536;
-  logic [22:0] c$case_alt_537;
-  logic [22:0] c$case_alt_538;
-  logic [22:0] c$case_alt_539;
-  logic [22:0] c$case_alt_540;
-  logic [22:0] c$case_alt_541;
-  logic [22:0] c$case_alt_542;
-  logic [22:0] c$case_alt_543;
-  logic [22:0] c$case_alt_544;
-  logic [22:0] c$case_alt_545;
-  logic [22:0] c$case_alt_546;
-  logic [22:0] c$case_alt_547;
-  logic [22:0] c$case_alt_548;
-  logic [22:0] c$case_alt_549;
-  logic [22:0] c$case_alt_550;
-  logic [22:0] c$case_alt_551;
-  logic [22:0] c$case_alt_552;
-  logic [22:0] c$case_alt_553;
-  logic [22:0] c$case_alt_554;
-  logic [22:0] c$case_alt_555;
-  logic [22:0] c$case_alt_556;
-  logic [22:0] c$case_alt_557;
-  logic [22:0] c$case_alt_558;
-  logic [22:0] c$case_alt_559;
-  logic [22:0] c$case_alt_560;
-  logic [22:0] c$case_alt_561;
-  logic [22:0] c$case_alt_562;
-  logic [22:0] c$case_alt_563;
-  logic [22:0] c$case_alt_564;
-  logic [22:0] c$case_alt_565;
-  logic [22:0] c$case_alt_566;
-  logic [22:0] c$case_alt_567;
-  logic [22:0] c$case_alt_568;
-  logic [22:0] c$case_alt_569;
-  logic [22:0] c$case_alt_570;
-  logic [22:0] c$case_alt_571;
-  logic [22:0] c$case_alt_572;
-  logic [22:0] c$case_alt_573;
-  logic [22:0] c$case_alt_574;
-  logic [22:0] c$case_alt_575;
-  logic [22:0] c$case_alt_576;
-  logic [22:0] c$case_alt_577;
-  logic [22:0] c$case_alt_578;
-  logic [22:0] c$case_alt_579;
-  logic [22:0] c$case_alt_580;
-  logic [22:0] c$case_alt_581;
-  logic [22:0] c$case_alt_582;
-  logic [22:0] c$case_alt_583;
-  logic [22:0] c$case_alt_584;
-  logic [22:0] c$case_alt_585;
-  logic [22:0] c$case_alt_586;
-  logic [22:0] c$case_alt_587;
-  logic [22:0] c$case_alt_588;
-  logic [22:0] c$case_alt_589;
-  logic [22:0] c$case_alt_590;
-  logic [22:0] c$case_alt_591;
-  logic [22:0] c$case_alt_592;
-  logic [22:0] c$case_alt_593;
-  logic [22:0] c$case_alt_594;
-  logic [22:0] c$case_alt_595;
-  logic [22:0] c$case_alt_596;
-  logic [22:0] c$case_alt_597;
-  logic [22:0] c$case_alt_598;
-  logic [22:0] c$case_alt_599;
-  logic [22:0] c$case_alt_600;
-  logic [22:0] c$case_alt_601;
-  logic [22:0] c$case_alt_602;
-  logic [22:0] c$case_alt_603;
-  logic [22:0] c$case_alt_604;
-  logic [22:0] c$case_alt_605;
-  logic [22:0] c$case_alt_606;
-  logic [22:0] c$case_alt_607;
-  logic [22:0] c$case_alt_608;
-  logic [22:0] c$case_alt_609;
-  logic [22:0] c$case_alt_610;
-  logic [22:0] c$case_alt_611;
-  logic [22:0] c$case_alt_612;
-  logic [22:0] c$case_alt_613;
-  logic [22:0] c$case_alt_614;
-  logic [22:0] c$case_alt_615;
-  logic [22:0] c$case_alt_616;
-  logic [22:0] c$case_alt_617;
-  logic [22:0] c$case_alt_618;
-  logic [22:0] c$case_alt_619;
-  logic [22:0] c$case_alt_620;
-  logic [22:0] c$case_alt_621;
-  logic [22:0] c$case_alt_622;
-  logic [22:0] c$case_alt_623;
-  logic [22:0] c$case_alt_624;
-  logic [22:0] c$case_alt_625;
-  logic [22:0] c$case_alt_626;
-  logic [22:0] c$case_alt_627;
-  logic [22:0] c$case_alt_628;
-  logic [22:0] c$case_alt_629;
-  logic [22:0] c$case_alt_630;
-  logic [22:0] c$case_alt_631;
-  logic [22:0] c$case_alt_632;
-  logic [22:0] c$case_alt_633;
-  logic [22:0] c$case_alt_634;
-  logic [22:0] c$case_alt_635;
-  logic [22:0] c$case_alt_636;
-  logic [22:0] c$case_alt_637;
-  logic [22:0] c$case_alt_638;
-  logic [22:0] c$case_alt_639;
-  logic [22:0] c$case_alt_640;
-  logic [22:0] c$case_alt_641;
-  logic [22:0] c$case_alt_642;
-  logic [22:0] c$case_alt_643;
-  logic [22:0] c$case_alt_644;
-  logic [22:0] c$case_alt_645;
-  logic [22:0] c$case_alt_646;
-  logic [22:0] c$case_alt_647;
-  logic [22:0] c$case_alt_648;
-  logic [22:0] c$case_alt_649;
-  logic [22:0] c$case_alt_650;
-  logic [22:0] c$case_alt_651;
-  logic [22:0] c$case_alt_652;
-  logic [22:0] c$case_alt_653;
-  logic [22:0] c$case_alt_654;
-  logic [22:0] c$case_alt_655;
-  logic [22:0] c$case_alt_656;
-  logic [22:0] c$case_alt_657;
-  logic [22:0] c$case_alt_658;
-  logic [22:0] c$case_alt_659;
-  logic [22:0] c$case_alt_660;
-  logic [22:0] c$case_alt_661;
-  logic [22:0] c$case_alt_662;
-  logic [22:0] c$case_alt_663;
-  logic [22:0] c$case_alt_664;
-  logic [22:0] c$case_alt_665;
-  logic [22:0] c$case_alt_666;
-  logic [22:0] c$case_alt_667;
-  logic [22:0] c$case_alt_668;
-  logic [22:0] c$case_alt_669;
-  logic [22:0] c$case_alt_670;
-  logic [22:0] c$case_alt_671;
-  logic [22:0] c$case_alt_672;
-  logic [22:0] c$case_alt_673;
-  logic [22:0] c$case_alt_674;
-  logic [22:0] c$case_alt_675;
-  logic [22:0] c$case_alt_676;
-  logic [22:0] c$case_alt_677;
-  logic [22:0] c$case_alt_678;
-  logic [22:0] c$case_alt_679;
-  logic [22:0] c$case_alt_680;
-  logic [22:0] c$case_alt_681;
-  logic [22:0] c$case_alt_682;
-  logic [22:0] c$case_alt_683;
-  logic [22:0] c$case_alt_684;
-  logic [22:0] c$case_alt_685;
-  logic [22:0] c$case_alt_686;
-  logic [22:0] c$case_alt_687;
-  logic [22:0] c$case_alt_688;
-  logic [22:0] c$case_alt_689;
-  logic [22:0] c$case_alt_690;
-  logic [22:0] c$case_alt_691;
-  logic [22:0] c$case_alt_692;
-  logic [22:0] c$case_alt_693;
-  logic [22:0] c$case_alt_694;
-  logic [22:0] c$case_alt_695;
-  logic [22:0] c$case_alt_696;
-  logic [22:0] c$case_alt_697;
-  logic [22:0] c$case_alt_698;
-  logic [22:0] c$case_alt_699;
-  logic [22:0] c$case_alt_700;
-  logic [22:0] c$case_alt_701;
-  logic [22:0] c$case_alt_702;
-  logic [22:0] c$case_alt_703;
-  logic [22:0] c$case_alt_704;
-  logic [22:0] c$case_alt_705;
-  logic [22:0] c$case_alt_706;
-  logic [22:0] c$case_alt_707;
-  logic [22:0] c$case_alt_708;
-  logic [22:0] c$case_alt_709;
-  logic [22:0] c$case_alt_710;
-  logic [22:0] c$case_alt_711;
-  logic [22:0] c$case_alt_712;
-  logic [22:0] c$case_alt_713;
-  logic [22:0] c$case_alt_714;
-  logic [22:0] c$case_alt_715;
-  logic [22:0] c$case_alt_716;
-  logic [22:0] c$case_alt_717;
-  logic [22:0] c$case_alt_718;
-  logic [22:0] c$case_alt_719;
-  logic [22:0] c$case_alt_720;
-  logic [22:0] c$case_alt_721;
-  logic [22:0] c$case_alt_722;
-  logic [22:0] c$case_alt_723;
-  logic [22:0] c$case_alt_724;
-  logic [22:0] c$case_alt_725;
-  logic [22:0] c$case_alt_726;
-  logic [22:0] c$case_alt_727;
-  logic [22:0] c$case_alt_728;
-  logic [22:0] c$case_alt_729;
-  logic [22:0] c$case_alt_730;
-  logic [22:0] c$case_alt_731;
-  logic [22:0] c$case_alt_732;
-  logic [22:0] c$case_alt_733;
-  logic [22:0] c$case_alt_734;
-  logic [22:0] c$case_alt_735;
-  logic [22:0] c$case_alt_736;
-  logic [22:0] c$case_alt_737;
-  logic [22:0] c$case_alt_738;
-  logic [22:0] c$case_alt_739;
-  logic [22:0] c$case_alt_740;
-  logic [22:0] c$case_alt_741;
-  logic [22:0] c$case_alt_742;
-  logic [22:0] c$case_alt_743;
-  logic [22:0] c$case_alt_744;
-  logic [22:0] c$case_alt_745;
-  logic [22:0] c$case_alt_746;
-  logic [22:0] c$case_alt_747;
-  logic [22:0] c$case_alt_748;
-  logic [22:0] c$case_alt_749;
-  logic [22:0] c$case_alt_750;
-  logic [22:0] c$case_alt_751;
-  logic [22:0] c$case_alt_752;
-  logic [22:0] c$case_alt_753;
-  logic [22:0] c$case_alt_754;
-  logic [22:0] c$case_alt_755;
-  logic [22:0] c$case_alt_756;
-  logic [22:0] c$case_alt_757;
-  logic [22:0] c$case_alt_758;
-  logic [22:0] c$case_alt_759;
-  logic [22:0] c$case_alt_760;
-  logic [22:0] c$case_alt_761;
-  logic [22:0] c$case_alt_762;
-  logic [22:0] c$case_alt_763;
-  logic [22:0] c$case_alt_764;
-  logic [22:0] c$case_alt_765;
-  logic [22:0] c$case_alt_766;
-  logic [22:0] c$case_alt_767;
-  logic [22:0] c$case_alt_768;
-  logic [22:0] c$case_alt_769;
-  logic [22:0] c$case_alt_770;
-  logic [22:0] c$case_alt_771;
-  logic [22:0] c$case_alt_772;
-  logic [22:0] c$case_alt_773;
-  logic [22:0] c$case_alt_774;
-  NTT256_types::ButterflyResponse response_1;
-  NTT256_types::array_of_256_logic_vector_23 c$case_alt_775;
-  logic valid_6;
-  NTT256_types::array_of_256_logic_vector_23 c$case_alt_776;
-  logic [22:0] c$case_alt_777;
-  logic [22:0] c$case_alt_778;
-  logic [22:0] c$case_alt_779;
-  logic [22:0] c$case_alt_780;
-  logic [22:0] c$case_alt_781;
-  logic [22:0] c$case_alt_782;
-  logic [22:0] c$case_alt_783;
-  logic [22:0] c$case_alt_784;
-  logic [22:0] c$case_alt_785;
-  logic [22:0] c$case_alt_786;
-  logic [22:0] c$case_alt_787;
-  logic [22:0] c$case_alt_788;
-  logic [22:0] c$case_alt_789;
-  logic [22:0] c$case_alt_790;
-  logic [22:0] c$case_alt_791;
-  logic [22:0] c$case_alt_792;
-  logic [22:0] c$case_alt_793;
-  logic [22:0] c$case_alt_794;
-  logic [22:0] c$case_alt_795;
-  logic [22:0] c$case_alt_796;
-  logic [22:0] c$case_alt_797;
-  logic [22:0] c$case_alt_798;
-  logic [22:0] c$case_alt_799;
-  logic [22:0] c$case_alt_800;
-  logic [22:0] c$case_alt_801;
-  logic [22:0] c$case_alt_802;
-  logic [22:0] c$case_alt_803;
-  logic [22:0] c$case_alt_804;
-  logic [22:0] c$case_alt_805;
-  logic [22:0] c$case_alt_806;
-  logic [22:0] c$case_alt_807;
-  logic [22:0] c$case_alt_808;
-  logic [22:0] c$case_alt_809;
-  logic [22:0] c$case_alt_810;
-  logic [22:0] c$case_alt_811;
-  logic [22:0] c$case_alt_812;
-  logic [22:0] c$case_alt_813;
-  logic [22:0] c$case_alt_814;
-  logic [22:0] c$case_alt_815;
-  logic [22:0] c$case_alt_816;
-  logic [22:0] c$case_alt_817;
-  logic [22:0] c$case_alt_818;
-  logic [22:0] c$case_alt_819;
-  logic [22:0] c$case_alt_820;
-  logic [22:0] c$case_alt_821;
-  logic [22:0] c$case_alt_822;
-  logic [22:0] c$case_alt_823;
-  logic [22:0] c$case_alt_824;
-  logic [22:0] c$case_alt_825;
-  logic [22:0] c$case_alt_826;
-  logic [22:0] c$case_alt_827;
-  logic [22:0] c$case_alt_828;
-  logic [22:0] c$case_alt_829;
-  logic [22:0] c$case_alt_830;
-  logic [22:0] c$case_alt_831;
-  logic [22:0] c$case_alt_832;
-  logic [22:0] c$case_alt_833;
-  logic [22:0] c$case_alt_834;
-  logic [22:0] c$case_alt_835;
-  logic [22:0] c$case_alt_836;
-  logic [22:0] c$case_alt_837;
-  logic [22:0] c$case_alt_838;
-  logic [22:0] c$case_alt_839;
-  logic [22:0] c$case_alt_840;
-  logic [22:0] c$case_alt_841;
-  logic [22:0] c$case_alt_842;
-  logic [22:0] c$case_alt_843;
-  logic [22:0] c$case_alt_844;
-  logic [22:0] c$case_alt_845;
-  logic [22:0] c$case_alt_846;
-  logic [22:0] c$case_alt_847;
-  logic [22:0] c$case_alt_848;
-  logic [22:0] c$case_alt_849;
-  logic [22:0] c$case_alt_850;
-  logic [22:0] c$case_alt_851;
-  logic [22:0] c$case_alt_852;
-  logic [22:0] c$case_alt_853;
-  logic [22:0] c$case_alt_854;
-  logic [22:0] c$case_alt_855;
-  logic [22:0] c$case_alt_856;
-  logic [22:0] c$case_alt_857;
-  logic [22:0] c$case_alt_858;
-  logic [22:0] c$case_alt_859;
-  logic [22:0] c$case_alt_860;
-  logic [22:0] c$case_alt_861;
-  logic [22:0] c$case_alt_862;
-  logic [22:0] c$case_alt_863;
-  logic [22:0] c$case_alt_864;
-  logic [22:0] c$case_alt_865;
-  logic [22:0] c$case_alt_866;
-  logic [22:0] c$case_alt_867;
-  logic [22:0] c$case_alt_868;
-  logic [22:0] c$case_alt_869;
-  logic [22:0] c$case_alt_870;
-  logic [22:0] c$case_alt_871;
-  logic [22:0] c$case_alt_872;
-  logic [22:0] c$case_alt_873;
-  logic [22:0] c$case_alt_874;
-  logic [22:0] c$case_alt_875;
-  logic [22:0] c$case_alt_876;
-  logic [22:0] c$case_alt_877;
-  logic [22:0] c$case_alt_878;
-  logic [22:0] c$case_alt_879;
-  logic [22:0] c$case_alt_880;
-  logic [22:0] c$case_alt_881;
-  logic [22:0] c$case_alt_882;
-  logic [22:0] c$case_alt_883;
-  logic [22:0] c$case_alt_884;
-  logic [22:0] c$case_alt_885;
-  logic [22:0] c$case_alt_886;
-  logic [22:0] c$case_alt_887;
-  logic [22:0] c$case_alt_888;
-  logic [22:0] c$case_alt_889;
-  logic [22:0] c$case_alt_890;
-  logic [22:0] c$case_alt_891;
-  logic [22:0] c$case_alt_892;
-  logic [22:0] c$case_alt_893;
-  logic [22:0] c$case_alt_894;
-  logic [22:0] c$case_alt_895;
-  logic [22:0] c$case_alt_896;
-  logic [22:0] c$case_alt_897;
-  logic [22:0] c$case_alt_898;
-  logic [22:0] c$case_alt_899;
-  logic [22:0] c$case_alt_900;
-  logic [22:0] c$case_alt_901;
-  logic [22:0] c$case_alt_902;
-  logic [22:0] c$case_alt_903;
-  logic [22:0] c$case_alt_904;
-  logic [22:0] c$case_alt_905;
-  logic [22:0] c$case_alt_906;
-  logic [22:0] c$case_alt_907;
-  logic [22:0] c$case_alt_908;
-  logic [22:0] c$case_alt_909;
-  logic [22:0] c$case_alt_910;
-  logic [22:0] c$case_alt_911;
-  logic [22:0] c$case_alt_912;
-  logic [22:0] c$case_alt_913;
-  logic [22:0] c$case_alt_914;
-  logic [22:0] c$case_alt_915;
-  logic [22:0] c$case_alt_916;
-  logic [22:0] c$case_alt_917;
-  logic [22:0] c$case_alt_918;
-  logic [22:0] c$case_alt_919;
-  logic [22:0] c$case_alt_920;
-  logic [22:0] c$case_alt_921;
-  logic [22:0] c$case_alt_922;
-  logic [22:0] c$case_alt_923;
-  logic [22:0] c$case_alt_924;
-  logic [22:0] c$case_alt_925;
-  logic [22:0] c$case_alt_926;
-  logic [22:0] c$case_alt_927;
-  logic [22:0] c$case_alt_928;
-  logic [22:0] c$case_alt_929;
-  logic [22:0] c$case_alt_930;
-  logic [22:0] c$case_alt_931;
-  logic [22:0] c$case_alt_932;
-  logic [22:0] c$case_alt_933;
-  logic [22:0] c$case_alt_934;
-  logic [22:0] c$case_alt_935;
-  logic [22:0] c$case_alt_936;
-  logic [22:0] c$case_alt_937;
-  logic [22:0] c$case_alt_938;
-  logic [22:0] c$case_alt_939;
-  logic [22:0] c$case_alt_940;
-  logic [22:0] c$case_alt_941;
-  logic [22:0] c$case_alt_942;
-  logic [22:0] c$case_alt_943;
-  logic [22:0] c$case_alt_944;
-  logic [22:0] c$case_alt_945;
-  logic [22:0] c$case_alt_946;
-  logic [22:0] c$case_alt_947;
-  logic [22:0] c$case_alt_948;
-  logic [22:0] c$case_alt_949;
-  logic [22:0] c$case_alt_950;
-  logic [22:0] c$case_alt_951;
-  logic [22:0] c$case_alt_952;
-  logic [22:0] c$case_alt_953;
-  logic [22:0] c$case_alt_954;
-  logic [22:0] c$case_alt_955;
-  logic [22:0] c$case_alt_956;
-  logic [22:0] c$case_alt_957;
-  logic [22:0] c$case_alt_958;
-  logic [22:0] c$case_alt_959;
-  logic [22:0] c$case_alt_960;
-  logic [22:0] c$case_alt_961;
-  logic [22:0] c$case_alt_962;
-  logic [22:0] c$case_alt_963;
-  logic [22:0] c$case_alt_964;
-  logic [22:0] c$case_alt_965;
-  logic [22:0] c$case_alt_966;
-  logic [22:0] c$case_alt_967;
-  logic [22:0] c$case_alt_968;
-  logic [22:0] c$case_alt_969;
-  logic [22:0] c$case_alt_970;
-  logic [22:0] c$case_alt_971;
-  logic [22:0] c$case_alt_972;
-  logic [22:0] c$case_alt_973;
-  logic [22:0] c$case_alt_974;
-  logic [22:0] c$case_alt_975;
-  logic [22:0] c$case_alt_976;
-  logic [22:0] c$case_alt_977;
-  logic [22:0] c$case_alt_978;
-  logic [22:0] c$case_alt_979;
-  logic [22:0] c$case_alt_980;
-  logic [22:0] c$case_alt_981;
-  logic [22:0] c$case_alt_982;
-  logic [22:0] c$case_alt_983;
-  logic [22:0] c$case_alt_984;
-  logic [22:0] c$case_alt_985;
-  logic [22:0] c$case_alt_986;
-  logic [22:0] c$case_alt_987;
-  logic [22:0] c$case_alt_988;
-  logic [22:0] c$case_alt_989;
-  logic [22:0] c$case_alt_990;
-  logic [22:0] c$case_alt_991;
-  logic [22:0] c$case_alt_992;
-  logic [22:0] c$case_alt_993;
-  logic [22:0] c$case_alt_994;
-  logic [22:0] c$case_alt_995;
-  logic [22:0] c$case_alt_996;
-  logic [22:0] c$case_alt_997;
-  logic [22:0] c$case_alt_998;
-  logic [22:0] c$case_alt_999;
-  logic [22:0] c$case_alt_1000;
-  logic [22:0] c$case_alt_1001;
-  logic [22:0] c$case_alt_1002;
-  logic [22:0] c$case_alt_1003;
-  logic [22:0] c$case_alt_1004;
-  logic [22:0] c$case_alt_1005;
-  logic [22:0] c$case_alt_1006;
-  logic [22:0] c$case_alt_1007;
-  logic [22:0] c$case_alt_1008;
-  logic [22:0] c$case_alt_1009;
-  logic [22:0] c$case_alt_1010;
-  logic [22:0] c$case_alt_1011;
-  logic [22:0] c$case_alt_1012;
-  logic [22:0] c$case_alt_1013;
-  logic [22:0] c$case_alt_1014;
-  logic [22:0] c$case_alt_1015;
-  logic [22:0] c$case_alt_1016;
-  logic [22:0] c$case_alt_1017;
-  logic [22:0] c$case_alt_1018;
-  logic [22:0] c$case_alt_1019;
-  logic [22:0] c$case_alt_1020;
-  logic [22:0] c$case_alt_1021;
-  logic [22:0] c$case_alt_1022;
-  logic [22:0] c$case_alt_1023;
-  logic [22:0] c$case_alt_1024;
-  logic [22:0] c$case_alt_1025;
-  logic [22:0] c$case_alt_1026;
-  logic [22:0] c$case_alt_1027;
-  logic [22:0] c$case_alt_1028;
-  logic [22:0] c$case_alt_1029;
-  logic [22:0] c$case_alt_1030;
-  logic [22:0] c$case_alt_1031;
-  logic [22:0] c$case_alt_1032;
-  NTT256_types::ButterflyResponse response_2;
+  logic [22:0] c$case_alt_517;
+  logic [22:0] c$case_alt_518;
+  NTT256_types::array_of_256_logic_vector_23 c$case_alt_519;
+  logic valid;
+  logic [7:0] aIndex;
+  logic [7:0] bIndex;
+  logic lastResult;
+  logic [22:0] outA;
+  logic [22:0] outB;
+  NTT256_types::Tuple4 ds_1 = {1'b0,8'd0,8'd0,1'b0};
   NTT256_types::NTTState stateSignal = {2'd0
 ,1'b0
 ,3'd0
-,9'd0
+,8'd0
+,1'b1
+,{NTT256_types::array_of_256_logic_vector_23_to_lv('{0: 23'd0
+                                                    ,1: 23'd0
+                                                    ,2: 23'd0
+                                                    ,3: 23'd0
+                                                    ,4: 23'd0
+                                                    ,5: 23'd0
+                                                    ,6: 23'd0
+                                                    ,7: 23'd0
+                                                    ,8: 23'd0
+                                                    ,9: 23'd0
+                                                    ,10: 23'd0
+                                                    ,11: 23'd0
+                                                    ,12: 23'd0
+                                                    ,13: 23'd0
+                                                    ,14: 23'd0
+                                                    ,15: 23'd0
+                                                    ,16: 23'd0
+                                                    ,17: 23'd0
+                                                    ,18: 23'd0
+                                                    ,19: 23'd0
+                                                    ,20: 23'd0
+                                                    ,21: 23'd0
+                                                    ,22: 23'd0
+                                                    ,23: 23'd0
+                                                    ,24: 23'd0
+                                                    ,25: 23'd0
+                                                    ,26: 23'd0
+                                                    ,27: 23'd0
+                                                    ,28: 23'd0
+                                                    ,29: 23'd0
+                                                    ,30: 23'd0
+                                                    ,31: 23'd0
+                                                    ,32: 23'd0
+                                                    ,33: 23'd0
+                                                    ,34: 23'd0
+                                                    ,35: 23'd0
+                                                    ,36: 23'd0
+                                                    ,37: 23'd0
+                                                    ,38: 23'd0
+                                                    ,39: 23'd0
+                                                    ,40: 23'd0
+                                                    ,41: 23'd0
+                                                    ,42: 23'd0
+                                                    ,43: 23'd0
+                                                    ,44: 23'd0
+                                                    ,45: 23'd0
+                                                    ,46: 23'd0
+                                                    ,47: 23'd0
+                                                    ,48: 23'd0
+                                                    ,49: 23'd0
+                                                    ,50: 23'd0
+                                                    ,51: 23'd0
+                                                    ,52: 23'd0
+                                                    ,53: 23'd0
+                                                    ,54: 23'd0
+                                                    ,55: 23'd0
+                                                    ,56: 23'd0
+                                                    ,57: 23'd0
+                                                    ,58: 23'd0
+                                                    ,59: 23'd0
+                                                    ,60: 23'd0
+                                                    ,61: 23'd0
+                                                    ,62: 23'd0
+                                                    ,63: 23'd0
+                                                    ,64: 23'd0
+                                                    ,65: 23'd0
+                                                    ,66: 23'd0
+                                                    ,67: 23'd0
+                                                    ,68: 23'd0
+                                                    ,69: 23'd0
+                                                    ,70: 23'd0
+                                                    ,71: 23'd0
+                                                    ,72: 23'd0
+                                                    ,73: 23'd0
+                                                    ,74: 23'd0
+                                                    ,75: 23'd0
+                                                    ,76: 23'd0
+                                                    ,77: 23'd0
+                                                    ,78: 23'd0
+                                                    ,79: 23'd0
+                                                    ,80: 23'd0
+                                                    ,81: 23'd0
+                                                    ,82: 23'd0
+                                                    ,83: 23'd0
+                                                    ,84: 23'd0
+                                                    ,85: 23'd0
+                                                    ,86: 23'd0
+                                                    ,87: 23'd0
+                                                    ,88: 23'd0
+                                                    ,89: 23'd0
+                                                    ,90: 23'd0
+                                                    ,91: 23'd0
+                                                    ,92: 23'd0
+                                                    ,93: 23'd0
+                                                    ,94: 23'd0
+                                                    ,95: 23'd0
+                                                    ,96: 23'd0
+                                                    ,97: 23'd0
+                                                    ,98: 23'd0
+                                                    ,99: 23'd0
+                                                    ,100: 23'd0
+                                                    ,101: 23'd0
+                                                    ,102: 23'd0
+                                                    ,103: 23'd0
+                                                    ,104: 23'd0
+                                                    ,105: 23'd0
+                                                    ,106: 23'd0
+                                                    ,107: 23'd0
+                                                    ,108: 23'd0
+                                                    ,109: 23'd0
+                                                    ,110: 23'd0
+                                                    ,111: 23'd0
+                                                    ,112: 23'd0
+                                                    ,113: 23'd0
+                                                    ,114: 23'd0
+                                                    ,115: 23'd0
+                                                    ,116: 23'd0
+                                                    ,117: 23'd0
+                                                    ,118: 23'd0
+                                                    ,119: 23'd0
+                                                    ,120: 23'd0
+                                                    ,121: 23'd0
+                                                    ,122: 23'd0
+                                                    ,123: 23'd0
+                                                    ,124: 23'd0
+                                                    ,125: 23'd0
+                                                    ,126: 23'd0
+                                                    ,127: 23'd0
+                                                    ,128: 23'd0
+                                                    ,129: 23'd0
+                                                    ,130: 23'd0
+                                                    ,131: 23'd0
+                                                    ,132: 23'd0
+                                                    ,133: 23'd0
+                                                    ,134: 23'd0
+                                                    ,135: 23'd0
+                                                    ,136: 23'd0
+                                                    ,137: 23'd0
+                                                    ,138: 23'd0
+                                                    ,139: 23'd0
+                                                    ,140: 23'd0
+                                                    ,141: 23'd0
+                                                    ,142: 23'd0
+                                                    ,143: 23'd0
+                                                    ,144: 23'd0
+                                                    ,145: 23'd0
+                                                    ,146: 23'd0
+                                                    ,147: 23'd0
+                                                    ,148: 23'd0
+                                                    ,149: 23'd0
+                                                    ,150: 23'd0
+                                                    ,151: 23'd0
+                                                    ,152: 23'd0
+                                                    ,153: 23'd0
+                                                    ,154: 23'd0
+                                                    ,155: 23'd0
+                                                    ,156: 23'd0
+                                                    ,157: 23'd0
+                                                    ,158: 23'd0
+                                                    ,159: 23'd0
+                                                    ,160: 23'd0
+                                                    ,161: 23'd0
+                                                    ,162: 23'd0
+                                                    ,163: 23'd0
+                                                    ,164: 23'd0
+                                                    ,165: 23'd0
+                                                    ,166: 23'd0
+                                                    ,167: 23'd0
+                                                    ,168: 23'd0
+                                                    ,169: 23'd0
+                                                    ,170: 23'd0
+                                                    ,171: 23'd0
+                                                    ,172: 23'd0
+                                                    ,173: 23'd0
+                                                    ,174: 23'd0
+                                                    ,175: 23'd0
+                                                    ,176: 23'd0
+                                                    ,177: 23'd0
+                                                    ,178: 23'd0
+                                                    ,179: 23'd0
+                                                    ,180: 23'd0
+                                                    ,181: 23'd0
+                                                    ,182: 23'd0
+                                                    ,183: 23'd0
+                                                    ,184: 23'd0
+                                                    ,185: 23'd0
+                                                    ,186: 23'd0
+                                                    ,187: 23'd0
+                                                    ,188: 23'd0
+                                                    ,189: 23'd0
+                                                    ,190: 23'd0
+                                                    ,191: 23'd0
+                                                    ,192: 23'd0
+                                                    ,193: 23'd0
+                                                    ,194: 23'd0
+                                                    ,195: 23'd0
+                                                    ,196: 23'd0
+                                                    ,197: 23'd0
+                                                    ,198: 23'd0
+                                                    ,199: 23'd0
+                                                    ,200: 23'd0
+                                                    ,201: 23'd0
+                                                    ,202: 23'd0
+                                                    ,203: 23'd0
+                                                    ,204: 23'd0
+                                                    ,205: 23'd0
+                                                    ,206: 23'd0
+                                                    ,207: 23'd0
+                                                    ,208: 23'd0
+                                                    ,209: 23'd0
+                                                    ,210: 23'd0
+                                                    ,211: 23'd0
+                                                    ,212: 23'd0
+                                                    ,213: 23'd0
+                                                    ,214: 23'd0
+                                                    ,215: 23'd0
+                                                    ,216: 23'd0
+                                                    ,217: 23'd0
+                                                    ,218: 23'd0
+                                                    ,219: 23'd0
+                                                    ,220: 23'd0
+                                                    ,221: 23'd0
+                                                    ,222: 23'd0
+                                                    ,223: 23'd0
+                                                    ,224: 23'd0
+                                                    ,225: 23'd0
+                                                    ,226: 23'd0
+                                                    ,227: 23'd0
+                                                    ,228: 23'd0
+                                                    ,229: 23'd0
+                                                    ,230: 23'd0
+                                                    ,231: 23'd0
+                                                    ,232: 23'd0
+                                                    ,233: 23'd0
+                                                    ,234: 23'd0
+                                                    ,235: 23'd0
+                                                    ,236: 23'd0
+                                                    ,237: 23'd0
+                                                    ,238: 23'd0
+                                                    ,239: 23'd0
+                                                    ,240: 23'd0
+                                                    ,241: 23'd0
+                                                    ,242: 23'd0
+                                                    ,243: 23'd0
+                                                    ,244: 23'd0
+                                                    ,245: 23'd0
+                                                    ,246: 23'd0
+                                                    ,247: 23'd0
+                                                    ,248: 23'd0
+                                                    ,249: 23'd0
+                                                    ,250: 23'd0
+                                                    ,251: 23'd0
+                                                    ,252: 23'd0
+                                                    ,253: 23'd0
+                                                    ,254: 23'd0
+                                                    ,255: 23'd0})}
 ,{NTT256_types::array_of_256_logic_vector_23_to_lv('{0: 23'd0
                                                     ,1: 23'd0
                                                     ,2: 23'd0
@@ -1517,3173 +1109,1068 @@ module NTT256
                                                     ,253: 23'd0
                                                     ,254: 23'd0
                                                     ,255: 23'd0})}};
+  NTT256_types::ButterflyPacket packetSignal = {1'b0,8'd0,8'd0,23'd0,23'd0,23'd0,1'b0};
   NTT256_types::array_of_256_logic_vector_23 poly_0;
-  NTT256_types::array_of_256_logic_vector_23 c$vec;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_0;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_1;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_2;
+  logic [8:0] c$i;
+  logic [8:0] c$i_0;
   logic [1:0] c$dtt_rhs_1;
-  NTT256_types::array_of_256_logic_vector_23 request_res;
-  NTT256_types::array_of_256_signed_64 c$vec_3;
-  logic [7:0] c$i_1;
-  logic [8:0] c$i_2;
-  logic [8:0] c$i_3;
-  logic [23:0] c$bv;
-  logic [47:0] c$bv_0;
-  logic [48:0] c$bv_1;
-  logic [46:0] c$bv_2;
-  logic [23:0] c$bv_3;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_4;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_5;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_6;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_7;
-  logic [1:0] c$dtt_rhs_4;
-  NTT256_types::array_of_256_logic_vector_23 request_res_0;
-  NTT256_types::array_of_256_signed_64 c$vec_8;
-  logic [7:0] c$i_61;
-  logic [8:0] c$i_62;
-  logic [8:0] c$i_63;
+  logic [7:0] c$bv;
+  logic [23:0] c$bv_0;
+  logic [47:0] c$bv_1;
+  logic [48:0] c$bv_2;
+  logic [46:0] c$bv_3;
   logic [23:0] c$bv_4;
-  logic [47:0] c$bv_5;
-  logic [48:0] c$bv_6;
-  logic [46:0] c$bv_7;
-  logic [23:0] c$bv_8;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_9;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_10;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_11;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_12;
-  logic [1:0] c$dtt_rhs_7;
-  NTT256_types::array_of_256_logic_vector_23 request_res_1;
-  NTT256_types::array_of_256_signed_64 c$vec_13;
-  logic [7:0] c$i_121;
-  logic [8:0] c$i_122;
-  logic [8:0] c$i_123;
-  logic [23:0] c$bv_9;
-  logic [47:0] c$bv_10;
-  logic [48:0] c$bv_11;
-  logic [46:0] c$bv_12;
-  logic [23:0] c$bv_13;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_14;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_15;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_16;
-  NTT256_types::array_of_256_logic_vector_23 c$vec_17;
-  logic [1:0] c$dtt_rhs_10;
-  NTT256_types::array_of_256_logic_vector_23 request_res_2;
-  NTT256_types::array_of_256_signed_64 c$vec_18;
-  logic [7:0] c$i_181;
-  logic [8:0] c$i_182;
-  logic [8:0] c$i_183;
-  logic [23:0] c$bv_14;
-  logic [47:0] c$bv_15;
-  logic [48:0] c$bv_16;
-  logic [46:0] c$bv_17;
-  logic [23:0] c$bv_18;
-  logic [1:0] result_selection_13;
-  logic [7:0] c$i_248;
-  logic signed [63:0] c$case_alt_selection_4;
-  logic [7:0] c$i_249;
-  logic signed [63:0] c$case_alt_selection_3;
+  logic [1:0] result_selection_3;
+  logic signed [63:0] c$case_alt_selection_8;
   logic signed [63:0] c$case_alt_selection_7;
-  logic [7:0] c$i_250;
-  logic signed [63:0] c$case_alt_selection_6;
+  logic signed [63:0] c$case_alt_selection_11;
   logic signed [63:0] c$case_alt_selection_10;
-  logic [7:0] c$i_251;
-  logic signed [63:0] c$case_alt_selection_9;
+  logic signed [63:0] c$case_alt_selection_14;
   logic signed [63:0] c$case_alt_selection_13;
-  logic [7:0] c$i_252;
-  logic signed [63:0] c$case_alt_selection_12;
+  logic signed [63:0] c$case_alt_selection_17;
   logic signed [63:0] c$case_alt_selection_16;
-  logic [7:0] c$i_253;
-  logic signed [63:0] c$case_alt_selection_15;
+  logic signed [63:0] c$case_alt_selection_20;
   logic signed [63:0] c$case_alt_selection_19;
-  logic [7:0] c$i_254;
-  logic signed [63:0] c$case_alt_selection_18;
+  logic signed [63:0] c$case_alt_selection_23;
   logic signed [63:0] c$case_alt_selection_22;
-  logic [7:0] c$i_255;
-  logic signed [63:0] c$case_alt_selection_21;
+  logic signed [63:0] c$case_alt_selection_26;
   logic signed [63:0] c$case_alt_selection_25;
-  logic [7:0] c$i_256;
-  logic signed [63:0] c$case_alt_selection_24;
+  logic signed [63:0] c$case_alt_selection_29;
   logic signed [63:0] c$case_alt_selection_28;
-  logic [7:0] c$i_257;
-  logic signed [63:0] c$case_alt_selection_27;
+  logic signed [63:0] c$case_alt_selection_32;
   logic signed [63:0] c$case_alt_selection_31;
-  logic [7:0] c$i_258;
-  logic signed [63:0] c$case_alt_selection_30;
+  logic signed [63:0] c$case_alt_selection_35;
   logic signed [63:0] c$case_alt_selection_34;
-  logic [7:0] c$i_259;
-  logic signed [63:0] c$case_alt_selection_33;
+  logic signed [63:0] c$case_alt_selection_38;
   logic signed [63:0] c$case_alt_selection_37;
-  logic [7:0] c$i_260;
-  logic signed [63:0] c$case_alt_selection_36;
+  logic signed [63:0] c$case_alt_selection_41;
   logic signed [63:0] c$case_alt_selection_40;
-  logic [7:0] c$i_261;
-  logic signed [63:0] c$case_alt_selection_39;
+  logic signed [63:0] c$case_alt_selection_44;
   logic signed [63:0] c$case_alt_selection_43;
-  logic [7:0] c$i_262;
-  logic signed [63:0] c$case_alt_selection_42;
+  logic signed [63:0] c$case_alt_selection_47;
   logic signed [63:0] c$case_alt_selection_46;
-  logic [7:0] c$i_263;
-  logic signed [63:0] c$case_alt_selection_45;
+  logic signed [63:0] c$case_alt_selection_50;
   logic signed [63:0] c$case_alt_selection_49;
-  logic [7:0] c$i_264;
-  logic signed [63:0] c$case_alt_selection_48;
+  logic signed [63:0] c$case_alt_selection_53;
   logic signed [63:0] c$case_alt_selection_52;
-  logic [7:0] c$i_265;
-  logic signed [63:0] c$case_alt_selection_51;
+  logic signed [63:0] c$case_alt_selection_56;
   logic signed [63:0] c$case_alt_selection_55;
-  logic [7:0] c$i_266;
-  logic signed [63:0] c$case_alt_selection_54;
+  logic signed [63:0] c$case_alt_selection_59;
   logic signed [63:0] c$case_alt_selection_58;
-  logic [7:0] c$i_267;
-  logic signed [63:0] c$case_alt_selection_57;
+  logic signed [63:0] c$case_alt_selection_62;
   logic signed [63:0] c$case_alt_selection_61;
-  logic [7:0] c$i_268;
-  logic signed [63:0] c$case_alt_selection_60;
+  logic signed [63:0] c$case_alt_selection_65;
   logic signed [63:0] c$case_alt_selection_64;
-  logic [7:0] c$i_269;
-  logic signed [63:0] c$case_alt_selection_63;
+  logic signed [63:0] c$case_alt_selection_68;
   logic signed [63:0] c$case_alt_selection_67;
-  logic [7:0] c$i_270;
-  logic signed [63:0] c$case_alt_selection_66;
+  logic signed [63:0] c$case_alt_selection_71;
   logic signed [63:0] c$case_alt_selection_70;
-  logic [7:0] c$i_271;
-  logic signed [63:0] c$case_alt_selection_69;
+  logic signed [63:0] c$case_alt_selection_74;
   logic signed [63:0] c$case_alt_selection_73;
-  logic [7:0] c$i_272;
-  logic signed [63:0] c$case_alt_selection_72;
+  logic signed [63:0] c$case_alt_selection_77;
   logic signed [63:0] c$case_alt_selection_76;
-  logic [7:0] c$i_273;
-  logic signed [63:0] c$case_alt_selection_75;
+  logic signed [63:0] c$case_alt_selection_80;
   logic signed [63:0] c$case_alt_selection_79;
-  logic [7:0] c$i_274;
-  logic signed [63:0] c$case_alt_selection_78;
+  logic signed [63:0] c$case_alt_selection_83;
   logic signed [63:0] c$case_alt_selection_82;
-  logic [7:0] c$i_275;
-  logic signed [63:0] c$case_alt_selection_81;
+  logic signed [63:0] c$case_alt_selection_86;
   logic signed [63:0] c$case_alt_selection_85;
-  logic [7:0] c$i_276;
-  logic signed [63:0] c$case_alt_selection_84;
+  logic signed [63:0] c$case_alt_selection_89;
   logic signed [63:0] c$case_alt_selection_88;
-  logic [7:0] c$i_277;
-  logic signed [63:0] c$case_alt_selection_87;
+  logic signed [63:0] c$case_alt_selection_92;
   logic signed [63:0] c$case_alt_selection_91;
-  logic [7:0] c$i_278;
-  logic signed [63:0] c$case_alt_selection_90;
+  logic signed [63:0] c$case_alt_selection_95;
   logic signed [63:0] c$case_alt_selection_94;
-  logic [7:0] c$i_279;
-  logic signed [63:0] c$case_alt_selection_93;
+  logic signed [63:0] c$case_alt_selection_98;
   logic signed [63:0] c$case_alt_selection_97;
-  logic [7:0] c$i_280;
-  logic signed [63:0] c$case_alt_selection_96;
+  logic signed [63:0] c$case_alt_selection_101;
   logic signed [63:0] c$case_alt_selection_100;
-  logic [7:0] c$i_281;
-  logic signed [63:0] c$case_alt_selection_99;
+  logic signed [63:0] c$case_alt_selection_104;
   logic signed [63:0] c$case_alt_selection_103;
-  logic [7:0] c$i_282;
-  logic signed [63:0] c$case_alt_selection_102;
+  logic signed [63:0] c$case_alt_selection_107;
   logic signed [63:0] c$case_alt_selection_106;
-  logic [7:0] c$i_283;
-  logic signed [63:0] c$case_alt_selection_105;
+  logic signed [63:0] c$case_alt_selection_110;
   logic signed [63:0] c$case_alt_selection_109;
-  logic [7:0] c$i_284;
-  logic signed [63:0] c$case_alt_selection_108;
+  logic signed [63:0] c$case_alt_selection_113;
   logic signed [63:0] c$case_alt_selection_112;
-  logic [7:0] c$i_285;
-  logic signed [63:0] c$case_alt_selection_111;
+  logic signed [63:0] c$case_alt_selection_116;
   logic signed [63:0] c$case_alt_selection_115;
-  logic [7:0] c$i_286;
-  logic signed [63:0] c$case_alt_selection_114;
+  logic signed [63:0] c$case_alt_selection_119;
   logic signed [63:0] c$case_alt_selection_118;
-  logic [7:0] c$i_287;
-  logic signed [63:0] c$case_alt_selection_117;
+  logic signed [63:0] c$case_alt_selection_122;
   logic signed [63:0] c$case_alt_selection_121;
-  logic [7:0] c$i_288;
-  logic signed [63:0] c$case_alt_selection_120;
+  logic signed [63:0] c$case_alt_selection_125;
   logic signed [63:0] c$case_alt_selection_124;
-  logic [7:0] c$i_289;
-  logic signed [63:0] c$case_alt_selection_123;
+  logic signed [63:0] c$case_alt_selection_128;
   logic signed [63:0] c$case_alt_selection_127;
-  logic [7:0] c$i_290;
-  logic signed [63:0] c$case_alt_selection_126;
+  logic signed [63:0] c$case_alt_selection_131;
   logic signed [63:0] c$case_alt_selection_130;
-  logic [7:0] c$i_291;
-  logic signed [63:0] c$case_alt_selection_129;
+  logic signed [63:0] c$case_alt_selection_134;
   logic signed [63:0] c$case_alt_selection_133;
-  logic [7:0] c$i_292;
-  logic signed [63:0] c$case_alt_selection_132;
+  logic signed [63:0] c$case_alt_selection_137;
   logic signed [63:0] c$case_alt_selection_136;
-  logic [7:0] c$i_293;
-  logic signed [63:0] c$case_alt_selection_135;
+  logic signed [63:0] c$case_alt_selection_140;
   logic signed [63:0] c$case_alt_selection_139;
-  logic [7:0] c$i_294;
-  logic signed [63:0] c$case_alt_selection_138;
+  logic signed [63:0] c$case_alt_selection_143;
   logic signed [63:0] c$case_alt_selection_142;
-  logic [7:0] c$i_295;
-  logic signed [63:0] c$case_alt_selection_141;
+  logic signed [63:0] c$case_alt_selection_146;
   logic signed [63:0] c$case_alt_selection_145;
-  logic [7:0] c$i_296;
-  logic signed [63:0] c$case_alt_selection_144;
+  logic signed [63:0] c$case_alt_selection_149;
   logic signed [63:0] c$case_alt_selection_148;
-  logic [7:0] c$i_297;
-  logic signed [63:0] c$case_alt_selection_147;
+  logic signed [63:0] c$case_alt_selection_152;
   logic signed [63:0] c$case_alt_selection_151;
-  logic [7:0] c$i_298;
-  logic signed [63:0] c$case_alt_selection_150;
+  logic signed [63:0] c$case_alt_selection_155;
   logic signed [63:0] c$case_alt_selection_154;
-  logic [7:0] c$i_299;
-  logic signed [63:0] c$case_alt_selection_153;
+  logic signed [63:0] c$case_alt_selection_158;
   logic signed [63:0] c$case_alt_selection_157;
-  logic [7:0] c$i_300;
-  logic signed [63:0] c$case_alt_selection_156;
+  logic signed [63:0] c$case_alt_selection_161;
   logic signed [63:0] c$case_alt_selection_160;
-  logic [7:0] c$i_301;
-  logic signed [63:0] c$case_alt_selection_159;
+  logic signed [63:0] c$case_alt_selection_164;
   logic signed [63:0] c$case_alt_selection_163;
-  logic [7:0] c$i_302;
-  logic signed [63:0] c$case_alt_selection_162;
+  logic signed [63:0] c$case_alt_selection_167;
   logic signed [63:0] c$case_alt_selection_166;
-  logic [7:0] c$i_303;
-  logic signed [63:0] c$case_alt_selection_165;
+  logic signed [63:0] c$case_alt_selection_170;
   logic signed [63:0] c$case_alt_selection_169;
-  logic [7:0] c$i_304;
-  logic signed [63:0] c$case_alt_selection_168;
+  logic signed [63:0] c$case_alt_selection_173;
   logic signed [63:0] c$case_alt_selection_172;
-  logic [7:0] c$i_305;
-  logic signed [63:0] c$case_alt_selection_171;
+  logic signed [63:0] c$case_alt_selection_176;
   logic signed [63:0] c$case_alt_selection_175;
-  logic [7:0] c$i_306;
-  logic signed [63:0] c$case_alt_selection_174;
+  logic signed [63:0] c$case_alt_selection_179;
   logic signed [63:0] c$case_alt_selection_178;
-  logic [7:0] c$i_307;
-  logic signed [63:0] c$case_alt_selection_177;
+  logic signed [63:0] c$case_alt_selection_182;
   logic signed [63:0] c$case_alt_selection_181;
-  logic [7:0] c$i_308;
-  logic signed [63:0] c$case_alt_selection_180;
+  logic signed [63:0] c$case_alt_selection_185;
   logic signed [63:0] c$case_alt_selection_184;
-  logic [7:0] c$i_309;
-  logic signed [63:0] c$case_alt_selection_183;
+  logic signed [63:0] c$case_alt_selection_188;
   logic signed [63:0] c$case_alt_selection_187;
-  logic [7:0] c$i_310;
-  logic signed [63:0] c$case_alt_selection_186;
+  logic signed [63:0] c$case_alt_selection_191;
   logic signed [63:0] c$case_alt_selection_190;
-  logic [7:0] c$i_311;
-  logic signed [63:0] c$case_alt_selection_189;
+  logic signed [63:0] c$case_alt_selection_194;
   logic signed [63:0] c$case_alt_selection_193;
-  logic [7:0] c$i_312;
-  logic signed [63:0] c$case_alt_selection_192;
+  logic signed [63:0] c$case_alt_selection_197;
   logic signed [63:0] c$case_alt_selection_196;
-  logic [7:0] c$i_313;
-  logic signed [63:0] c$case_alt_selection_195;
+  logic signed [63:0] c$case_alt_selection_200;
   logic signed [63:0] c$case_alt_selection_199;
-  logic [7:0] c$i_314;
-  logic signed [63:0] c$case_alt_selection_198;
+  logic signed [63:0] c$case_alt_selection_203;
   logic signed [63:0] c$case_alt_selection_202;
-  logic [7:0] c$i_315;
-  logic signed [63:0] c$case_alt_selection_201;
+  logic signed [63:0] c$case_alt_selection_206;
   logic signed [63:0] c$case_alt_selection_205;
-  logic [7:0] c$i_316;
-  logic signed [63:0] c$case_alt_selection_204;
+  logic signed [63:0] c$case_alt_selection_209;
   logic signed [63:0] c$case_alt_selection_208;
-  logic [7:0] c$i_317;
-  logic signed [63:0] c$case_alt_selection_207;
+  logic signed [63:0] c$case_alt_selection_212;
   logic signed [63:0] c$case_alt_selection_211;
-  logic [7:0] c$i_318;
-  logic signed [63:0] c$case_alt_selection_210;
+  logic signed [63:0] c$case_alt_selection_215;
   logic signed [63:0] c$case_alt_selection_214;
-  logic [7:0] c$i_319;
-  logic signed [63:0] c$case_alt_selection_213;
+  logic signed [63:0] c$case_alt_selection_218;
   logic signed [63:0] c$case_alt_selection_217;
-  logic [7:0] c$i_320;
-  logic signed [63:0] c$case_alt_selection_216;
+  logic signed [63:0] c$case_alt_selection_221;
   logic signed [63:0] c$case_alt_selection_220;
-  logic [7:0] c$i_321;
-  logic signed [63:0] c$case_alt_selection_219;
+  logic signed [63:0] c$case_alt_selection_224;
   logic signed [63:0] c$case_alt_selection_223;
-  logic [7:0] c$i_322;
-  logic signed [63:0] c$case_alt_selection_222;
+  logic signed [63:0] c$case_alt_selection_227;
   logic signed [63:0] c$case_alt_selection_226;
-  logic [7:0] c$i_323;
-  logic signed [63:0] c$case_alt_selection_225;
+  logic signed [63:0] c$case_alt_selection_230;
   logic signed [63:0] c$case_alt_selection_229;
-  logic [7:0] c$i_324;
-  logic signed [63:0] c$case_alt_selection_228;
+  logic signed [63:0] c$case_alt_selection_233;
   logic signed [63:0] c$case_alt_selection_232;
-  logic [7:0] c$i_325;
-  logic signed [63:0] c$case_alt_selection_231;
+  logic signed [63:0] c$case_alt_selection_236;
   logic signed [63:0] c$case_alt_selection_235;
-  logic [7:0] c$i_326;
-  logic signed [63:0] c$case_alt_selection_234;
+  logic signed [63:0] c$case_alt_selection_239;
   logic signed [63:0] c$case_alt_selection_238;
-  logic [7:0] c$i_327;
-  logic signed [63:0] c$case_alt_selection_237;
+  logic signed [63:0] c$case_alt_selection_242;
   logic signed [63:0] c$case_alt_selection_241;
-  logic [7:0] c$i_328;
-  logic signed [63:0] c$case_alt_selection_240;
+  logic signed [63:0] c$case_alt_selection_245;
   logic signed [63:0] c$case_alt_selection_244;
-  logic [7:0] c$i_329;
-  logic signed [63:0] c$case_alt_selection_243;
+  logic signed [63:0] c$case_alt_selection_248;
   logic signed [63:0] c$case_alt_selection_247;
-  logic [7:0] c$i_330;
-  logic signed [63:0] c$case_alt_selection_246;
+  logic signed [63:0] c$case_alt_selection_251;
   logic signed [63:0] c$case_alt_selection_250;
-  logic [7:0] c$i_331;
-  logic signed [63:0] c$case_alt_selection_249;
+  logic signed [63:0] c$case_alt_selection_254;
   logic signed [63:0] c$case_alt_selection_253;
-  logic [7:0] c$i_332;
-  logic signed [63:0] c$case_alt_selection_252;
+  logic signed [63:0] c$case_alt_selection_257;
   logic signed [63:0] c$case_alt_selection_256;
-  logic [7:0] c$i_333;
-  logic signed [63:0] c$case_alt_selection_255;
+  logic signed [63:0] c$case_alt_selection_260;
   logic signed [63:0] c$case_alt_selection_259;
-  logic [7:0] c$i_334;
-  logic signed [63:0] c$case_alt_selection_258;
+  logic signed [63:0] c$case_alt_selection_263;
   logic signed [63:0] c$case_alt_selection_262;
-  logic [7:0] c$i_335;
-  logic signed [63:0] c$case_alt_selection_261;
+  logic signed [63:0] c$case_alt_selection_266;
   logic signed [63:0] c$case_alt_selection_265;
-  logic [7:0] c$i_336;
-  logic signed [63:0] c$case_alt_selection_264;
+  logic signed [63:0] c$case_alt_selection_269;
   logic signed [63:0] c$case_alt_selection_268;
-  logic [7:0] c$i_337;
-  logic signed [63:0] c$case_alt_selection_267;
+  logic signed [63:0] c$case_alt_selection_272;
   logic signed [63:0] c$case_alt_selection_271;
-  logic [7:0] c$i_338;
-  logic signed [63:0] c$case_alt_selection_270;
+  logic signed [63:0] c$case_alt_selection_275;
   logic signed [63:0] c$case_alt_selection_274;
-  logic [7:0] c$i_339;
-  logic signed [63:0] c$case_alt_selection_273;
+  logic signed [63:0] c$case_alt_selection_278;
   logic signed [63:0] c$case_alt_selection_277;
-  logic [7:0] c$i_340;
-  logic signed [63:0] c$case_alt_selection_276;
+  logic signed [63:0] c$case_alt_selection_281;
   logic signed [63:0] c$case_alt_selection_280;
-  logic [7:0] c$i_341;
-  logic signed [63:0] c$case_alt_selection_279;
+  logic signed [63:0] c$case_alt_selection_284;
   logic signed [63:0] c$case_alt_selection_283;
-  logic [7:0] c$i_342;
-  logic signed [63:0] c$case_alt_selection_282;
+  logic signed [63:0] c$case_alt_selection_287;
   logic signed [63:0] c$case_alt_selection_286;
-  logic [7:0] c$i_343;
-  logic signed [63:0] c$case_alt_selection_285;
+  logic signed [63:0] c$case_alt_selection_290;
   logic signed [63:0] c$case_alt_selection_289;
-  logic [7:0] c$i_344;
-  logic signed [63:0] c$case_alt_selection_288;
+  logic signed [63:0] c$case_alt_selection_293;
   logic signed [63:0] c$case_alt_selection_292;
-  logic [7:0] c$i_345;
-  logic signed [63:0] c$case_alt_selection_291;
+  logic signed [63:0] c$case_alt_selection_296;
   logic signed [63:0] c$case_alt_selection_295;
-  logic [7:0] c$i_346;
-  logic signed [63:0] c$case_alt_selection_294;
+  logic signed [63:0] c$case_alt_selection_299;
   logic signed [63:0] c$case_alt_selection_298;
-  logic [7:0] c$i_347;
-  logic signed [63:0] c$case_alt_selection_297;
+  logic signed [63:0] c$case_alt_selection_302;
   logic signed [63:0] c$case_alt_selection_301;
-  logic [7:0] c$i_348;
-  logic signed [63:0] c$case_alt_selection_300;
+  logic signed [63:0] c$case_alt_selection_305;
   logic signed [63:0] c$case_alt_selection_304;
-  logic [7:0] c$i_349;
-  logic signed [63:0] c$case_alt_selection_303;
+  logic signed [63:0] c$case_alt_selection_308;
   logic signed [63:0] c$case_alt_selection_307;
-  logic [7:0] c$i_350;
-  logic signed [63:0] c$case_alt_selection_306;
+  logic signed [63:0] c$case_alt_selection_311;
   logic signed [63:0] c$case_alt_selection_310;
-  logic [7:0] c$i_351;
-  logic signed [63:0] c$case_alt_selection_309;
+  logic signed [63:0] c$case_alt_selection_314;
   logic signed [63:0] c$case_alt_selection_313;
-  logic [7:0] c$i_352;
-  logic signed [63:0] c$case_alt_selection_312;
+  logic signed [63:0] c$case_alt_selection_317;
   logic signed [63:0] c$case_alt_selection_316;
-  logic [7:0] c$i_353;
-  logic signed [63:0] c$case_alt_selection_315;
+  logic signed [63:0] c$case_alt_selection_320;
   logic signed [63:0] c$case_alt_selection_319;
-  logic [7:0] c$i_354;
-  logic signed [63:0] c$case_alt_selection_318;
+  logic signed [63:0] c$case_alt_selection_323;
   logic signed [63:0] c$case_alt_selection_322;
-  logic [7:0] c$i_355;
-  logic signed [63:0] c$case_alt_selection_321;
+  logic signed [63:0] c$case_alt_selection_326;
   logic signed [63:0] c$case_alt_selection_325;
-  logic [7:0] c$i_356;
-  logic signed [63:0] c$case_alt_selection_324;
+  logic signed [63:0] c$case_alt_selection_329;
   logic signed [63:0] c$case_alt_selection_328;
-  logic [7:0] c$i_357;
-  logic signed [63:0] c$case_alt_selection_327;
+  logic signed [63:0] c$case_alt_selection_332;
   logic signed [63:0] c$case_alt_selection_331;
-  logic [7:0] c$i_358;
-  logic signed [63:0] c$case_alt_selection_330;
+  logic signed [63:0] c$case_alt_selection_335;
   logic signed [63:0] c$case_alt_selection_334;
-  logic [7:0] c$i_359;
-  logic signed [63:0] c$case_alt_selection_333;
+  logic signed [63:0] c$case_alt_selection_338;
   logic signed [63:0] c$case_alt_selection_337;
-  logic [7:0] c$i_360;
-  logic signed [63:0] c$case_alt_selection_336;
+  logic signed [63:0] c$case_alt_selection_341;
   logic signed [63:0] c$case_alt_selection_340;
-  logic [7:0] c$i_361;
-  logic signed [63:0] c$case_alt_selection_339;
+  logic signed [63:0] c$case_alt_selection_344;
   logic signed [63:0] c$case_alt_selection_343;
-  logic [7:0] c$i_362;
-  logic signed [63:0] c$case_alt_selection_342;
+  logic signed [63:0] c$case_alt_selection_347;
   logic signed [63:0] c$case_alt_selection_346;
-  logic [7:0] c$i_363;
-  logic signed [63:0] c$case_alt_selection_345;
+  logic signed [63:0] c$case_alt_selection_350;
   logic signed [63:0] c$case_alt_selection_349;
-  logic [7:0] c$i_364;
-  logic signed [63:0] c$case_alt_selection_348;
+  logic signed [63:0] c$case_alt_selection_353;
   logic signed [63:0] c$case_alt_selection_352;
-  logic [7:0] c$i_365;
-  logic signed [63:0] c$case_alt_selection_351;
+  logic signed [63:0] c$case_alt_selection_356;
   logic signed [63:0] c$case_alt_selection_355;
-  logic [7:0] c$i_366;
-  logic signed [63:0] c$case_alt_selection_354;
+  logic signed [63:0] c$case_alt_selection_359;
   logic signed [63:0] c$case_alt_selection_358;
-  logic [7:0] c$i_367;
-  logic signed [63:0] c$case_alt_selection_357;
+  logic signed [63:0] c$case_alt_selection_362;
   logic signed [63:0] c$case_alt_selection_361;
-  logic [7:0] c$i_368;
-  logic signed [63:0] c$case_alt_selection_360;
+  logic signed [63:0] c$case_alt_selection_365;
   logic signed [63:0] c$case_alt_selection_364;
-  logic [7:0] c$i_369;
-  logic signed [63:0] c$case_alt_selection_363;
+  logic signed [63:0] c$case_alt_selection_368;
   logic signed [63:0] c$case_alt_selection_367;
-  logic [7:0] c$i_370;
-  logic signed [63:0] c$case_alt_selection_366;
+  logic signed [63:0] c$case_alt_selection_371;
   logic signed [63:0] c$case_alt_selection_370;
-  logic [7:0] c$i_371;
-  logic signed [63:0] c$case_alt_selection_369;
+  logic signed [63:0] c$case_alt_selection_374;
   logic signed [63:0] c$case_alt_selection_373;
-  logic [7:0] c$i_372;
-  logic signed [63:0] c$case_alt_selection_372;
+  logic signed [63:0] c$case_alt_selection_377;
   logic signed [63:0] c$case_alt_selection_376;
-  logic [7:0] c$i_373;
-  logic signed [63:0] c$case_alt_selection_375;
+  logic signed [63:0] c$case_alt_selection_380;
   logic signed [63:0] c$case_alt_selection_379;
-  logic [7:0] c$i_374;
-  logic signed [63:0] c$case_alt_selection_378;
+  logic signed [63:0] c$case_alt_selection_383;
   logic signed [63:0] c$case_alt_selection_382;
-  logic [7:0] c$i_375;
-  logic signed [63:0] c$case_alt_selection_381;
+  logic signed [63:0] c$case_alt_selection_386;
   logic signed [63:0] c$case_alt_selection_385;
-  logic [7:0] c$i_376;
-  logic signed [63:0] c$case_alt_selection_384;
+  logic signed [63:0] c$case_alt_selection_389;
   logic signed [63:0] c$case_alt_selection_388;
-  logic [7:0] c$i_377;
-  logic signed [63:0] c$case_alt_selection_387;
+  logic signed [63:0] c$case_alt_selection_392;
   logic signed [63:0] c$case_alt_selection_391;
-  logic [7:0] c$i_378;
-  logic signed [63:0] c$case_alt_selection_390;
+  logic signed [63:0] c$case_alt_selection_395;
   logic signed [63:0] c$case_alt_selection_394;
-  logic [7:0] c$i_379;
-  logic signed [63:0] c$case_alt_selection_393;
+  logic signed [63:0] c$case_alt_selection_398;
   logic signed [63:0] c$case_alt_selection_397;
-  logic [7:0] c$i_380;
-  logic signed [63:0] c$case_alt_selection_396;
+  logic signed [63:0] c$case_alt_selection_401;
   logic signed [63:0] c$case_alt_selection_400;
-  logic [7:0] c$i_381;
-  logic signed [63:0] c$case_alt_selection_399;
+  logic signed [63:0] c$case_alt_selection_404;
   logic signed [63:0] c$case_alt_selection_403;
-  logic [7:0] c$i_382;
-  logic signed [63:0] c$case_alt_selection_402;
+  logic signed [63:0] c$case_alt_selection_407;
   logic signed [63:0] c$case_alt_selection_406;
-  logic [7:0] c$i_383;
-  logic signed [63:0] c$case_alt_selection_405;
+  logic signed [63:0] c$case_alt_selection_410;
   logic signed [63:0] c$case_alt_selection_409;
-  logic [7:0] c$i_384;
-  logic signed [63:0] c$case_alt_selection_408;
+  logic signed [63:0] c$case_alt_selection_413;
   logic signed [63:0] c$case_alt_selection_412;
-  logic [7:0] c$i_385;
-  logic signed [63:0] c$case_alt_selection_411;
+  logic signed [63:0] c$case_alt_selection_416;
   logic signed [63:0] c$case_alt_selection_415;
-  logic [7:0] c$i_386;
-  logic signed [63:0] c$case_alt_selection_414;
+  logic signed [63:0] c$case_alt_selection_419;
   logic signed [63:0] c$case_alt_selection_418;
-  logic [7:0] c$i_387;
-  logic signed [63:0] c$case_alt_selection_417;
+  logic signed [63:0] c$case_alt_selection_422;
   logic signed [63:0] c$case_alt_selection_421;
-  logic [7:0] c$i_388;
-  logic signed [63:0] c$case_alt_selection_420;
+  logic signed [63:0] c$case_alt_selection_425;
   logic signed [63:0] c$case_alt_selection_424;
-  logic [7:0] c$i_389;
-  logic signed [63:0] c$case_alt_selection_423;
+  logic signed [63:0] c$case_alt_selection_428;
   logic signed [63:0] c$case_alt_selection_427;
-  logic [7:0] c$i_390;
-  logic signed [63:0] c$case_alt_selection_426;
+  logic signed [63:0] c$case_alt_selection_431;
   logic signed [63:0] c$case_alt_selection_430;
-  logic [7:0] c$i_391;
-  logic signed [63:0] c$case_alt_selection_429;
+  logic signed [63:0] c$case_alt_selection_434;
   logic signed [63:0] c$case_alt_selection_433;
-  logic [7:0] c$i_392;
-  logic signed [63:0] c$case_alt_selection_432;
+  logic signed [63:0] c$case_alt_selection_437;
   logic signed [63:0] c$case_alt_selection_436;
-  logic [7:0] c$i_393;
-  logic signed [63:0] c$case_alt_selection_435;
+  logic signed [63:0] c$case_alt_selection_440;
   logic signed [63:0] c$case_alt_selection_439;
-  logic [7:0] c$i_394;
-  logic signed [63:0] c$case_alt_selection_438;
+  logic signed [63:0] c$case_alt_selection_443;
   logic signed [63:0] c$case_alt_selection_442;
-  logic [7:0] c$i_395;
-  logic signed [63:0] c$case_alt_selection_441;
+  logic signed [63:0] c$case_alt_selection_446;
   logic signed [63:0] c$case_alt_selection_445;
-  logic [7:0] c$i_396;
-  logic signed [63:0] c$case_alt_selection_444;
+  logic signed [63:0] c$case_alt_selection_449;
   logic signed [63:0] c$case_alt_selection_448;
-  logic [7:0] c$i_397;
-  logic signed [63:0] c$case_alt_selection_447;
+  logic signed [63:0] c$case_alt_selection_452;
   logic signed [63:0] c$case_alt_selection_451;
-  logic [7:0] c$i_398;
-  logic signed [63:0] c$case_alt_selection_450;
+  logic signed [63:0] c$case_alt_selection_455;
   logic signed [63:0] c$case_alt_selection_454;
-  logic [7:0] c$i_399;
-  logic signed [63:0] c$case_alt_selection_453;
+  logic signed [63:0] c$case_alt_selection_458;
   logic signed [63:0] c$case_alt_selection_457;
-  logic [7:0] c$i_400;
-  logic signed [63:0] c$case_alt_selection_456;
+  logic signed [63:0] c$case_alt_selection_461;
   logic signed [63:0] c$case_alt_selection_460;
-  logic [7:0] c$i_401;
-  logic signed [63:0] c$case_alt_selection_459;
+  logic signed [63:0] c$case_alt_selection_464;
   logic signed [63:0] c$case_alt_selection_463;
-  logic [7:0] c$i_402;
-  logic signed [63:0] c$case_alt_selection_462;
+  logic signed [63:0] c$case_alt_selection_467;
   logic signed [63:0] c$case_alt_selection_466;
-  logic [7:0] c$i_403;
-  logic signed [63:0] c$case_alt_selection_465;
+  logic signed [63:0] c$case_alt_selection_470;
   logic signed [63:0] c$case_alt_selection_469;
-  logic [7:0] c$i_404;
-  logic signed [63:0] c$case_alt_selection_468;
+  logic signed [63:0] c$case_alt_selection_473;
   logic signed [63:0] c$case_alt_selection_472;
-  logic [7:0] c$i_405;
-  logic signed [63:0] c$case_alt_selection_471;
+  logic signed [63:0] c$case_alt_selection_476;
   logic signed [63:0] c$case_alt_selection_475;
-  logic [7:0] c$i_406;
-  logic signed [63:0] c$case_alt_selection_474;
+  logic signed [63:0] c$case_alt_selection_479;
   logic signed [63:0] c$case_alt_selection_478;
-  logic [7:0] c$i_407;
-  logic signed [63:0] c$case_alt_selection_477;
+  logic signed [63:0] c$case_alt_selection_482;
   logic signed [63:0] c$case_alt_selection_481;
-  logic [7:0] c$i_408;
-  logic signed [63:0] c$case_alt_selection_480;
+  logic signed [63:0] c$case_alt_selection_485;
   logic signed [63:0] c$case_alt_selection_484;
-  logic [7:0] c$i_409;
-  logic signed [63:0] c$case_alt_selection_483;
+  logic signed [63:0] c$case_alt_selection_488;
   logic signed [63:0] c$case_alt_selection_487;
-  logic [7:0] c$i_410;
-  logic signed [63:0] c$case_alt_selection_486;
+  logic signed [63:0] c$case_alt_selection_491;
   logic signed [63:0] c$case_alt_selection_490;
-  logic [7:0] c$i_411;
-  logic signed [63:0] c$case_alt_selection_489;
+  logic signed [63:0] c$case_alt_selection_494;
   logic signed [63:0] c$case_alt_selection_493;
-  logic [7:0] c$i_412;
-  logic signed [63:0] c$case_alt_selection_492;
+  logic signed [63:0] c$case_alt_selection_497;
   logic signed [63:0] c$case_alt_selection_496;
-  logic [7:0] c$i_413;
-  logic signed [63:0] c$case_alt_selection_495;
+  logic signed [63:0] c$case_alt_selection_500;
   logic signed [63:0] c$case_alt_selection_499;
-  logic [7:0] c$i_414;
-  logic signed [63:0] c$case_alt_selection_498;
+  logic signed [63:0] c$case_alt_selection_503;
   logic signed [63:0] c$case_alt_selection_502;
-  logic [7:0] c$i_415;
-  logic signed [63:0] c$case_alt_selection_501;
+  logic signed [63:0] c$case_alt_selection_506;
   logic signed [63:0] c$case_alt_selection_505;
-  logic [7:0] c$i_416;
-  logic signed [63:0] c$case_alt_selection_504;
+  logic signed [63:0] c$case_alt_selection_509;
   logic signed [63:0] c$case_alt_selection_508;
-  logic [7:0] c$i_417;
-  logic signed [63:0] c$case_alt_selection_507;
+  logic signed [63:0] c$case_alt_selection_512;
   logic signed [63:0] c$case_alt_selection_511;
-  logic [7:0] c$i_418;
-  logic signed [63:0] c$case_alt_selection_510;
+  logic signed [63:0] c$case_alt_selection_515;
   logic signed [63:0] c$case_alt_selection_514;
-  logic [7:0] c$i_419;
-  logic signed [63:0] c$case_alt_selection_513;
+  logic signed [63:0] c$case_alt_selection_518;
   logic signed [63:0] c$case_alt_selection_517;
-  logic [7:0] c$i_420;
-  logic signed [63:0] c$case_alt_selection_516;
+  logic signed [63:0] c$case_alt_selection_521;
   logic signed [63:0] c$case_alt_selection_520;
-  logic [7:0] c$i_421;
-  logic signed [63:0] c$case_alt_selection_519;
+  logic signed [63:0] c$case_alt_selection_524;
   logic signed [63:0] c$case_alt_selection_523;
-  logic [7:0] c$i_422;
-  logic signed [63:0] c$case_alt_selection_522;
+  logic signed [63:0] c$case_alt_selection_527;
   logic signed [63:0] c$case_alt_selection_526;
-  logic [7:0] c$i_423;
-  logic signed [63:0] c$case_alt_selection_525;
+  logic signed [63:0] c$case_alt_selection_530;
   logic signed [63:0] c$case_alt_selection_529;
-  logic [7:0] c$i_424;
-  logic signed [63:0] c$case_alt_selection_528;
+  logic signed [63:0] c$case_alt_selection_533;
   logic signed [63:0] c$case_alt_selection_532;
-  logic [7:0] c$i_425;
-  logic signed [63:0] c$case_alt_selection_531;
+  logic signed [63:0] c$case_alt_selection_536;
   logic signed [63:0] c$case_alt_selection_535;
-  logic [7:0] c$i_426;
-  logic signed [63:0] c$case_alt_selection_534;
+  logic signed [63:0] c$case_alt_selection_539;
   logic signed [63:0] c$case_alt_selection_538;
-  logic [7:0] c$i_427;
-  logic signed [63:0] c$case_alt_selection_537;
+  logic signed [63:0] c$case_alt_selection_542;
   logic signed [63:0] c$case_alt_selection_541;
-  logic [7:0] c$i_428;
-  logic signed [63:0] c$case_alt_selection_540;
+  logic signed [63:0] c$case_alt_selection_545;
   logic signed [63:0] c$case_alt_selection_544;
-  logic [7:0] c$i_429;
-  logic signed [63:0] c$case_alt_selection_543;
+  logic signed [63:0] c$case_alt_selection_548;
   logic signed [63:0] c$case_alt_selection_547;
-  logic [7:0] c$i_430;
-  logic signed [63:0] c$case_alt_selection_546;
+  logic signed [63:0] c$case_alt_selection_551;
   logic signed [63:0] c$case_alt_selection_550;
-  logic [7:0] c$i_431;
-  logic signed [63:0] c$case_alt_selection_549;
+  logic signed [63:0] c$case_alt_selection_554;
   logic signed [63:0] c$case_alt_selection_553;
-  logic [7:0] c$i_432;
-  logic signed [63:0] c$case_alt_selection_552;
+  logic signed [63:0] c$case_alt_selection_557;
   logic signed [63:0] c$case_alt_selection_556;
-  logic [7:0] c$i_433;
-  logic signed [63:0] c$case_alt_selection_555;
+  logic signed [63:0] c$case_alt_selection_560;
   logic signed [63:0] c$case_alt_selection_559;
-  logic [7:0] c$i_434;
-  logic signed [63:0] c$case_alt_selection_558;
+  logic signed [63:0] c$case_alt_selection_563;
   logic signed [63:0] c$case_alt_selection_562;
-  logic [7:0] c$i_435;
-  logic signed [63:0] c$case_alt_selection_561;
+  logic signed [63:0] c$case_alt_selection_566;
   logic signed [63:0] c$case_alt_selection_565;
-  logic [7:0] c$i_436;
-  logic signed [63:0] c$case_alt_selection_564;
+  logic signed [63:0] c$case_alt_selection_569;
   logic signed [63:0] c$case_alt_selection_568;
-  logic [7:0] c$i_437;
-  logic signed [63:0] c$case_alt_selection_567;
+  logic signed [63:0] c$case_alt_selection_572;
   logic signed [63:0] c$case_alt_selection_571;
-  logic [7:0] c$i_438;
-  logic signed [63:0] c$case_alt_selection_570;
+  logic signed [63:0] c$case_alt_selection_575;
   logic signed [63:0] c$case_alt_selection_574;
-  logic [7:0] c$i_439;
-  logic signed [63:0] c$case_alt_selection_573;
+  logic signed [63:0] c$case_alt_selection_578;
   logic signed [63:0] c$case_alt_selection_577;
-  logic [7:0] c$i_440;
-  logic signed [63:0] c$case_alt_selection_576;
+  logic signed [63:0] c$case_alt_selection_581;
   logic signed [63:0] c$case_alt_selection_580;
-  logic [7:0] c$i_441;
-  logic signed [63:0] c$case_alt_selection_579;
+  logic signed [63:0] c$case_alt_selection_584;
   logic signed [63:0] c$case_alt_selection_583;
-  logic [7:0] c$i_442;
-  logic signed [63:0] c$case_alt_selection_582;
+  logic signed [63:0] c$case_alt_selection_587;
   logic signed [63:0] c$case_alt_selection_586;
-  logic [7:0] c$i_443;
-  logic signed [63:0] c$case_alt_selection_585;
+  logic signed [63:0] c$case_alt_selection_590;
   logic signed [63:0] c$case_alt_selection_589;
-  logic [7:0] c$i_444;
-  logic signed [63:0] c$case_alt_selection_588;
+  logic signed [63:0] c$case_alt_selection_593;
   logic signed [63:0] c$case_alt_selection_592;
-  logic [7:0] c$i_445;
-  logic signed [63:0] c$case_alt_selection_591;
+  logic signed [63:0] c$case_alt_selection_596;
   logic signed [63:0] c$case_alt_selection_595;
-  logic [7:0] c$i_446;
-  logic signed [63:0] c$case_alt_selection_594;
+  logic signed [63:0] c$case_alt_selection_599;
   logic signed [63:0] c$case_alt_selection_598;
-  logic [7:0] c$i_447;
-  logic signed [63:0] c$case_alt_selection_597;
+  logic signed [63:0] c$case_alt_selection_602;
   logic signed [63:0] c$case_alt_selection_601;
-  logic [7:0] c$i_448;
-  logic signed [63:0] c$case_alt_selection_600;
+  logic signed [63:0] c$case_alt_selection_605;
   logic signed [63:0] c$case_alt_selection_604;
-  logic [7:0] c$i_449;
-  logic signed [63:0] c$case_alt_selection_603;
+  logic signed [63:0] c$case_alt_selection_608;
   logic signed [63:0] c$case_alt_selection_607;
-  logic [7:0] c$i_450;
-  logic signed [63:0] c$case_alt_selection_606;
+  logic signed [63:0] c$case_alt_selection_611;
   logic signed [63:0] c$case_alt_selection_610;
-  logic [7:0] c$i_451;
-  logic signed [63:0] c$case_alt_selection_609;
+  logic signed [63:0] c$case_alt_selection_614;
   logic signed [63:0] c$case_alt_selection_613;
-  logic [7:0] c$i_452;
-  logic signed [63:0] c$case_alt_selection_612;
+  logic signed [63:0] c$case_alt_selection_617;
   logic signed [63:0] c$case_alt_selection_616;
-  logic [7:0] c$i_453;
-  logic signed [63:0] c$case_alt_selection_615;
+  logic signed [63:0] c$case_alt_selection_620;
   logic signed [63:0] c$case_alt_selection_619;
-  logic [7:0] c$i_454;
-  logic signed [63:0] c$case_alt_selection_618;
+  logic signed [63:0] c$case_alt_selection_623;
   logic signed [63:0] c$case_alt_selection_622;
-  logic [7:0] c$i_455;
-  logic signed [63:0] c$case_alt_selection_621;
+  logic signed [63:0] c$case_alt_selection_626;
   logic signed [63:0] c$case_alt_selection_625;
-  logic [7:0] c$i_456;
-  logic signed [63:0] c$case_alt_selection_624;
+  logic signed [63:0] c$case_alt_selection_629;
   logic signed [63:0] c$case_alt_selection_628;
-  logic [7:0] c$i_457;
-  logic signed [63:0] c$case_alt_selection_627;
+  logic signed [63:0] c$case_alt_selection_632;
   logic signed [63:0] c$case_alt_selection_631;
-  logic [7:0] c$i_458;
-  logic signed [63:0] c$case_alt_selection_630;
+  logic signed [63:0] c$case_alt_selection_635;
   logic signed [63:0] c$case_alt_selection_634;
-  logic [7:0] c$i_459;
-  logic signed [63:0] c$case_alt_selection_633;
+  logic signed [63:0] c$case_alt_selection_638;
   logic signed [63:0] c$case_alt_selection_637;
-  logic [7:0] c$i_460;
-  logic signed [63:0] c$case_alt_selection_636;
+  logic signed [63:0] c$case_alt_selection_641;
   logic signed [63:0] c$case_alt_selection_640;
-  logic [7:0] c$i_461;
-  logic signed [63:0] c$case_alt_selection_639;
+  logic signed [63:0] c$case_alt_selection_644;
   logic signed [63:0] c$case_alt_selection_643;
-  logic [7:0] c$i_462;
-  logic signed [63:0] c$case_alt_selection_642;
+  logic signed [63:0] c$case_alt_selection_647;
   logic signed [63:0] c$case_alt_selection_646;
-  logic [7:0] c$i_463;
-  logic signed [63:0] c$case_alt_selection_645;
+  logic signed [63:0] c$case_alt_selection_650;
   logic signed [63:0] c$case_alt_selection_649;
-  logic [7:0] c$i_464;
-  logic signed [63:0] c$case_alt_selection_648;
+  logic signed [63:0] c$case_alt_selection_653;
   logic signed [63:0] c$case_alt_selection_652;
-  logic [7:0] c$i_465;
-  logic signed [63:0] c$case_alt_selection_651;
+  logic signed [63:0] c$case_alt_selection_656;
   logic signed [63:0] c$case_alt_selection_655;
-  logic [7:0] c$i_466;
-  logic signed [63:0] c$case_alt_selection_654;
+  logic signed [63:0] c$case_alt_selection_659;
   logic signed [63:0] c$case_alt_selection_658;
-  logic [7:0] c$i_467;
-  logic signed [63:0] c$case_alt_selection_657;
+  logic signed [63:0] c$case_alt_selection_662;
   logic signed [63:0] c$case_alt_selection_661;
-  logic [7:0] c$i_468;
-  logic signed [63:0] c$case_alt_selection_660;
+  logic signed [63:0] c$case_alt_selection_665;
   logic signed [63:0] c$case_alt_selection_664;
-  logic [7:0] c$i_469;
-  logic signed [63:0] c$case_alt_selection_663;
+  logic signed [63:0] c$case_alt_selection_668;
   logic signed [63:0] c$case_alt_selection_667;
-  logic [7:0] c$i_470;
-  logic signed [63:0] c$case_alt_selection_666;
+  logic signed [63:0] c$case_alt_selection_671;
   logic signed [63:0] c$case_alt_selection_670;
-  logic [7:0] c$i_471;
-  logic signed [63:0] c$case_alt_selection_669;
+  logic signed [63:0] c$case_alt_selection_674;
   logic signed [63:0] c$case_alt_selection_673;
-  logic [7:0] c$i_472;
-  logic signed [63:0] c$case_alt_selection_672;
+  logic signed [63:0] c$case_alt_selection_677;
   logic signed [63:0] c$case_alt_selection_676;
-  logic [7:0] c$i_473;
-  logic signed [63:0] c$case_alt_selection_675;
+  logic signed [63:0] c$case_alt_selection_680;
   logic signed [63:0] c$case_alt_selection_679;
-  logic [7:0] c$i_474;
-  logic signed [63:0] c$case_alt_selection_678;
+  logic signed [63:0] c$case_alt_selection_683;
   logic signed [63:0] c$case_alt_selection_682;
-  logic [7:0] c$i_475;
-  logic signed [63:0] c$case_alt_selection_681;
+  logic signed [63:0] c$case_alt_selection_686;
   logic signed [63:0] c$case_alt_selection_685;
-  logic [7:0] c$i_476;
-  logic signed [63:0] c$case_alt_selection_684;
+  logic signed [63:0] c$case_alt_selection_689;
   logic signed [63:0] c$case_alt_selection_688;
-  logic [7:0] c$i_477;
-  logic signed [63:0] c$case_alt_selection_687;
+  logic signed [63:0] c$case_alt_selection_692;
   logic signed [63:0] c$case_alt_selection_691;
-  logic [7:0] c$i_478;
-  logic signed [63:0] c$case_alt_selection_690;
+  logic signed [63:0] c$case_alt_selection_695;
   logic signed [63:0] c$case_alt_selection_694;
-  logic [7:0] c$i_479;
-  logic signed [63:0] c$case_alt_selection_693;
+  logic signed [63:0] c$case_alt_selection_698;
   logic signed [63:0] c$case_alt_selection_697;
-  logic [7:0] c$i_480;
-  logic signed [63:0] c$case_alt_selection_696;
+  logic signed [63:0] c$case_alt_selection_701;
   logic signed [63:0] c$case_alt_selection_700;
-  logic [7:0] c$i_481;
-  logic signed [63:0] c$case_alt_selection_699;
+  logic signed [63:0] c$case_alt_selection_704;
   logic signed [63:0] c$case_alt_selection_703;
-  logic [7:0] c$i_482;
-  logic signed [63:0] c$case_alt_selection_702;
+  logic signed [63:0] c$case_alt_selection_707;
   logic signed [63:0] c$case_alt_selection_706;
-  logic [7:0] c$i_483;
-  logic signed [63:0] c$case_alt_selection_705;
+  logic signed [63:0] c$case_alt_selection_710;
   logic signed [63:0] c$case_alt_selection_709;
-  logic [7:0] c$i_484;
-  logic signed [63:0] c$case_alt_selection_708;
+  logic signed [63:0] c$case_alt_selection_713;
   logic signed [63:0] c$case_alt_selection_712;
-  logic [7:0] c$i_485;
-  logic signed [63:0] c$case_alt_selection_711;
+  logic signed [63:0] c$case_alt_selection_716;
   logic signed [63:0] c$case_alt_selection_715;
-  logic [7:0] c$i_486;
-  logic signed [63:0] c$case_alt_selection_714;
+  logic signed [63:0] c$case_alt_selection_719;
   logic signed [63:0] c$case_alt_selection_718;
-  logic [7:0] c$i_487;
-  logic signed [63:0] c$case_alt_selection_717;
+  logic signed [63:0] c$case_alt_selection_722;
   logic signed [63:0] c$case_alt_selection_721;
-  logic [7:0] c$i_488;
-  logic signed [63:0] c$case_alt_selection_720;
+  logic signed [63:0] c$case_alt_selection_725;
   logic signed [63:0] c$case_alt_selection_724;
-  logic [7:0] c$i_489;
-  logic signed [63:0] c$case_alt_selection_723;
+  logic signed [63:0] c$case_alt_selection_728;
   logic signed [63:0] c$case_alt_selection_727;
-  logic [7:0] c$i_490;
-  logic signed [63:0] c$case_alt_selection_726;
+  logic signed [63:0] c$case_alt_selection_731;
   logic signed [63:0] c$case_alt_selection_730;
-  logic [7:0] c$i_491;
-  logic signed [63:0] c$case_alt_selection_729;
+  logic signed [63:0] c$case_alt_selection_734;
   logic signed [63:0] c$case_alt_selection_733;
-  logic [7:0] c$i_492;
-  logic signed [63:0] c$case_alt_selection_732;
+  logic signed [63:0] c$case_alt_selection_737;
   logic signed [63:0] c$case_alt_selection_736;
-  logic [7:0] c$i_493;
-  logic signed [63:0] c$case_alt_selection_735;
+  logic signed [63:0] c$case_alt_selection_740;
   logic signed [63:0] c$case_alt_selection_739;
-  logic [7:0] c$i_494;
-  logic signed [63:0] c$case_alt_selection_738;
+  logic signed [63:0] c$case_alt_selection_743;
   logic signed [63:0] c$case_alt_selection_742;
-  logic [7:0] c$i_495;
-  logic signed [63:0] c$case_alt_selection_741;
+  logic signed [63:0] c$case_alt_selection_746;
   logic signed [63:0] c$case_alt_selection_745;
-  logic [7:0] c$i_496;
-  logic signed [63:0] c$case_alt_selection_744;
+  logic signed [63:0] c$case_alt_selection_749;
   logic signed [63:0] c$case_alt_selection_748;
-  logic [7:0] c$i_497;
-  logic signed [63:0] c$case_alt_selection_747;
+  logic signed [63:0] c$case_alt_selection_752;
   logic signed [63:0] c$case_alt_selection_751;
-  logic [7:0] c$i_498;
-  logic signed [63:0] c$case_alt_selection_750;
+  logic signed [63:0] c$case_alt_selection_755;
   logic signed [63:0] c$case_alt_selection_754;
-  logic [7:0] c$i_499;
-  logic signed [63:0] c$case_alt_selection_753;
+  logic signed [63:0] c$case_alt_selection_758;
   logic signed [63:0] c$case_alt_selection_757;
-  logic [7:0] c$i_500;
-  logic signed [63:0] c$case_alt_selection_756;
+  logic signed [63:0] c$case_alt_selection_761;
   logic signed [63:0] c$case_alt_selection_760;
-  logic [7:0] c$i_501;
-  logic signed [63:0] c$case_alt_selection_759;
+  logic signed [63:0] c$case_alt_selection_764;
   logic signed [63:0] c$case_alt_selection_763;
-  logic [7:0] c$i_502;
-  logic signed [63:0] c$case_alt_selection_762;
+  logic signed [63:0] c$case_alt_selection_767;
   logic signed [63:0] c$case_alt_selection_766;
-  logic [7:0] c$i_503;
-  logic signed [63:0] c$case_alt_selection_765;
+  logic signed [63:0] c$case_alt_selection_770;
   logic signed [63:0] c$case_alt_selection_769;
-  logic [7:0] c$i_504;
-  logic signed [63:0] c$case_alt_selection_768;
-  logic [7:0] c$i_505;
   logic signed [63:0] c$case_alt_selection_773;
-  logic [7:0] c$i_506;
   logic signed [63:0] c$case_alt_selection_772;
   logic signed [63:0] c$case_alt_selection_776;
-  logic [7:0] c$i_507;
   logic signed [63:0] c$case_alt_selection_775;
   logic signed [63:0] c$case_alt_selection_779;
-  logic [7:0] c$i_508;
   logic signed [63:0] c$case_alt_selection_778;
   logic signed [63:0] c$case_alt_selection_782;
-  logic [7:0] c$i_509;
   logic signed [63:0] c$case_alt_selection_781;
   logic signed [63:0] c$case_alt_selection_785;
-  logic [7:0] c$i_510;
   logic signed [63:0] c$case_alt_selection_784;
   logic signed [63:0] c$case_alt_selection_788;
-  logic [7:0] c$i_511;
   logic signed [63:0] c$case_alt_selection_787;
   logic signed [63:0] c$case_alt_selection_791;
-  logic [7:0] c$i_512;
   logic signed [63:0] c$case_alt_selection_790;
   logic signed [63:0] c$case_alt_selection_794;
-  logic [7:0] c$i_513;
   logic signed [63:0] c$case_alt_selection_793;
   logic signed [63:0] c$case_alt_selection_797;
-  logic [7:0] c$i_514;
   logic signed [63:0] c$case_alt_selection_796;
   logic signed [63:0] c$case_alt_selection_800;
-  logic [7:0] c$i_515;
   logic signed [63:0] c$case_alt_selection_799;
   logic signed [63:0] c$case_alt_selection_803;
-  logic [7:0] c$i_516;
   logic signed [63:0] c$case_alt_selection_802;
   logic signed [63:0] c$case_alt_selection_806;
-  logic [7:0] c$i_517;
   logic signed [63:0] c$case_alt_selection_805;
   logic signed [63:0] c$case_alt_selection_809;
-  logic [7:0] c$i_518;
   logic signed [63:0] c$case_alt_selection_808;
   logic signed [63:0] c$case_alt_selection_812;
-  logic [7:0] c$i_519;
   logic signed [63:0] c$case_alt_selection_811;
   logic signed [63:0] c$case_alt_selection_815;
-  logic [7:0] c$i_520;
   logic signed [63:0] c$case_alt_selection_814;
   logic signed [63:0] c$case_alt_selection_818;
-  logic [7:0] c$i_521;
   logic signed [63:0] c$case_alt_selection_817;
   logic signed [63:0] c$case_alt_selection_821;
-  logic [7:0] c$i_522;
   logic signed [63:0] c$case_alt_selection_820;
   logic signed [63:0] c$case_alt_selection_824;
-  logic [7:0] c$i_523;
   logic signed [63:0] c$case_alt_selection_823;
   logic signed [63:0] c$case_alt_selection_827;
-  logic [7:0] c$i_524;
   logic signed [63:0] c$case_alt_selection_826;
   logic signed [63:0] c$case_alt_selection_830;
-  logic [7:0] c$i_525;
   logic signed [63:0] c$case_alt_selection_829;
   logic signed [63:0] c$case_alt_selection_833;
-  logic [7:0] c$i_526;
   logic signed [63:0] c$case_alt_selection_832;
   logic signed [63:0] c$case_alt_selection_836;
-  logic [7:0] c$i_527;
   logic signed [63:0] c$case_alt_selection_835;
   logic signed [63:0] c$case_alt_selection_839;
-  logic [7:0] c$i_528;
   logic signed [63:0] c$case_alt_selection_838;
   logic signed [63:0] c$case_alt_selection_842;
-  logic [7:0] c$i_529;
   logic signed [63:0] c$case_alt_selection_841;
   logic signed [63:0] c$case_alt_selection_845;
-  logic [7:0] c$i_530;
   logic signed [63:0] c$case_alt_selection_844;
   logic signed [63:0] c$case_alt_selection_848;
-  logic [7:0] c$i_531;
   logic signed [63:0] c$case_alt_selection_847;
   logic signed [63:0] c$case_alt_selection_851;
-  logic [7:0] c$i_532;
   logic signed [63:0] c$case_alt_selection_850;
   logic signed [63:0] c$case_alt_selection_854;
-  logic [7:0] c$i_533;
   logic signed [63:0] c$case_alt_selection_853;
   logic signed [63:0] c$case_alt_selection_857;
-  logic [7:0] c$i_534;
   logic signed [63:0] c$case_alt_selection_856;
   logic signed [63:0] c$case_alt_selection_860;
-  logic [7:0] c$i_535;
   logic signed [63:0] c$case_alt_selection_859;
   logic signed [63:0] c$case_alt_selection_863;
-  logic [7:0] c$i_536;
   logic signed [63:0] c$case_alt_selection_862;
   logic signed [63:0] c$case_alt_selection_866;
-  logic [7:0] c$i_537;
   logic signed [63:0] c$case_alt_selection_865;
   logic signed [63:0] c$case_alt_selection_869;
-  logic [7:0] c$i_538;
   logic signed [63:0] c$case_alt_selection_868;
   logic signed [63:0] c$case_alt_selection_872;
-  logic [7:0] c$i_539;
   logic signed [63:0] c$case_alt_selection_871;
   logic signed [63:0] c$case_alt_selection_875;
-  logic [7:0] c$i_540;
   logic signed [63:0] c$case_alt_selection_874;
   logic signed [63:0] c$case_alt_selection_878;
-  logic [7:0] c$i_541;
   logic signed [63:0] c$case_alt_selection_877;
   logic signed [63:0] c$case_alt_selection_881;
-  logic [7:0] c$i_542;
   logic signed [63:0] c$case_alt_selection_880;
   logic signed [63:0] c$case_alt_selection_884;
-  logic [7:0] c$i_543;
   logic signed [63:0] c$case_alt_selection_883;
   logic signed [63:0] c$case_alt_selection_887;
-  logic [7:0] c$i_544;
   logic signed [63:0] c$case_alt_selection_886;
   logic signed [63:0] c$case_alt_selection_890;
-  logic [7:0] c$i_545;
   logic signed [63:0] c$case_alt_selection_889;
   logic signed [63:0] c$case_alt_selection_893;
-  logic [7:0] c$i_546;
   logic signed [63:0] c$case_alt_selection_892;
   logic signed [63:0] c$case_alt_selection_896;
-  logic [7:0] c$i_547;
   logic signed [63:0] c$case_alt_selection_895;
   logic signed [63:0] c$case_alt_selection_899;
-  logic [7:0] c$i_548;
   logic signed [63:0] c$case_alt_selection_898;
   logic signed [63:0] c$case_alt_selection_902;
-  logic [7:0] c$i_549;
   logic signed [63:0] c$case_alt_selection_901;
   logic signed [63:0] c$case_alt_selection_905;
-  logic [7:0] c$i_550;
   logic signed [63:0] c$case_alt_selection_904;
   logic signed [63:0] c$case_alt_selection_908;
-  logic [7:0] c$i_551;
   logic signed [63:0] c$case_alt_selection_907;
   logic signed [63:0] c$case_alt_selection_911;
-  logic [7:0] c$i_552;
   logic signed [63:0] c$case_alt_selection_910;
   logic signed [63:0] c$case_alt_selection_914;
-  logic [7:0] c$i_553;
   logic signed [63:0] c$case_alt_selection_913;
   logic signed [63:0] c$case_alt_selection_917;
-  logic [7:0] c$i_554;
   logic signed [63:0] c$case_alt_selection_916;
   logic signed [63:0] c$case_alt_selection_920;
-  logic [7:0] c$i_555;
   logic signed [63:0] c$case_alt_selection_919;
   logic signed [63:0] c$case_alt_selection_923;
-  logic [7:0] c$i_556;
   logic signed [63:0] c$case_alt_selection_922;
   logic signed [63:0] c$case_alt_selection_926;
-  logic [7:0] c$i_557;
   logic signed [63:0] c$case_alt_selection_925;
   logic signed [63:0] c$case_alt_selection_929;
-  logic [7:0] c$i_558;
   logic signed [63:0] c$case_alt_selection_928;
   logic signed [63:0] c$case_alt_selection_932;
-  logic [7:0] c$i_559;
   logic signed [63:0] c$case_alt_selection_931;
   logic signed [63:0] c$case_alt_selection_935;
-  logic [7:0] c$i_560;
   logic signed [63:0] c$case_alt_selection_934;
   logic signed [63:0] c$case_alt_selection_938;
-  logic [7:0] c$i_561;
   logic signed [63:0] c$case_alt_selection_937;
   logic signed [63:0] c$case_alt_selection_941;
-  logic [7:0] c$i_562;
   logic signed [63:0] c$case_alt_selection_940;
   logic signed [63:0] c$case_alt_selection_944;
-  logic [7:0] c$i_563;
   logic signed [63:0] c$case_alt_selection_943;
   logic signed [63:0] c$case_alt_selection_947;
-  logic [7:0] c$i_564;
   logic signed [63:0] c$case_alt_selection_946;
   logic signed [63:0] c$case_alt_selection_950;
-  logic [7:0] c$i_565;
   logic signed [63:0] c$case_alt_selection_949;
   logic signed [63:0] c$case_alt_selection_953;
-  logic [7:0] c$i_566;
   logic signed [63:0] c$case_alt_selection_952;
   logic signed [63:0] c$case_alt_selection_956;
-  logic [7:0] c$i_567;
   logic signed [63:0] c$case_alt_selection_955;
   logic signed [63:0] c$case_alt_selection_959;
-  logic [7:0] c$i_568;
   logic signed [63:0] c$case_alt_selection_958;
   logic signed [63:0] c$case_alt_selection_962;
-  logic [7:0] c$i_569;
   logic signed [63:0] c$case_alt_selection_961;
   logic signed [63:0] c$case_alt_selection_965;
-  logic [7:0] c$i_570;
   logic signed [63:0] c$case_alt_selection_964;
   logic signed [63:0] c$case_alt_selection_968;
-  logic [7:0] c$i_571;
   logic signed [63:0] c$case_alt_selection_967;
   logic signed [63:0] c$case_alt_selection_971;
-  logic [7:0] c$i_572;
   logic signed [63:0] c$case_alt_selection_970;
   logic signed [63:0] c$case_alt_selection_974;
-  logic [7:0] c$i_573;
   logic signed [63:0] c$case_alt_selection_973;
   logic signed [63:0] c$case_alt_selection_977;
-  logic [7:0] c$i_574;
   logic signed [63:0] c$case_alt_selection_976;
   logic signed [63:0] c$case_alt_selection_980;
-  logic [7:0] c$i_575;
   logic signed [63:0] c$case_alt_selection_979;
   logic signed [63:0] c$case_alt_selection_983;
-  logic [7:0] c$i_576;
   logic signed [63:0] c$case_alt_selection_982;
   logic signed [63:0] c$case_alt_selection_986;
-  logic [7:0] c$i_577;
   logic signed [63:0] c$case_alt_selection_985;
   logic signed [63:0] c$case_alt_selection_989;
-  logic [7:0] c$i_578;
   logic signed [63:0] c$case_alt_selection_988;
   logic signed [63:0] c$case_alt_selection_992;
-  logic [7:0] c$i_579;
   logic signed [63:0] c$case_alt_selection_991;
   logic signed [63:0] c$case_alt_selection_995;
-  logic [7:0] c$i_580;
   logic signed [63:0] c$case_alt_selection_994;
   logic signed [63:0] c$case_alt_selection_998;
-  logic [7:0] c$i_581;
   logic signed [63:0] c$case_alt_selection_997;
   logic signed [63:0] c$case_alt_selection_1001;
-  logic [7:0] c$i_582;
   logic signed [63:0] c$case_alt_selection_1000;
   logic signed [63:0] c$case_alt_selection_1004;
-  logic [7:0] c$i_583;
   logic signed [63:0] c$case_alt_selection_1003;
   logic signed [63:0] c$case_alt_selection_1007;
-  logic [7:0] c$i_584;
   logic signed [63:0] c$case_alt_selection_1006;
   logic signed [63:0] c$case_alt_selection_1010;
-  logic [7:0] c$i_585;
   logic signed [63:0] c$case_alt_selection_1009;
   logic signed [63:0] c$case_alt_selection_1013;
-  logic [7:0] c$i_586;
   logic signed [63:0] c$case_alt_selection_1012;
   logic signed [63:0] c$case_alt_selection_1016;
-  logic [7:0] c$i_587;
   logic signed [63:0] c$case_alt_selection_1015;
   logic signed [63:0] c$case_alt_selection_1019;
-  logic [7:0] c$i_588;
   logic signed [63:0] c$case_alt_selection_1018;
   logic signed [63:0] c$case_alt_selection_1022;
-  logic [7:0] c$i_589;
   logic signed [63:0] c$case_alt_selection_1021;
   logic signed [63:0] c$case_alt_selection_1025;
-  logic [7:0] c$i_590;
   logic signed [63:0] c$case_alt_selection_1024;
   logic signed [63:0] c$case_alt_selection_1028;
-  logic [7:0] c$i_591;
   logic signed [63:0] c$case_alt_selection_1027;
   logic signed [63:0] c$case_alt_selection_1031;
-  logic [7:0] c$i_592;
   logic signed [63:0] c$case_alt_selection_1030;
   logic signed [63:0] c$case_alt_selection_1034;
-  logic [7:0] c$i_593;
   logic signed [63:0] c$case_alt_selection_1033;
   logic signed [63:0] c$case_alt_selection_1037;
-  logic [7:0] c$i_594;
   logic signed [63:0] c$case_alt_selection_1036;
   logic signed [63:0] c$case_alt_selection_1040;
-  logic [7:0] c$i_595;
   logic signed [63:0] c$case_alt_selection_1039;
   logic signed [63:0] c$case_alt_selection_1043;
-  logic [7:0] c$i_596;
   logic signed [63:0] c$case_alt_selection_1042;
   logic signed [63:0] c$case_alt_selection_1046;
-  logic [7:0] c$i_597;
   logic signed [63:0] c$case_alt_selection_1045;
   logic signed [63:0] c$case_alt_selection_1049;
-  logic [7:0] c$i_598;
   logic signed [63:0] c$case_alt_selection_1048;
   logic signed [63:0] c$case_alt_selection_1052;
-  logic [7:0] c$i_599;
   logic signed [63:0] c$case_alt_selection_1051;
   logic signed [63:0] c$case_alt_selection_1055;
-  logic [7:0] c$i_600;
   logic signed [63:0] c$case_alt_selection_1054;
   logic signed [63:0] c$case_alt_selection_1058;
-  logic [7:0] c$i_601;
   logic signed [63:0] c$case_alt_selection_1057;
   logic signed [63:0] c$case_alt_selection_1061;
-  logic [7:0] c$i_602;
   logic signed [63:0] c$case_alt_selection_1060;
   logic signed [63:0] c$case_alt_selection_1064;
-  logic [7:0] c$i_603;
   logic signed [63:0] c$case_alt_selection_1063;
   logic signed [63:0] c$case_alt_selection_1067;
-  logic [7:0] c$i_604;
   logic signed [63:0] c$case_alt_selection_1066;
   logic signed [63:0] c$case_alt_selection_1070;
-  logic [7:0] c$i_605;
   logic signed [63:0] c$case_alt_selection_1069;
   logic signed [63:0] c$case_alt_selection_1073;
-  logic [7:0] c$i_606;
   logic signed [63:0] c$case_alt_selection_1072;
   logic signed [63:0] c$case_alt_selection_1076;
-  logic [7:0] c$i_607;
   logic signed [63:0] c$case_alt_selection_1075;
   logic signed [63:0] c$case_alt_selection_1079;
-  logic [7:0] c$i_608;
   logic signed [63:0] c$case_alt_selection_1078;
   logic signed [63:0] c$case_alt_selection_1082;
-  logic [7:0] c$i_609;
   logic signed [63:0] c$case_alt_selection_1081;
   logic signed [63:0] c$case_alt_selection_1085;
-  logic [7:0] c$i_610;
   logic signed [63:0] c$case_alt_selection_1084;
   logic signed [63:0] c$case_alt_selection_1088;
-  logic [7:0] c$i_611;
   logic signed [63:0] c$case_alt_selection_1087;
   logic signed [63:0] c$case_alt_selection_1091;
-  logic [7:0] c$i_612;
   logic signed [63:0] c$case_alt_selection_1090;
   logic signed [63:0] c$case_alt_selection_1094;
-  logic [7:0] c$i_613;
   logic signed [63:0] c$case_alt_selection_1093;
   logic signed [63:0] c$case_alt_selection_1097;
-  logic [7:0] c$i_614;
   logic signed [63:0] c$case_alt_selection_1096;
   logic signed [63:0] c$case_alt_selection_1100;
-  logic [7:0] c$i_615;
   logic signed [63:0] c$case_alt_selection_1099;
   logic signed [63:0] c$case_alt_selection_1103;
-  logic [7:0] c$i_616;
   logic signed [63:0] c$case_alt_selection_1102;
   logic signed [63:0] c$case_alt_selection_1106;
-  logic [7:0] c$i_617;
   logic signed [63:0] c$case_alt_selection_1105;
   logic signed [63:0] c$case_alt_selection_1109;
-  logic [7:0] c$i_618;
   logic signed [63:0] c$case_alt_selection_1108;
   logic signed [63:0] c$case_alt_selection_1112;
-  logic [7:0] c$i_619;
   logic signed [63:0] c$case_alt_selection_1111;
   logic signed [63:0] c$case_alt_selection_1115;
-  logic [7:0] c$i_620;
   logic signed [63:0] c$case_alt_selection_1114;
   logic signed [63:0] c$case_alt_selection_1118;
-  logic [7:0] c$i_621;
   logic signed [63:0] c$case_alt_selection_1117;
   logic signed [63:0] c$case_alt_selection_1121;
-  logic [7:0] c$i_622;
   logic signed [63:0] c$case_alt_selection_1120;
   logic signed [63:0] c$case_alt_selection_1124;
-  logic [7:0] c$i_623;
   logic signed [63:0] c$case_alt_selection_1123;
   logic signed [63:0] c$case_alt_selection_1127;
-  logic [7:0] c$i_624;
   logic signed [63:0] c$case_alt_selection_1126;
   logic signed [63:0] c$case_alt_selection_1130;
-  logic [7:0] c$i_625;
   logic signed [63:0] c$case_alt_selection_1129;
   logic signed [63:0] c$case_alt_selection_1133;
-  logic [7:0] c$i_626;
   logic signed [63:0] c$case_alt_selection_1132;
   logic signed [63:0] c$case_alt_selection_1136;
-  logic [7:0] c$i_627;
   logic signed [63:0] c$case_alt_selection_1135;
   logic signed [63:0] c$case_alt_selection_1139;
-  logic [7:0] c$i_628;
   logic signed [63:0] c$case_alt_selection_1138;
   logic signed [63:0] c$case_alt_selection_1142;
-  logic [7:0] c$i_629;
   logic signed [63:0] c$case_alt_selection_1141;
   logic signed [63:0] c$case_alt_selection_1145;
-  logic [7:0] c$i_630;
   logic signed [63:0] c$case_alt_selection_1144;
   logic signed [63:0] c$case_alt_selection_1148;
-  logic [7:0] c$i_631;
   logic signed [63:0] c$case_alt_selection_1147;
   logic signed [63:0] c$case_alt_selection_1151;
-  logic [7:0] c$i_632;
   logic signed [63:0] c$case_alt_selection_1150;
   logic signed [63:0] c$case_alt_selection_1154;
-  logic [7:0] c$i_633;
   logic signed [63:0] c$case_alt_selection_1153;
   logic signed [63:0] c$case_alt_selection_1157;
-  logic [7:0] c$i_634;
   logic signed [63:0] c$case_alt_selection_1156;
   logic signed [63:0] c$case_alt_selection_1160;
-  logic [7:0] c$i_635;
   logic signed [63:0] c$case_alt_selection_1159;
   logic signed [63:0] c$case_alt_selection_1163;
-  logic [7:0] c$i_636;
   logic signed [63:0] c$case_alt_selection_1162;
   logic signed [63:0] c$case_alt_selection_1166;
-  logic [7:0] c$i_637;
   logic signed [63:0] c$case_alt_selection_1165;
   logic signed [63:0] c$case_alt_selection_1169;
-  logic [7:0] c$i_638;
   logic signed [63:0] c$case_alt_selection_1168;
   logic signed [63:0] c$case_alt_selection_1172;
-  logic [7:0] c$i_639;
   logic signed [63:0] c$case_alt_selection_1171;
   logic signed [63:0] c$case_alt_selection_1175;
-  logic [7:0] c$i_640;
   logic signed [63:0] c$case_alt_selection_1174;
   logic signed [63:0] c$case_alt_selection_1178;
-  logic [7:0] c$i_641;
   logic signed [63:0] c$case_alt_selection_1177;
   logic signed [63:0] c$case_alt_selection_1181;
-  logic [7:0] c$i_642;
   logic signed [63:0] c$case_alt_selection_1180;
   logic signed [63:0] c$case_alt_selection_1184;
-  logic [7:0] c$i_643;
   logic signed [63:0] c$case_alt_selection_1183;
   logic signed [63:0] c$case_alt_selection_1187;
-  logic [7:0] c$i_644;
   logic signed [63:0] c$case_alt_selection_1186;
   logic signed [63:0] c$case_alt_selection_1190;
-  logic [7:0] c$i_645;
   logic signed [63:0] c$case_alt_selection_1189;
   logic signed [63:0] c$case_alt_selection_1193;
-  logic [7:0] c$i_646;
   logic signed [63:0] c$case_alt_selection_1192;
   logic signed [63:0] c$case_alt_selection_1196;
-  logic [7:0] c$i_647;
   logic signed [63:0] c$case_alt_selection_1195;
   logic signed [63:0] c$case_alt_selection_1199;
-  logic [7:0] c$i_648;
   logic signed [63:0] c$case_alt_selection_1198;
   logic signed [63:0] c$case_alt_selection_1202;
-  logic [7:0] c$i_649;
   logic signed [63:0] c$case_alt_selection_1201;
   logic signed [63:0] c$case_alt_selection_1205;
-  logic [7:0] c$i_650;
   logic signed [63:0] c$case_alt_selection_1204;
   logic signed [63:0] c$case_alt_selection_1208;
-  logic [7:0] c$i_651;
   logic signed [63:0] c$case_alt_selection_1207;
   logic signed [63:0] c$case_alt_selection_1211;
-  logic [7:0] c$i_652;
   logic signed [63:0] c$case_alt_selection_1210;
   logic signed [63:0] c$case_alt_selection_1214;
-  logic [7:0] c$i_653;
   logic signed [63:0] c$case_alt_selection_1213;
   logic signed [63:0] c$case_alt_selection_1217;
-  logic [7:0] c$i_654;
   logic signed [63:0] c$case_alt_selection_1216;
   logic signed [63:0] c$case_alt_selection_1220;
-  logic [7:0] c$i_655;
   logic signed [63:0] c$case_alt_selection_1219;
   logic signed [63:0] c$case_alt_selection_1223;
-  logic [7:0] c$i_656;
   logic signed [63:0] c$case_alt_selection_1222;
   logic signed [63:0] c$case_alt_selection_1226;
-  logic [7:0] c$i_657;
   logic signed [63:0] c$case_alt_selection_1225;
   logic signed [63:0] c$case_alt_selection_1229;
-  logic [7:0] c$i_658;
   logic signed [63:0] c$case_alt_selection_1228;
   logic signed [63:0] c$case_alt_selection_1232;
-  logic [7:0] c$i_659;
   logic signed [63:0] c$case_alt_selection_1231;
   logic signed [63:0] c$case_alt_selection_1235;
-  logic [7:0] c$i_660;
   logic signed [63:0] c$case_alt_selection_1234;
   logic signed [63:0] c$case_alt_selection_1238;
-  logic [7:0] c$i_661;
   logic signed [63:0] c$case_alt_selection_1237;
   logic signed [63:0] c$case_alt_selection_1241;
-  logic [7:0] c$i_662;
   logic signed [63:0] c$case_alt_selection_1240;
   logic signed [63:0] c$case_alt_selection_1244;
-  logic [7:0] c$i_663;
   logic signed [63:0] c$case_alt_selection_1243;
   logic signed [63:0] c$case_alt_selection_1247;
-  logic [7:0] c$i_664;
   logic signed [63:0] c$case_alt_selection_1246;
   logic signed [63:0] c$case_alt_selection_1250;
-  logic [7:0] c$i_665;
   logic signed [63:0] c$case_alt_selection_1249;
   logic signed [63:0] c$case_alt_selection_1253;
-  logic [7:0] c$i_666;
   logic signed [63:0] c$case_alt_selection_1252;
   logic signed [63:0] c$case_alt_selection_1256;
-  logic [7:0] c$i_667;
   logic signed [63:0] c$case_alt_selection_1255;
   logic signed [63:0] c$case_alt_selection_1259;
-  logic [7:0] c$i_668;
   logic signed [63:0] c$case_alt_selection_1258;
   logic signed [63:0] c$case_alt_selection_1262;
-  logic [7:0] c$i_669;
   logic signed [63:0] c$case_alt_selection_1261;
   logic signed [63:0] c$case_alt_selection_1265;
-  logic [7:0] c$i_670;
   logic signed [63:0] c$case_alt_selection_1264;
   logic signed [63:0] c$case_alt_selection_1268;
-  logic [7:0] c$i_671;
   logic signed [63:0] c$case_alt_selection_1267;
   logic signed [63:0] c$case_alt_selection_1271;
-  logic [7:0] c$i_672;
   logic signed [63:0] c$case_alt_selection_1270;
   logic signed [63:0] c$case_alt_selection_1274;
-  logic [7:0] c$i_673;
   logic signed [63:0] c$case_alt_selection_1273;
   logic signed [63:0] c$case_alt_selection_1277;
-  logic [7:0] c$i_674;
   logic signed [63:0] c$case_alt_selection_1276;
   logic signed [63:0] c$case_alt_selection_1280;
-  logic [7:0] c$i_675;
   logic signed [63:0] c$case_alt_selection_1279;
   logic signed [63:0] c$case_alt_selection_1283;
-  logic [7:0] c$i_676;
   logic signed [63:0] c$case_alt_selection_1282;
   logic signed [63:0] c$case_alt_selection_1286;
-  logic [7:0] c$i_677;
   logic signed [63:0] c$case_alt_selection_1285;
   logic signed [63:0] c$case_alt_selection_1289;
-  logic [7:0] c$i_678;
   logic signed [63:0] c$case_alt_selection_1288;
   logic signed [63:0] c$case_alt_selection_1292;
-  logic [7:0] c$i_679;
   logic signed [63:0] c$case_alt_selection_1291;
   logic signed [63:0] c$case_alt_selection_1295;
-  logic [7:0] c$i_680;
   logic signed [63:0] c$case_alt_selection_1294;
   logic signed [63:0] c$case_alt_selection_1298;
-  logic [7:0] c$i_681;
   logic signed [63:0] c$case_alt_selection_1297;
   logic signed [63:0] c$case_alt_selection_1301;
-  logic [7:0] c$i_682;
   logic signed [63:0] c$case_alt_selection_1300;
   logic signed [63:0] c$case_alt_selection_1304;
-  logic [7:0] c$i_683;
   logic signed [63:0] c$case_alt_selection_1303;
   logic signed [63:0] c$case_alt_selection_1307;
-  logic [7:0] c$i_684;
   logic signed [63:0] c$case_alt_selection_1306;
   logic signed [63:0] c$case_alt_selection_1310;
-  logic [7:0] c$i_685;
   logic signed [63:0] c$case_alt_selection_1309;
   logic signed [63:0] c$case_alt_selection_1313;
-  logic [7:0] c$i_686;
   logic signed [63:0] c$case_alt_selection_1312;
   logic signed [63:0] c$case_alt_selection_1316;
-  logic [7:0] c$i_687;
   logic signed [63:0] c$case_alt_selection_1315;
   logic signed [63:0] c$case_alt_selection_1319;
-  logic [7:0] c$i_688;
   logic signed [63:0] c$case_alt_selection_1318;
   logic signed [63:0] c$case_alt_selection_1322;
-  logic [7:0] c$i_689;
   logic signed [63:0] c$case_alt_selection_1321;
   logic signed [63:0] c$case_alt_selection_1325;
-  logic [7:0] c$i_690;
   logic signed [63:0] c$case_alt_selection_1324;
   logic signed [63:0] c$case_alt_selection_1328;
-  logic [7:0] c$i_691;
   logic signed [63:0] c$case_alt_selection_1327;
   logic signed [63:0] c$case_alt_selection_1331;
-  logic [7:0] c$i_692;
   logic signed [63:0] c$case_alt_selection_1330;
   logic signed [63:0] c$case_alt_selection_1334;
-  logic [7:0] c$i_693;
   logic signed [63:0] c$case_alt_selection_1333;
   logic signed [63:0] c$case_alt_selection_1337;
-  logic [7:0] c$i_694;
   logic signed [63:0] c$case_alt_selection_1336;
   logic signed [63:0] c$case_alt_selection_1340;
-  logic [7:0] c$i_695;
   logic signed [63:0] c$case_alt_selection_1339;
   logic signed [63:0] c$case_alt_selection_1343;
-  logic [7:0] c$i_696;
   logic signed [63:0] c$case_alt_selection_1342;
   logic signed [63:0] c$case_alt_selection_1346;
-  logic [7:0] c$i_697;
   logic signed [63:0] c$case_alt_selection_1345;
   logic signed [63:0] c$case_alt_selection_1349;
-  logic [7:0] c$i_698;
   logic signed [63:0] c$case_alt_selection_1348;
   logic signed [63:0] c$case_alt_selection_1352;
-  logic [7:0] c$i_699;
   logic signed [63:0] c$case_alt_selection_1351;
   logic signed [63:0] c$case_alt_selection_1355;
-  logic [7:0] c$i_700;
   logic signed [63:0] c$case_alt_selection_1354;
   logic signed [63:0] c$case_alt_selection_1358;
-  logic [7:0] c$i_701;
   logic signed [63:0] c$case_alt_selection_1357;
   logic signed [63:0] c$case_alt_selection_1361;
-  logic [7:0] c$i_702;
   logic signed [63:0] c$case_alt_selection_1360;
   logic signed [63:0] c$case_alt_selection_1364;
-  logic [7:0] c$i_703;
   logic signed [63:0] c$case_alt_selection_1363;
   logic signed [63:0] c$case_alt_selection_1367;
-  logic [7:0] c$i_704;
   logic signed [63:0] c$case_alt_selection_1366;
   logic signed [63:0] c$case_alt_selection_1370;
-  logic [7:0] c$i_705;
   logic signed [63:0] c$case_alt_selection_1369;
   logic signed [63:0] c$case_alt_selection_1373;
-  logic [7:0] c$i_706;
   logic signed [63:0] c$case_alt_selection_1372;
   logic signed [63:0] c$case_alt_selection_1376;
-  logic [7:0] c$i_707;
   logic signed [63:0] c$case_alt_selection_1375;
   logic signed [63:0] c$case_alt_selection_1379;
-  logic [7:0] c$i_708;
   logic signed [63:0] c$case_alt_selection_1378;
   logic signed [63:0] c$case_alt_selection_1382;
-  logic [7:0] c$i_709;
   logic signed [63:0] c$case_alt_selection_1381;
   logic signed [63:0] c$case_alt_selection_1385;
-  logic [7:0] c$i_710;
   logic signed [63:0] c$case_alt_selection_1384;
   logic signed [63:0] c$case_alt_selection_1388;
-  logic [7:0] c$i_711;
   logic signed [63:0] c$case_alt_selection_1387;
   logic signed [63:0] c$case_alt_selection_1391;
-  logic [7:0] c$i_712;
   logic signed [63:0] c$case_alt_selection_1390;
   logic signed [63:0] c$case_alt_selection_1394;
-  logic [7:0] c$i_713;
   logic signed [63:0] c$case_alt_selection_1393;
   logic signed [63:0] c$case_alt_selection_1397;
-  logic [7:0] c$i_714;
   logic signed [63:0] c$case_alt_selection_1396;
   logic signed [63:0] c$case_alt_selection_1400;
-  logic [7:0] c$i_715;
   logic signed [63:0] c$case_alt_selection_1399;
   logic signed [63:0] c$case_alt_selection_1403;
-  logic [7:0] c$i_716;
   logic signed [63:0] c$case_alt_selection_1402;
   logic signed [63:0] c$case_alt_selection_1406;
-  logic [7:0] c$i_717;
   logic signed [63:0] c$case_alt_selection_1405;
   logic signed [63:0] c$case_alt_selection_1409;
-  logic [7:0] c$i_718;
   logic signed [63:0] c$case_alt_selection_1408;
   logic signed [63:0] c$case_alt_selection_1412;
-  logic [7:0] c$i_719;
   logic signed [63:0] c$case_alt_selection_1411;
   logic signed [63:0] c$case_alt_selection_1415;
-  logic [7:0] c$i_720;
   logic signed [63:0] c$case_alt_selection_1414;
   logic signed [63:0] c$case_alt_selection_1418;
-  logic [7:0] c$i_721;
   logic signed [63:0] c$case_alt_selection_1417;
   logic signed [63:0] c$case_alt_selection_1421;
-  logic [7:0] c$i_722;
   logic signed [63:0] c$case_alt_selection_1420;
   logic signed [63:0] c$case_alt_selection_1424;
-  logic [7:0] c$i_723;
   logic signed [63:0] c$case_alt_selection_1423;
   logic signed [63:0] c$case_alt_selection_1427;
-  logic [7:0] c$i_724;
   logic signed [63:0] c$case_alt_selection_1426;
   logic signed [63:0] c$case_alt_selection_1430;
-  logic [7:0] c$i_725;
   logic signed [63:0] c$case_alt_selection_1429;
   logic signed [63:0] c$case_alt_selection_1433;
-  logic [7:0] c$i_726;
   logic signed [63:0] c$case_alt_selection_1432;
   logic signed [63:0] c$case_alt_selection_1436;
-  logic [7:0] c$i_727;
   logic signed [63:0] c$case_alt_selection_1435;
   logic signed [63:0] c$case_alt_selection_1439;
-  logic [7:0] c$i_728;
   logic signed [63:0] c$case_alt_selection_1438;
   logic signed [63:0] c$case_alt_selection_1442;
-  logic [7:0] c$i_729;
   logic signed [63:0] c$case_alt_selection_1441;
   logic signed [63:0] c$case_alt_selection_1445;
-  logic [7:0] c$i_730;
   logic signed [63:0] c$case_alt_selection_1444;
   logic signed [63:0] c$case_alt_selection_1448;
-  logic [7:0] c$i_731;
   logic signed [63:0] c$case_alt_selection_1447;
   logic signed [63:0] c$case_alt_selection_1451;
-  logic [7:0] c$i_732;
   logic signed [63:0] c$case_alt_selection_1450;
   logic signed [63:0] c$case_alt_selection_1454;
-  logic [7:0] c$i_733;
   logic signed [63:0] c$case_alt_selection_1453;
   logic signed [63:0] c$case_alt_selection_1457;
-  logic [7:0] c$i_734;
   logic signed [63:0] c$case_alt_selection_1456;
   logic signed [63:0] c$case_alt_selection_1460;
-  logic [7:0] c$i_735;
   logic signed [63:0] c$case_alt_selection_1459;
   logic signed [63:0] c$case_alt_selection_1463;
-  logic [7:0] c$i_736;
   logic signed [63:0] c$case_alt_selection_1462;
   logic signed [63:0] c$case_alt_selection_1466;
-  logic [7:0] c$i_737;
   logic signed [63:0] c$case_alt_selection_1465;
   logic signed [63:0] c$case_alt_selection_1469;
-  logic [7:0] c$i_738;
   logic signed [63:0] c$case_alt_selection_1468;
   logic signed [63:0] c$case_alt_selection_1472;
-  logic [7:0] c$i_739;
   logic signed [63:0] c$case_alt_selection_1471;
   logic signed [63:0] c$case_alt_selection_1475;
-  logic [7:0] c$i_740;
   logic signed [63:0] c$case_alt_selection_1474;
   logic signed [63:0] c$case_alt_selection_1478;
-  logic [7:0] c$i_741;
   logic signed [63:0] c$case_alt_selection_1477;
   logic signed [63:0] c$case_alt_selection_1481;
-  logic [7:0] c$i_742;
   logic signed [63:0] c$case_alt_selection_1480;
   logic signed [63:0] c$case_alt_selection_1484;
-  logic [7:0] c$i_743;
   logic signed [63:0] c$case_alt_selection_1483;
   logic signed [63:0] c$case_alt_selection_1487;
-  logic [7:0] c$i_744;
   logic signed [63:0] c$case_alt_selection_1486;
   logic signed [63:0] c$case_alt_selection_1490;
-  logic [7:0] c$i_745;
   logic signed [63:0] c$case_alt_selection_1489;
   logic signed [63:0] c$case_alt_selection_1493;
-  logic [7:0] c$i_746;
   logic signed [63:0] c$case_alt_selection_1492;
   logic signed [63:0] c$case_alt_selection_1496;
-  logic [7:0] c$i_747;
   logic signed [63:0] c$case_alt_selection_1495;
   logic signed [63:0] c$case_alt_selection_1499;
-  logic [7:0] c$i_748;
   logic signed [63:0] c$case_alt_selection_1498;
   logic signed [63:0] c$case_alt_selection_1502;
-  logic [7:0] c$i_749;
   logic signed [63:0] c$case_alt_selection_1501;
   logic signed [63:0] c$case_alt_selection_1505;
-  logic [7:0] c$i_750;
   logic signed [63:0] c$case_alt_selection_1504;
   logic signed [63:0] c$case_alt_selection_1508;
-  logic [7:0] c$i_751;
   logic signed [63:0] c$case_alt_selection_1507;
   logic signed [63:0] c$case_alt_selection_1511;
-  logic [7:0] c$i_752;
   logic signed [63:0] c$case_alt_selection_1510;
   logic signed [63:0] c$case_alt_selection_1514;
-  logic [7:0] c$i_753;
   logic signed [63:0] c$case_alt_selection_1513;
   logic signed [63:0] c$case_alt_selection_1517;
-  logic [7:0] c$i_754;
   logic signed [63:0] c$case_alt_selection_1516;
   logic signed [63:0] c$case_alt_selection_1520;
-  logic [7:0] c$i_755;
   logic signed [63:0] c$case_alt_selection_1519;
   logic signed [63:0] c$case_alt_selection_1523;
-  logic [7:0] c$i_756;
   logic signed [63:0] c$case_alt_selection_1522;
   logic signed [63:0] c$case_alt_selection_1526;
-  logic [7:0] c$i_757;
   logic signed [63:0] c$case_alt_selection_1525;
   logic signed [63:0] c$case_alt_selection_1529;
-  logic [7:0] c$i_758;
   logic signed [63:0] c$case_alt_selection_1528;
   logic signed [63:0] c$case_alt_selection_1532;
-  logic [7:0] c$i_759;
   logic signed [63:0] c$case_alt_selection_1531;
   logic signed [63:0] c$case_alt_selection_1535;
-  logic [7:0] c$i_760;
   logic signed [63:0] c$case_alt_selection_1534;
   logic signed [63:0] c$case_alt_selection_1538;
-  logic [7:0] c$i_761;
   logic signed [63:0] c$case_alt_selection_1537;
-  logic [7:0] c$i_762;
-  logic signed [63:0] c$case_alt_selection_1542;
-  logic [7:0] c$i_763;
   logic signed [63:0] c$case_alt_selection_1541;
-  logic signed [63:0] c$case_alt_selection_1545;
-  logic [7:0] c$i_764;
-  logic signed [63:0] c$case_alt_selection_1544;
-  logic signed [63:0] c$case_alt_selection_1548;
-  logic [7:0] c$i_765;
-  logic signed [63:0] c$case_alt_selection_1547;
-  logic signed [63:0] c$case_alt_selection_1551;
-  logic [7:0] c$i_766;
-  logic signed [63:0] c$case_alt_selection_1550;
-  logic signed [63:0] c$case_alt_selection_1554;
-  logic [7:0] c$i_767;
-  logic signed [63:0] c$case_alt_selection_1553;
-  logic signed [63:0] c$case_alt_selection_1557;
-  logic [7:0] c$i_768;
-  logic signed [63:0] c$case_alt_selection_1556;
-  logic signed [63:0] c$case_alt_selection_1560;
-  logic [7:0] c$i_769;
-  logic signed [63:0] c$case_alt_selection_1559;
-  logic signed [63:0] c$case_alt_selection_1563;
-  logic [7:0] c$i_770;
-  logic signed [63:0] c$case_alt_selection_1562;
-  logic signed [63:0] c$case_alt_selection_1566;
-  logic [7:0] c$i_771;
-  logic signed [63:0] c$case_alt_selection_1565;
-  logic signed [63:0] c$case_alt_selection_1569;
-  logic [7:0] c$i_772;
-  logic signed [63:0] c$case_alt_selection_1568;
-  logic signed [63:0] c$case_alt_selection_1572;
-  logic [7:0] c$i_773;
-  logic signed [63:0] c$case_alt_selection_1571;
-  logic signed [63:0] c$case_alt_selection_1575;
-  logic [7:0] c$i_774;
-  logic signed [63:0] c$case_alt_selection_1574;
-  logic signed [63:0] c$case_alt_selection_1578;
-  logic [7:0] c$i_775;
-  logic signed [63:0] c$case_alt_selection_1577;
-  logic signed [63:0] c$case_alt_selection_1581;
-  logic [7:0] c$i_776;
-  logic signed [63:0] c$case_alt_selection_1580;
-  logic signed [63:0] c$case_alt_selection_1584;
-  logic [7:0] c$i_777;
-  logic signed [63:0] c$case_alt_selection_1583;
-  logic signed [63:0] c$case_alt_selection_1587;
-  logic [7:0] c$i_778;
-  logic signed [63:0] c$case_alt_selection_1586;
-  logic signed [63:0] c$case_alt_selection_1590;
-  logic [7:0] c$i_779;
-  logic signed [63:0] c$case_alt_selection_1589;
-  logic signed [63:0] c$case_alt_selection_1593;
-  logic [7:0] c$i_780;
-  logic signed [63:0] c$case_alt_selection_1592;
-  logic signed [63:0] c$case_alt_selection_1596;
-  logic [7:0] c$i_781;
-  logic signed [63:0] c$case_alt_selection_1595;
-  logic signed [63:0] c$case_alt_selection_1599;
-  logic [7:0] c$i_782;
-  logic signed [63:0] c$case_alt_selection_1598;
-  logic signed [63:0] c$case_alt_selection_1602;
-  logic [7:0] c$i_783;
-  logic signed [63:0] c$case_alt_selection_1601;
-  logic signed [63:0] c$case_alt_selection_1605;
-  logic [7:0] c$i_784;
-  logic signed [63:0] c$case_alt_selection_1604;
-  logic signed [63:0] c$case_alt_selection_1608;
-  logic [7:0] c$i_785;
-  logic signed [63:0] c$case_alt_selection_1607;
-  logic signed [63:0] c$case_alt_selection_1611;
-  logic [7:0] c$i_786;
-  logic signed [63:0] c$case_alt_selection_1610;
-  logic signed [63:0] c$case_alt_selection_1614;
-  logic [7:0] c$i_787;
-  logic signed [63:0] c$case_alt_selection_1613;
-  logic signed [63:0] c$case_alt_selection_1617;
-  logic [7:0] c$i_788;
-  logic signed [63:0] c$case_alt_selection_1616;
-  logic signed [63:0] c$case_alt_selection_1620;
-  logic [7:0] c$i_789;
-  logic signed [63:0] c$case_alt_selection_1619;
-  logic signed [63:0] c$case_alt_selection_1623;
-  logic [7:0] c$i_790;
-  logic signed [63:0] c$case_alt_selection_1622;
-  logic signed [63:0] c$case_alt_selection_1626;
-  logic [7:0] c$i_791;
-  logic signed [63:0] c$case_alt_selection_1625;
-  logic signed [63:0] c$case_alt_selection_1629;
-  logic [7:0] c$i_792;
-  logic signed [63:0] c$case_alt_selection_1628;
-  logic signed [63:0] c$case_alt_selection_1632;
-  logic [7:0] c$i_793;
-  logic signed [63:0] c$case_alt_selection_1631;
-  logic signed [63:0] c$case_alt_selection_1635;
-  logic [7:0] c$i_794;
-  logic signed [63:0] c$case_alt_selection_1634;
-  logic signed [63:0] c$case_alt_selection_1638;
-  logic [7:0] c$i_795;
-  logic signed [63:0] c$case_alt_selection_1637;
-  logic signed [63:0] c$case_alt_selection_1641;
-  logic [7:0] c$i_796;
-  logic signed [63:0] c$case_alt_selection_1640;
-  logic signed [63:0] c$case_alt_selection_1644;
-  logic [7:0] c$i_797;
-  logic signed [63:0] c$case_alt_selection_1643;
-  logic signed [63:0] c$case_alt_selection_1647;
-  logic [7:0] c$i_798;
-  logic signed [63:0] c$case_alt_selection_1646;
-  logic signed [63:0] c$case_alt_selection_1650;
-  logic [7:0] c$i_799;
-  logic signed [63:0] c$case_alt_selection_1649;
-  logic signed [63:0] c$case_alt_selection_1653;
-  logic [7:0] c$i_800;
-  logic signed [63:0] c$case_alt_selection_1652;
-  logic signed [63:0] c$case_alt_selection_1656;
-  logic [7:0] c$i_801;
-  logic signed [63:0] c$case_alt_selection_1655;
-  logic signed [63:0] c$case_alt_selection_1659;
-  logic [7:0] c$i_802;
-  logic signed [63:0] c$case_alt_selection_1658;
-  logic signed [63:0] c$case_alt_selection_1662;
-  logic [7:0] c$i_803;
-  logic signed [63:0] c$case_alt_selection_1661;
-  logic signed [63:0] c$case_alt_selection_1665;
-  logic [7:0] c$i_804;
-  logic signed [63:0] c$case_alt_selection_1664;
-  logic signed [63:0] c$case_alt_selection_1668;
-  logic [7:0] c$i_805;
-  logic signed [63:0] c$case_alt_selection_1667;
-  logic signed [63:0] c$case_alt_selection_1671;
-  logic [7:0] c$i_806;
-  logic signed [63:0] c$case_alt_selection_1670;
-  logic signed [63:0] c$case_alt_selection_1674;
-  logic [7:0] c$i_807;
-  logic signed [63:0] c$case_alt_selection_1673;
-  logic signed [63:0] c$case_alt_selection_1677;
-  logic [7:0] c$i_808;
-  logic signed [63:0] c$case_alt_selection_1676;
-  logic signed [63:0] c$case_alt_selection_1680;
-  logic [7:0] c$i_809;
-  logic signed [63:0] c$case_alt_selection_1679;
-  logic signed [63:0] c$case_alt_selection_1683;
-  logic [7:0] c$i_810;
-  logic signed [63:0] c$case_alt_selection_1682;
-  logic signed [63:0] c$case_alt_selection_1686;
-  logic [7:0] c$i_811;
-  logic signed [63:0] c$case_alt_selection_1685;
-  logic signed [63:0] c$case_alt_selection_1689;
-  logic [7:0] c$i_812;
-  logic signed [63:0] c$case_alt_selection_1688;
-  logic signed [63:0] c$case_alt_selection_1692;
-  logic [7:0] c$i_813;
-  logic signed [63:0] c$case_alt_selection_1691;
-  logic signed [63:0] c$case_alt_selection_1695;
-  logic [7:0] c$i_814;
-  logic signed [63:0] c$case_alt_selection_1694;
-  logic signed [63:0] c$case_alt_selection_1698;
-  logic [7:0] c$i_815;
-  logic signed [63:0] c$case_alt_selection_1697;
-  logic signed [63:0] c$case_alt_selection_1701;
-  logic [7:0] c$i_816;
-  logic signed [63:0] c$case_alt_selection_1700;
-  logic signed [63:0] c$case_alt_selection_1704;
-  logic [7:0] c$i_817;
-  logic signed [63:0] c$case_alt_selection_1703;
-  logic signed [63:0] c$case_alt_selection_1707;
-  logic [7:0] c$i_818;
-  logic signed [63:0] c$case_alt_selection_1706;
-  logic signed [63:0] c$case_alt_selection_1710;
-  logic [7:0] c$i_819;
-  logic signed [63:0] c$case_alt_selection_1709;
-  logic signed [63:0] c$case_alt_selection_1713;
-  logic [7:0] c$i_820;
-  logic signed [63:0] c$case_alt_selection_1712;
-  logic signed [63:0] c$case_alt_selection_1716;
-  logic [7:0] c$i_821;
-  logic signed [63:0] c$case_alt_selection_1715;
-  logic signed [63:0] c$case_alt_selection_1719;
-  logic [7:0] c$i_822;
-  logic signed [63:0] c$case_alt_selection_1718;
-  logic signed [63:0] c$case_alt_selection_1722;
-  logic [7:0] c$i_823;
-  logic signed [63:0] c$case_alt_selection_1721;
-  logic signed [63:0] c$case_alt_selection_1725;
-  logic [7:0] c$i_824;
-  logic signed [63:0] c$case_alt_selection_1724;
-  logic signed [63:0] c$case_alt_selection_1728;
-  logic [7:0] c$i_825;
-  logic signed [63:0] c$case_alt_selection_1727;
-  logic signed [63:0] c$case_alt_selection_1731;
-  logic [7:0] c$i_826;
-  logic signed [63:0] c$case_alt_selection_1730;
-  logic signed [63:0] c$case_alt_selection_1734;
-  logic [7:0] c$i_827;
-  logic signed [63:0] c$case_alt_selection_1733;
-  logic signed [63:0] c$case_alt_selection_1737;
-  logic [7:0] c$i_828;
-  logic signed [63:0] c$case_alt_selection_1736;
-  logic signed [63:0] c$case_alt_selection_1740;
-  logic [7:0] c$i_829;
-  logic signed [63:0] c$case_alt_selection_1739;
-  logic signed [63:0] c$case_alt_selection_1743;
-  logic [7:0] c$i_830;
-  logic signed [63:0] c$case_alt_selection_1742;
-  logic signed [63:0] c$case_alt_selection_1746;
-  logic [7:0] c$i_831;
-  logic signed [63:0] c$case_alt_selection_1745;
-  logic signed [63:0] c$case_alt_selection_1749;
-  logic [7:0] c$i_832;
-  logic signed [63:0] c$case_alt_selection_1748;
-  logic signed [63:0] c$case_alt_selection_1752;
-  logic [7:0] c$i_833;
-  logic signed [63:0] c$case_alt_selection_1751;
-  logic signed [63:0] c$case_alt_selection_1755;
-  logic [7:0] c$i_834;
-  logic signed [63:0] c$case_alt_selection_1754;
-  logic signed [63:0] c$case_alt_selection_1758;
-  logic [7:0] c$i_835;
-  logic signed [63:0] c$case_alt_selection_1757;
-  logic signed [63:0] c$case_alt_selection_1761;
-  logic [7:0] c$i_836;
-  logic signed [63:0] c$case_alt_selection_1760;
-  logic signed [63:0] c$case_alt_selection_1764;
-  logic [7:0] c$i_837;
-  logic signed [63:0] c$case_alt_selection_1763;
-  logic signed [63:0] c$case_alt_selection_1767;
-  logic [7:0] c$i_838;
-  logic signed [63:0] c$case_alt_selection_1766;
-  logic signed [63:0] c$case_alt_selection_1770;
-  logic [7:0] c$i_839;
-  logic signed [63:0] c$case_alt_selection_1769;
-  logic signed [63:0] c$case_alt_selection_1773;
-  logic [7:0] c$i_840;
-  logic signed [63:0] c$case_alt_selection_1772;
-  logic signed [63:0] c$case_alt_selection_1776;
-  logic [7:0] c$i_841;
-  logic signed [63:0] c$case_alt_selection_1775;
-  logic signed [63:0] c$case_alt_selection_1779;
-  logic [7:0] c$i_842;
-  logic signed [63:0] c$case_alt_selection_1778;
-  logic signed [63:0] c$case_alt_selection_1782;
-  logic [7:0] c$i_843;
-  logic signed [63:0] c$case_alt_selection_1781;
-  logic signed [63:0] c$case_alt_selection_1785;
-  logic [7:0] c$i_844;
-  logic signed [63:0] c$case_alt_selection_1784;
-  logic signed [63:0] c$case_alt_selection_1788;
-  logic [7:0] c$i_845;
-  logic signed [63:0] c$case_alt_selection_1787;
-  logic signed [63:0] c$case_alt_selection_1791;
-  logic [7:0] c$i_846;
-  logic signed [63:0] c$case_alt_selection_1790;
-  logic signed [63:0] c$case_alt_selection_1794;
-  logic [7:0] c$i_847;
-  logic signed [63:0] c$case_alt_selection_1793;
-  logic signed [63:0] c$case_alt_selection_1797;
-  logic [7:0] c$i_848;
-  logic signed [63:0] c$case_alt_selection_1796;
-  logic signed [63:0] c$case_alt_selection_1800;
-  logic [7:0] c$i_849;
-  logic signed [63:0] c$case_alt_selection_1799;
-  logic signed [63:0] c$case_alt_selection_1803;
-  logic [7:0] c$i_850;
-  logic signed [63:0] c$case_alt_selection_1802;
-  logic signed [63:0] c$case_alt_selection_1806;
-  logic [7:0] c$i_851;
-  logic signed [63:0] c$case_alt_selection_1805;
-  logic signed [63:0] c$case_alt_selection_1809;
-  logic [7:0] c$i_852;
-  logic signed [63:0] c$case_alt_selection_1808;
-  logic signed [63:0] c$case_alt_selection_1812;
-  logic [7:0] c$i_853;
-  logic signed [63:0] c$case_alt_selection_1811;
-  logic signed [63:0] c$case_alt_selection_1815;
-  logic [7:0] c$i_854;
-  logic signed [63:0] c$case_alt_selection_1814;
-  logic signed [63:0] c$case_alt_selection_1818;
-  logic [7:0] c$i_855;
-  logic signed [63:0] c$case_alt_selection_1817;
-  logic signed [63:0] c$case_alt_selection_1821;
-  logic [7:0] c$i_856;
-  logic signed [63:0] c$case_alt_selection_1820;
-  logic signed [63:0] c$case_alt_selection_1824;
-  logic [7:0] c$i_857;
-  logic signed [63:0] c$case_alt_selection_1823;
-  logic signed [63:0] c$case_alt_selection_1827;
-  logic [7:0] c$i_858;
-  logic signed [63:0] c$case_alt_selection_1826;
-  logic signed [63:0] c$case_alt_selection_1830;
-  logic [7:0] c$i_859;
-  logic signed [63:0] c$case_alt_selection_1829;
-  logic signed [63:0] c$case_alt_selection_1833;
-  logic [7:0] c$i_860;
-  logic signed [63:0] c$case_alt_selection_1832;
-  logic signed [63:0] c$case_alt_selection_1836;
-  logic [7:0] c$i_861;
-  logic signed [63:0] c$case_alt_selection_1835;
-  logic signed [63:0] c$case_alt_selection_1839;
-  logic [7:0] c$i_862;
-  logic signed [63:0] c$case_alt_selection_1838;
-  logic signed [63:0] c$case_alt_selection_1842;
-  logic [7:0] c$i_863;
-  logic signed [63:0] c$case_alt_selection_1841;
-  logic signed [63:0] c$case_alt_selection_1845;
-  logic [7:0] c$i_864;
-  logic signed [63:0] c$case_alt_selection_1844;
-  logic signed [63:0] c$case_alt_selection_1848;
-  logic [7:0] c$i_865;
-  logic signed [63:0] c$case_alt_selection_1847;
-  logic signed [63:0] c$case_alt_selection_1851;
-  logic [7:0] c$i_866;
-  logic signed [63:0] c$case_alt_selection_1850;
-  logic signed [63:0] c$case_alt_selection_1854;
-  logic [7:0] c$i_867;
-  logic signed [63:0] c$case_alt_selection_1853;
-  logic signed [63:0] c$case_alt_selection_1857;
-  logic [7:0] c$i_868;
-  logic signed [63:0] c$case_alt_selection_1856;
-  logic signed [63:0] c$case_alt_selection_1860;
-  logic [7:0] c$i_869;
-  logic signed [63:0] c$case_alt_selection_1859;
-  logic signed [63:0] c$case_alt_selection_1863;
-  logic [7:0] c$i_870;
-  logic signed [63:0] c$case_alt_selection_1862;
-  logic signed [63:0] c$case_alt_selection_1866;
-  logic [7:0] c$i_871;
-  logic signed [63:0] c$case_alt_selection_1865;
-  logic signed [63:0] c$case_alt_selection_1869;
-  logic [7:0] c$i_872;
-  logic signed [63:0] c$case_alt_selection_1868;
-  logic signed [63:0] c$case_alt_selection_1872;
-  logic [7:0] c$i_873;
-  logic signed [63:0] c$case_alt_selection_1871;
-  logic signed [63:0] c$case_alt_selection_1875;
-  logic [7:0] c$i_874;
-  logic signed [63:0] c$case_alt_selection_1874;
-  logic signed [63:0] c$case_alt_selection_1878;
-  logic [7:0] c$i_875;
-  logic signed [63:0] c$case_alt_selection_1877;
-  logic signed [63:0] c$case_alt_selection_1881;
-  logic [7:0] c$i_876;
-  logic signed [63:0] c$case_alt_selection_1880;
-  logic signed [63:0] c$case_alt_selection_1884;
-  logic [7:0] c$i_877;
-  logic signed [63:0] c$case_alt_selection_1883;
-  logic signed [63:0] c$case_alt_selection_1887;
-  logic [7:0] c$i_878;
-  logic signed [63:0] c$case_alt_selection_1886;
-  logic signed [63:0] c$case_alt_selection_1890;
-  logic [7:0] c$i_879;
-  logic signed [63:0] c$case_alt_selection_1889;
-  logic signed [63:0] c$case_alt_selection_1893;
-  logic [7:0] c$i_880;
-  logic signed [63:0] c$case_alt_selection_1892;
-  logic signed [63:0] c$case_alt_selection_1896;
-  logic [7:0] c$i_881;
-  logic signed [63:0] c$case_alt_selection_1895;
-  logic signed [63:0] c$case_alt_selection_1899;
-  logic [7:0] c$i_882;
-  logic signed [63:0] c$case_alt_selection_1898;
-  logic signed [63:0] c$case_alt_selection_1902;
-  logic [7:0] c$i_883;
-  logic signed [63:0] c$case_alt_selection_1901;
-  logic signed [63:0] c$case_alt_selection_1905;
-  logic [7:0] c$i_884;
-  logic signed [63:0] c$case_alt_selection_1904;
-  logic signed [63:0] c$case_alt_selection_1908;
-  logic [7:0] c$i_885;
-  logic signed [63:0] c$case_alt_selection_1907;
-  logic signed [63:0] c$case_alt_selection_1911;
-  logic [7:0] c$i_886;
-  logic signed [63:0] c$case_alt_selection_1910;
-  logic signed [63:0] c$case_alt_selection_1914;
-  logic [7:0] c$i_887;
-  logic signed [63:0] c$case_alt_selection_1913;
-  logic signed [63:0] c$case_alt_selection_1917;
-  logic [7:0] c$i_888;
-  logic signed [63:0] c$case_alt_selection_1916;
-  logic signed [63:0] c$case_alt_selection_1920;
-  logic [7:0] c$i_889;
-  logic signed [63:0] c$case_alt_selection_1919;
-  logic signed [63:0] c$case_alt_selection_1923;
-  logic [7:0] c$i_890;
-  logic signed [63:0] c$case_alt_selection_1922;
-  logic signed [63:0] c$case_alt_selection_1926;
-  logic [7:0] c$i_891;
-  logic signed [63:0] c$case_alt_selection_1925;
-  logic signed [63:0] c$case_alt_selection_1929;
-  logic [7:0] c$i_892;
-  logic signed [63:0] c$case_alt_selection_1928;
-  logic signed [63:0] c$case_alt_selection_1932;
-  logic [7:0] c$i_893;
-  logic signed [63:0] c$case_alt_selection_1931;
-  logic signed [63:0] c$case_alt_selection_1935;
-  logic [7:0] c$i_894;
-  logic signed [63:0] c$case_alt_selection_1934;
-  logic signed [63:0] c$case_alt_selection_1938;
-  logic [7:0] c$i_895;
-  logic signed [63:0] c$case_alt_selection_1937;
-  logic signed [63:0] c$case_alt_selection_1941;
-  logic [7:0] c$i_896;
-  logic signed [63:0] c$case_alt_selection_1940;
-  logic signed [63:0] c$case_alt_selection_1944;
-  logic [7:0] c$i_897;
-  logic signed [63:0] c$case_alt_selection_1943;
-  logic signed [63:0] c$case_alt_selection_1947;
-  logic [7:0] c$i_898;
-  logic signed [63:0] c$case_alt_selection_1946;
-  logic signed [63:0] c$case_alt_selection_1950;
-  logic [7:0] c$i_899;
-  logic signed [63:0] c$case_alt_selection_1949;
-  logic signed [63:0] c$case_alt_selection_1953;
-  logic [7:0] c$i_900;
-  logic signed [63:0] c$case_alt_selection_1952;
-  logic signed [63:0] c$case_alt_selection_1956;
-  logic [7:0] c$i_901;
-  logic signed [63:0] c$case_alt_selection_1955;
-  logic signed [63:0] c$case_alt_selection_1959;
-  logic [7:0] c$i_902;
-  logic signed [63:0] c$case_alt_selection_1958;
-  logic signed [63:0] c$case_alt_selection_1962;
-  logic [7:0] c$i_903;
-  logic signed [63:0] c$case_alt_selection_1961;
-  logic signed [63:0] c$case_alt_selection_1965;
-  logic [7:0] c$i_904;
-  logic signed [63:0] c$case_alt_selection_1964;
-  logic signed [63:0] c$case_alt_selection_1968;
-  logic [7:0] c$i_905;
-  logic signed [63:0] c$case_alt_selection_1967;
-  logic signed [63:0] c$case_alt_selection_1971;
-  logic [7:0] c$i_906;
-  logic signed [63:0] c$case_alt_selection_1970;
-  logic signed [63:0] c$case_alt_selection_1974;
-  logic [7:0] c$i_907;
-  logic signed [63:0] c$case_alt_selection_1973;
-  logic signed [63:0] c$case_alt_selection_1977;
-  logic [7:0] c$i_908;
-  logic signed [63:0] c$case_alt_selection_1976;
-  logic signed [63:0] c$case_alt_selection_1980;
-  logic [7:0] c$i_909;
-  logic signed [63:0] c$case_alt_selection_1979;
-  logic signed [63:0] c$case_alt_selection_1983;
-  logic [7:0] c$i_910;
-  logic signed [63:0] c$case_alt_selection_1982;
-  logic signed [63:0] c$case_alt_selection_1986;
-  logic [7:0] c$i_911;
-  logic signed [63:0] c$case_alt_selection_1985;
-  logic signed [63:0] c$case_alt_selection_1989;
-  logic [7:0] c$i_912;
-  logic signed [63:0] c$case_alt_selection_1988;
-  logic signed [63:0] c$case_alt_selection_1992;
-  logic [7:0] c$i_913;
-  logic signed [63:0] c$case_alt_selection_1991;
-  logic signed [63:0] c$case_alt_selection_1995;
-  logic [7:0] c$i_914;
-  logic signed [63:0] c$case_alt_selection_1994;
-  logic signed [63:0] c$case_alt_selection_1998;
-  logic [7:0] c$i_915;
-  logic signed [63:0] c$case_alt_selection_1997;
-  logic signed [63:0] c$case_alt_selection_2001;
-  logic [7:0] c$i_916;
-  logic signed [63:0] c$case_alt_selection_2000;
-  logic signed [63:0] c$case_alt_selection_2004;
-  logic [7:0] c$i_917;
-  logic signed [63:0] c$case_alt_selection_2003;
-  logic signed [63:0] c$case_alt_selection_2007;
-  logic [7:0] c$i_918;
-  logic signed [63:0] c$case_alt_selection_2006;
-  logic signed [63:0] c$case_alt_selection_2010;
-  logic [7:0] c$i_919;
-  logic signed [63:0] c$case_alt_selection_2009;
-  logic signed [63:0] c$case_alt_selection_2013;
-  logic [7:0] c$i_920;
-  logic signed [63:0] c$case_alt_selection_2012;
-  logic signed [63:0] c$case_alt_selection_2016;
-  logic [7:0] c$i_921;
-  logic signed [63:0] c$case_alt_selection_2015;
-  logic signed [63:0] c$case_alt_selection_2019;
-  logic [7:0] c$i_922;
-  logic signed [63:0] c$case_alt_selection_2018;
-  logic signed [63:0] c$case_alt_selection_2022;
-  logic [7:0] c$i_923;
-  logic signed [63:0] c$case_alt_selection_2021;
-  logic signed [63:0] c$case_alt_selection_2025;
-  logic [7:0] c$i_924;
-  logic signed [63:0] c$case_alt_selection_2024;
-  logic signed [63:0] c$case_alt_selection_2028;
-  logic [7:0] c$i_925;
-  logic signed [63:0] c$case_alt_selection_2027;
-  logic signed [63:0] c$case_alt_selection_2031;
-  logic [7:0] c$i_926;
-  logic signed [63:0] c$case_alt_selection_2030;
-  logic signed [63:0] c$case_alt_selection_2034;
-  logic [7:0] c$i_927;
-  logic signed [63:0] c$case_alt_selection_2033;
-  logic signed [63:0] c$case_alt_selection_2037;
-  logic [7:0] c$i_928;
-  logic signed [63:0] c$case_alt_selection_2036;
-  logic signed [63:0] c$case_alt_selection_2040;
-  logic [7:0] c$i_929;
-  logic signed [63:0] c$case_alt_selection_2039;
-  logic signed [63:0] c$case_alt_selection_2043;
-  logic [7:0] c$i_930;
-  logic signed [63:0] c$case_alt_selection_2042;
-  logic signed [63:0] c$case_alt_selection_2046;
-  logic [7:0] c$i_931;
-  logic signed [63:0] c$case_alt_selection_2045;
-  logic signed [63:0] c$case_alt_selection_2049;
-  logic [7:0] c$i_932;
-  logic signed [63:0] c$case_alt_selection_2048;
-  logic signed [63:0] c$case_alt_selection_2052;
-  logic [7:0] c$i_933;
-  logic signed [63:0] c$case_alt_selection_2051;
-  logic signed [63:0] c$case_alt_selection_2055;
-  logic [7:0] c$i_934;
-  logic signed [63:0] c$case_alt_selection_2054;
-  logic signed [63:0] c$case_alt_selection_2058;
-  logic [7:0] c$i_935;
-  logic signed [63:0] c$case_alt_selection_2057;
-  logic signed [63:0] c$case_alt_selection_2061;
-  logic [7:0] c$i_936;
-  logic signed [63:0] c$case_alt_selection_2060;
-  logic signed [63:0] c$case_alt_selection_2064;
-  logic [7:0] c$i_937;
-  logic signed [63:0] c$case_alt_selection_2063;
-  logic signed [63:0] c$case_alt_selection_2067;
-  logic [7:0] c$i_938;
-  logic signed [63:0] c$case_alt_selection_2066;
-  logic signed [63:0] c$case_alt_selection_2070;
-  logic [7:0] c$i_939;
-  logic signed [63:0] c$case_alt_selection_2069;
-  logic signed [63:0] c$case_alt_selection_2073;
-  logic [7:0] c$i_940;
-  logic signed [63:0] c$case_alt_selection_2072;
-  logic signed [63:0] c$case_alt_selection_2076;
-  logic [7:0] c$i_941;
-  logic signed [63:0] c$case_alt_selection_2075;
-  logic signed [63:0] c$case_alt_selection_2079;
-  logic [7:0] c$i_942;
-  logic signed [63:0] c$case_alt_selection_2078;
-  logic signed [63:0] c$case_alt_selection_2082;
-  logic [7:0] c$i_943;
-  logic signed [63:0] c$case_alt_selection_2081;
-  logic signed [63:0] c$case_alt_selection_2085;
-  logic [7:0] c$i_944;
-  logic signed [63:0] c$case_alt_selection_2084;
-  logic signed [63:0] c$case_alt_selection_2088;
-  logic [7:0] c$i_945;
-  logic signed [63:0] c$case_alt_selection_2087;
-  logic signed [63:0] c$case_alt_selection_2091;
-  logic [7:0] c$i_946;
-  logic signed [63:0] c$case_alt_selection_2090;
-  logic signed [63:0] c$case_alt_selection_2094;
-  logic [7:0] c$i_947;
-  logic signed [63:0] c$case_alt_selection_2093;
-  logic signed [63:0] c$case_alt_selection_2097;
-  logic [7:0] c$i_948;
-  logic signed [63:0] c$case_alt_selection_2096;
-  logic signed [63:0] c$case_alt_selection_2100;
-  logic [7:0] c$i_949;
-  logic signed [63:0] c$case_alt_selection_2099;
-  logic signed [63:0] c$case_alt_selection_2103;
-  logic [7:0] c$i_950;
-  logic signed [63:0] c$case_alt_selection_2102;
-  logic signed [63:0] c$case_alt_selection_2106;
-  logic [7:0] c$i_951;
-  logic signed [63:0] c$case_alt_selection_2105;
-  logic signed [63:0] c$case_alt_selection_2109;
-  logic [7:0] c$i_952;
-  logic signed [63:0] c$case_alt_selection_2108;
-  logic signed [63:0] c$case_alt_selection_2112;
-  logic [7:0] c$i_953;
-  logic signed [63:0] c$case_alt_selection_2111;
-  logic signed [63:0] c$case_alt_selection_2115;
-  logic [7:0] c$i_954;
-  logic signed [63:0] c$case_alt_selection_2114;
-  logic signed [63:0] c$case_alt_selection_2118;
-  logic [7:0] c$i_955;
-  logic signed [63:0] c$case_alt_selection_2117;
-  logic signed [63:0] c$case_alt_selection_2121;
-  logic [7:0] c$i_956;
-  logic signed [63:0] c$case_alt_selection_2120;
-  logic signed [63:0] c$case_alt_selection_2124;
-  logic [7:0] c$i_957;
-  logic signed [63:0] c$case_alt_selection_2123;
-  logic signed [63:0] c$case_alt_selection_2127;
-  logic [7:0] c$i_958;
-  logic signed [63:0] c$case_alt_selection_2126;
-  logic signed [63:0] c$case_alt_selection_2130;
-  logic [7:0] c$i_959;
-  logic signed [63:0] c$case_alt_selection_2129;
-  logic signed [63:0] c$case_alt_selection_2133;
-  logic [7:0] c$i_960;
-  logic signed [63:0] c$case_alt_selection_2132;
-  logic signed [63:0] c$case_alt_selection_2136;
-  logic [7:0] c$i_961;
-  logic signed [63:0] c$case_alt_selection_2135;
-  logic signed [63:0] c$case_alt_selection_2139;
-  logic [7:0] c$i_962;
-  logic signed [63:0] c$case_alt_selection_2138;
-  logic signed [63:0] c$case_alt_selection_2142;
-  logic [7:0] c$i_963;
-  logic signed [63:0] c$case_alt_selection_2141;
-  logic signed [63:0] c$case_alt_selection_2145;
-  logic [7:0] c$i_964;
-  logic signed [63:0] c$case_alt_selection_2144;
-  logic signed [63:0] c$case_alt_selection_2148;
-  logic [7:0] c$i_965;
-  logic signed [63:0] c$case_alt_selection_2147;
-  logic signed [63:0] c$case_alt_selection_2151;
-  logic [7:0] c$i_966;
-  logic signed [63:0] c$case_alt_selection_2150;
-  logic signed [63:0] c$case_alt_selection_2154;
-  logic [7:0] c$i_967;
-  logic signed [63:0] c$case_alt_selection_2153;
-  logic signed [63:0] c$case_alt_selection_2157;
-  logic [7:0] c$i_968;
-  logic signed [63:0] c$case_alt_selection_2156;
-  logic signed [63:0] c$case_alt_selection_2160;
-  logic [7:0] c$i_969;
-  logic signed [63:0] c$case_alt_selection_2159;
-  logic signed [63:0] c$case_alt_selection_2163;
-  logic [7:0] c$i_970;
-  logic signed [63:0] c$case_alt_selection_2162;
-  logic signed [63:0] c$case_alt_selection_2166;
-  logic [7:0] c$i_971;
-  logic signed [63:0] c$case_alt_selection_2165;
-  logic signed [63:0] c$case_alt_selection_2169;
-  logic [7:0] c$i_972;
-  logic signed [63:0] c$case_alt_selection_2168;
-  logic signed [63:0] c$case_alt_selection_2172;
-  logic [7:0] c$i_973;
-  logic signed [63:0] c$case_alt_selection_2171;
-  logic signed [63:0] c$case_alt_selection_2175;
-  logic [7:0] c$i_974;
-  logic signed [63:0] c$case_alt_selection_2174;
-  logic signed [63:0] c$case_alt_selection_2178;
-  logic [7:0] c$i_975;
-  logic signed [63:0] c$case_alt_selection_2177;
-  logic signed [63:0] c$case_alt_selection_2181;
-  logic [7:0] c$i_976;
-  logic signed [63:0] c$case_alt_selection_2180;
-  logic signed [63:0] c$case_alt_selection_2184;
-  logic [7:0] c$i_977;
-  logic signed [63:0] c$case_alt_selection_2183;
-  logic signed [63:0] c$case_alt_selection_2187;
-  logic [7:0] c$i_978;
-  logic signed [63:0] c$case_alt_selection_2186;
-  logic signed [63:0] c$case_alt_selection_2190;
-  logic [7:0] c$i_979;
-  logic signed [63:0] c$case_alt_selection_2189;
-  logic signed [63:0] c$case_alt_selection_2193;
-  logic [7:0] c$i_980;
-  logic signed [63:0] c$case_alt_selection_2192;
-  logic signed [63:0] c$case_alt_selection_2196;
-  logic [7:0] c$i_981;
-  logic signed [63:0] c$case_alt_selection_2195;
-  logic signed [63:0] c$case_alt_selection_2199;
-  logic [7:0] c$i_982;
-  logic signed [63:0] c$case_alt_selection_2198;
-  logic signed [63:0] c$case_alt_selection_2202;
-  logic [7:0] c$i_983;
-  logic signed [63:0] c$case_alt_selection_2201;
-  logic signed [63:0] c$case_alt_selection_2205;
-  logic [7:0] c$i_984;
-  logic signed [63:0] c$case_alt_selection_2204;
-  logic signed [63:0] c$case_alt_selection_2208;
-  logic [7:0] c$i_985;
-  logic signed [63:0] c$case_alt_selection_2207;
-  logic signed [63:0] c$case_alt_selection_2211;
-  logic [7:0] c$i_986;
-  logic signed [63:0] c$case_alt_selection_2210;
-  logic signed [63:0] c$case_alt_selection_2214;
-  logic [7:0] c$i_987;
-  logic signed [63:0] c$case_alt_selection_2213;
-  logic signed [63:0] c$case_alt_selection_2217;
-  logic [7:0] c$i_988;
-  logic signed [63:0] c$case_alt_selection_2216;
-  logic signed [63:0] c$case_alt_selection_2220;
-  logic [7:0] c$i_989;
-  logic signed [63:0] c$case_alt_selection_2219;
-  logic signed [63:0] c$case_alt_selection_2223;
-  logic [7:0] c$i_990;
-  logic signed [63:0] c$case_alt_selection_2222;
-  logic signed [63:0] c$case_alt_selection_2226;
-  logic [7:0] c$i_991;
-  logic signed [63:0] c$case_alt_selection_2225;
-  logic signed [63:0] c$case_alt_selection_2229;
-  logic [7:0] c$i_992;
-  logic signed [63:0] c$case_alt_selection_2228;
-  logic signed [63:0] c$case_alt_selection_2232;
-  logic [7:0] c$i_993;
-  logic signed [63:0] c$case_alt_selection_2231;
-  logic signed [63:0] c$case_alt_selection_2235;
-  logic [7:0] c$i_994;
-  logic signed [63:0] c$case_alt_selection_2234;
-  logic signed [63:0] c$case_alt_selection_2238;
-  logic [7:0] c$i_995;
-  logic signed [63:0] c$case_alt_selection_2237;
-  logic signed [63:0] c$case_alt_selection_2241;
-  logic [7:0] c$i_996;
-  logic signed [63:0] c$case_alt_selection_2240;
-  logic signed [63:0] c$case_alt_selection_2244;
-  logic [7:0] c$i_997;
-  logic signed [63:0] c$case_alt_selection_2243;
-  logic signed [63:0] c$case_alt_selection_2247;
-  logic [7:0] c$i_998;
-  logic signed [63:0] c$case_alt_selection_2246;
-  logic signed [63:0] c$case_alt_selection_2250;
-  logic [7:0] c$i_999;
-  logic signed [63:0] c$case_alt_selection_2249;
-  logic signed [63:0] c$case_alt_selection_2253;
-  logic [7:0] c$i_1000;
-  logic signed [63:0] c$case_alt_selection_2252;
-  logic signed [63:0] c$case_alt_selection_2256;
-  logic [7:0] c$i_1001;
-  logic signed [63:0] c$case_alt_selection_2255;
-  logic signed [63:0] c$case_alt_selection_2259;
-  logic [7:0] c$i_1002;
-  logic signed [63:0] c$case_alt_selection_2258;
-  logic signed [63:0] c$case_alt_selection_2262;
-  logic [7:0] c$i_1003;
-  logic signed [63:0] c$case_alt_selection_2261;
-  logic signed [63:0] c$case_alt_selection_2265;
-  logic [7:0] c$i_1004;
-  logic signed [63:0] c$case_alt_selection_2264;
-  logic signed [63:0] c$case_alt_selection_2268;
-  logic [7:0] c$i_1005;
-  logic signed [63:0] c$case_alt_selection_2267;
-  logic signed [63:0] c$case_alt_selection_2271;
-  logic [7:0] c$i_1006;
-  logic signed [63:0] c$case_alt_selection_2270;
-  logic signed [63:0] c$case_alt_selection_2274;
-  logic [7:0] c$i_1007;
-  logic signed [63:0] c$case_alt_selection_2273;
-  logic signed [63:0] c$case_alt_selection_2277;
-  logic [7:0] c$i_1008;
-  logic signed [63:0] c$case_alt_selection_2276;
-  logic signed [63:0] c$case_alt_selection_2280;
-  logic [7:0] c$i_1009;
-  logic signed [63:0] c$case_alt_selection_2279;
-  logic signed [63:0] c$case_alt_selection_2283;
-  logic [7:0] c$i_1010;
-  logic signed [63:0] c$case_alt_selection_2282;
-  logic signed [63:0] c$case_alt_selection_2286;
-  logic [7:0] c$i_1011;
-  logic signed [63:0] c$case_alt_selection_2285;
-  logic signed [63:0] c$case_alt_selection_2289;
-  logic [7:0] c$i_1012;
-  logic signed [63:0] c$case_alt_selection_2288;
-  logic signed [63:0] c$case_alt_selection_2292;
-  logic [7:0] c$i_1013;
-  logic signed [63:0] c$case_alt_selection_2291;
-  logic signed [63:0] c$case_alt_selection_2295;
-  logic [7:0] c$i_1014;
-  logic signed [63:0] c$case_alt_selection_2294;
-  logic signed [63:0] c$case_alt_selection_2298;
-  logic [7:0] c$i_1015;
-  logic signed [63:0] c$case_alt_selection_2297;
-  logic signed [63:0] c$case_alt_selection_2301;
-  logic [7:0] c$i_1016;
-  logic signed [63:0] c$case_alt_selection_2300;
-  logic signed [63:0] c$case_alt_selection_2304;
-  logic [7:0] c$i_1017;
-  logic signed [63:0] c$case_alt_selection_2303;
-  logic signed [63:0] c$case_alt_selection_2307;
-  logic [7:0] c$i_1018;
-  logic signed [63:0] c$case_alt_selection_2306;
-  logic [7:0] c$i_1019;
-  logic signed [63:0] c$case_alt_selection_2311;
-  logic [7:0] c$i_1020;
-  logic signed [63:0] c$case_alt_selection_2310;
-  logic signed [63:0] c$case_alt_selection_2314;
-  logic [7:0] c$i_1021;
-  logic signed [63:0] c$case_alt_selection_2313;
-  logic signed [63:0] c$case_alt_selection_2317;
-  logic [7:0] c$i_1022;
-  logic signed [63:0] c$case_alt_selection_2316;
-  logic signed [63:0] c$case_alt_selection_2320;
-  logic [7:0] c$i_1023;
-  logic signed [63:0] c$case_alt_selection_2319;
-  logic signed [63:0] c$case_alt_selection_2323;
-  logic [7:0] c$i_1024;
-  logic signed [63:0] c$case_alt_selection_2322;
-  logic signed [63:0] c$case_alt_selection_2326;
-  logic [7:0] c$i_1025;
-  logic signed [63:0] c$case_alt_selection_2325;
-  logic signed [63:0] c$case_alt_selection_2329;
-  logic [7:0] c$i_1026;
-  logic signed [63:0] c$case_alt_selection_2328;
-  logic signed [63:0] c$case_alt_selection_2332;
-  logic [7:0] c$i_1027;
-  logic signed [63:0] c$case_alt_selection_2331;
-  logic signed [63:0] c$case_alt_selection_2335;
-  logic [7:0] c$i_1028;
-  logic signed [63:0] c$case_alt_selection_2334;
-  logic signed [63:0] c$case_alt_selection_2338;
-  logic [7:0] c$i_1029;
-  logic signed [63:0] c$case_alt_selection_2337;
-  logic signed [63:0] c$case_alt_selection_2341;
-  logic [7:0] c$i_1030;
-  logic signed [63:0] c$case_alt_selection_2340;
-  logic signed [63:0] c$case_alt_selection_2344;
-  logic [7:0] c$i_1031;
-  logic signed [63:0] c$case_alt_selection_2343;
-  logic signed [63:0] c$case_alt_selection_2347;
-  logic [7:0] c$i_1032;
-  logic signed [63:0] c$case_alt_selection_2346;
-  logic signed [63:0] c$case_alt_selection_2350;
-  logic [7:0] c$i_1033;
-  logic signed [63:0] c$case_alt_selection_2349;
-  logic signed [63:0] c$case_alt_selection_2353;
-  logic [7:0] c$i_1034;
-  logic signed [63:0] c$case_alt_selection_2352;
-  logic signed [63:0] c$case_alt_selection_2356;
-  logic [7:0] c$i_1035;
-  logic signed [63:0] c$case_alt_selection_2355;
-  logic signed [63:0] c$case_alt_selection_2359;
-  logic [7:0] c$i_1036;
-  logic signed [63:0] c$case_alt_selection_2358;
-  logic signed [63:0] c$case_alt_selection_2362;
-  logic [7:0] c$i_1037;
-  logic signed [63:0] c$case_alt_selection_2361;
-  logic signed [63:0] c$case_alt_selection_2365;
-  logic [7:0] c$i_1038;
-  logic signed [63:0] c$case_alt_selection_2364;
-  logic signed [63:0] c$case_alt_selection_2368;
-  logic [7:0] c$i_1039;
-  logic signed [63:0] c$case_alt_selection_2367;
-  logic signed [63:0] c$case_alt_selection_2371;
-  logic [7:0] c$i_1040;
-  logic signed [63:0] c$case_alt_selection_2370;
-  logic signed [63:0] c$case_alt_selection_2374;
-  logic [7:0] c$i_1041;
-  logic signed [63:0] c$case_alt_selection_2373;
-  logic signed [63:0] c$case_alt_selection_2377;
-  logic [7:0] c$i_1042;
-  logic signed [63:0] c$case_alt_selection_2376;
-  logic signed [63:0] c$case_alt_selection_2380;
-  logic [7:0] c$i_1043;
-  logic signed [63:0] c$case_alt_selection_2379;
-  logic signed [63:0] c$case_alt_selection_2383;
-  logic [7:0] c$i_1044;
-  logic signed [63:0] c$case_alt_selection_2382;
-  logic signed [63:0] c$case_alt_selection_2386;
-  logic [7:0] c$i_1045;
-  logic signed [63:0] c$case_alt_selection_2385;
-  logic signed [63:0] c$case_alt_selection_2389;
-  logic [7:0] c$i_1046;
-  logic signed [63:0] c$case_alt_selection_2388;
-  logic signed [63:0] c$case_alt_selection_2392;
-  logic [7:0] c$i_1047;
-  logic signed [63:0] c$case_alt_selection_2391;
-  logic signed [63:0] c$case_alt_selection_2395;
-  logic [7:0] c$i_1048;
-  logic signed [63:0] c$case_alt_selection_2394;
-  logic signed [63:0] c$case_alt_selection_2398;
-  logic [7:0] c$i_1049;
-  logic signed [63:0] c$case_alt_selection_2397;
-  logic signed [63:0] c$case_alt_selection_2401;
-  logic [7:0] c$i_1050;
-  logic signed [63:0] c$case_alt_selection_2400;
-  logic signed [63:0] c$case_alt_selection_2404;
-  logic [7:0] c$i_1051;
-  logic signed [63:0] c$case_alt_selection_2403;
-  logic signed [63:0] c$case_alt_selection_2407;
-  logic [7:0] c$i_1052;
-  logic signed [63:0] c$case_alt_selection_2406;
-  logic signed [63:0] c$case_alt_selection_2410;
-  logic [7:0] c$i_1053;
-  logic signed [63:0] c$case_alt_selection_2409;
-  logic signed [63:0] c$case_alt_selection_2413;
-  logic [7:0] c$i_1054;
-  logic signed [63:0] c$case_alt_selection_2412;
-  logic signed [63:0] c$case_alt_selection_2416;
-  logic [7:0] c$i_1055;
-  logic signed [63:0] c$case_alt_selection_2415;
-  logic signed [63:0] c$case_alt_selection_2419;
-  logic [7:0] c$i_1056;
-  logic signed [63:0] c$case_alt_selection_2418;
-  logic signed [63:0] c$case_alt_selection_2422;
-  logic [7:0] c$i_1057;
-  logic signed [63:0] c$case_alt_selection_2421;
-  logic signed [63:0] c$case_alt_selection_2425;
-  logic [7:0] c$i_1058;
-  logic signed [63:0] c$case_alt_selection_2424;
-  logic signed [63:0] c$case_alt_selection_2428;
-  logic [7:0] c$i_1059;
-  logic signed [63:0] c$case_alt_selection_2427;
-  logic signed [63:0] c$case_alt_selection_2431;
-  logic [7:0] c$i_1060;
-  logic signed [63:0] c$case_alt_selection_2430;
-  logic signed [63:0] c$case_alt_selection_2434;
-  logic [7:0] c$i_1061;
-  logic signed [63:0] c$case_alt_selection_2433;
-  logic signed [63:0] c$case_alt_selection_2437;
-  logic [7:0] c$i_1062;
-  logic signed [63:0] c$case_alt_selection_2436;
-  logic signed [63:0] c$case_alt_selection_2440;
-  logic [7:0] c$i_1063;
-  logic signed [63:0] c$case_alt_selection_2439;
-  logic signed [63:0] c$case_alt_selection_2443;
-  logic [7:0] c$i_1064;
-  logic signed [63:0] c$case_alt_selection_2442;
-  logic signed [63:0] c$case_alt_selection_2446;
-  logic [7:0] c$i_1065;
-  logic signed [63:0] c$case_alt_selection_2445;
-  logic signed [63:0] c$case_alt_selection_2449;
-  logic [7:0] c$i_1066;
-  logic signed [63:0] c$case_alt_selection_2448;
-  logic signed [63:0] c$case_alt_selection_2452;
-  logic [7:0] c$i_1067;
-  logic signed [63:0] c$case_alt_selection_2451;
-  logic signed [63:0] c$case_alt_selection_2455;
-  logic [7:0] c$i_1068;
-  logic signed [63:0] c$case_alt_selection_2454;
-  logic signed [63:0] c$case_alt_selection_2458;
-  logic [7:0] c$i_1069;
-  logic signed [63:0] c$case_alt_selection_2457;
-  logic signed [63:0] c$case_alt_selection_2461;
-  logic [7:0] c$i_1070;
-  logic signed [63:0] c$case_alt_selection_2460;
-  logic signed [63:0] c$case_alt_selection_2464;
-  logic [7:0] c$i_1071;
-  logic signed [63:0] c$case_alt_selection_2463;
-  logic signed [63:0] c$case_alt_selection_2467;
-  logic [7:0] c$i_1072;
-  logic signed [63:0] c$case_alt_selection_2466;
-  logic signed [63:0] c$case_alt_selection_2470;
-  logic [7:0] c$i_1073;
-  logic signed [63:0] c$case_alt_selection_2469;
-  logic signed [63:0] c$case_alt_selection_2473;
-  logic [7:0] c$i_1074;
-  logic signed [63:0] c$case_alt_selection_2472;
-  logic signed [63:0] c$case_alt_selection_2476;
-  logic [7:0] c$i_1075;
-  logic signed [63:0] c$case_alt_selection_2475;
-  logic signed [63:0] c$case_alt_selection_2479;
-  logic [7:0] c$i_1076;
-  logic signed [63:0] c$case_alt_selection_2478;
-  logic signed [63:0] c$case_alt_selection_2482;
-  logic [7:0] c$i_1077;
-  logic signed [63:0] c$case_alt_selection_2481;
-  logic signed [63:0] c$case_alt_selection_2485;
-  logic [7:0] c$i_1078;
-  logic signed [63:0] c$case_alt_selection_2484;
-  logic signed [63:0] c$case_alt_selection_2488;
-  logic [7:0] c$i_1079;
-  logic signed [63:0] c$case_alt_selection_2487;
-  logic signed [63:0] c$case_alt_selection_2491;
-  logic [7:0] c$i_1080;
-  logic signed [63:0] c$case_alt_selection_2490;
-  logic signed [63:0] c$case_alt_selection_2494;
-  logic [7:0] c$i_1081;
-  logic signed [63:0] c$case_alt_selection_2493;
-  logic signed [63:0] c$case_alt_selection_2497;
-  logic [7:0] c$i_1082;
-  logic signed [63:0] c$case_alt_selection_2496;
-  logic signed [63:0] c$case_alt_selection_2500;
-  logic [7:0] c$i_1083;
-  logic signed [63:0] c$case_alt_selection_2499;
-  logic signed [63:0] c$case_alt_selection_2503;
-  logic [7:0] c$i_1084;
-  logic signed [63:0] c$case_alt_selection_2502;
-  logic signed [63:0] c$case_alt_selection_2506;
-  logic [7:0] c$i_1085;
-  logic signed [63:0] c$case_alt_selection_2505;
-  logic signed [63:0] c$case_alt_selection_2509;
-  logic [7:0] c$i_1086;
-  logic signed [63:0] c$case_alt_selection_2508;
-  logic signed [63:0] c$case_alt_selection_2512;
-  logic [7:0] c$i_1087;
-  logic signed [63:0] c$case_alt_selection_2511;
-  logic signed [63:0] c$case_alt_selection_2515;
-  logic [7:0] c$i_1088;
-  logic signed [63:0] c$case_alt_selection_2514;
-  logic signed [63:0] c$case_alt_selection_2518;
-  logic [7:0] c$i_1089;
-  logic signed [63:0] c$case_alt_selection_2517;
-  logic signed [63:0] c$case_alt_selection_2521;
-  logic [7:0] c$i_1090;
-  logic signed [63:0] c$case_alt_selection_2520;
-  logic signed [63:0] c$case_alt_selection_2524;
-  logic [7:0] c$i_1091;
-  logic signed [63:0] c$case_alt_selection_2523;
-  logic signed [63:0] c$case_alt_selection_2527;
-  logic [7:0] c$i_1092;
-  logic signed [63:0] c$case_alt_selection_2526;
-  logic signed [63:0] c$case_alt_selection_2530;
-  logic [7:0] c$i_1093;
-  logic signed [63:0] c$case_alt_selection_2529;
-  logic signed [63:0] c$case_alt_selection_2533;
-  logic [7:0] c$i_1094;
-  logic signed [63:0] c$case_alt_selection_2532;
-  logic signed [63:0] c$case_alt_selection_2536;
-  logic [7:0] c$i_1095;
-  logic signed [63:0] c$case_alt_selection_2535;
-  logic signed [63:0] c$case_alt_selection_2539;
-  logic [7:0] c$i_1096;
-  logic signed [63:0] c$case_alt_selection_2538;
-  logic signed [63:0] c$case_alt_selection_2542;
-  logic [7:0] c$i_1097;
-  logic signed [63:0] c$case_alt_selection_2541;
-  logic signed [63:0] c$case_alt_selection_2545;
-  logic [7:0] c$i_1098;
-  logic signed [63:0] c$case_alt_selection_2544;
-  logic signed [63:0] c$case_alt_selection_2548;
-  logic [7:0] c$i_1099;
-  logic signed [63:0] c$case_alt_selection_2547;
-  logic signed [63:0] c$case_alt_selection_2551;
-  logic [7:0] c$i_1100;
-  logic signed [63:0] c$case_alt_selection_2550;
-  logic signed [63:0] c$case_alt_selection_2554;
-  logic [7:0] c$i_1101;
-  logic signed [63:0] c$case_alt_selection_2553;
-  logic signed [63:0] c$case_alt_selection_2557;
-  logic [7:0] c$i_1102;
-  logic signed [63:0] c$case_alt_selection_2556;
-  logic signed [63:0] c$case_alt_selection_2560;
-  logic [7:0] c$i_1103;
-  logic signed [63:0] c$case_alt_selection_2559;
-  logic signed [63:0] c$case_alt_selection_2563;
-  logic [7:0] c$i_1104;
-  logic signed [63:0] c$case_alt_selection_2562;
-  logic signed [63:0] c$case_alt_selection_2566;
-  logic [7:0] c$i_1105;
-  logic signed [63:0] c$case_alt_selection_2565;
-  logic signed [63:0] c$case_alt_selection_2569;
-  logic [7:0] c$i_1106;
-  logic signed [63:0] c$case_alt_selection_2568;
-  logic signed [63:0] c$case_alt_selection_2572;
-  logic [7:0] c$i_1107;
-  logic signed [63:0] c$case_alt_selection_2571;
-  logic signed [63:0] c$case_alt_selection_2575;
-  logic [7:0] c$i_1108;
-  logic signed [63:0] c$case_alt_selection_2574;
-  logic signed [63:0] c$case_alt_selection_2578;
+  logic signed [63:0] c$case_alt_selection_1540;
   logic [7:0] c$i_1109;
-  logic signed [63:0] c$case_alt_selection_2577;
-  logic signed [63:0] c$case_alt_selection_2581;
   logic [7:0] c$i_1110;
-  logic signed [63:0] c$case_alt_selection_2580;
-  logic signed [63:0] c$case_alt_selection_2584;
+  NTT256_types::array_of_256_logic_vector_23 packetSignal_res;
+  NTT256_types::array_of_256_signed_64 c$vec;
   logic [7:0] c$i_1111;
-  logic signed [63:0] c$case_alt_selection_2583;
-  logic signed [63:0] c$case_alt_selection_2587;
-  logic [7:0] c$i_1112;
-  logic signed [63:0] c$case_alt_selection_2586;
-  logic signed [63:0] c$case_alt_selection_2590;
-  logic [7:0] c$i_1113;
-  logic signed [63:0] c$case_alt_selection_2589;
-  logic signed [63:0] c$case_alt_selection_2593;
-  logic [7:0] c$i_1114;
-  logic signed [63:0] c$case_alt_selection_2592;
-  logic signed [63:0] c$case_alt_selection_2596;
-  logic [7:0] c$i_1115;
-  logic signed [63:0] c$case_alt_selection_2595;
-  logic signed [63:0] c$case_alt_selection_2599;
-  logic [7:0] c$i_1116;
-  logic signed [63:0] c$case_alt_selection_2598;
-  logic signed [63:0] c$case_alt_selection_2602;
-  logic [7:0] c$i_1117;
-  logic signed [63:0] c$case_alt_selection_2601;
-  logic signed [63:0] c$case_alt_selection_2605;
-  logic [7:0] c$i_1118;
-  logic signed [63:0] c$case_alt_selection_2604;
-  logic signed [63:0] c$case_alt_selection_2608;
-  logic [7:0] c$i_1119;
-  logic signed [63:0] c$case_alt_selection_2607;
-  logic signed [63:0] c$case_alt_selection_2611;
-  logic [7:0] c$i_1120;
-  logic signed [63:0] c$case_alt_selection_2610;
-  logic signed [63:0] c$case_alt_selection_2614;
-  logic [7:0] c$i_1121;
-  logic signed [63:0] c$case_alt_selection_2613;
-  logic signed [63:0] c$case_alt_selection_2617;
-  logic [7:0] c$i_1122;
-  logic signed [63:0] c$case_alt_selection_2616;
-  logic signed [63:0] c$case_alt_selection_2620;
-  logic [7:0] c$i_1123;
-  logic signed [63:0] c$case_alt_selection_2619;
-  logic signed [63:0] c$case_alt_selection_2623;
-  logic [7:0] c$i_1124;
-  logic signed [63:0] c$case_alt_selection_2622;
-  logic signed [63:0] c$case_alt_selection_2626;
-  logic [7:0] c$i_1125;
-  logic signed [63:0] c$case_alt_selection_2625;
-  logic signed [63:0] c$case_alt_selection_2629;
-  logic [7:0] c$i_1126;
-  logic signed [63:0] c$case_alt_selection_2628;
-  logic signed [63:0] c$case_alt_selection_2632;
-  logic [7:0] c$i_1127;
-  logic signed [63:0] c$case_alt_selection_2631;
-  logic signed [63:0] c$case_alt_selection_2635;
-  logic [7:0] c$i_1128;
-  logic signed [63:0] c$case_alt_selection_2634;
-  logic signed [63:0] c$case_alt_selection_2638;
-  logic [7:0] c$i_1129;
-  logic signed [63:0] c$case_alt_selection_2637;
-  logic signed [63:0] c$case_alt_selection_2641;
-  logic [7:0] c$i_1130;
-  logic signed [63:0] c$case_alt_selection_2640;
-  logic signed [63:0] c$case_alt_selection_2644;
-  logic [7:0] c$i_1131;
-  logic signed [63:0] c$case_alt_selection_2643;
-  logic signed [63:0] c$case_alt_selection_2647;
-  logic [7:0] c$i_1132;
-  logic signed [63:0] c$case_alt_selection_2646;
-  logic signed [63:0] c$case_alt_selection_2650;
-  logic [7:0] c$i_1133;
-  logic signed [63:0] c$case_alt_selection_2649;
-  logic signed [63:0] c$case_alt_selection_2653;
-  logic [7:0] c$i_1134;
-  logic signed [63:0] c$case_alt_selection_2652;
-  logic signed [63:0] c$case_alt_selection_2656;
-  logic [7:0] c$i_1135;
-  logic signed [63:0] c$case_alt_selection_2655;
-  logic signed [63:0] c$case_alt_selection_2659;
-  logic [7:0] c$i_1136;
-  logic signed [63:0] c$case_alt_selection_2658;
-  logic signed [63:0] c$case_alt_selection_2662;
-  logic [7:0] c$i_1137;
-  logic signed [63:0] c$case_alt_selection_2661;
-  logic signed [63:0] c$case_alt_selection_2665;
-  logic [7:0] c$i_1138;
-  logic signed [63:0] c$case_alt_selection_2664;
-  logic signed [63:0] c$case_alt_selection_2668;
-  logic [7:0] c$i_1139;
-  logic signed [63:0] c$case_alt_selection_2667;
-  logic signed [63:0] c$case_alt_selection_2671;
-  logic [7:0] c$i_1140;
-  logic signed [63:0] c$case_alt_selection_2670;
-  logic signed [63:0] c$case_alt_selection_2674;
-  logic [7:0] c$i_1141;
-  logic signed [63:0] c$case_alt_selection_2673;
-  logic signed [63:0] c$case_alt_selection_2677;
-  logic [7:0] c$i_1142;
-  logic signed [63:0] c$case_alt_selection_2676;
-  logic signed [63:0] c$case_alt_selection_2680;
-  logic [7:0] c$i_1143;
-  logic signed [63:0] c$case_alt_selection_2679;
-  logic signed [63:0] c$case_alt_selection_2683;
-  logic [7:0] c$i_1144;
-  logic signed [63:0] c$case_alt_selection_2682;
-  logic signed [63:0] c$case_alt_selection_2686;
-  logic [7:0] c$i_1145;
-  logic signed [63:0] c$case_alt_selection_2685;
-  logic signed [63:0] c$case_alt_selection_2689;
-  logic [7:0] c$i_1146;
-  logic signed [63:0] c$case_alt_selection_2688;
-  logic signed [63:0] c$case_alt_selection_2692;
-  logic [7:0] c$i_1147;
-  logic signed [63:0] c$case_alt_selection_2691;
-  logic signed [63:0] c$case_alt_selection_2695;
-  logic [7:0] c$i_1148;
-  logic signed [63:0] c$case_alt_selection_2694;
-  logic signed [63:0] c$case_alt_selection_2698;
-  logic [7:0] c$i_1149;
-  logic signed [63:0] c$case_alt_selection_2697;
-  logic signed [63:0] c$case_alt_selection_2701;
-  logic [7:0] c$i_1150;
-  logic signed [63:0] c$case_alt_selection_2700;
-  logic signed [63:0] c$case_alt_selection_2704;
-  logic [7:0] c$i_1151;
-  logic signed [63:0] c$case_alt_selection_2703;
-  logic signed [63:0] c$case_alt_selection_2707;
-  logic [7:0] c$i_1152;
-  logic signed [63:0] c$case_alt_selection_2706;
-  logic signed [63:0] c$case_alt_selection_2710;
-  logic [7:0] c$i_1153;
-  logic signed [63:0] c$case_alt_selection_2709;
-  logic signed [63:0] c$case_alt_selection_2713;
-  logic [7:0] c$i_1154;
-  logic signed [63:0] c$case_alt_selection_2712;
-  logic signed [63:0] c$case_alt_selection_2716;
-  logic [7:0] c$i_1155;
-  logic signed [63:0] c$case_alt_selection_2715;
-  logic signed [63:0] c$case_alt_selection_2719;
-  logic [7:0] c$i_1156;
-  logic signed [63:0] c$case_alt_selection_2718;
-  logic signed [63:0] c$case_alt_selection_2722;
-  logic [7:0] c$i_1157;
-  logic signed [63:0] c$case_alt_selection_2721;
-  logic signed [63:0] c$case_alt_selection_2725;
-  logic [7:0] c$i_1158;
-  logic signed [63:0] c$case_alt_selection_2724;
-  logic signed [63:0] c$case_alt_selection_2728;
-  logic [7:0] c$i_1159;
-  logic signed [63:0] c$case_alt_selection_2727;
-  logic signed [63:0] c$case_alt_selection_2731;
-  logic [7:0] c$i_1160;
-  logic signed [63:0] c$case_alt_selection_2730;
-  logic signed [63:0] c$case_alt_selection_2734;
-  logic [7:0] c$i_1161;
-  logic signed [63:0] c$case_alt_selection_2733;
-  logic signed [63:0] c$case_alt_selection_2737;
-  logic [7:0] c$i_1162;
-  logic signed [63:0] c$case_alt_selection_2736;
-  logic signed [63:0] c$case_alt_selection_2740;
-  logic [7:0] c$i_1163;
-  logic signed [63:0] c$case_alt_selection_2739;
-  logic signed [63:0] c$case_alt_selection_2743;
-  logic [7:0] c$i_1164;
-  logic signed [63:0] c$case_alt_selection_2742;
-  logic signed [63:0] c$case_alt_selection_2746;
-  logic [7:0] c$i_1165;
-  logic signed [63:0] c$case_alt_selection_2745;
-  logic signed [63:0] c$case_alt_selection_2749;
-  logic [7:0] c$i_1166;
-  logic signed [63:0] c$case_alt_selection_2748;
-  logic signed [63:0] c$case_alt_selection_2752;
-  logic [7:0] c$i_1167;
-  logic signed [63:0] c$case_alt_selection_2751;
-  logic signed [63:0] c$case_alt_selection_2755;
-  logic [7:0] c$i_1168;
-  logic signed [63:0] c$case_alt_selection_2754;
-  logic signed [63:0] c$case_alt_selection_2758;
-  logic [7:0] c$i_1169;
-  logic signed [63:0] c$case_alt_selection_2757;
-  logic signed [63:0] c$case_alt_selection_2761;
-  logic [7:0] c$i_1170;
-  logic signed [63:0] c$case_alt_selection_2760;
-  logic signed [63:0] c$case_alt_selection_2764;
-  logic [7:0] c$i_1171;
-  logic signed [63:0] c$case_alt_selection_2763;
-  logic signed [63:0] c$case_alt_selection_2767;
-  logic [7:0] c$i_1172;
-  logic signed [63:0] c$case_alt_selection_2766;
-  logic signed [63:0] c$case_alt_selection_2770;
-  logic [7:0] c$i_1173;
-  logic signed [63:0] c$case_alt_selection_2769;
-  logic signed [63:0] c$case_alt_selection_2773;
-  logic [7:0] c$i_1174;
-  logic signed [63:0] c$case_alt_selection_2772;
-  logic signed [63:0] c$case_alt_selection_2776;
-  logic [7:0] c$i_1175;
-  logic signed [63:0] c$case_alt_selection_2775;
-  logic signed [63:0] c$case_alt_selection_2779;
-  logic [7:0] c$i_1176;
-  logic signed [63:0] c$case_alt_selection_2778;
-  logic signed [63:0] c$case_alt_selection_2782;
-  logic [7:0] c$i_1177;
-  logic signed [63:0] c$case_alt_selection_2781;
-  logic signed [63:0] c$case_alt_selection_2785;
-  logic [7:0] c$i_1178;
-  logic signed [63:0] c$case_alt_selection_2784;
-  logic signed [63:0] c$case_alt_selection_2788;
-  logic [7:0] c$i_1179;
-  logic signed [63:0] c$case_alt_selection_2787;
-  logic signed [63:0] c$case_alt_selection_2791;
-  logic [7:0] c$i_1180;
-  logic signed [63:0] c$case_alt_selection_2790;
-  logic signed [63:0] c$case_alt_selection_2794;
-  logic [7:0] c$i_1181;
-  logic signed [63:0] c$case_alt_selection_2793;
-  logic signed [63:0] c$case_alt_selection_2797;
-  logic [7:0] c$i_1182;
-  logic signed [63:0] c$case_alt_selection_2796;
-  logic signed [63:0] c$case_alt_selection_2800;
-  logic [7:0] c$i_1183;
-  logic signed [63:0] c$case_alt_selection_2799;
-  logic signed [63:0] c$case_alt_selection_2803;
-  logic [7:0] c$i_1184;
-  logic signed [63:0] c$case_alt_selection_2802;
-  logic signed [63:0] c$case_alt_selection_2806;
-  logic [7:0] c$i_1185;
-  logic signed [63:0] c$case_alt_selection_2805;
-  logic signed [63:0] c$case_alt_selection_2809;
-  logic [7:0] c$i_1186;
-  logic signed [63:0] c$case_alt_selection_2808;
-  logic signed [63:0] c$case_alt_selection_2812;
-  logic [7:0] c$i_1187;
-  logic signed [63:0] c$case_alt_selection_2811;
-  logic signed [63:0] c$case_alt_selection_2815;
-  logic [7:0] c$i_1188;
-  logic signed [63:0] c$case_alt_selection_2814;
-  logic signed [63:0] c$case_alt_selection_2818;
-  logic [7:0] c$i_1189;
-  logic signed [63:0] c$case_alt_selection_2817;
-  logic signed [63:0] c$case_alt_selection_2821;
-  logic [7:0] c$i_1190;
-  logic signed [63:0] c$case_alt_selection_2820;
-  logic signed [63:0] c$case_alt_selection_2824;
-  logic [7:0] c$i_1191;
-  logic signed [63:0] c$case_alt_selection_2823;
-  logic signed [63:0] c$case_alt_selection_2827;
-  logic [7:0] c$i_1192;
-  logic signed [63:0] c$case_alt_selection_2826;
-  logic signed [63:0] c$case_alt_selection_2830;
-  logic [7:0] c$i_1193;
-  logic signed [63:0] c$case_alt_selection_2829;
-  logic signed [63:0] c$case_alt_selection_2833;
-  logic [7:0] c$i_1194;
-  logic signed [63:0] c$case_alt_selection_2832;
-  logic signed [63:0] c$case_alt_selection_2836;
-  logic [7:0] c$i_1195;
-  logic signed [63:0] c$case_alt_selection_2835;
-  logic signed [63:0] c$case_alt_selection_2839;
-  logic [7:0] c$i_1196;
-  logic signed [63:0] c$case_alt_selection_2838;
-  logic signed [63:0] c$case_alt_selection_2842;
-  logic [7:0] c$i_1197;
-  logic signed [63:0] c$case_alt_selection_2841;
-  logic signed [63:0] c$case_alt_selection_2845;
-  logic [7:0] c$i_1198;
-  logic signed [63:0] c$case_alt_selection_2844;
-  logic signed [63:0] c$case_alt_selection_2848;
-  logic [7:0] c$i_1199;
-  logic signed [63:0] c$case_alt_selection_2847;
-  logic signed [63:0] c$case_alt_selection_2851;
-  logic [7:0] c$i_1200;
-  logic signed [63:0] c$case_alt_selection_2850;
-  logic signed [63:0] c$case_alt_selection_2854;
-  logic [7:0] c$i_1201;
-  logic signed [63:0] c$case_alt_selection_2853;
-  logic signed [63:0] c$case_alt_selection_2857;
-  logic [7:0] c$i_1202;
-  logic signed [63:0] c$case_alt_selection_2856;
-  logic signed [63:0] c$case_alt_selection_2860;
-  logic [7:0] c$i_1203;
-  logic signed [63:0] c$case_alt_selection_2859;
-  logic signed [63:0] c$case_alt_selection_2863;
-  logic [7:0] c$i_1204;
-  logic signed [63:0] c$case_alt_selection_2862;
-  logic signed [63:0] c$case_alt_selection_2866;
-  logic [7:0] c$i_1205;
-  logic signed [63:0] c$case_alt_selection_2865;
-  logic signed [63:0] c$case_alt_selection_2869;
-  logic [7:0] c$i_1206;
-  logic signed [63:0] c$case_alt_selection_2868;
-  logic signed [63:0] c$case_alt_selection_2872;
-  logic [7:0] c$i_1207;
-  logic signed [63:0] c$case_alt_selection_2871;
-  logic signed [63:0] c$case_alt_selection_2875;
-  logic [7:0] c$i_1208;
-  logic signed [63:0] c$case_alt_selection_2874;
-  logic signed [63:0] c$case_alt_selection_2878;
-  logic [7:0] c$i_1209;
-  logic signed [63:0] c$case_alt_selection_2877;
-  logic signed [63:0] c$case_alt_selection_2881;
-  logic [7:0] c$i_1210;
-  logic signed [63:0] c$case_alt_selection_2880;
-  logic signed [63:0] c$case_alt_selection_2884;
-  logic [7:0] c$i_1211;
-  logic signed [63:0] c$case_alt_selection_2883;
-  logic signed [63:0] c$case_alt_selection_2887;
-  logic [7:0] c$i_1212;
-  logic signed [63:0] c$case_alt_selection_2886;
-  logic signed [63:0] c$case_alt_selection_2890;
-  logic [7:0] c$i_1213;
-  logic signed [63:0] c$case_alt_selection_2889;
-  logic signed [63:0] c$case_alt_selection_2893;
-  logic [7:0] c$i_1214;
-  logic signed [63:0] c$case_alt_selection_2892;
-  logic signed [63:0] c$case_alt_selection_2896;
-  logic [7:0] c$i_1215;
-  logic signed [63:0] c$case_alt_selection_2895;
-  logic signed [63:0] c$case_alt_selection_2899;
-  logic [7:0] c$i_1216;
-  logic signed [63:0] c$case_alt_selection_2898;
-  logic signed [63:0] c$case_alt_selection_2902;
-  logic [7:0] c$i_1217;
-  logic signed [63:0] c$case_alt_selection_2901;
-  logic signed [63:0] c$case_alt_selection_2905;
-  logic [7:0] c$i_1218;
-  logic signed [63:0] c$case_alt_selection_2904;
-  logic signed [63:0] c$case_alt_selection_2908;
-  logic [7:0] c$i_1219;
-  logic signed [63:0] c$case_alt_selection_2907;
-  logic signed [63:0] c$case_alt_selection_2911;
-  logic [7:0] c$i_1220;
-  logic signed [63:0] c$case_alt_selection_2910;
-  logic signed [63:0] c$case_alt_selection_2914;
-  logic [7:0] c$i_1221;
-  logic signed [63:0] c$case_alt_selection_2913;
-  logic signed [63:0] c$case_alt_selection_2917;
-  logic [7:0] c$i_1222;
-  logic signed [63:0] c$case_alt_selection_2916;
-  logic signed [63:0] c$case_alt_selection_2920;
-  logic [7:0] c$i_1223;
-  logic signed [63:0] c$case_alt_selection_2919;
-  logic signed [63:0] c$case_alt_selection_2923;
-  logic [7:0] c$i_1224;
-  logic signed [63:0] c$case_alt_selection_2922;
-  logic signed [63:0] c$case_alt_selection_2926;
-  logic [7:0] c$i_1225;
-  logic signed [63:0] c$case_alt_selection_2925;
-  logic signed [63:0] c$case_alt_selection_2929;
-  logic [7:0] c$i_1226;
-  logic signed [63:0] c$case_alt_selection_2928;
-  logic signed [63:0] c$case_alt_selection_2932;
-  logic [7:0] c$i_1227;
-  logic signed [63:0] c$case_alt_selection_2931;
-  logic signed [63:0] c$case_alt_selection_2935;
-  logic [7:0] c$i_1228;
-  logic signed [63:0] c$case_alt_selection_2934;
-  logic signed [63:0] c$case_alt_selection_2938;
-  logic [7:0] c$i_1229;
-  logic signed [63:0] c$case_alt_selection_2937;
-  logic signed [63:0] c$case_alt_selection_2941;
-  logic [7:0] c$i_1230;
-  logic signed [63:0] c$case_alt_selection_2940;
-  logic signed [63:0] c$case_alt_selection_2944;
-  logic [7:0] c$i_1231;
-  logic signed [63:0] c$case_alt_selection_2943;
-  logic signed [63:0] c$case_alt_selection_2947;
-  logic [7:0] c$i_1232;
-  logic signed [63:0] c$case_alt_selection_2946;
-  logic signed [63:0] c$case_alt_selection_2950;
-  logic [7:0] c$i_1233;
-  logic signed [63:0] c$case_alt_selection_2949;
-  logic signed [63:0] c$case_alt_selection_2953;
-  logic [7:0] c$i_1234;
-  logic signed [63:0] c$case_alt_selection_2952;
-  logic signed [63:0] c$case_alt_selection_2956;
-  logic [7:0] c$i_1235;
-  logic signed [63:0] c$case_alt_selection_2955;
-  logic signed [63:0] c$case_alt_selection_2959;
-  logic [7:0] c$i_1236;
-  logic signed [63:0] c$case_alt_selection_2958;
-  logic signed [63:0] c$case_alt_selection_2962;
-  logic [7:0] c$i_1237;
-  logic signed [63:0] c$case_alt_selection_2961;
-  logic signed [63:0] c$case_alt_selection_2965;
-  logic [7:0] c$i_1238;
-  logic signed [63:0] c$case_alt_selection_2964;
-  logic signed [63:0] c$case_alt_selection_2968;
-  logic [7:0] c$i_1239;
-  logic signed [63:0] c$case_alt_selection_2967;
-  logic signed [63:0] c$case_alt_selection_2971;
-  logic [7:0] c$i_1240;
-  logic signed [63:0] c$case_alt_selection_2970;
-  logic signed [63:0] c$case_alt_selection_2974;
-  logic [7:0] c$i_1241;
-  logic signed [63:0] c$case_alt_selection_2973;
-  logic signed [63:0] c$case_alt_selection_2977;
-  logic [7:0] c$i_1242;
-  logic signed [63:0] c$case_alt_selection_2976;
-  logic signed [63:0] c$case_alt_selection_2980;
-  logic [7:0] c$i_1243;
-  logic signed [63:0] c$case_alt_selection_2979;
-  logic signed [63:0] c$case_alt_selection_2983;
-  logic [7:0] c$i_1244;
-  logic signed [63:0] c$case_alt_selection_2982;
-  logic signed [63:0] c$case_alt_selection_2986;
-  logic [7:0] c$i_1245;
-  logic signed [63:0] c$case_alt_selection_2985;
-  logic signed [63:0] c$case_alt_selection_2989;
-  logic [7:0] c$i_1246;
-  logic signed [63:0] c$case_alt_selection_2988;
-  logic signed [63:0] c$case_alt_selection_2992;
-  logic [7:0] c$i_1247;
-  logic signed [63:0] c$case_alt_selection_2991;
-  logic signed [63:0] c$case_alt_selection_2995;
-  logic [7:0] c$i_1248;
-  logic signed [63:0] c$case_alt_selection_2994;
-  logic signed [63:0] c$case_alt_selection_2998;
-  logic [7:0] c$i_1249;
-  logic signed [63:0] c$case_alt_selection_2997;
-  logic signed [63:0] c$case_alt_selection_3001;
-  logic [7:0] c$i_1250;
-  logic signed [63:0] c$case_alt_selection_3000;
-  logic signed [63:0] c$case_alt_selection_3004;
-  logic [7:0] c$i_1251;
-  logic signed [63:0] c$case_alt_selection_3003;
-  logic signed [63:0] c$case_alt_selection_3007;
-  logic [7:0] c$i_1252;
-  logic signed [63:0] c$case_alt_selection_3006;
-  logic signed [63:0] c$case_alt_selection_3010;
-  logic [7:0] c$i_1253;
-  logic signed [63:0] c$case_alt_selection_3009;
-  logic signed [63:0] c$case_alt_selection_3013;
-  logic [7:0] c$i_1254;
-  logic signed [63:0] c$case_alt_selection_3012;
-  logic signed [63:0] c$case_alt_selection_3016;
-  logic [7:0] c$i_1255;
-  logic signed [63:0] c$case_alt_selection_3015;
-  logic signed [63:0] c$case_alt_selection_3019;
-  logic [7:0] c$i_1256;
-  logic signed [63:0] c$case_alt_selection_3018;
-  logic signed [63:0] c$case_alt_selection_3022;
-  logic [7:0] c$i_1257;
-  logic signed [63:0] c$case_alt_selection_3021;
-  logic signed [63:0] c$case_alt_selection_3025;
-  logic [7:0] c$i_1258;
-  logic signed [63:0] c$case_alt_selection_3024;
-  logic signed [63:0] c$case_alt_selection_3028;
-  logic [7:0] c$i_1259;
-  logic signed [63:0] c$case_alt_selection_3027;
-  logic signed [63:0] c$case_alt_selection_3031;
-  logic [7:0] c$i_1260;
-  logic signed [63:0] c$case_alt_selection_3030;
-  logic signed [63:0] c$case_alt_selection_3034;
-  logic [7:0] c$i_1261;
-  logic signed [63:0] c$case_alt_selection_3033;
-  logic signed [63:0] c$case_alt_selection_3037;
-  logic [7:0] c$i_1262;
-  logic signed [63:0] c$case_alt_selection_3036;
-  logic signed [63:0] c$case_alt_selection_3040;
-  logic [7:0] c$i_1263;
-  logic signed [63:0] c$case_alt_selection_3039;
-  logic signed [63:0] c$case_alt_selection_3043;
-  logic [7:0] c$i_1264;
-  logic signed [63:0] c$case_alt_selection_3042;
-  logic signed [63:0] c$case_alt_selection_3046;
-  logic [7:0] c$i_1265;
-  logic signed [63:0] c$case_alt_selection_3045;
-  logic signed [63:0] c$case_alt_selection_3049;
-  logic [7:0] c$i_1266;
-  logic signed [63:0] c$case_alt_selection_3048;
-  logic signed [63:0] c$case_alt_selection_3052;
-  logic [7:0] c$i_1267;
-  logic signed [63:0] c$case_alt_selection_3051;
-  logic signed [63:0] c$case_alt_selection_3055;
-  logic [7:0] c$i_1268;
-  logic signed [63:0] c$case_alt_selection_3054;
-  logic signed [63:0] c$case_alt_selection_3058;
-  logic [7:0] c$i_1269;
-  logic signed [63:0] c$case_alt_selection_3057;
-  logic signed [63:0] c$case_alt_selection_3061;
-  logic [7:0] c$i_1270;
-  logic signed [63:0] c$case_alt_selection_3060;
-  logic signed [63:0] c$case_alt_selection_3064;
-  logic [7:0] c$i_1271;
-  logic signed [63:0] c$case_alt_selection_3063;
-  logic signed [63:0] c$case_alt_selection_3067;
-  logic [7:0] c$i_1272;
-  logic signed [63:0] c$case_alt_selection_3066;
-  logic signed [63:0] c$case_alt_selection_3070;
-  logic [7:0] c$i_1273;
-  logic signed [63:0] c$case_alt_selection_3069;
-  logic signed [63:0] c$case_alt_selection_3073;
-  logic [7:0] c$i_1274;
-  logic signed [63:0] c$case_alt_selection_3072;
-  logic signed [63:0] c$case_alt_selection_3076;
-  logic [7:0] c$i_1275;
-  logic signed [63:0] c$case_alt_selection_3075;
-  NTT256_types::Tuple2_3 result_0;
+  NTT256_types::Tuple2_2 result_0;
   NTT256_types::array_of_256_logic_vector_23 result_1;
 
   assign poly_0 = NTT256_types::array_of_256_logic_vector_23_from_lv(poly);
 
-  assign c$vec = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
+  assign c$i = (c$ds_case_alt.Tuple2_sel1 + groupIndex);
 
-  assign c$vec_0 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
+  assign c$app_arg = $unsigned({{(64-9) {1'b0}},c$i});
 
-  assign c$vec_1 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
+  assign c$i_0 = (aRaw + len);
 
-  assign c$vec_2 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
+  assign c$app_arg_0 = $unsigned({{(64-9) {1'b0}},c$i_0});
+
+  assign c$app_arg_1 = $unsigned({{(64-9) {1'b0}},aRaw});
+
+  assign aRaw = (groupIndex * (9'd2 * len)) + (opWide % len);
 
   always_comb begin
     case(c$case_scrut)
-      64'sd1 : result_3 = {1'b1
-                          ,{aIndex
-                           ,bIndex
-                           ,c$vec[($unsigned({{(64-8) {1'b0}},aIndex}))]
-                           ,c$vec_0[($unsigned({{(64-8) {1'b0}},bIndex}))]
-                           ,request
-                           ,stateSignal.NTTState_sel3 == 9'd124}};
-      default : result_3 = {1'b0
-                           ,{aIndex
-                            ,bIndex
-                            ,c$vec_1[($unsigned({{(64-8) {1'b0}},aIndex}))]
-                            ,c$vec_2[($unsigned({{(64-8) {1'b0}},bIndex}))]
-                            ,request
-                            ,stateSignal.NTTState_sel3 == 9'd124}};
+      64'sd1 : c$case_alt = 1'b1;
+      default : c$case_alt = 1'b0;
     endcase
   end
 
@@ -4691,16325 +2178,6423 @@ module NTT256
 
   assign c$case_scrut = $unsigned(c$dtt_rhs_1);
 
-  assign c$vec_3 = '{0: 64'sd0
-                    ,1: 64'sd294725
-                    ,2: 64'sd8304754
-                    ,3: 64'sd8280182
-                    ,4: 64'sd6155295
-                    ,5: 64'sd7591714
-                    ,6: 64'sd7067554
-                    ,7: 64'sd7203743
-                    ,8: 64'sd6979903
-                    ,9: 64'sd6981962
-                    ,10: 64'sd2715685
-                    ,11: 64'sd4214773
-                    ,12: 64'sd4562491
-                    ,13: 64'sd8074524
-                    ,14: 64'sd6002843
-                    ,15: 64'sd7114182
-                    ,16: 64'sd5510295
-                    ,17: 64'sd4717985
-                    ,18: 64'sd3007494
-                    ,19: 64'sd3942328
-                    ,20: 64'sd3664286
-                    ,21: 64'sd3138283
-                    ,22: 64'sd4986106
-                    ,23: 64'sd4345652
-                    ,24: 64'sd1366638
-                    ,25: 64'sd803323
-                    ,26: 64'sd289157
-                    ,27: 64'sd3391741
-                    ,28: 64'sd6652273
-                    ,29: 64'sd7267317
-                    ,30: 64'sd8363347
-                    ,31: 64'sd1932518
-                    ,32: 64'sd5019179
-                    ,33: 64'sd7333239
-                    ,34: 64'sd1681557
-                    ,35: 64'sd1945215
-                    ,36: 64'sd8275718
-                    ,37: 64'sd6926001
-                    ,38: 64'sd1430472
-                    ,39: 64'sd2666911
-                    ,40: 64'sd4011446
-                    ,41: 64'sd4309263
-                    ,42: 64'sd3483979
-                    ,43: 64'sd6241375
-                    ,44: 64'sd13828
-                    ,45: 64'sd5858571
-                    ,46: 64'sd3282775
-                    ,47: 64'sd5333862
-                    ,48: 64'sd6376883
-                    ,49: 64'sd1368491
-                    ,50: 64'sd7412031
-                    ,51: 64'sd5451984
-                    ,52: 64'sd6331749
-                    ,53: 64'sd7619127
-                    ,54: 64'sd5362453
-                    ,55: 64'sd3811828
-                    ,56: 64'sd2883940
-                    ,57: 64'sd3341148
-                    ,58: 64'sd4521296
-                    ,59: 64'sd5678489
-                    ,60: 64'sd6693382
-                    ,61: 64'sd6799101
-                    ,62: 64'sd5638686
-                    ,63: 64'sd6896368
-                    ,64: 64'sd868519
-                    ,65: 64'sd4151501
-                    ,66: 64'sd1589698
-                    ,67: 64'sd7550137
-                    ,68: 64'sd5330295
-                    ,69: 64'sd602826
-                    ,70: 64'sd1874454
-                    ,71: 64'sd2252592
-                    ,72: 64'sd4545392
-                    ,73: 64'sd4656088
-                    ,74: 64'sd4632561
-                    ,75: 64'sd323453
-                    ,76: 64'sd4177747
-                    ,77: 64'sd2672019
-                    ,78: 64'sd1033361
-                    ,79: 64'sd1768240
-                    ,80: 64'sd471633
-                    ,81: 64'sd4022687
-                    ,82: 64'sd6555591
-                    ,83: 64'sd3185999
-                    ,84: 64'sd3032856
-                    ,85: 64'sd5910789
-                    ,86: 64'sd4810587
-                    ,87: 64'sd8076117
-                    ,88: 64'sd4122115
-                    ,89: 64'sd7753634
-                    ,90: 64'sd6448903
-                    ,91: 64'sd289514
-                    ,92: 64'sd1144268
-                    ,93: 64'sd1445654
-                    ,94: 64'sd5146790
-                    ,95: 64'sd5166701
-                    ,96: 64'sd739868
-                    ,97: 64'sd524811
-                    ,98: 64'sd7629477
-                    ,99: 64'sd3940422
-                    ,100: 64'sd173
-                    ,101: 64'sd2156279
-                    ,102: 64'sd6157902
-                    ,103: 64'sd5449640
-                    ,104: 64'sd1753196
-                    ,105: 64'sd4255647
-                    ,106: 64'sd6029882
-                    ,107: 64'sd2082410
-                    ,108: 64'sd4854262
-                    ,109: 64'sd1079464
-                    ,110: 64'sd3112889
-                    ,111: 64'sd8113385
-                    ,112: 64'sd4845669
-                    ,113: 64'sd8104649
-                    ,114: 64'sd2041975
-                    ,115: 64'sd320128
-                    ,116: 64'sd3558813
-                    ,117: 64'sd1046859
-                    ,118: 64'sd8221876
-                    ,119: 64'sd3606200
-                    ,120: 64'sd7174207
-                    ,121: 64'sd1041361
-                    ,122: 64'sd6151194
-                    ,123: 64'sd8309321
-                    ,124: 64'sd3065391
-                    ,125: 64'sd3258440
-                    ,126: 64'sd5518209
-                    ,127: 64'sd1291704
-                    ,128: 64'sd3576395
-                    ,129: 64'sd5447488
-                    ,130: 64'sd1449433
-                    ,131: 64'sd276802
-                    ,132: 64'sd4635456
-                    ,133: 64'sd172446
-                    ,134: 64'sd3165836
-                    ,135: 64'sd7253477
-                    ,136: 64'sd361139
-                    ,137: 64'sd3970566
-                    ,138: 64'sd518949
-                    ,139: 64'sd5349692
-                    ,140: 64'sd3128905
-                    ,141: 64'sd116259
-                    ,142: 64'sd5560444
-                    ,143: 64'sd1100550
-                    ,144: 64'sd5306751
-                    ,145: 64'sd7536543
-                    ,146: 64'sd854689
-                    ,147: 64'sd5437376
-                    ,148: 64'sd4093936
-                    ,149: 64'sd3856547
-                    ,150: 64'sd8249304
-                    ,151: 64'sd128903
-                    ,152: 64'sd7297569
-                    ,153: 64'sd315163
-                    ,154: 64'sd4067201
-                    ,155: 64'sd4006320
-                    ,156: 64'sd4274522
-                    ,157: 64'sd1372861
-                    ,158: 64'sd3597958
-                    ,159: 64'sd2015586
-                    ,160: 64'sd7563354
-                    ,161: 64'sd7988706
-                    ,162: 64'sd6243054
-                    ,163: 64'sd7512593
-                    ,164: 64'sd831827
-                    ,165: 64'sd6435937
-                    ,166: 64'sd1872733
-                    ,167: 64'sd7202714
-                    ,168: 64'sd894975
-                    ,169: 64'sd3382322
-                    ,170: 64'sd6471611
-                    ,171: 64'sd4686190
-                    ,172: 64'sd7479650
-                    ,173: 64'sd4064138
-                    ,174: 64'sd5738513
-                    ,175: 64'sd6095131
-                    ,176: 64'sd7580038
-                    ,177: 64'sd2165461
-                    ,178: 64'sd3643993
-                    ,179: 64'sd3652572
-                    ,180: 64'sd3883889
-                    ,181: 64'sd6325350
-                    ,182: 64'sd5932652
-                    ,183: 64'sd2942135
-                    ,184: 64'sd2155369
-                    ,185: 64'sd7501378
-                    ,186: 64'sd6337823
-                    ,187: 64'sd6836238
-                    ,188: 64'sd914846
-                    ,189: 64'sd1871079
-                    ,190: 64'sd4104915
-                    ,191: 64'sd4771790
-                    ,192: 64'sd5658330
-                    ,193: 64'sd3379297
-                    ,194: 64'sd4442150
-                    ,195: 64'sd2711718
-                    ,196: 64'sd8222597
-                    ,197: 64'sd821436
-                    ,198: 64'sd794398
-                    ,199: 64'sd1617369
-                    ,200: 64'sd6676026
-                    ,201: 64'sd7976523
-                    ,202: 64'sd255360
-                    ,203: 64'sd5525170
-                    ,204: 64'sd7486450
-                    ,205: 64'sd7776621
-                    ,206: 64'sd1311761
-                    ,207: 64'sd7350847
-                    ,208: 64'sd5491783
-                    ,209: 64'sd3839614
-                    ,210: 64'sd2399316
-                    ,211: 64'sd3698525
-                    ,212: 64'sd3412190
-                    ,213: 64'sd3417705
-                    ,214: 64'sd2259509
-                    ,215: 64'sd2908788
-                    ,216: 64'sd2148141
-                    ,217: 64'sd7464445
-                    ,218: 64'sd8124843
-                    ,219: 64'sd4693022
-                    ,220: 64'sd2982141
-                    ,221: 64'sd3345528
-                    ,222: 64'sd4994178
-                    ,223: 64'sd6376493
-                    ,224: 64'sd6404386
-                    ,225: 64'sd6528230
-                    ,226: 64'sd7708066
-                    ,227: 64'sd2096158
-                    ,228: 64'sd303269
-                    ,229: 64'sd389020
-                    ,230: 64'sd825110
-                    ,231: 64'sd7923957
-                    ,232: 64'sd6119966
-                    ,233: 64'sd1578061
-                    ,234: 64'sd2677309
-                    ,235: 64'sd4983335
-                    ,236: 64'sd3398031
-                    ,237: 64'sd6706567
-                    ,238: 64'sd1242950
-                    ,239: 64'sd1196256
-                    ,240: 64'sd5095336
-                    ,241: 64'sd2642882
-                    ,242: 64'sd1144116
-                    ,243: 64'sd8076862
-                    ,244: 64'sd3568941
-                    ,245: 64'sd8212921
-                    ,246: 64'sd7011805
-                    ,247: 64'sd2834182
-                    ,248: 64'sd5759371
-                    ,249: 64'sd6955344
-                    ,250: 64'sd5826820
-                    ,251: 64'sd1074967
-                    ,252: 64'sd1783126
-                    ,253: 64'sd4981343
-                    ,254: 64'sd2419159
-                    ,255: 64'sd1644522};
+  assign groupIndex = opWide / len;
 
-  // map begin
-  genvar n;
-  generate
-  for (n=0; n < $size(request_res); n = n + 1) begin : map
-    logic signed [63:0] map_in;
-    assign map_in = $signed(c$vec_3[n]);
-    logic [22:0] map_out;
-    assign map_out = $unsigned(map_in[0+:23]);
+  assign c$bv = stateSignal.NTTState_sel3;
 
+  assign opWide = {{(9-8) {1'b0}},stateSignal.NTTState_sel3};
 
-    assign request_res[n] = map_out;
+  assign len = c$ds_case_alt.Tuple2_sel0;
+
+  assign c$ds_case_alt = (stateSignal.NTTState_sel2 == 3'd0) ? {9'd128
+                                                               ,9'd1} : c$ds_case_alt_0;
+
+  assign c$ds_case_alt_0 = (stateSignal.NTTState_sel2 == 3'd1) ? {9'd64
+                                                                 ,9'd2} : c$ds_case_alt_1;
+
+  assign c$ds_case_alt_1 = (stateSignal.NTTState_sel2 == 3'd2) ? {9'd32
+                                                                 ,9'd4} : c$ds_case_alt_2;
+
+  assign c$ds_case_alt_2 = (stateSignal.NTTState_sel2 == 3'd3) ? {9'd16
+                                                                 ,9'd8} : c$ds_case_alt_3;
+
+  assign c$ds_case_alt_3 = (stateSignal.NTTState_sel2 == 3'd4) ? {9'd8
+                                                                 ,9'd16} : c$ds_case_alt_4;
+
+  assign c$ds_case_alt_4 = (stateSignal.NTTState_sel2 == 3'd5) ? {9'd4
+                                                                 ,9'd32} : c$ds_case_alt_5;
+
+  assign c$ds_case_alt_5 = (stateSignal.NTTState_sel2 == 3'd6) ? {9'd2
+                                                                 ,9'd64} : c$ds_case_alt_6;
+
+  assign c$ds_case_alt_6 = (stateSignal.NTTState_sel2 == 3'd7) ? {9'd1
+                                                                 ,9'd128} : ({18 {1'bx}});
+
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$packetSignal_app_arg_register
+    if ( rst) begin
+      c$packetSignal_app_arg <= {1'b0,8'd0,8'd0,8'd0,1'b0};
+    end else  if (en)  begin
+      c$packetSignal_app_arg <= {c$case_alt
+  ,$unsigned(c$app_arg_1[0+:8])
+  ,$unsigned(c$app_arg_0[0+:8])
+  ,$unsigned(c$app_arg[0+:8])
+  ,stateSignal.NTTState_sel3 == 8'd127};
+    end
   end
-  endgenerate
-  // map end
+  // register end
 
-  assign c$i_1 = ($unsigned(c$request_app_arg[0+:8]));
+  assign c$sourcePoly_case_alt = stateSignal.NTTState_sel4 ? NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel5) : NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel6);
 
-  assign request = request_res[($unsigned({{(64-8) {1'b0}},c$i_1}))];
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$ds_app_arg_register
+    if ( rst) begin
+      c$ds_app_arg <= {1'b0,8'd0,8'd0,1'b0};
+    end else  if (en)  begin
+      c$ds_app_arg <= {packetSignal.ButterflyPacket_sel0
+  ,packetSignal.ButterflyPacket_sel1
+  ,packetSignal.ButterflyPacket_sel2
+  ,packetSignal.ButterflyPacket_sel6};
+    end
+  end
+  // register end
 
-  assign bIndex = $unsigned(c$bIndex_app_arg[0+:8]);
-
-  assign aIndex = $unsigned(c$aIndex_app_arg[0+:8]);
-
-  assign c$i_2 = (ds5.Tuple2_0_sel1 + groupIndex);
-
-  assign c$request_app_arg = $unsigned({{(64-9) {1'b0}},c$i_2});
-
-  assign c$i_3 = (aRaw + len);
-
-  assign c$bIndex_app_arg = $unsigned({{(64-9) {1'b0}},c$i_3});
-
-  assign c$aIndex_app_arg = $unsigned({{(64-9) {1'b0}},aRaw});
-
-  assign aRaw = (groupIndex * (9'd2 * len)) + (opNumber % len);
-
-  assign groupIndex = opNumber / len;
-
-  assign opNumber = stateSignal.NTTState_sel3 + 9'd0;
-
-  assign len = ds5.Tuple2_0_sel0;
-
-  assign ds5 = (stateSignal.NTTState_sel2 == 3'd0) ? {9'd128
-                                                     ,9'd1} : c$ds5_case_alt;
-
-  assign c$ds5_case_alt = (stateSignal.NTTState_sel2 == 3'd1) ? {9'd64
-                                                                ,9'd2} : c$ds5_case_alt_0;
-
-  assign c$ds5_case_alt_0 = (stateSignal.NTTState_sel2 == 3'd2) ? {9'd32
-                                                                  ,9'd4} : c$ds5_case_alt_1;
-
-  assign c$ds5_case_alt_1 = (stateSignal.NTTState_sel2 == 3'd3) ? {9'd16
-                                                                  ,9'd8} : c$ds5_case_alt_2;
-
-  assign c$ds5_case_alt_2 = (stateSignal.NTTState_sel2 == 3'd4) ? {9'd8
-                                                                  ,9'd16} : c$ds5_case_alt_3;
-
-  assign c$ds5_case_alt_3 = (stateSignal.NTTState_sel2 == 3'd5) ? {9'd4
-                                                                  ,9'd32} : c$ds5_case_alt_4;
-
-  assign c$ds5_case_alt_4 = (stateSignal.NTTState_sel2 == 3'd6) ? {9'd2
-                                                                  ,9'd64} : c$ds5_case_alt_5;
-
-  assign c$ds5_case_alt_5 = (stateSignal.NTTState_sel2 == 3'd7) ? {9'd1
-                                                                  ,9'd128} : ({18 {1'bx}});
-
-  assign outB = result_6.Tuple2_1_sel1;
-
-  assign outA = result_6.Tuple2_1_sel0;
-
-  assign lastGroup = metaReg3.Tuple4_sel3;
-
-  assign bIndex_0 = metaReg3.Tuple4_sel2;
-
-  assign aIndex_0 = metaReg3.Tuple4_sel1;
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$ds_app_arg_0_register
+    if ( rst) begin
+      c$ds_app_arg_0 <= {1'b0,8'd0,8'd0,1'b0};
+    end else  if (en)  begin
+      c$ds_app_arg_0 <= c$ds_app_arg;
+    end
+  end
+  // register end
 
   // register begin
   always_ff @(posedge clk or  posedge  rst) begin : ds_register
     if ( rst) begin
       ds <= {23'd0,23'd0};
     end else  if (en)  begin
-      ds <= {a_0,result_5[0+:23]};
+      ds <= {a_0,result_4[0+:23]};
     end
   end
   // register end
 
-  assign a = ds.Tuple2_1_sel0;
+  assign a = ds.Tuple2_0_sel0;
 
-  assign t = ds.Tuple2_1_sel1;
+  assign t = ds.Tuple2_0_sel1;
 
-  assign c$app_arg = (a >= t) ? (a - t) : (23'd8380417 - (t - a));
+  assign c$app_arg_2 = (a >= t) ? (a - t) : (23'd8380417 - (t - a));
 
   assign sumWide = ({{(24-23) {1'b0}},a}) + ({{(24-23) {1'b0}},t});
 
-  assign c$bv = (sumWide - 24'd8380417);
+  assign c$bv_0 = (sumWide - 24'd8380417);
 
-  assign result_4 = (sumWide >= 24'd8380417) ? (c$bv[0+:23]) : (sumWide[0+:23]);
+  assign result_3 = (sumWide >= 24'd8380417) ? (c$bv_0[0+:23]) : (sumWide[0+:23]);
 
   // register begin
   always_ff @(posedge clk or  posedge  rst) begin : ds_0_register
     if ( rst) begin
       ds_0 <= {23'd0,46'd0};
     end else  if (en)  begin
-      ds_0 <= {a_1,c$ds_app_arg};
+      ds_0 <= {a_1,c$ds_app_arg_1};
     end
   end
   // register end
 
-  assign a_0 = ds_0.Tuple2_2_sel0;
+  assign a_0 = ds_0.Tuple2_1_sel0;
 
-  assign productWide = ds_0.Tuple2_2_sel1;
+  assign productWide = ds_0.Tuple2_1_sel1;
 
-  assign result_5 = (shifted >= 25'd8380417) ? (shifted - 25'd8380417) : shifted;
+  assign result_4 = (shifted >= 25'd8380417) ? (shifted - 25'd8380417) : shifted;
 
-  assign c$bv_0 = (((mWide << (64'sd23)) - (mWide << (64'sd13))) + mWide);
+  assign c$bv_1 = (((mWide << (64'sd23)) - (mWide << (64'sd13))) + mWide);
 
-  assign c$bv_1 = ((({{(49-46) {1'b0}},productWide}) + ({{(49-48) {1'b0}},(((mWide << (64'sd23)) - (mWide << (64'sd13))) + mWide)})) >> (64'sd24));
+  assign c$bv_2 = ((({{(49-46) {1'b0}},productWide}) + ({{(49-48) {1'b0}},(((mWide << (64'sd23)) - (mWide << (64'sd13))) + mWide)})) >> (64'sd24));
 
-  assign shifted = c$bv_1[0+:25];
+  assign shifted = c$bv_2[0+:25];
 
-  assign c$bv_2 = (((c$mWide_app_arg << (64'sd23)) - (c$mWide_app_arg << (64'sd13))) - c$mWide_app_arg);
+  assign c$bv_3 = (((c$mWide_app_arg << (64'sd23)) - (c$mWide_app_arg << (64'sd13))) - c$mWide_app_arg);
 
-  assign c$bv_3 = (c$bv_2[0+:24]);
+  assign c$bv_4 = (c$bv_3[0+:24]);
 
-  assign mWide = {{(48-24) {1'b0}},(c$bv_2[0+:24])};
+  assign mWide = {{(48-24) {1'b0}},(c$bv_3[0+:24])};
 
   assign c$mWide_app_arg = {{(47-24) {1'b0}},xLow};
 
   assign xLow = productWide[0+:24];
 
-  assign a_1 = request_0.ButterflyRequest_sel2;
+  assign a_1 = packetSignal.ButterflyPacket_sel3;
 
-  assign b = request_0.ButterflyRequest_sel3;
+  assign b = packetSignal.ButterflyPacket_sel4;
 
-  assign zeta = request_0.ButterflyRequest_sel4;
+  assign zeta = packetSignal.ButterflyPacket_sel5;
 
-  assign c$ds_app_arg = zeta * b;
+  assign c$ds_app_arg_1 = zeta * b;
 
   // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : result_6_register
+  always_ff @(posedge clk or  posedge  rst) begin : result_5_register
     if ( rst) begin
-      result_6 <= {23'd0,23'd0};
+      result_5 <= {23'd0,23'd0};
     end else  if (en)  begin
-      result_6 <= {result_4,c$app_arg};
+      result_5 <= {result_3,c$app_arg_2};
     end
   end
   // register end
 
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : metaReg3_register
-    if ( rst) begin
-      metaReg3 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      metaReg3 <= c$metaReg3_app_arg;
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : c$metaReg3_app_arg_register
-    if ( rst) begin
-      c$metaReg3_app_arg <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      c$metaReg3_app_arg <= c$metaReg3_app_arg_0;
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : c$metaReg3_app_arg_0_register
-    if ( rst) begin
-      c$metaReg3_app_arg_0 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      c$metaReg3_app_arg_0 <= {valid
-  ,request_0.ButterflyRequest_sel0
-  ,request_0.ButterflyRequest_sel1
-  ,request_0.ButterflyRequest_sel5};
-    end
-  end
-  // register end
-
-  assign valid = result_3.Tuple2_sel0;
-
-  assign request_0 = result_3.Tuple2_sel1;
-
-  assign c$vec_4 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  assign c$vec_5 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  assign c$vec_6 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  assign c$vec_7 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
+  assign result_selection_3 = stateSignal.NTTState_sel0;
 
   always_comb begin
-    case(c$case_scrut_0)
-      64'sd1 : result_7 = {1'b1
-                          ,{aIndex_1
-                           ,bIndex_1
-                           ,c$vec_4[($unsigned({{(64-8) {1'b0}},aIndex_1}))]
-                           ,c$vec_5[($unsigned({{(64-8) {1'b0}},bIndex_1}))]
-                           ,request_1
-                           ,stateSignal.NTTState_sel3 == 9'd124}};
-      default : result_7 = {1'b0
-                           ,{aIndex_1
-                            ,bIndex_1
-                            ,c$vec_6[($unsigned({{(64-8) {1'b0}},aIndex_1}))]
-                            ,c$vec_7[($unsigned({{(64-8) {1'b0}},bIndex_1}))]
-                            ,request_1
-                            ,stateSignal.NTTState_sel3 == 9'd124}};
+    case(result_selection_3)
+      2'b00 : result_6 = c$case_alt_2;
+      2'b01 : result_6 = c$case_alt_1;
+      default : result_6 = c$case_alt_0;
     endcase
   end
 
-  assign c$dtt_rhs_4 = stateSignal.NTTState_sel0;
-
-  assign c$case_scrut_0 = $unsigned(c$dtt_rhs_4);
-
-  assign c$vec_8 = '{0: 64'sd0
-                    ,1: 64'sd294725
-                    ,2: 64'sd8304754
-                    ,3: 64'sd8280182
-                    ,4: 64'sd6155295
-                    ,5: 64'sd7591714
-                    ,6: 64'sd7067554
-                    ,7: 64'sd7203743
-                    ,8: 64'sd6979903
-                    ,9: 64'sd6981962
-                    ,10: 64'sd2715685
-                    ,11: 64'sd4214773
-                    ,12: 64'sd4562491
-                    ,13: 64'sd8074524
-                    ,14: 64'sd6002843
-                    ,15: 64'sd7114182
-                    ,16: 64'sd5510295
-                    ,17: 64'sd4717985
-                    ,18: 64'sd3007494
-                    ,19: 64'sd3942328
-                    ,20: 64'sd3664286
-                    ,21: 64'sd3138283
-                    ,22: 64'sd4986106
-                    ,23: 64'sd4345652
-                    ,24: 64'sd1366638
-                    ,25: 64'sd803323
-                    ,26: 64'sd289157
-                    ,27: 64'sd3391741
-                    ,28: 64'sd6652273
-                    ,29: 64'sd7267317
-                    ,30: 64'sd8363347
-                    ,31: 64'sd1932518
-                    ,32: 64'sd5019179
-                    ,33: 64'sd7333239
-                    ,34: 64'sd1681557
-                    ,35: 64'sd1945215
-                    ,36: 64'sd8275718
-                    ,37: 64'sd6926001
-                    ,38: 64'sd1430472
-                    ,39: 64'sd2666911
-                    ,40: 64'sd4011446
-                    ,41: 64'sd4309263
-                    ,42: 64'sd3483979
-                    ,43: 64'sd6241375
-                    ,44: 64'sd13828
-                    ,45: 64'sd5858571
-                    ,46: 64'sd3282775
-                    ,47: 64'sd5333862
-                    ,48: 64'sd6376883
-                    ,49: 64'sd1368491
-                    ,50: 64'sd7412031
-                    ,51: 64'sd5451984
-                    ,52: 64'sd6331749
-                    ,53: 64'sd7619127
-                    ,54: 64'sd5362453
-                    ,55: 64'sd3811828
-                    ,56: 64'sd2883940
-                    ,57: 64'sd3341148
-                    ,58: 64'sd4521296
-                    ,59: 64'sd5678489
-                    ,60: 64'sd6693382
-                    ,61: 64'sd6799101
-                    ,62: 64'sd5638686
-                    ,63: 64'sd6896368
-                    ,64: 64'sd868519
-                    ,65: 64'sd4151501
-                    ,66: 64'sd1589698
-                    ,67: 64'sd7550137
-                    ,68: 64'sd5330295
-                    ,69: 64'sd602826
-                    ,70: 64'sd1874454
-                    ,71: 64'sd2252592
-                    ,72: 64'sd4545392
-                    ,73: 64'sd4656088
-                    ,74: 64'sd4632561
-                    ,75: 64'sd323453
-                    ,76: 64'sd4177747
-                    ,77: 64'sd2672019
-                    ,78: 64'sd1033361
-                    ,79: 64'sd1768240
-                    ,80: 64'sd471633
-                    ,81: 64'sd4022687
-                    ,82: 64'sd6555591
-                    ,83: 64'sd3185999
-                    ,84: 64'sd3032856
-                    ,85: 64'sd5910789
-                    ,86: 64'sd4810587
-                    ,87: 64'sd8076117
-                    ,88: 64'sd4122115
-                    ,89: 64'sd7753634
-                    ,90: 64'sd6448903
-                    ,91: 64'sd289514
-                    ,92: 64'sd1144268
-                    ,93: 64'sd1445654
-                    ,94: 64'sd5146790
-                    ,95: 64'sd5166701
-                    ,96: 64'sd739868
-                    ,97: 64'sd524811
-                    ,98: 64'sd7629477
-                    ,99: 64'sd3940422
-                    ,100: 64'sd173
-                    ,101: 64'sd2156279
-                    ,102: 64'sd6157902
-                    ,103: 64'sd5449640
-                    ,104: 64'sd1753196
-                    ,105: 64'sd4255647
-                    ,106: 64'sd6029882
-                    ,107: 64'sd2082410
-                    ,108: 64'sd4854262
-                    ,109: 64'sd1079464
-                    ,110: 64'sd3112889
-                    ,111: 64'sd8113385
-                    ,112: 64'sd4845669
-                    ,113: 64'sd8104649
-                    ,114: 64'sd2041975
-                    ,115: 64'sd320128
-                    ,116: 64'sd3558813
-                    ,117: 64'sd1046859
-                    ,118: 64'sd8221876
-                    ,119: 64'sd3606200
-                    ,120: 64'sd7174207
-                    ,121: 64'sd1041361
-                    ,122: 64'sd6151194
-                    ,123: 64'sd8309321
-                    ,124: 64'sd3065391
-                    ,125: 64'sd3258440
-                    ,126: 64'sd5518209
-                    ,127: 64'sd1291704
-                    ,128: 64'sd3576395
-                    ,129: 64'sd5447488
-                    ,130: 64'sd1449433
-                    ,131: 64'sd276802
-                    ,132: 64'sd4635456
-                    ,133: 64'sd172446
-                    ,134: 64'sd3165836
-                    ,135: 64'sd7253477
-                    ,136: 64'sd361139
-                    ,137: 64'sd3970566
-                    ,138: 64'sd518949
-                    ,139: 64'sd5349692
-                    ,140: 64'sd3128905
-                    ,141: 64'sd116259
-                    ,142: 64'sd5560444
-                    ,143: 64'sd1100550
-                    ,144: 64'sd5306751
-                    ,145: 64'sd7536543
-                    ,146: 64'sd854689
-                    ,147: 64'sd5437376
-                    ,148: 64'sd4093936
-                    ,149: 64'sd3856547
-                    ,150: 64'sd8249304
-                    ,151: 64'sd128903
-                    ,152: 64'sd7297569
-                    ,153: 64'sd315163
-                    ,154: 64'sd4067201
-                    ,155: 64'sd4006320
-                    ,156: 64'sd4274522
-                    ,157: 64'sd1372861
-                    ,158: 64'sd3597958
-                    ,159: 64'sd2015586
-                    ,160: 64'sd7563354
-                    ,161: 64'sd7988706
-                    ,162: 64'sd6243054
-                    ,163: 64'sd7512593
-                    ,164: 64'sd831827
-                    ,165: 64'sd6435937
-                    ,166: 64'sd1872733
-                    ,167: 64'sd7202714
-                    ,168: 64'sd894975
-                    ,169: 64'sd3382322
-                    ,170: 64'sd6471611
-                    ,171: 64'sd4686190
-                    ,172: 64'sd7479650
-                    ,173: 64'sd4064138
-                    ,174: 64'sd5738513
-                    ,175: 64'sd6095131
-                    ,176: 64'sd7580038
-                    ,177: 64'sd2165461
-                    ,178: 64'sd3643993
-                    ,179: 64'sd3652572
-                    ,180: 64'sd3883889
-                    ,181: 64'sd6325350
-                    ,182: 64'sd5932652
-                    ,183: 64'sd2942135
-                    ,184: 64'sd2155369
-                    ,185: 64'sd7501378
-                    ,186: 64'sd6337823
-                    ,187: 64'sd6836238
-                    ,188: 64'sd914846
-                    ,189: 64'sd1871079
-                    ,190: 64'sd4104915
-                    ,191: 64'sd4771790
-                    ,192: 64'sd5658330
-                    ,193: 64'sd3379297
-                    ,194: 64'sd4442150
-                    ,195: 64'sd2711718
-                    ,196: 64'sd8222597
-                    ,197: 64'sd821436
-                    ,198: 64'sd794398
-                    ,199: 64'sd1617369
-                    ,200: 64'sd6676026
-                    ,201: 64'sd7976523
-                    ,202: 64'sd255360
-                    ,203: 64'sd5525170
-                    ,204: 64'sd7486450
-                    ,205: 64'sd7776621
-                    ,206: 64'sd1311761
-                    ,207: 64'sd7350847
-                    ,208: 64'sd5491783
-                    ,209: 64'sd3839614
-                    ,210: 64'sd2399316
-                    ,211: 64'sd3698525
-                    ,212: 64'sd3412190
-                    ,213: 64'sd3417705
-                    ,214: 64'sd2259509
-                    ,215: 64'sd2908788
-                    ,216: 64'sd2148141
-                    ,217: 64'sd7464445
-                    ,218: 64'sd8124843
-                    ,219: 64'sd4693022
-                    ,220: 64'sd2982141
-                    ,221: 64'sd3345528
-                    ,222: 64'sd4994178
-                    ,223: 64'sd6376493
-                    ,224: 64'sd6404386
-                    ,225: 64'sd6528230
-                    ,226: 64'sd7708066
-                    ,227: 64'sd2096158
-                    ,228: 64'sd303269
-                    ,229: 64'sd389020
-                    ,230: 64'sd825110
-                    ,231: 64'sd7923957
-                    ,232: 64'sd6119966
-                    ,233: 64'sd1578061
-                    ,234: 64'sd2677309
-                    ,235: 64'sd4983335
-                    ,236: 64'sd3398031
-                    ,237: 64'sd6706567
-                    ,238: 64'sd1242950
-                    ,239: 64'sd1196256
-                    ,240: 64'sd5095336
-                    ,241: 64'sd2642882
-                    ,242: 64'sd1144116
-                    ,243: 64'sd8076862
-                    ,244: 64'sd3568941
-                    ,245: 64'sd8212921
-                    ,246: 64'sd7011805
-                    ,247: 64'sd2834182
-                    ,248: 64'sd5759371
-                    ,249: 64'sd6955344
-                    ,250: 64'sd5826820
-                    ,251: 64'sd1074967
-                    ,252: 64'sd1783126
-                    ,253: 64'sd4981343
-                    ,254: 64'sd2419159
-                    ,255: 64'sd1644522};
-
-  // map begin
-  genvar n_0;
-  generate
-  for (n_0=0; n_0 < $size(request_res_0); n_0 = n_0 + 1) begin : map_0
-    logic signed [63:0] map_in_0;
-    assign map_in_0 = $signed(c$vec_8[n_0]);
-    logic [22:0] map_out_0;
-    assign map_out_0 = $unsigned(map_in_0[0+:23]);
-
-
-    assign request_res_0[n_0] = map_out_0;
-  end
-  endgenerate
-  // map end
-
-  assign c$i_61 = ($unsigned(c$request_app_arg_0[0+:8]));
-
-  assign request_1 = request_res_0[($unsigned({{(64-8) {1'b0}},c$i_61}))];
-
-  assign bIndex_1 = $unsigned(c$bIndex_app_arg_0[0+:8]);
-
-  assign aIndex_1 = $unsigned(c$aIndex_app_arg_0[0+:8]);
-
-  assign c$i_62 = (ds5_0.Tuple2_0_sel1 + groupIndex_0);
-
-  assign c$request_app_arg_0 = $unsigned({{(64-9) {1'b0}},c$i_62});
-
-  assign c$i_63 = (aRaw_0 + len_0);
-
-  assign c$bIndex_app_arg_0 = $unsigned({{(64-9) {1'b0}},c$i_63});
-
-  assign c$aIndex_app_arg_0 = $unsigned({{(64-9) {1'b0}},aRaw_0});
-
-  assign aRaw_0 = (groupIndex_0 * (9'd2 * len_0)) + (opNumber_0 % len_0);
-
-  assign groupIndex_0 = opNumber_0 / len_0;
-
-  assign opNumber_0 = stateSignal.NTTState_sel3 + 9'd1;
-
-  assign len_0 = ds5_0.Tuple2_0_sel0;
-
-  assign ds5_0 = (stateSignal.NTTState_sel2 == 3'd0) ? {9'd128
-                                                       ,9'd1} : c$ds5_case_alt_6;
-
-  assign c$ds5_case_alt_6 = (stateSignal.NTTState_sel2 == 3'd1) ? {9'd64
-                                                                  ,9'd2} : c$ds5_case_alt_7;
-
-  assign c$ds5_case_alt_7 = (stateSignal.NTTState_sel2 == 3'd2) ? {9'd32
-                                                                  ,9'd4} : c$ds5_case_alt_8;
-
-  assign c$ds5_case_alt_8 = (stateSignal.NTTState_sel2 == 3'd3) ? {9'd16
-                                                                  ,9'd8} : c$ds5_case_alt_9;
-
-  assign c$ds5_case_alt_9 = (stateSignal.NTTState_sel2 == 3'd4) ? {9'd8
-                                                                  ,9'd16} : c$ds5_case_alt_10;
-
-  assign c$ds5_case_alt_10 = (stateSignal.NTTState_sel2 == 3'd5) ? {9'd4
-                                                                   ,9'd32} : c$ds5_case_alt_11;
-
-  assign c$ds5_case_alt_11 = (stateSignal.NTTState_sel2 == 3'd6) ? {9'd2
-                                                                   ,9'd64} : c$ds5_case_alt_12;
-
-  assign c$ds5_case_alt_12 = (stateSignal.NTTState_sel2 == 3'd7) ? {9'd1
-                                                                   ,9'd128} : ({18 {1'bx}});
-
-  assign outB_0 = result_10.Tuple2_1_sel1;
-
-  assign outA_0 = result_10.Tuple2_1_sel0;
-
-  assign lastGroup_0 = metaReg3_0.Tuple4_sel3;
-
-  assign bIndex_2 = metaReg3_0.Tuple4_sel2;
-
-  assign aIndex_2 = metaReg3_0.Tuple4_sel1;
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : ds_1_register
-    if ( rst) begin
-      ds_1 <= {23'd0,23'd0};
-    end else  if (en)  begin
-      ds_1 <= {a_3,result_9[0+:23]};
-    end
-  end
-  // register end
-
-  assign a_2 = ds_1.Tuple2_1_sel0;
-
-  assign t_0 = ds_1.Tuple2_1_sel1;
-
-  assign c$app_arg_0 = (a_2 >= t_0) ? (a_2 - t_0) : (23'd8380417 - (t_0 - a_2));
-
-  assign sumWide_0 = ({{(24-23) {1'b0}},a_2}) + ({{(24-23) {1'b0}},t_0});
-
-  assign c$bv_4 = (sumWide_0 - 24'd8380417);
-
-  assign result_8 = (sumWide_0 >= 24'd8380417) ? (c$bv_4[0+:23]) : (sumWide_0[0+:23]);
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : ds_2_register
-    if ( rst) begin
-      ds_2 <= {23'd0,46'd0};
-    end else  if (en)  begin
-      ds_2 <= {a_4,c$ds_app_arg_0};
-    end
-  end
-  // register end
-
-  assign a_3 = ds_2.Tuple2_2_sel0;
-
-  assign productWide_0 = ds_2.Tuple2_2_sel1;
-
-  assign result_9 = (shifted_0 >= 25'd8380417) ? (shifted_0 - 25'd8380417) : shifted_0;
-
-  assign c$bv_5 = (((mWide_0 << (64'sd23)) - (mWide_0 << (64'sd13))) + mWide_0);
-
-  assign c$bv_6 = ((({{(49-46) {1'b0}},productWide_0}) + ({{(49-48) {1'b0}},(((mWide_0 << (64'sd23)) - (mWide_0 << (64'sd13))) + mWide_0)})) >> (64'sd24));
-
-  assign shifted_0 = c$bv_6[0+:25];
-
-  assign c$bv_7 = (((c$mWide_app_arg_0 << (64'sd23)) - (c$mWide_app_arg_0 << (64'sd13))) - c$mWide_app_arg_0);
-
-  assign c$bv_8 = (c$bv_7[0+:24]);
-
-  assign mWide_0 = {{(48-24) {1'b0}},(c$bv_7[0+:24])};
-
-  assign c$mWide_app_arg_0 = {{(47-24) {1'b0}},xLow_0};
-
-  assign xLow_0 = productWide_0[0+:24];
-
-  assign a_4 = request_2.ButterflyRequest_sel2;
-
-  assign b_0 = request_2.ButterflyRequest_sel3;
-
-  assign zeta_0 = request_2.ButterflyRequest_sel4;
-
-  assign c$ds_app_arg_0 = zeta_0 * b_0;
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : result_10_register
-    if ( rst) begin
-      result_10 <= {23'd0,23'd0};
-    end else  if (en)  begin
-      result_10 <= {result_8,c$app_arg_0};
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : metaReg3_0_register
-    if ( rst) begin
-      metaReg3_0 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      metaReg3_0 <= c$metaReg3_app_arg_1;
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : c$metaReg3_app_arg_1_register
-    if ( rst) begin
-      c$metaReg3_app_arg_1 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      c$metaReg3_app_arg_1 <= c$metaReg3_app_arg_2;
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : c$metaReg3_app_arg_2_register
-    if ( rst) begin
-      c$metaReg3_app_arg_2 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      c$metaReg3_app_arg_2 <= {valid_0
-  ,request_2.ButterflyRequest_sel0
-  ,request_2.ButterflyRequest_sel1
-  ,request_2.ButterflyRequest_sel5};
-    end
-  end
-  // register end
-
-  assign valid_0 = result_7.Tuple2_sel0;
-
-  assign request_2 = result_7.Tuple2_sel1;
-
-  assign c$vec_9 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  assign c$vec_10 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  assign c$vec_11 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  assign c$vec_12 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  always_comb begin
-    case(c$case_scrut_1)
-      64'sd1 : result_11 = {1'b1
-                           ,{aIndex_3
-                            ,bIndex_3
-                            ,c$vec_9[($unsigned({{(64-8) {1'b0}},aIndex_3}))]
-                            ,c$vec_10[($unsigned({{(64-8) {1'b0}},bIndex_3}))]
-                            ,request_3
-                            ,stateSignal.NTTState_sel3 == 9'd124}};
-      default : result_11 = {1'b0
-                            ,{aIndex_3
-                             ,bIndex_3
-                             ,c$vec_11[($unsigned({{(64-8) {1'b0}},aIndex_3}))]
-                             ,c$vec_12[($unsigned({{(64-8) {1'b0}},bIndex_3}))]
-                             ,request_3
-                             ,stateSignal.NTTState_sel3 == 9'd124}};
-    endcase
-  end
-
-  assign c$dtt_rhs_7 = stateSignal.NTTState_sel0;
-
-  assign c$case_scrut_1 = $unsigned(c$dtt_rhs_7);
-
-  assign c$vec_13 = '{0: 64'sd0
-                     ,1: 64'sd294725
-                     ,2: 64'sd8304754
-                     ,3: 64'sd8280182
-                     ,4: 64'sd6155295
-                     ,5: 64'sd7591714
-                     ,6: 64'sd7067554
-                     ,7: 64'sd7203743
-                     ,8: 64'sd6979903
-                     ,9: 64'sd6981962
-                     ,10: 64'sd2715685
-                     ,11: 64'sd4214773
-                     ,12: 64'sd4562491
-                     ,13: 64'sd8074524
-                     ,14: 64'sd6002843
-                     ,15: 64'sd7114182
-                     ,16: 64'sd5510295
-                     ,17: 64'sd4717985
-                     ,18: 64'sd3007494
-                     ,19: 64'sd3942328
-                     ,20: 64'sd3664286
-                     ,21: 64'sd3138283
-                     ,22: 64'sd4986106
-                     ,23: 64'sd4345652
-                     ,24: 64'sd1366638
-                     ,25: 64'sd803323
-                     ,26: 64'sd289157
-                     ,27: 64'sd3391741
-                     ,28: 64'sd6652273
-                     ,29: 64'sd7267317
-                     ,30: 64'sd8363347
-                     ,31: 64'sd1932518
-                     ,32: 64'sd5019179
-                     ,33: 64'sd7333239
-                     ,34: 64'sd1681557
-                     ,35: 64'sd1945215
-                     ,36: 64'sd8275718
-                     ,37: 64'sd6926001
-                     ,38: 64'sd1430472
-                     ,39: 64'sd2666911
-                     ,40: 64'sd4011446
-                     ,41: 64'sd4309263
-                     ,42: 64'sd3483979
-                     ,43: 64'sd6241375
-                     ,44: 64'sd13828
-                     ,45: 64'sd5858571
-                     ,46: 64'sd3282775
-                     ,47: 64'sd5333862
-                     ,48: 64'sd6376883
-                     ,49: 64'sd1368491
-                     ,50: 64'sd7412031
-                     ,51: 64'sd5451984
-                     ,52: 64'sd6331749
-                     ,53: 64'sd7619127
-                     ,54: 64'sd5362453
-                     ,55: 64'sd3811828
-                     ,56: 64'sd2883940
-                     ,57: 64'sd3341148
-                     ,58: 64'sd4521296
-                     ,59: 64'sd5678489
-                     ,60: 64'sd6693382
-                     ,61: 64'sd6799101
-                     ,62: 64'sd5638686
-                     ,63: 64'sd6896368
-                     ,64: 64'sd868519
-                     ,65: 64'sd4151501
-                     ,66: 64'sd1589698
-                     ,67: 64'sd7550137
-                     ,68: 64'sd5330295
-                     ,69: 64'sd602826
-                     ,70: 64'sd1874454
-                     ,71: 64'sd2252592
-                     ,72: 64'sd4545392
-                     ,73: 64'sd4656088
-                     ,74: 64'sd4632561
-                     ,75: 64'sd323453
-                     ,76: 64'sd4177747
-                     ,77: 64'sd2672019
-                     ,78: 64'sd1033361
-                     ,79: 64'sd1768240
-                     ,80: 64'sd471633
-                     ,81: 64'sd4022687
-                     ,82: 64'sd6555591
-                     ,83: 64'sd3185999
-                     ,84: 64'sd3032856
-                     ,85: 64'sd5910789
-                     ,86: 64'sd4810587
-                     ,87: 64'sd8076117
-                     ,88: 64'sd4122115
-                     ,89: 64'sd7753634
-                     ,90: 64'sd6448903
-                     ,91: 64'sd289514
-                     ,92: 64'sd1144268
-                     ,93: 64'sd1445654
-                     ,94: 64'sd5146790
-                     ,95: 64'sd5166701
-                     ,96: 64'sd739868
-                     ,97: 64'sd524811
-                     ,98: 64'sd7629477
-                     ,99: 64'sd3940422
-                     ,100: 64'sd173
-                     ,101: 64'sd2156279
-                     ,102: 64'sd6157902
-                     ,103: 64'sd5449640
-                     ,104: 64'sd1753196
-                     ,105: 64'sd4255647
-                     ,106: 64'sd6029882
-                     ,107: 64'sd2082410
-                     ,108: 64'sd4854262
-                     ,109: 64'sd1079464
-                     ,110: 64'sd3112889
-                     ,111: 64'sd8113385
-                     ,112: 64'sd4845669
-                     ,113: 64'sd8104649
-                     ,114: 64'sd2041975
-                     ,115: 64'sd320128
-                     ,116: 64'sd3558813
-                     ,117: 64'sd1046859
-                     ,118: 64'sd8221876
-                     ,119: 64'sd3606200
-                     ,120: 64'sd7174207
-                     ,121: 64'sd1041361
-                     ,122: 64'sd6151194
-                     ,123: 64'sd8309321
-                     ,124: 64'sd3065391
-                     ,125: 64'sd3258440
-                     ,126: 64'sd5518209
-                     ,127: 64'sd1291704
-                     ,128: 64'sd3576395
-                     ,129: 64'sd5447488
-                     ,130: 64'sd1449433
-                     ,131: 64'sd276802
-                     ,132: 64'sd4635456
-                     ,133: 64'sd172446
-                     ,134: 64'sd3165836
-                     ,135: 64'sd7253477
-                     ,136: 64'sd361139
-                     ,137: 64'sd3970566
-                     ,138: 64'sd518949
-                     ,139: 64'sd5349692
-                     ,140: 64'sd3128905
-                     ,141: 64'sd116259
-                     ,142: 64'sd5560444
-                     ,143: 64'sd1100550
-                     ,144: 64'sd5306751
-                     ,145: 64'sd7536543
-                     ,146: 64'sd854689
-                     ,147: 64'sd5437376
-                     ,148: 64'sd4093936
-                     ,149: 64'sd3856547
-                     ,150: 64'sd8249304
-                     ,151: 64'sd128903
-                     ,152: 64'sd7297569
-                     ,153: 64'sd315163
-                     ,154: 64'sd4067201
-                     ,155: 64'sd4006320
-                     ,156: 64'sd4274522
-                     ,157: 64'sd1372861
-                     ,158: 64'sd3597958
-                     ,159: 64'sd2015586
-                     ,160: 64'sd7563354
-                     ,161: 64'sd7988706
-                     ,162: 64'sd6243054
-                     ,163: 64'sd7512593
-                     ,164: 64'sd831827
-                     ,165: 64'sd6435937
-                     ,166: 64'sd1872733
-                     ,167: 64'sd7202714
-                     ,168: 64'sd894975
-                     ,169: 64'sd3382322
-                     ,170: 64'sd6471611
-                     ,171: 64'sd4686190
-                     ,172: 64'sd7479650
-                     ,173: 64'sd4064138
-                     ,174: 64'sd5738513
-                     ,175: 64'sd6095131
-                     ,176: 64'sd7580038
-                     ,177: 64'sd2165461
-                     ,178: 64'sd3643993
-                     ,179: 64'sd3652572
-                     ,180: 64'sd3883889
-                     ,181: 64'sd6325350
-                     ,182: 64'sd5932652
-                     ,183: 64'sd2942135
-                     ,184: 64'sd2155369
-                     ,185: 64'sd7501378
-                     ,186: 64'sd6337823
-                     ,187: 64'sd6836238
-                     ,188: 64'sd914846
-                     ,189: 64'sd1871079
-                     ,190: 64'sd4104915
-                     ,191: 64'sd4771790
-                     ,192: 64'sd5658330
-                     ,193: 64'sd3379297
-                     ,194: 64'sd4442150
-                     ,195: 64'sd2711718
-                     ,196: 64'sd8222597
-                     ,197: 64'sd821436
-                     ,198: 64'sd794398
-                     ,199: 64'sd1617369
-                     ,200: 64'sd6676026
-                     ,201: 64'sd7976523
-                     ,202: 64'sd255360
-                     ,203: 64'sd5525170
-                     ,204: 64'sd7486450
-                     ,205: 64'sd7776621
-                     ,206: 64'sd1311761
-                     ,207: 64'sd7350847
-                     ,208: 64'sd5491783
-                     ,209: 64'sd3839614
-                     ,210: 64'sd2399316
-                     ,211: 64'sd3698525
-                     ,212: 64'sd3412190
-                     ,213: 64'sd3417705
-                     ,214: 64'sd2259509
-                     ,215: 64'sd2908788
-                     ,216: 64'sd2148141
-                     ,217: 64'sd7464445
-                     ,218: 64'sd8124843
-                     ,219: 64'sd4693022
-                     ,220: 64'sd2982141
-                     ,221: 64'sd3345528
-                     ,222: 64'sd4994178
-                     ,223: 64'sd6376493
-                     ,224: 64'sd6404386
-                     ,225: 64'sd6528230
-                     ,226: 64'sd7708066
-                     ,227: 64'sd2096158
-                     ,228: 64'sd303269
-                     ,229: 64'sd389020
-                     ,230: 64'sd825110
-                     ,231: 64'sd7923957
-                     ,232: 64'sd6119966
-                     ,233: 64'sd1578061
-                     ,234: 64'sd2677309
-                     ,235: 64'sd4983335
-                     ,236: 64'sd3398031
-                     ,237: 64'sd6706567
-                     ,238: 64'sd1242950
-                     ,239: 64'sd1196256
-                     ,240: 64'sd5095336
-                     ,241: 64'sd2642882
-                     ,242: 64'sd1144116
-                     ,243: 64'sd8076862
-                     ,244: 64'sd3568941
-                     ,245: 64'sd8212921
-                     ,246: 64'sd7011805
-                     ,247: 64'sd2834182
-                     ,248: 64'sd5759371
-                     ,249: 64'sd6955344
-                     ,250: 64'sd5826820
-                     ,251: 64'sd1074967
-                     ,252: 64'sd1783126
-                     ,253: 64'sd4981343
-                     ,254: 64'sd2419159
-                     ,255: 64'sd1644522};
-
-  // map begin
-  genvar n_1;
-  generate
-  for (n_1=0; n_1 < $size(request_res_1); n_1 = n_1 + 1) begin : map_1
-    logic signed [63:0] map_in_1;
-    assign map_in_1 = $signed(c$vec_13[n_1]);
-    logic [22:0] map_out_1;
-    assign map_out_1 = $unsigned(map_in_1[0+:23]);
-
-
-    assign request_res_1[n_1] = map_out_1;
-  end
-  endgenerate
-  // map end
-
-  assign c$i_121 = ($unsigned(c$request_app_arg_1[0+:8]));
-
-  assign request_3 = request_res_1[($unsigned({{(64-8) {1'b0}},c$i_121}))];
-
-  assign bIndex_3 = $unsigned(c$bIndex_app_arg_1[0+:8]);
-
-  assign aIndex_3 = $unsigned(c$aIndex_app_arg_1[0+:8]);
-
-  assign c$i_122 = (ds5_1.Tuple2_0_sel1 + groupIndex_1);
-
-  assign c$request_app_arg_1 = $unsigned({{(64-9) {1'b0}},c$i_122});
-
-  assign c$i_123 = (aRaw_1 + len_1);
-
-  assign c$bIndex_app_arg_1 = $unsigned({{(64-9) {1'b0}},c$i_123});
-
-  assign c$aIndex_app_arg_1 = $unsigned({{(64-9) {1'b0}},aRaw_1});
-
-  assign aRaw_1 = (groupIndex_1 * (9'd2 * len_1)) + (opNumber_1 % len_1);
-
-  assign groupIndex_1 = opNumber_1 / len_1;
-
-  assign opNumber_1 = stateSignal.NTTState_sel3 + 9'd2;
-
-  assign len_1 = ds5_1.Tuple2_0_sel0;
-
-  assign ds5_1 = (stateSignal.NTTState_sel2 == 3'd0) ? {9'd128
-                                                       ,9'd1} : c$ds5_case_alt_13;
-
-  assign c$ds5_case_alt_13 = (stateSignal.NTTState_sel2 == 3'd1) ? {9'd64
-                                                                   ,9'd2} : c$ds5_case_alt_14;
-
-  assign c$ds5_case_alt_14 = (stateSignal.NTTState_sel2 == 3'd2) ? {9'd32
-                                                                   ,9'd4} : c$ds5_case_alt_15;
-
-  assign c$ds5_case_alt_15 = (stateSignal.NTTState_sel2 == 3'd3) ? {9'd16
-                                                                   ,9'd8} : c$ds5_case_alt_16;
-
-  assign c$ds5_case_alt_16 = (stateSignal.NTTState_sel2 == 3'd4) ? {9'd8
-                                                                   ,9'd16} : c$ds5_case_alt_17;
-
-  assign c$ds5_case_alt_17 = (stateSignal.NTTState_sel2 == 3'd5) ? {9'd4
-                                                                   ,9'd32} : c$ds5_case_alt_18;
-
-  assign c$ds5_case_alt_18 = (stateSignal.NTTState_sel2 == 3'd6) ? {9'd2
-                                                                   ,9'd64} : c$ds5_case_alt_19;
-
-  assign c$ds5_case_alt_19 = (stateSignal.NTTState_sel2 == 3'd7) ? {9'd1
-                                                                   ,9'd128} : ({18 {1'bx}});
-
-  assign outB_1 = result_14.Tuple2_1_sel1;
-
-  assign outA_1 = result_14.Tuple2_1_sel0;
-
-  assign lastGroup_1 = metaReg3_1.Tuple4_sel3;
-
-  assign bIndex_4 = metaReg3_1.Tuple4_sel2;
-
-  assign aIndex_4 = metaReg3_1.Tuple4_sel1;
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : ds_3_register
-    if ( rst) begin
-      ds_3 <= {23'd0,23'd0};
-    end else  if (en)  begin
-      ds_3 <= {a_6,result_13[0+:23]};
-    end
-  end
-  // register end
-
-  assign a_5 = ds_3.Tuple2_1_sel0;
-
-  assign t_1 = ds_3.Tuple2_1_sel1;
-
-  assign c$app_arg_1 = (a_5 >= t_1) ? (a_5 - t_1) : (23'd8380417 - (t_1 - a_5));
-
-  assign sumWide_1 = ({{(24-23) {1'b0}},a_5}) + ({{(24-23) {1'b0}},t_1});
-
-  assign c$bv_9 = (sumWide_1 - 24'd8380417);
-
-  assign result_12 = (sumWide_1 >= 24'd8380417) ? (c$bv_9[0+:23]) : (sumWide_1[0+:23]);
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : ds_4_register
-    if ( rst) begin
-      ds_4 <= {23'd0,46'd0};
-    end else  if (en)  begin
-      ds_4 <= {a_7,c$ds_app_arg_1};
-    end
-  end
-  // register end
-
-  assign a_6 = ds_4.Tuple2_2_sel0;
-
-  assign productWide_1 = ds_4.Tuple2_2_sel1;
-
-  assign result_13 = (shifted_1 >= 25'd8380417) ? (shifted_1 - 25'd8380417) : shifted_1;
-
-  assign c$bv_10 = (((mWide_1 << (64'sd23)) - (mWide_1 << (64'sd13))) + mWide_1);
-
-  assign c$bv_11 = ((({{(49-46) {1'b0}},productWide_1}) + ({{(49-48) {1'b0}},(((mWide_1 << (64'sd23)) - (mWide_1 << (64'sd13))) + mWide_1)})) >> (64'sd24));
-
-  assign shifted_1 = c$bv_11[0+:25];
-
-  assign c$bv_12 = (((c$mWide_app_arg_1 << (64'sd23)) - (c$mWide_app_arg_1 << (64'sd13))) - c$mWide_app_arg_1);
-
-  assign c$bv_13 = (c$bv_12[0+:24]);
-
-  assign mWide_1 = {{(48-24) {1'b0}},(c$bv_12[0+:24])};
-
-  assign c$mWide_app_arg_1 = {{(47-24) {1'b0}},xLow_1};
-
-  assign xLow_1 = productWide_1[0+:24];
-
-  assign a_7 = request_4.ButterflyRequest_sel2;
-
-  assign b_1 = request_4.ButterflyRequest_sel3;
-
-  assign zeta_1 = request_4.ButterflyRequest_sel4;
-
-  assign c$ds_app_arg_1 = zeta_1 * b_1;
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : result_14_register
-    if ( rst) begin
-      result_14 <= {23'd0,23'd0};
-    end else  if (en)  begin
-      result_14 <= {result_12,c$app_arg_1};
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : metaReg3_1_register
-    if ( rst) begin
-      metaReg3_1 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      metaReg3_1 <= c$metaReg3_app_arg_3;
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : c$metaReg3_app_arg_3_register
-    if ( rst) begin
-      c$metaReg3_app_arg_3 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      c$metaReg3_app_arg_3 <= c$metaReg3_app_arg_4;
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : c$metaReg3_app_arg_4_register
-    if ( rst) begin
-      c$metaReg3_app_arg_4 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      c$metaReg3_app_arg_4 <= {valid_1
-  ,request_4.ButterflyRequest_sel0
-  ,request_4.ButterflyRequest_sel1
-  ,request_4.ButterflyRequest_sel5};
-    end
-  end
-  // register end
-
-  assign valid_1 = result_11.Tuple2_sel0;
-
-  assign request_4 = result_11.Tuple2_sel1;
-
-  assign c$vec_14 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  assign c$vec_15 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  assign c$vec_16 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  assign c$vec_17 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  always_comb begin
-    case(c$case_scrut_2)
-      64'sd1 : result_15 = {1'b1
-                           ,{aIndex_5
-                            ,bIndex_5
-                            ,c$vec_14[($unsigned({{(64-8) {1'b0}},aIndex_5}))]
-                            ,c$vec_15[($unsigned({{(64-8) {1'b0}},bIndex_5}))]
-                            ,request_5
-                            ,stateSignal.NTTState_sel3 == 9'd124}};
-      default : result_15 = {1'b0
-                            ,{aIndex_5
-                             ,bIndex_5
-                             ,c$vec_16[($unsigned({{(64-8) {1'b0}},aIndex_5}))]
-                             ,c$vec_17[($unsigned({{(64-8) {1'b0}},bIndex_5}))]
-                             ,request_5
-                             ,stateSignal.NTTState_sel3 == 9'd124}};
-    endcase
-  end
-
-  assign c$dtt_rhs_10 = stateSignal.NTTState_sel0;
-
-  assign c$case_scrut_2 = $unsigned(c$dtt_rhs_10);
-
-  assign c$vec_18 = '{0: 64'sd0
-                     ,1: 64'sd294725
-                     ,2: 64'sd8304754
-                     ,3: 64'sd8280182
-                     ,4: 64'sd6155295
-                     ,5: 64'sd7591714
-                     ,6: 64'sd7067554
-                     ,7: 64'sd7203743
-                     ,8: 64'sd6979903
-                     ,9: 64'sd6981962
-                     ,10: 64'sd2715685
-                     ,11: 64'sd4214773
-                     ,12: 64'sd4562491
-                     ,13: 64'sd8074524
-                     ,14: 64'sd6002843
-                     ,15: 64'sd7114182
-                     ,16: 64'sd5510295
-                     ,17: 64'sd4717985
-                     ,18: 64'sd3007494
-                     ,19: 64'sd3942328
-                     ,20: 64'sd3664286
-                     ,21: 64'sd3138283
-                     ,22: 64'sd4986106
-                     ,23: 64'sd4345652
-                     ,24: 64'sd1366638
-                     ,25: 64'sd803323
-                     ,26: 64'sd289157
-                     ,27: 64'sd3391741
-                     ,28: 64'sd6652273
-                     ,29: 64'sd7267317
-                     ,30: 64'sd8363347
-                     ,31: 64'sd1932518
-                     ,32: 64'sd5019179
-                     ,33: 64'sd7333239
-                     ,34: 64'sd1681557
-                     ,35: 64'sd1945215
-                     ,36: 64'sd8275718
-                     ,37: 64'sd6926001
-                     ,38: 64'sd1430472
-                     ,39: 64'sd2666911
-                     ,40: 64'sd4011446
-                     ,41: 64'sd4309263
-                     ,42: 64'sd3483979
-                     ,43: 64'sd6241375
-                     ,44: 64'sd13828
-                     ,45: 64'sd5858571
-                     ,46: 64'sd3282775
-                     ,47: 64'sd5333862
-                     ,48: 64'sd6376883
-                     ,49: 64'sd1368491
-                     ,50: 64'sd7412031
-                     ,51: 64'sd5451984
-                     ,52: 64'sd6331749
-                     ,53: 64'sd7619127
-                     ,54: 64'sd5362453
-                     ,55: 64'sd3811828
-                     ,56: 64'sd2883940
-                     ,57: 64'sd3341148
-                     ,58: 64'sd4521296
-                     ,59: 64'sd5678489
-                     ,60: 64'sd6693382
-                     ,61: 64'sd6799101
-                     ,62: 64'sd5638686
-                     ,63: 64'sd6896368
-                     ,64: 64'sd868519
-                     ,65: 64'sd4151501
-                     ,66: 64'sd1589698
-                     ,67: 64'sd7550137
-                     ,68: 64'sd5330295
-                     ,69: 64'sd602826
-                     ,70: 64'sd1874454
-                     ,71: 64'sd2252592
-                     ,72: 64'sd4545392
-                     ,73: 64'sd4656088
-                     ,74: 64'sd4632561
-                     ,75: 64'sd323453
-                     ,76: 64'sd4177747
-                     ,77: 64'sd2672019
-                     ,78: 64'sd1033361
-                     ,79: 64'sd1768240
-                     ,80: 64'sd471633
-                     ,81: 64'sd4022687
-                     ,82: 64'sd6555591
-                     ,83: 64'sd3185999
-                     ,84: 64'sd3032856
-                     ,85: 64'sd5910789
-                     ,86: 64'sd4810587
-                     ,87: 64'sd8076117
-                     ,88: 64'sd4122115
-                     ,89: 64'sd7753634
-                     ,90: 64'sd6448903
-                     ,91: 64'sd289514
-                     ,92: 64'sd1144268
-                     ,93: 64'sd1445654
-                     ,94: 64'sd5146790
-                     ,95: 64'sd5166701
-                     ,96: 64'sd739868
-                     ,97: 64'sd524811
-                     ,98: 64'sd7629477
-                     ,99: 64'sd3940422
-                     ,100: 64'sd173
-                     ,101: 64'sd2156279
-                     ,102: 64'sd6157902
-                     ,103: 64'sd5449640
-                     ,104: 64'sd1753196
-                     ,105: 64'sd4255647
-                     ,106: 64'sd6029882
-                     ,107: 64'sd2082410
-                     ,108: 64'sd4854262
-                     ,109: 64'sd1079464
-                     ,110: 64'sd3112889
-                     ,111: 64'sd8113385
-                     ,112: 64'sd4845669
-                     ,113: 64'sd8104649
-                     ,114: 64'sd2041975
-                     ,115: 64'sd320128
-                     ,116: 64'sd3558813
-                     ,117: 64'sd1046859
-                     ,118: 64'sd8221876
-                     ,119: 64'sd3606200
-                     ,120: 64'sd7174207
-                     ,121: 64'sd1041361
-                     ,122: 64'sd6151194
-                     ,123: 64'sd8309321
-                     ,124: 64'sd3065391
-                     ,125: 64'sd3258440
-                     ,126: 64'sd5518209
-                     ,127: 64'sd1291704
-                     ,128: 64'sd3576395
-                     ,129: 64'sd5447488
-                     ,130: 64'sd1449433
-                     ,131: 64'sd276802
-                     ,132: 64'sd4635456
-                     ,133: 64'sd172446
-                     ,134: 64'sd3165836
-                     ,135: 64'sd7253477
-                     ,136: 64'sd361139
-                     ,137: 64'sd3970566
-                     ,138: 64'sd518949
-                     ,139: 64'sd5349692
-                     ,140: 64'sd3128905
-                     ,141: 64'sd116259
-                     ,142: 64'sd5560444
-                     ,143: 64'sd1100550
-                     ,144: 64'sd5306751
-                     ,145: 64'sd7536543
-                     ,146: 64'sd854689
-                     ,147: 64'sd5437376
-                     ,148: 64'sd4093936
-                     ,149: 64'sd3856547
-                     ,150: 64'sd8249304
-                     ,151: 64'sd128903
-                     ,152: 64'sd7297569
-                     ,153: 64'sd315163
-                     ,154: 64'sd4067201
-                     ,155: 64'sd4006320
-                     ,156: 64'sd4274522
-                     ,157: 64'sd1372861
-                     ,158: 64'sd3597958
-                     ,159: 64'sd2015586
-                     ,160: 64'sd7563354
-                     ,161: 64'sd7988706
-                     ,162: 64'sd6243054
-                     ,163: 64'sd7512593
-                     ,164: 64'sd831827
-                     ,165: 64'sd6435937
-                     ,166: 64'sd1872733
-                     ,167: 64'sd7202714
-                     ,168: 64'sd894975
-                     ,169: 64'sd3382322
-                     ,170: 64'sd6471611
-                     ,171: 64'sd4686190
-                     ,172: 64'sd7479650
-                     ,173: 64'sd4064138
-                     ,174: 64'sd5738513
-                     ,175: 64'sd6095131
-                     ,176: 64'sd7580038
-                     ,177: 64'sd2165461
-                     ,178: 64'sd3643993
-                     ,179: 64'sd3652572
-                     ,180: 64'sd3883889
-                     ,181: 64'sd6325350
-                     ,182: 64'sd5932652
-                     ,183: 64'sd2942135
-                     ,184: 64'sd2155369
-                     ,185: 64'sd7501378
-                     ,186: 64'sd6337823
-                     ,187: 64'sd6836238
-                     ,188: 64'sd914846
-                     ,189: 64'sd1871079
-                     ,190: 64'sd4104915
-                     ,191: 64'sd4771790
-                     ,192: 64'sd5658330
-                     ,193: 64'sd3379297
-                     ,194: 64'sd4442150
-                     ,195: 64'sd2711718
-                     ,196: 64'sd8222597
-                     ,197: 64'sd821436
-                     ,198: 64'sd794398
-                     ,199: 64'sd1617369
-                     ,200: 64'sd6676026
-                     ,201: 64'sd7976523
-                     ,202: 64'sd255360
-                     ,203: 64'sd5525170
-                     ,204: 64'sd7486450
-                     ,205: 64'sd7776621
-                     ,206: 64'sd1311761
-                     ,207: 64'sd7350847
-                     ,208: 64'sd5491783
-                     ,209: 64'sd3839614
-                     ,210: 64'sd2399316
-                     ,211: 64'sd3698525
-                     ,212: 64'sd3412190
-                     ,213: 64'sd3417705
-                     ,214: 64'sd2259509
-                     ,215: 64'sd2908788
-                     ,216: 64'sd2148141
-                     ,217: 64'sd7464445
-                     ,218: 64'sd8124843
-                     ,219: 64'sd4693022
-                     ,220: 64'sd2982141
-                     ,221: 64'sd3345528
-                     ,222: 64'sd4994178
-                     ,223: 64'sd6376493
-                     ,224: 64'sd6404386
-                     ,225: 64'sd6528230
-                     ,226: 64'sd7708066
-                     ,227: 64'sd2096158
-                     ,228: 64'sd303269
-                     ,229: 64'sd389020
-                     ,230: 64'sd825110
-                     ,231: 64'sd7923957
-                     ,232: 64'sd6119966
-                     ,233: 64'sd1578061
-                     ,234: 64'sd2677309
-                     ,235: 64'sd4983335
-                     ,236: 64'sd3398031
-                     ,237: 64'sd6706567
-                     ,238: 64'sd1242950
-                     ,239: 64'sd1196256
-                     ,240: 64'sd5095336
-                     ,241: 64'sd2642882
-                     ,242: 64'sd1144116
-                     ,243: 64'sd8076862
-                     ,244: 64'sd3568941
-                     ,245: 64'sd8212921
-                     ,246: 64'sd7011805
-                     ,247: 64'sd2834182
-                     ,248: 64'sd5759371
-                     ,249: 64'sd6955344
-                     ,250: 64'sd5826820
-                     ,251: 64'sd1074967
-                     ,252: 64'sd1783126
-                     ,253: 64'sd4981343
-                     ,254: 64'sd2419159
-                     ,255: 64'sd1644522};
-
-  // map begin
-  genvar n_2;
-  generate
-  for (n_2=0; n_2 < $size(request_res_2); n_2 = n_2 + 1) begin : map_2
-    logic signed [63:0] map_in_2;
-    assign map_in_2 = $signed(c$vec_18[n_2]);
-    logic [22:0] map_out_2;
-    assign map_out_2 = $unsigned(map_in_2[0+:23]);
-
-
-    assign request_res_2[n_2] = map_out_2;
-  end
-  endgenerate
-  // map end
-
-  assign c$i_181 = ($unsigned(c$request_app_arg_2[0+:8]));
-
-  assign request_5 = request_res_2[($unsigned({{(64-8) {1'b0}},c$i_181}))];
-
-  assign bIndex_5 = $unsigned(c$bIndex_app_arg_2[0+:8]);
-
-  assign aIndex_5 = $unsigned(c$aIndex_app_arg_2[0+:8]);
-
-  assign c$i_182 = (ds5_2.Tuple2_0_sel1 + groupIndex_2);
-
-  assign c$request_app_arg_2 = $unsigned({{(64-9) {1'b0}},c$i_182});
-
-  assign c$i_183 = (aRaw_2 + len_2);
-
-  assign c$bIndex_app_arg_2 = $unsigned({{(64-9) {1'b0}},c$i_183});
-
-  assign c$aIndex_app_arg_2 = $unsigned({{(64-9) {1'b0}},aRaw_2});
-
-  assign aRaw_2 = (groupIndex_2 * (9'd2 * len_2)) + (opNumber_2 % len_2);
-
-  assign groupIndex_2 = opNumber_2 / len_2;
-
-  assign opNumber_2 = stateSignal.NTTState_sel3 + 9'd3;
-
-  assign len_2 = ds5_2.Tuple2_0_sel0;
-
-  assign ds5_2 = (stateSignal.NTTState_sel2 == 3'd0) ? {9'd128
-                                                       ,9'd1} : c$ds5_case_alt_20;
-
-  assign c$ds5_case_alt_20 = (stateSignal.NTTState_sel2 == 3'd1) ? {9'd64
-                                                                   ,9'd2} : c$ds5_case_alt_21;
-
-  assign c$ds5_case_alt_21 = (stateSignal.NTTState_sel2 == 3'd2) ? {9'd32
-                                                                   ,9'd4} : c$ds5_case_alt_22;
-
-  assign c$ds5_case_alt_22 = (stateSignal.NTTState_sel2 == 3'd3) ? {9'd16
-                                                                   ,9'd8} : c$ds5_case_alt_23;
-
-  assign c$ds5_case_alt_23 = (stateSignal.NTTState_sel2 == 3'd4) ? {9'd8
-                                                                   ,9'd16} : c$ds5_case_alt_24;
-
-  assign c$ds5_case_alt_24 = (stateSignal.NTTState_sel2 == 3'd5) ? {9'd4
-                                                                   ,9'd32} : c$ds5_case_alt_25;
-
-  assign c$ds5_case_alt_25 = (stateSignal.NTTState_sel2 == 3'd6) ? {9'd2
-                                                                   ,9'd64} : c$ds5_case_alt_26;
-
-  assign c$ds5_case_alt_26 = (stateSignal.NTTState_sel2 == 3'd7) ? {9'd1
-                                                                   ,9'd128} : ({18 {1'bx}});
-
-  assign outB_2 = result_18.Tuple2_1_sel1;
-
-  assign outA_2 = result_18.Tuple2_1_sel0;
-
-  assign lastGroup_2 = metaReg3_2.Tuple4_sel3;
-
-  assign bIndex_6 = metaReg3_2.Tuple4_sel2;
-
-  assign aIndex_6 = metaReg3_2.Tuple4_sel1;
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : ds_5_register
-    if ( rst) begin
-      ds_5 <= {23'd0,23'd0};
-    end else  if (en)  begin
-      ds_5 <= {a_9,result_17[0+:23]};
-    end
-  end
-  // register end
-
-  assign a_8 = ds_5.Tuple2_1_sel0;
-
-  assign t_2 = ds_5.Tuple2_1_sel1;
-
-  assign c$app_arg_2 = (a_8 >= t_2) ? (a_8 - t_2) : (23'd8380417 - (t_2 - a_8));
-
-  assign sumWide_2 = ({{(24-23) {1'b0}},a_8}) + ({{(24-23) {1'b0}},t_2});
-
-  assign c$bv_14 = (sumWide_2 - 24'd8380417);
-
-  assign result_16 = (sumWide_2 >= 24'd8380417) ? (c$bv_14[0+:23]) : (sumWide_2[0+:23]);
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : ds_6_register
-    if ( rst) begin
-      ds_6 <= {23'd0,46'd0};
-    end else  if (en)  begin
-      ds_6 <= {a_10,c$ds_app_arg_2};
-    end
-  end
-  // register end
-
-  assign a_9 = ds_6.Tuple2_2_sel0;
-
-  assign productWide_2 = ds_6.Tuple2_2_sel1;
-
-  assign result_17 = (shifted_2 >= 25'd8380417) ? (shifted_2 - 25'd8380417) : shifted_2;
-
-  assign c$bv_15 = (((mWide_2 << (64'sd23)) - (mWide_2 << (64'sd13))) + mWide_2);
-
-  assign c$bv_16 = ((({{(49-46) {1'b0}},productWide_2}) + ({{(49-48) {1'b0}},(((mWide_2 << (64'sd23)) - (mWide_2 << (64'sd13))) + mWide_2)})) >> (64'sd24));
-
-  assign shifted_2 = c$bv_16[0+:25];
-
-  assign c$bv_17 = (((c$mWide_app_arg_2 << (64'sd23)) - (c$mWide_app_arg_2 << (64'sd13))) - c$mWide_app_arg_2);
-
-  assign c$bv_18 = (c$bv_17[0+:24]);
-
-  assign mWide_2 = {{(48-24) {1'b0}},(c$bv_17[0+:24])};
-
-  assign c$mWide_app_arg_2 = {{(47-24) {1'b0}},xLow_2};
-
-  assign xLow_2 = productWide_2[0+:24];
-
-  assign a_10 = request_6.ButterflyRequest_sel2;
-
-  assign b_2 = request_6.ButterflyRequest_sel3;
-
-  assign zeta_2 = request_6.ButterflyRequest_sel4;
-
-  assign c$ds_app_arg_2 = zeta_2 * b_2;
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : result_18_register
-    if ( rst) begin
-      result_18 <= {23'd0,23'd0};
-    end else  if (en)  begin
-      result_18 <= {result_16,c$app_arg_2};
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : metaReg3_2_register
-    if ( rst) begin
-      metaReg3_2 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      metaReg3_2 <= c$metaReg3_app_arg_5;
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : c$metaReg3_app_arg_5_register
-    if ( rst) begin
-      c$metaReg3_app_arg_5 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      c$metaReg3_app_arg_5 <= c$metaReg3_app_arg_6;
-    end
-  end
-  // register end
-
-  // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : c$metaReg3_app_arg_6_register
-    if ( rst) begin
-      c$metaReg3_app_arg_6 <= {1'b0,8'd0,8'd0,1'b0};
-    end else  if (en)  begin
-      c$metaReg3_app_arg_6 <= {valid_2
-  ,request_6.ButterflyRequest_sel0
-  ,request_6.ButterflyRequest_sel1
-  ,request_6.ButterflyRequest_sel5};
-    end
-  end
-  // register end
-
-  assign valid_2 = result_15.Tuple2_sel0;
-
-  assign request_6 = result_15.Tuple2_sel1;
-
-  assign result_selection_13 = stateSignal.NTTState_sel0;
-
-  always_comb begin
-    case(result_selection_13)
-      2'b00 : result_19 = c$case_alt;
-      2'b01 : result_19 = result_21;
-      default : result_19 = result_20;
-    endcase
-  end
-
-  assign c$case_alt = start ? {2'd1
-                              ,1'b0
-                              ,3'd0
-                              ,9'd0
-                              ,{NTT256_types::array_of_256_logic_vector_23_to_lv(poly_0)}} : {2'd0
-                                                                                             ,1'b0
-                                                                                             ,stateSignal.NTTState_sel2
-                                                                                             ,stateSignal.NTTState_sel3
-                                                                                             ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4))}};
-
-  assign result_20 = (metaReg3.Tuple4_sel0 & response0.ButterflyResponse_sel4) ? c$case_alt_0 : {2'd2
-                                                                                                ,1'b0
-                                                                                                ,stateSignal.NTTState_sel2
-                                                                                                ,stateSignal.NTTState_sel3
-                                                                                                ,{NTT256_types::array_of_256_logic_vector_23_to_lv(c$case_alt_1)}};
-
-  assign c$case_alt_0 = (stateSignal.NTTState_sel2 == 3'd7) ? {2'd0
-                                                              ,1'b1
-                                                              ,3'd7
-                                                              ,9'd0
-                                                              ,{NTT256_types::array_of_256_logic_vector_23_to_lv(c$case_alt_1)}} : {2'd1
+  assign c$case_alt_0 = (valid & lastResult) ? c$case_alt_3 : {eta1
+                                                              ,1'b0
+                                                              ,stateStage1
+                                                              ,stateOp1
+                                                              ,stateUseA1
+                                                              ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufA1)}
+                                                              ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufB1)}};
+
+  assign c$case_alt_1 = (stateSignal.NTTState_sel3 == 8'd127) ? {2'd2
+                                                                ,1'b0
+                                                                ,stateStage1
+                                                                ,stateOp1
+                                                                ,stateUseA1
+                                                                ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufA1)}
+                                                                ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufB1)}} : {2'd1
                                                                                                                                    ,1'b0
-                                                                                                                                   ,stateSignal.NTTState_sel2 + 3'd1
-                                                                                                                                   ,9'd0
-                                                                                                                                   ,{NTT256_types::array_of_256_logic_vector_23_to_lv(c$case_alt_1)}};
+                                                                                                                                   ,stateStage1
+                                                                                                                                   ,stateSignal.NTTState_sel3 + 8'd1
+                                                                                                                                   ,stateUseA1
+                                                                                                                                   ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufA1)}
+                                                                                                                                   ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufB1)}};
 
-  assign response0 = {aIndex_0
-                     ,bIndex_0
-                     ,outA
-                     ,outB
-                     ,lastGroup};
+  assign c$case_alt_2 = start ? {2'd1
+                                ,1'b0
+                                ,3'd0
+                                ,8'd0
+                                ,1'b1
+                                ,{NTT256_types::array_of_256_logic_vector_23_to_lv(poly_0)}
+                                ,{NTT256_types::array_of_256_logic_vector_23_to_lv('{256 {23'd0}})}} : {2'd0
+                                                                                                       ,1'b0
+                                                                                                       ,stateSignal.NTTState_sel2
+                                                                                                       ,stateSignal.NTTState_sel3
+                                                                                                       ,stateSignal.NTTState_sel4
+                                                                                                       ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel5))}
+                                                                                                       ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel6))}};
 
-  assign result_21 = (stateSignal.NTTState_sel3 == 9'd124) ? {2'd2
-                                                             ,1'b0
-                                                             ,stateSignal.NTTState_sel2
-                                                             ,stateSignal.NTTState_sel3
-                                                             ,{NTT256_types::array_of_256_logic_vector_23_to_lv(c$case_alt_1)}} : {2'd1
-                                                                                                                                  ,1'b0
-                                                                                                                                  ,stateSignal.NTTState_sel2
-                                                                                                                                  ,stateSignal.NTTState_sel3 + 9'd4
-                                                                                                                                  ,{NTT256_types::array_of_256_logic_vector_23_to_lv(c$case_alt_1)}};
+  assign c$case_alt_3 = (stateSignal.NTTState_sel2 == 3'd7) ? {2'd0
+                                                              ,1'b1
+                                                              ,stateStage1
+                                                              ,8'd0
+                                                              ,c$app_arg_3
+                                                              ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufA1)}
+                                                              ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufB1)}} : {2'd1
+                                                                                                                                 ,1'b0
+                                                                                                                                 ,stateSignal.NTTState_sel2 + 3'd1
+                                                                                                                                 ,8'd0
+                                                                                                                                 ,c$app_arg_3
+                                                                                                                                 ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufA1)}
+                                                                                                                                 ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufB1)}};
 
-  assign c$case_alt_1 = valid_3 ? c$case_alt_2 : c$case_alt_259;
+  assign c$app_arg_3 = ~ stateSignal.NTTState_sel4;
 
-  assign valid_3 = metaReg3_2.Tuple4_sel0;
+  assign eta1 = result_7.NTTState_sel0;
 
-  assign c$i_248 = response.ButterflyResponse_sel1;
+  assign stateOp1 = result_7.NTTState_sel3;
+
+  assign stateBufB1 = NTT256_types::array_of_256_logic_vector_23_from_lv(result_7.NTTState_sel6);
+
+  assign stateBufA1 = NTT256_types::array_of_256_logic_vector_23_from_lv(result_7.NTTState_sel5);
+
+  assign stateUseA1 = result_7.NTTState_sel4;
+
+  assign stateStage1 = result_7.NTTState_sel2;
+
+  assign result_7 = (~ valid) ? stateSignal : c$case_alt_4;
+
+  assign c$case_alt_4 = stateSignal.NTTState_sel4 ? {stateSignal.NTTState_sel0
+                                                    ,stateSignal.NTTState_sel1
+                                                    ,stateSignal.NTTState_sel2
+                                                    ,stateSignal.NTTState_sel3
+                                                    ,1'b1
+                                                    ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel5))}
+                                                    ,{NTT256_types::array_of_256_logic_vector_23_to_lv(c$case_alt_5)}} : {stateSignal.NTTState_sel0
+                                                                                                                         ,stateSignal.NTTState_sel1
+                                                                                                                         ,stateSignal.NTTState_sel2
+                                                                                                                         ,stateSignal.NTTState_sel3
+                                                                                                                         ,1'b0
+                                                                                                                         ,{NTT256_types::array_of_256_logic_vector_23_to_lv(c$case_alt_262)}
+                                                                                                                         ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel6))}};
 
   // replaceVec start
   always_comb begin
-    c$case_alt_2 = '{0: c$case_alt_258
-   ,1: c$case_alt_257
-   ,2: c$case_alt_256
-   ,3: c$case_alt_255
-   ,4: c$case_alt_254
-   ,5: c$case_alt_253
-   ,6: c$case_alt_252
-   ,7: c$case_alt_251
-   ,8: c$case_alt_250
-   ,9: c$case_alt_249
-   ,10: c$case_alt_248
-   ,11: c$case_alt_247
-   ,12: c$case_alt_246
-   ,13: c$case_alt_245
-   ,14: c$case_alt_244
-   ,15: c$case_alt_243
-   ,16: c$case_alt_242
-   ,17: c$case_alt_241
-   ,18: c$case_alt_240
-   ,19: c$case_alt_239
-   ,20: c$case_alt_238
-   ,21: c$case_alt_237
-   ,22: c$case_alt_236
-   ,23: c$case_alt_235
-   ,24: c$case_alt_234
-   ,25: c$case_alt_233
-   ,26: c$case_alt_232
-   ,27: c$case_alt_231
-   ,28: c$case_alt_230
-   ,29: c$case_alt_229
-   ,30: c$case_alt_228
-   ,31: c$case_alt_227
-   ,32: c$case_alt_226
-   ,33: c$case_alt_225
-   ,34: c$case_alt_224
-   ,35: c$case_alt_223
-   ,36: c$case_alt_222
-   ,37: c$case_alt_221
-   ,38: c$case_alt_220
-   ,39: c$case_alt_219
-   ,40: c$case_alt_218
-   ,41: c$case_alt_217
-   ,42: c$case_alt_216
-   ,43: c$case_alt_215
-   ,44: c$case_alt_214
-   ,45: c$case_alt_213
-   ,46: c$case_alt_212
-   ,47: c$case_alt_211
-   ,48: c$case_alt_210
-   ,49: c$case_alt_209
-   ,50: c$case_alt_208
-   ,51: c$case_alt_207
-   ,52: c$case_alt_206
-   ,53: c$case_alt_205
-   ,54: c$case_alt_204
-   ,55: c$case_alt_203
-   ,56: c$case_alt_202
-   ,57: c$case_alt_201
-   ,58: c$case_alt_200
-   ,59: c$case_alt_199
-   ,60: c$case_alt_198
-   ,61: c$case_alt_197
-   ,62: c$case_alt_196
-   ,63: c$case_alt_195
-   ,64: c$case_alt_194
-   ,65: c$case_alt_193
-   ,66: c$case_alt_192
-   ,67: c$case_alt_191
-   ,68: c$case_alt_190
-   ,69: c$case_alt_189
-   ,70: c$case_alt_188
-   ,71: c$case_alt_187
-   ,72: c$case_alt_186
-   ,73: c$case_alt_185
-   ,74: c$case_alt_184
-   ,75: c$case_alt_183
-   ,76: c$case_alt_182
-   ,77: c$case_alt_181
-   ,78: c$case_alt_180
-   ,79: c$case_alt_179
-   ,80: c$case_alt_178
-   ,81: c$case_alt_177
-   ,82: c$case_alt_176
-   ,83: c$case_alt_175
-   ,84: c$case_alt_174
-   ,85: c$case_alt_173
-   ,86: c$case_alt_172
-   ,87: c$case_alt_171
-   ,88: c$case_alt_170
-   ,89: c$case_alt_169
-   ,90: c$case_alt_168
-   ,91: c$case_alt_167
-   ,92: c$case_alt_166
-   ,93: c$case_alt_165
-   ,94: c$case_alt_164
-   ,95: c$case_alt_163
-   ,96: c$case_alt_162
-   ,97: c$case_alt_161
-   ,98: c$case_alt_160
-   ,99: c$case_alt_159
-   ,100: c$case_alt_158
-   ,101: c$case_alt_157
-   ,102: c$case_alt_156
-   ,103: c$case_alt_155
-   ,104: c$case_alt_154
-   ,105: c$case_alt_153
-   ,106: c$case_alt_152
-   ,107: c$case_alt_151
-   ,108: c$case_alt_150
-   ,109: c$case_alt_149
-   ,110: c$case_alt_148
-   ,111: c$case_alt_147
-   ,112: c$case_alt_146
-   ,113: c$case_alt_145
-   ,114: c$case_alt_144
-   ,115: c$case_alt_143
-   ,116: c$case_alt_142
-   ,117: c$case_alt_141
-   ,118: c$case_alt_140
-   ,119: c$case_alt_139
-   ,120: c$case_alt_138
-   ,121: c$case_alt_137
-   ,122: c$case_alt_136
-   ,123: c$case_alt_135
-   ,124: c$case_alt_134
-   ,125: c$case_alt_133
-   ,126: c$case_alt_132
-   ,127: c$case_alt_131
-   ,128: c$case_alt_130
-   ,129: c$case_alt_129
-   ,130: c$case_alt_128
-   ,131: c$case_alt_127
-   ,132: c$case_alt_126
-   ,133: c$case_alt_125
-   ,134: c$case_alt_124
-   ,135: c$case_alt_123
-   ,136: c$case_alt_122
-   ,137: c$case_alt_121
-   ,138: c$case_alt_120
-   ,139: c$case_alt_119
-   ,140: c$case_alt_118
-   ,141: c$case_alt_117
-   ,142: c$case_alt_116
-   ,143: c$case_alt_115
-   ,144: c$case_alt_114
-   ,145: c$case_alt_113
-   ,146: c$case_alt_112
-   ,147: c$case_alt_111
-   ,148: c$case_alt_110
-   ,149: c$case_alt_109
-   ,150: c$case_alt_108
-   ,151: c$case_alt_107
-   ,152: c$case_alt_106
-   ,153: c$case_alt_105
-   ,154: c$case_alt_104
-   ,155: c$case_alt_103
-   ,156: c$case_alt_102
-   ,157: c$case_alt_101
-   ,158: c$case_alt_100
-   ,159: c$case_alt_99
-   ,160: c$case_alt_98
-   ,161: c$case_alt_97
-   ,162: c$case_alt_96
-   ,163: c$case_alt_95
-   ,164: c$case_alt_94
-   ,165: c$case_alt_93
-   ,166: c$case_alt_92
-   ,167: c$case_alt_91
-   ,168: c$case_alt_90
-   ,169: c$case_alt_89
-   ,170: c$case_alt_88
-   ,171: c$case_alt_87
-   ,172: c$case_alt_86
-   ,173: c$case_alt_85
-   ,174: c$case_alt_84
-   ,175: c$case_alt_83
-   ,176: c$case_alt_82
-   ,177: c$case_alt_81
-   ,178: c$case_alt_80
-   ,179: c$case_alt_79
-   ,180: c$case_alt_78
-   ,181: c$case_alt_77
-   ,182: c$case_alt_76
-   ,183: c$case_alt_75
-   ,184: c$case_alt_74
-   ,185: c$case_alt_73
-   ,186: c$case_alt_72
-   ,187: c$case_alt_71
-   ,188: c$case_alt_70
-   ,189: c$case_alt_69
-   ,190: c$case_alt_68
-   ,191: c$case_alt_67
-   ,192: c$case_alt_66
-   ,193: c$case_alt_65
-   ,194: c$case_alt_64
-   ,195: c$case_alt_63
-   ,196: c$case_alt_62
-   ,197: c$case_alt_61
-   ,198: c$case_alt_60
-   ,199: c$case_alt_59
-   ,200: c$case_alt_58
-   ,201: c$case_alt_57
-   ,202: c$case_alt_56
-   ,203: c$case_alt_55
-   ,204: c$case_alt_54
-   ,205: c$case_alt_53
-   ,206: c$case_alt_52
-   ,207: c$case_alt_51
-   ,208: c$case_alt_50
-   ,209: c$case_alt_49
-   ,210: c$case_alt_48
-   ,211: c$case_alt_47
-   ,212: c$case_alt_46
-   ,213: c$case_alt_45
-   ,214: c$case_alt_44
-   ,215: c$case_alt_43
-   ,216: c$case_alt_42
-   ,217: c$case_alt_41
-   ,218: c$case_alt_40
-   ,219: c$case_alt_39
-   ,220: c$case_alt_38
-   ,221: c$case_alt_37
-   ,222: c$case_alt_36
-   ,223: c$case_alt_35
-   ,224: c$case_alt_34
-   ,225: c$case_alt_33
-   ,226: c$case_alt_32
-   ,227: c$case_alt_31
-   ,228: c$case_alt_30
-   ,229: c$case_alt_29
-   ,230: c$case_alt_28
-   ,231: c$case_alt_27
-   ,232: c$case_alt_26
-   ,233: c$case_alt_25
-   ,234: c$case_alt_24
-   ,235: c$case_alt_23
-   ,236: c$case_alt_22
-   ,237: c$case_alt_21
-   ,238: c$case_alt_20
-   ,239: c$case_alt_19
-   ,240: c$case_alt_18
-   ,241: c$case_alt_17
-   ,242: c$case_alt_16
-   ,243: c$case_alt_15
-   ,244: c$case_alt_14
-   ,245: c$case_alt_13
-   ,246: c$case_alt_12
-   ,247: c$case_alt_11
-   ,248: c$case_alt_10
-   ,249: c$case_alt_9
-   ,250: c$case_alt_8
-   ,251: c$case_alt_7
-   ,252: c$case_alt_6
-   ,253: c$case_alt_5
-   ,254: c$case_alt_4
-   ,255: c$case_alt_3};
-    c$case_alt_2[($unsigned({{(64-8) {1'b0}},c$i_248}))] = response.ButterflyResponse_sel3;
+    c$case_alt_5 = '{0: c$case_alt_261
+   ,1: c$case_alt_260
+   ,2: c$case_alt_259
+   ,3: c$case_alt_258
+   ,4: c$case_alt_257
+   ,5: c$case_alt_256
+   ,6: c$case_alt_255
+   ,7: c$case_alt_254
+   ,8: c$case_alt_253
+   ,9: c$case_alt_252
+   ,10: c$case_alt_251
+   ,11: c$case_alt_250
+   ,12: c$case_alt_249
+   ,13: c$case_alt_248
+   ,14: c$case_alt_247
+   ,15: c$case_alt_246
+   ,16: c$case_alt_245
+   ,17: c$case_alt_244
+   ,18: c$case_alt_243
+   ,19: c$case_alt_242
+   ,20: c$case_alt_241
+   ,21: c$case_alt_240
+   ,22: c$case_alt_239
+   ,23: c$case_alt_238
+   ,24: c$case_alt_237
+   ,25: c$case_alt_236
+   ,26: c$case_alt_235
+   ,27: c$case_alt_234
+   ,28: c$case_alt_233
+   ,29: c$case_alt_232
+   ,30: c$case_alt_231
+   ,31: c$case_alt_230
+   ,32: c$case_alt_229
+   ,33: c$case_alt_228
+   ,34: c$case_alt_227
+   ,35: c$case_alt_226
+   ,36: c$case_alt_225
+   ,37: c$case_alt_224
+   ,38: c$case_alt_223
+   ,39: c$case_alt_222
+   ,40: c$case_alt_221
+   ,41: c$case_alt_220
+   ,42: c$case_alt_219
+   ,43: c$case_alt_218
+   ,44: c$case_alt_217
+   ,45: c$case_alt_216
+   ,46: c$case_alt_215
+   ,47: c$case_alt_214
+   ,48: c$case_alt_213
+   ,49: c$case_alt_212
+   ,50: c$case_alt_211
+   ,51: c$case_alt_210
+   ,52: c$case_alt_209
+   ,53: c$case_alt_208
+   ,54: c$case_alt_207
+   ,55: c$case_alt_206
+   ,56: c$case_alt_205
+   ,57: c$case_alt_204
+   ,58: c$case_alt_203
+   ,59: c$case_alt_202
+   ,60: c$case_alt_201
+   ,61: c$case_alt_200
+   ,62: c$case_alt_199
+   ,63: c$case_alt_198
+   ,64: c$case_alt_197
+   ,65: c$case_alt_196
+   ,66: c$case_alt_195
+   ,67: c$case_alt_194
+   ,68: c$case_alt_193
+   ,69: c$case_alt_192
+   ,70: c$case_alt_191
+   ,71: c$case_alt_190
+   ,72: c$case_alt_189
+   ,73: c$case_alt_188
+   ,74: c$case_alt_187
+   ,75: c$case_alt_186
+   ,76: c$case_alt_185
+   ,77: c$case_alt_184
+   ,78: c$case_alt_183
+   ,79: c$case_alt_182
+   ,80: c$case_alt_181
+   ,81: c$case_alt_180
+   ,82: c$case_alt_179
+   ,83: c$case_alt_178
+   ,84: c$case_alt_177
+   ,85: c$case_alt_176
+   ,86: c$case_alt_175
+   ,87: c$case_alt_174
+   ,88: c$case_alt_173
+   ,89: c$case_alt_172
+   ,90: c$case_alt_171
+   ,91: c$case_alt_170
+   ,92: c$case_alt_169
+   ,93: c$case_alt_168
+   ,94: c$case_alt_167
+   ,95: c$case_alt_166
+   ,96: c$case_alt_165
+   ,97: c$case_alt_164
+   ,98: c$case_alt_163
+   ,99: c$case_alt_162
+   ,100: c$case_alt_161
+   ,101: c$case_alt_160
+   ,102: c$case_alt_159
+   ,103: c$case_alt_158
+   ,104: c$case_alt_157
+   ,105: c$case_alt_156
+   ,106: c$case_alt_155
+   ,107: c$case_alt_154
+   ,108: c$case_alt_153
+   ,109: c$case_alt_152
+   ,110: c$case_alt_151
+   ,111: c$case_alt_150
+   ,112: c$case_alt_149
+   ,113: c$case_alt_148
+   ,114: c$case_alt_147
+   ,115: c$case_alt_146
+   ,116: c$case_alt_145
+   ,117: c$case_alt_144
+   ,118: c$case_alt_143
+   ,119: c$case_alt_142
+   ,120: c$case_alt_141
+   ,121: c$case_alt_140
+   ,122: c$case_alt_139
+   ,123: c$case_alt_138
+   ,124: c$case_alt_137
+   ,125: c$case_alt_136
+   ,126: c$case_alt_135
+   ,127: c$case_alt_134
+   ,128: c$case_alt_133
+   ,129: c$case_alt_132
+   ,130: c$case_alt_131
+   ,131: c$case_alt_130
+   ,132: c$case_alt_129
+   ,133: c$case_alt_128
+   ,134: c$case_alt_127
+   ,135: c$case_alt_126
+   ,136: c$case_alt_125
+   ,137: c$case_alt_124
+   ,138: c$case_alt_123
+   ,139: c$case_alt_122
+   ,140: c$case_alt_121
+   ,141: c$case_alt_120
+   ,142: c$case_alt_119
+   ,143: c$case_alt_118
+   ,144: c$case_alt_117
+   ,145: c$case_alt_116
+   ,146: c$case_alt_115
+   ,147: c$case_alt_114
+   ,148: c$case_alt_113
+   ,149: c$case_alt_112
+   ,150: c$case_alt_111
+   ,151: c$case_alt_110
+   ,152: c$case_alt_109
+   ,153: c$case_alt_108
+   ,154: c$case_alt_107
+   ,155: c$case_alt_106
+   ,156: c$case_alt_105
+   ,157: c$case_alt_104
+   ,158: c$case_alt_103
+   ,159: c$case_alt_102
+   ,160: c$case_alt_101
+   ,161: c$case_alt_100
+   ,162: c$case_alt_99
+   ,163: c$case_alt_98
+   ,164: c$case_alt_97
+   ,165: c$case_alt_96
+   ,166: c$case_alt_95
+   ,167: c$case_alt_94
+   ,168: c$case_alt_93
+   ,169: c$case_alt_92
+   ,170: c$case_alt_91
+   ,171: c$case_alt_90
+   ,172: c$case_alt_89
+   ,173: c$case_alt_88
+   ,174: c$case_alt_87
+   ,175: c$case_alt_86
+   ,176: c$case_alt_85
+   ,177: c$case_alt_84
+   ,178: c$case_alt_83
+   ,179: c$case_alt_82
+   ,180: c$case_alt_81
+   ,181: c$case_alt_80
+   ,182: c$case_alt_79
+   ,183: c$case_alt_78
+   ,184: c$case_alt_77
+   ,185: c$case_alt_76
+   ,186: c$case_alt_75
+   ,187: c$case_alt_74
+   ,188: c$case_alt_73
+   ,189: c$case_alt_72
+   ,190: c$case_alt_71
+   ,191: c$case_alt_70
+   ,192: c$case_alt_69
+   ,193: c$case_alt_68
+   ,194: c$case_alt_67
+   ,195: c$case_alt_66
+   ,196: c$case_alt_65
+   ,197: c$case_alt_64
+   ,198: c$case_alt_63
+   ,199: c$case_alt_62
+   ,200: c$case_alt_61
+   ,201: c$case_alt_60
+   ,202: c$case_alt_59
+   ,203: c$case_alt_58
+   ,204: c$case_alt_57
+   ,205: c$case_alt_56
+   ,206: c$case_alt_55
+   ,207: c$case_alt_54
+   ,208: c$case_alt_53
+   ,209: c$case_alt_52
+   ,210: c$case_alt_51
+   ,211: c$case_alt_50
+   ,212: c$case_alt_49
+   ,213: c$case_alt_48
+   ,214: c$case_alt_47
+   ,215: c$case_alt_46
+   ,216: c$case_alt_45
+   ,217: c$case_alt_44
+   ,218: c$case_alt_43
+   ,219: c$case_alt_42
+   ,220: c$case_alt_41
+   ,221: c$case_alt_40
+   ,222: c$case_alt_39
+   ,223: c$case_alt_38
+   ,224: c$case_alt_37
+   ,225: c$case_alt_36
+   ,226: c$case_alt_35
+   ,227: c$case_alt_34
+   ,228: c$case_alt_33
+   ,229: c$case_alt_32
+   ,230: c$case_alt_31
+   ,231: c$case_alt_30
+   ,232: c$case_alt_29
+   ,233: c$case_alt_28
+   ,234: c$case_alt_27
+   ,235: c$case_alt_26
+   ,236: c$case_alt_25
+   ,237: c$case_alt_24
+   ,238: c$case_alt_23
+   ,239: c$case_alt_22
+   ,240: c$case_alt_21
+   ,241: c$case_alt_20
+   ,242: c$case_alt_19
+   ,243: c$case_alt_18
+   ,244: c$case_alt_17
+   ,245: c$case_alt_16
+   ,246: c$case_alt_15
+   ,247: c$case_alt_14
+   ,248: c$case_alt_13
+   ,249: c$case_alt_12
+   ,250: c$case_alt_11
+   ,251: c$case_alt_10
+   ,252: c$case_alt_9
+   ,253: c$case_alt_8
+   ,254: c$case_alt_7
+   ,255: c$case_alt_6};
+    c$case_alt_5[c$app_arg_4] = outB;
   end
   // replaceVec end
 
-  assign c$case_alt_selection_4 = c$case_alt_selection_3;
+  assign c$case_alt_selection_8 = c$case_alt_selection_7;
 
-  assign c$i_249 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_7 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_3 = $unsigned({{(64-8) {1'b0}},c$i_249});
-
-  always_comb begin
-    case(c$case_alt_selection_4)
-      64'sd255 : c$case_alt_3 = response.ButterflyResponse_sel2;
-      default : c$case_alt_3 = c$case_alt_259[255];
-    endcase
-  end
-
-  assign c$case_alt_selection_7 = c$case_alt_selection_6;
-
-  assign c$i_250 = response.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_6 = $unsigned({{(64-8) {1'b0}},c$i_250});
-
   always_comb begin
-    case(c$case_alt_selection_7)
-      64'sd254 : c$case_alt_4 = response.ButterflyResponse_sel2;
-      default : c$case_alt_4 = c$case_alt_259[254];
+    case(c$case_alt_selection_8)
+      64'sd255 : c$case_alt_6 = outA;
+      default : c$case_alt_6 = stateSignal[22:0];
     endcase
   end
 
-  assign c$case_alt_selection_10 = c$case_alt_selection_9;
+  assign c$case_alt_selection_11 = c$case_alt_selection_10;
 
-  assign c$i_251 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_10 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_9 = $unsigned({{(64-8) {1'b0}},c$i_251});
-
   always_comb begin
-    case(c$case_alt_selection_10)
-      64'sd253 : c$case_alt_5 = response.ButterflyResponse_sel2;
-      default : c$case_alt_5 = c$case_alt_259[253];
+    case(c$case_alt_selection_11)
+      64'sd254 : c$case_alt_7 = outA;
+      default : c$case_alt_7 = stateSignal[45:23];
     endcase
   end
-
-  assign c$case_alt_selection_13 = c$case_alt_selection_12;
 
-  assign c$i_252 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_14 = c$case_alt_selection_13;
 
-  assign c$case_alt_selection_12 = $unsigned({{(64-8) {1'b0}},c$i_252});
+  assign c$case_alt_selection_13 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_13)
-      64'sd252 : c$case_alt_6 = response.ButterflyResponse_sel2;
-      default : c$case_alt_6 = c$case_alt_259[252];
+    case(c$case_alt_selection_14)
+      64'sd253 : c$case_alt_8 = outA;
+      default : c$case_alt_8 = stateSignal[68:46];
     endcase
   end
 
-  assign c$case_alt_selection_16 = c$case_alt_selection_15;
+  assign c$case_alt_selection_17 = c$case_alt_selection_16;
 
-  assign c$i_253 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_16 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_15 = $unsigned({{(64-8) {1'b0}},c$i_253});
-
   always_comb begin
-    case(c$case_alt_selection_16)
-      64'sd251 : c$case_alt_7 = response.ButterflyResponse_sel2;
-      default : c$case_alt_7 = c$case_alt_259[251];
+    case(c$case_alt_selection_17)
+      64'sd252 : c$case_alt_9 = outA;
+      default : c$case_alt_9 = stateSignal[91:69];
     endcase
   end
-
-  assign c$case_alt_selection_19 = c$case_alt_selection_18;
 
-  assign c$i_254 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_20 = c$case_alt_selection_19;
 
-  assign c$case_alt_selection_18 = $unsigned({{(64-8) {1'b0}},c$i_254});
+  assign c$case_alt_selection_19 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_19)
-      64'sd250 : c$case_alt_8 = response.ButterflyResponse_sel2;
-      default : c$case_alt_8 = c$case_alt_259[250];
+    case(c$case_alt_selection_20)
+      64'sd251 : c$case_alt_10 = outA;
+      default : c$case_alt_10 = stateSignal[114:92];
     endcase
   end
 
-  assign c$case_alt_selection_22 = c$case_alt_selection_21;
+  assign c$case_alt_selection_23 = c$case_alt_selection_22;
 
-  assign c$i_255 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_22 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_21 = $unsigned({{(64-8) {1'b0}},c$i_255});
-
   always_comb begin
-    case(c$case_alt_selection_22)
-      64'sd249 : c$case_alt_9 = response.ButterflyResponse_sel2;
-      default : c$case_alt_9 = c$case_alt_259[249];
+    case(c$case_alt_selection_23)
+      64'sd250 : c$case_alt_11 = outA;
+      default : c$case_alt_11 = stateSignal[137:115];
     endcase
   end
-
-  assign c$case_alt_selection_25 = c$case_alt_selection_24;
 
-  assign c$i_256 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_26 = c$case_alt_selection_25;
 
-  assign c$case_alt_selection_24 = $unsigned({{(64-8) {1'b0}},c$i_256});
+  assign c$case_alt_selection_25 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_25)
-      64'sd248 : c$case_alt_10 = response.ButterflyResponse_sel2;
-      default : c$case_alt_10 = c$case_alt_259[248];
+    case(c$case_alt_selection_26)
+      64'sd249 : c$case_alt_12 = outA;
+      default : c$case_alt_12 = stateSignal[160:138];
     endcase
   end
 
-  assign c$case_alt_selection_28 = c$case_alt_selection_27;
+  assign c$case_alt_selection_29 = c$case_alt_selection_28;
 
-  assign c$i_257 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_28 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_27 = $unsigned({{(64-8) {1'b0}},c$i_257});
-
   always_comb begin
-    case(c$case_alt_selection_28)
-      64'sd247 : c$case_alt_11 = response.ButterflyResponse_sel2;
-      default : c$case_alt_11 = c$case_alt_259[247];
+    case(c$case_alt_selection_29)
+      64'sd248 : c$case_alt_13 = outA;
+      default : c$case_alt_13 = stateSignal[183:161];
     endcase
   end
-
-  assign c$case_alt_selection_31 = c$case_alt_selection_30;
 
-  assign c$i_258 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_32 = c$case_alt_selection_31;
 
-  assign c$case_alt_selection_30 = $unsigned({{(64-8) {1'b0}},c$i_258});
+  assign c$case_alt_selection_31 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_31)
-      64'sd246 : c$case_alt_12 = response.ButterflyResponse_sel2;
-      default : c$case_alt_12 = c$case_alt_259[246];
+    case(c$case_alt_selection_32)
+      64'sd247 : c$case_alt_14 = outA;
+      default : c$case_alt_14 = stateSignal[206:184];
     endcase
   end
 
-  assign c$case_alt_selection_34 = c$case_alt_selection_33;
+  assign c$case_alt_selection_35 = c$case_alt_selection_34;
 
-  assign c$i_259 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_34 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_33 = $unsigned({{(64-8) {1'b0}},c$i_259});
-
   always_comb begin
-    case(c$case_alt_selection_34)
-      64'sd245 : c$case_alt_13 = response.ButterflyResponse_sel2;
-      default : c$case_alt_13 = c$case_alt_259[245];
+    case(c$case_alt_selection_35)
+      64'sd246 : c$case_alt_15 = outA;
+      default : c$case_alt_15 = stateSignal[229:207];
     endcase
   end
-
-  assign c$case_alt_selection_37 = c$case_alt_selection_36;
 
-  assign c$i_260 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_38 = c$case_alt_selection_37;
 
-  assign c$case_alt_selection_36 = $unsigned({{(64-8) {1'b0}},c$i_260});
+  assign c$case_alt_selection_37 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_37)
-      64'sd244 : c$case_alt_14 = response.ButterflyResponse_sel2;
-      default : c$case_alt_14 = c$case_alt_259[244];
+    case(c$case_alt_selection_38)
+      64'sd245 : c$case_alt_16 = outA;
+      default : c$case_alt_16 = stateSignal[252:230];
     endcase
   end
 
-  assign c$case_alt_selection_40 = c$case_alt_selection_39;
+  assign c$case_alt_selection_41 = c$case_alt_selection_40;
 
-  assign c$i_261 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_40 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_39 = $unsigned({{(64-8) {1'b0}},c$i_261});
-
   always_comb begin
-    case(c$case_alt_selection_40)
-      64'sd243 : c$case_alt_15 = response.ButterflyResponse_sel2;
-      default : c$case_alt_15 = c$case_alt_259[243];
+    case(c$case_alt_selection_41)
+      64'sd244 : c$case_alt_17 = outA;
+      default : c$case_alt_17 = stateSignal[275:253];
     endcase
   end
-
-  assign c$case_alt_selection_43 = c$case_alt_selection_42;
 
-  assign c$i_262 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_44 = c$case_alt_selection_43;
 
-  assign c$case_alt_selection_42 = $unsigned({{(64-8) {1'b0}},c$i_262});
+  assign c$case_alt_selection_43 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_43)
-      64'sd242 : c$case_alt_16 = response.ButterflyResponse_sel2;
-      default : c$case_alt_16 = c$case_alt_259[242];
+    case(c$case_alt_selection_44)
+      64'sd243 : c$case_alt_18 = outA;
+      default : c$case_alt_18 = stateSignal[298:276];
     endcase
   end
 
-  assign c$case_alt_selection_46 = c$case_alt_selection_45;
+  assign c$case_alt_selection_47 = c$case_alt_selection_46;
 
-  assign c$i_263 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_46 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_45 = $unsigned({{(64-8) {1'b0}},c$i_263});
-
   always_comb begin
-    case(c$case_alt_selection_46)
-      64'sd241 : c$case_alt_17 = response.ButterflyResponse_sel2;
-      default : c$case_alt_17 = c$case_alt_259[241];
+    case(c$case_alt_selection_47)
+      64'sd242 : c$case_alt_19 = outA;
+      default : c$case_alt_19 = stateSignal[321:299];
     endcase
   end
-
-  assign c$case_alt_selection_49 = c$case_alt_selection_48;
 
-  assign c$i_264 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_50 = c$case_alt_selection_49;
 
-  assign c$case_alt_selection_48 = $unsigned({{(64-8) {1'b0}},c$i_264});
+  assign c$case_alt_selection_49 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_49)
-      64'sd240 : c$case_alt_18 = response.ButterflyResponse_sel2;
-      default : c$case_alt_18 = c$case_alt_259[240];
+    case(c$case_alt_selection_50)
+      64'sd241 : c$case_alt_20 = outA;
+      default : c$case_alt_20 = stateSignal[344:322];
     endcase
   end
 
-  assign c$case_alt_selection_52 = c$case_alt_selection_51;
+  assign c$case_alt_selection_53 = c$case_alt_selection_52;
 
-  assign c$i_265 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_52 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_51 = $unsigned({{(64-8) {1'b0}},c$i_265});
-
   always_comb begin
-    case(c$case_alt_selection_52)
-      64'sd239 : c$case_alt_19 = response.ButterflyResponse_sel2;
-      default : c$case_alt_19 = c$case_alt_259[239];
+    case(c$case_alt_selection_53)
+      64'sd240 : c$case_alt_21 = outA;
+      default : c$case_alt_21 = stateSignal[367:345];
     endcase
   end
-
-  assign c$case_alt_selection_55 = c$case_alt_selection_54;
 
-  assign c$i_266 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_56 = c$case_alt_selection_55;
 
-  assign c$case_alt_selection_54 = $unsigned({{(64-8) {1'b0}},c$i_266});
+  assign c$case_alt_selection_55 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_55)
-      64'sd238 : c$case_alt_20 = response.ButterflyResponse_sel2;
-      default : c$case_alt_20 = c$case_alt_259[238];
+    case(c$case_alt_selection_56)
+      64'sd239 : c$case_alt_22 = outA;
+      default : c$case_alt_22 = stateSignal[390:368];
     endcase
   end
 
-  assign c$case_alt_selection_58 = c$case_alt_selection_57;
+  assign c$case_alt_selection_59 = c$case_alt_selection_58;
 
-  assign c$i_267 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_58 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_57 = $unsigned({{(64-8) {1'b0}},c$i_267});
-
   always_comb begin
-    case(c$case_alt_selection_58)
-      64'sd237 : c$case_alt_21 = response.ButterflyResponse_sel2;
-      default : c$case_alt_21 = c$case_alt_259[237];
+    case(c$case_alt_selection_59)
+      64'sd238 : c$case_alt_23 = outA;
+      default : c$case_alt_23 = stateSignal[413:391];
     endcase
   end
-
-  assign c$case_alt_selection_61 = c$case_alt_selection_60;
 
-  assign c$i_268 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_62 = c$case_alt_selection_61;
 
-  assign c$case_alt_selection_60 = $unsigned({{(64-8) {1'b0}},c$i_268});
+  assign c$case_alt_selection_61 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_61)
-      64'sd236 : c$case_alt_22 = response.ButterflyResponse_sel2;
-      default : c$case_alt_22 = c$case_alt_259[236];
+    case(c$case_alt_selection_62)
+      64'sd237 : c$case_alt_24 = outA;
+      default : c$case_alt_24 = stateSignal[436:414];
     endcase
   end
 
-  assign c$case_alt_selection_64 = c$case_alt_selection_63;
+  assign c$case_alt_selection_65 = c$case_alt_selection_64;
 
-  assign c$i_269 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_64 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_63 = $unsigned({{(64-8) {1'b0}},c$i_269});
-
   always_comb begin
-    case(c$case_alt_selection_64)
-      64'sd235 : c$case_alt_23 = response.ButterflyResponse_sel2;
-      default : c$case_alt_23 = c$case_alt_259[235];
+    case(c$case_alt_selection_65)
+      64'sd236 : c$case_alt_25 = outA;
+      default : c$case_alt_25 = stateSignal[459:437];
     endcase
   end
-
-  assign c$case_alt_selection_67 = c$case_alt_selection_66;
 
-  assign c$i_270 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_68 = c$case_alt_selection_67;
 
-  assign c$case_alt_selection_66 = $unsigned({{(64-8) {1'b0}},c$i_270});
+  assign c$case_alt_selection_67 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_67)
-      64'sd234 : c$case_alt_24 = response.ButterflyResponse_sel2;
-      default : c$case_alt_24 = c$case_alt_259[234];
+    case(c$case_alt_selection_68)
+      64'sd235 : c$case_alt_26 = outA;
+      default : c$case_alt_26 = stateSignal[482:460];
     endcase
   end
 
-  assign c$case_alt_selection_70 = c$case_alt_selection_69;
+  assign c$case_alt_selection_71 = c$case_alt_selection_70;
 
-  assign c$i_271 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_70 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_69 = $unsigned({{(64-8) {1'b0}},c$i_271});
-
   always_comb begin
-    case(c$case_alt_selection_70)
-      64'sd233 : c$case_alt_25 = response.ButterflyResponse_sel2;
-      default : c$case_alt_25 = c$case_alt_259[233];
+    case(c$case_alt_selection_71)
+      64'sd234 : c$case_alt_27 = outA;
+      default : c$case_alt_27 = stateSignal[505:483];
     endcase
   end
-
-  assign c$case_alt_selection_73 = c$case_alt_selection_72;
 
-  assign c$i_272 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_74 = c$case_alt_selection_73;
 
-  assign c$case_alt_selection_72 = $unsigned({{(64-8) {1'b0}},c$i_272});
+  assign c$case_alt_selection_73 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_73)
-      64'sd232 : c$case_alt_26 = response.ButterflyResponse_sel2;
-      default : c$case_alt_26 = c$case_alt_259[232];
+    case(c$case_alt_selection_74)
+      64'sd233 : c$case_alt_28 = outA;
+      default : c$case_alt_28 = stateSignal[528:506];
     endcase
   end
 
-  assign c$case_alt_selection_76 = c$case_alt_selection_75;
+  assign c$case_alt_selection_77 = c$case_alt_selection_76;
 
-  assign c$i_273 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_76 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_75 = $unsigned({{(64-8) {1'b0}},c$i_273});
-
   always_comb begin
-    case(c$case_alt_selection_76)
-      64'sd231 : c$case_alt_27 = response.ButterflyResponse_sel2;
-      default : c$case_alt_27 = c$case_alt_259[231];
+    case(c$case_alt_selection_77)
+      64'sd232 : c$case_alt_29 = outA;
+      default : c$case_alt_29 = stateSignal[551:529];
     endcase
   end
 
-  assign c$case_alt_selection_79 = c$case_alt_selection_78;
+  assign c$case_alt_selection_80 = c$case_alt_selection_79;
 
-  assign c$i_274 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_79 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_78 = $unsigned({{(64-8) {1'b0}},c$i_274});
-
   always_comb begin
-    case(c$case_alt_selection_79)
-      64'sd230 : c$case_alt_28 = response.ButterflyResponse_sel2;
-      default : c$case_alt_28 = c$case_alt_259[230];
+    case(c$case_alt_selection_80)
+      64'sd231 : c$case_alt_30 = outA;
+      default : c$case_alt_30 = stateSignal[574:552];
     endcase
   end
-
-  assign c$case_alt_selection_82 = c$case_alt_selection_81;
 
-  assign c$i_275 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_83 = c$case_alt_selection_82;
 
-  assign c$case_alt_selection_81 = $unsigned({{(64-8) {1'b0}},c$i_275});
+  assign c$case_alt_selection_82 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_82)
-      64'sd229 : c$case_alt_29 = response.ButterflyResponse_sel2;
-      default : c$case_alt_29 = c$case_alt_259[229];
+    case(c$case_alt_selection_83)
+      64'sd230 : c$case_alt_31 = outA;
+      default : c$case_alt_31 = stateSignal[597:575];
     endcase
   end
 
-  assign c$case_alt_selection_85 = c$case_alt_selection_84;
+  assign c$case_alt_selection_86 = c$case_alt_selection_85;
 
-  assign c$i_276 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_85 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_84 = $unsigned({{(64-8) {1'b0}},c$i_276});
-
   always_comb begin
-    case(c$case_alt_selection_85)
-      64'sd228 : c$case_alt_30 = response.ButterflyResponse_sel2;
-      default : c$case_alt_30 = c$case_alt_259[228];
+    case(c$case_alt_selection_86)
+      64'sd229 : c$case_alt_32 = outA;
+      default : c$case_alt_32 = stateSignal[620:598];
     endcase
   end
-
-  assign c$case_alt_selection_88 = c$case_alt_selection_87;
 
-  assign c$i_277 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_89 = c$case_alt_selection_88;
 
-  assign c$case_alt_selection_87 = $unsigned({{(64-8) {1'b0}},c$i_277});
+  assign c$case_alt_selection_88 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_88)
-      64'sd227 : c$case_alt_31 = response.ButterflyResponse_sel2;
-      default : c$case_alt_31 = c$case_alt_259[227];
+    case(c$case_alt_selection_89)
+      64'sd228 : c$case_alt_33 = outA;
+      default : c$case_alt_33 = stateSignal[643:621];
     endcase
   end
 
-  assign c$case_alt_selection_91 = c$case_alt_selection_90;
+  assign c$case_alt_selection_92 = c$case_alt_selection_91;
 
-  assign c$i_278 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_91 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_90 = $unsigned({{(64-8) {1'b0}},c$i_278});
-
   always_comb begin
-    case(c$case_alt_selection_91)
-      64'sd226 : c$case_alt_32 = response.ButterflyResponse_sel2;
-      default : c$case_alt_32 = c$case_alt_259[226];
+    case(c$case_alt_selection_92)
+      64'sd227 : c$case_alt_34 = outA;
+      default : c$case_alt_34 = stateSignal[666:644];
     endcase
   end
-
-  assign c$case_alt_selection_94 = c$case_alt_selection_93;
 
-  assign c$i_279 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_95 = c$case_alt_selection_94;
 
-  assign c$case_alt_selection_93 = $unsigned({{(64-8) {1'b0}},c$i_279});
+  assign c$case_alt_selection_94 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_94)
-      64'sd225 : c$case_alt_33 = response.ButterflyResponse_sel2;
-      default : c$case_alt_33 = c$case_alt_259[225];
+    case(c$case_alt_selection_95)
+      64'sd226 : c$case_alt_35 = outA;
+      default : c$case_alt_35 = stateSignal[689:667];
     endcase
   end
 
-  assign c$case_alt_selection_97 = c$case_alt_selection_96;
+  assign c$case_alt_selection_98 = c$case_alt_selection_97;
 
-  assign c$i_280 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_97 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_96 = $unsigned({{(64-8) {1'b0}},c$i_280});
-
   always_comb begin
-    case(c$case_alt_selection_97)
-      64'sd224 : c$case_alt_34 = response.ButterflyResponse_sel2;
-      default : c$case_alt_34 = c$case_alt_259[224];
+    case(c$case_alt_selection_98)
+      64'sd225 : c$case_alt_36 = outA;
+      default : c$case_alt_36 = stateSignal[712:690];
     endcase
   end
-
-  assign c$case_alt_selection_100 = c$case_alt_selection_99;
 
-  assign c$i_281 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_101 = c$case_alt_selection_100;
 
-  assign c$case_alt_selection_99 = $unsigned({{(64-8) {1'b0}},c$i_281});
+  assign c$case_alt_selection_100 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_100)
-      64'sd223 : c$case_alt_35 = response.ButterflyResponse_sel2;
-      default : c$case_alt_35 = c$case_alt_259[223];
+    case(c$case_alt_selection_101)
+      64'sd224 : c$case_alt_37 = outA;
+      default : c$case_alt_37 = stateSignal[735:713];
     endcase
   end
 
-  assign c$case_alt_selection_103 = c$case_alt_selection_102;
+  assign c$case_alt_selection_104 = c$case_alt_selection_103;
 
-  assign c$i_282 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_103 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_102 = $unsigned({{(64-8) {1'b0}},c$i_282});
-
   always_comb begin
-    case(c$case_alt_selection_103)
-      64'sd222 : c$case_alt_36 = response.ButterflyResponse_sel2;
-      default : c$case_alt_36 = c$case_alt_259[222];
+    case(c$case_alt_selection_104)
+      64'sd223 : c$case_alt_38 = outA;
+      default : c$case_alt_38 = stateSignal[758:736];
     endcase
   end
-
-  assign c$case_alt_selection_106 = c$case_alt_selection_105;
 
-  assign c$i_283 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_107 = c$case_alt_selection_106;
 
-  assign c$case_alt_selection_105 = $unsigned({{(64-8) {1'b0}},c$i_283});
+  assign c$case_alt_selection_106 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_106)
-      64'sd221 : c$case_alt_37 = response.ButterflyResponse_sel2;
-      default : c$case_alt_37 = c$case_alt_259[221];
+    case(c$case_alt_selection_107)
+      64'sd222 : c$case_alt_39 = outA;
+      default : c$case_alt_39 = stateSignal[781:759];
     endcase
   end
 
-  assign c$case_alt_selection_109 = c$case_alt_selection_108;
+  assign c$case_alt_selection_110 = c$case_alt_selection_109;
 
-  assign c$i_284 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_109 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_108 = $unsigned({{(64-8) {1'b0}},c$i_284});
-
   always_comb begin
-    case(c$case_alt_selection_109)
-      64'sd220 : c$case_alt_38 = response.ButterflyResponse_sel2;
-      default : c$case_alt_38 = c$case_alt_259[220];
+    case(c$case_alt_selection_110)
+      64'sd221 : c$case_alt_40 = outA;
+      default : c$case_alt_40 = stateSignal[804:782];
     endcase
   end
-
-  assign c$case_alt_selection_112 = c$case_alt_selection_111;
 
-  assign c$i_285 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_113 = c$case_alt_selection_112;
 
-  assign c$case_alt_selection_111 = $unsigned({{(64-8) {1'b0}},c$i_285});
+  assign c$case_alt_selection_112 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_112)
-      64'sd219 : c$case_alt_39 = response.ButterflyResponse_sel2;
-      default : c$case_alt_39 = c$case_alt_259[219];
+    case(c$case_alt_selection_113)
+      64'sd220 : c$case_alt_41 = outA;
+      default : c$case_alt_41 = stateSignal[827:805];
     endcase
   end
 
-  assign c$case_alt_selection_115 = c$case_alt_selection_114;
+  assign c$case_alt_selection_116 = c$case_alt_selection_115;
 
-  assign c$i_286 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_115 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_114 = $unsigned({{(64-8) {1'b0}},c$i_286});
-
   always_comb begin
-    case(c$case_alt_selection_115)
-      64'sd218 : c$case_alt_40 = response.ButterflyResponse_sel2;
-      default : c$case_alt_40 = c$case_alt_259[218];
+    case(c$case_alt_selection_116)
+      64'sd219 : c$case_alt_42 = outA;
+      default : c$case_alt_42 = stateSignal[850:828];
     endcase
   end
-
-  assign c$case_alt_selection_118 = c$case_alt_selection_117;
 
-  assign c$i_287 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_119 = c$case_alt_selection_118;
 
-  assign c$case_alt_selection_117 = $unsigned({{(64-8) {1'b0}},c$i_287});
+  assign c$case_alt_selection_118 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_118)
-      64'sd217 : c$case_alt_41 = response.ButterflyResponse_sel2;
-      default : c$case_alt_41 = c$case_alt_259[217];
+    case(c$case_alt_selection_119)
+      64'sd218 : c$case_alt_43 = outA;
+      default : c$case_alt_43 = stateSignal[873:851];
     endcase
   end
 
-  assign c$case_alt_selection_121 = c$case_alt_selection_120;
+  assign c$case_alt_selection_122 = c$case_alt_selection_121;
 
-  assign c$i_288 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_121 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_120 = $unsigned({{(64-8) {1'b0}},c$i_288});
-
   always_comb begin
-    case(c$case_alt_selection_121)
-      64'sd216 : c$case_alt_42 = response.ButterflyResponse_sel2;
-      default : c$case_alt_42 = c$case_alt_259[216];
+    case(c$case_alt_selection_122)
+      64'sd217 : c$case_alt_44 = outA;
+      default : c$case_alt_44 = stateSignal[896:874];
     endcase
   end
-
-  assign c$case_alt_selection_124 = c$case_alt_selection_123;
 
-  assign c$i_289 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_125 = c$case_alt_selection_124;
 
-  assign c$case_alt_selection_123 = $unsigned({{(64-8) {1'b0}},c$i_289});
+  assign c$case_alt_selection_124 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_124)
-      64'sd215 : c$case_alt_43 = response.ButterflyResponse_sel2;
-      default : c$case_alt_43 = c$case_alt_259[215];
+    case(c$case_alt_selection_125)
+      64'sd216 : c$case_alt_45 = outA;
+      default : c$case_alt_45 = stateSignal[919:897];
     endcase
   end
 
-  assign c$case_alt_selection_127 = c$case_alt_selection_126;
+  assign c$case_alt_selection_128 = c$case_alt_selection_127;
 
-  assign c$i_290 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_127 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_126 = $unsigned({{(64-8) {1'b0}},c$i_290});
-
   always_comb begin
-    case(c$case_alt_selection_127)
-      64'sd214 : c$case_alt_44 = response.ButterflyResponse_sel2;
-      default : c$case_alt_44 = c$case_alt_259[214];
+    case(c$case_alt_selection_128)
+      64'sd215 : c$case_alt_46 = outA;
+      default : c$case_alt_46 = stateSignal[942:920];
     endcase
   end
 
-  assign c$case_alt_selection_130 = c$case_alt_selection_129;
+  assign c$case_alt_selection_131 = c$case_alt_selection_130;
 
-  assign c$i_291 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_130 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_129 = $unsigned({{(64-8) {1'b0}},c$i_291});
-
   always_comb begin
-    case(c$case_alt_selection_130)
-      64'sd213 : c$case_alt_45 = response.ButterflyResponse_sel2;
-      default : c$case_alt_45 = c$case_alt_259[213];
+    case(c$case_alt_selection_131)
+      64'sd214 : c$case_alt_47 = outA;
+      default : c$case_alt_47 = stateSignal[965:943];
     endcase
   end
-
-  assign c$case_alt_selection_133 = c$case_alt_selection_132;
 
-  assign c$i_292 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_134 = c$case_alt_selection_133;
 
-  assign c$case_alt_selection_132 = $unsigned({{(64-8) {1'b0}},c$i_292});
+  assign c$case_alt_selection_133 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_133)
-      64'sd212 : c$case_alt_46 = response.ButterflyResponse_sel2;
-      default : c$case_alt_46 = c$case_alt_259[212];
+    case(c$case_alt_selection_134)
+      64'sd213 : c$case_alt_48 = outA;
+      default : c$case_alt_48 = stateSignal[988:966];
     endcase
   end
 
-  assign c$case_alt_selection_136 = c$case_alt_selection_135;
+  assign c$case_alt_selection_137 = c$case_alt_selection_136;
 
-  assign c$i_293 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_136 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_135 = $unsigned({{(64-8) {1'b0}},c$i_293});
-
   always_comb begin
-    case(c$case_alt_selection_136)
-      64'sd211 : c$case_alt_47 = response.ButterflyResponse_sel2;
-      default : c$case_alt_47 = c$case_alt_259[211];
+    case(c$case_alt_selection_137)
+      64'sd212 : c$case_alt_49 = outA;
+      default : c$case_alt_49 = stateSignal[1011:989];
     endcase
   end
-
-  assign c$case_alt_selection_139 = c$case_alt_selection_138;
 
-  assign c$i_294 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_140 = c$case_alt_selection_139;
 
-  assign c$case_alt_selection_138 = $unsigned({{(64-8) {1'b0}},c$i_294});
+  assign c$case_alt_selection_139 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_139)
-      64'sd210 : c$case_alt_48 = response.ButterflyResponse_sel2;
-      default : c$case_alt_48 = c$case_alt_259[210];
+    case(c$case_alt_selection_140)
+      64'sd211 : c$case_alt_50 = outA;
+      default : c$case_alt_50 = stateSignal[1034:1012];
     endcase
   end
 
-  assign c$case_alt_selection_142 = c$case_alt_selection_141;
+  assign c$case_alt_selection_143 = c$case_alt_selection_142;
 
-  assign c$i_295 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_142 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_141 = $unsigned({{(64-8) {1'b0}},c$i_295});
-
   always_comb begin
-    case(c$case_alt_selection_142)
-      64'sd209 : c$case_alt_49 = response.ButterflyResponse_sel2;
-      default : c$case_alt_49 = c$case_alt_259[209];
+    case(c$case_alt_selection_143)
+      64'sd210 : c$case_alt_51 = outA;
+      default : c$case_alt_51 = stateSignal[1057:1035];
     endcase
   end
-
-  assign c$case_alt_selection_145 = c$case_alt_selection_144;
 
-  assign c$i_296 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_146 = c$case_alt_selection_145;
 
-  assign c$case_alt_selection_144 = $unsigned({{(64-8) {1'b0}},c$i_296});
+  assign c$case_alt_selection_145 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_145)
-      64'sd208 : c$case_alt_50 = response.ButterflyResponse_sel2;
-      default : c$case_alt_50 = c$case_alt_259[208];
+    case(c$case_alt_selection_146)
+      64'sd209 : c$case_alt_52 = outA;
+      default : c$case_alt_52 = stateSignal[1080:1058];
     endcase
   end
 
-  assign c$case_alt_selection_148 = c$case_alt_selection_147;
+  assign c$case_alt_selection_149 = c$case_alt_selection_148;
 
-  assign c$i_297 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_148 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_147 = $unsigned({{(64-8) {1'b0}},c$i_297});
-
   always_comb begin
-    case(c$case_alt_selection_148)
-      64'sd207 : c$case_alt_51 = response.ButterflyResponse_sel2;
-      default : c$case_alt_51 = c$case_alt_259[207];
+    case(c$case_alt_selection_149)
+      64'sd208 : c$case_alt_53 = outA;
+      default : c$case_alt_53 = stateSignal[1103:1081];
     endcase
   end
-
-  assign c$case_alt_selection_151 = c$case_alt_selection_150;
 
-  assign c$i_298 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_152 = c$case_alt_selection_151;
 
-  assign c$case_alt_selection_150 = $unsigned({{(64-8) {1'b0}},c$i_298});
+  assign c$case_alt_selection_151 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_151)
-      64'sd206 : c$case_alt_52 = response.ButterflyResponse_sel2;
-      default : c$case_alt_52 = c$case_alt_259[206];
+    case(c$case_alt_selection_152)
+      64'sd207 : c$case_alt_54 = outA;
+      default : c$case_alt_54 = stateSignal[1126:1104];
     endcase
   end
 
-  assign c$case_alt_selection_154 = c$case_alt_selection_153;
+  assign c$case_alt_selection_155 = c$case_alt_selection_154;
 
-  assign c$i_299 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_154 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_153 = $unsigned({{(64-8) {1'b0}},c$i_299});
-
   always_comb begin
-    case(c$case_alt_selection_154)
-      64'sd205 : c$case_alt_53 = response.ButterflyResponse_sel2;
-      default : c$case_alt_53 = c$case_alt_259[205];
+    case(c$case_alt_selection_155)
+      64'sd206 : c$case_alt_55 = outA;
+      default : c$case_alt_55 = stateSignal[1149:1127];
     endcase
   end
-
-  assign c$case_alt_selection_157 = c$case_alt_selection_156;
 
-  assign c$i_300 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_158 = c$case_alt_selection_157;
 
-  assign c$case_alt_selection_156 = $unsigned({{(64-8) {1'b0}},c$i_300});
+  assign c$case_alt_selection_157 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_157)
-      64'sd204 : c$case_alt_54 = response.ButterflyResponse_sel2;
-      default : c$case_alt_54 = c$case_alt_259[204];
+    case(c$case_alt_selection_158)
+      64'sd205 : c$case_alt_56 = outA;
+      default : c$case_alt_56 = stateSignal[1172:1150];
     endcase
   end
 
-  assign c$case_alt_selection_160 = c$case_alt_selection_159;
+  assign c$case_alt_selection_161 = c$case_alt_selection_160;
 
-  assign c$i_301 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_160 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_159 = $unsigned({{(64-8) {1'b0}},c$i_301});
-
   always_comb begin
-    case(c$case_alt_selection_160)
-      64'sd203 : c$case_alt_55 = response.ButterflyResponse_sel2;
-      default : c$case_alt_55 = c$case_alt_259[203];
+    case(c$case_alt_selection_161)
+      64'sd204 : c$case_alt_57 = outA;
+      default : c$case_alt_57 = stateSignal[1195:1173];
     endcase
   end
-
-  assign c$case_alt_selection_163 = c$case_alt_selection_162;
 
-  assign c$i_302 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_164 = c$case_alt_selection_163;
 
-  assign c$case_alt_selection_162 = $unsigned({{(64-8) {1'b0}},c$i_302});
+  assign c$case_alt_selection_163 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_163)
-      64'sd202 : c$case_alt_56 = response.ButterflyResponse_sel2;
-      default : c$case_alt_56 = c$case_alt_259[202];
+    case(c$case_alt_selection_164)
+      64'sd203 : c$case_alt_58 = outA;
+      default : c$case_alt_58 = stateSignal[1218:1196];
     endcase
   end
 
-  assign c$case_alt_selection_166 = c$case_alt_selection_165;
+  assign c$case_alt_selection_167 = c$case_alt_selection_166;
 
-  assign c$i_303 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_166 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_165 = $unsigned({{(64-8) {1'b0}},c$i_303});
-
   always_comb begin
-    case(c$case_alt_selection_166)
-      64'sd201 : c$case_alt_57 = response.ButterflyResponse_sel2;
-      default : c$case_alt_57 = c$case_alt_259[201];
+    case(c$case_alt_selection_167)
+      64'sd202 : c$case_alt_59 = outA;
+      default : c$case_alt_59 = stateSignal[1241:1219];
     endcase
   end
-
-  assign c$case_alt_selection_169 = c$case_alt_selection_168;
 
-  assign c$i_304 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_170 = c$case_alt_selection_169;
 
-  assign c$case_alt_selection_168 = $unsigned({{(64-8) {1'b0}},c$i_304});
+  assign c$case_alt_selection_169 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_169)
-      64'sd200 : c$case_alt_58 = response.ButterflyResponse_sel2;
-      default : c$case_alt_58 = c$case_alt_259[200];
+    case(c$case_alt_selection_170)
+      64'sd201 : c$case_alt_60 = outA;
+      default : c$case_alt_60 = stateSignal[1264:1242];
     endcase
   end
 
-  assign c$case_alt_selection_172 = c$case_alt_selection_171;
+  assign c$case_alt_selection_173 = c$case_alt_selection_172;
 
-  assign c$i_305 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_172 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_171 = $unsigned({{(64-8) {1'b0}},c$i_305});
-
   always_comb begin
-    case(c$case_alt_selection_172)
-      64'sd199 : c$case_alt_59 = response.ButterflyResponse_sel2;
-      default : c$case_alt_59 = c$case_alt_259[199];
+    case(c$case_alt_selection_173)
+      64'sd200 : c$case_alt_61 = outA;
+      default : c$case_alt_61 = stateSignal[1287:1265];
     endcase
   end
-
-  assign c$case_alt_selection_175 = c$case_alt_selection_174;
 
-  assign c$i_306 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_176 = c$case_alt_selection_175;
 
-  assign c$case_alt_selection_174 = $unsigned({{(64-8) {1'b0}},c$i_306});
+  assign c$case_alt_selection_175 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_175)
-      64'sd198 : c$case_alt_60 = response.ButterflyResponse_sel2;
-      default : c$case_alt_60 = c$case_alt_259[198];
+    case(c$case_alt_selection_176)
+      64'sd199 : c$case_alt_62 = outA;
+      default : c$case_alt_62 = stateSignal[1310:1288];
     endcase
   end
 
-  assign c$case_alt_selection_178 = c$case_alt_selection_177;
+  assign c$case_alt_selection_179 = c$case_alt_selection_178;
 
-  assign c$i_307 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_178 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_177 = $unsigned({{(64-8) {1'b0}},c$i_307});
-
   always_comb begin
-    case(c$case_alt_selection_178)
-      64'sd197 : c$case_alt_61 = response.ButterflyResponse_sel2;
-      default : c$case_alt_61 = c$case_alt_259[197];
+    case(c$case_alt_selection_179)
+      64'sd198 : c$case_alt_63 = outA;
+      default : c$case_alt_63 = stateSignal[1333:1311];
     endcase
   end
 
-  assign c$case_alt_selection_181 = c$case_alt_selection_180;
+  assign c$case_alt_selection_182 = c$case_alt_selection_181;
 
-  assign c$i_308 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_181 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_180 = $unsigned({{(64-8) {1'b0}},c$i_308});
-
   always_comb begin
-    case(c$case_alt_selection_181)
-      64'sd196 : c$case_alt_62 = response.ButterflyResponse_sel2;
-      default : c$case_alt_62 = c$case_alt_259[196];
+    case(c$case_alt_selection_182)
+      64'sd197 : c$case_alt_64 = outA;
+      default : c$case_alt_64 = stateSignal[1356:1334];
     endcase
   end
-
-  assign c$case_alt_selection_184 = c$case_alt_selection_183;
 
-  assign c$i_309 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_185 = c$case_alt_selection_184;
 
-  assign c$case_alt_selection_183 = $unsigned({{(64-8) {1'b0}},c$i_309});
+  assign c$case_alt_selection_184 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_184)
-      64'sd195 : c$case_alt_63 = response.ButterflyResponse_sel2;
-      default : c$case_alt_63 = c$case_alt_259[195];
+    case(c$case_alt_selection_185)
+      64'sd196 : c$case_alt_65 = outA;
+      default : c$case_alt_65 = stateSignal[1379:1357];
     endcase
   end
 
-  assign c$case_alt_selection_187 = c$case_alt_selection_186;
+  assign c$case_alt_selection_188 = c$case_alt_selection_187;
 
-  assign c$i_310 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_187 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_186 = $unsigned({{(64-8) {1'b0}},c$i_310});
-
   always_comb begin
-    case(c$case_alt_selection_187)
-      64'sd194 : c$case_alt_64 = response.ButterflyResponse_sel2;
-      default : c$case_alt_64 = c$case_alt_259[194];
+    case(c$case_alt_selection_188)
+      64'sd195 : c$case_alt_66 = outA;
+      default : c$case_alt_66 = stateSignal[1402:1380];
     endcase
   end
-
-  assign c$case_alt_selection_190 = c$case_alt_selection_189;
 
-  assign c$i_311 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_191 = c$case_alt_selection_190;
 
-  assign c$case_alt_selection_189 = $unsigned({{(64-8) {1'b0}},c$i_311});
+  assign c$case_alt_selection_190 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_190)
-      64'sd193 : c$case_alt_65 = response.ButterflyResponse_sel2;
-      default : c$case_alt_65 = c$case_alt_259[193];
+    case(c$case_alt_selection_191)
+      64'sd194 : c$case_alt_67 = outA;
+      default : c$case_alt_67 = stateSignal[1425:1403];
     endcase
   end
 
-  assign c$case_alt_selection_193 = c$case_alt_selection_192;
+  assign c$case_alt_selection_194 = c$case_alt_selection_193;
 
-  assign c$i_312 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_193 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_192 = $unsigned({{(64-8) {1'b0}},c$i_312});
-
   always_comb begin
-    case(c$case_alt_selection_193)
-      64'sd192 : c$case_alt_66 = response.ButterflyResponse_sel2;
-      default : c$case_alt_66 = c$case_alt_259[192];
+    case(c$case_alt_selection_194)
+      64'sd193 : c$case_alt_68 = outA;
+      default : c$case_alt_68 = stateSignal[1448:1426];
     endcase
   end
-
-  assign c$case_alt_selection_196 = c$case_alt_selection_195;
 
-  assign c$i_313 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_197 = c$case_alt_selection_196;
 
-  assign c$case_alt_selection_195 = $unsigned({{(64-8) {1'b0}},c$i_313});
+  assign c$case_alt_selection_196 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_196)
-      64'sd191 : c$case_alt_67 = response.ButterflyResponse_sel2;
-      default : c$case_alt_67 = c$case_alt_259[191];
+    case(c$case_alt_selection_197)
+      64'sd192 : c$case_alt_69 = outA;
+      default : c$case_alt_69 = stateSignal[1471:1449];
     endcase
   end
 
-  assign c$case_alt_selection_199 = c$case_alt_selection_198;
+  assign c$case_alt_selection_200 = c$case_alt_selection_199;
 
-  assign c$i_314 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_199 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_198 = $unsigned({{(64-8) {1'b0}},c$i_314});
-
   always_comb begin
-    case(c$case_alt_selection_199)
-      64'sd190 : c$case_alt_68 = response.ButterflyResponse_sel2;
-      default : c$case_alt_68 = c$case_alt_259[190];
+    case(c$case_alt_selection_200)
+      64'sd191 : c$case_alt_70 = outA;
+      default : c$case_alt_70 = stateSignal[1494:1472];
     endcase
   end
-
-  assign c$case_alt_selection_202 = c$case_alt_selection_201;
 
-  assign c$i_315 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_203 = c$case_alt_selection_202;
 
-  assign c$case_alt_selection_201 = $unsigned({{(64-8) {1'b0}},c$i_315});
+  assign c$case_alt_selection_202 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_202)
-      64'sd189 : c$case_alt_69 = response.ButterflyResponse_sel2;
-      default : c$case_alt_69 = c$case_alt_259[189];
+    case(c$case_alt_selection_203)
+      64'sd190 : c$case_alt_71 = outA;
+      default : c$case_alt_71 = stateSignal[1517:1495];
     endcase
   end
 
-  assign c$case_alt_selection_205 = c$case_alt_selection_204;
+  assign c$case_alt_selection_206 = c$case_alt_selection_205;
 
-  assign c$i_316 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_205 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_204 = $unsigned({{(64-8) {1'b0}},c$i_316});
-
   always_comb begin
-    case(c$case_alt_selection_205)
-      64'sd188 : c$case_alt_70 = response.ButterflyResponse_sel2;
-      default : c$case_alt_70 = c$case_alt_259[188];
+    case(c$case_alt_selection_206)
+      64'sd189 : c$case_alt_72 = outA;
+      default : c$case_alt_72 = stateSignal[1540:1518];
     endcase
   end
-
-  assign c$case_alt_selection_208 = c$case_alt_selection_207;
 
-  assign c$i_317 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_209 = c$case_alt_selection_208;
 
-  assign c$case_alt_selection_207 = $unsigned({{(64-8) {1'b0}},c$i_317});
+  assign c$case_alt_selection_208 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_208)
-      64'sd187 : c$case_alt_71 = response.ButterflyResponse_sel2;
-      default : c$case_alt_71 = c$case_alt_259[187];
+    case(c$case_alt_selection_209)
+      64'sd188 : c$case_alt_73 = outA;
+      default : c$case_alt_73 = stateSignal[1563:1541];
     endcase
   end
 
-  assign c$case_alt_selection_211 = c$case_alt_selection_210;
+  assign c$case_alt_selection_212 = c$case_alt_selection_211;
 
-  assign c$i_318 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_211 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_210 = $unsigned({{(64-8) {1'b0}},c$i_318});
-
   always_comb begin
-    case(c$case_alt_selection_211)
-      64'sd186 : c$case_alt_72 = response.ButterflyResponse_sel2;
-      default : c$case_alt_72 = c$case_alt_259[186];
+    case(c$case_alt_selection_212)
+      64'sd187 : c$case_alt_74 = outA;
+      default : c$case_alt_74 = stateSignal[1586:1564];
     endcase
   end
-
-  assign c$case_alt_selection_214 = c$case_alt_selection_213;
 
-  assign c$i_319 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_215 = c$case_alt_selection_214;
 
-  assign c$case_alt_selection_213 = $unsigned({{(64-8) {1'b0}},c$i_319});
+  assign c$case_alt_selection_214 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_214)
-      64'sd185 : c$case_alt_73 = response.ButterflyResponse_sel2;
-      default : c$case_alt_73 = c$case_alt_259[185];
+    case(c$case_alt_selection_215)
+      64'sd186 : c$case_alt_75 = outA;
+      default : c$case_alt_75 = stateSignal[1609:1587];
     endcase
   end
 
-  assign c$case_alt_selection_217 = c$case_alt_selection_216;
+  assign c$case_alt_selection_218 = c$case_alt_selection_217;
 
-  assign c$i_320 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_217 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_216 = $unsigned({{(64-8) {1'b0}},c$i_320});
-
   always_comb begin
-    case(c$case_alt_selection_217)
-      64'sd184 : c$case_alt_74 = response.ButterflyResponse_sel2;
-      default : c$case_alt_74 = c$case_alt_259[184];
+    case(c$case_alt_selection_218)
+      64'sd185 : c$case_alt_76 = outA;
+      default : c$case_alt_76 = stateSignal[1632:1610];
     endcase
   end
-
-  assign c$case_alt_selection_220 = c$case_alt_selection_219;
 
-  assign c$i_321 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_221 = c$case_alt_selection_220;
 
-  assign c$case_alt_selection_219 = $unsigned({{(64-8) {1'b0}},c$i_321});
+  assign c$case_alt_selection_220 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_220)
-      64'sd183 : c$case_alt_75 = response.ButterflyResponse_sel2;
-      default : c$case_alt_75 = c$case_alt_259[183];
+    case(c$case_alt_selection_221)
+      64'sd184 : c$case_alt_77 = outA;
+      default : c$case_alt_77 = stateSignal[1655:1633];
     endcase
   end
 
-  assign c$case_alt_selection_223 = c$case_alt_selection_222;
+  assign c$case_alt_selection_224 = c$case_alt_selection_223;
 
-  assign c$i_322 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_223 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_222 = $unsigned({{(64-8) {1'b0}},c$i_322});
-
   always_comb begin
-    case(c$case_alt_selection_223)
-      64'sd182 : c$case_alt_76 = response.ButterflyResponse_sel2;
-      default : c$case_alt_76 = c$case_alt_259[182];
+    case(c$case_alt_selection_224)
+      64'sd183 : c$case_alt_78 = outA;
+      default : c$case_alt_78 = stateSignal[1678:1656];
     endcase
   end
-
-  assign c$case_alt_selection_226 = c$case_alt_selection_225;
 
-  assign c$i_323 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_227 = c$case_alt_selection_226;
 
-  assign c$case_alt_selection_225 = $unsigned({{(64-8) {1'b0}},c$i_323});
+  assign c$case_alt_selection_226 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_226)
-      64'sd181 : c$case_alt_77 = response.ButterflyResponse_sel2;
-      default : c$case_alt_77 = c$case_alt_259[181];
+    case(c$case_alt_selection_227)
+      64'sd182 : c$case_alt_79 = outA;
+      default : c$case_alt_79 = stateSignal[1701:1679];
     endcase
   end
 
-  assign c$case_alt_selection_229 = c$case_alt_selection_228;
+  assign c$case_alt_selection_230 = c$case_alt_selection_229;
 
-  assign c$i_324 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_229 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_228 = $unsigned({{(64-8) {1'b0}},c$i_324});
-
   always_comb begin
-    case(c$case_alt_selection_229)
-      64'sd180 : c$case_alt_78 = response.ButterflyResponse_sel2;
-      default : c$case_alt_78 = c$case_alt_259[180];
+    case(c$case_alt_selection_230)
+      64'sd181 : c$case_alt_80 = outA;
+      default : c$case_alt_80 = stateSignal[1724:1702];
     endcase
   end
-
-  assign c$case_alt_selection_232 = c$case_alt_selection_231;
 
-  assign c$i_325 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_233 = c$case_alt_selection_232;
 
-  assign c$case_alt_selection_231 = $unsigned({{(64-8) {1'b0}},c$i_325});
+  assign c$case_alt_selection_232 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_232)
-      64'sd179 : c$case_alt_79 = response.ButterflyResponse_sel2;
-      default : c$case_alt_79 = c$case_alt_259[179];
+    case(c$case_alt_selection_233)
+      64'sd180 : c$case_alt_81 = outA;
+      default : c$case_alt_81 = stateSignal[1747:1725];
     endcase
   end
 
-  assign c$case_alt_selection_235 = c$case_alt_selection_234;
+  assign c$case_alt_selection_236 = c$case_alt_selection_235;
 
-  assign c$i_326 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_235 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_234 = $unsigned({{(64-8) {1'b0}},c$i_326});
-
   always_comb begin
-    case(c$case_alt_selection_235)
-      64'sd178 : c$case_alt_80 = response.ButterflyResponse_sel2;
-      default : c$case_alt_80 = c$case_alt_259[178];
+    case(c$case_alt_selection_236)
+      64'sd179 : c$case_alt_82 = outA;
+      default : c$case_alt_82 = stateSignal[1770:1748];
     endcase
   end
-
-  assign c$case_alt_selection_238 = c$case_alt_selection_237;
 
-  assign c$i_327 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_239 = c$case_alt_selection_238;
 
-  assign c$case_alt_selection_237 = $unsigned({{(64-8) {1'b0}},c$i_327});
+  assign c$case_alt_selection_238 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_238)
-      64'sd177 : c$case_alt_81 = response.ButterflyResponse_sel2;
-      default : c$case_alt_81 = c$case_alt_259[177];
+    case(c$case_alt_selection_239)
+      64'sd178 : c$case_alt_83 = outA;
+      default : c$case_alt_83 = stateSignal[1793:1771];
     endcase
   end
 
-  assign c$case_alt_selection_241 = c$case_alt_selection_240;
+  assign c$case_alt_selection_242 = c$case_alt_selection_241;
 
-  assign c$i_328 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_241 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_240 = $unsigned({{(64-8) {1'b0}},c$i_328});
-
   always_comb begin
-    case(c$case_alt_selection_241)
-      64'sd176 : c$case_alt_82 = response.ButterflyResponse_sel2;
-      default : c$case_alt_82 = c$case_alt_259[176];
+    case(c$case_alt_selection_242)
+      64'sd177 : c$case_alt_84 = outA;
+      default : c$case_alt_84 = stateSignal[1816:1794];
     endcase
   end
-
-  assign c$case_alt_selection_244 = c$case_alt_selection_243;
 
-  assign c$i_329 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_245 = c$case_alt_selection_244;
 
-  assign c$case_alt_selection_243 = $unsigned({{(64-8) {1'b0}},c$i_329});
+  assign c$case_alt_selection_244 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_244)
-      64'sd175 : c$case_alt_83 = response.ButterflyResponse_sel2;
-      default : c$case_alt_83 = c$case_alt_259[175];
+    case(c$case_alt_selection_245)
+      64'sd176 : c$case_alt_85 = outA;
+      default : c$case_alt_85 = stateSignal[1839:1817];
     endcase
   end
 
-  assign c$case_alt_selection_247 = c$case_alt_selection_246;
+  assign c$case_alt_selection_248 = c$case_alt_selection_247;
 
-  assign c$i_330 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_247 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_246 = $unsigned({{(64-8) {1'b0}},c$i_330});
-
   always_comb begin
-    case(c$case_alt_selection_247)
-      64'sd174 : c$case_alt_84 = response.ButterflyResponse_sel2;
-      default : c$case_alt_84 = c$case_alt_259[174];
+    case(c$case_alt_selection_248)
+      64'sd175 : c$case_alt_86 = outA;
+      default : c$case_alt_86 = stateSignal[1862:1840];
     endcase
   end
-
-  assign c$case_alt_selection_250 = c$case_alt_selection_249;
 
-  assign c$i_331 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_251 = c$case_alt_selection_250;
 
-  assign c$case_alt_selection_249 = $unsigned({{(64-8) {1'b0}},c$i_331});
+  assign c$case_alt_selection_250 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_250)
-      64'sd173 : c$case_alt_85 = response.ButterflyResponse_sel2;
-      default : c$case_alt_85 = c$case_alt_259[173];
+    case(c$case_alt_selection_251)
+      64'sd174 : c$case_alt_87 = outA;
+      default : c$case_alt_87 = stateSignal[1885:1863];
     endcase
   end
 
-  assign c$case_alt_selection_253 = c$case_alt_selection_252;
+  assign c$case_alt_selection_254 = c$case_alt_selection_253;
 
-  assign c$i_332 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_253 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_252 = $unsigned({{(64-8) {1'b0}},c$i_332});
-
   always_comb begin
-    case(c$case_alt_selection_253)
-      64'sd172 : c$case_alt_86 = response.ButterflyResponse_sel2;
-      default : c$case_alt_86 = c$case_alt_259[172];
+    case(c$case_alt_selection_254)
+      64'sd173 : c$case_alt_88 = outA;
+      default : c$case_alt_88 = stateSignal[1908:1886];
     endcase
   end
-
-  assign c$case_alt_selection_256 = c$case_alt_selection_255;
 
-  assign c$i_333 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_257 = c$case_alt_selection_256;
 
-  assign c$case_alt_selection_255 = $unsigned({{(64-8) {1'b0}},c$i_333});
+  assign c$case_alt_selection_256 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_256)
-      64'sd171 : c$case_alt_87 = response.ButterflyResponse_sel2;
-      default : c$case_alt_87 = c$case_alt_259[171];
+    case(c$case_alt_selection_257)
+      64'sd172 : c$case_alt_89 = outA;
+      default : c$case_alt_89 = stateSignal[1931:1909];
     endcase
   end
 
-  assign c$case_alt_selection_259 = c$case_alt_selection_258;
+  assign c$case_alt_selection_260 = c$case_alt_selection_259;
 
-  assign c$i_334 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_259 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_258 = $unsigned({{(64-8) {1'b0}},c$i_334});
-
   always_comb begin
-    case(c$case_alt_selection_259)
-      64'sd170 : c$case_alt_88 = response.ButterflyResponse_sel2;
-      default : c$case_alt_88 = c$case_alt_259[170];
+    case(c$case_alt_selection_260)
+      64'sd171 : c$case_alt_90 = outA;
+      default : c$case_alt_90 = stateSignal[1954:1932];
     endcase
   end
-
-  assign c$case_alt_selection_262 = c$case_alt_selection_261;
 
-  assign c$i_335 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_263 = c$case_alt_selection_262;
 
-  assign c$case_alt_selection_261 = $unsigned({{(64-8) {1'b0}},c$i_335});
+  assign c$case_alt_selection_262 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_262)
-      64'sd169 : c$case_alt_89 = response.ButterflyResponse_sel2;
-      default : c$case_alt_89 = c$case_alt_259[169];
+    case(c$case_alt_selection_263)
+      64'sd170 : c$case_alt_91 = outA;
+      default : c$case_alt_91 = stateSignal[1977:1955];
     endcase
   end
 
-  assign c$case_alt_selection_265 = c$case_alt_selection_264;
+  assign c$case_alt_selection_266 = c$case_alt_selection_265;
 
-  assign c$i_336 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_265 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_264 = $unsigned({{(64-8) {1'b0}},c$i_336});
-
   always_comb begin
-    case(c$case_alt_selection_265)
-      64'sd168 : c$case_alt_90 = response.ButterflyResponse_sel2;
-      default : c$case_alt_90 = c$case_alt_259[168];
+    case(c$case_alt_selection_266)
+      64'sd169 : c$case_alt_92 = outA;
+      default : c$case_alt_92 = stateSignal[2000:1978];
     endcase
   end
-
-  assign c$case_alt_selection_268 = c$case_alt_selection_267;
 
-  assign c$i_337 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_269 = c$case_alt_selection_268;
 
-  assign c$case_alt_selection_267 = $unsigned({{(64-8) {1'b0}},c$i_337});
+  assign c$case_alt_selection_268 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_268)
-      64'sd167 : c$case_alt_91 = response.ButterflyResponse_sel2;
-      default : c$case_alt_91 = c$case_alt_259[167];
+    case(c$case_alt_selection_269)
+      64'sd168 : c$case_alt_93 = outA;
+      default : c$case_alt_93 = stateSignal[2023:2001];
     endcase
   end
 
-  assign c$case_alt_selection_271 = c$case_alt_selection_270;
+  assign c$case_alt_selection_272 = c$case_alt_selection_271;
 
-  assign c$i_338 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_271 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_270 = $unsigned({{(64-8) {1'b0}},c$i_338});
-
   always_comb begin
-    case(c$case_alt_selection_271)
-      64'sd166 : c$case_alt_92 = response.ButterflyResponse_sel2;
-      default : c$case_alt_92 = c$case_alt_259[166];
+    case(c$case_alt_selection_272)
+      64'sd167 : c$case_alt_94 = outA;
+      default : c$case_alt_94 = stateSignal[2046:2024];
     endcase
   end
-
-  assign c$case_alt_selection_274 = c$case_alt_selection_273;
 
-  assign c$i_339 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_275 = c$case_alt_selection_274;
 
-  assign c$case_alt_selection_273 = $unsigned({{(64-8) {1'b0}},c$i_339});
+  assign c$case_alt_selection_274 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_274)
-      64'sd165 : c$case_alt_93 = response.ButterflyResponse_sel2;
-      default : c$case_alt_93 = c$case_alt_259[165];
+    case(c$case_alt_selection_275)
+      64'sd166 : c$case_alt_95 = outA;
+      default : c$case_alt_95 = stateSignal[2069:2047];
     endcase
   end
 
-  assign c$case_alt_selection_277 = c$case_alt_selection_276;
+  assign c$case_alt_selection_278 = c$case_alt_selection_277;
 
-  assign c$i_340 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_277 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_276 = $unsigned({{(64-8) {1'b0}},c$i_340});
-
   always_comb begin
-    case(c$case_alt_selection_277)
-      64'sd164 : c$case_alt_94 = response.ButterflyResponse_sel2;
-      default : c$case_alt_94 = c$case_alt_259[164];
+    case(c$case_alt_selection_278)
+      64'sd165 : c$case_alt_96 = outA;
+      default : c$case_alt_96 = stateSignal[2092:2070];
     endcase
   end
 
-  assign c$case_alt_selection_280 = c$case_alt_selection_279;
+  assign c$case_alt_selection_281 = c$case_alt_selection_280;
 
-  assign c$i_341 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_280 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_279 = $unsigned({{(64-8) {1'b0}},c$i_341});
-
   always_comb begin
-    case(c$case_alt_selection_280)
-      64'sd163 : c$case_alt_95 = response.ButterflyResponse_sel2;
-      default : c$case_alt_95 = c$case_alt_259[163];
+    case(c$case_alt_selection_281)
+      64'sd164 : c$case_alt_97 = outA;
+      default : c$case_alt_97 = stateSignal[2115:2093];
     endcase
   end
-
-  assign c$case_alt_selection_283 = c$case_alt_selection_282;
 
-  assign c$i_342 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_284 = c$case_alt_selection_283;
 
-  assign c$case_alt_selection_282 = $unsigned({{(64-8) {1'b0}},c$i_342});
+  assign c$case_alt_selection_283 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_283)
-      64'sd162 : c$case_alt_96 = response.ButterflyResponse_sel2;
-      default : c$case_alt_96 = c$case_alt_259[162];
+    case(c$case_alt_selection_284)
+      64'sd163 : c$case_alt_98 = outA;
+      default : c$case_alt_98 = stateSignal[2138:2116];
     endcase
   end
 
-  assign c$case_alt_selection_286 = c$case_alt_selection_285;
+  assign c$case_alt_selection_287 = c$case_alt_selection_286;
 
-  assign c$i_343 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_286 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_285 = $unsigned({{(64-8) {1'b0}},c$i_343});
-
   always_comb begin
-    case(c$case_alt_selection_286)
-      64'sd161 : c$case_alt_97 = response.ButterflyResponse_sel2;
-      default : c$case_alt_97 = c$case_alt_259[161];
+    case(c$case_alt_selection_287)
+      64'sd162 : c$case_alt_99 = outA;
+      default : c$case_alt_99 = stateSignal[2161:2139];
     endcase
   end
-
-  assign c$case_alt_selection_289 = c$case_alt_selection_288;
 
-  assign c$i_344 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_290 = c$case_alt_selection_289;
 
-  assign c$case_alt_selection_288 = $unsigned({{(64-8) {1'b0}},c$i_344});
+  assign c$case_alt_selection_289 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_289)
-      64'sd160 : c$case_alt_98 = response.ButterflyResponse_sel2;
-      default : c$case_alt_98 = c$case_alt_259[160];
+    case(c$case_alt_selection_290)
+      64'sd161 : c$case_alt_100 = outA;
+      default : c$case_alt_100 = stateSignal[2184:2162];
     endcase
   end
 
-  assign c$case_alt_selection_292 = c$case_alt_selection_291;
+  assign c$case_alt_selection_293 = c$case_alt_selection_292;
 
-  assign c$i_345 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_292 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_291 = $unsigned({{(64-8) {1'b0}},c$i_345});
-
   always_comb begin
-    case(c$case_alt_selection_292)
-      64'sd159 : c$case_alt_99 = response.ButterflyResponse_sel2;
-      default : c$case_alt_99 = c$case_alt_259[159];
+    case(c$case_alt_selection_293)
+      64'sd160 : c$case_alt_101 = outA;
+      default : c$case_alt_101 = stateSignal[2207:2185];
     endcase
   end
-
-  assign c$case_alt_selection_295 = c$case_alt_selection_294;
 
-  assign c$i_346 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_296 = c$case_alt_selection_295;
 
-  assign c$case_alt_selection_294 = $unsigned({{(64-8) {1'b0}},c$i_346});
+  assign c$case_alt_selection_295 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_295)
-      64'sd158 : c$case_alt_100 = response.ButterflyResponse_sel2;
-      default : c$case_alt_100 = c$case_alt_259[158];
+    case(c$case_alt_selection_296)
+      64'sd159 : c$case_alt_102 = outA;
+      default : c$case_alt_102 = stateSignal[2230:2208];
     endcase
   end
 
-  assign c$case_alt_selection_298 = c$case_alt_selection_297;
+  assign c$case_alt_selection_299 = c$case_alt_selection_298;
 
-  assign c$i_347 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_298 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_297 = $unsigned({{(64-8) {1'b0}},c$i_347});
-
   always_comb begin
-    case(c$case_alt_selection_298)
-      64'sd157 : c$case_alt_101 = response.ButterflyResponse_sel2;
-      default : c$case_alt_101 = c$case_alt_259[157];
+    case(c$case_alt_selection_299)
+      64'sd158 : c$case_alt_103 = outA;
+      default : c$case_alt_103 = stateSignal[2253:2231];
     endcase
   end
-
-  assign c$case_alt_selection_301 = c$case_alt_selection_300;
 
-  assign c$i_348 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_302 = c$case_alt_selection_301;
 
-  assign c$case_alt_selection_300 = $unsigned({{(64-8) {1'b0}},c$i_348});
+  assign c$case_alt_selection_301 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_301)
-      64'sd156 : c$case_alt_102 = response.ButterflyResponse_sel2;
-      default : c$case_alt_102 = c$case_alt_259[156];
+    case(c$case_alt_selection_302)
+      64'sd157 : c$case_alt_104 = outA;
+      default : c$case_alt_104 = stateSignal[2276:2254];
     endcase
   end
 
-  assign c$case_alt_selection_304 = c$case_alt_selection_303;
+  assign c$case_alt_selection_305 = c$case_alt_selection_304;
 
-  assign c$i_349 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_304 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_303 = $unsigned({{(64-8) {1'b0}},c$i_349});
-
   always_comb begin
-    case(c$case_alt_selection_304)
-      64'sd155 : c$case_alt_103 = response.ButterflyResponse_sel2;
-      default : c$case_alt_103 = c$case_alt_259[155];
+    case(c$case_alt_selection_305)
+      64'sd156 : c$case_alt_105 = outA;
+      default : c$case_alt_105 = stateSignal[2299:2277];
     endcase
   end
-
-  assign c$case_alt_selection_307 = c$case_alt_selection_306;
 
-  assign c$i_350 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_308 = c$case_alt_selection_307;
 
-  assign c$case_alt_selection_306 = $unsigned({{(64-8) {1'b0}},c$i_350});
+  assign c$case_alt_selection_307 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_307)
-      64'sd154 : c$case_alt_104 = response.ButterflyResponse_sel2;
-      default : c$case_alt_104 = c$case_alt_259[154];
+    case(c$case_alt_selection_308)
+      64'sd155 : c$case_alt_106 = outA;
+      default : c$case_alt_106 = stateSignal[2322:2300];
     endcase
   end
 
-  assign c$case_alt_selection_310 = c$case_alt_selection_309;
+  assign c$case_alt_selection_311 = c$case_alt_selection_310;
 
-  assign c$i_351 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_310 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_309 = $unsigned({{(64-8) {1'b0}},c$i_351});
-
   always_comb begin
-    case(c$case_alt_selection_310)
-      64'sd153 : c$case_alt_105 = response.ButterflyResponse_sel2;
-      default : c$case_alt_105 = c$case_alt_259[153];
+    case(c$case_alt_selection_311)
+      64'sd154 : c$case_alt_107 = outA;
+      default : c$case_alt_107 = stateSignal[2345:2323];
     endcase
   end
-
-  assign c$case_alt_selection_313 = c$case_alt_selection_312;
 
-  assign c$i_352 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_314 = c$case_alt_selection_313;
 
-  assign c$case_alt_selection_312 = $unsigned({{(64-8) {1'b0}},c$i_352});
+  assign c$case_alt_selection_313 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_313)
-      64'sd152 : c$case_alt_106 = response.ButterflyResponse_sel2;
-      default : c$case_alt_106 = c$case_alt_259[152];
+    case(c$case_alt_selection_314)
+      64'sd153 : c$case_alt_108 = outA;
+      default : c$case_alt_108 = stateSignal[2368:2346];
     endcase
   end
 
-  assign c$case_alt_selection_316 = c$case_alt_selection_315;
+  assign c$case_alt_selection_317 = c$case_alt_selection_316;
 
-  assign c$i_353 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_316 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_315 = $unsigned({{(64-8) {1'b0}},c$i_353});
-
   always_comb begin
-    case(c$case_alt_selection_316)
-      64'sd151 : c$case_alt_107 = response.ButterflyResponse_sel2;
-      default : c$case_alt_107 = c$case_alt_259[151];
+    case(c$case_alt_selection_317)
+      64'sd152 : c$case_alt_109 = outA;
+      default : c$case_alt_109 = stateSignal[2391:2369];
     endcase
   end
-
-  assign c$case_alt_selection_319 = c$case_alt_selection_318;
 
-  assign c$i_354 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_320 = c$case_alt_selection_319;
 
-  assign c$case_alt_selection_318 = $unsigned({{(64-8) {1'b0}},c$i_354});
+  assign c$case_alt_selection_319 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_319)
-      64'sd150 : c$case_alt_108 = response.ButterflyResponse_sel2;
-      default : c$case_alt_108 = c$case_alt_259[150];
+    case(c$case_alt_selection_320)
+      64'sd151 : c$case_alt_110 = outA;
+      default : c$case_alt_110 = stateSignal[2414:2392];
     endcase
   end
 
-  assign c$case_alt_selection_322 = c$case_alt_selection_321;
+  assign c$case_alt_selection_323 = c$case_alt_selection_322;
 
-  assign c$i_355 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_322 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_321 = $unsigned({{(64-8) {1'b0}},c$i_355});
-
   always_comb begin
-    case(c$case_alt_selection_322)
-      64'sd149 : c$case_alt_109 = response.ButterflyResponse_sel2;
-      default : c$case_alt_109 = c$case_alt_259[149];
+    case(c$case_alt_selection_323)
+      64'sd150 : c$case_alt_111 = outA;
+      default : c$case_alt_111 = stateSignal[2437:2415];
     endcase
   end
-
-  assign c$case_alt_selection_325 = c$case_alt_selection_324;
 
-  assign c$i_356 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_326 = c$case_alt_selection_325;
 
-  assign c$case_alt_selection_324 = $unsigned({{(64-8) {1'b0}},c$i_356});
+  assign c$case_alt_selection_325 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_325)
-      64'sd148 : c$case_alt_110 = response.ButterflyResponse_sel2;
-      default : c$case_alt_110 = c$case_alt_259[148];
+    case(c$case_alt_selection_326)
+      64'sd149 : c$case_alt_112 = outA;
+      default : c$case_alt_112 = stateSignal[2460:2438];
     endcase
   end
 
-  assign c$case_alt_selection_328 = c$case_alt_selection_327;
+  assign c$case_alt_selection_329 = c$case_alt_selection_328;
 
-  assign c$i_357 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_328 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_327 = $unsigned({{(64-8) {1'b0}},c$i_357});
-
   always_comb begin
-    case(c$case_alt_selection_328)
-      64'sd147 : c$case_alt_111 = response.ButterflyResponse_sel2;
-      default : c$case_alt_111 = c$case_alt_259[147];
+    case(c$case_alt_selection_329)
+      64'sd148 : c$case_alt_113 = outA;
+      default : c$case_alt_113 = stateSignal[2483:2461];
     endcase
   end
 
-  assign c$case_alt_selection_331 = c$case_alt_selection_330;
+  assign c$case_alt_selection_332 = c$case_alt_selection_331;
 
-  assign c$i_358 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_331 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_330 = $unsigned({{(64-8) {1'b0}},c$i_358});
-
   always_comb begin
-    case(c$case_alt_selection_331)
-      64'sd146 : c$case_alt_112 = response.ButterflyResponse_sel2;
-      default : c$case_alt_112 = c$case_alt_259[146];
+    case(c$case_alt_selection_332)
+      64'sd147 : c$case_alt_114 = outA;
+      default : c$case_alt_114 = stateSignal[2506:2484];
     endcase
   end
-
-  assign c$case_alt_selection_334 = c$case_alt_selection_333;
 
-  assign c$i_359 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_335 = c$case_alt_selection_334;
 
-  assign c$case_alt_selection_333 = $unsigned({{(64-8) {1'b0}},c$i_359});
+  assign c$case_alt_selection_334 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_334)
-      64'sd145 : c$case_alt_113 = response.ButterflyResponse_sel2;
-      default : c$case_alt_113 = c$case_alt_259[145];
+    case(c$case_alt_selection_335)
+      64'sd146 : c$case_alt_115 = outA;
+      default : c$case_alt_115 = stateSignal[2529:2507];
     endcase
   end
 
-  assign c$case_alt_selection_337 = c$case_alt_selection_336;
+  assign c$case_alt_selection_338 = c$case_alt_selection_337;
 
-  assign c$i_360 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_337 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_336 = $unsigned({{(64-8) {1'b0}},c$i_360});
-
   always_comb begin
-    case(c$case_alt_selection_337)
-      64'sd144 : c$case_alt_114 = response.ButterflyResponse_sel2;
-      default : c$case_alt_114 = c$case_alt_259[144];
+    case(c$case_alt_selection_338)
+      64'sd145 : c$case_alt_116 = outA;
+      default : c$case_alt_116 = stateSignal[2552:2530];
     endcase
   end
-
-  assign c$case_alt_selection_340 = c$case_alt_selection_339;
 
-  assign c$i_361 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_341 = c$case_alt_selection_340;
 
-  assign c$case_alt_selection_339 = $unsigned({{(64-8) {1'b0}},c$i_361});
+  assign c$case_alt_selection_340 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_340)
-      64'sd143 : c$case_alt_115 = response.ButterflyResponse_sel2;
-      default : c$case_alt_115 = c$case_alt_259[143];
+    case(c$case_alt_selection_341)
+      64'sd144 : c$case_alt_117 = outA;
+      default : c$case_alt_117 = stateSignal[2575:2553];
     endcase
   end
 
-  assign c$case_alt_selection_343 = c$case_alt_selection_342;
+  assign c$case_alt_selection_344 = c$case_alt_selection_343;
 
-  assign c$i_362 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_343 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_342 = $unsigned({{(64-8) {1'b0}},c$i_362});
-
   always_comb begin
-    case(c$case_alt_selection_343)
-      64'sd142 : c$case_alt_116 = response.ButterflyResponse_sel2;
-      default : c$case_alt_116 = c$case_alt_259[142];
+    case(c$case_alt_selection_344)
+      64'sd143 : c$case_alt_118 = outA;
+      default : c$case_alt_118 = stateSignal[2598:2576];
     endcase
   end
-
-  assign c$case_alt_selection_346 = c$case_alt_selection_345;
 
-  assign c$i_363 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_347 = c$case_alt_selection_346;
 
-  assign c$case_alt_selection_345 = $unsigned({{(64-8) {1'b0}},c$i_363});
+  assign c$case_alt_selection_346 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_346)
-      64'sd141 : c$case_alt_117 = response.ButterflyResponse_sel2;
-      default : c$case_alt_117 = c$case_alt_259[141];
+    case(c$case_alt_selection_347)
+      64'sd142 : c$case_alt_119 = outA;
+      default : c$case_alt_119 = stateSignal[2621:2599];
     endcase
   end
 
-  assign c$case_alt_selection_349 = c$case_alt_selection_348;
+  assign c$case_alt_selection_350 = c$case_alt_selection_349;
 
-  assign c$i_364 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_349 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_348 = $unsigned({{(64-8) {1'b0}},c$i_364});
-
   always_comb begin
-    case(c$case_alt_selection_349)
-      64'sd140 : c$case_alt_118 = response.ButterflyResponse_sel2;
-      default : c$case_alt_118 = c$case_alt_259[140];
+    case(c$case_alt_selection_350)
+      64'sd141 : c$case_alt_120 = outA;
+      default : c$case_alt_120 = stateSignal[2644:2622];
     endcase
   end
-
-  assign c$case_alt_selection_352 = c$case_alt_selection_351;
 
-  assign c$i_365 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_353 = c$case_alt_selection_352;
 
-  assign c$case_alt_selection_351 = $unsigned({{(64-8) {1'b0}},c$i_365});
+  assign c$case_alt_selection_352 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_352)
-      64'sd139 : c$case_alt_119 = response.ButterflyResponse_sel2;
-      default : c$case_alt_119 = c$case_alt_259[139];
+    case(c$case_alt_selection_353)
+      64'sd140 : c$case_alt_121 = outA;
+      default : c$case_alt_121 = stateSignal[2667:2645];
     endcase
   end
 
-  assign c$case_alt_selection_355 = c$case_alt_selection_354;
+  assign c$case_alt_selection_356 = c$case_alt_selection_355;
 
-  assign c$i_366 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_355 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_354 = $unsigned({{(64-8) {1'b0}},c$i_366});
-
   always_comb begin
-    case(c$case_alt_selection_355)
-      64'sd138 : c$case_alt_120 = response.ButterflyResponse_sel2;
-      default : c$case_alt_120 = c$case_alt_259[138];
+    case(c$case_alt_selection_356)
+      64'sd139 : c$case_alt_122 = outA;
+      default : c$case_alt_122 = stateSignal[2690:2668];
     endcase
   end
-
-  assign c$case_alt_selection_358 = c$case_alt_selection_357;
 
-  assign c$i_367 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_359 = c$case_alt_selection_358;
 
-  assign c$case_alt_selection_357 = $unsigned({{(64-8) {1'b0}},c$i_367});
+  assign c$case_alt_selection_358 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_358)
-      64'sd137 : c$case_alt_121 = response.ButterflyResponse_sel2;
-      default : c$case_alt_121 = c$case_alt_259[137];
+    case(c$case_alt_selection_359)
+      64'sd138 : c$case_alt_123 = outA;
+      default : c$case_alt_123 = stateSignal[2713:2691];
     endcase
   end
 
-  assign c$case_alt_selection_361 = c$case_alt_selection_360;
+  assign c$case_alt_selection_362 = c$case_alt_selection_361;
 
-  assign c$i_368 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_361 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_360 = $unsigned({{(64-8) {1'b0}},c$i_368});
-
   always_comb begin
-    case(c$case_alt_selection_361)
-      64'sd136 : c$case_alt_122 = response.ButterflyResponse_sel2;
-      default : c$case_alt_122 = c$case_alt_259[136];
+    case(c$case_alt_selection_362)
+      64'sd137 : c$case_alt_124 = outA;
+      default : c$case_alt_124 = stateSignal[2736:2714];
     endcase
   end
-
-  assign c$case_alt_selection_364 = c$case_alt_selection_363;
 
-  assign c$i_369 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_365 = c$case_alt_selection_364;
 
-  assign c$case_alt_selection_363 = $unsigned({{(64-8) {1'b0}},c$i_369});
+  assign c$case_alt_selection_364 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_364)
-      64'sd135 : c$case_alt_123 = response.ButterflyResponse_sel2;
-      default : c$case_alt_123 = c$case_alt_259[135];
+    case(c$case_alt_selection_365)
+      64'sd136 : c$case_alt_125 = outA;
+      default : c$case_alt_125 = stateSignal[2759:2737];
     endcase
   end
 
-  assign c$case_alt_selection_367 = c$case_alt_selection_366;
+  assign c$case_alt_selection_368 = c$case_alt_selection_367;
 
-  assign c$i_370 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_367 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_366 = $unsigned({{(64-8) {1'b0}},c$i_370});
-
   always_comb begin
-    case(c$case_alt_selection_367)
-      64'sd134 : c$case_alt_124 = response.ButterflyResponse_sel2;
-      default : c$case_alt_124 = c$case_alt_259[134];
+    case(c$case_alt_selection_368)
+      64'sd135 : c$case_alt_126 = outA;
+      default : c$case_alt_126 = stateSignal[2782:2760];
     endcase
   end
-
-  assign c$case_alt_selection_370 = c$case_alt_selection_369;
 
-  assign c$i_371 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_371 = c$case_alt_selection_370;
 
-  assign c$case_alt_selection_369 = $unsigned({{(64-8) {1'b0}},c$i_371});
+  assign c$case_alt_selection_370 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_370)
-      64'sd133 : c$case_alt_125 = response.ButterflyResponse_sel2;
-      default : c$case_alt_125 = c$case_alt_259[133];
+    case(c$case_alt_selection_371)
+      64'sd134 : c$case_alt_127 = outA;
+      default : c$case_alt_127 = stateSignal[2805:2783];
     endcase
   end
 
-  assign c$case_alt_selection_373 = c$case_alt_selection_372;
+  assign c$case_alt_selection_374 = c$case_alt_selection_373;
 
-  assign c$i_372 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_373 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_372 = $unsigned({{(64-8) {1'b0}},c$i_372});
-
   always_comb begin
-    case(c$case_alt_selection_373)
-      64'sd132 : c$case_alt_126 = response.ButterflyResponse_sel2;
-      default : c$case_alt_126 = c$case_alt_259[132];
+    case(c$case_alt_selection_374)
+      64'sd133 : c$case_alt_128 = outA;
+      default : c$case_alt_128 = stateSignal[2828:2806];
     endcase
   end
-
-  assign c$case_alt_selection_376 = c$case_alt_selection_375;
 
-  assign c$i_373 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_377 = c$case_alt_selection_376;
 
-  assign c$case_alt_selection_375 = $unsigned({{(64-8) {1'b0}},c$i_373});
+  assign c$case_alt_selection_376 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_376)
-      64'sd131 : c$case_alt_127 = response.ButterflyResponse_sel2;
-      default : c$case_alt_127 = c$case_alt_259[131];
+    case(c$case_alt_selection_377)
+      64'sd132 : c$case_alt_129 = outA;
+      default : c$case_alt_129 = stateSignal[2851:2829];
     endcase
   end
 
-  assign c$case_alt_selection_379 = c$case_alt_selection_378;
+  assign c$case_alt_selection_380 = c$case_alt_selection_379;
 
-  assign c$i_374 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_379 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_378 = $unsigned({{(64-8) {1'b0}},c$i_374});
-
   always_comb begin
-    case(c$case_alt_selection_379)
-      64'sd130 : c$case_alt_128 = response.ButterflyResponse_sel2;
-      default : c$case_alt_128 = c$case_alt_259[130];
+    case(c$case_alt_selection_380)
+      64'sd131 : c$case_alt_130 = outA;
+      default : c$case_alt_130 = stateSignal[2874:2852];
     endcase
   end
 
-  assign c$case_alt_selection_382 = c$case_alt_selection_381;
+  assign c$case_alt_selection_383 = c$case_alt_selection_382;
 
-  assign c$i_375 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_382 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_381 = $unsigned({{(64-8) {1'b0}},c$i_375});
-
   always_comb begin
-    case(c$case_alt_selection_382)
-      64'sd129 : c$case_alt_129 = response.ButterflyResponse_sel2;
-      default : c$case_alt_129 = c$case_alt_259[129];
+    case(c$case_alt_selection_383)
+      64'sd130 : c$case_alt_131 = outA;
+      default : c$case_alt_131 = stateSignal[2897:2875];
     endcase
   end
-
-  assign c$case_alt_selection_385 = c$case_alt_selection_384;
 
-  assign c$i_376 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_386 = c$case_alt_selection_385;
 
-  assign c$case_alt_selection_384 = $unsigned({{(64-8) {1'b0}},c$i_376});
+  assign c$case_alt_selection_385 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_385)
-      64'sd128 : c$case_alt_130 = response.ButterflyResponse_sel2;
-      default : c$case_alt_130 = c$case_alt_259[128];
+    case(c$case_alt_selection_386)
+      64'sd129 : c$case_alt_132 = outA;
+      default : c$case_alt_132 = stateSignal[2920:2898];
     endcase
   end
 
-  assign c$case_alt_selection_388 = c$case_alt_selection_387;
+  assign c$case_alt_selection_389 = c$case_alt_selection_388;
 
-  assign c$i_377 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_388 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_387 = $unsigned({{(64-8) {1'b0}},c$i_377});
-
   always_comb begin
-    case(c$case_alt_selection_388)
-      64'sd127 : c$case_alt_131 = response.ButterflyResponse_sel2;
-      default : c$case_alt_131 = c$case_alt_259[127];
+    case(c$case_alt_selection_389)
+      64'sd128 : c$case_alt_133 = outA;
+      default : c$case_alt_133 = stateSignal[2943:2921];
     endcase
   end
-
-  assign c$case_alt_selection_391 = c$case_alt_selection_390;
 
-  assign c$i_378 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_392 = c$case_alt_selection_391;
 
-  assign c$case_alt_selection_390 = $unsigned({{(64-8) {1'b0}},c$i_378});
+  assign c$case_alt_selection_391 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_391)
-      64'sd126 : c$case_alt_132 = response.ButterflyResponse_sel2;
-      default : c$case_alt_132 = c$case_alt_259[126];
+    case(c$case_alt_selection_392)
+      64'sd127 : c$case_alt_134 = outA;
+      default : c$case_alt_134 = stateSignal[2966:2944];
     endcase
   end
 
-  assign c$case_alt_selection_394 = c$case_alt_selection_393;
+  assign c$case_alt_selection_395 = c$case_alt_selection_394;
 
-  assign c$i_379 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_394 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_393 = $unsigned({{(64-8) {1'b0}},c$i_379});
-
   always_comb begin
-    case(c$case_alt_selection_394)
-      64'sd125 : c$case_alt_133 = response.ButterflyResponse_sel2;
-      default : c$case_alt_133 = c$case_alt_259[125];
+    case(c$case_alt_selection_395)
+      64'sd126 : c$case_alt_135 = outA;
+      default : c$case_alt_135 = stateSignal[2989:2967];
     endcase
   end
-
-  assign c$case_alt_selection_397 = c$case_alt_selection_396;
 
-  assign c$i_380 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_398 = c$case_alt_selection_397;
 
-  assign c$case_alt_selection_396 = $unsigned({{(64-8) {1'b0}},c$i_380});
+  assign c$case_alt_selection_397 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_397)
-      64'sd124 : c$case_alt_134 = response.ButterflyResponse_sel2;
-      default : c$case_alt_134 = c$case_alt_259[124];
+    case(c$case_alt_selection_398)
+      64'sd125 : c$case_alt_136 = outA;
+      default : c$case_alt_136 = stateSignal[3012:2990];
     endcase
   end
 
-  assign c$case_alt_selection_400 = c$case_alt_selection_399;
+  assign c$case_alt_selection_401 = c$case_alt_selection_400;
 
-  assign c$i_381 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_400 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_399 = $unsigned({{(64-8) {1'b0}},c$i_381});
-
   always_comb begin
-    case(c$case_alt_selection_400)
-      64'sd123 : c$case_alt_135 = response.ButterflyResponse_sel2;
-      default : c$case_alt_135 = c$case_alt_259[123];
+    case(c$case_alt_selection_401)
+      64'sd124 : c$case_alt_137 = outA;
+      default : c$case_alt_137 = stateSignal[3035:3013];
     endcase
   end
-
-  assign c$case_alt_selection_403 = c$case_alt_selection_402;
 
-  assign c$i_382 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_404 = c$case_alt_selection_403;
 
-  assign c$case_alt_selection_402 = $unsigned({{(64-8) {1'b0}},c$i_382});
+  assign c$case_alt_selection_403 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_403)
-      64'sd122 : c$case_alt_136 = response.ButterflyResponse_sel2;
-      default : c$case_alt_136 = c$case_alt_259[122];
+    case(c$case_alt_selection_404)
+      64'sd123 : c$case_alt_138 = outA;
+      default : c$case_alt_138 = stateSignal[3058:3036];
     endcase
   end
 
-  assign c$case_alt_selection_406 = c$case_alt_selection_405;
+  assign c$case_alt_selection_407 = c$case_alt_selection_406;
 
-  assign c$i_383 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_406 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_405 = $unsigned({{(64-8) {1'b0}},c$i_383});
-
   always_comb begin
-    case(c$case_alt_selection_406)
-      64'sd121 : c$case_alt_137 = response.ButterflyResponse_sel2;
-      default : c$case_alt_137 = c$case_alt_259[121];
+    case(c$case_alt_selection_407)
+      64'sd122 : c$case_alt_139 = outA;
+      default : c$case_alt_139 = stateSignal[3081:3059];
     endcase
   end
-
-  assign c$case_alt_selection_409 = c$case_alt_selection_408;
 
-  assign c$i_384 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_410 = c$case_alt_selection_409;
 
-  assign c$case_alt_selection_408 = $unsigned({{(64-8) {1'b0}},c$i_384});
+  assign c$case_alt_selection_409 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_409)
-      64'sd120 : c$case_alt_138 = response.ButterflyResponse_sel2;
-      default : c$case_alt_138 = c$case_alt_259[120];
+    case(c$case_alt_selection_410)
+      64'sd121 : c$case_alt_140 = outA;
+      default : c$case_alt_140 = stateSignal[3104:3082];
     endcase
   end
 
-  assign c$case_alt_selection_412 = c$case_alt_selection_411;
+  assign c$case_alt_selection_413 = c$case_alt_selection_412;
 
-  assign c$i_385 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_412 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_411 = $unsigned({{(64-8) {1'b0}},c$i_385});
-
   always_comb begin
-    case(c$case_alt_selection_412)
-      64'sd119 : c$case_alt_139 = response.ButterflyResponse_sel2;
-      default : c$case_alt_139 = c$case_alt_259[119];
+    case(c$case_alt_selection_413)
+      64'sd120 : c$case_alt_141 = outA;
+      default : c$case_alt_141 = stateSignal[3127:3105];
     endcase
   end
-
-  assign c$case_alt_selection_415 = c$case_alt_selection_414;
 
-  assign c$i_386 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_416 = c$case_alt_selection_415;
 
-  assign c$case_alt_selection_414 = $unsigned({{(64-8) {1'b0}},c$i_386});
+  assign c$case_alt_selection_415 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_415)
-      64'sd118 : c$case_alt_140 = response.ButterflyResponse_sel2;
-      default : c$case_alt_140 = c$case_alt_259[118];
+    case(c$case_alt_selection_416)
+      64'sd119 : c$case_alt_142 = outA;
+      default : c$case_alt_142 = stateSignal[3150:3128];
     endcase
   end
 
-  assign c$case_alt_selection_418 = c$case_alt_selection_417;
+  assign c$case_alt_selection_419 = c$case_alt_selection_418;
 
-  assign c$i_387 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_418 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_417 = $unsigned({{(64-8) {1'b0}},c$i_387});
-
   always_comb begin
-    case(c$case_alt_selection_418)
-      64'sd117 : c$case_alt_141 = response.ButterflyResponse_sel2;
-      default : c$case_alt_141 = c$case_alt_259[117];
+    case(c$case_alt_selection_419)
+      64'sd118 : c$case_alt_143 = outA;
+      default : c$case_alt_143 = stateSignal[3173:3151];
     endcase
   end
-
-  assign c$case_alt_selection_421 = c$case_alt_selection_420;
 
-  assign c$i_388 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_422 = c$case_alt_selection_421;
 
-  assign c$case_alt_selection_420 = $unsigned({{(64-8) {1'b0}},c$i_388});
+  assign c$case_alt_selection_421 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_421)
-      64'sd116 : c$case_alt_142 = response.ButterflyResponse_sel2;
-      default : c$case_alt_142 = c$case_alt_259[116];
+    case(c$case_alt_selection_422)
+      64'sd117 : c$case_alt_144 = outA;
+      default : c$case_alt_144 = stateSignal[3196:3174];
     endcase
   end
 
-  assign c$case_alt_selection_424 = c$case_alt_selection_423;
+  assign c$case_alt_selection_425 = c$case_alt_selection_424;
 
-  assign c$i_389 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_424 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_423 = $unsigned({{(64-8) {1'b0}},c$i_389});
-
   always_comb begin
-    case(c$case_alt_selection_424)
-      64'sd115 : c$case_alt_143 = response.ButterflyResponse_sel2;
-      default : c$case_alt_143 = c$case_alt_259[115];
+    case(c$case_alt_selection_425)
+      64'sd116 : c$case_alt_145 = outA;
+      default : c$case_alt_145 = stateSignal[3219:3197];
     endcase
   end
-
-  assign c$case_alt_selection_427 = c$case_alt_selection_426;
 
-  assign c$i_390 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_428 = c$case_alt_selection_427;
 
-  assign c$case_alt_selection_426 = $unsigned({{(64-8) {1'b0}},c$i_390});
+  assign c$case_alt_selection_427 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_427)
-      64'sd114 : c$case_alt_144 = response.ButterflyResponse_sel2;
-      default : c$case_alt_144 = c$case_alt_259[114];
+    case(c$case_alt_selection_428)
+      64'sd115 : c$case_alt_146 = outA;
+      default : c$case_alt_146 = stateSignal[3242:3220];
     endcase
   end
 
-  assign c$case_alt_selection_430 = c$case_alt_selection_429;
+  assign c$case_alt_selection_431 = c$case_alt_selection_430;
 
-  assign c$i_391 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_430 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_429 = $unsigned({{(64-8) {1'b0}},c$i_391});
-
   always_comb begin
-    case(c$case_alt_selection_430)
-      64'sd113 : c$case_alt_145 = response.ButterflyResponse_sel2;
-      default : c$case_alt_145 = c$case_alt_259[113];
+    case(c$case_alt_selection_431)
+      64'sd114 : c$case_alt_147 = outA;
+      default : c$case_alt_147 = stateSignal[3265:3243];
     endcase
   end
-
-  assign c$case_alt_selection_433 = c$case_alt_selection_432;
 
-  assign c$i_392 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_434 = c$case_alt_selection_433;
 
-  assign c$case_alt_selection_432 = $unsigned({{(64-8) {1'b0}},c$i_392});
+  assign c$case_alt_selection_433 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_433)
-      64'sd112 : c$case_alt_146 = response.ButterflyResponse_sel2;
-      default : c$case_alt_146 = c$case_alt_259[112];
+    case(c$case_alt_selection_434)
+      64'sd113 : c$case_alt_148 = outA;
+      default : c$case_alt_148 = stateSignal[3288:3266];
     endcase
   end
 
-  assign c$case_alt_selection_436 = c$case_alt_selection_435;
+  assign c$case_alt_selection_437 = c$case_alt_selection_436;
 
-  assign c$i_393 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_436 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_435 = $unsigned({{(64-8) {1'b0}},c$i_393});
-
   always_comb begin
-    case(c$case_alt_selection_436)
-      64'sd111 : c$case_alt_147 = response.ButterflyResponse_sel2;
-      default : c$case_alt_147 = c$case_alt_259[111];
+    case(c$case_alt_selection_437)
+      64'sd112 : c$case_alt_149 = outA;
+      default : c$case_alt_149 = stateSignal[3311:3289];
     endcase
   end
-
-  assign c$case_alt_selection_439 = c$case_alt_selection_438;
 
-  assign c$i_394 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_440 = c$case_alt_selection_439;
 
-  assign c$case_alt_selection_438 = $unsigned({{(64-8) {1'b0}},c$i_394});
+  assign c$case_alt_selection_439 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_439)
-      64'sd110 : c$case_alt_148 = response.ButterflyResponse_sel2;
-      default : c$case_alt_148 = c$case_alt_259[110];
+    case(c$case_alt_selection_440)
+      64'sd111 : c$case_alt_150 = outA;
+      default : c$case_alt_150 = stateSignal[3334:3312];
     endcase
   end
 
-  assign c$case_alt_selection_442 = c$case_alt_selection_441;
+  assign c$case_alt_selection_443 = c$case_alt_selection_442;
 
-  assign c$i_395 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_442 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_441 = $unsigned({{(64-8) {1'b0}},c$i_395});
-
   always_comb begin
-    case(c$case_alt_selection_442)
-      64'sd109 : c$case_alt_149 = response.ButterflyResponse_sel2;
-      default : c$case_alt_149 = c$case_alt_259[109];
+    case(c$case_alt_selection_443)
+      64'sd110 : c$case_alt_151 = outA;
+      default : c$case_alt_151 = stateSignal[3357:3335];
     endcase
   end
-
-  assign c$case_alt_selection_445 = c$case_alt_selection_444;
 
-  assign c$i_396 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_446 = c$case_alt_selection_445;
 
-  assign c$case_alt_selection_444 = $unsigned({{(64-8) {1'b0}},c$i_396});
+  assign c$case_alt_selection_445 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_445)
-      64'sd108 : c$case_alt_150 = response.ButterflyResponse_sel2;
-      default : c$case_alt_150 = c$case_alt_259[108];
+    case(c$case_alt_selection_446)
+      64'sd109 : c$case_alt_152 = outA;
+      default : c$case_alt_152 = stateSignal[3380:3358];
     endcase
   end
 
-  assign c$case_alt_selection_448 = c$case_alt_selection_447;
+  assign c$case_alt_selection_449 = c$case_alt_selection_448;
 
-  assign c$i_397 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_448 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_447 = $unsigned({{(64-8) {1'b0}},c$i_397});
-
   always_comb begin
-    case(c$case_alt_selection_448)
-      64'sd107 : c$case_alt_151 = response.ButterflyResponse_sel2;
-      default : c$case_alt_151 = c$case_alt_259[107];
+    case(c$case_alt_selection_449)
+      64'sd108 : c$case_alt_153 = outA;
+      default : c$case_alt_153 = stateSignal[3403:3381];
     endcase
   end
-
-  assign c$case_alt_selection_451 = c$case_alt_selection_450;
 
-  assign c$i_398 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_452 = c$case_alt_selection_451;
 
-  assign c$case_alt_selection_450 = $unsigned({{(64-8) {1'b0}},c$i_398});
+  assign c$case_alt_selection_451 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_451)
-      64'sd106 : c$case_alt_152 = response.ButterflyResponse_sel2;
-      default : c$case_alt_152 = c$case_alt_259[106];
+    case(c$case_alt_selection_452)
+      64'sd107 : c$case_alt_154 = outA;
+      default : c$case_alt_154 = stateSignal[3426:3404];
     endcase
   end
 
-  assign c$case_alt_selection_454 = c$case_alt_selection_453;
+  assign c$case_alt_selection_455 = c$case_alt_selection_454;
 
-  assign c$i_399 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_454 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_453 = $unsigned({{(64-8) {1'b0}},c$i_399});
-
   always_comb begin
-    case(c$case_alt_selection_454)
-      64'sd105 : c$case_alt_153 = response.ButterflyResponse_sel2;
-      default : c$case_alt_153 = c$case_alt_259[105];
+    case(c$case_alt_selection_455)
+      64'sd106 : c$case_alt_155 = outA;
+      default : c$case_alt_155 = stateSignal[3449:3427];
     endcase
   end
-
-  assign c$case_alt_selection_457 = c$case_alt_selection_456;
 
-  assign c$i_400 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_458 = c$case_alt_selection_457;
 
-  assign c$case_alt_selection_456 = $unsigned({{(64-8) {1'b0}},c$i_400});
+  assign c$case_alt_selection_457 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_457)
-      64'sd104 : c$case_alt_154 = response.ButterflyResponse_sel2;
-      default : c$case_alt_154 = c$case_alt_259[104];
+    case(c$case_alt_selection_458)
+      64'sd105 : c$case_alt_156 = outA;
+      default : c$case_alt_156 = stateSignal[3472:3450];
     endcase
   end
 
-  assign c$case_alt_selection_460 = c$case_alt_selection_459;
+  assign c$case_alt_selection_461 = c$case_alt_selection_460;
 
-  assign c$i_401 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_460 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_459 = $unsigned({{(64-8) {1'b0}},c$i_401});
-
   always_comb begin
-    case(c$case_alt_selection_460)
-      64'sd103 : c$case_alt_155 = response.ButterflyResponse_sel2;
-      default : c$case_alt_155 = c$case_alt_259[103];
+    case(c$case_alt_selection_461)
+      64'sd104 : c$case_alt_157 = outA;
+      default : c$case_alt_157 = stateSignal[3495:3473];
     endcase
   end
-
-  assign c$case_alt_selection_463 = c$case_alt_selection_462;
 
-  assign c$i_402 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_464 = c$case_alt_selection_463;
 
-  assign c$case_alt_selection_462 = $unsigned({{(64-8) {1'b0}},c$i_402});
+  assign c$case_alt_selection_463 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_463)
-      64'sd102 : c$case_alt_156 = response.ButterflyResponse_sel2;
-      default : c$case_alt_156 = c$case_alt_259[102];
+    case(c$case_alt_selection_464)
+      64'sd103 : c$case_alt_158 = outA;
+      default : c$case_alt_158 = stateSignal[3518:3496];
     endcase
   end
 
-  assign c$case_alt_selection_466 = c$case_alt_selection_465;
+  assign c$case_alt_selection_467 = c$case_alt_selection_466;
 
-  assign c$i_403 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_466 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_465 = $unsigned({{(64-8) {1'b0}},c$i_403});
-
   always_comb begin
-    case(c$case_alt_selection_466)
-      64'sd101 : c$case_alt_157 = response.ButterflyResponse_sel2;
-      default : c$case_alt_157 = c$case_alt_259[101];
+    case(c$case_alt_selection_467)
+      64'sd102 : c$case_alt_159 = outA;
+      default : c$case_alt_159 = stateSignal[3541:3519];
     endcase
   end
-
-  assign c$case_alt_selection_469 = c$case_alt_selection_468;
 
-  assign c$i_404 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_470 = c$case_alt_selection_469;
 
-  assign c$case_alt_selection_468 = $unsigned({{(64-8) {1'b0}},c$i_404});
+  assign c$case_alt_selection_469 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_469)
-      64'sd100 : c$case_alt_158 = response.ButterflyResponse_sel2;
-      default : c$case_alt_158 = c$case_alt_259[100];
+    case(c$case_alt_selection_470)
+      64'sd101 : c$case_alt_160 = outA;
+      default : c$case_alt_160 = stateSignal[3564:3542];
     endcase
   end
 
-  assign c$case_alt_selection_472 = c$case_alt_selection_471;
+  assign c$case_alt_selection_473 = c$case_alt_selection_472;
 
-  assign c$i_405 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_472 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_471 = $unsigned({{(64-8) {1'b0}},c$i_405});
-
   always_comb begin
-    case(c$case_alt_selection_472)
-      64'sd99 : c$case_alt_159 = response.ButterflyResponse_sel2;
-      default : c$case_alt_159 = c$case_alt_259[99];
+    case(c$case_alt_selection_473)
+      64'sd100 : c$case_alt_161 = outA;
+      default : c$case_alt_161 = stateSignal[3587:3565];
     endcase
   end
-
-  assign c$case_alt_selection_475 = c$case_alt_selection_474;
 
-  assign c$i_406 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_476 = c$case_alt_selection_475;
 
-  assign c$case_alt_selection_474 = $unsigned({{(64-8) {1'b0}},c$i_406});
+  assign c$case_alt_selection_475 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_475)
-      64'sd98 : c$case_alt_160 = response.ButterflyResponse_sel2;
-      default : c$case_alt_160 = c$case_alt_259[98];
+    case(c$case_alt_selection_476)
+      64'sd99 : c$case_alt_162 = outA;
+      default : c$case_alt_162 = stateSignal[3610:3588];
     endcase
   end
 
-  assign c$case_alt_selection_478 = c$case_alt_selection_477;
+  assign c$case_alt_selection_479 = c$case_alt_selection_478;
 
-  assign c$i_407 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_478 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_477 = $unsigned({{(64-8) {1'b0}},c$i_407});
-
   always_comb begin
-    case(c$case_alt_selection_478)
-      64'sd97 : c$case_alt_161 = response.ButterflyResponse_sel2;
-      default : c$case_alt_161 = c$case_alt_259[97];
+    case(c$case_alt_selection_479)
+      64'sd98 : c$case_alt_163 = outA;
+      default : c$case_alt_163 = stateSignal[3633:3611];
     endcase
   end
 
-  assign c$case_alt_selection_481 = c$case_alt_selection_480;
+  assign c$case_alt_selection_482 = c$case_alt_selection_481;
 
-  assign c$i_408 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_481 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_480 = $unsigned({{(64-8) {1'b0}},c$i_408});
-
   always_comb begin
-    case(c$case_alt_selection_481)
-      64'sd96 : c$case_alt_162 = response.ButterflyResponse_sel2;
-      default : c$case_alt_162 = c$case_alt_259[96];
+    case(c$case_alt_selection_482)
+      64'sd97 : c$case_alt_164 = outA;
+      default : c$case_alt_164 = stateSignal[3656:3634];
     endcase
   end
-
-  assign c$case_alt_selection_484 = c$case_alt_selection_483;
 
-  assign c$i_409 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_485 = c$case_alt_selection_484;
 
-  assign c$case_alt_selection_483 = $unsigned({{(64-8) {1'b0}},c$i_409});
+  assign c$case_alt_selection_484 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_484)
-      64'sd95 : c$case_alt_163 = response.ButterflyResponse_sel2;
-      default : c$case_alt_163 = c$case_alt_259[95];
+    case(c$case_alt_selection_485)
+      64'sd96 : c$case_alt_165 = outA;
+      default : c$case_alt_165 = stateSignal[3679:3657];
     endcase
   end
 
-  assign c$case_alt_selection_487 = c$case_alt_selection_486;
+  assign c$case_alt_selection_488 = c$case_alt_selection_487;
 
-  assign c$i_410 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_487 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_486 = $unsigned({{(64-8) {1'b0}},c$i_410});
-
   always_comb begin
-    case(c$case_alt_selection_487)
-      64'sd94 : c$case_alt_164 = response.ButterflyResponse_sel2;
-      default : c$case_alt_164 = c$case_alt_259[94];
+    case(c$case_alt_selection_488)
+      64'sd95 : c$case_alt_166 = outA;
+      default : c$case_alt_166 = stateSignal[3702:3680];
     endcase
   end
-
-  assign c$case_alt_selection_490 = c$case_alt_selection_489;
 
-  assign c$i_411 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_491 = c$case_alt_selection_490;
 
-  assign c$case_alt_selection_489 = $unsigned({{(64-8) {1'b0}},c$i_411});
+  assign c$case_alt_selection_490 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_490)
-      64'sd93 : c$case_alt_165 = response.ButterflyResponse_sel2;
-      default : c$case_alt_165 = c$case_alt_259[93];
+    case(c$case_alt_selection_491)
+      64'sd94 : c$case_alt_167 = outA;
+      default : c$case_alt_167 = stateSignal[3725:3703];
     endcase
   end
 
-  assign c$case_alt_selection_493 = c$case_alt_selection_492;
+  assign c$case_alt_selection_494 = c$case_alt_selection_493;
 
-  assign c$i_412 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_493 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_492 = $unsigned({{(64-8) {1'b0}},c$i_412});
-
   always_comb begin
-    case(c$case_alt_selection_493)
-      64'sd92 : c$case_alt_166 = response.ButterflyResponse_sel2;
-      default : c$case_alt_166 = c$case_alt_259[92];
+    case(c$case_alt_selection_494)
+      64'sd93 : c$case_alt_168 = outA;
+      default : c$case_alt_168 = stateSignal[3748:3726];
     endcase
   end
-
-  assign c$case_alt_selection_496 = c$case_alt_selection_495;
 
-  assign c$i_413 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_497 = c$case_alt_selection_496;
 
-  assign c$case_alt_selection_495 = $unsigned({{(64-8) {1'b0}},c$i_413});
+  assign c$case_alt_selection_496 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_496)
-      64'sd91 : c$case_alt_167 = response.ButterflyResponse_sel2;
-      default : c$case_alt_167 = c$case_alt_259[91];
+    case(c$case_alt_selection_497)
+      64'sd92 : c$case_alt_169 = outA;
+      default : c$case_alt_169 = stateSignal[3771:3749];
     endcase
   end
 
-  assign c$case_alt_selection_499 = c$case_alt_selection_498;
+  assign c$case_alt_selection_500 = c$case_alt_selection_499;
 
-  assign c$i_414 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_499 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_498 = $unsigned({{(64-8) {1'b0}},c$i_414});
-
   always_comb begin
-    case(c$case_alt_selection_499)
-      64'sd90 : c$case_alt_168 = response.ButterflyResponse_sel2;
-      default : c$case_alt_168 = c$case_alt_259[90];
+    case(c$case_alt_selection_500)
+      64'sd91 : c$case_alt_170 = outA;
+      default : c$case_alt_170 = stateSignal[3794:3772];
     endcase
   end
-
-  assign c$case_alt_selection_502 = c$case_alt_selection_501;
 
-  assign c$i_415 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_503 = c$case_alt_selection_502;
 
-  assign c$case_alt_selection_501 = $unsigned({{(64-8) {1'b0}},c$i_415});
+  assign c$case_alt_selection_502 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_502)
-      64'sd89 : c$case_alt_169 = response.ButterflyResponse_sel2;
-      default : c$case_alt_169 = c$case_alt_259[89];
+    case(c$case_alt_selection_503)
+      64'sd90 : c$case_alt_171 = outA;
+      default : c$case_alt_171 = stateSignal[3817:3795];
     endcase
   end
 
-  assign c$case_alt_selection_505 = c$case_alt_selection_504;
+  assign c$case_alt_selection_506 = c$case_alt_selection_505;
 
-  assign c$i_416 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_505 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_504 = $unsigned({{(64-8) {1'b0}},c$i_416});
-
   always_comb begin
-    case(c$case_alt_selection_505)
-      64'sd88 : c$case_alt_170 = response.ButterflyResponse_sel2;
-      default : c$case_alt_170 = c$case_alt_259[88];
+    case(c$case_alt_selection_506)
+      64'sd89 : c$case_alt_172 = outA;
+      default : c$case_alt_172 = stateSignal[3840:3818];
     endcase
   end
-
-  assign c$case_alt_selection_508 = c$case_alt_selection_507;
 
-  assign c$i_417 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_509 = c$case_alt_selection_508;
 
-  assign c$case_alt_selection_507 = $unsigned({{(64-8) {1'b0}},c$i_417});
+  assign c$case_alt_selection_508 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_508)
-      64'sd87 : c$case_alt_171 = response.ButterflyResponse_sel2;
-      default : c$case_alt_171 = c$case_alt_259[87];
+    case(c$case_alt_selection_509)
+      64'sd88 : c$case_alt_173 = outA;
+      default : c$case_alt_173 = stateSignal[3863:3841];
     endcase
   end
 
-  assign c$case_alt_selection_511 = c$case_alt_selection_510;
+  assign c$case_alt_selection_512 = c$case_alt_selection_511;
 
-  assign c$i_418 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_511 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_510 = $unsigned({{(64-8) {1'b0}},c$i_418});
-
   always_comb begin
-    case(c$case_alt_selection_511)
-      64'sd86 : c$case_alt_172 = response.ButterflyResponse_sel2;
-      default : c$case_alt_172 = c$case_alt_259[86];
+    case(c$case_alt_selection_512)
+      64'sd87 : c$case_alt_174 = outA;
+      default : c$case_alt_174 = stateSignal[3886:3864];
     endcase
   end
-
-  assign c$case_alt_selection_514 = c$case_alt_selection_513;
 
-  assign c$i_419 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_515 = c$case_alt_selection_514;
 
-  assign c$case_alt_selection_513 = $unsigned({{(64-8) {1'b0}},c$i_419});
+  assign c$case_alt_selection_514 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_514)
-      64'sd85 : c$case_alt_173 = response.ButterflyResponse_sel2;
-      default : c$case_alt_173 = c$case_alt_259[85];
+    case(c$case_alt_selection_515)
+      64'sd86 : c$case_alt_175 = outA;
+      default : c$case_alt_175 = stateSignal[3909:3887];
     endcase
   end
 
-  assign c$case_alt_selection_517 = c$case_alt_selection_516;
+  assign c$case_alt_selection_518 = c$case_alt_selection_517;
 
-  assign c$i_420 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_517 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_516 = $unsigned({{(64-8) {1'b0}},c$i_420});
-
   always_comb begin
-    case(c$case_alt_selection_517)
-      64'sd84 : c$case_alt_174 = response.ButterflyResponse_sel2;
-      default : c$case_alt_174 = c$case_alt_259[84];
+    case(c$case_alt_selection_518)
+      64'sd85 : c$case_alt_176 = outA;
+      default : c$case_alt_176 = stateSignal[3932:3910];
     endcase
   end
-
-  assign c$case_alt_selection_520 = c$case_alt_selection_519;
 
-  assign c$i_421 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_521 = c$case_alt_selection_520;
 
-  assign c$case_alt_selection_519 = $unsigned({{(64-8) {1'b0}},c$i_421});
+  assign c$case_alt_selection_520 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_520)
-      64'sd83 : c$case_alt_175 = response.ButterflyResponse_sel2;
-      default : c$case_alt_175 = c$case_alt_259[83];
+    case(c$case_alt_selection_521)
+      64'sd84 : c$case_alt_177 = outA;
+      default : c$case_alt_177 = stateSignal[3955:3933];
     endcase
   end
 
-  assign c$case_alt_selection_523 = c$case_alt_selection_522;
+  assign c$case_alt_selection_524 = c$case_alt_selection_523;
 
-  assign c$i_422 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_523 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_522 = $unsigned({{(64-8) {1'b0}},c$i_422});
-
   always_comb begin
-    case(c$case_alt_selection_523)
-      64'sd82 : c$case_alt_176 = response.ButterflyResponse_sel2;
-      default : c$case_alt_176 = c$case_alt_259[82];
+    case(c$case_alt_selection_524)
+      64'sd83 : c$case_alt_178 = outA;
+      default : c$case_alt_178 = stateSignal[3978:3956];
     endcase
   end
-
-  assign c$case_alt_selection_526 = c$case_alt_selection_525;
 
-  assign c$i_423 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_527 = c$case_alt_selection_526;
 
-  assign c$case_alt_selection_525 = $unsigned({{(64-8) {1'b0}},c$i_423});
+  assign c$case_alt_selection_526 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_526)
-      64'sd81 : c$case_alt_177 = response.ButterflyResponse_sel2;
-      default : c$case_alt_177 = c$case_alt_259[81];
+    case(c$case_alt_selection_527)
+      64'sd82 : c$case_alt_179 = outA;
+      default : c$case_alt_179 = stateSignal[4001:3979];
     endcase
   end
 
-  assign c$case_alt_selection_529 = c$case_alt_selection_528;
+  assign c$case_alt_selection_530 = c$case_alt_selection_529;
 
-  assign c$i_424 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_529 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_528 = $unsigned({{(64-8) {1'b0}},c$i_424});
-
   always_comb begin
-    case(c$case_alt_selection_529)
-      64'sd80 : c$case_alt_178 = response.ButterflyResponse_sel2;
-      default : c$case_alt_178 = c$case_alt_259[80];
+    case(c$case_alt_selection_530)
+      64'sd81 : c$case_alt_180 = outA;
+      default : c$case_alt_180 = stateSignal[4024:4002];
     endcase
   end
 
-  assign c$case_alt_selection_532 = c$case_alt_selection_531;
+  assign c$case_alt_selection_533 = c$case_alt_selection_532;
 
-  assign c$i_425 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_532 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_531 = $unsigned({{(64-8) {1'b0}},c$i_425});
-
   always_comb begin
-    case(c$case_alt_selection_532)
-      64'sd79 : c$case_alt_179 = response.ButterflyResponse_sel2;
-      default : c$case_alt_179 = c$case_alt_259[79];
+    case(c$case_alt_selection_533)
+      64'sd80 : c$case_alt_181 = outA;
+      default : c$case_alt_181 = stateSignal[4047:4025];
     endcase
   end
-
-  assign c$case_alt_selection_535 = c$case_alt_selection_534;
 
-  assign c$i_426 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_536 = c$case_alt_selection_535;
 
-  assign c$case_alt_selection_534 = $unsigned({{(64-8) {1'b0}},c$i_426});
+  assign c$case_alt_selection_535 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_535)
-      64'sd78 : c$case_alt_180 = response.ButterflyResponse_sel2;
-      default : c$case_alt_180 = c$case_alt_259[78];
+    case(c$case_alt_selection_536)
+      64'sd79 : c$case_alt_182 = outA;
+      default : c$case_alt_182 = stateSignal[4070:4048];
     endcase
   end
 
-  assign c$case_alt_selection_538 = c$case_alt_selection_537;
+  assign c$case_alt_selection_539 = c$case_alt_selection_538;
 
-  assign c$i_427 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_538 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_537 = $unsigned({{(64-8) {1'b0}},c$i_427});
-
   always_comb begin
-    case(c$case_alt_selection_538)
-      64'sd77 : c$case_alt_181 = response.ButterflyResponse_sel2;
-      default : c$case_alt_181 = c$case_alt_259[77];
+    case(c$case_alt_selection_539)
+      64'sd78 : c$case_alt_183 = outA;
+      default : c$case_alt_183 = stateSignal[4093:4071];
     endcase
   end
-
-  assign c$case_alt_selection_541 = c$case_alt_selection_540;
 
-  assign c$i_428 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_542 = c$case_alt_selection_541;
 
-  assign c$case_alt_selection_540 = $unsigned({{(64-8) {1'b0}},c$i_428});
+  assign c$case_alt_selection_541 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_541)
-      64'sd76 : c$case_alt_182 = response.ButterflyResponse_sel2;
-      default : c$case_alt_182 = c$case_alt_259[76];
+    case(c$case_alt_selection_542)
+      64'sd77 : c$case_alt_184 = outA;
+      default : c$case_alt_184 = stateSignal[4116:4094];
     endcase
   end
 
-  assign c$case_alt_selection_544 = c$case_alt_selection_543;
+  assign c$case_alt_selection_545 = c$case_alt_selection_544;
 
-  assign c$i_429 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_544 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_543 = $unsigned({{(64-8) {1'b0}},c$i_429});
-
   always_comb begin
-    case(c$case_alt_selection_544)
-      64'sd75 : c$case_alt_183 = response.ButterflyResponse_sel2;
-      default : c$case_alt_183 = c$case_alt_259[75];
+    case(c$case_alt_selection_545)
+      64'sd76 : c$case_alt_185 = outA;
+      default : c$case_alt_185 = stateSignal[4139:4117];
     endcase
   end
-
-  assign c$case_alt_selection_547 = c$case_alt_selection_546;
 
-  assign c$i_430 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_548 = c$case_alt_selection_547;
 
-  assign c$case_alt_selection_546 = $unsigned({{(64-8) {1'b0}},c$i_430});
+  assign c$case_alt_selection_547 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_547)
-      64'sd74 : c$case_alt_184 = response.ButterflyResponse_sel2;
-      default : c$case_alt_184 = c$case_alt_259[74];
+    case(c$case_alt_selection_548)
+      64'sd75 : c$case_alt_186 = outA;
+      default : c$case_alt_186 = stateSignal[4162:4140];
     endcase
   end
 
-  assign c$case_alt_selection_550 = c$case_alt_selection_549;
+  assign c$case_alt_selection_551 = c$case_alt_selection_550;
 
-  assign c$i_431 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_550 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_549 = $unsigned({{(64-8) {1'b0}},c$i_431});
-
   always_comb begin
-    case(c$case_alt_selection_550)
-      64'sd73 : c$case_alt_185 = response.ButterflyResponse_sel2;
-      default : c$case_alt_185 = c$case_alt_259[73];
+    case(c$case_alt_selection_551)
+      64'sd74 : c$case_alt_187 = outA;
+      default : c$case_alt_187 = stateSignal[4185:4163];
     endcase
   end
-
-  assign c$case_alt_selection_553 = c$case_alt_selection_552;
 
-  assign c$i_432 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_554 = c$case_alt_selection_553;
 
-  assign c$case_alt_selection_552 = $unsigned({{(64-8) {1'b0}},c$i_432});
+  assign c$case_alt_selection_553 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_553)
-      64'sd72 : c$case_alt_186 = response.ButterflyResponse_sel2;
-      default : c$case_alt_186 = c$case_alt_259[72];
+    case(c$case_alt_selection_554)
+      64'sd73 : c$case_alt_188 = outA;
+      default : c$case_alt_188 = stateSignal[4208:4186];
     endcase
   end
 
-  assign c$case_alt_selection_556 = c$case_alt_selection_555;
+  assign c$case_alt_selection_557 = c$case_alt_selection_556;
 
-  assign c$i_433 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_556 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_555 = $unsigned({{(64-8) {1'b0}},c$i_433});
-
   always_comb begin
-    case(c$case_alt_selection_556)
-      64'sd71 : c$case_alt_187 = response.ButterflyResponse_sel2;
-      default : c$case_alt_187 = c$case_alt_259[71];
+    case(c$case_alt_selection_557)
+      64'sd72 : c$case_alt_189 = outA;
+      default : c$case_alt_189 = stateSignal[4231:4209];
     endcase
   end
-
-  assign c$case_alt_selection_559 = c$case_alt_selection_558;
 
-  assign c$i_434 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_560 = c$case_alt_selection_559;
 
-  assign c$case_alt_selection_558 = $unsigned({{(64-8) {1'b0}},c$i_434});
+  assign c$case_alt_selection_559 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_559)
-      64'sd70 : c$case_alt_188 = response.ButterflyResponse_sel2;
-      default : c$case_alt_188 = c$case_alt_259[70];
+    case(c$case_alt_selection_560)
+      64'sd71 : c$case_alt_190 = outA;
+      default : c$case_alt_190 = stateSignal[4254:4232];
     endcase
   end
 
-  assign c$case_alt_selection_562 = c$case_alt_selection_561;
+  assign c$case_alt_selection_563 = c$case_alt_selection_562;
 
-  assign c$i_435 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_562 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_561 = $unsigned({{(64-8) {1'b0}},c$i_435});
-
   always_comb begin
-    case(c$case_alt_selection_562)
-      64'sd69 : c$case_alt_189 = response.ButterflyResponse_sel2;
-      default : c$case_alt_189 = c$case_alt_259[69];
+    case(c$case_alt_selection_563)
+      64'sd70 : c$case_alt_191 = outA;
+      default : c$case_alt_191 = stateSignal[4277:4255];
     endcase
   end
-
-  assign c$case_alt_selection_565 = c$case_alt_selection_564;
 
-  assign c$i_436 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_566 = c$case_alt_selection_565;
 
-  assign c$case_alt_selection_564 = $unsigned({{(64-8) {1'b0}},c$i_436});
+  assign c$case_alt_selection_565 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_565)
-      64'sd68 : c$case_alt_190 = response.ButterflyResponse_sel2;
-      default : c$case_alt_190 = c$case_alt_259[68];
+    case(c$case_alt_selection_566)
+      64'sd69 : c$case_alt_192 = outA;
+      default : c$case_alt_192 = stateSignal[4300:4278];
     endcase
   end
 
-  assign c$case_alt_selection_568 = c$case_alt_selection_567;
+  assign c$case_alt_selection_569 = c$case_alt_selection_568;
 
-  assign c$i_437 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_568 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_567 = $unsigned({{(64-8) {1'b0}},c$i_437});
-
   always_comb begin
-    case(c$case_alt_selection_568)
-      64'sd67 : c$case_alt_191 = response.ButterflyResponse_sel2;
-      default : c$case_alt_191 = c$case_alt_259[67];
+    case(c$case_alt_selection_569)
+      64'sd68 : c$case_alt_193 = outA;
+      default : c$case_alt_193 = stateSignal[4323:4301];
     endcase
   end
-
-  assign c$case_alt_selection_571 = c$case_alt_selection_570;
 
-  assign c$i_438 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_572 = c$case_alt_selection_571;
 
-  assign c$case_alt_selection_570 = $unsigned({{(64-8) {1'b0}},c$i_438});
+  assign c$case_alt_selection_571 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_571)
-      64'sd66 : c$case_alt_192 = response.ButterflyResponse_sel2;
-      default : c$case_alt_192 = c$case_alt_259[66];
+    case(c$case_alt_selection_572)
+      64'sd67 : c$case_alt_194 = outA;
+      default : c$case_alt_194 = stateSignal[4346:4324];
     endcase
   end
 
-  assign c$case_alt_selection_574 = c$case_alt_selection_573;
+  assign c$case_alt_selection_575 = c$case_alt_selection_574;
 
-  assign c$i_439 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_574 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_573 = $unsigned({{(64-8) {1'b0}},c$i_439});
-
   always_comb begin
-    case(c$case_alt_selection_574)
-      64'sd65 : c$case_alt_193 = response.ButterflyResponse_sel2;
-      default : c$case_alt_193 = c$case_alt_259[65];
+    case(c$case_alt_selection_575)
+      64'sd66 : c$case_alt_195 = outA;
+      default : c$case_alt_195 = stateSignal[4369:4347];
     endcase
   end
-
-  assign c$case_alt_selection_577 = c$case_alt_selection_576;
 
-  assign c$i_440 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_578 = c$case_alt_selection_577;
 
-  assign c$case_alt_selection_576 = $unsigned({{(64-8) {1'b0}},c$i_440});
+  assign c$case_alt_selection_577 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_577)
-      64'sd64 : c$case_alt_194 = response.ButterflyResponse_sel2;
-      default : c$case_alt_194 = c$case_alt_259[64];
+    case(c$case_alt_selection_578)
+      64'sd65 : c$case_alt_196 = outA;
+      default : c$case_alt_196 = stateSignal[4392:4370];
     endcase
   end
 
-  assign c$case_alt_selection_580 = c$case_alt_selection_579;
+  assign c$case_alt_selection_581 = c$case_alt_selection_580;
 
-  assign c$i_441 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_580 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_579 = $unsigned({{(64-8) {1'b0}},c$i_441});
-
   always_comb begin
-    case(c$case_alt_selection_580)
-      64'sd63 : c$case_alt_195 = response.ButterflyResponse_sel2;
-      default : c$case_alt_195 = c$case_alt_259[63];
+    case(c$case_alt_selection_581)
+      64'sd64 : c$case_alt_197 = outA;
+      default : c$case_alt_197 = stateSignal[4415:4393];
     endcase
   end
 
-  assign c$case_alt_selection_583 = c$case_alt_selection_582;
+  assign c$case_alt_selection_584 = c$case_alt_selection_583;
 
-  assign c$i_442 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_583 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_582 = $unsigned({{(64-8) {1'b0}},c$i_442});
-
   always_comb begin
-    case(c$case_alt_selection_583)
-      64'sd62 : c$case_alt_196 = response.ButterflyResponse_sel2;
-      default : c$case_alt_196 = c$case_alt_259[62];
+    case(c$case_alt_selection_584)
+      64'sd63 : c$case_alt_198 = outA;
+      default : c$case_alt_198 = stateSignal[4438:4416];
     endcase
   end
-
-  assign c$case_alt_selection_586 = c$case_alt_selection_585;
 
-  assign c$i_443 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_587 = c$case_alt_selection_586;
 
-  assign c$case_alt_selection_585 = $unsigned({{(64-8) {1'b0}},c$i_443});
+  assign c$case_alt_selection_586 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_586)
-      64'sd61 : c$case_alt_197 = response.ButterflyResponse_sel2;
-      default : c$case_alt_197 = c$case_alt_259[61];
+    case(c$case_alt_selection_587)
+      64'sd62 : c$case_alt_199 = outA;
+      default : c$case_alt_199 = stateSignal[4461:4439];
     endcase
   end
 
-  assign c$case_alt_selection_589 = c$case_alt_selection_588;
+  assign c$case_alt_selection_590 = c$case_alt_selection_589;
 
-  assign c$i_444 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_589 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_588 = $unsigned({{(64-8) {1'b0}},c$i_444});
-
   always_comb begin
-    case(c$case_alt_selection_589)
-      64'sd60 : c$case_alt_198 = response.ButterflyResponse_sel2;
-      default : c$case_alt_198 = c$case_alt_259[60];
+    case(c$case_alt_selection_590)
+      64'sd61 : c$case_alt_200 = outA;
+      default : c$case_alt_200 = stateSignal[4484:4462];
     endcase
   end
-
-  assign c$case_alt_selection_592 = c$case_alt_selection_591;
 
-  assign c$i_445 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_593 = c$case_alt_selection_592;
 
-  assign c$case_alt_selection_591 = $unsigned({{(64-8) {1'b0}},c$i_445});
+  assign c$case_alt_selection_592 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_592)
-      64'sd59 : c$case_alt_199 = response.ButterflyResponse_sel2;
-      default : c$case_alt_199 = c$case_alt_259[59];
+    case(c$case_alt_selection_593)
+      64'sd60 : c$case_alt_201 = outA;
+      default : c$case_alt_201 = stateSignal[4507:4485];
     endcase
   end
 
-  assign c$case_alt_selection_595 = c$case_alt_selection_594;
+  assign c$case_alt_selection_596 = c$case_alt_selection_595;
 
-  assign c$i_446 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_595 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_594 = $unsigned({{(64-8) {1'b0}},c$i_446});
-
   always_comb begin
-    case(c$case_alt_selection_595)
-      64'sd58 : c$case_alt_200 = response.ButterflyResponse_sel2;
-      default : c$case_alt_200 = c$case_alt_259[58];
+    case(c$case_alt_selection_596)
+      64'sd59 : c$case_alt_202 = outA;
+      default : c$case_alt_202 = stateSignal[4530:4508];
     endcase
   end
-
-  assign c$case_alt_selection_598 = c$case_alt_selection_597;
 
-  assign c$i_447 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_599 = c$case_alt_selection_598;
 
-  assign c$case_alt_selection_597 = $unsigned({{(64-8) {1'b0}},c$i_447});
+  assign c$case_alt_selection_598 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_598)
-      64'sd57 : c$case_alt_201 = response.ButterflyResponse_sel2;
-      default : c$case_alt_201 = c$case_alt_259[57];
+    case(c$case_alt_selection_599)
+      64'sd58 : c$case_alt_203 = outA;
+      default : c$case_alt_203 = stateSignal[4553:4531];
     endcase
   end
 
-  assign c$case_alt_selection_601 = c$case_alt_selection_600;
+  assign c$case_alt_selection_602 = c$case_alt_selection_601;
 
-  assign c$i_448 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_601 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_600 = $unsigned({{(64-8) {1'b0}},c$i_448});
-
   always_comb begin
-    case(c$case_alt_selection_601)
-      64'sd56 : c$case_alt_202 = response.ButterflyResponse_sel2;
-      default : c$case_alt_202 = c$case_alt_259[56];
+    case(c$case_alt_selection_602)
+      64'sd57 : c$case_alt_204 = outA;
+      default : c$case_alt_204 = stateSignal[4576:4554];
     endcase
   end
-
-  assign c$case_alt_selection_604 = c$case_alt_selection_603;
 
-  assign c$i_449 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_605 = c$case_alt_selection_604;
 
-  assign c$case_alt_selection_603 = $unsigned({{(64-8) {1'b0}},c$i_449});
+  assign c$case_alt_selection_604 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_604)
-      64'sd55 : c$case_alt_203 = response.ButterflyResponse_sel2;
-      default : c$case_alt_203 = c$case_alt_259[55];
+    case(c$case_alt_selection_605)
+      64'sd56 : c$case_alt_205 = outA;
+      default : c$case_alt_205 = stateSignal[4599:4577];
     endcase
   end
 
-  assign c$case_alt_selection_607 = c$case_alt_selection_606;
+  assign c$case_alt_selection_608 = c$case_alt_selection_607;
 
-  assign c$i_450 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_607 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_606 = $unsigned({{(64-8) {1'b0}},c$i_450});
-
   always_comb begin
-    case(c$case_alt_selection_607)
-      64'sd54 : c$case_alt_204 = response.ButterflyResponse_sel2;
-      default : c$case_alt_204 = c$case_alt_259[54];
+    case(c$case_alt_selection_608)
+      64'sd55 : c$case_alt_206 = outA;
+      default : c$case_alt_206 = stateSignal[4622:4600];
     endcase
   end
-
-  assign c$case_alt_selection_610 = c$case_alt_selection_609;
 
-  assign c$i_451 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_611 = c$case_alt_selection_610;
 
-  assign c$case_alt_selection_609 = $unsigned({{(64-8) {1'b0}},c$i_451});
+  assign c$case_alt_selection_610 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_610)
-      64'sd53 : c$case_alt_205 = response.ButterflyResponse_sel2;
-      default : c$case_alt_205 = c$case_alt_259[53];
+    case(c$case_alt_selection_611)
+      64'sd54 : c$case_alt_207 = outA;
+      default : c$case_alt_207 = stateSignal[4645:4623];
     endcase
   end
 
-  assign c$case_alt_selection_613 = c$case_alt_selection_612;
+  assign c$case_alt_selection_614 = c$case_alt_selection_613;
 
-  assign c$i_452 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_613 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_612 = $unsigned({{(64-8) {1'b0}},c$i_452});
-
   always_comb begin
-    case(c$case_alt_selection_613)
-      64'sd52 : c$case_alt_206 = response.ButterflyResponse_sel2;
-      default : c$case_alt_206 = c$case_alt_259[52];
+    case(c$case_alt_selection_614)
+      64'sd53 : c$case_alt_208 = outA;
+      default : c$case_alt_208 = stateSignal[4668:4646];
     endcase
   end
-
-  assign c$case_alt_selection_616 = c$case_alt_selection_615;
 
-  assign c$i_453 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_617 = c$case_alt_selection_616;
 
-  assign c$case_alt_selection_615 = $unsigned({{(64-8) {1'b0}},c$i_453});
+  assign c$case_alt_selection_616 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_616)
-      64'sd51 : c$case_alt_207 = response.ButterflyResponse_sel2;
-      default : c$case_alt_207 = c$case_alt_259[51];
+    case(c$case_alt_selection_617)
+      64'sd52 : c$case_alt_209 = outA;
+      default : c$case_alt_209 = stateSignal[4691:4669];
     endcase
   end
 
-  assign c$case_alt_selection_619 = c$case_alt_selection_618;
+  assign c$case_alt_selection_620 = c$case_alt_selection_619;
 
-  assign c$i_454 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_619 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_618 = $unsigned({{(64-8) {1'b0}},c$i_454});
-
   always_comb begin
-    case(c$case_alt_selection_619)
-      64'sd50 : c$case_alt_208 = response.ButterflyResponse_sel2;
-      default : c$case_alt_208 = c$case_alt_259[50];
+    case(c$case_alt_selection_620)
+      64'sd51 : c$case_alt_210 = outA;
+      default : c$case_alt_210 = stateSignal[4714:4692];
     endcase
   end
-
-  assign c$case_alt_selection_622 = c$case_alt_selection_621;
 
-  assign c$i_455 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_623 = c$case_alt_selection_622;
 
-  assign c$case_alt_selection_621 = $unsigned({{(64-8) {1'b0}},c$i_455});
+  assign c$case_alt_selection_622 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_622)
-      64'sd49 : c$case_alt_209 = response.ButterflyResponse_sel2;
-      default : c$case_alt_209 = c$case_alt_259[49];
+    case(c$case_alt_selection_623)
+      64'sd50 : c$case_alt_211 = outA;
+      default : c$case_alt_211 = stateSignal[4737:4715];
     endcase
   end
 
-  assign c$case_alt_selection_625 = c$case_alt_selection_624;
+  assign c$case_alt_selection_626 = c$case_alt_selection_625;
 
-  assign c$i_456 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_625 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_624 = $unsigned({{(64-8) {1'b0}},c$i_456});
-
   always_comb begin
-    case(c$case_alt_selection_625)
-      64'sd48 : c$case_alt_210 = response.ButterflyResponse_sel2;
-      default : c$case_alt_210 = c$case_alt_259[48];
+    case(c$case_alt_selection_626)
+      64'sd49 : c$case_alt_212 = outA;
+      default : c$case_alt_212 = stateSignal[4760:4738];
     endcase
   end
-
-  assign c$case_alt_selection_628 = c$case_alt_selection_627;
 
-  assign c$i_457 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_629 = c$case_alt_selection_628;
 
-  assign c$case_alt_selection_627 = $unsigned({{(64-8) {1'b0}},c$i_457});
+  assign c$case_alt_selection_628 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_628)
-      64'sd47 : c$case_alt_211 = response.ButterflyResponse_sel2;
-      default : c$case_alt_211 = c$case_alt_259[47];
+    case(c$case_alt_selection_629)
+      64'sd48 : c$case_alt_213 = outA;
+      default : c$case_alt_213 = stateSignal[4783:4761];
     endcase
   end
 
-  assign c$case_alt_selection_631 = c$case_alt_selection_630;
+  assign c$case_alt_selection_632 = c$case_alt_selection_631;
 
-  assign c$i_458 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_631 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_630 = $unsigned({{(64-8) {1'b0}},c$i_458});
-
   always_comb begin
-    case(c$case_alt_selection_631)
-      64'sd46 : c$case_alt_212 = response.ButterflyResponse_sel2;
-      default : c$case_alt_212 = c$case_alt_259[46];
+    case(c$case_alt_selection_632)
+      64'sd47 : c$case_alt_214 = outA;
+      default : c$case_alt_214 = stateSignal[4806:4784];
     endcase
   end
 
-  assign c$case_alt_selection_634 = c$case_alt_selection_633;
+  assign c$case_alt_selection_635 = c$case_alt_selection_634;
 
-  assign c$i_459 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_634 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_633 = $unsigned({{(64-8) {1'b0}},c$i_459});
-
   always_comb begin
-    case(c$case_alt_selection_634)
-      64'sd45 : c$case_alt_213 = response.ButterflyResponse_sel2;
-      default : c$case_alt_213 = c$case_alt_259[45];
+    case(c$case_alt_selection_635)
+      64'sd46 : c$case_alt_215 = outA;
+      default : c$case_alt_215 = stateSignal[4829:4807];
     endcase
   end
-
-  assign c$case_alt_selection_637 = c$case_alt_selection_636;
 
-  assign c$i_460 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_638 = c$case_alt_selection_637;
 
-  assign c$case_alt_selection_636 = $unsigned({{(64-8) {1'b0}},c$i_460});
+  assign c$case_alt_selection_637 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_637)
-      64'sd44 : c$case_alt_214 = response.ButterflyResponse_sel2;
-      default : c$case_alt_214 = c$case_alt_259[44];
+    case(c$case_alt_selection_638)
+      64'sd45 : c$case_alt_216 = outA;
+      default : c$case_alt_216 = stateSignal[4852:4830];
     endcase
   end
 
-  assign c$case_alt_selection_640 = c$case_alt_selection_639;
+  assign c$case_alt_selection_641 = c$case_alt_selection_640;
 
-  assign c$i_461 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_640 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_639 = $unsigned({{(64-8) {1'b0}},c$i_461});
-
   always_comb begin
-    case(c$case_alt_selection_640)
-      64'sd43 : c$case_alt_215 = response.ButterflyResponse_sel2;
-      default : c$case_alt_215 = c$case_alt_259[43];
+    case(c$case_alt_selection_641)
+      64'sd44 : c$case_alt_217 = outA;
+      default : c$case_alt_217 = stateSignal[4875:4853];
     endcase
   end
-
-  assign c$case_alt_selection_643 = c$case_alt_selection_642;
 
-  assign c$i_462 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_644 = c$case_alt_selection_643;
 
-  assign c$case_alt_selection_642 = $unsigned({{(64-8) {1'b0}},c$i_462});
+  assign c$case_alt_selection_643 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_643)
-      64'sd42 : c$case_alt_216 = response.ButterflyResponse_sel2;
-      default : c$case_alt_216 = c$case_alt_259[42];
+    case(c$case_alt_selection_644)
+      64'sd43 : c$case_alt_218 = outA;
+      default : c$case_alt_218 = stateSignal[4898:4876];
     endcase
   end
 
-  assign c$case_alt_selection_646 = c$case_alt_selection_645;
+  assign c$case_alt_selection_647 = c$case_alt_selection_646;
 
-  assign c$i_463 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_646 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_645 = $unsigned({{(64-8) {1'b0}},c$i_463});
-
   always_comb begin
-    case(c$case_alt_selection_646)
-      64'sd41 : c$case_alt_217 = response.ButterflyResponse_sel2;
-      default : c$case_alt_217 = c$case_alt_259[41];
+    case(c$case_alt_selection_647)
+      64'sd42 : c$case_alt_219 = outA;
+      default : c$case_alt_219 = stateSignal[4921:4899];
     endcase
   end
-
-  assign c$case_alt_selection_649 = c$case_alt_selection_648;
 
-  assign c$i_464 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_650 = c$case_alt_selection_649;
 
-  assign c$case_alt_selection_648 = $unsigned({{(64-8) {1'b0}},c$i_464});
+  assign c$case_alt_selection_649 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_649)
-      64'sd40 : c$case_alt_218 = response.ButterflyResponse_sel2;
-      default : c$case_alt_218 = c$case_alt_259[40];
+    case(c$case_alt_selection_650)
+      64'sd41 : c$case_alt_220 = outA;
+      default : c$case_alt_220 = stateSignal[4944:4922];
     endcase
   end
 
-  assign c$case_alt_selection_652 = c$case_alt_selection_651;
+  assign c$case_alt_selection_653 = c$case_alt_selection_652;
 
-  assign c$i_465 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_652 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_651 = $unsigned({{(64-8) {1'b0}},c$i_465});
-
   always_comb begin
-    case(c$case_alt_selection_652)
-      64'sd39 : c$case_alt_219 = response.ButterflyResponse_sel2;
-      default : c$case_alt_219 = c$case_alt_259[39];
+    case(c$case_alt_selection_653)
+      64'sd40 : c$case_alt_221 = outA;
+      default : c$case_alt_221 = stateSignal[4967:4945];
     endcase
   end
-
-  assign c$case_alt_selection_655 = c$case_alt_selection_654;
 
-  assign c$i_466 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_656 = c$case_alt_selection_655;
 
-  assign c$case_alt_selection_654 = $unsigned({{(64-8) {1'b0}},c$i_466});
+  assign c$case_alt_selection_655 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_655)
-      64'sd38 : c$case_alt_220 = response.ButterflyResponse_sel2;
-      default : c$case_alt_220 = c$case_alt_259[38];
+    case(c$case_alt_selection_656)
+      64'sd39 : c$case_alt_222 = outA;
+      default : c$case_alt_222 = stateSignal[4990:4968];
     endcase
   end
 
-  assign c$case_alt_selection_658 = c$case_alt_selection_657;
+  assign c$case_alt_selection_659 = c$case_alt_selection_658;
 
-  assign c$i_467 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_658 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_657 = $unsigned({{(64-8) {1'b0}},c$i_467});
-
   always_comb begin
-    case(c$case_alt_selection_658)
-      64'sd37 : c$case_alt_221 = response.ButterflyResponse_sel2;
-      default : c$case_alt_221 = c$case_alt_259[37];
+    case(c$case_alt_selection_659)
+      64'sd38 : c$case_alt_223 = outA;
+      default : c$case_alt_223 = stateSignal[5013:4991];
     endcase
   end
-
-  assign c$case_alt_selection_661 = c$case_alt_selection_660;
 
-  assign c$i_468 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_662 = c$case_alt_selection_661;
 
-  assign c$case_alt_selection_660 = $unsigned({{(64-8) {1'b0}},c$i_468});
+  assign c$case_alt_selection_661 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_661)
-      64'sd36 : c$case_alt_222 = response.ButterflyResponse_sel2;
-      default : c$case_alt_222 = c$case_alt_259[36];
+    case(c$case_alt_selection_662)
+      64'sd37 : c$case_alt_224 = outA;
+      default : c$case_alt_224 = stateSignal[5036:5014];
     endcase
   end
 
-  assign c$case_alt_selection_664 = c$case_alt_selection_663;
+  assign c$case_alt_selection_665 = c$case_alt_selection_664;
 
-  assign c$i_469 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_664 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_663 = $unsigned({{(64-8) {1'b0}},c$i_469});
-
   always_comb begin
-    case(c$case_alt_selection_664)
-      64'sd35 : c$case_alt_223 = response.ButterflyResponse_sel2;
-      default : c$case_alt_223 = c$case_alt_259[35];
+    case(c$case_alt_selection_665)
+      64'sd36 : c$case_alt_225 = outA;
+      default : c$case_alt_225 = stateSignal[5059:5037];
     endcase
   end
-
-  assign c$case_alt_selection_667 = c$case_alt_selection_666;
 
-  assign c$i_470 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_668 = c$case_alt_selection_667;
 
-  assign c$case_alt_selection_666 = $unsigned({{(64-8) {1'b0}},c$i_470});
+  assign c$case_alt_selection_667 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_667)
-      64'sd34 : c$case_alt_224 = response.ButterflyResponse_sel2;
-      default : c$case_alt_224 = c$case_alt_259[34];
+    case(c$case_alt_selection_668)
+      64'sd35 : c$case_alt_226 = outA;
+      default : c$case_alt_226 = stateSignal[5082:5060];
     endcase
   end
 
-  assign c$case_alt_selection_670 = c$case_alt_selection_669;
+  assign c$case_alt_selection_671 = c$case_alt_selection_670;
 
-  assign c$i_471 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_670 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_669 = $unsigned({{(64-8) {1'b0}},c$i_471});
-
   always_comb begin
-    case(c$case_alt_selection_670)
-      64'sd33 : c$case_alt_225 = response.ButterflyResponse_sel2;
-      default : c$case_alt_225 = c$case_alt_259[33];
+    case(c$case_alt_selection_671)
+      64'sd34 : c$case_alt_227 = outA;
+      default : c$case_alt_227 = stateSignal[5105:5083];
     endcase
   end
-
-  assign c$case_alt_selection_673 = c$case_alt_selection_672;
 
-  assign c$i_472 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_674 = c$case_alt_selection_673;
 
-  assign c$case_alt_selection_672 = $unsigned({{(64-8) {1'b0}},c$i_472});
+  assign c$case_alt_selection_673 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_673)
-      64'sd32 : c$case_alt_226 = response.ButterflyResponse_sel2;
-      default : c$case_alt_226 = c$case_alt_259[32];
+    case(c$case_alt_selection_674)
+      64'sd33 : c$case_alt_228 = outA;
+      default : c$case_alt_228 = stateSignal[5128:5106];
     endcase
   end
 
-  assign c$case_alt_selection_676 = c$case_alt_selection_675;
+  assign c$case_alt_selection_677 = c$case_alt_selection_676;
 
-  assign c$i_473 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_676 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_675 = $unsigned({{(64-8) {1'b0}},c$i_473});
-
   always_comb begin
-    case(c$case_alt_selection_676)
-      64'sd31 : c$case_alt_227 = response.ButterflyResponse_sel2;
-      default : c$case_alt_227 = c$case_alt_259[31];
+    case(c$case_alt_selection_677)
+      64'sd32 : c$case_alt_229 = outA;
+      default : c$case_alt_229 = stateSignal[5151:5129];
     endcase
   end
-
-  assign c$case_alt_selection_679 = c$case_alt_selection_678;
 
-  assign c$i_474 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_680 = c$case_alt_selection_679;
 
-  assign c$case_alt_selection_678 = $unsigned({{(64-8) {1'b0}},c$i_474});
+  assign c$case_alt_selection_679 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_679)
-      64'sd30 : c$case_alt_228 = response.ButterflyResponse_sel2;
-      default : c$case_alt_228 = c$case_alt_259[30];
+    case(c$case_alt_selection_680)
+      64'sd31 : c$case_alt_230 = outA;
+      default : c$case_alt_230 = stateSignal[5174:5152];
     endcase
   end
 
-  assign c$case_alt_selection_682 = c$case_alt_selection_681;
+  assign c$case_alt_selection_683 = c$case_alt_selection_682;
 
-  assign c$i_475 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_682 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_681 = $unsigned({{(64-8) {1'b0}},c$i_475});
-
   always_comb begin
-    case(c$case_alt_selection_682)
-      64'sd29 : c$case_alt_229 = response.ButterflyResponse_sel2;
-      default : c$case_alt_229 = c$case_alt_259[29];
+    case(c$case_alt_selection_683)
+      64'sd30 : c$case_alt_231 = outA;
+      default : c$case_alt_231 = stateSignal[5197:5175];
     endcase
   end
 
-  assign c$case_alt_selection_685 = c$case_alt_selection_684;
+  assign c$case_alt_selection_686 = c$case_alt_selection_685;
 
-  assign c$i_476 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_685 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_684 = $unsigned({{(64-8) {1'b0}},c$i_476});
-
   always_comb begin
-    case(c$case_alt_selection_685)
-      64'sd28 : c$case_alt_230 = response.ButterflyResponse_sel2;
-      default : c$case_alt_230 = c$case_alt_259[28];
+    case(c$case_alt_selection_686)
+      64'sd29 : c$case_alt_232 = outA;
+      default : c$case_alt_232 = stateSignal[5220:5198];
     endcase
   end
-
-  assign c$case_alt_selection_688 = c$case_alt_selection_687;
 
-  assign c$i_477 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_689 = c$case_alt_selection_688;
 
-  assign c$case_alt_selection_687 = $unsigned({{(64-8) {1'b0}},c$i_477});
+  assign c$case_alt_selection_688 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_688)
-      64'sd27 : c$case_alt_231 = response.ButterflyResponse_sel2;
-      default : c$case_alt_231 = c$case_alt_259[27];
+    case(c$case_alt_selection_689)
+      64'sd28 : c$case_alt_233 = outA;
+      default : c$case_alt_233 = stateSignal[5243:5221];
     endcase
   end
 
-  assign c$case_alt_selection_691 = c$case_alt_selection_690;
+  assign c$case_alt_selection_692 = c$case_alt_selection_691;
 
-  assign c$i_478 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_691 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_690 = $unsigned({{(64-8) {1'b0}},c$i_478});
-
   always_comb begin
-    case(c$case_alt_selection_691)
-      64'sd26 : c$case_alt_232 = response.ButterflyResponse_sel2;
-      default : c$case_alt_232 = c$case_alt_259[26];
+    case(c$case_alt_selection_692)
+      64'sd27 : c$case_alt_234 = outA;
+      default : c$case_alt_234 = stateSignal[5266:5244];
     endcase
   end
-
-  assign c$case_alt_selection_694 = c$case_alt_selection_693;
 
-  assign c$i_479 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_695 = c$case_alt_selection_694;
 
-  assign c$case_alt_selection_693 = $unsigned({{(64-8) {1'b0}},c$i_479});
+  assign c$case_alt_selection_694 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_694)
-      64'sd25 : c$case_alt_233 = response.ButterflyResponse_sel2;
-      default : c$case_alt_233 = c$case_alt_259[25];
+    case(c$case_alt_selection_695)
+      64'sd26 : c$case_alt_235 = outA;
+      default : c$case_alt_235 = stateSignal[5289:5267];
     endcase
   end
 
-  assign c$case_alt_selection_697 = c$case_alt_selection_696;
+  assign c$case_alt_selection_698 = c$case_alt_selection_697;
 
-  assign c$i_480 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_697 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_696 = $unsigned({{(64-8) {1'b0}},c$i_480});
-
   always_comb begin
-    case(c$case_alt_selection_697)
-      64'sd24 : c$case_alt_234 = response.ButterflyResponse_sel2;
-      default : c$case_alt_234 = c$case_alt_259[24];
+    case(c$case_alt_selection_698)
+      64'sd25 : c$case_alt_236 = outA;
+      default : c$case_alt_236 = stateSignal[5312:5290];
     endcase
   end
-
-  assign c$case_alt_selection_700 = c$case_alt_selection_699;
 
-  assign c$i_481 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_701 = c$case_alt_selection_700;
 
-  assign c$case_alt_selection_699 = $unsigned({{(64-8) {1'b0}},c$i_481});
+  assign c$case_alt_selection_700 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_700)
-      64'sd23 : c$case_alt_235 = response.ButterflyResponse_sel2;
-      default : c$case_alt_235 = c$case_alt_259[23];
+    case(c$case_alt_selection_701)
+      64'sd24 : c$case_alt_237 = outA;
+      default : c$case_alt_237 = stateSignal[5335:5313];
     endcase
   end
 
-  assign c$case_alt_selection_703 = c$case_alt_selection_702;
+  assign c$case_alt_selection_704 = c$case_alt_selection_703;
 
-  assign c$i_482 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_703 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_702 = $unsigned({{(64-8) {1'b0}},c$i_482});
-
   always_comb begin
-    case(c$case_alt_selection_703)
-      64'sd22 : c$case_alt_236 = response.ButterflyResponse_sel2;
-      default : c$case_alt_236 = c$case_alt_259[22];
+    case(c$case_alt_selection_704)
+      64'sd23 : c$case_alt_238 = outA;
+      default : c$case_alt_238 = stateSignal[5358:5336];
     endcase
   end
-
-  assign c$case_alt_selection_706 = c$case_alt_selection_705;
 
-  assign c$i_483 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_707 = c$case_alt_selection_706;
 
-  assign c$case_alt_selection_705 = $unsigned({{(64-8) {1'b0}},c$i_483});
+  assign c$case_alt_selection_706 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_706)
-      64'sd21 : c$case_alt_237 = response.ButterflyResponse_sel2;
-      default : c$case_alt_237 = c$case_alt_259[21];
+    case(c$case_alt_selection_707)
+      64'sd22 : c$case_alt_239 = outA;
+      default : c$case_alt_239 = stateSignal[5381:5359];
     endcase
   end
 
-  assign c$case_alt_selection_709 = c$case_alt_selection_708;
+  assign c$case_alt_selection_710 = c$case_alt_selection_709;
 
-  assign c$i_484 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_709 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_708 = $unsigned({{(64-8) {1'b0}},c$i_484});
-
   always_comb begin
-    case(c$case_alt_selection_709)
-      64'sd20 : c$case_alt_238 = response.ButterflyResponse_sel2;
-      default : c$case_alt_238 = c$case_alt_259[20];
+    case(c$case_alt_selection_710)
+      64'sd21 : c$case_alt_240 = outA;
+      default : c$case_alt_240 = stateSignal[5404:5382];
     endcase
   end
-
-  assign c$case_alt_selection_712 = c$case_alt_selection_711;
 
-  assign c$i_485 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_713 = c$case_alt_selection_712;
 
-  assign c$case_alt_selection_711 = $unsigned({{(64-8) {1'b0}},c$i_485});
+  assign c$case_alt_selection_712 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_712)
-      64'sd19 : c$case_alt_239 = response.ButterflyResponse_sel2;
-      default : c$case_alt_239 = c$case_alt_259[19];
+    case(c$case_alt_selection_713)
+      64'sd20 : c$case_alt_241 = outA;
+      default : c$case_alt_241 = stateSignal[5427:5405];
     endcase
   end
 
-  assign c$case_alt_selection_715 = c$case_alt_selection_714;
+  assign c$case_alt_selection_716 = c$case_alt_selection_715;
 
-  assign c$i_486 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_715 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_714 = $unsigned({{(64-8) {1'b0}},c$i_486});
-
   always_comb begin
-    case(c$case_alt_selection_715)
-      64'sd18 : c$case_alt_240 = response.ButterflyResponse_sel2;
-      default : c$case_alt_240 = c$case_alt_259[18];
+    case(c$case_alt_selection_716)
+      64'sd19 : c$case_alt_242 = outA;
+      default : c$case_alt_242 = stateSignal[5450:5428];
     endcase
   end
-
-  assign c$case_alt_selection_718 = c$case_alt_selection_717;
 
-  assign c$i_487 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_719 = c$case_alt_selection_718;
 
-  assign c$case_alt_selection_717 = $unsigned({{(64-8) {1'b0}},c$i_487});
+  assign c$case_alt_selection_718 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_718)
-      64'sd17 : c$case_alt_241 = response.ButterflyResponse_sel2;
-      default : c$case_alt_241 = c$case_alt_259[17];
+    case(c$case_alt_selection_719)
+      64'sd18 : c$case_alt_243 = outA;
+      default : c$case_alt_243 = stateSignal[5473:5451];
     endcase
   end
 
-  assign c$case_alt_selection_721 = c$case_alt_selection_720;
+  assign c$case_alt_selection_722 = c$case_alt_selection_721;
 
-  assign c$i_488 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_721 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_720 = $unsigned({{(64-8) {1'b0}},c$i_488});
-
   always_comb begin
-    case(c$case_alt_selection_721)
-      64'sd16 : c$case_alt_242 = response.ButterflyResponse_sel2;
-      default : c$case_alt_242 = c$case_alt_259[16];
+    case(c$case_alt_selection_722)
+      64'sd17 : c$case_alt_244 = outA;
+      default : c$case_alt_244 = stateSignal[5496:5474];
     endcase
   end
-
-  assign c$case_alt_selection_724 = c$case_alt_selection_723;
 
-  assign c$i_489 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_725 = c$case_alt_selection_724;
 
-  assign c$case_alt_selection_723 = $unsigned({{(64-8) {1'b0}},c$i_489});
+  assign c$case_alt_selection_724 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_724)
-      64'sd15 : c$case_alt_243 = response.ButterflyResponse_sel2;
-      default : c$case_alt_243 = c$case_alt_259[15];
+    case(c$case_alt_selection_725)
+      64'sd16 : c$case_alt_245 = outA;
+      default : c$case_alt_245 = stateSignal[5519:5497];
     endcase
   end
 
-  assign c$case_alt_selection_727 = c$case_alt_selection_726;
+  assign c$case_alt_selection_728 = c$case_alt_selection_727;
 
-  assign c$i_490 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_727 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_726 = $unsigned({{(64-8) {1'b0}},c$i_490});
-
   always_comb begin
-    case(c$case_alt_selection_727)
-      64'sd14 : c$case_alt_244 = response.ButterflyResponse_sel2;
-      default : c$case_alt_244 = c$case_alt_259[14];
+    case(c$case_alt_selection_728)
+      64'sd15 : c$case_alt_246 = outA;
+      default : c$case_alt_246 = stateSignal[5542:5520];
     endcase
   end
-
-  assign c$case_alt_selection_730 = c$case_alt_selection_729;
 
-  assign c$i_491 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_731 = c$case_alt_selection_730;
 
-  assign c$case_alt_selection_729 = $unsigned({{(64-8) {1'b0}},c$i_491});
+  assign c$case_alt_selection_730 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_730)
-      64'sd13 : c$case_alt_245 = response.ButterflyResponse_sel2;
-      default : c$case_alt_245 = c$case_alt_259[13];
+    case(c$case_alt_selection_731)
+      64'sd14 : c$case_alt_247 = outA;
+      default : c$case_alt_247 = stateSignal[5565:5543];
     endcase
   end
 
-  assign c$case_alt_selection_733 = c$case_alt_selection_732;
+  assign c$case_alt_selection_734 = c$case_alt_selection_733;
 
-  assign c$i_492 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_733 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_732 = $unsigned({{(64-8) {1'b0}},c$i_492});
-
   always_comb begin
-    case(c$case_alt_selection_733)
-      64'sd12 : c$case_alt_246 = response.ButterflyResponse_sel2;
-      default : c$case_alt_246 = c$case_alt_259[12];
+    case(c$case_alt_selection_734)
+      64'sd13 : c$case_alt_248 = outA;
+      default : c$case_alt_248 = stateSignal[5588:5566];
     endcase
   end
 
-  assign c$case_alt_selection_736 = c$case_alt_selection_735;
+  assign c$case_alt_selection_737 = c$case_alt_selection_736;
 
-  assign c$i_493 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_736 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_735 = $unsigned({{(64-8) {1'b0}},c$i_493});
-
   always_comb begin
-    case(c$case_alt_selection_736)
-      64'sd11 : c$case_alt_247 = response.ButterflyResponse_sel2;
-      default : c$case_alt_247 = c$case_alt_259[11];
+    case(c$case_alt_selection_737)
+      64'sd12 : c$case_alt_249 = outA;
+      default : c$case_alt_249 = stateSignal[5611:5589];
     endcase
   end
-
-  assign c$case_alt_selection_739 = c$case_alt_selection_738;
 
-  assign c$i_494 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_740 = c$case_alt_selection_739;
 
-  assign c$case_alt_selection_738 = $unsigned({{(64-8) {1'b0}},c$i_494});
+  assign c$case_alt_selection_739 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_739)
-      64'sd10 : c$case_alt_248 = response.ButterflyResponse_sel2;
-      default : c$case_alt_248 = c$case_alt_259[10];
+    case(c$case_alt_selection_740)
+      64'sd11 : c$case_alt_250 = outA;
+      default : c$case_alt_250 = stateSignal[5634:5612];
     endcase
   end
 
-  assign c$case_alt_selection_742 = c$case_alt_selection_741;
+  assign c$case_alt_selection_743 = c$case_alt_selection_742;
 
-  assign c$i_495 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_742 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_741 = $unsigned({{(64-8) {1'b0}},c$i_495});
-
   always_comb begin
-    case(c$case_alt_selection_742)
-      64'sd9 : c$case_alt_249 = response.ButterflyResponse_sel2;
-      default : c$case_alt_249 = c$case_alt_259[9];
+    case(c$case_alt_selection_743)
+      64'sd10 : c$case_alt_251 = outA;
+      default : c$case_alt_251 = stateSignal[5657:5635];
     endcase
   end
-
-  assign c$case_alt_selection_745 = c$case_alt_selection_744;
 
-  assign c$i_496 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_746 = c$case_alt_selection_745;
 
-  assign c$case_alt_selection_744 = $unsigned({{(64-8) {1'b0}},c$i_496});
+  assign c$case_alt_selection_745 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_745)
-      64'sd8 : c$case_alt_250 = response.ButterflyResponse_sel2;
-      default : c$case_alt_250 = c$case_alt_259[8];
+    case(c$case_alt_selection_746)
+      64'sd9 : c$case_alt_252 = outA;
+      default : c$case_alt_252 = stateSignal[5680:5658];
     endcase
   end
 
-  assign c$case_alt_selection_748 = c$case_alt_selection_747;
+  assign c$case_alt_selection_749 = c$case_alt_selection_748;
 
-  assign c$i_497 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_748 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_747 = $unsigned({{(64-8) {1'b0}},c$i_497});
-
   always_comb begin
-    case(c$case_alt_selection_748)
-      64'sd7 : c$case_alt_251 = response.ButterflyResponse_sel2;
-      default : c$case_alt_251 = c$case_alt_259[7];
+    case(c$case_alt_selection_749)
+      64'sd8 : c$case_alt_253 = outA;
+      default : c$case_alt_253 = stateSignal[5703:5681];
     endcase
   end
-
-  assign c$case_alt_selection_751 = c$case_alt_selection_750;
 
-  assign c$i_498 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_752 = c$case_alt_selection_751;
 
-  assign c$case_alt_selection_750 = $unsigned({{(64-8) {1'b0}},c$i_498});
+  assign c$case_alt_selection_751 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_751)
-      64'sd6 : c$case_alt_252 = response.ButterflyResponse_sel2;
-      default : c$case_alt_252 = c$case_alt_259[6];
+    case(c$case_alt_selection_752)
+      64'sd7 : c$case_alt_254 = outA;
+      default : c$case_alt_254 = stateSignal[5726:5704];
     endcase
   end
 
-  assign c$case_alt_selection_754 = c$case_alt_selection_753;
+  assign c$case_alt_selection_755 = c$case_alt_selection_754;
 
-  assign c$i_499 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_754 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_753 = $unsigned({{(64-8) {1'b0}},c$i_499});
-
   always_comb begin
-    case(c$case_alt_selection_754)
-      64'sd5 : c$case_alt_253 = response.ButterflyResponse_sel2;
-      default : c$case_alt_253 = c$case_alt_259[5];
+    case(c$case_alt_selection_755)
+      64'sd6 : c$case_alt_255 = outA;
+      default : c$case_alt_255 = stateSignal[5749:5727];
     endcase
   end
-
-  assign c$case_alt_selection_757 = c$case_alt_selection_756;
 
-  assign c$i_500 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_758 = c$case_alt_selection_757;
 
-  assign c$case_alt_selection_756 = $unsigned({{(64-8) {1'b0}},c$i_500});
+  assign c$case_alt_selection_757 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_757)
-      64'sd4 : c$case_alt_254 = response.ButterflyResponse_sel2;
-      default : c$case_alt_254 = c$case_alt_259[4];
+    case(c$case_alt_selection_758)
+      64'sd5 : c$case_alt_256 = outA;
+      default : c$case_alt_256 = stateSignal[5772:5750];
     endcase
   end
 
-  assign c$case_alt_selection_760 = c$case_alt_selection_759;
+  assign c$case_alt_selection_761 = c$case_alt_selection_760;
 
-  assign c$i_501 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_760 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_759 = $unsigned({{(64-8) {1'b0}},c$i_501});
-
   always_comb begin
-    case(c$case_alt_selection_760)
-      64'sd3 : c$case_alt_255 = response.ButterflyResponse_sel2;
-      default : c$case_alt_255 = c$case_alt_259[3];
+    case(c$case_alt_selection_761)
+      64'sd4 : c$case_alt_257 = outA;
+      default : c$case_alt_257 = stateSignal[5795:5773];
     endcase
   end
-
-  assign c$case_alt_selection_763 = c$case_alt_selection_762;
 
-  assign c$i_502 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_764 = c$case_alt_selection_763;
 
-  assign c$case_alt_selection_762 = $unsigned({{(64-8) {1'b0}},c$i_502});
+  assign c$case_alt_selection_763 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_763)
-      64'sd2 : c$case_alt_256 = response.ButterflyResponse_sel2;
-      default : c$case_alt_256 = c$case_alt_259[2];
+    case(c$case_alt_selection_764)
+      64'sd3 : c$case_alt_258 = outA;
+      default : c$case_alt_258 = stateSignal[5818:5796];
     endcase
   end
 
-  assign c$case_alt_selection_766 = c$case_alt_selection_765;
+  assign c$case_alt_selection_767 = c$case_alt_selection_766;
 
-  assign c$i_503 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_766 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign c$case_alt_selection_765 = $unsigned({{(64-8) {1'b0}},c$i_503});
-
   always_comb begin
-    case(c$case_alt_selection_766)
-      64'sd1 : c$case_alt_257 = response.ButterflyResponse_sel2;
-      default : c$case_alt_257 = c$case_alt_259[1];
+    case(c$case_alt_selection_767)
+      64'sd2 : c$case_alt_259 = outA;
+      default : c$case_alt_259 = stateSignal[5841:5819];
     endcase
   end
-
-  assign c$case_alt_selection_769 = c$case_alt_selection_768;
 
-  assign c$i_504 = response.ButterflyResponse_sel0;
+  assign c$case_alt_selection_770 = c$case_alt_selection_769;
 
-  assign c$case_alt_selection_768 = $unsigned({{(64-8) {1'b0}},c$i_504});
+  assign c$case_alt_selection_769 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
-    case(c$case_alt_selection_769)
-      64'sd0 : c$case_alt_258 = response.ButterflyResponse_sel2;
-      default : c$case_alt_258 = c$case_alt_259[0];
+    case(c$case_alt_selection_770)
+      64'sd1 : c$case_alt_260 = outA;
+      default : c$case_alt_260 = stateSignal[5864:5842];
     endcase
-  end
-
-  assign response = {aIndex_6
-                    ,bIndex_6
-                    ,outA_2
-                    ,outB_2
-                    ,lastGroup_2};
-
-  assign c$case_alt_259 = valid_4 ? c$case_alt_260 : c$case_alt_517;
-
-  assign valid_4 = metaReg3_1.Tuple4_sel0;
-
-  assign c$i_505 = response_0.ButterflyResponse_sel1;
-
-  // replaceVec start
-  always_comb begin
-    c$case_alt_260 = '{0: c$case_alt_516
-   ,1: c$case_alt_515
-   ,2: c$case_alt_514
-   ,3: c$case_alt_513
-   ,4: c$case_alt_512
-   ,5: c$case_alt_511
-   ,6: c$case_alt_510
-   ,7: c$case_alt_509
-   ,8: c$case_alt_508
-   ,9: c$case_alt_507
-   ,10: c$case_alt_506
-   ,11: c$case_alt_505
-   ,12: c$case_alt_504
-   ,13: c$case_alt_503
-   ,14: c$case_alt_502
-   ,15: c$case_alt_501
-   ,16: c$case_alt_500
-   ,17: c$case_alt_499
-   ,18: c$case_alt_498
-   ,19: c$case_alt_497
-   ,20: c$case_alt_496
-   ,21: c$case_alt_495
-   ,22: c$case_alt_494
-   ,23: c$case_alt_493
-   ,24: c$case_alt_492
-   ,25: c$case_alt_491
-   ,26: c$case_alt_490
-   ,27: c$case_alt_489
-   ,28: c$case_alt_488
-   ,29: c$case_alt_487
-   ,30: c$case_alt_486
-   ,31: c$case_alt_485
-   ,32: c$case_alt_484
-   ,33: c$case_alt_483
-   ,34: c$case_alt_482
-   ,35: c$case_alt_481
-   ,36: c$case_alt_480
-   ,37: c$case_alt_479
-   ,38: c$case_alt_478
-   ,39: c$case_alt_477
-   ,40: c$case_alt_476
-   ,41: c$case_alt_475
-   ,42: c$case_alt_474
-   ,43: c$case_alt_473
-   ,44: c$case_alt_472
-   ,45: c$case_alt_471
-   ,46: c$case_alt_470
-   ,47: c$case_alt_469
-   ,48: c$case_alt_468
-   ,49: c$case_alt_467
-   ,50: c$case_alt_466
-   ,51: c$case_alt_465
-   ,52: c$case_alt_464
-   ,53: c$case_alt_463
-   ,54: c$case_alt_462
-   ,55: c$case_alt_461
-   ,56: c$case_alt_460
-   ,57: c$case_alt_459
-   ,58: c$case_alt_458
-   ,59: c$case_alt_457
-   ,60: c$case_alt_456
-   ,61: c$case_alt_455
-   ,62: c$case_alt_454
-   ,63: c$case_alt_453
-   ,64: c$case_alt_452
-   ,65: c$case_alt_451
-   ,66: c$case_alt_450
-   ,67: c$case_alt_449
-   ,68: c$case_alt_448
-   ,69: c$case_alt_447
-   ,70: c$case_alt_446
-   ,71: c$case_alt_445
-   ,72: c$case_alt_444
-   ,73: c$case_alt_443
-   ,74: c$case_alt_442
-   ,75: c$case_alt_441
-   ,76: c$case_alt_440
-   ,77: c$case_alt_439
-   ,78: c$case_alt_438
-   ,79: c$case_alt_437
-   ,80: c$case_alt_436
-   ,81: c$case_alt_435
-   ,82: c$case_alt_434
-   ,83: c$case_alt_433
-   ,84: c$case_alt_432
-   ,85: c$case_alt_431
-   ,86: c$case_alt_430
-   ,87: c$case_alt_429
-   ,88: c$case_alt_428
-   ,89: c$case_alt_427
-   ,90: c$case_alt_426
-   ,91: c$case_alt_425
-   ,92: c$case_alt_424
-   ,93: c$case_alt_423
-   ,94: c$case_alt_422
-   ,95: c$case_alt_421
-   ,96: c$case_alt_420
-   ,97: c$case_alt_419
-   ,98: c$case_alt_418
-   ,99: c$case_alt_417
-   ,100: c$case_alt_416
-   ,101: c$case_alt_415
-   ,102: c$case_alt_414
-   ,103: c$case_alt_413
-   ,104: c$case_alt_412
-   ,105: c$case_alt_411
-   ,106: c$case_alt_410
-   ,107: c$case_alt_409
-   ,108: c$case_alt_408
-   ,109: c$case_alt_407
-   ,110: c$case_alt_406
-   ,111: c$case_alt_405
-   ,112: c$case_alt_404
-   ,113: c$case_alt_403
-   ,114: c$case_alt_402
-   ,115: c$case_alt_401
-   ,116: c$case_alt_400
-   ,117: c$case_alt_399
-   ,118: c$case_alt_398
-   ,119: c$case_alt_397
-   ,120: c$case_alt_396
-   ,121: c$case_alt_395
-   ,122: c$case_alt_394
-   ,123: c$case_alt_393
-   ,124: c$case_alt_392
-   ,125: c$case_alt_391
-   ,126: c$case_alt_390
-   ,127: c$case_alt_389
-   ,128: c$case_alt_388
-   ,129: c$case_alt_387
-   ,130: c$case_alt_386
-   ,131: c$case_alt_385
-   ,132: c$case_alt_384
-   ,133: c$case_alt_383
-   ,134: c$case_alt_382
-   ,135: c$case_alt_381
-   ,136: c$case_alt_380
-   ,137: c$case_alt_379
-   ,138: c$case_alt_378
-   ,139: c$case_alt_377
-   ,140: c$case_alt_376
-   ,141: c$case_alt_375
-   ,142: c$case_alt_374
-   ,143: c$case_alt_373
-   ,144: c$case_alt_372
-   ,145: c$case_alt_371
-   ,146: c$case_alt_370
-   ,147: c$case_alt_369
-   ,148: c$case_alt_368
-   ,149: c$case_alt_367
-   ,150: c$case_alt_366
-   ,151: c$case_alt_365
-   ,152: c$case_alt_364
-   ,153: c$case_alt_363
-   ,154: c$case_alt_362
-   ,155: c$case_alt_361
-   ,156: c$case_alt_360
-   ,157: c$case_alt_359
-   ,158: c$case_alt_358
-   ,159: c$case_alt_357
-   ,160: c$case_alt_356
-   ,161: c$case_alt_355
-   ,162: c$case_alt_354
-   ,163: c$case_alt_353
-   ,164: c$case_alt_352
-   ,165: c$case_alt_351
-   ,166: c$case_alt_350
-   ,167: c$case_alt_349
-   ,168: c$case_alt_348
-   ,169: c$case_alt_347
-   ,170: c$case_alt_346
-   ,171: c$case_alt_345
-   ,172: c$case_alt_344
-   ,173: c$case_alt_343
-   ,174: c$case_alt_342
-   ,175: c$case_alt_341
-   ,176: c$case_alt_340
-   ,177: c$case_alt_339
-   ,178: c$case_alt_338
-   ,179: c$case_alt_337
-   ,180: c$case_alt_336
-   ,181: c$case_alt_335
-   ,182: c$case_alt_334
-   ,183: c$case_alt_333
-   ,184: c$case_alt_332
-   ,185: c$case_alt_331
-   ,186: c$case_alt_330
-   ,187: c$case_alt_329
-   ,188: c$case_alt_328
-   ,189: c$case_alt_327
-   ,190: c$case_alt_326
-   ,191: c$case_alt_325
-   ,192: c$case_alt_324
-   ,193: c$case_alt_323
-   ,194: c$case_alt_322
-   ,195: c$case_alt_321
-   ,196: c$case_alt_320
-   ,197: c$case_alt_319
-   ,198: c$case_alt_318
-   ,199: c$case_alt_317
-   ,200: c$case_alt_316
-   ,201: c$case_alt_315
-   ,202: c$case_alt_314
-   ,203: c$case_alt_313
-   ,204: c$case_alt_312
-   ,205: c$case_alt_311
-   ,206: c$case_alt_310
-   ,207: c$case_alt_309
-   ,208: c$case_alt_308
-   ,209: c$case_alt_307
-   ,210: c$case_alt_306
-   ,211: c$case_alt_305
-   ,212: c$case_alt_304
-   ,213: c$case_alt_303
-   ,214: c$case_alt_302
-   ,215: c$case_alt_301
-   ,216: c$case_alt_300
-   ,217: c$case_alt_299
-   ,218: c$case_alt_298
-   ,219: c$case_alt_297
-   ,220: c$case_alt_296
-   ,221: c$case_alt_295
-   ,222: c$case_alt_294
-   ,223: c$case_alt_293
-   ,224: c$case_alt_292
-   ,225: c$case_alt_291
-   ,226: c$case_alt_290
-   ,227: c$case_alt_289
-   ,228: c$case_alt_288
-   ,229: c$case_alt_287
-   ,230: c$case_alt_286
-   ,231: c$case_alt_285
-   ,232: c$case_alt_284
-   ,233: c$case_alt_283
-   ,234: c$case_alt_282
-   ,235: c$case_alt_281
-   ,236: c$case_alt_280
-   ,237: c$case_alt_279
-   ,238: c$case_alt_278
-   ,239: c$case_alt_277
-   ,240: c$case_alt_276
-   ,241: c$case_alt_275
-   ,242: c$case_alt_274
-   ,243: c$case_alt_273
-   ,244: c$case_alt_272
-   ,245: c$case_alt_271
-   ,246: c$case_alt_270
-   ,247: c$case_alt_269
-   ,248: c$case_alt_268
-   ,249: c$case_alt_267
-   ,250: c$case_alt_266
-   ,251: c$case_alt_265
-   ,252: c$case_alt_264
-   ,253: c$case_alt_263
-   ,254: c$case_alt_262
-   ,255: c$case_alt_261};
-    c$case_alt_260[($unsigned({{(64-8) {1'b0}},c$i_505}))] = response_0.ButterflyResponse_sel3;
   end
-  // replaceVec end
 
   assign c$case_alt_selection_773 = c$case_alt_selection_772;
 
-  assign c$i_506 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_772 = $unsigned({{(64-8) {1'b0}},c$i_506});
+  assign c$case_alt_selection_772 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_773)
-      64'sd255 : c$case_alt_261 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_261 = c$case_alt_517[255];
+      64'sd0 : c$case_alt_261 = outA;
+      default : c$case_alt_261 = stateSignal[5887:5865];
     endcase
   end
 
+  // replaceVec start
+  always_comb begin
+    c$case_alt_262 = '{0: c$case_alt_518
+   ,1: c$case_alt_517
+   ,2: c$case_alt_516
+   ,3: c$case_alt_515
+   ,4: c$case_alt_514
+   ,5: c$case_alt_513
+   ,6: c$case_alt_512
+   ,7: c$case_alt_511
+   ,8: c$case_alt_510
+   ,9: c$case_alt_509
+   ,10: c$case_alt_508
+   ,11: c$case_alt_507
+   ,12: c$case_alt_506
+   ,13: c$case_alt_505
+   ,14: c$case_alt_504
+   ,15: c$case_alt_503
+   ,16: c$case_alt_502
+   ,17: c$case_alt_501
+   ,18: c$case_alt_500
+   ,19: c$case_alt_499
+   ,20: c$case_alt_498
+   ,21: c$case_alt_497
+   ,22: c$case_alt_496
+   ,23: c$case_alt_495
+   ,24: c$case_alt_494
+   ,25: c$case_alt_493
+   ,26: c$case_alt_492
+   ,27: c$case_alt_491
+   ,28: c$case_alt_490
+   ,29: c$case_alt_489
+   ,30: c$case_alt_488
+   ,31: c$case_alt_487
+   ,32: c$case_alt_486
+   ,33: c$case_alt_485
+   ,34: c$case_alt_484
+   ,35: c$case_alt_483
+   ,36: c$case_alt_482
+   ,37: c$case_alt_481
+   ,38: c$case_alt_480
+   ,39: c$case_alt_479
+   ,40: c$case_alt_478
+   ,41: c$case_alt_477
+   ,42: c$case_alt_476
+   ,43: c$case_alt_475
+   ,44: c$case_alt_474
+   ,45: c$case_alt_473
+   ,46: c$case_alt_472
+   ,47: c$case_alt_471
+   ,48: c$case_alt_470
+   ,49: c$case_alt_469
+   ,50: c$case_alt_468
+   ,51: c$case_alt_467
+   ,52: c$case_alt_466
+   ,53: c$case_alt_465
+   ,54: c$case_alt_464
+   ,55: c$case_alt_463
+   ,56: c$case_alt_462
+   ,57: c$case_alt_461
+   ,58: c$case_alt_460
+   ,59: c$case_alt_459
+   ,60: c$case_alt_458
+   ,61: c$case_alt_457
+   ,62: c$case_alt_456
+   ,63: c$case_alt_455
+   ,64: c$case_alt_454
+   ,65: c$case_alt_453
+   ,66: c$case_alt_452
+   ,67: c$case_alt_451
+   ,68: c$case_alt_450
+   ,69: c$case_alt_449
+   ,70: c$case_alt_448
+   ,71: c$case_alt_447
+   ,72: c$case_alt_446
+   ,73: c$case_alt_445
+   ,74: c$case_alt_444
+   ,75: c$case_alt_443
+   ,76: c$case_alt_442
+   ,77: c$case_alt_441
+   ,78: c$case_alt_440
+   ,79: c$case_alt_439
+   ,80: c$case_alt_438
+   ,81: c$case_alt_437
+   ,82: c$case_alt_436
+   ,83: c$case_alt_435
+   ,84: c$case_alt_434
+   ,85: c$case_alt_433
+   ,86: c$case_alt_432
+   ,87: c$case_alt_431
+   ,88: c$case_alt_430
+   ,89: c$case_alt_429
+   ,90: c$case_alt_428
+   ,91: c$case_alt_427
+   ,92: c$case_alt_426
+   ,93: c$case_alt_425
+   ,94: c$case_alt_424
+   ,95: c$case_alt_423
+   ,96: c$case_alt_422
+   ,97: c$case_alt_421
+   ,98: c$case_alt_420
+   ,99: c$case_alt_419
+   ,100: c$case_alt_418
+   ,101: c$case_alt_417
+   ,102: c$case_alt_416
+   ,103: c$case_alt_415
+   ,104: c$case_alt_414
+   ,105: c$case_alt_413
+   ,106: c$case_alt_412
+   ,107: c$case_alt_411
+   ,108: c$case_alt_410
+   ,109: c$case_alt_409
+   ,110: c$case_alt_408
+   ,111: c$case_alt_407
+   ,112: c$case_alt_406
+   ,113: c$case_alt_405
+   ,114: c$case_alt_404
+   ,115: c$case_alt_403
+   ,116: c$case_alt_402
+   ,117: c$case_alt_401
+   ,118: c$case_alt_400
+   ,119: c$case_alt_399
+   ,120: c$case_alt_398
+   ,121: c$case_alt_397
+   ,122: c$case_alt_396
+   ,123: c$case_alt_395
+   ,124: c$case_alt_394
+   ,125: c$case_alt_393
+   ,126: c$case_alt_392
+   ,127: c$case_alt_391
+   ,128: c$case_alt_390
+   ,129: c$case_alt_389
+   ,130: c$case_alt_388
+   ,131: c$case_alt_387
+   ,132: c$case_alt_386
+   ,133: c$case_alt_385
+   ,134: c$case_alt_384
+   ,135: c$case_alt_383
+   ,136: c$case_alt_382
+   ,137: c$case_alt_381
+   ,138: c$case_alt_380
+   ,139: c$case_alt_379
+   ,140: c$case_alt_378
+   ,141: c$case_alt_377
+   ,142: c$case_alt_376
+   ,143: c$case_alt_375
+   ,144: c$case_alt_374
+   ,145: c$case_alt_373
+   ,146: c$case_alt_372
+   ,147: c$case_alt_371
+   ,148: c$case_alt_370
+   ,149: c$case_alt_369
+   ,150: c$case_alt_368
+   ,151: c$case_alt_367
+   ,152: c$case_alt_366
+   ,153: c$case_alt_365
+   ,154: c$case_alt_364
+   ,155: c$case_alt_363
+   ,156: c$case_alt_362
+   ,157: c$case_alt_361
+   ,158: c$case_alt_360
+   ,159: c$case_alt_359
+   ,160: c$case_alt_358
+   ,161: c$case_alt_357
+   ,162: c$case_alt_356
+   ,163: c$case_alt_355
+   ,164: c$case_alt_354
+   ,165: c$case_alt_353
+   ,166: c$case_alt_352
+   ,167: c$case_alt_351
+   ,168: c$case_alt_350
+   ,169: c$case_alt_349
+   ,170: c$case_alt_348
+   ,171: c$case_alt_347
+   ,172: c$case_alt_346
+   ,173: c$case_alt_345
+   ,174: c$case_alt_344
+   ,175: c$case_alt_343
+   ,176: c$case_alt_342
+   ,177: c$case_alt_341
+   ,178: c$case_alt_340
+   ,179: c$case_alt_339
+   ,180: c$case_alt_338
+   ,181: c$case_alt_337
+   ,182: c$case_alt_336
+   ,183: c$case_alt_335
+   ,184: c$case_alt_334
+   ,185: c$case_alt_333
+   ,186: c$case_alt_332
+   ,187: c$case_alt_331
+   ,188: c$case_alt_330
+   ,189: c$case_alt_329
+   ,190: c$case_alt_328
+   ,191: c$case_alt_327
+   ,192: c$case_alt_326
+   ,193: c$case_alt_325
+   ,194: c$case_alt_324
+   ,195: c$case_alt_323
+   ,196: c$case_alt_322
+   ,197: c$case_alt_321
+   ,198: c$case_alt_320
+   ,199: c$case_alt_319
+   ,200: c$case_alt_318
+   ,201: c$case_alt_317
+   ,202: c$case_alt_316
+   ,203: c$case_alt_315
+   ,204: c$case_alt_314
+   ,205: c$case_alt_313
+   ,206: c$case_alt_312
+   ,207: c$case_alt_311
+   ,208: c$case_alt_310
+   ,209: c$case_alt_309
+   ,210: c$case_alt_308
+   ,211: c$case_alt_307
+   ,212: c$case_alt_306
+   ,213: c$case_alt_305
+   ,214: c$case_alt_304
+   ,215: c$case_alt_303
+   ,216: c$case_alt_302
+   ,217: c$case_alt_301
+   ,218: c$case_alt_300
+   ,219: c$case_alt_299
+   ,220: c$case_alt_298
+   ,221: c$case_alt_297
+   ,222: c$case_alt_296
+   ,223: c$case_alt_295
+   ,224: c$case_alt_294
+   ,225: c$case_alt_293
+   ,226: c$case_alt_292
+   ,227: c$case_alt_291
+   ,228: c$case_alt_290
+   ,229: c$case_alt_289
+   ,230: c$case_alt_288
+   ,231: c$case_alt_287
+   ,232: c$case_alt_286
+   ,233: c$case_alt_285
+   ,234: c$case_alt_284
+   ,235: c$case_alt_283
+   ,236: c$case_alt_282
+   ,237: c$case_alt_281
+   ,238: c$case_alt_280
+   ,239: c$case_alt_279
+   ,240: c$case_alt_278
+   ,241: c$case_alt_277
+   ,242: c$case_alt_276
+   ,243: c$case_alt_275
+   ,244: c$case_alt_274
+   ,245: c$case_alt_273
+   ,246: c$case_alt_272
+   ,247: c$case_alt_271
+   ,248: c$case_alt_270
+   ,249: c$case_alt_269
+   ,250: c$case_alt_268
+   ,251: c$case_alt_267
+   ,252: c$case_alt_266
+   ,253: c$case_alt_265
+   ,254: c$case_alt_264
+   ,255: c$case_alt_263};
+    c$case_alt_262[c$app_arg_4] = outB;
+  end
+  // replaceVec end
+
+  assign c$app_arg_4 = $unsigned({{(64-8) {1'b0}},bIndex});
+
   assign c$case_alt_selection_776 = c$case_alt_selection_775;
 
-  assign c$i_507 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_775 = $unsigned({{(64-8) {1'b0}},c$i_507});
+  assign c$case_alt_selection_775 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_776)
-      64'sd254 : c$case_alt_262 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_262 = c$case_alt_517[254];
+      64'sd255 : c$case_alt_263 = outA;
+      default : c$case_alt_263 = stateSignal[5910:5888];
     endcase
   end
 
   assign c$case_alt_selection_779 = c$case_alt_selection_778;
 
-  assign c$i_508 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_778 = $unsigned({{(64-8) {1'b0}},c$i_508});
+  assign c$case_alt_selection_778 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_779)
-      64'sd253 : c$case_alt_263 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_263 = c$case_alt_517[253];
+      64'sd254 : c$case_alt_264 = outA;
+      default : c$case_alt_264 = stateSignal[5933:5911];
     endcase
   end
 
   assign c$case_alt_selection_782 = c$case_alt_selection_781;
 
-  assign c$i_509 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_781 = $unsigned({{(64-8) {1'b0}},c$i_509});
+  assign c$case_alt_selection_781 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_782)
-      64'sd252 : c$case_alt_264 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_264 = c$case_alt_517[252];
+      64'sd253 : c$case_alt_265 = outA;
+      default : c$case_alt_265 = stateSignal[5956:5934];
     endcase
   end
 
   assign c$case_alt_selection_785 = c$case_alt_selection_784;
 
-  assign c$i_510 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_784 = $unsigned({{(64-8) {1'b0}},c$i_510});
+  assign c$case_alt_selection_784 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_785)
-      64'sd251 : c$case_alt_265 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_265 = c$case_alt_517[251];
+      64'sd252 : c$case_alt_266 = outA;
+      default : c$case_alt_266 = stateSignal[5979:5957];
     endcase
   end
 
   assign c$case_alt_selection_788 = c$case_alt_selection_787;
 
-  assign c$i_511 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_787 = $unsigned({{(64-8) {1'b0}},c$i_511});
+  assign c$case_alt_selection_787 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_788)
-      64'sd250 : c$case_alt_266 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_266 = c$case_alt_517[250];
+      64'sd251 : c$case_alt_267 = outA;
+      default : c$case_alt_267 = stateSignal[6002:5980];
     endcase
   end
 
   assign c$case_alt_selection_791 = c$case_alt_selection_790;
 
-  assign c$i_512 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_790 = $unsigned({{(64-8) {1'b0}},c$i_512});
+  assign c$case_alt_selection_790 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_791)
-      64'sd249 : c$case_alt_267 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_267 = c$case_alt_517[249];
+      64'sd250 : c$case_alt_268 = outA;
+      default : c$case_alt_268 = stateSignal[6025:6003];
     endcase
   end
 
   assign c$case_alt_selection_794 = c$case_alt_selection_793;
 
-  assign c$i_513 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_793 = $unsigned({{(64-8) {1'b0}},c$i_513});
+  assign c$case_alt_selection_793 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_794)
-      64'sd248 : c$case_alt_268 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_268 = c$case_alt_517[248];
+      64'sd249 : c$case_alt_269 = outA;
+      default : c$case_alt_269 = stateSignal[6048:6026];
     endcase
   end
 
   assign c$case_alt_selection_797 = c$case_alt_selection_796;
 
-  assign c$i_514 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_796 = $unsigned({{(64-8) {1'b0}},c$i_514});
+  assign c$case_alt_selection_796 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_797)
-      64'sd247 : c$case_alt_269 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_269 = c$case_alt_517[247];
+      64'sd248 : c$case_alt_270 = outA;
+      default : c$case_alt_270 = stateSignal[6071:6049];
     endcase
   end
 
   assign c$case_alt_selection_800 = c$case_alt_selection_799;
 
-  assign c$i_515 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_799 = $unsigned({{(64-8) {1'b0}},c$i_515});
+  assign c$case_alt_selection_799 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_800)
-      64'sd246 : c$case_alt_270 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_270 = c$case_alt_517[246];
+      64'sd247 : c$case_alt_271 = outA;
+      default : c$case_alt_271 = stateSignal[6094:6072];
     endcase
   end
 
   assign c$case_alt_selection_803 = c$case_alt_selection_802;
 
-  assign c$i_516 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_802 = $unsigned({{(64-8) {1'b0}},c$i_516});
+  assign c$case_alt_selection_802 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_803)
-      64'sd245 : c$case_alt_271 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_271 = c$case_alt_517[245];
+      64'sd246 : c$case_alt_272 = outA;
+      default : c$case_alt_272 = stateSignal[6117:6095];
     endcase
   end
 
   assign c$case_alt_selection_806 = c$case_alt_selection_805;
 
-  assign c$i_517 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_805 = $unsigned({{(64-8) {1'b0}},c$i_517});
+  assign c$case_alt_selection_805 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_806)
-      64'sd244 : c$case_alt_272 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_272 = c$case_alt_517[244];
+      64'sd245 : c$case_alt_273 = outA;
+      default : c$case_alt_273 = stateSignal[6140:6118];
     endcase
   end
 
   assign c$case_alt_selection_809 = c$case_alt_selection_808;
 
-  assign c$i_518 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_808 = $unsigned({{(64-8) {1'b0}},c$i_518});
+  assign c$case_alt_selection_808 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_809)
-      64'sd243 : c$case_alt_273 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_273 = c$case_alt_517[243];
+      64'sd244 : c$case_alt_274 = outA;
+      default : c$case_alt_274 = stateSignal[6163:6141];
     endcase
   end
 
   assign c$case_alt_selection_812 = c$case_alt_selection_811;
 
-  assign c$i_519 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_811 = $unsigned({{(64-8) {1'b0}},c$i_519});
+  assign c$case_alt_selection_811 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_812)
-      64'sd242 : c$case_alt_274 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_274 = c$case_alt_517[242];
+      64'sd243 : c$case_alt_275 = outA;
+      default : c$case_alt_275 = stateSignal[6186:6164];
     endcase
   end
 
   assign c$case_alt_selection_815 = c$case_alt_selection_814;
 
-  assign c$i_520 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_814 = $unsigned({{(64-8) {1'b0}},c$i_520});
+  assign c$case_alt_selection_814 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_815)
-      64'sd241 : c$case_alt_275 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_275 = c$case_alt_517[241];
+      64'sd242 : c$case_alt_276 = outA;
+      default : c$case_alt_276 = stateSignal[6209:6187];
     endcase
   end
 
   assign c$case_alt_selection_818 = c$case_alt_selection_817;
 
-  assign c$i_521 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_817 = $unsigned({{(64-8) {1'b0}},c$i_521});
+  assign c$case_alt_selection_817 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_818)
-      64'sd240 : c$case_alt_276 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_276 = c$case_alt_517[240];
+      64'sd241 : c$case_alt_277 = outA;
+      default : c$case_alt_277 = stateSignal[6232:6210];
     endcase
   end
 
   assign c$case_alt_selection_821 = c$case_alt_selection_820;
 
-  assign c$i_522 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_820 = $unsigned({{(64-8) {1'b0}},c$i_522});
+  assign c$case_alt_selection_820 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_821)
-      64'sd239 : c$case_alt_277 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_277 = c$case_alt_517[239];
+      64'sd240 : c$case_alt_278 = outA;
+      default : c$case_alt_278 = stateSignal[6255:6233];
     endcase
   end
 
   assign c$case_alt_selection_824 = c$case_alt_selection_823;
 
-  assign c$i_523 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_823 = $unsigned({{(64-8) {1'b0}},c$i_523});
+  assign c$case_alt_selection_823 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_824)
-      64'sd238 : c$case_alt_278 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_278 = c$case_alt_517[238];
+      64'sd239 : c$case_alt_279 = outA;
+      default : c$case_alt_279 = stateSignal[6278:6256];
     endcase
   end
 
   assign c$case_alt_selection_827 = c$case_alt_selection_826;
 
-  assign c$i_524 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_826 = $unsigned({{(64-8) {1'b0}},c$i_524});
+  assign c$case_alt_selection_826 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_827)
-      64'sd237 : c$case_alt_279 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_279 = c$case_alt_517[237];
+      64'sd238 : c$case_alt_280 = outA;
+      default : c$case_alt_280 = stateSignal[6301:6279];
     endcase
   end
 
   assign c$case_alt_selection_830 = c$case_alt_selection_829;
 
-  assign c$i_525 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_829 = $unsigned({{(64-8) {1'b0}},c$i_525});
+  assign c$case_alt_selection_829 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_830)
-      64'sd236 : c$case_alt_280 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_280 = c$case_alt_517[236];
+      64'sd237 : c$case_alt_281 = outA;
+      default : c$case_alt_281 = stateSignal[6324:6302];
     endcase
   end
 
   assign c$case_alt_selection_833 = c$case_alt_selection_832;
 
-  assign c$i_526 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_832 = $unsigned({{(64-8) {1'b0}},c$i_526});
+  assign c$case_alt_selection_832 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_833)
-      64'sd235 : c$case_alt_281 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_281 = c$case_alt_517[235];
+      64'sd236 : c$case_alt_282 = outA;
+      default : c$case_alt_282 = stateSignal[6347:6325];
     endcase
   end
 
   assign c$case_alt_selection_836 = c$case_alt_selection_835;
 
-  assign c$i_527 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_835 = $unsigned({{(64-8) {1'b0}},c$i_527});
+  assign c$case_alt_selection_835 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_836)
-      64'sd234 : c$case_alt_282 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_282 = c$case_alt_517[234];
+      64'sd235 : c$case_alt_283 = outA;
+      default : c$case_alt_283 = stateSignal[6370:6348];
     endcase
   end
 
   assign c$case_alt_selection_839 = c$case_alt_selection_838;
 
-  assign c$i_528 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_838 = $unsigned({{(64-8) {1'b0}},c$i_528});
+  assign c$case_alt_selection_838 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_839)
-      64'sd233 : c$case_alt_283 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_283 = c$case_alt_517[233];
+      64'sd234 : c$case_alt_284 = outA;
+      default : c$case_alt_284 = stateSignal[6393:6371];
     endcase
   end
 
   assign c$case_alt_selection_842 = c$case_alt_selection_841;
 
-  assign c$i_529 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_841 = $unsigned({{(64-8) {1'b0}},c$i_529});
+  assign c$case_alt_selection_841 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_842)
-      64'sd232 : c$case_alt_284 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_284 = c$case_alt_517[232];
+      64'sd233 : c$case_alt_285 = outA;
+      default : c$case_alt_285 = stateSignal[6416:6394];
     endcase
   end
 
   assign c$case_alt_selection_845 = c$case_alt_selection_844;
 
-  assign c$i_530 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_844 = $unsigned({{(64-8) {1'b0}},c$i_530});
+  assign c$case_alt_selection_844 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_845)
-      64'sd231 : c$case_alt_285 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_285 = c$case_alt_517[231];
+      64'sd232 : c$case_alt_286 = outA;
+      default : c$case_alt_286 = stateSignal[6439:6417];
     endcase
   end
 
   assign c$case_alt_selection_848 = c$case_alt_selection_847;
 
-  assign c$i_531 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_847 = $unsigned({{(64-8) {1'b0}},c$i_531});
+  assign c$case_alt_selection_847 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_848)
-      64'sd230 : c$case_alt_286 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_286 = c$case_alt_517[230];
+      64'sd231 : c$case_alt_287 = outA;
+      default : c$case_alt_287 = stateSignal[6462:6440];
     endcase
   end
 
   assign c$case_alt_selection_851 = c$case_alt_selection_850;
 
-  assign c$i_532 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_850 = $unsigned({{(64-8) {1'b0}},c$i_532});
+  assign c$case_alt_selection_850 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_851)
-      64'sd229 : c$case_alt_287 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_287 = c$case_alt_517[229];
+      64'sd230 : c$case_alt_288 = outA;
+      default : c$case_alt_288 = stateSignal[6485:6463];
     endcase
   end
 
   assign c$case_alt_selection_854 = c$case_alt_selection_853;
 
-  assign c$i_533 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_853 = $unsigned({{(64-8) {1'b0}},c$i_533});
+  assign c$case_alt_selection_853 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_854)
-      64'sd228 : c$case_alt_288 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_288 = c$case_alt_517[228];
+      64'sd229 : c$case_alt_289 = outA;
+      default : c$case_alt_289 = stateSignal[6508:6486];
     endcase
   end
 
   assign c$case_alt_selection_857 = c$case_alt_selection_856;
 
-  assign c$i_534 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_856 = $unsigned({{(64-8) {1'b0}},c$i_534});
+  assign c$case_alt_selection_856 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_857)
-      64'sd227 : c$case_alt_289 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_289 = c$case_alt_517[227];
+      64'sd228 : c$case_alt_290 = outA;
+      default : c$case_alt_290 = stateSignal[6531:6509];
     endcase
   end
 
   assign c$case_alt_selection_860 = c$case_alt_selection_859;
 
-  assign c$i_535 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_859 = $unsigned({{(64-8) {1'b0}},c$i_535});
+  assign c$case_alt_selection_859 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_860)
-      64'sd226 : c$case_alt_290 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_290 = c$case_alt_517[226];
+      64'sd227 : c$case_alt_291 = outA;
+      default : c$case_alt_291 = stateSignal[6554:6532];
     endcase
   end
 
   assign c$case_alt_selection_863 = c$case_alt_selection_862;
 
-  assign c$i_536 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_862 = $unsigned({{(64-8) {1'b0}},c$i_536});
+  assign c$case_alt_selection_862 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_863)
-      64'sd225 : c$case_alt_291 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_291 = c$case_alt_517[225];
+      64'sd226 : c$case_alt_292 = outA;
+      default : c$case_alt_292 = stateSignal[6577:6555];
     endcase
   end
 
   assign c$case_alt_selection_866 = c$case_alt_selection_865;
 
-  assign c$i_537 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_865 = $unsigned({{(64-8) {1'b0}},c$i_537});
+  assign c$case_alt_selection_865 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_866)
-      64'sd224 : c$case_alt_292 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_292 = c$case_alt_517[224];
+      64'sd225 : c$case_alt_293 = outA;
+      default : c$case_alt_293 = stateSignal[6600:6578];
     endcase
   end
 
   assign c$case_alt_selection_869 = c$case_alt_selection_868;
 
-  assign c$i_538 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_868 = $unsigned({{(64-8) {1'b0}},c$i_538});
+  assign c$case_alt_selection_868 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_869)
-      64'sd223 : c$case_alt_293 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_293 = c$case_alt_517[223];
+      64'sd224 : c$case_alt_294 = outA;
+      default : c$case_alt_294 = stateSignal[6623:6601];
     endcase
   end
 
   assign c$case_alt_selection_872 = c$case_alt_selection_871;
 
-  assign c$i_539 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_871 = $unsigned({{(64-8) {1'b0}},c$i_539});
+  assign c$case_alt_selection_871 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_872)
-      64'sd222 : c$case_alt_294 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_294 = c$case_alt_517[222];
+      64'sd223 : c$case_alt_295 = outA;
+      default : c$case_alt_295 = stateSignal[6646:6624];
     endcase
   end
 
   assign c$case_alt_selection_875 = c$case_alt_selection_874;
 
-  assign c$i_540 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_874 = $unsigned({{(64-8) {1'b0}},c$i_540});
+  assign c$case_alt_selection_874 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_875)
-      64'sd221 : c$case_alt_295 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_295 = c$case_alt_517[221];
+      64'sd222 : c$case_alt_296 = outA;
+      default : c$case_alt_296 = stateSignal[6669:6647];
     endcase
   end
 
   assign c$case_alt_selection_878 = c$case_alt_selection_877;
 
-  assign c$i_541 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_877 = $unsigned({{(64-8) {1'b0}},c$i_541});
+  assign c$case_alt_selection_877 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_878)
-      64'sd220 : c$case_alt_296 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_296 = c$case_alt_517[220];
+      64'sd221 : c$case_alt_297 = outA;
+      default : c$case_alt_297 = stateSignal[6692:6670];
     endcase
   end
 
   assign c$case_alt_selection_881 = c$case_alt_selection_880;
 
-  assign c$i_542 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_880 = $unsigned({{(64-8) {1'b0}},c$i_542});
+  assign c$case_alt_selection_880 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_881)
-      64'sd219 : c$case_alt_297 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_297 = c$case_alt_517[219];
+      64'sd220 : c$case_alt_298 = outA;
+      default : c$case_alt_298 = stateSignal[6715:6693];
     endcase
   end
 
   assign c$case_alt_selection_884 = c$case_alt_selection_883;
 
-  assign c$i_543 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_883 = $unsigned({{(64-8) {1'b0}},c$i_543});
+  assign c$case_alt_selection_883 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_884)
-      64'sd218 : c$case_alt_298 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_298 = c$case_alt_517[218];
+      64'sd219 : c$case_alt_299 = outA;
+      default : c$case_alt_299 = stateSignal[6738:6716];
     endcase
   end
 
   assign c$case_alt_selection_887 = c$case_alt_selection_886;
 
-  assign c$i_544 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_886 = $unsigned({{(64-8) {1'b0}},c$i_544});
+  assign c$case_alt_selection_886 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_887)
-      64'sd217 : c$case_alt_299 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_299 = c$case_alt_517[217];
+      64'sd218 : c$case_alt_300 = outA;
+      default : c$case_alt_300 = stateSignal[6761:6739];
     endcase
   end
 
   assign c$case_alt_selection_890 = c$case_alt_selection_889;
 
-  assign c$i_545 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_889 = $unsigned({{(64-8) {1'b0}},c$i_545});
+  assign c$case_alt_selection_889 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_890)
-      64'sd216 : c$case_alt_300 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_300 = c$case_alt_517[216];
+      64'sd217 : c$case_alt_301 = outA;
+      default : c$case_alt_301 = stateSignal[6784:6762];
     endcase
   end
 
   assign c$case_alt_selection_893 = c$case_alt_selection_892;
 
-  assign c$i_546 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_892 = $unsigned({{(64-8) {1'b0}},c$i_546});
+  assign c$case_alt_selection_892 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_893)
-      64'sd215 : c$case_alt_301 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_301 = c$case_alt_517[215];
+      64'sd216 : c$case_alt_302 = outA;
+      default : c$case_alt_302 = stateSignal[6807:6785];
     endcase
   end
 
   assign c$case_alt_selection_896 = c$case_alt_selection_895;
 
-  assign c$i_547 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_895 = $unsigned({{(64-8) {1'b0}},c$i_547});
+  assign c$case_alt_selection_895 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_896)
-      64'sd214 : c$case_alt_302 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_302 = c$case_alt_517[214];
+      64'sd215 : c$case_alt_303 = outA;
+      default : c$case_alt_303 = stateSignal[6830:6808];
     endcase
   end
 
   assign c$case_alt_selection_899 = c$case_alt_selection_898;
 
-  assign c$i_548 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_898 = $unsigned({{(64-8) {1'b0}},c$i_548});
+  assign c$case_alt_selection_898 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_899)
-      64'sd213 : c$case_alt_303 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_303 = c$case_alt_517[213];
+      64'sd214 : c$case_alt_304 = outA;
+      default : c$case_alt_304 = stateSignal[6853:6831];
     endcase
   end
 
   assign c$case_alt_selection_902 = c$case_alt_selection_901;
 
-  assign c$i_549 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_901 = $unsigned({{(64-8) {1'b0}},c$i_549});
+  assign c$case_alt_selection_901 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_902)
-      64'sd212 : c$case_alt_304 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_304 = c$case_alt_517[212];
+      64'sd213 : c$case_alt_305 = outA;
+      default : c$case_alt_305 = stateSignal[6876:6854];
     endcase
   end
 
   assign c$case_alt_selection_905 = c$case_alt_selection_904;
 
-  assign c$i_550 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_904 = $unsigned({{(64-8) {1'b0}},c$i_550});
+  assign c$case_alt_selection_904 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_905)
-      64'sd211 : c$case_alt_305 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_305 = c$case_alt_517[211];
+      64'sd212 : c$case_alt_306 = outA;
+      default : c$case_alt_306 = stateSignal[6899:6877];
     endcase
   end
 
   assign c$case_alt_selection_908 = c$case_alt_selection_907;
 
-  assign c$i_551 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_907 = $unsigned({{(64-8) {1'b0}},c$i_551});
+  assign c$case_alt_selection_907 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_908)
-      64'sd210 : c$case_alt_306 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_306 = c$case_alt_517[210];
+      64'sd211 : c$case_alt_307 = outA;
+      default : c$case_alt_307 = stateSignal[6922:6900];
     endcase
   end
 
   assign c$case_alt_selection_911 = c$case_alt_selection_910;
 
-  assign c$i_552 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_910 = $unsigned({{(64-8) {1'b0}},c$i_552});
+  assign c$case_alt_selection_910 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_911)
-      64'sd209 : c$case_alt_307 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_307 = c$case_alt_517[209];
+      64'sd210 : c$case_alt_308 = outA;
+      default : c$case_alt_308 = stateSignal[6945:6923];
     endcase
   end
 
   assign c$case_alt_selection_914 = c$case_alt_selection_913;
 
-  assign c$i_553 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_913 = $unsigned({{(64-8) {1'b0}},c$i_553});
+  assign c$case_alt_selection_913 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_914)
-      64'sd208 : c$case_alt_308 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_308 = c$case_alt_517[208];
+      64'sd209 : c$case_alt_309 = outA;
+      default : c$case_alt_309 = stateSignal[6968:6946];
     endcase
   end
 
   assign c$case_alt_selection_917 = c$case_alt_selection_916;
 
-  assign c$i_554 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_916 = $unsigned({{(64-8) {1'b0}},c$i_554});
+  assign c$case_alt_selection_916 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_917)
-      64'sd207 : c$case_alt_309 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_309 = c$case_alt_517[207];
+      64'sd208 : c$case_alt_310 = outA;
+      default : c$case_alt_310 = stateSignal[6991:6969];
     endcase
   end
 
   assign c$case_alt_selection_920 = c$case_alt_selection_919;
 
-  assign c$i_555 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_919 = $unsigned({{(64-8) {1'b0}},c$i_555});
+  assign c$case_alt_selection_919 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_920)
-      64'sd206 : c$case_alt_310 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_310 = c$case_alt_517[206];
+      64'sd207 : c$case_alt_311 = outA;
+      default : c$case_alt_311 = stateSignal[7014:6992];
     endcase
   end
 
   assign c$case_alt_selection_923 = c$case_alt_selection_922;
 
-  assign c$i_556 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_922 = $unsigned({{(64-8) {1'b0}},c$i_556});
+  assign c$case_alt_selection_922 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_923)
-      64'sd205 : c$case_alt_311 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_311 = c$case_alt_517[205];
+      64'sd206 : c$case_alt_312 = outA;
+      default : c$case_alt_312 = stateSignal[7037:7015];
     endcase
   end
 
   assign c$case_alt_selection_926 = c$case_alt_selection_925;
 
-  assign c$i_557 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_925 = $unsigned({{(64-8) {1'b0}},c$i_557});
+  assign c$case_alt_selection_925 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_926)
-      64'sd204 : c$case_alt_312 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_312 = c$case_alt_517[204];
+      64'sd205 : c$case_alt_313 = outA;
+      default : c$case_alt_313 = stateSignal[7060:7038];
     endcase
   end
 
   assign c$case_alt_selection_929 = c$case_alt_selection_928;
 
-  assign c$i_558 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_928 = $unsigned({{(64-8) {1'b0}},c$i_558});
+  assign c$case_alt_selection_928 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_929)
-      64'sd203 : c$case_alt_313 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_313 = c$case_alt_517[203];
+      64'sd204 : c$case_alt_314 = outA;
+      default : c$case_alt_314 = stateSignal[7083:7061];
     endcase
   end
 
   assign c$case_alt_selection_932 = c$case_alt_selection_931;
 
-  assign c$i_559 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_931 = $unsigned({{(64-8) {1'b0}},c$i_559});
+  assign c$case_alt_selection_931 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_932)
-      64'sd202 : c$case_alt_314 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_314 = c$case_alt_517[202];
+      64'sd203 : c$case_alt_315 = outA;
+      default : c$case_alt_315 = stateSignal[7106:7084];
     endcase
   end
 
   assign c$case_alt_selection_935 = c$case_alt_selection_934;
 
-  assign c$i_560 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_934 = $unsigned({{(64-8) {1'b0}},c$i_560});
+  assign c$case_alt_selection_934 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_935)
-      64'sd201 : c$case_alt_315 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_315 = c$case_alt_517[201];
+      64'sd202 : c$case_alt_316 = outA;
+      default : c$case_alt_316 = stateSignal[7129:7107];
     endcase
   end
 
   assign c$case_alt_selection_938 = c$case_alt_selection_937;
 
-  assign c$i_561 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_937 = $unsigned({{(64-8) {1'b0}},c$i_561});
+  assign c$case_alt_selection_937 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_938)
-      64'sd200 : c$case_alt_316 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_316 = c$case_alt_517[200];
+      64'sd201 : c$case_alt_317 = outA;
+      default : c$case_alt_317 = stateSignal[7152:7130];
     endcase
   end
 
   assign c$case_alt_selection_941 = c$case_alt_selection_940;
 
-  assign c$i_562 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_940 = $unsigned({{(64-8) {1'b0}},c$i_562});
+  assign c$case_alt_selection_940 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_941)
-      64'sd199 : c$case_alt_317 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_317 = c$case_alt_517[199];
+      64'sd200 : c$case_alt_318 = outA;
+      default : c$case_alt_318 = stateSignal[7175:7153];
     endcase
   end
 
   assign c$case_alt_selection_944 = c$case_alt_selection_943;
 
-  assign c$i_563 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_943 = $unsigned({{(64-8) {1'b0}},c$i_563});
+  assign c$case_alt_selection_943 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_944)
-      64'sd198 : c$case_alt_318 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_318 = c$case_alt_517[198];
+      64'sd199 : c$case_alt_319 = outA;
+      default : c$case_alt_319 = stateSignal[7198:7176];
     endcase
   end
 
   assign c$case_alt_selection_947 = c$case_alt_selection_946;
 
-  assign c$i_564 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_946 = $unsigned({{(64-8) {1'b0}},c$i_564});
+  assign c$case_alt_selection_946 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_947)
-      64'sd197 : c$case_alt_319 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_319 = c$case_alt_517[197];
+      64'sd198 : c$case_alt_320 = outA;
+      default : c$case_alt_320 = stateSignal[7221:7199];
     endcase
   end
 
   assign c$case_alt_selection_950 = c$case_alt_selection_949;
 
-  assign c$i_565 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_949 = $unsigned({{(64-8) {1'b0}},c$i_565});
+  assign c$case_alt_selection_949 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_950)
-      64'sd196 : c$case_alt_320 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_320 = c$case_alt_517[196];
+      64'sd197 : c$case_alt_321 = outA;
+      default : c$case_alt_321 = stateSignal[7244:7222];
     endcase
   end
 
   assign c$case_alt_selection_953 = c$case_alt_selection_952;
 
-  assign c$i_566 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_952 = $unsigned({{(64-8) {1'b0}},c$i_566});
+  assign c$case_alt_selection_952 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_953)
-      64'sd195 : c$case_alt_321 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_321 = c$case_alt_517[195];
+      64'sd196 : c$case_alt_322 = outA;
+      default : c$case_alt_322 = stateSignal[7267:7245];
     endcase
   end
 
   assign c$case_alt_selection_956 = c$case_alt_selection_955;
 
-  assign c$i_567 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_955 = $unsigned({{(64-8) {1'b0}},c$i_567});
+  assign c$case_alt_selection_955 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_956)
-      64'sd194 : c$case_alt_322 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_322 = c$case_alt_517[194];
+      64'sd195 : c$case_alt_323 = outA;
+      default : c$case_alt_323 = stateSignal[7290:7268];
     endcase
   end
 
   assign c$case_alt_selection_959 = c$case_alt_selection_958;
 
-  assign c$i_568 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_958 = $unsigned({{(64-8) {1'b0}},c$i_568});
+  assign c$case_alt_selection_958 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_959)
-      64'sd193 : c$case_alt_323 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_323 = c$case_alt_517[193];
+      64'sd194 : c$case_alt_324 = outA;
+      default : c$case_alt_324 = stateSignal[7313:7291];
     endcase
   end
 
   assign c$case_alt_selection_962 = c$case_alt_selection_961;
 
-  assign c$i_569 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_961 = $unsigned({{(64-8) {1'b0}},c$i_569});
+  assign c$case_alt_selection_961 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_962)
-      64'sd192 : c$case_alt_324 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_324 = c$case_alt_517[192];
+      64'sd193 : c$case_alt_325 = outA;
+      default : c$case_alt_325 = stateSignal[7336:7314];
     endcase
   end
 
   assign c$case_alt_selection_965 = c$case_alt_selection_964;
 
-  assign c$i_570 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_964 = $unsigned({{(64-8) {1'b0}},c$i_570});
+  assign c$case_alt_selection_964 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_965)
-      64'sd191 : c$case_alt_325 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_325 = c$case_alt_517[191];
+      64'sd192 : c$case_alt_326 = outA;
+      default : c$case_alt_326 = stateSignal[7359:7337];
     endcase
   end
 
   assign c$case_alt_selection_968 = c$case_alt_selection_967;
 
-  assign c$i_571 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_967 = $unsigned({{(64-8) {1'b0}},c$i_571});
+  assign c$case_alt_selection_967 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_968)
-      64'sd190 : c$case_alt_326 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_326 = c$case_alt_517[190];
+      64'sd191 : c$case_alt_327 = outA;
+      default : c$case_alt_327 = stateSignal[7382:7360];
     endcase
   end
 
   assign c$case_alt_selection_971 = c$case_alt_selection_970;
 
-  assign c$i_572 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_970 = $unsigned({{(64-8) {1'b0}},c$i_572});
+  assign c$case_alt_selection_970 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_971)
-      64'sd189 : c$case_alt_327 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_327 = c$case_alt_517[189];
+      64'sd190 : c$case_alt_328 = outA;
+      default : c$case_alt_328 = stateSignal[7405:7383];
     endcase
   end
 
   assign c$case_alt_selection_974 = c$case_alt_selection_973;
 
-  assign c$i_573 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_973 = $unsigned({{(64-8) {1'b0}},c$i_573});
+  assign c$case_alt_selection_973 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_974)
-      64'sd188 : c$case_alt_328 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_328 = c$case_alt_517[188];
+      64'sd189 : c$case_alt_329 = outA;
+      default : c$case_alt_329 = stateSignal[7428:7406];
     endcase
   end
 
   assign c$case_alt_selection_977 = c$case_alt_selection_976;
 
-  assign c$i_574 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_976 = $unsigned({{(64-8) {1'b0}},c$i_574});
+  assign c$case_alt_selection_976 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_977)
-      64'sd187 : c$case_alt_329 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_329 = c$case_alt_517[187];
+      64'sd188 : c$case_alt_330 = outA;
+      default : c$case_alt_330 = stateSignal[7451:7429];
     endcase
   end
 
   assign c$case_alt_selection_980 = c$case_alt_selection_979;
 
-  assign c$i_575 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_979 = $unsigned({{(64-8) {1'b0}},c$i_575});
+  assign c$case_alt_selection_979 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_980)
-      64'sd186 : c$case_alt_330 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_330 = c$case_alt_517[186];
+      64'sd187 : c$case_alt_331 = outA;
+      default : c$case_alt_331 = stateSignal[7474:7452];
     endcase
   end
 
   assign c$case_alt_selection_983 = c$case_alt_selection_982;
 
-  assign c$i_576 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_982 = $unsigned({{(64-8) {1'b0}},c$i_576});
+  assign c$case_alt_selection_982 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_983)
-      64'sd185 : c$case_alt_331 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_331 = c$case_alt_517[185];
+      64'sd186 : c$case_alt_332 = outA;
+      default : c$case_alt_332 = stateSignal[7497:7475];
     endcase
   end
 
   assign c$case_alt_selection_986 = c$case_alt_selection_985;
 
-  assign c$i_577 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_985 = $unsigned({{(64-8) {1'b0}},c$i_577});
+  assign c$case_alt_selection_985 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_986)
-      64'sd184 : c$case_alt_332 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_332 = c$case_alt_517[184];
+      64'sd185 : c$case_alt_333 = outA;
+      default : c$case_alt_333 = stateSignal[7520:7498];
     endcase
   end
 
   assign c$case_alt_selection_989 = c$case_alt_selection_988;
 
-  assign c$i_578 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_988 = $unsigned({{(64-8) {1'b0}},c$i_578});
+  assign c$case_alt_selection_988 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_989)
-      64'sd183 : c$case_alt_333 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_333 = c$case_alt_517[183];
+      64'sd184 : c$case_alt_334 = outA;
+      default : c$case_alt_334 = stateSignal[7543:7521];
     endcase
   end
 
   assign c$case_alt_selection_992 = c$case_alt_selection_991;
 
-  assign c$i_579 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_991 = $unsigned({{(64-8) {1'b0}},c$i_579});
+  assign c$case_alt_selection_991 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_992)
-      64'sd182 : c$case_alt_334 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_334 = c$case_alt_517[182];
+      64'sd183 : c$case_alt_335 = outA;
+      default : c$case_alt_335 = stateSignal[7566:7544];
     endcase
   end
 
   assign c$case_alt_selection_995 = c$case_alt_selection_994;
 
-  assign c$i_580 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_994 = $unsigned({{(64-8) {1'b0}},c$i_580});
+  assign c$case_alt_selection_994 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_995)
-      64'sd181 : c$case_alt_335 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_335 = c$case_alt_517[181];
+      64'sd182 : c$case_alt_336 = outA;
+      default : c$case_alt_336 = stateSignal[7589:7567];
     endcase
   end
 
   assign c$case_alt_selection_998 = c$case_alt_selection_997;
 
-  assign c$i_581 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_997 = $unsigned({{(64-8) {1'b0}},c$i_581});
+  assign c$case_alt_selection_997 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_998)
-      64'sd180 : c$case_alt_336 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_336 = c$case_alt_517[180];
+      64'sd181 : c$case_alt_337 = outA;
+      default : c$case_alt_337 = stateSignal[7612:7590];
     endcase
   end
 
   assign c$case_alt_selection_1001 = c$case_alt_selection_1000;
 
-  assign c$i_582 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1000 = $unsigned({{(64-8) {1'b0}},c$i_582});
+  assign c$case_alt_selection_1000 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1001)
-      64'sd179 : c$case_alt_337 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_337 = c$case_alt_517[179];
+      64'sd180 : c$case_alt_338 = outA;
+      default : c$case_alt_338 = stateSignal[7635:7613];
     endcase
   end
 
   assign c$case_alt_selection_1004 = c$case_alt_selection_1003;
 
-  assign c$i_583 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1003 = $unsigned({{(64-8) {1'b0}},c$i_583});
+  assign c$case_alt_selection_1003 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1004)
-      64'sd178 : c$case_alt_338 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_338 = c$case_alt_517[178];
+      64'sd179 : c$case_alt_339 = outA;
+      default : c$case_alt_339 = stateSignal[7658:7636];
     endcase
   end
 
   assign c$case_alt_selection_1007 = c$case_alt_selection_1006;
 
-  assign c$i_584 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1006 = $unsigned({{(64-8) {1'b0}},c$i_584});
+  assign c$case_alt_selection_1006 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1007)
-      64'sd177 : c$case_alt_339 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_339 = c$case_alt_517[177];
+      64'sd178 : c$case_alt_340 = outA;
+      default : c$case_alt_340 = stateSignal[7681:7659];
     endcase
   end
 
   assign c$case_alt_selection_1010 = c$case_alt_selection_1009;
 
-  assign c$i_585 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1009 = $unsigned({{(64-8) {1'b0}},c$i_585});
+  assign c$case_alt_selection_1009 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1010)
-      64'sd176 : c$case_alt_340 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_340 = c$case_alt_517[176];
+      64'sd177 : c$case_alt_341 = outA;
+      default : c$case_alt_341 = stateSignal[7704:7682];
     endcase
   end
 
   assign c$case_alt_selection_1013 = c$case_alt_selection_1012;
 
-  assign c$i_586 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1012 = $unsigned({{(64-8) {1'b0}},c$i_586});
+  assign c$case_alt_selection_1012 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1013)
-      64'sd175 : c$case_alt_341 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_341 = c$case_alt_517[175];
+      64'sd176 : c$case_alt_342 = outA;
+      default : c$case_alt_342 = stateSignal[7727:7705];
     endcase
   end
 
   assign c$case_alt_selection_1016 = c$case_alt_selection_1015;
 
-  assign c$i_587 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1015 = $unsigned({{(64-8) {1'b0}},c$i_587});
+  assign c$case_alt_selection_1015 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1016)
-      64'sd174 : c$case_alt_342 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_342 = c$case_alt_517[174];
+      64'sd175 : c$case_alt_343 = outA;
+      default : c$case_alt_343 = stateSignal[7750:7728];
     endcase
   end
 
   assign c$case_alt_selection_1019 = c$case_alt_selection_1018;
 
-  assign c$i_588 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1018 = $unsigned({{(64-8) {1'b0}},c$i_588});
+  assign c$case_alt_selection_1018 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1019)
-      64'sd173 : c$case_alt_343 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_343 = c$case_alt_517[173];
+      64'sd174 : c$case_alt_344 = outA;
+      default : c$case_alt_344 = stateSignal[7773:7751];
     endcase
   end
 
   assign c$case_alt_selection_1022 = c$case_alt_selection_1021;
 
-  assign c$i_589 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1021 = $unsigned({{(64-8) {1'b0}},c$i_589});
+  assign c$case_alt_selection_1021 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1022)
-      64'sd172 : c$case_alt_344 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_344 = c$case_alt_517[172];
+      64'sd173 : c$case_alt_345 = outA;
+      default : c$case_alt_345 = stateSignal[7796:7774];
     endcase
   end
 
   assign c$case_alt_selection_1025 = c$case_alt_selection_1024;
 
-  assign c$i_590 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1024 = $unsigned({{(64-8) {1'b0}},c$i_590});
+  assign c$case_alt_selection_1024 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1025)
-      64'sd171 : c$case_alt_345 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_345 = c$case_alt_517[171];
+      64'sd172 : c$case_alt_346 = outA;
+      default : c$case_alt_346 = stateSignal[7819:7797];
     endcase
   end
 
   assign c$case_alt_selection_1028 = c$case_alt_selection_1027;
 
-  assign c$i_591 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1027 = $unsigned({{(64-8) {1'b0}},c$i_591});
+  assign c$case_alt_selection_1027 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1028)
-      64'sd170 : c$case_alt_346 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_346 = c$case_alt_517[170];
+      64'sd171 : c$case_alt_347 = outA;
+      default : c$case_alt_347 = stateSignal[7842:7820];
     endcase
   end
 
   assign c$case_alt_selection_1031 = c$case_alt_selection_1030;
 
-  assign c$i_592 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1030 = $unsigned({{(64-8) {1'b0}},c$i_592});
+  assign c$case_alt_selection_1030 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1031)
-      64'sd169 : c$case_alt_347 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_347 = c$case_alt_517[169];
+      64'sd170 : c$case_alt_348 = outA;
+      default : c$case_alt_348 = stateSignal[7865:7843];
     endcase
   end
 
   assign c$case_alt_selection_1034 = c$case_alt_selection_1033;
 
-  assign c$i_593 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1033 = $unsigned({{(64-8) {1'b0}},c$i_593});
+  assign c$case_alt_selection_1033 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1034)
-      64'sd168 : c$case_alt_348 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_348 = c$case_alt_517[168];
+      64'sd169 : c$case_alt_349 = outA;
+      default : c$case_alt_349 = stateSignal[7888:7866];
     endcase
   end
 
   assign c$case_alt_selection_1037 = c$case_alt_selection_1036;
 
-  assign c$i_594 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1036 = $unsigned({{(64-8) {1'b0}},c$i_594});
+  assign c$case_alt_selection_1036 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1037)
-      64'sd167 : c$case_alt_349 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_349 = c$case_alt_517[167];
+      64'sd168 : c$case_alt_350 = outA;
+      default : c$case_alt_350 = stateSignal[7911:7889];
     endcase
   end
 
   assign c$case_alt_selection_1040 = c$case_alt_selection_1039;
 
-  assign c$i_595 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1039 = $unsigned({{(64-8) {1'b0}},c$i_595});
+  assign c$case_alt_selection_1039 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1040)
-      64'sd166 : c$case_alt_350 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_350 = c$case_alt_517[166];
+      64'sd167 : c$case_alt_351 = outA;
+      default : c$case_alt_351 = stateSignal[7934:7912];
     endcase
   end
 
   assign c$case_alt_selection_1043 = c$case_alt_selection_1042;
 
-  assign c$i_596 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1042 = $unsigned({{(64-8) {1'b0}},c$i_596});
+  assign c$case_alt_selection_1042 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1043)
-      64'sd165 : c$case_alt_351 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_351 = c$case_alt_517[165];
+      64'sd166 : c$case_alt_352 = outA;
+      default : c$case_alt_352 = stateSignal[7957:7935];
     endcase
   end
 
   assign c$case_alt_selection_1046 = c$case_alt_selection_1045;
 
-  assign c$i_597 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1045 = $unsigned({{(64-8) {1'b0}},c$i_597});
+  assign c$case_alt_selection_1045 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1046)
-      64'sd164 : c$case_alt_352 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_352 = c$case_alt_517[164];
+      64'sd165 : c$case_alt_353 = outA;
+      default : c$case_alt_353 = stateSignal[7980:7958];
     endcase
   end
 
   assign c$case_alt_selection_1049 = c$case_alt_selection_1048;
 
-  assign c$i_598 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1048 = $unsigned({{(64-8) {1'b0}},c$i_598});
+  assign c$case_alt_selection_1048 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1049)
-      64'sd163 : c$case_alt_353 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_353 = c$case_alt_517[163];
+      64'sd164 : c$case_alt_354 = outA;
+      default : c$case_alt_354 = stateSignal[8003:7981];
     endcase
   end
 
   assign c$case_alt_selection_1052 = c$case_alt_selection_1051;
 
-  assign c$i_599 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1051 = $unsigned({{(64-8) {1'b0}},c$i_599});
+  assign c$case_alt_selection_1051 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1052)
-      64'sd162 : c$case_alt_354 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_354 = c$case_alt_517[162];
+      64'sd163 : c$case_alt_355 = outA;
+      default : c$case_alt_355 = stateSignal[8026:8004];
     endcase
   end
 
   assign c$case_alt_selection_1055 = c$case_alt_selection_1054;
 
-  assign c$i_600 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1054 = $unsigned({{(64-8) {1'b0}},c$i_600});
+  assign c$case_alt_selection_1054 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1055)
-      64'sd161 : c$case_alt_355 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_355 = c$case_alt_517[161];
+      64'sd162 : c$case_alt_356 = outA;
+      default : c$case_alt_356 = stateSignal[8049:8027];
     endcase
   end
 
   assign c$case_alt_selection_1058 = c$case_alt_selection_1057;
 
-  assign c$i_601 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1057 = $unsigned({{(64-8) {1'b0}},c$i_601});
+  assign c$case_alt_selection_1057 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1058)
-      64'sd160 : c$case_alt_356 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_356 = c$case_alt_517[160];
+      64'sd161 : c$case_alt_357 = outA;
+      default : c$case_alt_357 = stateSignal[8072:8050];
     endcase
   end
 
   assign c$case_alt_selection_1061 = c$case_alt_selection_1060;
 
-  assign c$i_602 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1060 = $unsigned({{(64-8) {1'b0}},c$i_602});
+  assign c$case_alt_selection_1060 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1061)
-      64'sd159 : c$case_alt_357 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_357 = c$case_alt_517[159];
+      64'sd160 : c$case_alt_358 = outA;
+      default : c$case_alt_358 = stateSignal[8095:8073];
     endcase
   end
 
   assign c$case_alt_selection_1064 = c$case_alt_selection_1063;
 
-  assign c$i_603 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1063 = $unsigned({{(64-8) {1'b0}},c$i_603});
+  assign c$case_alt_selection_1063 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1064)
-      64'sd158 : c$case_alt_358 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_358 = c$case_alt_517[158];
+      64'sd159 : c$case_alt_359 = outA;
+      default : c$case_alt_359 = stateSignal[8118:8096];
     endcase
   end
 
   assign c$case_alt_selection_1067 = c$case_alt_selection_1066;
 
-  assign c$i_604 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1066 = $unsigned({{(64-8) {1'b0}},c$i_604});
+  assign c$case_alt_selection_1066 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1067)
-      64'sd157 : c$case_alt_359 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_359 = c$case_alt_517[157];
+      64'sd158 : c$case_alt_360 = outA;
+      default : c$case_alt_360 = stateSignal[8141:8119];
     endcase
   end
 
   assign c$case_alt_selection_1070 = c$case_alt_selection_1069;
 
-  assign c$i_605 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1069 = $unsigned({{(64-8) {1'b0}},c$i_605});
+  assign c$case_alt_selection_1069 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1070)
-      64'sd156 : c$case_alt_360 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_360 = c$case_alt_517[156];
+      64'sd157 : c$case_alt_361 = outA;
+      default : c$case_alt_361 = stateSignal[8164:8142];
     endcase
   end
 
   assign c$case_alt_selection_1073 = c$case_alt_selection_1072;
 
-  assign c$i_606 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1072 = $unsigned({{(64-8) {1'b0}},c$i_606});
+  assign c$case_alt_selection_1072 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1073)
-      64'sd155 : c$case_alt_361 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_361 = c$case_alt_517[155];
+      64'sd156 : c$case_alt_362 = outA;
+      default : c$case_alt_362 = stateSignal[8187:8165];
     endcase
   end
 
   assign c$case_alt_selection_1076 = c$case_alt_selection_1075;
 
-  assign c$i_607 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1075 = $unsigned({{(64-8) {1'b0}},c$i_607});
+  assign c$case_alt_selection_1075 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1076)
-      64'sd154 : c$case_alt_362 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_362 = c$case_alt_517[154];
+      64'sd155 : c$case_alt_363 = outA;
+      default : c$case_alt_363 = stateSignal[8210:8188];
     endcase
   end
 
   assign c$case_alt_selection_1079 = c$case_alt_selection_1078;
 
-  assign c$i_608 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1078 = $unsigned({{(64-8) {1'b0}},c$i_608});
+  assign c$case_alt_selection_1078 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1079)
-      64'sd153 : c$case_alt_363 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_363 = c$case_alt_517[153];
+      64'sd154 : c$case_alt_364 = outA;
+      default : c$case_alt_364 = stateSignal[8233:8211];
     endcase
   end
 
   assign c$case_alt_selection_1082 = c$case_alt_selection_1081;
 
-  assign c$i_609 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1081 = $unsigned({{(64-8) {1'b0}},c$i_609});
+  assign c$case_alt_selection_1081 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1082)
-      64'sd152 : c$case_alt_364 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_364 = c$case_alt_517[152];
+      64'sd153 : c$case_alt_365 = outA;
+      default : c$case_alt_365 = stateSignal[8256:8234];
     endcase
   end
 
   assign c$case_alt_selection_1085 = c$case_alt_selection_1084;
 
-  assign c$i_610 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1084 = $unsigned({{(64-8) {1'b0}},c$i_610});
+  assign c$case_alt_selection_1084 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1085)
-      64'sd151 : c$case_alt_365 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_365 = c$case_alt_517[151];
+      64'sd152 : c$case_alt_366 = outA;
+      default : c$case_alt_366 = stateSignal[8279:8257];
     endcase
   end
 
   assign c$case_alt_selection_1088 = c$case_alt_selection_1087;
 
-  assign c$i_611 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1087 = $unsigned({{(64-8) {1'b0}},c$i_611});
+  assign c$case_alt_selection_1087 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1088)
-      64'sd150 : c$case_alt_366 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_366 = c$case_alt_517[150];
+      64'sd151 : c$case_alt_367 = outA;
+      default : c$case_alt_367 = stateSignal[8302:8280];
     endcase
   end
 
   assign c$case_alt_selection_1091 = c$case_alt_selection_1090;
 
-  assign c$i_612 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1090 = $unsigned({{(64-8) {1'b0}},c$i_612});
+  assign c$case_alt_selection_1090 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1091)
-      64'sd149 : c$case_alt_367 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_367 = c$case_alt_517[149];
+      64'sd150 : c$case_alt_368 = outA;
+      default : c$case_alt_368 = stateSignal[8325:8303];
     endcase
   end
 
   assign c$case_alt_selection_1094 = c$case_alt_selection_1093;
 
-  assign c$i_613 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1093 = $unsigned({{(64-8) {1'b0}},c$i_613});
+  assign c$case_alt_selection_1093 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1094)
-      64'sd148 : c$case_alt_368 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_368 = c$case_alt_517[148];
+      64'sd149 : c$case_alt_369 = outA;
+      default : c$case_alt_369 = stateSignal[8348:8326];
     endcase
   end
 
   assign c$case_alt_selection_1097 = c$case_alt_selection_1096;
 
-  assign c$i_614 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1096 = $unsigned({{(64-8) {1'b0}},c$i_614});
+  assign c$case_alt_selection_1096 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1097)
-      64'sd147 : c$case_alt_369 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_369 = c$case_alt_517[147];
+      64'sd148 : c$case_alt_370 = outA;
+      default : c$case_alt_370 = stateSignal[8371:8349];
     endcase
   end
 
   assign c$case_alt_selection_1100 = c$case_alt_selection_1099;
 
-  assign c$i_615 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1099 = $unsigned({{(64-8) {1'b0}},c$i_615});
+  assign c$case_alt_selection_1099 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1100)
-      64'sd146 : c$case_alt_370 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_370 = c$case_alt_517[146];
+      64'sd147 : c$case_alt_371 = outA;
+      default : c$case_alt_371 = stateSignal[8394:8372];
     endcase
   end
 
   assign c$case_alt_selection_1103 = c$case_alt_selection_1102;
 
-  assign c$i_616 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1102 = $unsigned({{(64-8) {1'b0}},c$i_616});
+  assign c$case_alt_selection_1102 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1103)
-      64'sd145 : c$case_alt_371 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_371 = c$case_alt_517[145];
+      64'sd146 : c$case_alt_372 = outA;
+      default : c$case_alt_372 = stateSignal[8417:8395];
     endcase
   end
 
   assign c$case_alt_selection_1106 = c$case_alt_selection_1105;
 
-  assign c$i_617 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1105 = $unsigned({{(64-8) {1'b0}},c$i_617});
+  assign c$case_alt_selection_1105 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1106)
-      64'sd144 : c$case_alt_372 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_372 = c$case_alt_517[144];
+      64'sd145 : c$case_alt_373 = outA;
+      default : c$case_alt_373 = stateSignal[8440:8418];
     endcase
   end
 
   assign c$case_alt_selection_1109 = c$case_alt_selection_1108;
 
-  assign c$i_618 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1108 = $unsigned({{(64-8) {1'b0}},c$i_618});
+  assign c$case_alt_selection_1108 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1109)
-      64'sd143 : c$case_alt_373 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_373 = c$case_alt_517[143];
+      64'sd144 : c$case_alt_374 = outA;
+      default : c$case_alt_374 = stateSignal[8463:8441];
     endcase
   end
 
   assign c$case_alt_selection_1112 = c$case_alt_selection_1111;
 
-  assign c$i_619 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1111 = $unsigned({{(64-8) {1'b0}},c$i_619});
+  assign c$case_alt_selection_1111 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1112)
-      64'sd142 : c$case_alt_374 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_374 = c$case_alt_517[142];
+      64'sd143 : c$case_alt_375 = outA;
+      default : c$case_alt_375 = stateSignal[8486:8464];
     endcase
   end
 
   assign c$case_alt_selection_1115 = c$case_alt_selection_1114;
 
-  assign c$i_620 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1114 = $unsigned({{(64-8) {1'b0}},c$i_620});
+  assign c$case_alt_selection_1114 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1115)
-      64'sd141 : c$case_alt_375 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_375 = c$case_alt_517[141];
+      64'sd142 : c$case_alt_376 = outA;
+      default : c$case_alt_376 = stateSignal[8509:8487];
     endcase
   end
 
   assign c$case_alt_selection_1118 = c$case_alt_selection_1117;
 
-  assign c$i_621 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1117 = $unsigned({{(64-8) {1'b0}},c$i_621});
+  assign c$case_alt_selection_1117 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1118)
-      64'sd140 : c$case_alt_376 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_376 = c$case_alt_517[140];
+      64'sd141 : c$case_alt_377 = outA;
+      default : c$case_alt_377 = stateSignal[8532:8510];
     endcase
   end
 
   assign c$case_alt_selection_1121 = c$case_alt_selection_1120;
 
-  assign c$i_622 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1120 = $unsigned({{(64-8) {1'b0}},c$i_622});
+  assign c$case_alt_selection_1120 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1121)
-      64'sd139 : c$case_alt_377 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_377 = c$case_alt_517[139];
+      64'sd140 : c$case_alt_378 = outA;
+      default : c$case_alt_378 = stateSignal[8555:8533];
     endcase
   end
 
   assign c$case_alt_selection_1124 = c$case_alt_selection_1123;
 
-  assign c$i_623 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1123 = $unsigned({{(64-8) {1'b0}},c$i_623});
+  assign c$case_alt_selection_1123 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1124)
-      64'sd138 : c$case_alt_378 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_378 = c$case_alt_517[138];
+      64'sd139 : c$case_alt_379 = outA;
+      default : c$case_alt_379 = stateSignal[8578:8556];
     endcase
   end
 
   assign c$case_alt_selection_1127 = c$case_alt_selection_1126;
 
-  assign c$i_624 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1126 = $unsigned({{(64-8) {1'b0}},c$i_624});
+  assign c$case_alt_selection_1126 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1127)
-      64'sd137 : c$case_alt_379 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_379 = c$case_alt_517[137];
+      64'sd138 : c$case_alt_380 = outA;
+      default : c$case_alt_380 = stateSignal[8601:8579];
     endcase
   end
 
   assign c$case_alt_selection_1130 = c$case_alt_selection_1129;
 
-  assign c$i_625 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1129 = $unsigned({{(64-8) {1'b0}},c$i_625});
+  assign c$case_alt_selection_1129 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1130)
-      64'sd136 : c$case_alt_380 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_380 = c$case_alt_517[136];
+      64'sd137 : c$case_alt_381 = outA;
+      default : c$case_alt_381 = stateSignal[8624:8602];
     endcase
   end
 
   assign c$case_alt_selection_1133 = c$case_alt_selection_1132;
 
-  assign c$i_626 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1132 = $unsigned({{(64-8) {1'b0}},c$i_626});
+  assign c$case_alt_selection_1132 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1133)
-      64'sd135 : c$case_alt_381 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_381 = c$case_alt_517[135];
+      64'sd136 : c$case_alt_382 = outA;
+      default : c$case_alt_382 = stateSignal[8647:8625];
     endcase
   end
 
   assign c$case_alt_selection_1136 = c$case_alt_selection_1135;
 
-  assign c$i_627 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1135 = $unsigned({{(64-8) {1'b0}},c$i_627});
+  assign c$case_alt_selection_1135 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1136)
-      64'sd134 : c$case_alt_382 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_382 = c$case_alt_517[134];
+      64'sd135 : c$case_alt_383 = outA;
+      default : c$case_alt_383 = stateSignal[8670:8648];
     endcase
   end
 
   assign c$case_alt_selection_1139 = c$case_alt_selection_1138;
 
-  assign c$i_628 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1138 = $unsigned({{(64-8) {1'b0}},c$i_628});
+  assign c$case_alt_selection_1138 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1139)
-      64'sd133 : c$case_alt_383 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_383 = c$case_alt_517[133];
+      64'sd134 : c$case_alt_384 = outA;
+      default : c$case_alt_384 = stateSignal[8693:8671];
     endcase
   end
 
   assign c$case_alt_selection_1142 = c$case_alt_selection_1141;
 
-  assign c$i_629 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1141 = $unsigned({{(64-8) {1'b0}},c$i_629});
+  assign c$case_alt_selection_1141 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1142)
-      64'sd132 : c$case_alt_384 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_384 = c$case_alt_517[132];
+      64'sd133 : c$case_alt_385 = outA;
+      default : c$case_alt_385 = stateSignal[8716:8694];
     endcase
   end
 
   assign c$case_alt_selection_1145 = c$case_alt_selection_1144;
 
-  assign c$i_630 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1144 = $unsigned({{(64-8) {1'b0}},c$i_630});
+  assign c$case_alt_selection_1144 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1145)
-      64'sd131 : c$case_alt_385 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_385 = c$case_alt_517[131];
+      64'sd132 : c$case_alt_386 = outA;
+      default : c$case_alt_386 = stateSignal[8739:8717];
     endcase
   end
 
   assign c$case_alt_selection_1148 = c$case_alt_selection_1147;
 
-  assign c$i_631 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1147 = $unsigned({{(64-8) {1'b0}},c$i_631});
+  assign c$case_alt_selection_1147 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1148)
-      64'sd130 : c$case_alt_386 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_386 = c$case_alt_517[130];
+      64'sd131 : c$case_alt_387 = outA;
+      default : c$case_alt_387 = stateSignal[8762:8740];
     endcase
   end
 
   assign c$case_alt_selection_1151 = c$case_alt_selection_1150;
 
-  assign c$i_632 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1150 = $unsigned({{(64-8) {1'b0}},c$i_632});
+  assign c$case_alt_selection_1150 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1151)
-      64'sd129 : c$case_alt_387 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_387 = c$case_alt_517[129];
+      64'sd130 : c$case_alt_388 = outA;
+      default : c$case_alt_388 = stateSignal[8785:8763];
     endcase
   end
 
   assign c$case_alt_selection_1154 = c$case_alt_selection_1153;
 
-  assign c$i_633 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1153 = $unsigned({{(64-8) {1'b0}},c$i_633});
+  assign c$case_alt_selection_1153 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1154)
-      64'sd128 : c$case_alt_388 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_388 = c$case_alt_517[128];
+      64'sd129 : c$case_alt_389 = outA;
+      default : c$case_alt_389 = stateSignal[8808:8786];
     endcase
   end
 
   assign c$case_alt_selection_1157 = c$case_alt_selection_1156;
 
-  assign c$i_634 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1156 = $unsigned({{(64-8) {1'b0}},c$i_634});
+  assign c$case_alt_selection_1156 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1157)
-      64'sd127 : c$case_alt_389 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_389 = c$case_alt_517[127];
+      64'sd128 : c$case_alt_390 = outA;
+      default : c$case_alt_390 = stateSignal[8831:8809];
     endcase
   end
 
   assign c$case_alt_selection_1160 = c$case_alt_selection_1159;
 
-  assign c$i_635 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1159 = $unsigned({{(64-8) {1'b0}},c$i_635});
+  assign c$case_alt_selection_1159 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1160)
-      64'sd126 : c$case_alt_390 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_390 = c$case_alt_517[126];
+      64'sd127 : c$case_alt_391 = outA;
+      default : c$case_alt_391 = stateSignal[8854:8832];
     endcase
   end
 
   assign c$case_alt_selection_1163 = c$case_alt_selection_1162;
 
-  assign c$i_636 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1162 = $unsigned({{(64-8) {1'b0}},c$i_636});
+  assign c$case_alt_selection_1162 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1163)
-      64'sd125 : c$case_alt_391 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_391 = c$case_alt_517[125];
+      64'sd126 : c$case_alt_392 = outA;
+      default : c$case_alt_392 = stateSignal[8877:8855];
     endcase
   end
 
   assign c$case_alt_selection_1166 = c$case_alt_selection_1165;
 
-  assign c$i_637 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1165 = $unsigned({{(64-8) {1'b0}},c$i_637});
+  assign c$case_alt_selection_1165 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1166)
-      64'sd124 : c$case_alt_392 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_392 = c$case_alt_517[124];
+      64'sd125 : c$case_alt_393 = outA;
+      default : c$case_alt_393 = stateSignal[8900:8878];
     endcase
   end
 
   assign c$case_alt_selection_1169 = c$case_alt_selection_1168;
 
-  assign c$i_638 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1168 = $unsigned({{(64-8) {1'b0}},c$i_638});
+  assign c$case_alt_selection_1168 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1169)
-      64'sd123 : c$case_alt_393 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_393 = c$case_alt_517[123];
+      64'sd124 : c$case_alt_394 = outA;
+      default : c$case_alt_394 = stateSignal[8923:8901];
     endcase
   end
 
   assign c$case_alt_selection_1172 = c$case_alt_selection_1171;
 
-  assign c$i_639 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1171 = $unsigned({{(64-8) {1'b0}},c$i_639});
+  assign c$case_alt_selection_1171 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1172)
-      64'sd122 : c$case_alt_394 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_394 = c$case_alt_517[122];
+      64'sd123 : c$case_alt_395 = outA;
+      default : c$case_alt_395 = stateSignal[8946:8924];
     endcase
   end
 
   assign c$case_alt_selection_1175 = c$case_alt_selection_1174;
 
-  assign c$i_640 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1174 = $unsigned({{(64-8) {1'b0}},c$i_640});
+  assign c$case_alt_selection_1174 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1175)
-      64'sd121 : c$case_alt_395 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_395 = c$case_alt_517[121];
+      64'sd122 : c$case_alt_396 = outA;
+      default : c$case_alt_396 = stateSignal[8969:8947];
     endcase
   end
 
   assign c$case_alt_selection_1178 = c$case_alt_selection_1177;
 
-  assign c$i_641 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1177 = $unsigned({{(64-8) {1'b0}},c$i_641});
+  assign c$case_alt_selection_1177 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1178)
-      64'sd120 : c$case_alt_396 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_396 = c$case_alt_517[120];
+      64'sd121 : c$case_alt_397 = outA;
+      default : c$case_alt_397 = stateSignal[8992:8970];
     endcase
   end
 
   assign c$case_alt_selection_1181 = c$case_alt_selection_1180;
 
-  assign c$i_642 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1180 = $unsigned({{(64-8) {1'b0}},c$i_642});
+  assign c$case_alt_selection_1180 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1181)
-      64'sd119 : c$case_alt_397 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_397 = c$case_alt_517[119];
+      64'sd120 : c$case_alt_398 = outA;
+      default : c$case_alt_398 = stateSignal[9015:8993];
     endcase
   end
 
   assign c$case_alt_selection_1184 = c$case_alt_selection_1183;
 
-  assign c$i_643 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1183 = $unsigned({{(64-8) {1'b0}},c$i_643});
+  assign c$case_alt_selection_1183 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1184)
-      64'sd118 : c$case_alt_398 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_398 = c$case_alt_517[118];
+      64'sd119 : c$case_alt_399 = outA;
+      default : c$case_alt_399 = stateSignal[9038:9016];
     endcase
   end
 
   assign c$case_alt_selection_1187 = c$case_alt_selection_1186;
 
-  assign c$i_644 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1186 = $unsigned({{(64-8) {1'b0}},c$i_644});
+  assign c$case_alt_selection_1186 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1187)
-      64'sd117 : c$case_alt_399 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_399 = c$case_alt_517[117];
+      64'sd118 : c$case_alt_400 = outA;
+      default : c$case_alt_400 = stateSignal[9061:9039];
     endcase
   end
 
   assign c$case_alt_selection_1190 = c$case_alt_selection_1189;
 
-  assign c$i_645 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1189 = $unsigned({{(64-8) {1'b0}},c$i_645});
+  assign c$case_alt_selection_1189 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1190)
-      64'sd116 : c$case_alt_400 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_400 = c$case_alt_517[116];
+      64'sd117 : c$case_alt_401 = outA;
+      default : c$case_alt_401 = stateSignal[9084:9062];
     endcase
   end
 
   assign c$case_alt_selection_1193 = c$case_alt_selection_1192;
 
-  assign c$i_646 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1192 = $unsigned({{(64-8) {1'b0}},c$i_646});
+  assign c$case_alt_selection_1192 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1193)
-      64'sd115 : c$case_alt_401 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_401 = c$case_alt_517[115];
+      64'sd116 : c$case_alt_402 = outA;
+      default : c$case_alt_402 = stateSignal[9107:9085];
     endcase
   end
 
   assign c$case_alt_selection_1196 = c$case_alt_selection_1195;
 
-  assign c$i_647 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1195 = $unsigned({{(64-8) {1'b0}},c$i_647});
+  assign c$case_alt_selection_1195 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1196)
-      64'sd114 : c$case_alt_402 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_402 = c$case_alt_517[114];
+      64'sd115 : c$case_alt_403 = outA;
+      default : c$case_alt_403 = stateSignal[9130:9108];
     endcase
   end
 
   assign c$case_alt_selection_1199 = c$case_alt_selection_1198;
 
-  assign c$i_648 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1198 = $unsigned({{(64-8) {1'b0}},c$i_648});
+  assign c$case_alt_selection_1198 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1199)
-      64'sd113 : c$case_alt_403 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_403 = c$case_alt_517[113];
+      64'sd114 : c$case_alt_404 = outA;
+      default : c$case_alt_404 = stateSignal[9153:9131];
     endcase
   end
 
   assign c$case_alt_selection_1202 = c$case_alt_selection_1201;
 
-  assign c$i_649 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1201 = $unsigned({{(64-8) {1'b0}},c$i_649});
+  assign c$case_alt_selection_1201 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1202)
-      64'sd112 : c$case_alt_404 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_404 = c$case_alt_517[112];
+      64'sd113 : c$case_alt_405 = outA;
+      default : c$case_alt_405 = stateSignal[9176:9154];
     endcase
   end
 
   assign c$case_alt_selection_1205 = c$case_alt_selection_1204;
 
-  assign c$i_650 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1204 = $unsigned({{(64-8) {1'b0}},c$i_650});
+  assign c$case_alt_selection_1204 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1205)
-      64'sd111 : c$case_alt_405 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_405 = c$case_alt_517[111];
+      64'sd112 : c$case_alt_406 = outA;
+      default : c$case_alt_406 = stateSignal[9199:9177];
     endcase
   end
 
   assign c$case_alt_selection_1208 = c$case_alt_selection_1207;
 
-  assign c$i_651 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1207 = $unsigned({{(64-8) {1'b0}},c$i_651});
+  assign c$case_alt_selection_1207 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1208)
-      64'sd110 : c$case_alt_406 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_406 = c$case_alt_517[110];
+      64'sd111 : c$case_alt_407 = outA;
+      default : c$case_alt_407 = stateSignal[9222:9200];
     endcase
   end
 
   assign c$case_alt_selection_1211 = c$case_alt_selection_1210;
 
-  assign c$i_652 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1210 = $unsigned({{(64-8) {1'b0}},c$i_652});
+  assign c$case_alt_selection_1210 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1211)
-      64'sd109 : c$case_alt_407 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_407 = c$case_alt_517[109];
+      64'sd110 : c$case_alt_408 = outA;
+      default : c$case_alt_408 = stateSignal[9245:9223];
     endcase
   end
 
   assign c$case_alt_selection_1214 = c$case_alt_selection_1213;
 
-  assign c$i_653 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1213 = $unsigned({{(64-8) {1'b0}},c$i_653});
+  assign c$case_alt_selection_1213 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1214)
-      64'sd108 : c$case_alt_408 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_408 = c$case_alt_517[108];
+      64'sd109 : c$case_alt_409 = outA;
+      default : c$case_alt_409 = stateSignal[9268:9246];
     endcase
   end
 
   assign c$case_alt_selection_1217 = c$case_alt_selection_1216;
 
-  assign c$i_654 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1216 = $unsigned({{(64-8) {1'b0}},c$i_654});
+  assign c$case_alt_selection_1216 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1217)
-      64'sd107 : c$case_alt_409 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_409 = c$case_alt_517[107];
+      64'sd108 : c$case_alt_410 = outA;
+      default : c$case_alt_410 = stateSignal[9291:9269];
     endcase
   end
 
   assign c$case_alt_selection_1220 = c$case_alt_selection_1219;
 
-  assign c$i_655 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1219 = $unsigned({{(64-8) {1'b0}},c$i_655});
+  assign c$case_alt_selection_1219 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1220)
-      64'sd106 : c$case_alt_410 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_410 = c$case_alt_517[106];
+      64'sd107 : c$case_alt_411 = outA;
+      default : c$case_alt_411 = stateSignal[9314:9292];
     endcase
   end
 
   assign c$case_alt_selection_1223 = c$case_alt_selection_1222;
 
-  assign c$i_656 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1222 = $unsigned({{(64-8) {1'b0}},c$i_656});
+  assign c$case_alt_selection_1222 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1223)
-      64'sd105 : c$case_alt_411 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_411 = c$case_alt_517[105];
+      64'sd106 : c$case_alt_412 = outA;
+      default : c$case_alt_412 = stateSignal[9337:9315];
     endcase
   end
 
   assign c$case_alt_selection_1226 = c$case_alt_selection_1225;
 
-  assign c$i_657 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1225 = $unsigned({{(64-8) {1'b0}},c$i_657});
+  assign c$case_alt_selection_1225 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1226)
-      64'sd104 : c$case_alt_412 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_412 = c$case_alt_517[104];
+      64'sd105 : c$case_alt_413 = outA;
+      default : c$case_alt_413 = stateSignal[9360:9338];
     endcase
   end
 
   assign c$case_alt_selection_1229 = c$case_alt_selection_1228;
 
-  assign c$i_658 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1228 = $unsigned({{(64-8) {1'b0}},c$i_658});
+  assign c$case_alt_selection_1228 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1229)
-      64'sd103 : c$case_alt_413 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_413 = c$case_alt_517[103];
+      64'sd104 : c$case_alt_414 = outA;
+      default : c$case_alt_414 = stateSignal[9383:9361];
     endcase
   end
 
   assign c$case_alt_selection_1232 = c$case_alt_selection_1231;
 
-  assign c$i_659 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1231 = $unsigned({{(64-8) {1'b0}},c$i_659});
+  assign c$case_alt_selection_1231 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1232)
-      64'sd102 : c$case_alt_414 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_414 = c$case_alt_517[102];
+      64'sd103 : c$case_alt_415 = outA;
+      default : c$case_alt_415 = stateSignal[9406:9384];
     endcase
   end
 
   assign c$case_alt_selection_1235 = c$case_alt_selection_1234;
 
-  assign c$i_660 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1234 = $unsigned({{(64-8) {1'b0}},c$i_660});
+  assign c$case_alt_selection_1234 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1235)
-      64'sd101 : c$case_alt_415 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_415 = c$case_alt_517[101];
+      64'sd102 : c$case_alt_416 = outA;
+      default : c$case_alt_416 = stateSignal[9429:9407];
     endcase
   end
 
   assign c$case_alt_selection_1238 = c$case_alt_selection_1237;
 
-  assign c$i_661 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1237 = $unsigned({{(64-8) {1'b0}},c$i_661});
+  assign c$case_alt_selection_1237 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1238)
-      64'sd100 : c$case_alt_416 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_416 = c$case_alt_517[100];
+      64'sd101 : c$case_alt_417 = outA;
+      default : c$case_alt_417 = stateSignal[9452:9430];
     endcase
   end
 
   assign c$case_alt_selection_1241 = c$case_alt_selection_1240;
 
-  assign c$i_662 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1240 = $unsigned({{(64-8) {1'b0}},c$i_662});
+  assign c$case_alt_selection_1240 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1241)
-      64'sd99 : c$case_alt_417 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_417 = c$case_alt_517[99];
+      64'sd100 : c$case_alt_418 = outA;
+      default : c$case_alt_418 = stateSignal[9475:9453];
     endcase
   end
 
   assign c$case_alt_selection_1244 = c$case_alt_selection_1243;
 
-  assign c$i_663 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1243 = $unsigned({{(64-8) {1'b0}},c$i_663});
+  assign c$case_alt_selection_1243 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1244)
-      64'sd98 : c$case_alt_418 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_418 = c$case_alt_517[98];
+      64'sd99 : c$case_alt_419 = outA;
+      default : c$case_alt_419 = stateSignal[9498:9476];
     endcase
   end
 
   assign c$case_alt_selection_1247 = c$case_alt_selection_1246;
 
-  assign c$i_664 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1246 = $unsigned({{(64-8) {1'b0}},c$i_664});
+  assign c$case_alt_selection_1246 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1247)
-      64'sd97 : c$case_alt_419 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_419 = c$case_alt_517[97];
+      64'sd98 : c$case_alt_420 = outA;
+      default : c$case_alt_420 = stateSignal[9521:9499];
     endcase
   end
 
   assign c$case_alt_selection_1250 = c$case_alt_selection_1249;
 
-  assign c$i_665 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1249 = $unsigned({{(64-8) {1'b0}},c$i_665});
+  assign c$case_alt_selection_1249 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1250)
-      64'sd96 : c$case_alt_420 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_420 = c$case_alt_517[96];
+      64'sd97 : c$case_alt_421 = outA;
+      default : c$case_alt_421 = stateSignal[9544:9522];
     endcase
   end
 
   assign c$case_alt_selection_1253 = c$case_alt_selection_1252;
 
-  assign c$i_666 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1252 = $unsigned({{(64-8) {1'b0}},c$i_666});
+  assign c$case_alt_selection_1252 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1253)
-      64'sd95 : c$case_alt_421 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_421 = c$case_alt_517[95];
+      64'sd96 : c$case_alt_422 = outA;
+      default : c$case_alt_422 = stateSignal[9567:9545];
     endcase
   end
 
   assign c$case_alt_selection_1256 = c$case_alt_selection_1255;
 
-  assign c$i_667 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1255 = $unsigned({{(64-8) {1'b0}},c$i_667});
+  assign c$case_alt_selection_1255 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1256)
-      64'sd94 : c$case_alt_422 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_422 = c$case_alt_517[94];
+      64'sd95 : c$case_alt_423 = outA;
+      default : c$case_alt_423 = stateSignal[9590:9568];
     endcase
   end
 
   assign c$case_alt_selection_1259 = c$case_alt_selection_1258;
 
-  assign c$i_668 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1258 = $unsigned({{(64-8) {1'b0}},c$i_668});
+  assign c$case_alt_selection_1258 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1259)
-      64'sd93 : c$case_alt_423 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_423 = c$case_alt_517[93];
+      64'sd94 : c$case_alt_424 = outA;
+      default : c$case_alt_424 = stateSignal[9613:9591];
     endcase
   end
 
   assign c$case_alt_selection_1262 = c$case_alt_selection_1261;
 
-  assign c$i_669 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1261 = $unsigned({{(64-8) {1'b0}},c$i_669});
+  assign c$case_alt_selection_1261 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1262)
-      64'sd92 : c$case_alt_424 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_424 = c$case_alt_517[92];
+      64'sd93 : c$case_alt_425 = outA;
+      default : c$case_alt_425 = stateSignal[9636:9614];
     endcase
   end
 
   assign c$case_alt_selection_1265 = c$case_alt_selection_1264;
 
-  assign c$i_670 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1264 = $unsigned({{(64-8) {1'b0}},c$i_670});
+  assign c$case_alt_selection_1264 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1265)
-      64'sd91 : c$case_alt_425 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_425 = c$case_alt_517[91];
+      64'sd92 : c$case_alt_426 = outA;
+      default : c$case_alt_426 = stateSignal[9659:9637];
     endcase
   end
 
   assign c$case_alt_selection_1268 = c$case_alt_selection_1267;
 
-  assign c$i_671 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1267 = $unsigned({{(64-8) {1'b0}},c$i_671});
+  assign c$case_alt_selection_1267 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1268)
-      64'sd90 : c$case_alt_426 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_426 = c$case_alt_517[90];
+      64'sd91 : c$case_alt_427 = outA;
+      default : c$case_alt_427 = stateSignal[9682:9660];
     endcase
   end
 
   assign c$case_alt_selection_1271 = c$case_alt_selection_1270;
 
-  assign c$i_672 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1270 = $unsigned({{(64-8) {1'b0}},c$i_672});
+  assign c$case_alt_selection_1270 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1271)
-      64'sd89 : c$case_alt_427 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_427 = c$case_alt_517[89];
+      64'sd90 : c$case_alt_428 = outA;
+      default : c$case_alt_428 = stateSignal[9705:9683];
     endcase
   end
 
   assign c$case_alt_selection_1274 = c$case_alt_selection_1273;
 
-  assign c$i_673 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1273 = $unsigned({{(64-8) {1'b0}},c$i_673});
+  assign c$case_alt_selection_1273 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1274)
-      64'sd88 : c$case_alt_428 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_428 = c$case_alt_517[88];
+      64'sd89 : c$case_alt_429 = outA;
+      default : c$case_alt_429 = stateSignal[9728:9706];
     endcase
   end
 
   assign c$case_alt_selection_1277 = c$case_alt_selection_1276;
 
-  assign c$i_674 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1276 = $unsigned({{(64-8) {1'b0}},c$i_674});
+  assign c$case_alt_selection_1276 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1277)
-      64'sd87 : c$case_alt_429 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_429 = c$case_alt_517[87];
+      64'sd88 : c$case_alt_430 = outA;
+      default : c$case_alt_430 = stateSignal[9751:9729];
     endcase
   end
 
   assign c$case_alt_selection_1280 = c$case_alt_selection_1279;
 
-  assign c$i_675 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1279 = $unsigned({{(64-8) {1'b0}},c$i_675});
+  assign c$case_alt_selection_1279 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1280)
-      64'sd86 : c$case_alt_430 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_430 = c$case_alt_517[86];
+      64'sd87 : c$case_alt_431 = outA;
+      default : c$case_alt_431 = stateSignal[9774:9752];
     endcase
   end
 
   assign c$case_alt_selection_1283 = c$case_alt_selection_1282;
 
-  assign c$i_676 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1282 = $unsigned({{(64-8) {1'b0}},c$i_676});
+  assign c$case_alt_selection_1282 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1283)
-      64'sd85 : c$case_alt_431 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_431 = c$case_alt_517[85];
+      64'sd86 : c$case_alt_432 = outA;
+      default : c$case_alt_432 = stateSignal[9797:9775];
     endcase
   end
 
   assign c$case_alt_selection_1286 = c$case_alt_selection_1285;
 
-  assign c$i_677 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1285 = $unsigned({{(64-8) {1'b0}},c$i_677});
+  assign c$case_alt_selection_1285 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1286)
-      64'sd84 : c$case_alt_432 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_432 = c$case_alt_517[84];
+      64'sd85 : c$case_alt_433 = outA;
+      default : c$case_alt_433 = stateSignal[9820:9798];
     endcase
   end
 
   assign c$case_alt_selection_1289 = c$case_alt_selection_1288;
 
-  assign c$i_678 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1288 = $unsigned({{(64-8) {1'b0}},c$i_678});
+  assign c$case_alt_selection_1288 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1289)
-      64'sd83 : c$case_alt_433 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_433 = c$case_alt_517[83];
+      64'sd84 : c$case_alt_434 = outA;
+      default : c$case_alt_434 = stateSignal[9843:9821];
     endcase
   end
 
   assign c$case_alt_selection_1292 = c$case_alt_selection_1291;
 
-  assign c$i_679 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1291 = $unsigned({{(64-8) {1'b0}},c$i_679});
+  assign c$case_alt_selection_1291 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1292)
-      64'sd82 : c$case_alt_434 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_434 = c$case_alt_517[82];
+      64'sd83 : c$case_alt_435 = outA;
+      default : c$case_alt_435 = stateSignal[9866:9844];
     endcase
   end
 
   assign c$case_alt_selection_1295 = c$case_alt_selection_1294;
 
-  assign c$i_680 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1294 = $unsigned({{(64-8) {1'b0}},c$i_680});
+  assign c$case_alt_selection_1294 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1295)
-      64'sd81 : c$case_alt_435 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_435 = c$case_alt_517[81];
+      64'sd82 : c$case_alt_436 = outA;
+      default : c$case_alt_436 = stateSignal[9889:9867];
     endcase
   end
 
   assign c$case_alt_selection_1298 = c$case_alt_selection_1297;
 
-  assign c$i_681 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1297 = $unsigned({{(64-8) {1'b0}},c$i_681});
+  assign c$case_alt_selection_1297 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1298)
-      64'sd80 : c$case_alt_436 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_436 = c$case_alt_517[80];
+      64'sd81 : c$case_alt_437 = outA;
+      default : c$case_alt_437 = stateSignal[9912:9890];
     endcase
   end
 
   assign c$case_alt_selection_1301 = c$case_alt_selection_1300;
 
-  assign c$i_682 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1300 = $unsigned({{(64-8) {1'b0}},c$i_682});
+  assign c$case_alt_selection_1300 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1301)
-      64'sd79 : c$case_alt_437 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_437 = c$case_alt_517[79];
+      64'sd80 : c$case_alt_438 = outA;
+      default : c$case_alt_438 = stateSignal[9935:9913];
     endcase
   end
 
   assign c$case_alt_selection_1304 = c$case_alt_selection_1303;
 
-  assign c$i_683 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1303 = $unsigned({{(64-8) {1'b0}},c$i_683});
+  assign c$case_alt_selection_1303 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1304)
-      64'sd78 : c$case_alt_438 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_438 = c$case_alt_517[78];
+      64'sd79 : c$case_alt_439 = outA;
+      default : c$case_alt_439 = stateSignal[9958:9936];
     endcase
   end
 
   assign c$case_alt_selection_1307 = c$case_alt_selection_1306;
 
-  assign c$i_684 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1306 = $unsigned({{(64-8) {1'b0}},c$i_684});
+  assign c$case_alt_selection_1306 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1307)
-      64'sd77 : c$case_alt_439 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_439 = c$case_alt_517[77];
+      64'sd78 : c$case_alt_440 = outA;
+      default : c$case_alt_440 = stateSignal[9981:9959];
     endcase
   end
 
   assign c$case_alt_selection_1310 = c$case_alt_selection_1309;
 
-  assign c$i_685 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1309 = $unsigned({{(64-8) {1'b0}},c$i_685});
+  assign c$case_alt_selection_1309 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1310)
-      64'sd76 : c$case_alt_440 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_440 = c$case_alt_517[76];
+      64'sd77 : c$case_alt_441 = outA;
+      default : c$case_alt_441 = stateSignal[10004:9982];
     endcase
   end
 
   assign c$case_alt_selection_1313 = c$case_alt_selection_1312;
 
-  assign c$i_686 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1312 = $unsigned({{(64-8) {1'b0}},c$i_686});
+  assign c$case_alt_selection_1312 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1313)
-      64'sd75 : c$case_alt_441 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_441 = c$case_alt_517[75];
+      64'sd76 : c$case_alt_442 = outA;
+      default : c$case_alt_442 = stateSignal[10027:10005];
     endcase
   end
 
   assign c$case_alt_selection_1316 = c$case_alt_selection_1315;
 
-  assign c$i_687 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1315 = $unsigned({{(64-8) {1'b0}},c$i_687});
+  assign c$case_alt_selection_1315 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1316)
-      64'sd74 : c$case_alt_442 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_442 = c$case_alt_517[74];
+      64'sd75 : c$case_alt_443 = outA;
+      default : c$case_alt_443 = stateSignal[10050:10028];
     endcase
   end
 
   assign c$case_alt_selection_1319 = c$case_alt_selection_1318;
 
-  assign c$i_688 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1318 = $unsigned({{(64-8) {1'b0}},c$i_688});
+  assign c$case_alt_selection_1318 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1319)
-      64'sd73 : c$case_alt_443 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_443 = c$case_alt_517[73];
+      64'sd74 : c$case_alt_444 = outA;
+      default : c$case_alt_444 = stateSignal[10073:10051];
     endcase
   end
 
   assign c$case_alt_selection_1322 = c$case_alt_selection_1321;
 
-  assign c$i_689 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1321 = $unsigned({{(64-8) {1'b0}},c$i_689});
+  assign c$case_alt_selection_1321 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1322)
-      64'sd72 : c$case_alt_444 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_444 = c$case_alt_517[72];
+      64'sd73 : c$case_alt_445 = outA;
+      default : c$case_alt_445 = stateSignal[10096:10074];
     endcase
   end
 
   assign c$case_alt_selection_1325 = c$case_alt_selection_1324;
 
-  assign c$i_690 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1324 = $unsigned({{(64-8) {1'b0}},c$i_690});
+  assign c$case_alt_selection_1324 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1325)
-      64'sd71 : c$case_alt_445 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_445 = c$case_alt_517[71];
+      64'sd72 : c$case_alt_446 = outA;
+      default : c$case_alt_446 = stateSignal[10119:10097];
     endcase
   end
 
   assign c$case_alt_selection_1328 = c$case_alt_selection_1327;
 
-  assign c$i_691 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1327 = $unsigned({{(64-8) {1'b0}},c$i_691});
+  assign c$case_alt_selection_1327 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1328)
-      64'sd70 : c$case_alt_446 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_446 = c$case_alt_517[70];
+      64'sd71 : c$case_alt_447 = outA;
+      default : c$case_alt_447 = stateSignal[10142:10120];
     endcase
   end
 
   assign c$case_alt_selection_1331 = c$case_alt_selection_1330;
 
-  assign c$i_692 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1330 = $unsigned({{(64-8) {1'b0}},c$i_692});
+  assign c$case_alt_selection_1330 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1331)
-      64'sd69 : c$case_alt_447 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_447 = c$case_alt_517[69];
+      64'sd70 : c$case_alt_448 = outA;
+      default : c$case_alt_448 = stateSignal[10165:10143];
     endcase
   end
 
   assign c$case_alt_selection_1334 = c$case_alt_selection_1333;
 
-  assign c$i_693 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1333 = $unsigned({{(64-8) {1'b0}},c$i_693});
+  assign c$case_alt_selection_1333 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1334)
-      64'sd68 : c$case_alt_448 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_448 = c$case_alt_517[68];
+      64'sd69 : c$case_alt_449 = outA;
+      default : c$case_alt_449 = stateSignal[10188:10166];
     endcase
   end
 
   assign c$case_alt_selection_1337 = c$case_alt_selection_1336;
 
-  assign c$i_694 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1336 = $unsigned({{(64-8) {1'b0}},c$i_694});
+  assign c$case_alt_selection_1336 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1337)
-      64'sd67 : c$case_alt_449 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_449 = c$case_alt_517[67];
+      64'sd68 : c$case_alt_450 = outA;
+      default : c$case_alt_450 = stateSignal[10211:10189];
     endcase
   end
 
   assign c$case_alt_selection_1340 = c$case_alt_selection_1339;
 
-  assign c$i_695 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1339 = $unsigned({{(64-8) {1'b0}},c$i_695});
+  assign c$case_alt_selection_1339 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1340)
-      64'sd66 : c$case_alt_450 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_450 = c$case_alt_517[66];
+      64'sd67 : c$case_alt_451 = outA;
+      default : c$case_alt_451 = stateSignal[10234:10212];
     endcase
   end
 
   assign c$case_alt_selection_1343 = c$case_alt_selection_1342;
 
-  assign c$i_696 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1342 = $unsigned({{(64-8) {1'b0}},c$i_696});
+  assign c$case_alt_selection_1342 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1343)
-      64'sd65 : c$case_alt_451 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_451 = c$case_alt_517[65];
+      64'sd66 : c$case_alt_452 = outA;
+      default : c$case_alt_452 = stateSignal[10257:10235];
     endcase
   end
 
   assign c$case_alt_selection_1346 = c$case_alt_selection_1345;
 
-  assign c$i_697 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1345 = $unsigned({{(64-8) {1'b0}},c$i_697});
+  assign c$case_alt_selection_1345 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1346)
-      64'sd64 : c$case_alt_452 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_452 = c$case_alt_517[64];
+      64'sd65 : c$case_alt_453 = outA;
+      default : c$case_alt_453 = stateSignal[10280:10258];
     endcase
   end
 
   assign c$case_alt_selection_1349 = c$case_alt_selection_1348;
 
-  assign c$i_698 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1348 = $unsigned({{(64-8) {1'b0}},c$i_698});
+  assign c$case_alt_selection_1348 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1349)
-      64'sd63 : c$case_alt_453 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_453 = c$case_alt_517[63];
+      64'sd64 : c$case_alt_454 = outA;
+      default : c$case_alt_454 = stateSignal[10303:10281];
     endcase
   end
 
   assign c$case_alt_selection_1352 = c$case_alt_selection_1351;
 
-  assign c$i_699 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1351 = $unsigned({{(64-8) {1'b0}},c$i_699});
+  assign c$case_alt_selection_1351 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1352)
-      64'sd62 : c$case_alt_454 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_454 = c$case_alt_517[62];
+      64'sd63 : c$case_alt_455 = outA;
+      default : c$case_alt_455 = stateSignal[10326:10304];
     endcase
   end
 
   assign c$case_alt_selection_1355 = c$case_alt_selection_1354;
 
-  assign c$i_700 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1354 = $unsigned({{(64-8) {1'b0}},c$i_700});
+  assign c$case_alt_selection_1354 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1355)
-      64'sd61 : c$case_alt_455 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_455 = c$case_alt_517[61];
+      64'sd62 : c$case_alt_456 = outA;
+      default : c$case_alt_456 = stateSignal[10349:10327];
     endcase
   end
 
   assign c$case_alt_selection_1358 = c$case_alt_selection_1357;
 
-  assign c$i_701 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1357 = $unsigned({{(64-8) {1'b0}},c$i_701});
+  assign c$case_alt_selection_1357 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1358)
-      64'sd60 : c$case_alt_456 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_456 = c$case_alt_517[60];
+      64'sd61 : c$case_alt_457 = outA;
+      default : c$case_alt_457 = stateSignal[10372:10350];
     endcase
   end
 
   assign c$case_alt_selection_1361 = c$case_alt_selection_1360;
 
-  assign c$i_702 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1360 = $unsigned({{(64-8) {1'b0}},c$i_702});
+  assign c$case_alt_selection_1360 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1361)
-      64'sd59 : c$case_alt_457 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_457 = c$case_alt_517[59];
+      64'sd60 : c$case_alt_458 = outA;
+      default : c$case_alt_458 = stateSignal[10395:10373];
     endcase
   end
 
   assign c$case_alt_selection_1364 = c$case_alt_selection_1363;
 
-  assign c$i_703 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1363 = $unsigned({{(64-8) {1'b0}},c$i_703});
+  assign c$case_alt_selection_1363 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1364)
-      64'sd58 : c$case_alt_458 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_458 = c$case_alt_517[58];
+      64'sd59 : c$case_alt_459 = outA;
+      default : c$case_alt_459 = stateSignal[10418:10396];
     endcase
   end
 
   assign c$case_alt_selection_1367 = c$case_alt_selection_1366;
 
-  assign c$i_704 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1366 = $unsigned({{(64-8) {1'b0}},c$i_704});
+  assign c$case_alt_selection_1366 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1367)
-      64'sd57 : c$case_alt_459 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_459 = c$case_alt_517[57];
+      64'sd58 : c$case_alt_460 = outA;
+      default : c$case_alt_460 = stateSignal[10441:10419];
     endcase
   end
 
   assign c$case_alt_selection_1370 = c$case_alt_selection_1369;
 
-  assign c$i_705 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1369 = $unsigned({{(64-8) {1'b0}},c$i_705});
+  assign c$case_alt_selection_1369 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1370)
-      64'sd56 : c$case_alt_460 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_460 = c$case_alt_517[56];
+      64'sd57 : c$case_alt_461 = outA;
+      default : c$case_alt_461 = stateSignal[10464:10442];
     endcase
   end
 
   assign c$case_alt_selection_1373 = c$case_alt_selection_1372;
 
-  assign c$i_706 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1372 = $unsigned({{(64-8) {1'b0}},c$i_706});
+  assign c$case_alt_selection_1372 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1373)
-      64'sd55 : c$case_alt_461 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_461 = c$case_alt_517[55];
+      64'sd56 : c$case_alt_462 = outA;
+      default : c$case_alt_462 = stateSignal[10487:10465];
     endcase
   end
 
   assign c$case_alt_selection_1376 = c$case_alt_selection_1375;
 
-  assign c$i_707 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1375 = $unsigned({{(64-8) {1'b0}},c$i_707});
+  assign c$case_alt_selection_1375 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1376)
-      64'sd54 : c$case_alt_462 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_462 = c$case_alt_517[54];
+      64'sd55 : c$case_alt_463 = outA;
+      default : c$case_alt_463 = stateSignal[10510:10488];
     endcase
   end
 
   assign c$case_alt_selection_1379 = c$case_alt_selection_1378;
 
-  assign c$i_708 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1378 = $unsigned({{(64-8) {1'b0}},c$i_708});
+  assign c$case_alt_selection_1378 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1379)
-      64'sd53 : c$case_alt_463 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_463 = c$case_alt_517[53];
+      64'sd54 : c$case_alt_464 = outA;
+      default : c$case_alt_464 = stateSignal[10533:10511];
     endcase
   end
 
   assign c$case_alt_selection_1382 = c$case_alt_selection_1381;
 
-  assign c$i_709 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1381 = $unsigned({{(64-8) {1'b0}},c$i_709});
+  assign c$case_alt_selection_1381 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1382)
-      64'sd52 : c$case_alt_464 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_464 = c$case_alt_517[52];
+      64'sd53 : c$case_alt_465 = outA;
+      default : c$case_alt_465 = stateSignal[10556:10534];
     endcase
   end
 
   assign c$case_alt_selection_1385 = c$case_alt_selection_1384;
 
-  assign c$i_710 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1384 = $unsigned({{(64-8) {1'b0}},c$i_710});
+  assign c$case_alt_selection_1384 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1385)
-      64'sd51 : c$case_alt_465 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_465 = c$case_alt_517[51];
+      64'sd52 : c$case_alt_466 = outA;
+      default : c$case_alt_466 = stateSignal[10579:10557];
     endcase
   end
 
   assign c$case_alt_selection_1388 = c$case_alt_selection_1387;
 
-  assign c$i_711 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1387 = $unsigned({{(64-8) {1'b0}},c$i_711});
+  assign c$case_alt_selection_1387 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1388)
-      64'sd50 : c$case_alt_466 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_466 = c$case_alt_517[50];
+      64'sd51 : c$case_alt_467 = outA;
+      default : c$case_alt_467 = stateSignal[10602:10580];
     endcase
   end
 
   assign c$case_alt_selection_1391 = c$case_alt_selection_1390;
 
-  assign c$i_712 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1390 = $unsigned({{(64-8) {1'b0}},c$i_712});
+  assign c$case_alt_selection_1390 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1391)
-      64'sd49 : c$case_alt_467 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_467 = c$case_alt_517[49];
+      64'sd50 : c$case_alt_468 = outA;
+      default : c$case_alt_468 = stateSignal[10625:10603];
     endcase
   end
 
   assign c$case_alt_selection_1394 = c$case_alt_selection_1393;
 
-  assign c$i_713 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1393 = $unsigned({{(64-8) {1'b0}},c$i_713});
+  assign c$case_alt_selection_1393 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1394)
-      64'sd48 : c$case_alt_468 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_468 = c$case_alt_517[48];
+      64'sd49 : c$case_alt_469 = outA;
+      default : c$case_alt_469 = stateSignal[10648:10626];
     endcase
   end
 
   assign c$case_alt_selection_1397 = c$case_alt_selection_1396;
 
-  assign c$i_714 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1396 = $unsigned({{(64-8) {1'b0}},c$i_714});
+  assign c$case_alt_selection_1396 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1397)
-      64'sd47 : c$case_alt_469 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_469 = c$case_alt_517[47];
+      64'sd48 : c$case_alt_470 = outA;
+      default : c$case_alt_470 = stateSignal[10671:10649];
     endcase
   end
 
   assign c$case_alt_selection_1400 = c$case_alt_selection_1399;
 
-  assign c$i_715 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1399 = $unsigned({{(64-8) {1'b0}},c$i_715});
+  assign c$case_alt_selection_1399 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1400)
-      64'sd46 : c$case_alt_470 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_470 = c$case_alt_517[46];
+      64'sd47 : c$case_alt_471 = outA;
+      default : c$case_alt_471 = stateSignal[10694:10672];
     endcase
   end
 
   assign c$case_alt_selection_1403 = c$case_alt_selection_1402;
 
-  assign c$i_716 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1402 = $unsigned({{(64-8) {1'b0}},c$i_716});
+  assign c$case_alt_selection_1402 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1403)
-      64'sd45 : c$case_alt_471 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_471 = c$case_alt_517[45];
+      64'sd46 : c$case_alt_472 = outA;
+      default : c$case_alt_472 = stateSignal[10717:10695];
     endcase
   end
 
   assign c$case_alt_selection_1406 = c$case_alt_selection_1405;
 
-  assign c$i_717 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1405 = $unsigned({{(64-8) {1'b0}},c$i_717});
+  assign c$case_alt_selection_1405 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1406)
-      64'sd44 : c$case_alt_472 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_472 = c$case_alt_517[44];
+      64'sd45 : c$case_alt_473 = outA;
+      default : c$case_alt_473 = stateSignal[10740:10718];
     endcase
   end
 
   assign c$case_alt_selection_1409 = c$case_alt_selection_1408;
 
-  assign c$i_718 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1408 = $unsigned({{(64-8) {1'b0}},c$i_718});
+  assign c$case_alt_selection_1408 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1409)
-      64'sd43 : c$case_alt_473 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_473 = c$case_alt_517[43];
+      64'sd44 : c$case_alt_474 = outA;
+      default : c$case_alt_474 = stateSignal[10763:10741];
     endcase
   end
 
   assign c$case_alt_selection_1412 = c$case_alt_selection_1411;
 
-  assign c$i_719 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1411 = $unsigned({{(64-8) {1'b0}},c$i_719});
+  assign c$case_alt_selection_1411 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1412)
-      64'sd42 : c$case_alt_474 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_474 = c$case_alt_517[42];
+      64'sd43 : c$case_alt_475 = outA;
+      default : c$case_alt_475 = stateSignal[10786:10764];
     endcase
   end
 
   assign c$case_alt_selection_1415 = c$case_alt_selection_1414;
 
-  assign c$i_720 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1414 = $unsigned({{(64-8) {1'b0}},c$i_720});
+  assign c$case_alt_selection_1414 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1415)
-      64'sd41 : c$case_alt_475 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_475 = c$case_alt_517[41];
+      64'sd42 : c$case_alt_476 = outA;
+      default : c$case_alt_476 = stateSignal[10809:10787];
     endcase
   end
 
   assign c$case_alt_selection_1418 = c$case_alt_selection_1417;
 
-  assign c$i_721 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1417 = $unsigned({{(64-8) {1'b0}},c$i_721});
+  assign c$case_alt_selection_1417 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1418)
-      64'sd40 : c$case_alt_476 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_476 = c$case_alt_517[40];
+      64'sd41 : c$case_alt_477 = outA;
+      default : c$case_alt_477 = stateSignal[10832:10810];
     endcase
   end
 
   assign c$case_alt_selection_1421 = c$case_alt_selection_1420;
 
-  assign c$i_722 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1420 = $unsigned({{(64-8) {1'b0}},c$i_722});
+  assign c$case_alt_selection_1420 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1421)
-      64'sd39 : c$case_alt_477 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_477 = c$case_alt_517[39];
+      64'sd40 : c$case_alt_478 = outA;
+      default : c$case_alt_478 = stateSignal[10855:10833];
     endcase
   end
 
   assign c$case_alt_selection_1424 = c$case_alt_selection_1423;
 
-  assign c$i_723 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1423 = $unsigned({{(64-8) {1'b0}},c$i_723});
+  assign c$case_alt_selection_1423 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1424)
-      64'sd38 : c$case_alt_478 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_478 = c$case_alt_517[38];
+      64'sd39 : c$case_alt_479 = outA;
+      default : c$case_alt_479 = stateSignal[10878:10856];
     endcase
   end
 
   assign c$case_alt_selection_1427 = c$case_alt_selection_1426;
 
-  assign c$i_724 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1426 = $unsigned({{(64-8) {1'b0}},c$i_724});
+  assign c$case_alt_selection_1426 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1427)
-      64'sd37 : c$case_alt_479 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_479 = c$case_alt_517[37];
+      64'sd38 : c$case_alt_480 = outA;
+      default : c$case_alt_480 = stateSignal[10901:10879];
     endcase
   end
 
   assign c$case_alt_selection_1430 = c$case_alt_selection_1429;
 
-  assign c$i_725 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1429 = $unsigned({{(64-8) {1'b0}},c$i_725});
+  assign c$case_alt_selection_1429 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1430)
-      64'sd36 : c$case_alt_480 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_480 = c$case_alt_517[36];
+      64'sd37 : c$case_alt_481 = outA;
+      default : c$case_alt_481 = stateSignal[10924:10902];
     endcase
   end
 
   assign c$case_alt_selection_1433 = c$case_alt_selection_1432;
 
-  assign c$i_726 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1432 = $unsigned({{(64-8) {1'b0}},c$i_726});
+  assign c$case_alt_selection_1432 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1433)
-      64'sd35 : c$case_alt_481 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_481 = c$case_alt_517[35];
+      64'sd36 : c$case_alt_482 = outA;
+      default : c$case_alt_482 = stateSignal[10947:10925];
     endcase
   end
 
   assign c$case_alt_selection_1436 = c$case_alt_selection_1435;
 
-  assign c$i_727 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1435 = $unsigned({{(64-8) {1'b0}},c$i_727});
+  assign c$case_alt_selection_1435 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1436)
-      64'sd34 : c$case_alt_482 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_482 = c$case_alt_517[34];
+      64'sd35 : c$case_alt_483 = outA;
+      default : c$case_alt_483 = stateSignal[10970:10948];
     endcase
   end
 
   assign c$case_alt_selection_1439 = c$case_alt_selection_1438;
 
-  assign c$i_728 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1438 = $unsigned({{(64-8) {1'b0}},c$i_728});
+  assign c$case_alt_selection_1438 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1439)
-      64'sd33 : c$case_alt_483 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_483 = c$case_alt_517[33];
+      64'sd34 : c$case_alt_484 = outA;
+      default : c$case_alt_484 = stateSignal[10993:10971];
     endcase
   end
 
   assign c$case_alt_selection_1442 = c$case_alt_selection_1441;
 
-  assign c$i_729 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1441 = $unsigned({{(64-8) {1'b0}},c$i_729});
+  assign c$case_alt_selection_1441 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1442)
-      64'sd32 : c$case_alt_484 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_484 = c$case_alt_517[32];
+      64'sd33 : c$case_alt_485 = outA;
+      default : c$case_alt_485 = stateSignal[11016:10994];
     endcase
   end
 
   assign c$case_alt_selection_1445 = c$case_alt_selection_1444;
 
-  assign c$i_730 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1444 = $unsigned({{(64-8) {1'b0}},c$i_730});
+  assign c$case_alt_selection_1444 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1445)
-      64'sd31 : c$case_alt_485 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_485 = c$case_alt_517[31];
+      64'sd32 : c$case_alt_486 = outA;
+      default : c$case_alt_486 = stateSignal[11039:11017];
     endcase
   end
 
   assign c$case_alt_selection_1448 = c$case_alt_selection_1447;
 
-  assign c$i_731 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1447 = $unsigned({{(64-8) {1'b0}},c$i_731});
+  assign c$case_alt_selection_1447 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1448)
-      64'sd30 : c$case_alt_486 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_486 = c$case_alt_517[30];
+      64'sd31 : c$case_alt_487 = outA;
+      default : c$case_alt_487 = stateSignal[11062:11040];
     endcase
   end
 
   assign c$case_alt_selection_1451 = c$case_alt_selection_1450;
 
-  assign c$i_732 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1450 = $unsigned({{(64-8) {1'b0}},c$i_732});
+  assign c$case_alt_selection_1450 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1451)
-      64'sd29 : c$case_alt_487 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_487 = c$case_alt_517[29];
+      64'sd30 : c$case_alt_488 = outA;
+      default : c$case_alt_488 = stateSignal[11085:11063];
     endcase
   end
 
   assign c$case_alt_selection_1454 = c$case_alt_selection_1453;
 
-  assign c$i_733 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1453 = $unsigned({{(64-8) {1'b0}},c$i_733});
+  assign c$case_alt_selection_1453 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1454)
-      64'sd28 : c$case_alt_488 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_488 = c$case_alt_517[28];
+      64'sd29 : c$case_alt_489 = outA;
+      default : c$case_alt_489 = stateSignal[11108:11086];
     endcase
   end
 
   assign c$case_alt_selection_1457 = c$case_alt_selection_1456;
 
-  assign c$i_734 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1456 = $unsigned({{(64-8) {1'b0}},c$i_734});
+  assign c$case_alt_selection_1456 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1457)
-      64'sd27 : c$case_alt_489 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_489 = c$case_alt_517[27];
+      64'sd28 : c$case_alt_490 = outA;
+      default : c$case_alt_490 = stateSignal[11131:11109];
     endcase
   end
 
   assign c$case_alt_selection_1460 = c$case_alt_selection_1459;
 
-  assign c$i_735 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1459 = $unsigned({{(64-8) {1'b0}},c$i_735});
+  assign c$case_alt_selection_1459 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1460)
-      64'sd26 : c$case_alt_490 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_490 = c$case_alt_517[26];
+      64'sd27 : c$case_alt_491 = outA;
+      default : c$case_alt_491 = stateSignal[11154:11132];
     endcase
   end
 
   assign c$case_alt_selection_1463 = c$case_alt_selection_1462;
 
-  assign c$i_736 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1462 = $unsigned({{(64-8) {1'b0}},c$i_736});
+  assign c$case_alt_selection_1462 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1463)
-      64'sd25 : c$case_alt_491 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_491 = c$case_alt_517[25];
+      64'sd26 : c$case_alt_492 = outA;
+      default : c$case_alt_492 = stateSignal[11177:11155];
     endcase
   end
 
   assign c$case_alt_selection_1466 = c$case_alt_selection_1465;
 
-  assign c$i_737 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1465 = $unsigned({{(64-8) {1'b0}},c$i_737});
+  assign c$case_alt_selection_1465 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1466)
-      64'sd24 : c$case_alt_492 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_492 = c$case_alt_517[24];
+      64'sd25 : c$case_alt_493 = outA;
+      default : c$case_alt_493 = stateSignal[11200:11178];
     endcase
   end
 
   assign c$case_alt_selection_1469 = c$case_alt_selection_1468;
 
-  assign c$i_738 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1468 = $unsigned({{(64-8) {1'b0}},c$i_738});
+  assign c$case_alt_selection_1468 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1469)
-      64'sd23 : c$case_alt_493 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_493 = c$case_alt_517[23];
+      64'sd24 : c$case_alt_494 = outA;
+      default : c$case_alt_494 = stateSignal[11223:11201];
     endcase
   end
 
   assign c$case_alt_selection_1472 = c$case_alt_selection_1471;
 
-  assign c$i_739 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1471 = $unsigned({{(64-8) {1'b0}},c$i_739});
+  assign c$case_alt_selection_1471 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1472)
-      64'sd22 : c$case_alt_494 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_494 = c$case_alt_517[22];
+      64'sd23 : c$case_alt_495 = outA;
+      default : c$case_alt_495 = stateSignal[11246:11224];
     endcase
   end
 
   assign c$case_alt_selection_1475 = c$case_alt_selection_1474;
 
-  assign c$i_740 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1474 = $unsigned({{(64-8) {1'b0}},c$i_740});
+  assign c$case_alt_selection_1474 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1475)
-      64'sd21 : c$case_alt_495 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_495 = c$case_alt_517[21];
+      64'sd22 : c$case_alt_496 = outA;
+      default : c$case_alt_496 = stateSignal[11269:11247];
     endcase
   end
 
   assign c$case_alt_selection_1478 = c$case_alt_selection_1477;
 
-  assign c$i_741 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1477 = $unsigned({{(64-8) {1'b0}},c$i_741});
+  assign c$case_alt_selection_1477 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1478)
-      64'sd20 : c$case_alt_496 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_496 = c$case_alt_517[20];
+      64'sd21 : c$case_alt_497 = outA;
+      default : c$case_alt_497 = stateSignal[11292:11270];
     endcase
   end
 
   assign c$case_alt_selection_1481 = c$case_alt_selection_1480;
 
-  assign c$i_742 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1480 = $unsigned({{(64-8) {1'b0}},c$i_742});
+  assign c$case_alt_selection_1480 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1481)
-      64'sd19 : c$case_alt_497 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_497 = c$case_alt_517[19];
+      64'sd20 : c$case_alt_498 = outA;
+      default : c$case_alt_498 = stateSignal[11315:11293];
     endcase
   end
 
   assign c$case_alt_selection_1484 = c$case_alt_selection_1483;
 
-  assign c$i_743 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1483 = $unsigned({{(64-8) {1'b0}},c$i_743});
+  assign c$case_alt_selection_1483 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1484)
-      64'sd18 : c$case_alt_498 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_498 = c$case_alt_517[18];
+      64'sd19 : c$case_alt_499 = outA;
+      default : c$case_alt_499 = stateSignal[11338:11316];
     endcase
   end
 
   assign c$case_alt_selection_1487 = c$case_alt_selection_1486;
 
-  assign c$i_744 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1486 = $unsigned({{(64-8) {1'b0}},c$i_744});
+  assign c$case_alt_selection_1486 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1487)
-      64'sd17 : c$case_alt_499 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_499 = c$case_alt_517[17];
+      64'sd18 : c$case_alt_500 = outA;
+      default : c$case_alt_500 = stateSignal[11361:11339];
     endcase
   end
 
   assign c$case_alt_selection_1490 = c$case_alt_selection_1489;
 
-  assign c$i_745 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1489 = $unsigned({{(64-8) {1'b0}},c$i_745});
+  assign c$case_alt_selection_1489 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1490)
-      64'sd16 : c$case_alt_500 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_500 = c$case_alt_517[16];
+      64'sd17 : c$case_alt_501 = outA;
+      default : c$case_alt_501 = stateSignal[11384:11362];
     endcase
   end
 
   assign c$case_alt_selection_1493 = c$case_alt_selection_1492;
 
-  assign c$i_746 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1492 = $unsigned({{(64-8) {1'b0}},c$i_746});
+  assign c$case_alt_selection_1492 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1493)
-      64'sd15 : c$case_alt_501 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_501 = c$case_alt_517[15];
+      64'sd16 : c$case_alt_502 = outA;
+      default : c$case_alt_502 = stateSignal[11407:11385];
     endcase
   end
 
   assign c$case_alt_selection_1496 = c$case_alt_selection_1495;
 
-  assign c$i_747 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1495 = $unsigned({{(64-8) {1'b0}},c$i_747});
+  assign c$case_alt_selection_1495 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1496)
-      64'sd14 : c$case_alt_502 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_502 = c$case_alt_517[14];
+      64'sd15 : c$case_alt_503 = outA;
+      default : c$case_alt_503 = stateSignal[11430:11408];
     endcase
   end
 
   assign c$case_alt_selection_1499 = c$case_alt_selection_1498;
 
-  assign c$i_748 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1498 = $unsigned({{(64-8) {1'b0}},c$i_748});
+  assign c$case_alt_selection_1498 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1499)
-      64'sd13 : c$case_alt_503 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_503 = c$case_alt_517[13];
+      64'sd14 : c$case_alt_504 = outA;
+      default : c$case_alt_504 = stateSignal[11453:11431];
     endcase
   end
 
   assign c$case_alt_selection_1502 = c$case_alt_selection_1501;
 
-  assign c$i_749 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1501 = $unsigned({{(64-8) {1'b0}},c$i_749});
+  assign c$case_alt_selection_1501 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1502)
-      64'sd12 : c$case_alt_504 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_504 = c$case_alt_517[12];
+      64'sd13 : c$case_alt_505 = outA;
+      default : c$case_alt_505 = stateSignal[11476:11454];
     endcase
   end
 
   assign c$case_alt_selection_1505 = c$case_alt_selection_1504;
 
-  assign c$i_750 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1504 = $unsigned({{(64-8) {1'b0}},c$i_750});
+  assign c$case_alt_selection_1504 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1505)
-      64'sd11 : c$case_alt_505 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_505 = c$case_alt_517[11];
+      64'sd12 : c$case_alt_506 = outA;
+      default : c$case_alt_506 = stateSignal[11499:11477];
     endcase
   end
 
   assign c$case_alt_selection_1508 = c$case_alt_selection_1507;
 
-  assign c$i_751 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1507 = $unsigned({{(64-8) {1'b0}},c$i_751});
+  assign c$case_alt_selection_1507 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1508)
-      64'sd10 : c$case_alt_506 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_506 = c$case_alt_517[10];
+      64'sd11 : c$case_alt_507 = outA;
+      default : c$case_alt_507 = stateSignal[11522:11500];
     endcase
   end
 
   assign c$case_alt_selection_1511 = c$case_alt_selection_1510;
 
-  assign c$i_752 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1510 = $unsigned({{(64-8) {1'b0}},c$i_752});
+  assign c$case_alt_selection_1510 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1511)
-      64'sd9 : c$case_alt_507 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_507 = c$case_alt_517[9];
+      64'sd10 : c$case_alt_508 = outA;
+      default : c$case_alt_508 = stateSignal[11545:11523];
     endcase
   end
 
   assign c$case_alt_selection_1514 = c$case_alt_selection_1513;
 
-  assign c$i_753 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1513 = $unsigned({{(64-8) {1'b0}},c$i_753});
+  assign c$case_alt_selection_1513 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1514)
-      64'sd8 : c$case_alt_508 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_508 = c$case_alt_517[8];
+      64'sd9 : c$case_alt_509 = outA;
+      default : c$case_alt_509 = stateSignal[11568:11546];
     endcase
   end
 
   assign c$case_alt_selection_1517 = c$case_alt_selection_1516;
 
-  assign c$i_754 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1516 = $unsigned({{(64-8) {1'b0}},c$i_754});
+  assign c$case_alt_selection_1516 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1517)
-      64'sd7 : c$case_alt_509 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_509 = c$case_alt_517[7];
+      64'sd8 : c$case_alt_510 = outA;
+      default : c$case_alt_510 = stateSignal[11591:11569];
     endcase
   end
 
   assign c$case_alt_selection_1520 = c$case_alt_selection_1519;
 
-  assign c$i_755 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1519 = $unsigned({{(64-8) {1'b0}},c$i_755});
+  assign c$case_alt_selection_1519 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1520)
-      64'sd6 : c$case_alt_510 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_510 = c$case_alt_517[6];
+      64'sd7 : c$case_alt_511 = outA;
+      default : c$case_alt_511 = stateSignal[11614:11592];
     endcase
   end
 
   assign c$case_alt_selection_1523 = c$case_alt_selection_1522;
 
-  assign c$i_756 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1522 = $unsigned({{(64-8) {1'b0}},c$i_756});
+  assign c$case_alt_selection_1522 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1523)
-      64'sd5 : c$case_alt_511 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_511 = c$case_alt_517[5];
+      64'sd6 : c$case_alt_512 = outA;
+      default : c$case_alt_512 = stateSignal[11637:11615];
     endcase
   end
 
   assign c$case_alt_selection_1526 = c$case_alt_selection_1525;
 
-  assign c$i_757 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1525 = $unsigned({{(64-8) {1'b0}},c$i_757});
+  assign c$case_alt_selection_1525 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1526)
-      64'sd4 : c$case_alt_512 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_512 = c$case_alt_517[4];
+      64'sd5 : c$case_alt_513 = outA;
+      default : c$case_alt_513 = stateSignal[11660:11638];
     endcase
   end
 
   assign c$case_alt_selection_1529 = c$case_alt_selection_1528;
 
-  assign c$i_758 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1528 = $unsigned({{(64-8) {1'b0}},c$i_758});
+  assign c$case_alt_selection_1528 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1529)
-      64'sd3 : c$case_alt_513 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_513 = c$case_alt_517[3];
+      64'sd4 : c$case_alt_514 = outA;
+      default : c$case_alt_514 = stateSignal[11683:11661];
     endcase
   end
 
   assign c$case_alt_selection_1532 = c$case_alt_selection_1531;
 
-  assign c$i_759 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1531 = $unsigned({{(64-8) {1'b0}},c$i_759});
+  assign c$case_alt_selection_1531 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1532)
-      64'sd2 : c$case_alt_514 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_514 = c$case_alt_517[2];
+      64'sd3 : c$case_alt_515 = outA;
+      default : c$case_alt_515 = stateSignal[11706:11684];
     endcase
   end
 
   assign c$case_alt_selection_1535 = c$case_alt_selection_1534;
 
-  assign c$i_760 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1534 = $unsigned({{(64-8) {1'b0}},c$i_760});
+  assign c$case_alt_selection_1534 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1535)
-      64'sd1 : c$case_alt_515 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_515 = c$case_alt_517[1];
+      64'sd2 : c$case_alt_516 = outA;
+      default : c$case_alt_516 = stateSignal[11729:11707];
     endcase
   end
 
   assign c$case_alt_selection_1538 = c$case_alt_selection_1537;
 
-  assign c$i_761 = response_0.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1537 = $unsigned({{(64-8) {1'b0}},c$i_761});
+  assign c$case_alt_selection_1537 = $unsigned({{(64-8) {1'b0}},aIndex});
 
   always_comb begin
     case(c$case_alt_selection_1538)
-      64'sd0 : c$case_alt_516 = response_0.ButterflyResponse_sel2;
-      default : c$case_alt_516 = c$case_alt_517[0];
+      64'sd1 : c$case_alt_517 = outA;
+      default : c$case_alt_517 = stateSignal[11752:11730];
     endcase
   end
 
-  assign response_0 = {aIndex_4
-                      ,bIndex_4
-                      ,outA_1
-                      ,outB_1
-                      ,lastGroup_1};
+  assign c$case_alt_selection_1541 = c$case_alt_selection_1540;
 
-  assign c$case_alt_517 = valid_5 ? c$case_alt_518 : c$case_alt_775;
+  assign c$case_alt_selection_1540 = $unsigned({{(64-8) {1'b0}},aIndex});
 
-  assign valid_5 = metaReg3_0.Tuple4_sel0;
-
-  assign c$i_762 = response_1.ButterflyResponse_sel1;
-
-  // replaceVec start
-  always_comb begin
-    c$case_alt_518 = '{0: c$case_alt_774
-   ,1: c$case_alt_773
-   ,2: c$case_alt_772
-   ,3: c$case_alt_771
-   ,4: c$case_alt_770
-   ,5: c$case_alt_769
-   ,6: c$case_alt_768
-   ,7: c$case_alt_767
-   ,8: c$case_alt_766
-   ,9: c$case_alt_765
-   ,10: c$case_alt_764
-   ,11: c$case_alt_763
-   ,12: c$case_alt_762
-   ,13: c$case_alt_761
-   ,14: c$case_alt_760
-   ,15: c$case_alt_759
-   ,16: c$case_alt_758
-   ,17: c$case_alt_757
-   ,18: c$case_alt_756
-   ,19: c$case_alt_755
-   ,20: c$case_alt_754
-   ,21: c$case_alt_753
-   ,22: c$case_alt_752
-   ,23: c$case_alt_751
-   ,24: c$case_alt_750
-   ,25: c$case_alt_749
-   ,26: c$case_alt_748
-   ,27: c$case_alt_747
-   ,28: c$case_alt_746
-   ,29: c$case_alt_745
-   ,30: c$case_alt_744
-   ,31: c$case_alt_743
-   ,32: c$case_alt_742
-   ,33: c$case_alt_741
-   ,34: c$case_alt_740
-   ,35: c$case_alt_739
-   ,36: c$case_alt_738
-   ,37: c$case_alt_737
-   ,38: c$case_alt_736
-   ,39: c$case_alt_735
-   ,40: c$case_alt_734
-   ,41: c$case_alt_733
-   ,42: c$case_alt_732
-   ,43: c$case_alt_731
-   ,44: c$case_alt_730
-   ,45: c$case_alt_729
-   ,46: c$case_alt_728
-   ,47: c$case_alt_727
-   ,48: c$case_alt_726
-   ,49: c$case_alt_725
-   ,50: c$case_alt_724
-   ,51: c$case_alt_723
-   ,52: c$case_alt_722
-   ,53: c$case_alt_721
-   ,54: c$case_alt_720
-   ,55: c$case_alt_719
-   ,56: c$case_alt_718
-   ,57: c$case_alt_717
-   ,58: c$case_alt_716
-   ,59: c$case_alt_715
-   ,60: c$case_alt_714
-   ,61: c$case_alt_713
-   ,62: c$case_alt_712
-   ,63: c$case_alt_711
-   ,64: c$case_alt_710
-   ,65: c$case_alt_709
-   ,66: c$case_alt_708
-   ,67: c$case_alt_707
-   ,68: c$case_alt_706
-   ,69: c$case_alt_705
-   ,70: c$case_alt_704
-   ,71: c$case_alt_703
-   ,72: c$case_alt_702
-   ,73: c$case_alt_701
-   ,74: c$case_alt_700
-   ,75: c$case_alt_699
-   ,76: c$case_alt_698
-   ,77: c$case_alt_697
-   ,78: c$case_alt_696
-   ,79: c$case_alt_695
-   ,80: c$case_alt_694
-   ,81: c$case_alt_693
-   ,82: c$case_alt_692
-   ,83: c$case_alt_691
-   ,84: c$case_alt_690
-   ,85: c$case_alt_689
-   ,86: c$case_alt_688
-   ,87: c$case_alt_687
-   ,88: c$case_alt_686
-   ,89: c$case_alt_685
-   ,90: c$case_alt_684
-   ,91: c$case_alt_683
-   ,92: c$case_alt_682
-   ,93: c$case_alt_681
-   ,94: c$case_alt_680
-   ,95: c$case_alt_679
-   ,96: c$case_alt_678
-   ,97: c$case_alt_677
-   ,98: c$case_alt_676
-   ,99: c$case_alt_675
-   ,100: c$case_alt_674
-   ,101: c$case_alt_673
-   ,102: c$case_alt_672
-   ,103: c$case_alt_671
-   ,104: c$case_alt_670
-   ,105: c$case_alt_669
-   ,106: c$case_alt_668
-   ,107: c$case_alt_667
-   ,108: c$case_alt_666
-   ,109: c$case_alt_665
-   ,110: c$case_alt_664
-   ,111: c$case_alt_663
-   ,112: c$case_alt_662
-   ,113: c$case_alt_661
-   ,114: c$case_alt_660
-   ,115: c$case_alt_659
-   ,116: c$case_alt_658
-   ,117: c$case_alt_657
-   ,118: c$case_alt_656
-   ,119: c$case_alt_655
-   ,120: c$case_alt_654
-   ,121: c$case_alt_653
-   ,122: c$case_alt_652
-   ,123: c$case_alt_651
-   ,124: c$case_alt_650
-   ,125: c$case_alt_649
-   ,126: c$case_alt_648
-   ,127: c$case_alt_647
-   ,128: c$case_alt_646
-   ,129: c$case_alt_645
-   ,130: c$case_alt_644
-   ,131: c$case_alt_643
-   ,132: c$case_alt_642
-   ,133: c$case_alt_641
-   ,134: c$case_alt_640
-   ,135: c$case_alt_639
-   ,136: c$case_alt_638
-   ,137: c$case_alt_637
-   ,138: c$case_alt_636
-   ,139: c$case_alt_635
-   ,140: c$case_alt_634
-   ,141: c$case_alt_633
-   ,142: c$case_alt_632
-   ,143: c$case_alt_631
-   ,144: c$case_alt_630
-   ,145: c$case_alt_629
-   ,146: c$case_alt_628
-   ,147: c$case_alt_627
-   ,148: c$case_alt_626
-   ,149: c$case_alt_625
-   ,150: c$case_alt_624
-   ,151: c$case_alt_623
-   ,152: c$case_alt_622
-   ,153: c$case_alt_621
-   ,154: c$case_alt_620
-   ,155: c$case_alt_619
-   ,156: c$case_alt_618
-   ,157: c$case_alt_617
-   ,158: c$case_alt_616
-   ,159: c$case_alt_615
-   ,160: c$case_alt_614
-   ,161: c$case_alt_613
-   ,162: c$case_alt_612
-   ,163: c$case_alt_611
-   ,164: c$case_alt_610
-   ,165: c$case_alt_609
-   ,166: c$case_alt_608
-   ,167: c$case_alt_607
-   ,168: c$case_alt_606
-   ,169: c$case_alt_605
-   ,170: c$case_alt_604
-   ,171: c$case_alt_603
-   ,172: c$case_alt_602
-   ,173: c$case_alt_601
-   ,174: c$case_alt_600
-   ,175: c$case_alt_599
-   ,176: c$case_alt_598
-   ,177: c$case_alt_597
-   ,178: c$case_alt_596
-   ,179: c$case_alt_595
-   ,180: c$case_alt_594
-   ,181: c$case_alt_593
-   ,182: c$case_alt_592
-   ,183: c$case_alt_591
-   ,184: c$case_alt_590
-   ,185: c$case_alt_589
-   ,186: c$case_alt_588
-   ,187: c$case_alt_587
-   ,188: c$case_alt_586
-   ,189: c$case_alt_585
-   ,190: c$case_alt_584
-   ,191: c$case_alt_583
-   ,192: c$case_alt_582
-   ,193: c$case_alt_581
-   ,194: c$case_alt_580
-   ,195: c$case_alt_579
-   ,196: c$case_alt_578
-   ,197: c$case_alt_577
-   ,198: c$case_alt_576
-   ,199: c$case_alt_575
-   ,200: c$case_alt_574
-   ,201: c$case_alt_573
-   ,202: c$case_alt_572
-   ,203: c$case_alt_571
-   ,204: c$case_alt_570
-   ,205: c$case_alt_569
-   ,206: c$case_alt_568
-   ,207: c$case_alt_567
-   ,208: c$case_alt_566
-   ,209: c$case_alt_565
-   ,210: c$case_alt_564
-   ,211: c$case_alt_563
-   ,212: c$case_alt_562
-   ,213: c$case_alt_561
-   ,214: c$case_alt_560
-   ,215: c$case_alt_559
-   ,216: c$case_alt_558
-   ,217: c$case_alt_557
-   ,218: c$case_alt_556
-   ,219: c$case_alt_555
-   ,220: c$case_alt_554
-   ,221: c$case_alt_553
-   ,222: c$case_alt_552
-   ,223: c$case_alt_551
-   ,224: c$case_alt_550
-   ,225: c$case_alt_549
-   ,226: c$case_alt_548
-   ,227: c$case_alt_547
-   ,228: c$case_alt_546
-   ,229: c$case_alt_545
-   ,230: c$case_alt_544
-   ,231: c$case_alt_543
-   ,232: c$case_alt_542
-   ,233: c$case_alt_541
-   ,234: c$case_alt_540
-   ,235: c$case_alt_539
-   ,236: c$case_alt_538
-   ,237: c$case_alt_537
-   ,238: c$case_alt_536
-   ,239: c$case_alt_535
-   ,240: c$case_alt_534
-   ,241: c$case_alt_533
-   ,242: c$case_alt_532
-   ,243: c$case_alt_531
-   ,244: c$case_alt_530
-   ,245: c$case_alt_529
-   ,246: c$case_alt_528
-   ,247: c$case_alt_527
-   ,248: c$case_alt_526
-   ,249: c$case_alt_525
-   ,250: c$case_alt_524
-   ,251: c$case_alt_523
-   ,252: c$case_alt_522
-   ,253: c$case_alt_521
-   ,254: c$case_alt_520
-   ,255: c$case_alt_519};
-    c$case_alt_518[($unsigned({{(64-8) {1'b0}},c$i_762}))] = response_1.ButterflyResponse_sel3;
-  end
-  // replaceVec end
-
-  assign c$case_alt_selection_1542 = c$case_alt_selection_1541;
-
-  assign c$i_763 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1541 = $unsigned({{(64-8) {1'b0}},c$i_763});
-
-  always_comb begin
-    case(c$case_alt_selection_1542)
-      64'sd255 : c$case_alt_519 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_519 = c$case_alt_775[255];
-    endcase
-  end
-
-  assign c$case_alt_selection_1545 = c$case_alt_selection_1544;
-
-  assign c$i_764 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1544 = $unsigned({{(64-8) {1'b0}},c$i_764});
-
-  always_comb begin
-    case(c$case_alt_selection_1545)
-      64'sd254 : c$case_alt_520 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_520 = c$case_alt_775[254];
-    endcase
-  end
-
-  assign c$case_alt_selection_1548 = c$case_alt_selection_1547;
-
-  assign c$i_765 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1547 = $unsigned({{(64-8) {1'b0}},c$i_765});
-
-  always_comb begin
-    case(c$case_alt_selection_1548)
-      64'sd253 : c$case_alt_521 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_521 = c$case_alt_775[253];
-    endcase
-  end
-
-  assign c$case_alt_selection_1551 = c$case_alt_selection_1550;
-
-  assign c$i_766 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1550 = $unsigned({{(64-8) {1'b0}},c$i_766});
-
-  always_comb begin
-    case(c$case_alt_selection_1551)
-      64'sd252 : c$case_alt_522 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_522 = c$case_alt_775[252];
-    endcase
-  end
-
-  assign c$case_alt_selection_1554 = c$case_alt_selection_1553;
-
-  assign c$i_767 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1553 = $unsigned({{(64-8) {1'b0}},c$i_767});
-
-  always_comb begin
-    case(c$case_alt_selection_1554)
-      64'sd251 : c$case_alt_523 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_523 = c$case_alt_775[251];
-    endcase
-  end
-
-  assign c$case_alt_selection_1557 = c$case_alt_selection_1556;
-
-  assign c$i_768 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1556 = $unsigned({{(64-8) {1'b0}},c$i_768});
-
-  always_comb begin
-    case(c$case_alt_selection_1557)
-      64'sd250 : c$case_alt_524 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_524 = c$case_alt_775[250];
-    endcase
-  end
-
-  assign c$case_alt_selection_1560 = c$case_alt_selection_1559;
-
-  assign c$i_769 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1559 = $unsigned({{(64-8) {1'b0}},c$i_769});
-
-  always_comb begin
-    case(c$case_alt_selection_1560)
-      64'sd249 : c$case_alt_525 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_525 = c$case_alt_775[249];
-    endcase
-  end
-
-  assign c$case_alt_selection_1563 = c$case_alt_selection_1562;
-
-  assign c$i_770 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1562 = $unsigned({{(64-8) {1'b0}},c$i_770});
-
-  always_comb begin
-    case(c$case_alt_selection_1563)
-      64'sd248 : c$case_alt_526 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_526 = c$case_alt_775[248];
-    endcase
-  end
-
-  assign c$case_alt_selection_1566 = c$case_alt_selection_1565;
-
-  assign c$i_771 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1565 = $unsigned({{(64-8) {1'b0}},c$i_771});
-
-  always_comb begin
-    case(c$case_alt_selection_1566)
-      64'sd247 : c$case_alt_527 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_527 = c$case_alt_775[247];
-    endcase
-  end
-
-  assign c$case_alt_selection_1569 = c$case_alt_selection_1568;
-
-  assign c$i_772 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1568 = $unsigned({{(64-8) {1'b0}},c$i_772});
-
-  always_comb begin
-    case(c$case_alt_selection_1569)
-      64'sd246 : c$case_alt_528 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_528 = c$case_alt_775[246];
-    endcase
-  end
-
-  assign c$case_alt_selection_1572 = c$case_alt_selection_1571;
-
-  assign c$i_773 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1571 = $unsigned({{(64-8) {1'b0}},c$i_773});
-
-  always_comb begin
-    case(c$case_alt_selection_1572)
-      64'sd245 : c$case_alt_529 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_529 = c$case_alt_775[245];
-    endcase
-  end
-
-  assign c$case_alt_selection_1575 = c$case_alt_selection_1574;
-
-  assign c$i_774 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1574 = $unsigned({{(64-8) {1'b0}},c$i_774});
-
-  always_comb begin
-    case(c$case_alt_selection_1575)
-      64'sd244 : c$case_alt_530 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_530 = c$case_alt_775[244];
-    endcase
-  end
-
-  assign c$case_alt_selection_1578 = c$case_alt_selection_1577;
-
-  assign c$i_775 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1577 = $unsigned({{(64-8) {1'b0}},c$i_775});
-
-  always_comb begin
-    case(c$case_alt_selection_1578)
-      64'sd243 : c$case_alt_531 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_531 = c$case_alt_775[243];
-    endcase
-  end
-
-  assign c$case_alt_selection_1581 = c$case_alt_selection_1580;
-
-  assign c$i_776 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1580 = $unsigned({{(64-8) {1'b0}},c$i_776});
-
-  always_comb begin
-    case(c$case_alt_selection_1581)
-      64'sd242 : c$case_alt_532 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_532 = c$case_alt_775[242];
-    endcase
-  end
-
-  assign c$case_alt_selection_1584 = c$case_alt_selection_1583;
-
-  assign c$i_777 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1583 = $unsigned({{(64-8) {1'b0}},c$i_777});
-
-  always_comb begin
-    case(c$case_alt_selection_1584)
-      64'sd241 : c$case_alt_533 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_533 = c$case_alt_775[241];
-    endcase
-  end
-
-  assign c$case_alt_selection_1587 = c$case_alt_selection_1586;
-
-  assign c$i_778 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1586 = $unsigned({{(64-8) {1'b0}},c$i_778});
-
-  always_comb begin
-    case(c$case_alt_selection_1587)
-      64'sd240 : c$case_alt_534 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_534 = c$case_alt_775[240];
-    endcase
-  end
-
-  assign c$case_alt_selection_1590 = c$case_alt_selection_1589;
-
-  assign c$i_779 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1589 = $unsigned({{(64-8) {1'b0}},c$i_779});
-
-  always_comb begin
-    case(c$case_alt_selection_1590)
-      64'sd239 : c$case_alt_535 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_535 = c$case_alt_775[239];
-    endcase
-  end
-
-  assign c$case_alt_selection_1593 = c$case_alt_selection_1592;
-
-  assign c$i_780 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1592 = $unsigned({{(64-8) {1'b0}},c$i_780});
-
-  always_comb begin
-    case(c$case_alt_selection_1593)
-      64'sd238 : c$case_alt_536 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_536 = c$case_alt_775[238];
-    endcase
-  end
-
-  assign c$case_alt_selection_1596 = c$case_alt_selection_1595;
-
-  assign c$i_781 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1595 = $unsigned({{(64-8) {1'b0}},c$i_781});
-
-  always_comb begin
-    case(c$case_alt_selection_1596)
-      64'sd237 : c$case_alt_537 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_537 = c$case_alt_775[237];
-    endcase
-  end
-
-  assign c$case_alt_selection_1599 = c$case_alt_selection_1598;
-
-  assign c$i_782 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1598 = $unsigned({{(64-8) {1'b0}},c$i_782});
-
-  always_comb begin
-    case(c$case_alt_selection_1599)
-      64'sd236 : c$case_alt_538 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_538 = c$case_alt_775[236];
-    endcase
-  end
-
-  assign c$case_alt_selection_1602 = c$case_alt_selection_1601;
-
-  assign c$i_783 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1601 = $unsigned({{(64-8) {1'b0}},c$i_783});
-
-  always_comb begin
-    case(c$case_alt_selection_1602)
-      64'sd235 : c$case_alt_539 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_539 = c$case_alt_775[235];
-    endcase
-  end
-
-  assign c$case_alt_selection_1605 = c$case_alt_selection_1604;
-
-  assign c$i_784 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1604 = $unsigned({{(64-8) {1'b0}},c$i_784});
-
-  always_comb begin
-    case(c$case_alt_selection_1605)
-      64'sd234 : c$case_alt_540 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_540 = c$case_alt_775[234];
-    endcase
-  end
-
-  assign c$case_alt_selection_1608 = c$case_alt_selection_1607;
-
-  assign c$i_785 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1607 = $unsigned({{(64-8) {1'b0}},c$i_785});
-
-  always_comb begin
-    case(c$case_alt_selection_1608)
-      64'sd233 : c$case_alt_541 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_541 = c$case_alt_775[233];
-    endcase
-  end
-
-  assign c$case_alt_selection_1611 = c$case_alt_selection_1610;
-
-  assign c$i_786 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1610 = $unsigned({{(64-8) {1'b0}},c$i_786});
-
-  always_comb begin
-    case(c$case_alt_selection_1611)
-      64'sd232 : c$case_alt_542 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_542 = c$case_alt_775[232];
-    endcase
-  end
-
-  assign c$case_alt_selection_1614 = c$case_alt_selection_1613;
-
-  assign c$i_787 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1613 = $unsigned({{(64-8) {1'b0}},c$i_787});
-
-  always_comb begin
-    case(c$case_alt_selection_1614)
-      64'sd231 : c$case_alt_543 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_543 = c$case_alt_775[231];
-    endcase
-  end
-
-  assign c$case_alt_selection_1617 = c$case_alt_selection_1616;
-
-  assign c$i_788 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1616 = $unsigned({{(64-8) {1'b0}},c$i_788});
-
-  always_comb begin
-    case(c$case_alt_selection_1617)
-      64'sd230 : c$case_alt_544 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_544 = c$case_alt_775[230];
-    endcase
-  end
-
-  assign c$case_alt_selection_1620 = c$case_alt_selection_1619;
-
-  assign c$i_789 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1619 = $unsigned({{(64-8) {1'b0}},c$i_789});
-
-  always_comb begin
-    case(c$case_alt_selection_1620)
-      64'sd229 : c$case_alt_545 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_545 = c$case_alt_775[229];
-    endcase
-  end
-
-  assign c$case_alt_selection_1623 = c$case_alt_selection_1622;
-
-  assign c$i_790 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1622 = $unsigned({{(64-8) {1'b0}},c$i_790});
-
-  always_comb begin
-    case(c$case_alt_selection_1623)
-      64'sd228 : c$case_alt_546 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_546 = c$case_alt_775[228];
-    endcase
-  end
-
-  assign c$case_alt_selection_1626 = c$case_alt_selection_1625;
-
-  assign c$i_791 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1625 = $unsigned({{(64-8) {1'b0}},c$i_791});
-
-  always_comb begin
-    case(c$case_alt_selection_1626)
-      64'sd227 : c$case_alt_547 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_547 = c$case_alt_775[227];
-    endcase
-  end
-
-  assign c$case_alt_selection_1629 = c$case_alt_selection_1628;
-
-  assign c$i_792 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1628 = $unsigned({{(64-8) {1'b0}},c$i_792});
-
-  always_comb begin
-    case(c$case_alt_selection_1629)
-      64'sd226 : c$case_alt_548 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_548 = c$case_alt_775[226];
-    endcase
-  end
-
-  assign c$case_alt_selection_1632 = c$case_alt_selection_1631;
-
-  assign c$i_793 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1631 = $unsigned({{(64-8) {1'b0}},c$i_793});
-
-  always_comb begin
-    case(c$case_alt_selection_1632)
-      64'sd225 : c$case_alt_549 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_549 = c$case_alt_775[225];
-    endcase
-  end
-
-  assign c$case_alt_selection_1635 = c$case_alt_selection_1634;
-
-  assign c$i_794 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1634 = $unsigned({{(64-8) {1'b0}},c$i_794});
-
-  always_comb begin
-    case(c$case_alt_selection_1635)
-      64'sd224 : c$case_alt_550 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_550 = c$case_alt_775[224];
-    endcase
-  end
-
-  assign c$case_alt_selection_1638 = c$case_alt_selection_1637;
-
-  assign c$i_795 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1637 = $unsigned({{(64-8) {1'b0}},c$i_795});
-
-  always_comb begin
-    case(c$case_alt_selection_1638)
-      64'sd223 : c$case_alt_551 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_551 = c$case_alt_775[223];
-    endcase
-  end
-
-  assign c$case_alt_selection_1641 = c$case_alt_selection_1640;
-
-  assign c$i_796 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1640 = $unsigned({{(64-8) {1'b0}},c$i_796});
-
-  always_comb begin
-    case(c$case_alt_selection_1641)
-      64'sd222 : c$case_alt_552 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_552 = c$case_alt_775[222];
-    endcase
-  end
-
-  assign c$case_alt_selection_1644 = c$case_alt_selection_1643;
-
-  assign c$i_797 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1643 = $unsigned({{(64-8) {1'b0}},c$i_797});
-
-  always_comb begin
-    case(c$case_alt_selection_1644)
-      64'sd221 : c$case_alt_553 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_553 = c$case_alt_775[221];
-    endcase
-  end
-
-  assign c$case_alt_selection_1647 = c$case_alt_selection_1646;
-
-  assign c$i_798 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1646 = $unsigned({{(64-8) {1'b0}},c$i_798});
-
-  always_comb begin
-    case(c$case_alt_selection_1647)
-      64'sd220 : c$case_alt_554 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_554 = c$case_alt_775[220];
-    endcase
-  end
-
-  assign c$case_alt_selection_1650 = c$case_alt_selection_1649;
-
-  assign c$i_799 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1649 = $unsigned({{(64-8) {1'b0}},c$i_799});
-
-  always_comb begin
-    case(c$case_alt_selection_1650)
-      64'sd219 : c$case_alt_555 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_555 = c$case_alt_775[219];
-    endcase
-  end
-
-  assign c$case_alt_selection_1653 = c$case_alt_selection_1652;
-
-  assign c$i_800 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1652 = $unsigned({{(64-8) {1'b0}},c$i_800});
-
-  always_comb begin
-    case(c$case_alt_selection_1653)
-      64'sd218 : c$case_alt_556 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_556 = c$case_alt_775[218];
-    endcase
-  end
-
-  assign c$case_alt_selection_1656 = c$case_alt_selection_1655;
-
-  assign c$i_801 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1655 = $unsigned({{(64-8) {1'b0}},c$i_801});
-
-  always_comb begin
-    case(c$case_alt_selection_1656)
-      64'sd217 : c$case_alt_557 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_557 = c$case_alt_775[217];
-    endcase
-  end
-
-  assign c$case_alt_selection_1659 = c$case_alt_selection_1658;
-
-  assign c$i_802 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1658 = $unsigned({{(64-8) {1'b0}},c$i_802});
-
-  always_comb begin
-    case(c$case_alt_selection_1659)
-      64'sd216 : c$case_alt_558 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_558 = c$case_alt_775[216];
-    endcase
-  end
-
-  assign c$case_alt_selection_1662 = c$case_alt_selection_1661;
-
-  assign c$i_803 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1661 = $unsigned({{(64-8) {1'b0}},c$i_803});
-
-  always_comb begin
-    case(c$case_alt_selection_1662)
-      64'sd215 : c$case_alt_559 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_559 = c$case_alt_775[215];
-    endcase
-  end
-
-  assign c$case_alt_selection_1665 = c$case_alt_selection_1664;
-
-  assign c$i_804 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1664 = $unsigned({{(64-8) {1'b0}},c$i_804});
-
-  always_comb begin
-    case(c$case_alt_selection_1665)
-      64'sd214 : c$case_alt_560 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_560 = c$case_alt_775[214];
-    endcase
-  end
-
-  assign c$case_alt_selection_1668 = c$case_alt_selection_1667;
-
-  assign c$i_805 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1667 = $unsigned({{(64-8) {1'b0}},c$i_805});
-
-  always_comb begin
-    case(c$case_alt_selection_1668)
-      64'sd213 : c$case_alt_561 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_561 = c$case_alt_775[213];
-    endcase
-  end
-
-  assign c$case_alt_selection_1671 = c$case_alt_selection_1670;
-
-  assign c$i_806 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1670 = $unsigned({{(64-8) {1'b0}},c$i_806});
-
-  always_comb begin
-    case(c$case_alt_selection_1671)
-      64'sd212 : c$case_alt_562 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_562 = c$case_alt_775[212];
-    endcase
-  end
-
-  assign c$case_alt_selection_1674 = c$case_alt_selection_1673;
-
-  assign c$i_807 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1673 = $unsigned({{(64-8) {1'b0}},c$i_807});
-
-  always_comb begin
-    case(c$case_alt_selection_1674)
-      64'sd211 : c$case_alt_563 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_563 = c$case_alt_775[211];
-    endcase
-  end
-
-  assign c$case_alt_selection_1677 = c$case_alt_selection_1676;
-
-  assign c$i_808 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1676 = $unsigned({{(64-8) {1'b0}},c$i_808});
-
-  always_comb begin
-    case(c$case_alt_selection_1677)
-      64'sd210 : c$case_alt_564 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_564 = c$case_alt_775[210];
-    endcase
-  end
-
-  assign c$case_alt_selection_1680 = c$case_alt_selection_1679;
-
-  assign c$i_809 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1679 = $unsigned({{(64-8) {1'b0}},c$i_809});
-
-  always_comb begin
-    case(c$case_alt_selection_1680)
-      64'sd209 : c$case_alt_565 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_565 = c$case_alt_775[209];
-    endcase
-  end
-
-  assign c$case_alt_selection_1683 = c$case_alt_selection_1682;
-
-  assign c$i_810 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1682 = $unsigned({{(64-8) {1'b0}},c$i_810});
-
-  always_comb begin
-    case(c$case_alt_selection_1683)
-      64'sd208 : c$case_alt_566 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_566 = c$case_alt_775[208];
-    endcase
-  end
-
-  assign c$case_alt_selection_1686 = c$case_alt_selection_1685;
-
-  assign c$i_811 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1685 = $unsigned({{(64-8) {1'b0}},c$i_811});
-
-  always_comb begin
-    case(c$case_alt_selection_1686)
-      64'sd207 : c$case_alt_567 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_567 = c$case_alt_775[207];
-    endcase
-  end
-
-  assign c$case_alt_selection_1689 = c$case_alt_selection_1688;
-
-  assign c$i_812 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1688 = $unsigned({{(64-8) {1'b0}},c$i_812});
-
-  always_comb begin
-    case(c$case_alt_selection_1689)
-      64'sd206 : c$case_alt_568 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_568 = c$case_alt_775[206];
-    endcase
-  end
-
-  assign c$case_alt_selection_1692 = c$case_alt_selection_1691;
-
-  assign c$i_813 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1691 = $unsigned({{(64-8) {1'b0}},c$i_813});
-
-  always_comb begin
-    case(c$case_alt_selection_1692)
-      64'sd205 : c$case_alt_569 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_569 = c$case_alt_775[205];
-    endcase
-  end
-
-  assign c$case_alt_selection_1695 = c$case_alt_selection_1694;
-
-  assign c$i_814 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1694 = $unsigned({{(64-8) {1'b0}},c$i_814});
-
-  always_comb begin
-    case(c$case_alt_selection_1695)
-      64'sd204 : c$case_alt_570 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_570 = c$case_alt_775[204];
-    endcase
-  end
-
-  assign c$case_alt_selection_1698 = c$case_alt_selection_1697;
-
-  assign c$i_815 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1697 = $unsigned({{(64-8) {1'b0}},c$i_815});
-
-  always_comb begin
-    case(c$case_alt_selection_1698)
-      64'sd203 : c$case_alt_571 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_571 = c$case_alt_775[203];
-    endcase
-  end
-
-  assign c$case_alt_selection_1701 = c$case_alt_selection_1700;
-
-  assign c$i_816 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1700 = $unsigned({{(64-8) {1'b0}},c$i_816});
-
-  always_comb begin
-    case(c$case_alt_selection_1701)
-      64'sd202 : c$case_alt_572 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_572 = c$case_alt_775[202];
-    endcase
-  end
-
-  assign c$case_alt_selection_1704 = c$case_alt_selection_1703;
-
-  assign c$i_817 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1703 = $unsigned({{(64-8) {1'b0}},c$i_817});
-
-  always_comb begin
-    case(c$case_alt_selection_1704)
-      64'sd201 : c$case_alt_573 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_573 = c$case_alt_775[201];
-    endcase
-  end
-
-  assign c$case_alt_selection_1707 = c$case_alt_selection_1706;
-
-  assign c$i_818 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1706 = $unsigned({{(64-8) {1'b0}},c$i_818});
-
-  always_comb begin
-    case(c$case_alt_selection_1707)
-      64'sd200 : c$case_alt_574 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_574 = c$case_alt_775[200];
-    endcase
-  end
-
-  assign c$case_alt_selection_1710 = c$case_alt_selection_1709;
-
-  assign c$i_819 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1709 = $unsigned({{(64-8) {1'b0}},c$i_819});
-
-  always_comb begin
-    case(c$case_alt_selection_1710)
-      64'sd199 : c$case_alt_575 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_575 = c$case_alt_775[199];
-    endcase
-  end
-
-  assign c$case_alt_selection_1713 = c$case_alt_selection_1712;
-
-  assign c$i_820 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1712 = $unsigned({{(64-8) {1'b0}},c$i_820});
-
-  always_comb begin
-    case(c$case_alt_selection_1713)
-      64'sd198 : c$case_alt_576 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_576 = c$case_alt_775[198];
-    endcase
-  end
-
-  assign c$case_alt_selection_1716 = c$case_alt_selection_1715;
-
-  assign c$i_821 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1715 = $unsigned({{(64-8) {1'b0}},c$i_821});
-
-  always_comb begin
-    case(c$case_alt_selection_1716)
-      64'sd197 : c$case_alt_577 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_577 = c$case_alt_775[197];
-    endcase
-  end
-
-  assign c$case_alt_selection_1719 = c$case_alt_selection_1718;
-
-  assign c$i_822 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1718 = $unsigned({{(64-8) {1'b0}},c$i_822});
-
-  always_comb begin
-    case(c$case_alt_selection_1719)
-      64'sd196 : c$case_alt_578 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_578 = c$case_alt_775[196];
-    endcase
-  end
-
-  assign c$case_alt_selection_1722 = c$case_alt_selection_1721;
-
-  assign c$i_823 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1721 = $unsigned({{(64-8) {1'b0}},c$i_823});
-
-  always_comb begin
-    case(c$case_alt_selection_1722)
-      64'sd195 : c$case_alt_579 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_579 = c$case_alt_775[195];
-    endcase
-  end
-
-  assign c$case_alt_selection_1725 = c$case_alt_selection_1724;
-
-  assign c$i_824 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1724 = $unsigned({{(64-8) {1'b0}},c$i_824});
-
-  always_comb begin
-    case(c$case_alt_selection_1725)
-      64'sd194 : c$case_alt_580 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_580 = c$case_alt_775[194];
-    endcase
-  end
-
-  assign c$case_alt_selection_1728 = c$case_alt_selection_1727;
-
-  assign c$i_825 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1727 = $unsigned({{(64-8) {1'b0}},c$i_825});
-
-  always_comb begin
-    case(c$case_alt_selection_1728)
-      64'sd193 : c$case_alt_581 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_581 = c$case_alt_775[193];
-    endcase
-  end
-
-  assign c$case_alt_selection_1731 = c$case_alt_selection_1730;
-
-  assign c$i_826 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1730 = $unsigned({{(64-8) {1'b0}},c$i_826});
-
-  always_comb begin
-    case(c$case_alt_selection_1731)
-      64'sd192 : c$case_alt_582 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_582 = c$case_alt_775[192];
-    endcase
-  end
-
-  assign c$case_alt_selection_1734 = c$case_alt_selection_1733;
-
-  assign c$i_827 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1733 = $unsigned({{(64-8) {1'b0}},c$i_827});
-
-  always_comb begin
-    case(c$case_alt_selection_1734)
-      64'sd191 : c$case_alt_583 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_583 = c$case_alt_775[191];
-    endcase
-  end
-
-  assign c$case_alt_selection_1737 = c$case_alt_selection_1736;
-
-  assign c$i_828 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1736 = $unsigned({{(64-8) {1'b0}},c$i_828});
-
-  always_comb begin
-    case(c$case_alt_selection_1737)
-      64'sd190 : c$case_alt_584 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_584 = c$case_alt_775[190];
-    endcase
-  end
-
-  assign c$case_alt_selection_1740 = c$case_alt_selection_1739;
-
-  assign c$i_829 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1739 = $unsigned({{(64-8) {1'b0}},c$i_829});
-
-  always_comb begin
-    case(c$case_alt_selection_1740)
-      64'sd189 : c$case_alt_585 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_585 = c$case_alt_775[189];
-    endcase
-  end
-
-  assign c$case_alt_selection_1743 = c$case_alt_selection_1742;
-
-  assign c$i_830 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1742 = $unsigned({{(64-8) {1'b0}},c$i_830});
-
-  always_comb begin
-    case(c$case_alt_selection_1743)
-      64'sd188 : c$case_alt_586 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_586 = c$case_alt_775[188];
-    endcase
-  end
-
-  assign c$case_alt_selection_1746 = c$case_alt_selection_1745;
-
-  assign c$i_831 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1745 = $unsigned({{(64-8) {1'b0}},c$i_831});
-
-  always_comb begin
-    case(c$case_alt_selection_1746)
-      64'sd187 : c$case_alt_587 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_587 = c$case_alt_775[187];
-    endcase
-  end
-
-  assign c$case_alt_selection_1749 = c$case_alt_selection_1748;
-
-  assign c$i_832 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1748 = $unsigned({{(64-8) {1'b0}},c$i_832});
-
-  always_comb begin
-    case(c$case_alt_selection_1749)
-      64'sd186 : c$case_alt_588 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_588 = c$case_alt_775[186];
-    endcase
-  end
-
-  assign c$case_alt_selection_1752 = c$case_alt_selection_1751;
-
-  assign c$i_833 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1751 = $unsigned({{(64-8) {1'b0}},c$i_833});
-
-  always_comb begin
-    case(c$case_alt_selection_1752)
-      64'sd185 : c$case_alt_589 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_589 = c$case_alt_775[185];
-    endcase
-  end
-
-  assign c$case_alt_selection_1755 = c$case_alt_selection_1754;
-
-  assign c$i_834 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1754 = $unsigned({{(64-8) {1'b0}},c$i_834});
-
-  always_comb begin
-    case(c$case_alt_selection_1755)
-      64'sd184 : c$case_alt_590 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_590 = c$case_alt_775[184];
-    endcase
-  end
-
-  assign c$case_alt_selection_1758 = c$case_alt_selection_1757;
-
-  assign c$i_835 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1757 = $unsigned({{(64-8) {1'b0}},c$i_835});
-
-  always_comb begin
-    case(c$case_alt_selection_1758)
-      64'sd183 : c$case_alt_591 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_591 = c$case_alt_775[183];
-    endcase
-  end
-
-  assign c$case_alt_selection_1761 = c$case_alt_selection_1760;
-
-  assign c$i_836 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1760 = $unsigned({{(64-8) {1'b0}},c$i_836});
-
-  always_comb begin
-    case(c$case_alt_selection_1761)
-      64'sd182 : c$case_alt_592 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_592 = c$case_alt_775[182];
-    endcase
-  end
-
-  assign c$case_alt_selection_1764 = c$case_alt_selection_1763;
-
-  assign c$i_837 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1763 = $unsigned({{(64-8) {1'b0}},c$i_837});
-
-  always_comb begin
-    case(c$case_alt_selection_1764)
-      64'sd181 : c$case_alt_593 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_593 = c$case_alt_775[181];
-    endcase
-  end
-
-  assign c$case_alt_selection_1767 = c$case_alt_selection_1766;
-
-  assign c$i_838 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1766 = $unsigned({{(64-8) {1'b0}},c$i_838});
-
-  always_comb begin
-    case(c$case_alt_selection_1767)
-      64'sd180 : c$case_alt_594 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_594 = c$case_alt_775[180];
-    endcase
-  end
-
-  assign c$case_alt_selection_1770 = c$case_alt_selection_1769;
-
-  assign c$i_839 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1769 = $unsigned({{(64-8) {1'b0}},c$i_839});
-
-  always_comb begin
-    case(c$case_alt_selection_1770)
-      64'sd179 : c$case_alt_595 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_595 = c$case_alt_775[179];
-    endcase
-  end
-
-  assign c$case_alt_selection_1773 = c$case_alt_selection_1772;
-
-  assign c$i_840 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1772 = $unsigned({{(64-8) {1'b0}},c$i_840});
-
-  always_comb begin
-    case(c$case_alt_selection_1773)
-      64'sd178 : c$case_alt_596 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_596 = c$case_alt_775[178];
-    endcase
-  end
-
-  assign c$case_alt_selection_1776 = c$case_alt_selection_1775;
-
-  assign c$i_841 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1775 = $unsigned({{(64-8) {1'b0}},c$i_841});
-
-  always_comb begin
-    case(c$case_alt_selection_1776)
-      64'sd177 : c$case_alt_597 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_597 = c$case_alt_775[177];
-    endcase
-  end
-
-  assign c$case_alt_selection_1779 = c$case_alt_selection_1778;
-
-  assign c$i_842 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1778 = $unsigned({{(64-8) {1'b0}},c$i_842});
-
-  always_comb begin
-    case(c$case_alt_selection_1779)
-      64'sd176 : c$case_alt_598 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_598 = c$case_alt_775[176];
-    endcase
-  end
-
-  assign c$case_alt_selection_1782 = c$case_alt_selection_1781;
-
-  assign c$i_843 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1781 = $unsigned({{(64-8) {1'b0}},c$i_843});
-
-  always_comb begin
-    case(c$case_alt_selection_1782)
-      64'sd175 : c$case_alt_599 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_599 = c$case_alt_775[175];
-    endcase
-  end
-
-  assign c$case_alt_selection_1785 = c$case_alt_selection_1784;
-
-  assign c$i_844 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1784 = $unsigned({{(64-8) {1'b0}},c$i_844});
-
-  always_comb begin
-    case(c$case_alt_selection_1785)
-      64'sd174 : c$case_alt_600 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_600 = c$case_alt_775[174];
-    endcase
-  end
-
-  assign c$case_alt_selection_1788 = c$case_alt_selection_1787;
-
-  assign c$i_845 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1787 = $unsigned({{(64-8) {1'b0}},c$i_845});
-
-  always_comb begin
-    case(c$case_alt_selection_1788)
-      64'sd173 : c$case_alt_601 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_601 = c$case_alt_775[173];
-    endcase
-  end
-
-  assign c$case_alt_selection_1791 = c$case_alt_selection_1790;
-
-  assign c$i_846 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1790 = $unsigned({{(64-8) {1'b0}},c$i_846});
-
-  always_comb begin
-    case(c$case_alt_selection_1791)
-      64'sd172 : c$case_alt_602 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_602 = c$case_alt_775[172];
-    endcase
-  end
-
-  assign c$case_alt_selection_1794 = c$case_alt_selection_1793;
-
-  assign c$i_847 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1793 = $unsigned({{(64-8) {1'b0}},c$i_847});
-
-  always_comb begin
-    case(c$case_alt_selection_1794)
-      64'sd171 : c$case_alt_603 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_603 = c$case_alt_775[171];
-    endcase
-  end
-
-  assign c$case_alt_selection_1797 = c$case_alt_selection_1796;
-
-  assign c$i_848 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1796 = $unsigned({{(64-8) {1'b0}},c$i_848});
-
-  always_comb begin
-    case(c$case_alt_selection_1797)
-      64'sd170 : c$case_alt_604 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_604 = c$case_alt_775[170];
-    endcase
-  end
-
-  assign c$case_alt_selection_1800 = c$case_alt_selection_1799;
-
-  assign c$i_849 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1799 = $unsigned({{(64-8) {1'b0}},c$i_849});
-
-  always_comb begin
-    case(c$case_alt_selection_1800)
-      64'sd169 : c$case_alt_605 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_605 = c$case_alt_775[169];
-    endcase
-  end
-
-  assign c$case_alt_selection_1803 = c$case_alt_selection_1802;
-
-  assign c$i_850 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1802 = $unsigned({{(64-8) {1'b0}},c$i_850});
-
-  always_comb begin
-    case(c$case_alt_selection_1803)
-      64'sd168 : c$case_alt_606 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_606 = c$case_alt_775[168];
-    endcase
-  end
-
-  assign c$case_alt_selection_1806 = c$case_alt_selection_1805;
-
-  assign c$i_851 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1805 = $unsigned({{(64-8) {1'b0}},c$i_851});
-
-  always_comb begin
-    case(c$case_alt_selection_1806)
-      64'sd167 : c$case_alt_607 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_607 = c$case_alt_775[167];
-    endcase
-  end
-
-  assign c$case_alt_selection_1809 = c$case_alt_selection_1808;
-
-  assign c$i_852 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1808 = $unsigned({{(64-8) {1'b0}},c$i_852});
-
-  always_comb begin
-    case(c$case_alt_selection_1809)
-      64'sd166 : c$case_alt_608 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_608 = c$case_alt_775[166];
-    endcase
-  end
-
-  assign c$case_alt_selection_1812 = c$case_alt_selection_1811;
-
-  assign c$i_853 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1811 = $unsigned({{(64-8) {1'b0}},c$i_853});
-
-  always_comb begin
-    case(c$case_alt_selection_1812)
-      64'sd165 : c$case_alt_609 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_609 = c$case_alt_775[165];
-    endcase
-  end
-
-  assign c$case_alt_selection_1815 = c$case_alt_selection_1814;
-
-  assign c$i_854 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1814 = $unsigned({{(64-8) {1'b0}},c$i_854});
-
-  always_comb begin
-    case(c$case_alt_selection_1815)
-      64'sd164 : c$case_alt_610 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_610 = c$case_alt_775[164];
-    endcase
-  end
-
-  assign c$case_alt_selection_1818 = c$case_alt_selection_1817;
-
-  assign c$i_855 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1817 = $unsigned({{(64-8) {1'b0}},c$i_855});
-
-  always_comb begin
-    case(c$case_alt_selection_1818)
-      64'sd163 : c$case_alt_611 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_611 = c$case_alt_775[163];
-    endcase
-  end
-
-  assign c$case_alt_selection_1821 = c$case_alt_selection_1820;
-
-  assign c$i_856 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1820 = $unsigned({{(64-8) {1'b0}},c$i_856});
-
-  always_comb begin
-    case(c$case_alt_selection_1821)
-      64'sd162 : c$case_alt_612 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_612 = c$case_alt_775[162];
-    endcase
-  end
-
-  assign c$case_alt_selection_1824 = c$case_alt_selection_1823;
-
-  assign c$i_857 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1823 = $unsigned({{(64-8) {1'b0}},c$i_857});
-
-  always_comb begin
-    case(c$case_alt_selection_1824)
-      64'sd161 : c$case_alt_613 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_613 = c$case_alt_775[161];
-    endcase
-  end
-
-  assign c$case_alt_selection_1827 = c$case_alt_selection_1826;
-
-  assign c$i_858 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1826 = $unsigned({{(64-8) {1'b0}},c$i_858});
-
-  always_comb begin
-    case(c$case_alt_selection_1827)
-      64'sd160 : c$case_alt_614 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_614 = c$case_alt_775[160];
-    endcase
-  end
-
-  assign c$case_alt_selection_1830 = c$case_alt_selection_1829;
-
-  assign c$i_859 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1829 = $unsigned({{(64-8) {1'b0}},c$i_859});
-
-  always_comb begin
-    case(c$case_alt_selection_1830)
-      64'sd159 : c$case_alt_615 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_615 = c$case_alt_775[159];
-    endcase
-  end
-
-  assign c$case_alt_selection_1833 = c$case_alt_selection_1832;
-
-  assign c$i_860 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1832 = $unsigned({{(64-8) {1'b0}},c$i_860});
-
-  always_comb begin
-    case(c$case_alt_selection_1833)
-      64'sd158 : c$case_alt_616 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_616 = c$case_alt_775[158];
-    endcase
-  end
-
-  assign c$case_alt_selection_1836 = c$case_alt_selection_1835;
-
-  assign c$i_861 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1835 = $unsigned({{(64-8) {1'b0}},c$i_861});
-
-  always_comb begin
-    case(c$case_alt_selection_1836)
-      64'sd157 : c$case_alt_617 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_617 = c$case_alt_775[157];
-    endcase
-  end
-
-  assign c$case_alt_selection_1839 = c$case_alt_selection_1838;
-
-  assign c$i_862 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1838 = $unsigned({{(64-8) {1'b0}},c$i_862});
-
-  always_comb begin
-    case(c$case_alt_selection_1839)
-      64'sd156 : c$case_alt_618 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_618 = c$case_alt_775[156];
-    endcase
-  end
-
-  assign c$case_alt_selection_1842 = c$case_alt_selection_1841;
-
-  assign c$i_863 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1841 = $unsigned({{(64-8) {1'b0}},c$i_863});
-
-  always_comb begin
-    case(c$case_alt_selection_1842)
-      64'sd155 : c$case_alt_619 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_619 = c$case_alt_775[155];
-    endcase
-  end
-
-  assign c$case_alt_selection_1845 = c$case_alt_selection_1844;
-
-  assign c$i_864 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1844 = $unsigned({{(64-8) {1'b0}},c$i_864});
-
-  always_comb begin
-    case(c$case_alt_selection_1845)
-      64'sd154 : c$case_alt_620 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_620 = c$case_alt_775[154];
-    endcase
-  end
-
-  assign c$case_alt_selection_1848 = c$case_alt_selection_1847;
-
-  assign c$i_865 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1847 = $unsigned({{(64-8) {1'b0}},c$i_865});
-
-  always_comb begin
-    case(c$case_alt_selection_1848)
-      64'sd153 : c$case_alt_621 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_621 = c$case_alt_775[153];
-    endcase
-  end
-
-  assign c$case_alt_selection_1851 = c$case_alt_selection_1850;
-
-  assign c$i_866 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1850 = $unsigned({{(64-8) {1'b0}},c$i_866});
-
-  always_comb begin
-    case(c$case_alt_selection_1851)
-      64'sd152 : c$case_alt_622 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_622 = c$case_alt_775[152];
-    endcase
-  end
-
-  assign c$case_alt_selection_1854 = c$case_alt_selection_1853;
-
-  assign c$i_867 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1853 = $unsigned({{(64-8) {1'b0}},c$i_867});
-
-  always_comb begin
-    case(c$case_alt_selection_1854)
-      64'sd151 : c$case_alt_623 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_623 = c$case_alt_775[151];
-    endcase
-  end
-
-  assign c$case_alt_selection_1857 = c$case_alt_selection_1856;
-
-  assign c$i_868 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1856 = $unsigned({{(64-8) {1'b0}},c$i_868});
-
-  always_comb begin
-    case(c$case_alt_selection_1857)
-      64'sd150 : c$case_alt_624 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_624 = c$case_alt_775[150];
-    endcase
-  end
-
-  assign c$case_alt_selection_1860 = c$case_alt_selection_1859;
-
-  assign c$i_869 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1859 = $unsigned({{(64-8) {1'b0}},c$i_869});
-
-  always_comb begin
-    case(c$case_alt_selection_1860)
-      64'sd149 : c$case_alt_625 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_625 = c$case_alt_775[149];
-    endcase
-  end
-
-  assign c$case_alt_selection_1863 = c$case_alt_selection_1862;
-
-  assign c$i_870 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1862 = $unsigned({{(64-8) {1'b0}},c$i_870});
-
-  always_comb begin
-    case(c$case_alt_selection_1863)
-      64'sd148 : c$case_alt_626 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_626 = c$case_alt_775[148];
-    endcase
-  end
-
-  assign c$case_alt_selection_1866 = c$case_alt_selection_1865;
-
-  assign c$i_871 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1865 = $unsigned({{(64-8) {1'b0}},c$i_871});
-
-  always_comb begin
-    case(c$case_alt_selection_1866)
-      64'sd147 : c$case_alt_627 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_627 = c$case_alt_775[147];
-    endcase
-  end
-
-  assign c$case_alt_selection_1869 = c$case_alt_selection_1868;
-
-  assign c$i_872 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1868 = $unsigned({{(64-8) {1'b0}},c$i_872});
-
-  always_comb begin
-    case(c$case_alt_selection_1869)
-      64'sd146 : c$case_alt_628 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_628 = c$case_alt_775[146];
-    endcase
-  end
-
-  assign c$case_alt_selection_1872 = c$case_alt_selection_1871;
-
-  assign c$i_873 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1871 = $unsigned({{(64-8) {1'b0}},c$i_873});
-
-  always_comb begin
-    case(c$case_alt_selection_1872)
-      64'sd145 : c$case_alt_629 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_629 = c$case_alt_775[145];
-    endcase
-  end
-
-  assign c$case_alt_selection_1875 = c$case_alt_selection_1874;
-
-  assign c$i_874 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1874 = $unsigned({{(64-8) {1'b0}},c$i_874});
-
-  always_comb begin
-    case(c$case_alt_selection_1875)
-      64'sd144 : c$case_alt_630 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_630 = c$case_alt_775[144];
-    endcase
-  end
-
-  assign c$case_alt_selection_1878 = c$case_alt_selection_1877;
-
-  assign c$i_875 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1877 = $unsigned({{(64-8) {1'b0}},c$i_875});
-
-  always_comb begin
-    case(c$case_alt_selection_1878)
-      64'sd143 : c$case_alt_631 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_631 = c$case_alt_775[143];
-    endcase
-  end
-
-  assign c$case_alt_selection_1881 = c$case_alt_selection_1880;
-
-  assign c$i_876 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1880 = $unsigned({{(64-8) {1'b0}},c$i_876});
-
-  always_comb begin
-    case(c$case_alt_selection_1881)
-      64'sd142 : c$case_alt_632 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_632 = c$case_alt_775[142];
-    endcase
-  end
-
-  assign c$case_alt_selection_1884 = c$case_alt_selection_1883;
-
-  assign c$i_877 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1883 = $unsigned({{(64-8) {1'b0}},c$i_877});
-
-  always_comb begin
-    case(c$case_alt_selection_1884)
-      64'sd141 : c$case_alt_633 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_633 = c$case_alt_775[141];
-    endcase
-  end
-
-  assign c$case_alt_selection_1887 = c$case_alt_selection_1886;
-
-  assign c$i_878 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1886 = $unsigned({{(64-8) {1'b0}},c$i_878});
-
-  always_comb begin
-    case(c$case_alt_selection_1887)
-      64'sd140 : c$case_alt_634 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_634 = c$case_alt_775[140];
-    endcase
-  end
-
-  assign c$case_alt_selection_1890 = c$case_alt_selection_1889;
-
-  assign c$i_879 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1889 = $unsigned({{(64-8) {1'b0}},c$i_879});
-
-  always_comb begin
-    case(c$case_alt_selection_1890)
-      64'sd139 : c$case_alt_635 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_635 = c$case_alt_775[139];
-    endcase
-  end
-
-  assign c$case_alt_selection_1893 = c$case_alt_selection_1892;
-
-  assign c$i_880 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1892 = $unsigned({{(64-8) {1'b0}},c$i_880});
-
-  always_comb begin
-    case(c$case_alt_selection_1893)
-      64'sd138 : c$case_alt_636 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_636 = c$case_alt_775[138];
-    endcase
-  end
-
-  assign c$case_alt_selection_1896 = c$case_alt_selection_1895;
-
-  assign c$i_881 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1895 = $unsigned({{(64-8) {1'b0}},c$i_881});
-
-  always_comb begin
-    case(c$case_alt_selection_1896)
-      64'sd137 : c$case_alt_637 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_637 = c$case_alt_775[137];
-    endcase
-  end
-
-  assign c$case_alt_selection_1899 = c$case_alt_selection_1898;
-
-  assign c$i_882 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1898 = $unsigned({{(64-8) {1'b0}},c$i_882});
-
-  always_comb begin
-    case(c$case_alt_selection_1899)
-      64'sd136 : c$case_alt_638 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_638 = c$case_alt_775[136];
-    endcase
-  end
-
-  assign c$case_alt_selection_1902 = c$case_alt_selection_1901;
-
-  assign c$i_883 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1901 = $unsigned({{(64-8) {1'b0}},c$i_883});
-
-  always_comb begin
-    case(c$case_alt_selection_1902)
-      64'sd135 : c$case_alt_639 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_639 = c$case_alt_775[135];
-    endcase
-  end
-
-  assign c$case_alt_selection_1905 = c$case_alt_selection_1904;
-
-  assign c$i_884 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1904 = $unsigned({{(64-8) {1'b0}},c$i_884});
-
-  always_comb begin
-    case(c$case_alt_selection_1905)
-      64'sd134 : c$case_alt_640 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_640 = c$case_alt_775[134];
-    endcase
-  end
-
-  assign c$case_alt_selection_1908 = c$case_alt_selection_1907;
-
-  assign c$i_885 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1907 = $unsigned({{(64-8) {1'b0}},c$i_885});
-
-  always_comb begin
-    case(c$case_alt_selection_1908)
-      64'sd133 : c$case_alt_641 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_641 = c$case_alt_775[133];
-    endcase
-  end
-
-  assign c$case_alt_selection_1911 = c$case_alt_selection_1910;
-
-  assign c$i_886 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1910 = $unsigned({{(64-8) {1'b0}},c$i_886});
-
-  always_comb begin
-    case(c$case_alt_selection_1911)
-      64'sd132 : c$case_alt_642 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_642 = c$case_alt_775[132];
-    endcase
-  end
-
-  assign c$case_alt_selection_1914 = c$case_alt_selection_1913;
-
-  assign c$i_887 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1913 = $unsigned({{(64-8) {1'b0}},c$i_887});
-
-  always_comb begin
-    case(c$case_alt_selection_1914)
-      64'sd131 : c$case_alt_643 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_643 = c$case_alt_775[131];
-    endcase
-  end
-
-  assign c$case_alt_selection_1917 = c$case_alt_selection_1916;
-
-  assign c$i_888 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1916 = $unsigned({{(64-8) {1'b0}},c$i_888});
-
-  always_comb begin
-    case(c$case_alt_selection_1917)
-      64'sd130 : c$case_alt_644 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_644 = c$case_alt_775[130];
-    endcase
-  end
-
-  assign c$case_alt_selection_1920 = c$case_alt_selection_1919;
-
-  assign c$i_889 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1919 = $unsigned({{(64-8) {1'b0}},c$i_889});
-
-  always_comb begin
-    case(c$case_alt_selection_1920)
-      64'sd129 : c$case_alt_645 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_645 = c$case_alt_775[129];
-    endcase
-  end
-
-  assign c$case_alt_selection_1923 = c$case_alt_selection_1922;
-
-  assign c$i_890 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1922 = $unsigned({{(64-8) {1'b0}},c$i_890});
-
-  always_comb begin
-    case(c$case_alt_selection_1923)
-      64'sd128 : c$case_alt_646 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_646 = c$case_alt_775[128];
-    endcase
-  end
-
-  assign c$case_alt_selection_1926 = c$case_alt_selection_1925;
-
-  assign c$i_891 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1925 = $unsigned({{(64-8) {1'b0}},c$i_891});
-
-  always_comb begin
-    case(c$case_alt_selection_1926)
-      64'sd127 : c$case_alt_647 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_647 = c$case_alt_775[127];
-    endcase
-  end
-
-  assign c$case_alt_selection_1929 = c$case_alt_selection_1928;
-
-  assign c$i_892 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1928 = $unsigned({{(64-8) {1'b0}},c$i_892});
-
-  always_comb begin
-    case(c$case_alt_selection_1929)
-      64'sd126 : c$case_alt_648 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_648 = c$case_alt_775[126];
-    endcase
-  end
-
-  assign c$case_alt_selection_1932 = c$case_alt_selection_1931;
-
-  assign c$i_893 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1931 = $unsigned({{(64-8) {1'b0}},c$i_893});
-
-  always_comb begin
-    case(c$case_alt_selection_1932)
-      64'sd125 : c$case_alt_649 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_649 = c$case_alt_775[125];
-    endcase
-  end
-
-  assign c$case_alt_selection_1935 = c$case_alt_selection_1934;
-
-  assign c$i_894 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1934 = $unsigned({{(64-8) {1'b0}},c$i_894});
-
-  always_comb begin
-    case(c$case_alt_selection_1935)
-      64'sd124 : c$case_alt_650 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_650 = c$case_alt_775[124];
-    endcase
-  end
-
-  assign c$case_alt_selection_1938 = c$case_alt_selection_1937;
-
-  assign c$i_895 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1937 = $unsigned({{(64-8) {1'b0}},c$i_895});
-
-  always_comb begin
-    case(c$case_alt_selection_1938)
-      64'sd123 : c$case_alt_651 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_651 = c$case_alt_775[123];
-    endcase
-  end
-
-  assign c$case_alt_selection_1941 = c$case_alt_selection_1940;
-
-  assign c$i_896 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1940 = $unsigned({{(64-8) {1'b0}},c$i_896});
-
-  always_comb begin
-    case(c$case_alt_selection_1941)
-      64'sd122 : c$case_alt_652 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_652 = c$case_alt_775[122];
-    endcase
-  end
-
-  assign c$case_alt_selection_1944 = c$case_alt_selection_1943;
-
-  assign c$i_897 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1943 = $unsigned({{(64-8) {1'b0}},c$i_897});
-
-  always_comb begin
-    case(c$case_alt_selection_1944)
-      64'sd121 : c$case_alt_653 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_653 = c$case_alt_775[121];
-    endcase
-  end
-
-  assign c$case_alt_selection_1947 = c$case_alt_selection_1946;
-
-  assign c$i_898 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1946 = $unsigned({{(64-8) {1'b0}},c$i_898});
-
-  always_comb begin
-    case(c$case_alt_selection_1947)
-      64'sd120 : c$case_alt_654 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_654 = c$case_alt_775[120];
-    endcase
-  end
-
-  assign c$case_alt_selection_1950 = c$case_alt_selection_1949;
-
-  assign c$i_899 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1949 = $unsigned({{(64-8) {1'b0}},c$i_899});
-
-  always_comb begin
-    case(c$case_alt_selection_1950)
-      64'sd119 : c$case_alt_655 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_655 = c$case_alt_775[119];
-    endcase
-  end
-
-  assign c$case_alt_selection_1953 = c$case_alt_selection_1952;
-
-  assign c$i_900 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1952 = $unsigned({{(64-8) {1'b0}},c$i_900});
-
-  always_comb begin
-    case(c$case_alt_selection_1953)
-      64'sd118 : c$case_alt_656 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_656 = c$case_alt_775[118];
-    endcase
-  end
-
-  assign c$case_alt_selection_1956 = c$case_alt_selection_1955;
-
-  assign c$i_901 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1955 = $unsigned({{(64-8) {1'b0}},c$i_901});
-
-  always_comb begin
-    case(c$case_alt_selection_1956)
-      64'sd117 : c$case_alt_657 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_657 = c$case_alt_775[117];
-    endcase
-  end
-
-  assign c$case_alt_selection_1959 = c$case_alt_selection_1958;
-
-  assign c$i_902 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1958 = $unsigned({{(64-8) {1'b0}},c$i_902});
-
-  always_comb begin
-    case(c$case_alt_selection_1959)
-      64'sd116 : c$case_alt_658 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_658 = c$case_alt_775[116];
-    endcase
-  end
-
-  assign c$case_alt_selection_1962 = c$case_alt_selection_1961;
-
-  assign c$i_903 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1961 = $unsigned({{(64-8) {1'b0}},c$i_903});
-
-  always_comb begin
-    case(c$case_alt_selection_1962)
-      64'sd115 : c$case_alt_659 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_659 = c$case_alt_775[115];
-    endcase
-  end
-
-  assign c$case_alt_selection_1965 = c$case_alt_selection_1964;
-
-  assign c$i_904 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1964 = $unsigned({{(64-8) {1'b0}},c$i_904});
-
-  always_comb begin
-    case(c$case_alt_selection_1965)
-      64'sd114 : c$case_alt_660 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_660 = c$case_alt_775[114];
-    endcase
-  end
-
-  assign c$case_alt_selection_1968 = c$case_alt_selection_1967;
-
-  assign c$i_905 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1967 = $unsigned({{(64-8) {1'b0}},c$i_905});
-
-  always_comb begin
-    case(c$case_alt_selection_1968)
-      64'sd113 : c$case_alt_661 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_661 = c$case_alt_775[113];
-    endcase
-  end
-
-  assign c$case_alt_selection_1971 = c$case_alt_selection_1970;
-
-  assign c$i_906 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1970 = $unsigned({{(64-8) {1'b0}},c$i_906});
-
-  always_comb begin
-    case(c$case_alt_selection_1971)
-      64'sd112 : c$case_alt_662 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_662 = c$case_alt_775[112];
-    endcase
-  end
-
-  assign c$case_alt_selection_1974 = c$case_alt_selection_1973;
-
-  assign c$i_907 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1973 = $unsigned({{(64-8) {1'b0}},c$i_907});
-
-  always_comb begin
-    case(c$case_alt_selection_1974)
-      64'sd111 : c$case_alt_663 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_663 = c$case_alt_775[111];
-    endcase
-  end
-
-  assign c$case_alt_selection_1977 = c$case_alt_selection_1976;
-
-  assign c$i_908 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1976 = $unsigned({{(64-8) {1'b0}},c$i_908});
-
-  always_comb begin
-    case(c$case_alt_selection_1977)
-      64'sd110 : c$case_alt_664 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_664 = c$case_alt_775[110];
-    endcase
-  end
-
-  assign c$case_alt_selection_1980 = c$case_alt_selection_1979;
-
-  assign c$i_909 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1979 = $unsigned({{(64-8) {1'b0}},c$i_909});
-
-  always_comb begin
-    case(c$case_alt_selection_1980)
-      64'sd109 : c$case_alt_665 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_665 = c$case_alt_775[109];
-    endcase
-  end
-
-  assign c$case_alt_selection_1983 = c$case_alt_selection_1982;
-
-  assign c$i_910 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1982 = $unsigned({{(64-8) {1'b0}},c$i_910});
-
-  always_comb begin
-    case(c$case_alt_selection_1983)
-      64'sd108 : c$case_alt_666 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_666 = c$case_alt_775[108];
-    endcase
-  end
-
-  assign c$case_alt_selection_1986 = c$case_alt_selection_1985;
-
-  assign c$i_911 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1985 = $unsigned({{(64-8) {1'b0}},c$i_911});
-
-  always_comb begin
-    case(c$case_alt_selection_1986)
-      64'sd107 : c$case_alt_667 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_667 = c$case_alt_775[107];
-    endcase
-  end
-
-  assign c$case_alt_selection_1989 = c$case_alt_selection_1988;
-
-  assign c$i_912 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1988 = $unsigned({{(64-8) {1'b0}},c$i_912});
-
-  always_comb begin
-    case(c$case_alt_selection_1989)
-      64'sd106 : c$case_alt_668 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_668 = c$case_alt_775[106];
-    endcase
-  end
-
-  assign c$case_alt_selection_1992 = c$case_alt_selection_1991;
-
-  assign c$i_913 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1991 = $unsigned({{(64-8) {1'b0}},c$i_913});
-
-  always_comb begin
-    case(c$case_alt_selection_1992)
-      64'sd105 : c$case_alt_669 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_669 = c$case_alt_775[105];
-    endcase
-  end
-
-  assign c$case_alt_selection_1995 = c$case_alt_selection_1994;
-
-  assign c$i_914 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1994 = $unsigned({{(64-8) {1'b0}},c$i_914});
-
-  always_comb begin
-    case(c$case_alt_selection_1995)
-      64'sd104 : c$case_alt_670 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_670 = c$case_alt_775[104];
-    endcase
-  end
-
-  assign c$case_alt_selection_1998 = c$case_alt_selection_1997;
-
-  assign c$i_915 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_1997 = $unsigned({{(64-8) {1'b0}},c$i_915});
-
-  always_comb begin
-    case(c$case_alt_selection_1998)
-      64'sd103 : c$case_alt_671 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_671 = c$case_alt_775[103];
-    endcase
-  end
-
-  assign c$case_alt_selection_2001 = c$case_alt_selection_2000;
-
-  assign c$i_916 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2000 = $unsigned({{(64-8) {1'b0}},c$i_916});
-
-  always_comb begin
-    case(c$case_alt_selection_2001)
-      64'sd102 : c$case_alt_672 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_672 = c$case_alt_775[102];
-    endcase
-  end
-
-  assign c$case_alt_selection_2004 = c$case_alt_selection_2003;
-
-  assign c$i_917 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2003 = $unsigned({{(64-8) {1'b0}},c$i_917});
-
-  always_comb begin
-    case(c$case_alt_selection_2004)
-      64'sd101 : c$case_alt_673 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_673 = c$case_alt_775[101];
-    endcase
-  end
-
-  assign c$case_alt_selection_2007 = c$case_alt_selection_2006;
-
-  assign c$i_918 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2006 = $unsigned({{(64-8) {1'b0}},c$i_918});
-
-  always_comb begin
-    case(c$case_alt_selection_2007)
-      64'sd100 : c$case_alt_674 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_674 = c$case_alt_775[100];
-    endcase
-  end
-
-  assign c$case_alt_selection_2010 = c$case_alt_selection_2009;
-
-  assign c$i_919 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2009 = $unsigned({{(64-8) {1'b0}},c$i_919});
-
-  always_comb begin
-    case(c$case_alt_selection_2010)
-      64'sd99 : c$case_alt_675 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_675 = c$case_alt_775[99];
-    endcase
-  end
-
-  assign c$case_alt_selection_2013 = c$case_alt_selection_2012;
-
-  assign c$i_920 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2012 = $unsigned({{(64-8) {1'b0}},c$i_920});
-
-  always_comb begin
-    case(c$case_alt_selection_2013)
-      64'sd98 : c$case_alt_676 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_676 = c$case_alt_775[98];
-    endcase
-  end
-
-  assign c$case_alt_selection_2016 = c$case_alt_selection_2015;
-
-  assign c$i_921 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2015 = $unsigned({{(64-8) {1'b0}},c$i_921});
-
-  always_comb begin
-    case(c$case_alt_selection_2016)
-      64'sd97 : c$case_alt_677 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_677 = c$case_alt_775[97];
-    endcase
-  end
-
-  assign c$case_alt_selection_2019 = c$case_alt_selection_2018;
-
-  assign c$i_922 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2018 = $unsigned({{(64-8) {1'b0}},c$i_922});
-
-  always_comb begin
-    case(c$case_alt_selection_2019)
-      64'sd96 : c$case_alt_678 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_678 = c$case_alt_775[96];
-    endcase
-  end
-
-  assign c$case_alt_selection_2022 = c$case_alt_selection_2021;
-
-  assign c$i_923 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2021 = $unsigned({{(64-8) {1'b0}},c$i_923});
-
-  always_comb begin
-    case(c$case_alt_selection_2022)
-      64'sd95 : c$case_alt_679 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_679 = c$case_alt_775[95];
-    endcase
-  end
-
-  assign c$case_alt_selection_2025 = c$case_alt_selection_2024;
-
-  assign c$i_924 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2024 = $unsigned({{(64-8) {1'b0}},c$i_924});
-
-  always_comb begin
-    case(c$case_alt_selection_2025)
-      64'sd94 : c$case_alt_680 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_680 = c$case_alt_775[94];
-    endcase
-  end
-
-  assign c$case_alt_selection_2028 = c$case_alt_selection_2027;
-
-  assign c$i_925 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2027 = $unsigned({{(64-8) {1'b0}},c$i_925});
-
-  always_comb begin
-    case(c$case_alt_selection_2028)
-      64'sd93 : c$case_alt_681 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_681 = c$case_alt_775[93];
-    endcase
-  end
-
-  assign c$case_alt_selection_2031 = c$case_alt_selection_2030;
-
-  assign c$i_926 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2030 = $unsigned({{(64-8) {1'b0}},c$i_926});
-
-  always_comb begin
-    case(c$case_alt_selection_2031)
-      64'sd92 : c$case_alt_682 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_682 = c$case_alt_775[92];
-    endcase
-  end
-
-  assign c$case_alt_selection_2034 = c$case_alt_selection_2033;
-
-  assign c$i_927 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2033 = $unsigned({{(64-8) {1'b0}},c$i_927});
-
-  always_comb begin
-    case(c$case_alt_selection_2034)
-      64'sd91 : c$case_alt_683 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_683 = c$case_alt_775[91];
-    endcase
-  end
-
-  assign c$case_alt_selection_2037 = c$case_alt_selection_2036;
-
-  assign c$i_928 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2036 = $unsigned({{(64-8) {1'b0}},c$i_928});
-
-  always_comb begin
-    case(c$case_alt_selection_2037)
-      64'sd90 : c$case_alt_684 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_684 = c$case_alt_775[90];
-    endcase
-  end
-
-  assign c$case_alt_selection_2040 = c$case_alt_selection_2039;
-
-  assign c$i_929 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2039 = $unsigned({{(64-8) {1'b0}},c$i_929});
-
-  always_comb begin
-    case(c$case_alt_selection_2040)
-      64'sd89 : c$case_alt_685 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_685 = c$case_alt_775[89];
-    endcase
-  end
-
-  assign c$case_alt_selection_2043 = c$case_alt_selection_2042;
-
-  assign c$i_930 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2042 = $unsigned({{(64-8) {1'b0}},c$i_930});
-
-  always_comb begin
-    case(c$case_alt_selection_2043)
-      64'sd88 : c$case_alt_686 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_686 = c$case_alt_775[88];
-    endcase
-  end
-
-  assign c$case_alt_selection_2046 = c$case_alt_selection_2045;
-
-  assign c$i_931 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2045 = $unsigned({{(64-8) {1'b0}},c$i_931});
-
-  always_comb begin
-    case(c$case_alt_selection_2046)
-      64'sd87 : c$case_alt_687 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_687 = c$case_alt_775[87];
-    endcase
-  end
-
-  assign c$case_alt_selection_2049 = c$case_alt_selection_2048;
-
-  assign c$i_932 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2048 = $unsigned({{(64-8) {1'b0}},c$i_932});
-
-  always_comb begin
-    case(c$case_alt_selection_2049)
-      64'sd86 : c$case_alt_688 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_688 = c$case_alt_775[86];
-    endcase
-  end
-
-  assign c$case_alt_selection_2052 = c$case_alt_selection_2051;
-
-  assign c$i_933 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2051 = $unsigned({{(64-8) {1'b0}},c$i_933});
-
-  always_comb begin
-    case(c$case_alt_selection_2052)
-      64'sd85 : c$case_alt_689 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_689 = c$case_alt_775[85];
-    endcase
-  end
-
-  assign c$case_alt_selection_2055 = c$case_alt_selection_2054;
-
-  assign c$i_934 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2054 = $unsigned({{(64-8) {1'b0}},c$i_934});
-
-  always_comb begin
-    case(c$case_alt_selection_2055)
-      64'sd84 : c$case_alt_690 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_690 = c$case_alt_775[84];
-    endcase
-  end
-
-  assign c$case_alt_selection_2058 = c$case_alt_selection_2057;
-
-  assign c$i_935 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2057 = $unsigned({{(64-8) {1'b0}},c$i_935});
-
-  always_comb begin
-    case(c$case_alt_selection_2058)
-      64'sd83 : c$case_alt_691 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_691 = c$case_alt_775[83];
-    endcase
-  end
-
-  assign c$case_alt_selection_2061 = c$case_alt_selection_2060;
-
-  assign c$i_936 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2060 = $unsigned({{(64-8) {1'b0}},c$i_936});
-
-  always_comb begin
-    case(c$case_alt_selection_2061)
-      64'sd82 : c$case_alt_692 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_692 = c$case_alt_775[82];
-    endcase
-  end
-
-  assign c$case_alt_selection_2064 = c$case_alt_selection_2063;
-
-  assign c$i_937 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2063 = $unsigned({{(64-8) {1'b0}},c$i_937});
-
-  always_comb begin
-    case(c$case_alt_selection_2064)
-      64'sd81 : c$case_alt_693 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_693 = c$case_alt_775[81];
-    endcase
-  end
-
-  assign c$case_alt_selection_2067 = c$case_alt_selection_2066;
-
-  assign c$i_938 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2066 = $unsigned({{(64-8) {1'b0}},c$i_938});
-
-  always_comb begin
-    case(c$case_alt_selection_2067)
-      64'sd80 : c$case_alt_694 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_694 = c$case_alt_775[80];
-    endcase
-  end
-
-  assign c$case_alt_selection_2070 = c$case_alt_selection_2069;
-
-  assign c$i_939 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2069 = $unsigned({{(64-8) {1'b0}},c$i_939});
-
-  always_comb begin
-    case(c$case_alt_selection_2070)
-      64'sd79 : c$case_alt_695 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_695 = c$case_alt_775[79];
-    endcase
-  end
-
-  assign c$case_alt_selection_2073 = c$case_alt_selection_2072;
-
-  assign c$i_940 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2072 = $unsigned({{(64-8) {1'b0}},c$i_940});
-
-  always_comb begin
-    case(c$case_alt_selection_2073)
-      64'sd78 : c$case_alt_696 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_696 = c$case_alt_775[78];
-    endcase
-  end
-
-  assign c$case_alt_selection_2076 = c$case_alt_selection_2075;
-
-  assign c$i_941 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2075 = $unsigned({{(64-8) {1'b0}},c$i_941});
-
-  always_comb begin
-    case(c$case_alt_selection_2076)
-      64'sd77 : c$case_alt_697 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_697 = c$case_alt_775[77];
-    endcase
-  end
-
-  assign c$case_alt_selection_2079 = c$case_alt_selection_2078;
-
-  assign c$i_942 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2078 = $unsigned({{(64-8) {1'b0}},c$i_942});
-
-  always_comb begin
-    case(c$case_alt_selection_2079)
-      64'sd76 : c$case_alt_698 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_698 = c$case_alt_775[76];
-    endcase
-  end
-
-  assign c$case_alt_selection_2082 = c$case_alt_selection_2081;
-
-  assign c$i_943 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2081 = $unsigned({{(64-8) {1'b0}},c$i_943});
-
-  always_comb begin
-    case(c$case_alt_selection_2082)
-      64'sd75 : c$case_alt_699 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_699 = c$case_alt_775[75];
-    endcase
-  end
-
-  assign c$case_alt_selection_2085 = c$case_alt_selection_2084;
-
-  assign c$i_944 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2084 = $unsigned({{(64-8) {1'b0}},c$i_944});
-
-  always_comb begin
-    case(c$case_alt_selection_2085)
-      64'sd74 : c$case_alt_700 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_700 = c$case_alt_775[74];
-    endcase
-  end
-
-  assign c$case_alt_selection_2088 = c$case_alt_selection_2087;
-
-  assign c$i_945 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2087 = $unsigned({{(64-8) {1'b0}},c$i_945});
-
-  always_comb begin
-    case(c$case_alt_selection_2088)
-      64'sd73 : c$case_alt_701 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_701 = c$case_alt_775[73];
-    endcase
-  end
-
-  assign c$case_alt_selection_2091 = c$case_alt_selection_2090;
-
-  assign c$i_946 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2090 = $unsigned({{(64-8) {1'b0}},c$i_946});
-
-  always_comb begin
-    case(c$case_alt_selection_2091)
-      64'sd72 : c$case_alt_702 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_702 = c$case_alt_775[72];
-    endcase
-  end
-
-  assign c$case_alt_selection_2094 = c$case_alt_selection_2093;
-
-  assign c$i_947 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2093 = $unsigned({{(64-8) {1'b0}},c$i_947});
-
-  always_comb begin
-    case(c$case_alt_selection_2094)
-      64'sd71 : c$case_alt_703 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_703 = c$case_alt_775[71];
-    endcase
-  end
-
-  assign c$case_alt_selection_2097 = c$case_alt_selection_2096;
-
-  assign c$i_948 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2096 = $unsigned({{(64-8) {1'b0}},c$i_948});
-
-  always_comb begin
-    case(c$case_alt_selection_2097)
-      64'sd70 : c$case_alt_704 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_704 = c$case_alt_775[70];
-    endcase
-  end
-
-  assign c$case_alt_selection_2100 = c$case_alt_selection_2099;
-
-  assign c$i_949 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2099 = $unsigned({{(64-8) {1'b0}},c$i_949});
-
-  always_comb begin
-    case(c$case_alt_selection_2100)
-      64'sd69 : c$case_alt_705 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_705 = c$case_alt_775[69];
-    endcase
-  end
-
-  assign c$case_alt_selection_2103 = c$case_alt_selection_2102;
-
-  assign c$i_950 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2102 = $unsigned({{(64-8) {1'b0}},c$i_950});
-
-  always_comb begin
-    case(c$case_alt_selection_2103)
-      64'sd68 : c$case_alt_706 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_706 = c$case_alt_775[68];
-    endcase
-  end
-
-  assign c$case_alt_selection_2106 = c$case_alt_selection_2105;
-
-  assign c$i_951 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2105 = $unsigned({{(64-8) {1'b0}},c$i_951});
-
-  always_comb begin
-    case(c$case_alt_selection_2106)
-      64'sd67 : c$case_alt_707 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_707 = c$case_alt_775[67];
-    endcase
-  end
-
-  assign c$case_alt_selection_2109 = c$case_alt_selection_2108;
-
-  assign c$i_952 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2108 = $unsigned({{(64-8) {1'b0}},c$i_952});
-
-  always_comb begin
-    case(c$case_alt_selection_2109)
-      64'sd66 : c$case_alt_708 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_708 = c$case_alt_775[66];
-    endcase
-  end
-
-  assign c$case_alt_selection_2112 = c$case_alt_selection_2111;
-
-  assign c$i_953 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2111 = $unsigned({{(64-8) {1'b0}},c$i_953});
-
-  always_comb begin
-    case(c$case_alt_selection_2112)
-      64'sd65 : c$case_alt_709 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_709 = c$case_alt_775[65];
-    endcase
-  end
-
-  assign c$case_alt_selection_2115 = c$case_alt_selection_2114;
-
-  assign c$i_954 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2114 = $unsigned({{(64-8) {1'b0}},c$i_954});
-
-  always_comb begin
-    case(c$case_alt_selection_2115)
-      64'sd64 : c$case_alt_710 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_710 = c$case_alt_775[64];
-    endcase
-  end
-
-  assign c$case_alt_selection_2118 = c$case_alt_selection_2117;
-
-  assign c$i_955 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2117 = $unsigned({{(64-8) {1'b0}},c$i_955});
-
-  always_comb begin
-    case(c$case_alt_selection_2118)
-      64'sd63 : c$case_alt_711 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_711 = c$case_alt_775[63];
-    endcase
-  end
-
-  assign c$case_alt_selection_2121 = c$case_alt_selection_2120;
-
-  assign c$i_956 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2120 = $unsigned({{(64-8) {1'b0}},c$i_956});
-
-  always_comb begin
-    case(c$case_alt_selection_2121)
-      64'sd62 : c$case_alt_712 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_712 = c$case_alt_775[62];
-    endcase
-  end
-
-  assign c$case_alt_selection_2124 = c$case_alt_selection_2123;
-
-  assign c$i_957 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2123 = $unsigned({{(64-8) {1'b0}},c$i_957});
-
-  always_comb begin
-    case(c$case_alt_selection_2124)
-      64'sd61 : c$case_alt_713 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_713 = c$case_alt_775[61];
-    endcase
-  end
-
-  assign c$case_alt_selection_2127 = c$case_alt_selection_2126;
-
-  assign c$i_958 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2126 = $unsigned({{(64-8) {1'b0}},c$i_958});
-
-  always_comb begin
-    case(c$case_alt_selection_2127)
-      64'sd60 : c$case_alt_714 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_714 = c$case_alt_775[60];
-    endcase
-  end
-
-  assign c$case_alt_selection_2130 = c$case_alt_selection_2129;
-
-  assign c$i_959 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2129 = $unsigned({{(64-8) {1'b0}},c$i_959});
-
-  always_comb begin
-    case(c$case_alt_selection_2130)
-      64'sd59 : c$case_alt_715 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_715 = c$case_alt_775[59];
-    endcase
-  end
-
-  assign c$case_alt_selection_2133 = c$case_alt_selection_2132;
-
-  assign c$i_960 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2132 = $unsigned({{(64-8) {1'b0}},c$i_960});
-
-  always_comb begin
-    case(c$case_alt_selection_2133)
-      64'sd58 : c$case_alt_716 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_716 = c$case_alt_775[58];
-    endcase
-  end
-
-  assign c$case_alt_selection_2136 = c$case_alt_selection_2135;
-
-  assign c$i_961 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2135 = $unsigned({{(64-8) {1'b0}},c$i_961});
-
-  always_comb begin
-    case(c$case_alt_selection_2136)
-      64'sd57 : c$case_alt_717 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_717 = c$case_alt_775[57];
-    endcase
-  end
-
-  assign c$case_alt_selection_2139 = c$case_alt_selection_2138;
-
-  assign c$i_962 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2138 = $unsigned({{(64-8) {1'b0}},c$i_962});
-
-  always_comb begin
-    case(c$case_alt_selection_2139)
-      64'sd56 : c$case_alt_718 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_718 = c$case_alt_775[56];
-    endcase
-  end
-
-  assign c$case_alt_selection_2142 = c$case_alt_selection_2141;
-
-  assign c$i_963 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2141 = $unsigned({{(64-8) {1'b0}},c$i_963});
-
-  always_comb begin
-    case(c$case_alt_selection_2142)
-      64'sd55 : c$case_alt_719 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_719 = c$case_alt_775[55];
-    endcase
-  end
-
-  assign c$case_alt_selection_2145 = c$case_alt_selection_2144;
-
-  assign c$i_964 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2144 = $unsigned({{(64-8) {1'b0}},c$i_964});
-
-  always_comb begin
-    case(c$case_alt_selection_2145)
-      64'sd54 : c$case_alt_720 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_720 = c$case_alt_775[54];
-    endcase
-  end
-
-  assign c$case_alt_selection_2148 = c$case_alt_selection_2147;
-
-  assign c$i_965 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2147 = $unsigned({{(64-8) {1'b0}},c$i_965});
-
-  always_comb begin
-    case(c$case_alt_selection_2148)
-      64'sd53 : c$case_alt_721 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_721 = c$case_alt_775[53];
-    endcase
-  end
-
-  assign c$case_alt_selection_2151 = c$case_alt_selection_2150;
-
-  assign c$i_966 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2150 = $unsigned({{(64-8) {1'b0}},c$i_966});
-
-  always_comb begin
-    case(c$case_alt_selection_2151)
-      64'sd52 : c$case_alt_722 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_722 = c$case_alt_775[52];
-    endcase
-  end
-
-  assign c$case_alt_selection_2154 = c$case_alt_selection_2153;
-
-  assign c$i_967 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2153 = $unsigned({{(64-8) {1'b0}},c$i_967});
-
-  always_comb begin
-    case(c$case_alt_selection_2154)
-      64'sd51 : c$case_alt_723 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_723 = c$case_alt_775[51];
-    endcase
-  end
-
-  assign c$case_alt_selection_2157 = c$case_alt_selection_2156;
-
-  assign c$i_968 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2156 = $unsigned({{(64-8) {1'b0}},c$i_968});
-
-  always_comb begin
-    case(c$case_alt_selection_2157)
-      64'sd50 : c$case_alt_724 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_724 = c$case_alt_775[50];
-    endcase
-  end
-
-  assign c$case_alt_selection_2160 = c$case_alt_selection_2159;
-
-  assign c$i_969 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2159 = $unsigned({{(64-8) {1'b0}},c$i_969});
-
-  always_comb begin
-    case(c$case_alt_selection_2160)
-      64'sd49 : c$case_alt_725 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_725 = c$case_alt_775[49];
-    endcase
-  end
-
-  assign c$case_alt_selection_2163 = c$case_alt_selection_2162;
-
-  assign c$i_970 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2162 = $unsigned({{(64-8) {1'b0}},c$i_970});
-
-  always_comb begin
-    case(c$case_alt_selection_2163)
-      64'sd48 : c$case_alt_726 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_726 = c$case_alt_775[48];
-    endcase
-  end
-
-  assign c$case_alt_selection_2166 = c$case_alt_selection_2165;
-
-  assign c$i_971 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2165 = $unsigned({{(64-8) {1'b0}},c$i_971});
-
-  always_comb begin
-    case(c$case_alt_selection_2166)
-      64'sd47 : c$case_alt_727 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_727 = c$case_alt_775[47];
-    endcase
-  end
-
-  assign c$case_alt_selection_2169 = c$case_alt_selection_2168;
-
-  assign c$i_972 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2168 = $unsigned({{(64-8) {1'b0}},c$i_972});
-
-  always_comb begin
-    case(c$case_alt_selection_2169)
-      64'sd46 : c$case_alt_728 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_728 = c$case_alt_775[46];
-    endcase
-  end
-
-  assign c$case_alt_selection_2172 = c$case_alt_selection_2171;
-
-  assign c$i_973 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2171 = $unsigned({{(64-8) {1'b0}},c$i_973});
-
-  always_comb begin
-    case(c$case_alt_selection_2172)
-      64'sd45 : c$case_alt_729 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_729 = c$case_alt_775[45];
-    endcase
-  end
-
-  assign c$case_alt_selection_2175 = c$case_alt_selection_2174;
-
-  assign c$i_974 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2174 = $unsigned({{(64-8) {1'b0}},c$i_974});
-
-  always_comb begin
-    case(c$case_alt_selection_2175)
-      64'sd44 : c$case_alt_730 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_730 = c$case_alt_775[44];
-    endcase
-  end
-
-  assign c$case_alt_selection_2178 = c$case_alt_selection_2177;
-
-  assign c$i_975 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2177 = $unsigned({{(64-8) {1'b0}},c$i_975});
-
-  always_comb begin
-    case(c$case_alt_selection_2178)
-      64'sd43 : c$case_alt_731 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_731 = c$case_alt_775[43];
-    endcase
-  end
-
-  assign c$case_alt_selection_2181 = c$case_alt_selection_2180;
-
-  assign c$i_976 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2180 = $unsigned({{(64-8) {1'b0}},c$i_976});
-
-  always_comb begin
-    case(c$case_alt_selection_2181)
-      64'sd42 : c$case_alt_732 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_732 = c$case_alt_775[42];
-    endcase
-  end
-
-  assign c$case_alt_selection_2184 = c$case_alt_selection_2183;
-
-  assign c$i_977 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2183 = $unsigned({{(64-8) {1'b0}},c$i_977});
-
-  always_comb begin
-    case(c$case_alt_selection_2184)
-      64'sd41 : c$case_alt_733 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_733 = c$case_alt_775[41];
-    endcase
-  end
-
-  assign c$case_alt_selection_2187 = c$case_alt_selection_2186;
-
-  assign c$i_978 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2186 = $unsigned({{(64-8) {1'b0}},c$i_978});
-
-  always_comb begin
-    case(c$case_alt_selection_2187)
-      64'sd40 : c$case_alt_734 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_734 = c$case_alt_775[40];
-    endcase
-  end
-
-  assign c$case_alt_selection_2190 = c$case_alt_selection_2189;
-
-  assign c$i_979 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2189 = $unsigned({{(64-8) {1'b0}},c$i_979});
-
-  always_comb begin
-    case(c$case_alt_selection_2190)
-      64'sd39 : c$case_alt_735 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_735 = c$case_alt_775[39];
-    endcase
-  end
-
-  assign c$case_alt_selection_2193 = c$case_alt_selection_2192;
-
-  assign c$i_980 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2192 = $unsigned({{(64-8) {1'b0}},c$i_980});
-
-  always_comb begin
-    case(c$case_alt_selection_2193)
-      64'sd38 : c$case_alt_736 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_736 = c$case_alt_775[38];
-    endcase
-  end
-
-  assign c$case_alt_selection_2196 = c$case_alt_selection_2195;
-
-  assign c$i_981 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2195 = $unsigned({{(64-8) {1'b0}},c$i_981});
-
-  always_comb begin
-    case(c$case_alt_selection_2196)
-      64'sd37 : c$case_alt_737 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_737 = c$case_alt_775[37];
-    endcase
-  end
-
-  assign c$case_alt_selection_2199 = c$case_alt_selection_2198;
-
-  assign c$i_982 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2198 = $unsigned({{(64-8) {1'b0}},c$i_982});
-
-  always_comb begin
-    case(c$case_alt_selection_2199)
-      64'sd36 : c$case_alt_738 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_738 = c$case_alt_775[36];
-    endcase
-  end
-
-  assign c$case_alt_selection_2202 = c$case_alt_selection_2201;
-
-  assign c$i_983 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2201 = $unsigned({{(64-8) {1'b0}},c$i_983});
-
-  always_comb begin
-    case(c$case_alt_selection_2202)
-      64'sd35 : c$case_alt_739 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_739 = c$case_alt_775[35];
-    endcase
-  end
-
-  assign c$case_alt_selection_2205 = c$case_alt_selection_2204;
-
-  assign c$i_984 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2204 = $unsigned({{(64-8) {1'b0}},c$i_984});
-
-  always_comb begin
-    case(c$case_alt_selection_2205)
-      64'sd34 : c$case_alt_740 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_740 = c$case_alt_775[34];
-    endcase
-  end
-
-  assign c$case_alt_selection_2208 = c$case_alt_selection_2207;
-
-  assign c$i_985 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2207 = $unsigned({{(64-8) {1'b0}},c$i_985});
-
-  always_comb begin
-    case(c$case_alt_selection_2208)
-      64'sd33 : c$case_alt_741 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_741 = c$case_alt_775[33];
-    endcase
-  end
-
-  assign c$case_alt_selection_2211 = c$case_alt_selection_2210;
-
-  assign c$i_986 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2210 = $unsigned({{(64-8) {1'b0}},c$i_986});
-
-  always_comb begin
-    case(c$case_alt_selection_2211)
-      64'sd32 : c$case_alt_742 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_742 = c$case_alt_775[32];
-    endcase
-  end
-
-  assign c$case_alt_selection_2214 = c$case_alt_selection_2213;
-
-  assign c$i_987 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2213 = $unsigned({{(64-8) {1'b0}},c$i_987});
-
-  always_comb begin
-    case(c$case_alt_selection_2214)
-      64'sd31 : c$case_alt_743 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_743 = c$case_alt_775[31];
-    endcase
-  end
-
-  assign c$case_alt_selection_2217 = c$case_alt_selection_2216;
-
-  assign c$i_988 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2216 = $unsigned({{(64-8) {1'b0}},c$i_988});
-
-  always_comb begin
-    case(c$case_alt_selection_2217)
-      64'sd30 : c$case_alt_744 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_744 = c$case_alt_775[30];
-    endcase
-  end
-
-  assign c$case_alt_selection_2220 = c$case_alt_selection_2219;
-
-  assign c$i_989 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2219 = $unsigned({{(64-8) {1'b0}},c$i_989});
-
-  always_comb begin
-    case(c$case_alt_selection_2220)
-      64'sd29 : c$case_alt_745 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_745 = c$case_alt_775[29];
-    endcase
-  end
-
-  assign c$case_alt_selection_2223 = c$case_alt_selection_2222;
-
-  assign c$i_990 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2222 = $unsigned({{(64-8) {1'b0}},c$i_990});
-
-  always_comb begin
-    case(c$case_alt_selection_2223)
-      64'sd28 : c$case_alt_746 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_746 = c$case_alt_775[28];
-    endcase
-  end
-
-  assign c$case_alt_selection_2226 = c$case_alt_selection_2225;
-
-  assign c$i_991 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2225 = $unsigned({{(64-8) {1'b0}},c$i_991});
-
-  always_comb begin
-    case(c$case_alt_selection_2226)
-      64'sd27 : c$case_alt_747 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_747 = c$case_alt_775[27];
-    endcase
-  end
-
-  assign c$case_alt_selection_2229 = c$case_alt_selection_2228;
-
-  assign c$i_992 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2228 = $unsigned({{(64-8) {1'b0}},c$i_992});
-
-  always_comb begin
-    case(c$case_alt_selection_2229)
-      64'sd26 : c$case_alt_748 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_748 = c$case_alt_775[26];
-    endcase
-  end
-
-  assign c$case_alt_selection_2232 = c$case_alt_selection_2231;
-
-  assign c$i_993 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2231 = $unsigned({{(64-8) {1'b0}},c$i_993});
-
-  always_comb begin
-    case(c$case_alt_selection_2232)
-      64'sd25 : c$case_alt_749 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_749 = c$case_alt_775[25];
-    endcase
-  end
-
-  assign c$case_alt_selection_2235 = c$case_alt_selection_2234;
-
-  assign c$i_994 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2234 = $unsigned({{(64-8) {1'b0}},c$i_994});
-
-  always_comb begin
-    case(c$case_alt_selection_2235)
-      64'sd24 : c$case_alt_750 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_750 = c$case_alt_775[24];
-    endcase
-  end
-
-  assign c$case_alt_selection_2238 = c$case_alt_selection_2237;
-
-  assign c$i_995 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2237 = $unsigned({{(64-8) {1'b0}},c$i_995});
-
-  always_comb begin
-    case(c$case_alt_selection_2238)
-      64'sd23 : c$case_alt_751 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_751 = c$case_alt_775[23];
-    endcase
-  end
-
-  assign c$case_alt_selection_2241 = c$case_alt_selection_2240;
-
-  assign c$i_996 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2240 = $unsigned({{(64-8) {1'b0}},c$i_996});
-
-  always_comb begin
-    case(c$case_alt_selection_2241)
-      64'sd22 : c$case_alt_752 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_752 = c$case_alt_775[22];
-    endcase
-  end
-
-  assign c$case_alt_selection_2244 = c$case_alt_selection_2243;
-
-  assign c$i_997 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2243 = $unsigned({{(64-8) {1'b0}},c$i_997});
-
-  always_comb begin
-    case(c$case_alt_selection_2244)
-      64'sd21 : c$case_alt_753 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_753 = c$case_alt_775[21];
-    endcase
-  end
-
-  assign c$case_alt_selection_2247 = c$case_alt_selection_2246;
-
-  assign c$i_998 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2246 = $unsigned({{(64-8) {1'b0}},c$i_998});
-
-  always_comb begin
-    case(c$case_alt_selection_2247)
-      64'sd20 : c$case_alt_754 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_754 = c$case_alt_775[20];
-    endcase
-  end
-
-  assign c$case_alt_selection_2250 = c$case_alt_selection_2249;
-
-  assign c$i_999 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2249 = $unsigned({{(64-8) {1'b0}},c$i_999});
-
-  always_comb begin
-    case(c$case_alt_selection_2250)
-      64'sd19 : c$case_alt_755 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_755 = c$case_alt_775[19];
-    endcase
-  end
-
-  assign c$case_alt_selection_2253 = c$case_alt_selection_2252;
-
-  assign c$i_1000 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2252 = $unsigned({{(64-8) {1'b0}},c$i_1000});
-
-  always_comb begin
-    case(c$case_alt_selection_2253)
-      64'sd18 : c$case_alt_756 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_756 = c$case_alt_775[18];
-    endcase
-  end
-
-  assign c$case_alt_selection_2256 = c$case_alt_selection_2255;
-
-  assign c$i_1001 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2255 = $unsigned({{(64-8) {1'b0}},c$i_1001});
-
-  always_comb begin
-    case(c$case_alt_selection_2256)
-      64'sd17 : c$case_alt_757 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_757 = c$case_alt_775[17];
-    endcase
-  end
-
-  assign c$case_alt_selection_2259 = c$case_alt_selection_2258;
-
-  assign c$i_1002 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2258 = $unsigned({{(64-8) {1'b0}},c$i_1002});
-
-  always_comb begin
-    case(c$case_alt_selection_2259)
-      64'sd16 : c$case_alt_758 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_758 = c$case_alt_775[16];
-    endcase
-  end
-
-  assign c$case_alt_selection_2262 = c$case_alt_selection_2261;
-
-  assign c$i_1003 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2261 = $unsigned({{(64-8) {1'b0}},c$i_1003});
-
-  always_comb begin
-    case(c$case_alt_selection_2262)
-      64'sd15 : c$case_alt_759 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_759 = c$case_alt_775[15];
-    endcase
-  end
-
-  assign c$case_alt_selection_2265 = c$case_alt_selection_2264;
-
-  assign c$i_1004 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2264 = $unsigned({{(64-8) {1'b0}},c$i_1004});
-
-  always_comb begin
-    case(c$case_alt_selection_2265)
-      64'sd14 : c$case_alt_760 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_760 = c$case_alt_775[14];
-    endcase
-  end
-
-  assign c$case_alt_selection_2268 = c$case_alt_selection_2267;
-
-  assign c$i_1005 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2267 = $unsigned({{(64-8) {1'b0}},c$i_1005});
-
-  always_comb begin
-    case(c$case_alt_selection_2268)
-      64'sd13 : c$case_alt_761 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_761 = c$case_alt_775[13];
-    endcase
-  end
-
-  assign c$case_alt_selection_2271 = c$case_alt_selection_2270;
-
-  assign c$i_1006 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2270 = $unsigned({{(64-8) {1'b0}},c$i_1006});
-
-  always_comb begin
-    case(c$case_alt_selection_2271)
-      64'sd12 : c$case_alt_762 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_762 = c$case_alt_775[12];
-    endcase
-  end
-
-  assign c$case_alt_selection_2274 = c$case_alt_selection_2273;
-
-  assign c$i_1007 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2273 = $unsigned({{(64-8) {1'b0}},c$i_1007});
-
-  always_comb begin
-    case(c$case_alt_selection_2274)
-      64'sd11 : c$case_alt_763 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_763 = c$case_alt_775[11];
-    endcase
-  end
-
-  assign c$case_alt_selection_2277 = c$case_alt_selection_2276;
-
-  assign c$i_1008 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2276 = $unsigned({{(64-8) {1'b0}},c$i_1008});
-
-  always_comb begin
-    case(c$case_alt_selection_2277)
-      64'sd10 : c$case_alt_764 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_764 = c$case_alt_775[10];
-    endcase
-  end
-
-  assign c$case_alt_selection_2280 = c$case_alt_selection_2279;
-
-  assign c$i_1009 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2279 = $unsigned({{(64-8) {1'b0}},c$i_1009});
-
-  always_comb begin
-    case(c$case_alt_selection_2280)
-      64'sd9 : c$case_alt_765 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_765 = c$case_alt_775[9];
-    endcase
-  end
-
-  assign c$case_alt_selection_2283 = c$case_alt_selection_2282;
-
-  assign c$i_1010 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2282 = $unsigned({{(64-8) {1'b0}},c$i_1010});
-
-  always_comb begin
-    case(c$case_alt_selection_2283)
-      64'sd8 : c$case_alt_766 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_766 = c$case_alt_775[8];
-    endcase
-  end
-
-  assign c$case_alt_selection_2286 = c$case_alt_selection_2285;
-
-  assign c$i_1011 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2285 = $unsigned({{(64-8) {1'b0}},c$i_1011});
-
-  always_comb begin
-    case(c$case_alt_selection_2286)
-      64'sd7 : c$case_alt_767 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_767 = c$case_alt_775[7];
-    endcase
-  end
-
-  assign c$case_alt_selection_2289 = c$case_alt_selection_2288;
-
-  assign c$i_1012 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2288 = $unsigned({{(64-8) {1'b0}},c$i_1012});
-
-  always_comb begin
-    case(c$case_alt_selection_2289)
-      64'sd6 : c$case_alt_768 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_768 = c$case_alt_775[6];
-    endcase
-  end
-
-  assign c$case_alt_selection_2292 = c$case_alt_selection_2291;
-
-  assign c$i_1013 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2291 = $unsigned({{(64-8) {1'b0}},c$i_1013});
-
-  always_comb begin
-    case(c$case_alt_selection_2292)
-      64'sd5 : c$case_alt_769 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_769 = c$case_alt_775[5];
-    endcase
-  end
-
-  assign c$case_alt_selection_2295 = c$case_alt_selection_2294;
-
-  assign c$i_1014 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2294 = $unsigned({{(64-8) {1'b0}},c$i_1014});
-
-  always_comb begin
-    case(c$case_alt_selection_2295)
-      64'sd4 : c$case_alt_770 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_770 = c$case_alt_775[4];
-    endcase
-  end
-
-  assign c$case_alt_selection_2298 = c$case_alt_selection_2297;
-
-  assign c$i_1015 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2297 = $unsigned({{(64-8) {1'b0}},c$i_1015});
-
-  always_comb begin
-    case(c$case_alt_selection_2298)
-      64'sd3 : c$case_alt_771 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_771 = c$case_alt_775[3];
-    endcase
-  end
-
-  assign c$case_alt_selection_2301 = c$case_alt_selection_2300;
-
-  assign c$i_1016 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2300 = $unsigned({{(64-8) {1'b0}},c$i_1016});
-
-  always_comb begin
-    case(c$case_alt_selection_2301)
-      64'sd2 : c$case_alt_772 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_772 = c$case_alt_775[2];
-    endcase
-  end
-
-  assign c$case_alt_selection_2304 = c$case_alt_selection_2303;
-
-  assign c$i_1017 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2303 = $unsigned({{(64-8) {1'b0}},c$i_1017});
-
-  always_comb begin
-    case(c$case_alt_selection_2304)
-      64'sd1 : c$case_alt_773 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_773 = c$case_alt_775[1];
-    endcase
-  end
-
-  assign c$case_alt_selection_2307 = c$case_alt_selection_2306;
-
-  assign c$i_1018 = response_1.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2306 = $unsigned({{(64-8) {1'b0}},c$i_1018});
-
-  always_comb begin
-    case(c$case_alt_selection_2307)
-      64'sd0 : c$case_alt_774 = response_1.ButterflyResponse_sel2;
-      default : c$case_alt_774 = c$case_alt_775[0];
-    endcase
-  end
-
-  assign response_1 = {aIndex_2
-                      ,bIndex_2
-                      ,outA_0
-                      ,outB_0
-                      ,lastGroup_0};
-
-  assign c$case_alt_775 = valid_6 ? c$case_alt_776 : NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4);
-
-  assign valid_6 = metaReg3.Tuple4_sel0;
-
-  assign c$i_1019 = response_2.ButterflyResponse_sel1;
-
-  // replaceVec start
-  always_comb begin
-    c$case_alt_776 = '{0: c$case_alt_1032
-   ,1: c$case_alt_1031
-   ,2: c$case_alt_1030
-   ,3: c$case_alt_1029
-   ,4: c$case_alt_1028
-   ,5: c$case_alt_1027
-   ,6: c$case_alt_1026
-   ,7: c$case_alt_1025
-   ,8: c$case_alt_1024
-   ,9: c$case_alt_1023
-   ,10: c$case_alt_1022
-   ,11: c$case_alt_1021
-   ,12: c$case_alt_1020
-   ,13: c$case_alt_1019
-   ,14: c$case_alt_1018
-   ,15: c$case_alt_1017
-   ,16: c$case_alt_1016
-   ,17: c$case_alt_1015
-   ,18: c$case_alt_1014
-   ,19: c$case_alt_1013
-   ,20: c$case_alt_1012
-   ,21: c$case_alt_1011
-   ,22: c$case_alt_1010
-   ,23: c$case_alt_1009
-   ,24: c$case_alt_1008
-   ,25: c$case_alt_1007
-   ,26: c$case_alt_1006
-   ,27: c$case_alt_1005
-   ,28: c$case_alt_1004
-   ,29: c$case_alt_1003
-   ,30: c$case_alt_1002
-   ,31: c$case_alt_1001
-   ,32: c$case_alt_1000
-   ,33: c$case_alt_999
-   ,34: c$case_alt_998
-   ,35: c$case_alt_997
-   ,36: c$case_alt_996
-   ,37: c$case_alt_995
-   ,38: c$case_alt_994
-   ,39: c$case_alt_993
-   ,40: c$case_alt_992
-   ,41: c$case_alt_991
-   ,42: c$case_alt_990
-   ,43: c$case_alt_989
-   ,44: c$case_alt_988
-   ,45: c$case_alt_987
-   ,46: c$case_alt_986
-   ,47: c$case_alt_985
-   ,48: c$case_alt_984
-   ,49: c$case_alt_983
-   ,50: c$case_alt_982
-   ,51: c$case_alt_981
-   ,52: c$case_alt_980
-   ,53: c$case_alt_979
-   ,54: c$case_alt_978
-   ,55: c$case_alt_977
-   ,56: c$case_alt_976
-   ,57: c$case_alt_975
-   ,58: c$case_alt_974
-   ,59: c$case_alt_973
-   ,60: c$case_alt_972
-   ,61: c$case_alt_971
-   ,62: c$case_alt_970
-   ,63: c$case_alt_969
-   ,64: c$case_alt_968
-   ,65: c$case_alt_967
-   ,66: c$case_alt_966
-   ,67: c$case_alt_965
-   ,68: c$case_alt_964
-   ,69: c$case_alt_963
-   ,70: c$case_alt_962
-   ,71: c$case_alt_961
-   ,72: c$case_alt_960
-   ,73: c$case_alt_959
-   ,74: c$case_alt_958
-   ,75: c$case_alt_957
-   ,76: c$case_alt_956
-   ,77: c$case_alt_955
-   ,78: c$case_alt_954
-   ,79: c$case_alt_953
-   ,80: c$case_alt_952
-   ,81: c$case_alt_951
-   ,82: c$case_alt_950
-   ,83: c$case_alt_949
-   ,84: c$case_alt_948
-   ,85: c$case_alt_947
-   ,86: c$case_alt_946
-   ,87: c$case_alt_945
-   ,88: c$case_alt_944
-   ,89: c$case_alt_943
-   ,90: c$case_alt_942
-   ,91: c$case_alt_941
-   ,92: c$case_alt_940
-   ,93: c$case_alt_939
-   ,94: c$case_alt_938
-   ,95: c$case_alt_937
-   ,96: c$case_alt_936
-   ,97: c$case_alt_935
-   ,98: c$case_alt_934
-   ,99: c$case_alt_933
-   ,100: c$case_alt_932
-   ,101: c$case_alt_931
-   ,102: c$case_alt_930
-   ,103: c$case_alt_929
-   ,104: c$case_alt_928
-   ,105: c$case_alt_927
-   ,106: c$case_alt_926
-   ,107: c$case_alt_925
-   ,108: c$case_alt_924
-   ,109: c$case_alt_923
-   ,110: c$case_alt_922
-   ,111: c$case_alt_921
-   ,112: c$case_alt_920
-   ,113: c$case_alt_919
-   ,114: c$case_alt_918
-   ,115: c$case_alt_917
-   ,116: c$case_alt_916
-   ,117: c$case_alt_915
-   ,118: c$case_alt_914
-   ,119: c$case_alt_913
-   ,120: c$case_alt_912
-   ,121: c$case_alt_911
-   ,122: c$case_alt_910
-   ,123: c$case_alt_909
-   ,124: c$case_alt_908
-   ,125: c$case_alt_907
-   ,126: c$case_alt_906
-   ,127: c$case_alt_905
-   ,128: c$case_alt_904
-   ,129: c$case_alt_903
-   ,130: c$case_alt_902
-   ,131: c$case_alt_901
-   ,132: c$case_alt_900
-   ,133: c$case_alt_899
-   ,134: c$case_alt_898
-   ,135: c$case_alt_897
-   ,136: c$case_alt_896
-   ,137: c$case_alt_895
-   ,138: c$case_alt_894
-   ,139: c$case_alt_893
-   ,140: c$case_alt_892
-   ,141: c$case_alt_891
-   ,142: c$case_alt_890
-   ,143: c$case_alt_889
-   ,144: c$case_alt_888
-   ,145: c$case_alt_887
-   ,146: c$case_alt_886
-   ,147: c$case_alt_885
-   ,148: c$case_alt_884
-   ,149: c$case_alt_883
-   ,150: c$case_alt_882
-   ,151: c$case_alt_881
-   ,152: c$case_alt_880
-   ,153: c$case_alt_879
-   ,154: c$case_alt_878
-   ,155: c$case_alt_877
-   ,156: c$case_alt_876
-   ,157: c$case_alt_875
-   ,158: c$case_alt_874
-   ,159: c$case_alt_873
-   ,160: c$case_alt_872
-   ,161: c$case_alt_871
-   ,162: c$case_alt_870
-   ,163: c$case_alt_869
-   ,164: c$case_alt_868
-   ,165: c$case_alt_867
-   ,166: c$case_alt_866
-   ,167: c$case_alt_865
-   ,168: c$case_alt_864
-   ,169: c$case_alt_863
-   ,170: c$case_alt_862
-   ,171: c$case_alt_861
-   ,172: c$case_alt_860
-   ,173: c$case_alt_859
-   ,174: c$case_alt_858
-   ,175: c$case_alt_857
-   ,176: c$case_alt_856
-   ,177: c$case_alt_855
-   ,178: c$case_alt_854
-   ,179: c$case_alt_853
-   ,180: c$case_alt_852
-   ,181: c$case_alt_851
-   ,182: c$case_alt_850
-   ,183: c$case_alt_849
-   ,184: c$case_alt_848
-   ,185: c$case_alt_847
-   ,186: c$case_alt_846
-   ,187: c$case_alt_845
-   ,188: c$case_alt_844
-   ,189: c$case_alt_843
-   ,190: c$case_alt_842
-   ,191: c$case_alt_841
-   ,192: c$case_alt_840
-   ,193: c$case_alt_839
-   ,194: c$case_alt_838
-   ,195: c$case_alt_837
-   ,196: c$case_alt_836
-   ,197: c$case_alt_835
-   ,198: c$case_alt_834
-   ,199: c$case_alt_833
-   ,200: c$case_alt_832
-   ,201: c$case_alt_831
-   ,202: c$case_alt_830
-   ,203: c$case_alt_829
-   ,204: c$case_alt_828
-   ,205: c$case_alt_827
-   ,206: c$case_alt_826
-   ,207: c$case_alt_825
-   ,208: c$case_alt_824
-   ,209: c$case_alt_823
-   ,210: c$case_alt_822
-   ,211: c$case_alt_821
-   ,212: c$case_alt_820
-   ,213: c$case_alt_819
-   ,214: c$case_alt_818
-   ,215: c$case_alt_817
-   ,216: c$case_alt_816
-   ,217: c$case_alt_815
-   ,218: c$case_alt_814
-   ,219: c$case_alt_813
-   ,220: c$case_alt_812
-   ,221: c$case_alt_811
-   ,222: c$case_alt_810
-   ,223: c$case_alt_809
-   ,224: c$case_alt_808
-   ,225: c$case_alt_807
-   ,226: c$case_alt_806
-   ,227: c$case_alt_805
-   ,228: c$case_alt_804
-   ,229: c$case_alt_803
-   ,230: c$case_alt_802
-   ,231: c$case_alt_801
-   ,232: c$case_alt_800
-   ,233: c$case_alt_799
-   ,234: c$case_alt_798
-   ,235: c$case_alt_797
-   ,236: c$case_alt_796
-   ,237: c$case_alt_795
-   ,238: c$case_alt_794
-   ,239: c$case_alt_793
-   ,240: c$case_alt_792
-   ,241: c$case_alt_791
-   ,242: c$case_alt_790
-   ,243: c$case_alt_789
-   ,244: c$case_alt_788
-   ,245: c$case_alt_787
-   ,246: c$case_alt_786
-   ,247: c$case_alt_785
-   ,248: c$case_alt_784
-   ,249: c$case_alt_783
-   ,250: c$case_alt_782
-   ,251: c$case_alt_781
-   ,252: c$case_alt_780
-   ,253: c$case_alt_779
-   ,254: c$case_alt_778
-   ,255: c$case_alt_777};
-    c$case_alt_776[($unsigned({{(64-8) {1'b0}},c$i_1019}))] = response_2.ButterflyResponse_sel3;
-  end
-  // replaceVec end
-
-  assign c$case_alt_selection_2311 = c$case_alt_selection_2310;
-
-  assign c$i_1020 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2310 = $unsigned({{(64-8) {1'b0}},c$i_1020});
-
-  always_comb begin
-    case(c$case_alt_selection_2311)
-      64'sd255 : c$case_alt_777 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_777 = stateSignal[22:0];
-    endcase
-  end
-
-  assign c$case_alt_selection_2314 = c$case_alt_selection_2313;
-
-  assign c$i_1021 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2313 = $unsigned({{(64-8) {1'b0}},c$i_1021});
-
-  always_comb begin
-    case(c$case_alt_selection_2314)
-      64'sd254 : c$case_alt_778 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_778 = stateSignal[45:23];
-    endcase
-  end
-
-  assign c$case_alt_selection_2317 = c$case_alt_selection_2316;
-
-  assign c$i_1022 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2316 = $unsigned({{(64-8) {1'b0}},c$i_1022});
-
-  always_comb begin
-    case(c$case_alt_selection_2317)
-      64'sd253 : c$case_alt_779 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_779 = stateSignal[68:46];
-    endcase
-  end
-
-  assign c$case_alt_selection_2320 = c$case_alt_selection_2319;
-
-  assign c$i_1023 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2319 = $unsigned({{(64-8) {1'b0}},c$i_1023});
-
-  always_comb begin
-    case(c$case_alt_selection_2320)
-      64'sd252 : c$case_alt_780 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_780 = stateSignal[91:69];
-    endcase
-  end
-
-  assign c$case_alt_selection_2323 = c$case_alt_selection_2322;
-
-  assign c$i_1024 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2322 = $unsigned({{(64-8) {1'b0}},c$i_1024});
-
-  always_comb begin
-    case(c$case_alt_selection_2323)
-      64'sd251 : c$case_alt_781 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_781 = stateSignal[114:92];
-    endcase
-  end
-
-  assign c$case_alt_selection_2326 = c$case_alt_selection_2325;
-
-  assign c$i_1025 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2325 = $unsigned({{(64-8) {1'b0}},c$i_1025});
-
-  always_comb begin
-    case(c$case_alt_selection_2326)
-      64'sd250 : c$case_alt_782 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_782 = stateSignal[137:115];
-    endcase
-  end
-
-  assign c$case_alt_selection_2329 = c$case_alt_selection_2328;
-
-  assign c$i_1026 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2328 = $unsigned({{(64-8) {1'b0}},c$i_1026});
-
-  always_comb begin
-    case(c$case_alt_selection_2329)
-      64'sd249 : c$case_alt_783 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_783 = stateSignal[160:138];
-    endcase
-  end
-
-  assign c$case_alt_selection_2332 = c$case_alt_selection_2331;
-
-  assign c$i_1027 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2331 = $unsigned({{(64-8) {1'b0}},c$i_1027});
-
-  always_comb begin
-    case(c$case_alt_selection_2332)
-      64'sd248 : c$case_alt_784 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_784 = stateSignal[183:161];
-    endcase
-  end
-
-  assign c$case_alt_selection_2335 = c$case_alt_selection_2334;
-
-  assign c$i_1028 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2334 = $unsigned({{(64-8) {1'b0}},c$i_1028});
-
-  always_comb begin
-    case(c$case_alt_selection_2335)
-      64'sd247 : c$case_alt_785 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_785 = stateSignal[206:184];
-    endcase
-  end
-
-  assign c$case_alt_selection_2338 = c$case_alt_selection_2337;
-
-  assign c$i_1029 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2337 = $unsigned({{(64-8) {1'b0}},c$i_1029});
-
-  always_comb begin
-    case(c$case_alt_selection_2338)
-      64'sd246 : c$case_alt_786 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_786 = stateSignal[229:207];
-    endcase
-  end
-
-  assign c$case_alt_selection_2341 = c$case_alt_selection_2340;
-
-  assign c$i_1030 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2340 = $unsigned({{(64-8) {1'b0}},c$i_1030});
-
-  always_comb begin
-    case(c$case_alt_selection_2341)
-      64'sd245 : c$case_alt_787 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_787 = stateSignal[252:230];
-    endcase
-  end
-
-  assign c$case_alt_selection_2344 = c$case_alt_selection_2343;
-
-  assign c$i_1031 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2343 = $unsigned({{(64-8) {1'b0}},c$i_1031});
-
-  always_comb begin
-    case(c$case_alt_selection_2344)
-      64'sd244 : c$case_alt_788 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_788 = stateSignal[275:253];
-    endcase
-  end
-
-  assign c$case_alt_selection_2347 = c$case_alt_selection_2346;
-
-  assign c$i_1032 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2346 = $unsigned({{(64-8) {1'b0}},c$i_1032});
-
-  always_comb begin
-    case(c$case_alt_selection_2347)
-      64'sd243 : c$case_alt_789 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_789 = stateSignal[298:276];
-    endcase
-  end
-
-  assign c$case_alt_selection_2350 = c$case_alt_selection_2349;
-
-  assign c$i_1033 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2349 = $unsigned({{(64-8) {1'b0}},c$i_1033});
-
-  always_comb begin
-    case(c$case_alt_selection_2350)
-      64'sd242 : c$case_alt_790 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_790 = stateSignal[321:299];
-    endcase
-  end
-
-  assign c$case_alt_selection_2353 = c$case_alt_selection_2352;
-
-  assign c$i_1034 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2352 = $unsigned({{(64-8) {1'b0}},c$i_1034});
-
-  always_comb begin
-    case(c$case_alt_selection_2353)
-      64'sd241 : c$case_alt_791 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_791 = stateSignal[344:322];
-    endcase
-  end
-
-  assign c$case_alt_selection_2356 = c$case_alt_selection_2355;
-
-  assign c$i_1035 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2355 = $unsigned({{(64-8) {1'b0}},c$i_1035});
-
-  always_comb begin
-    case(c$case_alt_selection_2356)
-      64'sd240 : c$case_alt_792 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_792 = stateSignal[367:345];
-    endcase
-  end
-
-  assign c$case_alt_selection_2359 = c$case_alt_selection_2358;
-
-  assign c$i_1036 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2358 = $unsigned({{(64-8) {1'b0}},c$i_1036});
-
-  always_comb begin
-    case(c$case_alt_selection_2359)
-      64'sd239 : c$case_alt_793 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_793 = stateSignal[390:368];
-    endcase
-  end
-
-  assign c$case_alt_selection_2362 = c$case_alt_selection_2361;
-
-  assign c$i_1037 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2361 = $unsigned({{(64-8) {1'b0}},c$i_1037});
-
-  always_comb begin
-    case(c$case_alt_selection_2362)
-      64'sd238 : c$case_alt_794 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_794 = stateSignal[413:391];
-    endcase
-  end
-
-  assign c$case_alt_selection_2365 = c$case_alt_selection_2364;
-
-  assign c$i_1038 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2364 = $unsigned({{(64-8) {1'b0}},c$i_1038});
-
-  always_comb begin
-    case(c$case_alt_selection_2365)
-      64'sd237 : c$case_alt_795 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_795 = stateSignal[436:414];
-    endcase
-  end
-
-  assign c$case_alt_selection_2368 = c$case_alt_selection_2367;
-
-  assign c$i_1039 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2367 = $unsigned({{(64-8) {1'b0}},c$i_1039});
-
-  always_comb begin
-    case(c$case_alt_selection_2368)
-      64'sd236 : c$case_alt_796 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_796 = stateSignal[459:437];
-    endcase
-  end
-
-  assign c$case_alt_selection_2371 = c$case_alt_selection_2370;
-
-  assign c$i_1040 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2370 = $unsigned({{(64-8) {1'b0}},c$i_1040});
-
-  always_comb begin
-    case(c$case_alt_selection_2371)
-      64'sd235 : c$case_alt_797 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_797 = stateSignal[482:460];
-    endcase
-  end
-
-  assign c$case_alt_selection_2374 = c$case_alt_selection_2373;
-
-  assign c$i_1041 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2373 = $unsigned({{(64-8) {1'b0}},c$i_1041});
-
-  always_comb begin
-    case(c$case_alt_selection_2374)
-      64'sd234 : c$case_alt_798 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_798 = stateSignal[505:483];
-    endcase
-  end
-
-  assign c$case_alt_selection_2377 = c$case_alt_selection_2376;
-
-  assign c$i_1042 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2376 = $unsigned({{(64-8) {1'b0}},c$i_1042});
-
-  always_comb begin
-    case(c$case_alt_selection_2377)
-      64'sd233 : c$case_alt_799 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_799 = stateSignal[528:506];
-    endcase
-  end
-
-  assign c$case_alt_selection_2380 = c$case_alt_selection_2379;
-
-  assign c$i_1043 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2379 = $unsigned({{(64-8) {1'b0}},c$i_1043});
-
-  always_comb begin
-    case(c$case_alt_selection_2380)
-      64'sd232 : c$case_alt_800 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_800 = stateSignal[551:529];
-    endcase
-  end
-
-  assign c$case_alt_selection_2383 = c$case_alt_selection_2382;
-
-  assign c$i_1044 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2382 = $unsigned({{(64-8) {1'b0}},c$i_1044});
-
-  always_comb begin
-    case(c$case_alt_selection_2383)
-      64'sd231 : c$case_alt_801 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_801 = stateSignal[574:552];
-    endcase
-  end
-
-  assign c$case_alt_selection_2386 = c$case_alt_selection_2385;
-
-  assign c$i_1045 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2385 = $unsigned({{(64-8) {1'b0}},c$i_1045});
-
-  always_comb begin
-    case(c$case_alt_selection_2386)
-      64'sd230 : c$case_alt_802 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_802 = stateSignal[597:575];
-    endcase
-  end
-
-  assign c$case_alt_selection_2389 = c$case_alt_selection_2388;
-
-  assign c$i_1046 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2388 = $unsigned({{(64-8) {1'b0}},c$i_1046});
-
-  always_comb begin
-    case(c$case_alt_selection_2389)
-      64'sd229 : c$case_alt_803 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_803 = stateSignal[620:598];
-    endcase
-  end
-
-  assign c$case_alt_selection_2392 = c$case_alt_selection_2391;
-
-  assign c$i_1047 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2391 = $unsigned({{(64-8) {1'b0}},c$i_1047});
-
-  always_comb begin
-    case(c$case_alt_selection_2392)
-      64'sd228 : c$case_alt_804 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_804 = stateSignal[643:621];
-    endcase
-  end
-
-  assign c$case_alt_selection_2395 = c$case_alt_selection_2394;
-
-  assign c$i_1048 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2394 = $unsigned({{(64-8) {1'b0}},c$i_1048});
-
-  always_comb begin
-    case(c$case_alt_selection_2395)
-      64'sd227 : c$case_alt_805 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_805 = stateSignal[666:644];
-    endcase
-  end
-
-  assign c$case_alt_selection_2398 = c$case_alt_selection_2397;
-
-  assign c$i_1049 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2397 = $unsigned({{(64-8) {1'b0}},c$i_1049});
-
-  always_comb begin
-    case(c$case_alt_selection_2398)
-      64'sd226 : c$case_alt_806 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_806 = stateSignal[689:667];
-    endcase
-  end
-
-  assign c$case_alt_selection_2401 = c$case_alt_selection_2400;
-
-  assign c$i_1050 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2400 = $unsigned({{(64-8) {1'b0}},c$i_1050});
-
-  always_comb begin
-    case(c$case_alt_selection_2401)
-      64'sd225 : c$case_alt_807 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_807 = stateSignal[712:690];
-    endcase
-  end
-
-  assign c$case_alt_selection_2404 = c$case_alt_selection_2403;
-
-  assign c$i_1051 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2403 = $unsigned({{(64-8) {1'b0}},c$i_1051});
-
-  always_comb begin
-    case(c$case_alt_selection_2404)
-      64'sd224 : c$case_alt_808 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_808 = stateSignal[735:713];
-    endcase
-  end
-
-  assign c$case_alt_selection_2407 = c$case_alt_selection_2406;
-
-  assign c$i_1052 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2406 = $unsigned({{(64-8) {1'b0}},c$i_1052});
-
-  always_comb begin
-    case(c$case_alt_selection_2407)
-      64'sd223 : c$case_alt_809 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_809 = stateSignal[758:736];
-    endcase
-  end
-
-  assign c$case_alt_selection_2410 = c$case_alt_selection_2409;
-
-  assign c$i_1053 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2409 = $unsigned({{(64-8) {1'b0}},c$i_1053});
-
-  always_comb begin
-    case(c$case_alt_selection_2410)
-      64'sd222 : c$case_alt_810 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_810 = stateSignal[781:759];
-    endcase
-  end
-
-  assign c$case_alt_selection_2413 = c$case_alt_selection_2412;
-
-  assign c$i_1054 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2412 = $unsigned({{(64-8) {1'b0}},c$i_1054});
-
-  always_comb begin
-    case(c$case_alt_selection_2413)
-      64'sd221 : c$case_alt_811 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_811 = stateSignal[804:782];
-    endcase
-  end
-
-  assign c$case_alt_selection_2416 = c$case_alt_selection_2415;
-
-  assign c$i_1055 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2415 = $unsigned({{(64-8) {1'b0}},c$i_1055});
-
-  always_comb begin
-    case(c$case_alt_selection_2416)
-      64'sd220 : c$case_alt_812 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_812 = stateSignal[827:805];
-    endcase
-  end
-
-  assign c$case_alt_selection_2419 = c$case_alt_selection_2418;
-
-  assign c$i_1056 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2418 = $unsigned({{(64-8) {1'b0}},c$i_1056});
-
-  always_comb begin
-    case(c$case_alt_selection_2419)
-      64'sd219 : c$case_alt_813 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_813 = stateSignal[850:828];
-    endcase
-  end
-
-  assign c$case_alt_selection_2422 = c$case_alt_selection_2421;
-
-  assign c$i_1057 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2421 = $unsigned({{(64-8) {1'b0}},c$i_1057});
-
-  always_comb begin
-    case(c$case_alt_selection_2422)
-      64'sd218 : c$case_alt_814 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_814 = stateSignal[873:851];
-    endcase
-  end
-
-  assign c$case_alt_selection_2425 = c$case_alt_selection_2424;
-
-  assign c$i_1058 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2424 = $unsigned({{(64-8) {1'b0}},c$i_1058});
-
-  always_comb begin
-    case(c$case_alt_selection_2425)
-      64'sd217 : c$case_alt_815 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_815 = stateSignal[896:874];
-    endcase
-  end
-
-  assign c$case_alt_selection_2428 = c$case_alt_selection_2427;
-
-  assign c$i_1059 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2427 = $unsigned({{(64-8) {1'b0}},c$i_1059});
-
-  always_comb begin
-    case(c$case_alt_selection_2428)
-      64'sd216 : c$case_alt_816 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_816 = stateSignal[919:897];
-    endcase
-  end
-
-  assign c$case_alt_selection_2431 = c$case_alt_selection_2430;
-
-  assign c$i_1060 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2430 = $unsigned({{(64-8) {1'b0}},c$i_1060});
-
-  always_comb begin
-    case(c$case_alt_selection_2431)
-      64'sd215 : c$case_alt_817 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_817 = stateSignal[942:920];
-    endcase
-  end
-
-  assign c$case_alt_selection_2434 = c$case_alt_selection_2433;
-
-  assign c$i_1061 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2433 = $unsigned({{(64-8) {1'b0}},c$i_1061});
-
-  always_comb begin
-    case(c$case_alt_selection_2434)
-      64'sd214 : c$case_alt_818 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_818 = stateSignal[965:943];
-    endcase
-  end
-
-  assign c$case_alt_selection_2437 = c$case_alt_selection_2436;
-
-  assign c$i_1062 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2436 = $unsigned({{(64-8) {1'b0}},c$i_1062});
-
-  always_comb begin
-    case(c$case_alt_selection_2437)
-      64'sd213 : c$case_alt_819 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_819 = stateSignal[988:966];
-    endcase
-  end
-
-  assign c$case_alt_selection_2440 = c$case_alt_selection_2439;
-
-  assign c$i_1063 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2439 = $unsigned({{(64-8) {1'b0}},c$i_1063});
-
-  always_comb begin
-    case(c$case_alt_selection_2440)
-      64'sd212 : c$case_alt_820 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_820 = stateSignal[1011:989];
-    endcase
-  end
-
-  assign c$case_alt_selection_2443 = c$case_alt_selection_2442;
-
-  assign c$i_1064 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2442 = $unsigned({{(64-8) {1'b0}},c$i_1064});
-
-  always_comb begin
-    case(c$case_alt_selection_2443)
-      64'sd211 : c$case_alt_821 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_821 = stateSignal[1034:1012];
-    endcase
-  end
-
-  assign c$case_alt_selection_2446 = c$case_alt_selection_2445;
-
-  assign c$i_1065 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2445 = $unsigned({{(64-8) {1'b0}},c$i_1065});
-
-  always_comb begin
-    case(c$case_alt_selection_2446)
-      64'sd210 : c$case_alt_822 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_822 = stateSignal[1057:1035];
-    endcase
-  end
-
-  assign c$case_alt_selection_2449 = c$case_alt_selection_2448;
-
-  assign c$i_1066 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2448 = $unsigned({{(64-8) {1'b0}},c$i_1066});
-
-  always_comb begin
-    case(c$case_alt_selection_2449)
-      64'sd209 : c$case_alt_823 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_823 = stateSignal[1080:1058];
-    endcase
-  end
-
-  assign c$case_alt_selection_2452 = c$case_alt_selection_2451;
-
-  assign c$i_1067 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2451 = $unsigned({{(64-8) {1'b0}},c$i_1067});
-
-  always_comb begin
-    case(c$case_alt_selection_2452)
-      64'sd208 : c$case_alt_824 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_824 = stateSignal[1103:1081];
-    endcase
-  end
-
-  assign c$case_alt_selection_2455 = c$case_alt_selection_2454;
-
-  assign c$i_1068 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2454 = $unsigned({{(64-8) {1'b0}},c$i_1068});
-
-  always_comb begin
-    case(c$case_alt_selection_2455)
-      64'sd207 : c$case_alt_825 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_825 = stateSignal[1126:1104];
-    endcase
-  end
-
-  assign c$case_alt_selection_2458 = c$case_alt_selection_2457;
-
-  assign c$i_1069 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2457 = $unsigned({{(64-8) {1'b0}},c$i_1069});
-
-  always_comb begin
-    case(c$case_alt_selection_2458)
-      64'sd206 : c$case_alt_826 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_826 = stateSignal[1149:1127];
-    endcase
-  end
-
-  assign c$case_alt_selection_2461 = c$case_alt_selection_2460;
-
-  assign c$i_1070 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2460 = $unsigned({{(64-8) {1'b0}},c$i_1070});
-
-  always_comb begin
-    case(c$case_alt_selection_2461)
-      64'sd205 : c$case_alt_827 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_827 = stateSignal[1172:1150];
-    endcase
-  end
-
-  assign c$case_alt_selection_2464 = c$case_alt_selection_2463;
-
-  assign c$i_1071 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2463 = $unsigned({{(64-8) {1'b0}},c$i_1071});
-
-  always_comb begin
-    case(c$case_alt_selection_2464)
-      64'sd204 : c$case_alt_828 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_828 = stateSignal[1195:1173];
-    endcase
-  end
-
-  assign c$case_alt_selection_2467 = c$case_alt_selection_2466;
-
-  assign c$i_1072 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2466 = $unsigned({{(64-8) {1'b0}},c$i_1072});
-
-  always_comb begin
-    case(c$case_alt_selection_2467)
-      64'sd203 : c$case_alt_829 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_829 = stateSignal[1218:1196];
-    endcase
-  end
-
-  assign c$case_alt_selection_2470 = c$case_alt_selection_2469;
-
-  assign c$i_1073 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2469 = $unsigned({{(64-8) {1'b0}},c$i_1073});
-
-  always_comb begin
-    case(c$case_alt_selection_2470)
-      64'sd202 : c$case_alt_830 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_830 = stateSignal[1241:1219];
-    endcase
-  end
-
-  assign c$case_alt_selection_2473 = c$case_alt_selection_2472;
-
-  assign c$i_1074 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2472 = $unsigned({{(64-8) {1'b0}},c$i_1074});
-
-  always_comb begin
-    case(c$case_alt_selection_2473)
-      64'sd201 : c$case_alt_831 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_831 = stateSignal[1264:1242];
-    endcase
-  end
-
-  assign c$case_alt_selection_2476 = c$case_alt_selection_2475;
-
-  assign c$i_1075 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2475 = $unsigned({{(64-8) {1'b0}},c$i_1075});
-
-  always_comb begin
-    case(c$case_alt_selection_2476)
-      64'sd200 : c$case_alt_832 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_832 = stateSignal[1287:1265];
-    endcase
-  end
-
-  assign c$case_alt_selection_2479 = c$case_alt_selection_2478;
-
-  assign c$i_1076 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2478 = $unsigned({{(64-8) {1'b0}},c$i_1076});
-
-  always_comb begin
-    case(c$case_alt_selection_2479)
-      64'sd199 : c$case_alt_833 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_833 = stateSignal[1310:1288];
-    endcase
-  end
-
-  assign c$case_alt_selection_2482 = c$case_alt_selection_2481;
-
-  assign c$i_1077 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2481 = $unsigned({{(64-8) {1'b0}},c$i_1077});
-
-  always_comb begin
-    case(c$case_alt_selection_2482)
-      64'sd198 : c$case_alt_834 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_834 = stateSignal[1333:1311];
-    endcase
-  end
-
-  assign c$case_alt_selection_2485 = c$case_alt_selection_2484;
-
-  assign c$i_1078 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2484 = $unsigned({{(64-8) {1'b0}},c$i_1078});
-
-  always_comb begin
-    case(c$case_alt_selection_2485)
-      64'sd197 : c$case_alt_835 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_835 = stateSignal[1356:1334];
-    endcase
-  end
-
-  assign c$case_alt_selection_2488 = c$case_alt_selection_2487;
-
-  assign c$i_1079 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2487 = $unsigned({{(64-8) {1'b0}},c$i_1079});
-
-  always_comb begin
-    case(c$case_alt_selection_2488)
-      64'sd196 : c$case_alt_836 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_836 = stateSignal[1379:1357];
-    endcase
-  end
-
-  assign c$case_alt_selection_2491 = c$case_alt_selection_2490;
-
-  assign c$i_1080 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2490 = $unsigned({{(64-8) {1'b0}},c$i_1080});
-
-  always_comb begin
-    case(c$case_alt_selection_2491)
-      64'sd195 : c$case_alt_837 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_837 = stateSignal[1402:1380];
-    endcase
-  end
-
-  assign c$case_alt_selection_2494 = c$case_alt_selection_2493;
-
-  assign c$i_1081 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2493 = $unsigned({{(64-8) {1'b0}},c$i_1081});
-
-  always_comb begin
-    case(c$case_alt_selection_2494)
-      64'sd194 : c$case_alt_838 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_838 = stateSignal[1425:1403];
-    endcase
-  end
-
-  assign c$case_alt_selection_2497 = c$case_alt_selection_2496;
-
-  assign c$i_1082 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2496 = $unsigned({{(64-8) {1'b0}},c$i_1082});
-
-  always_comb begin
-    case(c$case_alt_selection_2497)
-      64'sd193 : c$case_alt_839 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_839 = stateSignal[1448:1426];
-    endcase
-  end
-
-  assign c$case_alt_selection_2500 = c$case_alt_selection_2499;
-
-  assign c$i_1083 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2499 = $unsigned({{(64-8) {1'b0}},c$i_1083});
-
-  always_comb begin
-    case(c$case_alt_selection_2500)
-      64'sd192 : c$case_alt_840 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_840 = stateSignal[1471:1449];
-    endcase
-  end
-
-  assign c$case_alt_selection_2503 = c$case_alt_selection_2502;
-
-  assign c$i_1084 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2502 = $unsigned({{(64-8) {1'b0}},c$i_1084});
-
-  always_comb begin
-    case(c$case_alt_selection_2503)
-      64'sd191 : c$case_alt_841 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_841 = stateSignal[1494:1472];
-    endcase
-  end
-
-  assign c$case_alt_selection_2506 = c$case_alt_selection_2505;
-
-  assign c$i_1085 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2505 = $unsigned({{(64-8) {1'b0}},c$i_1085});
-
-  always_comb begin
-    case(c$case_alt_selection_2506)
-      64'sd190 : c$case_alt_842 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_842 = stateSignal[1517:1495];
-    endcase
-  end
-
-  assign c$case_alt_selection_2509 = c$case_alt_selection_2508;
-
-  assign c$i_1086 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2508 = $unsigned({{(64-8) {1'b0}},c$i_1086});
-
-  always_comb begin
-    case(c$case_alt_selection_2509)
-      64'sd189 : c$case_alt_843 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_843 = stateSignal[1540:1518];
-    endcase
-  end
-
-  assign c$case_alt_selection_2512 = c$case_alt_selection_2511;
-
-  assign c$i_1087 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2511 = $unsigned({{(64-8) {1'b0}},c$i_1087});
-
-  always_comb begin
-    case(c$case_alt_selection_2512)
-      64'sd188 : c$case_alt_844 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_844 = stateSignal[1563:1541];
-    endcase
-  end
-
-  assign c$case_alt_selection_2515 = c$case_alt_selection_2514;
-
-  assign c$i_1088 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2514 = $unsigned({{(64-8) {1'b0}},c$i_1088});
-
-  always_comb begin
-    case(c$case_alt_selection_2515)
-      64'sd187 : c$case_alt_845 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_845 = stateSignal[1586:1564];
-    endcase
-  end
-
-  assign c$case_alt_selection_2518 = c$case_alt_selection_2517;
-
-  assign c$i_1089 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2517 = $unsigned({{(64-8) {1'b0}},c$i_1089});
-
-  always_comb begin
-    case(c$case_alt_selection_2518)
-      64'sd186 : c$case_alt_846 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_846 = stateSignal[1609:1587];
-    endcase
-  end
-
-  assign c$case_alt_selection_2521 = c$case_alt_selection_2520;
-
-  assign c$i_1090 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2520 = $unsigned({{(64-8) {1'b0}},c$i_1090});
-
-  always_comb begin
-    case(c$case_alt_selection_2521)
-      64'sd185 : c$case_alt_847 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_847 = stateSignal[1632:1610];
-    endcase
-  end
-
-  assign c$case_alt_selection_2524 = c$case_alt_selection_2523;
-
-  assign c$i_1091 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2523 = $unsigned({{(64-8) {1'b0}},c$i_1091});
-
-  always_comb begin
-    case(c$case_alt_selection_2524)
-      64'sd184 : c$case_alt_848 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_848 = stateSignal[1655:1633];
-    endcase
-  end
-
-  assign c$case_alt_selection_2527 = c$case_alt_selection_2526;
-
-  assign c$i_1092 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2526 = $unsigned({{(64-8) {1'b0}},c$i_1092});
-
-  always_comb begin
-    case(c$case_alt_selection_2527)
-      64'sd183 : c$case_alt_849 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_849 = stateSignal[1678:1656];
-    endcase
-  end
-
-  assign c$case_alt_selection_2530 = c$case_alt_selection_2529;
-
-  assign c$i_1093 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2529 = $unsigned({{(64-8) {1'b0}},c$i_1093});
-
-  always_comb begin
-    case(c$case_alt_selection_2530)
-      64'sd182 : c$case_alt_850 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_850 = stateSignal[1701:1679];
-    endcase
-  end
-
-  assign c$case_alt_selection_2533 = c$case_alt_selection_2532;
-
-  assign c$i_1094 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2532 = $unsigned({{(64-8) {1'b0}},c$i_1094});
-
-  always_comb begin
-    case(c$case_alt_selection_2533)
-      64'sd181 : c$case_alt_851 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_851 = stateSignal[1724:1702];
-    endcase
-  end
-
-  assign c$case_alt_selection_2536 = c$case_alt_selection_2535;
-
-  assign c$i_1095 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2535 = $unsigned({{(64-8) {1'b0}},c$i_1095});
-
-  always_comb begin
-    case(c$case_alt_selection_2536)
-      64'sd180 : c$case_alt_852 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_852 = stateSignal[1747:1725];
-    endcase
-  end
-
-  assign c$case_alt_selection_2539 = c$case_alt_selection_2538;
-
-  assign c$i_1096 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2538 = $unsigned({{(64-8) {1'b0}},c$i_1096});
-
-  always_comb begin
-    case(c$case_alt_selection_2539)
-      64'sd179 : c$case_alt_853 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_853 = stateSignal[1770:1748];
-    endcase
-  end
-
-  assign c$case_alt_selection_2542 = c$case_alt_selection_2541;
-
-  assign c$i_1097 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2541 = $unsigned({{(64-8) {1'b0}},c$i_1097});
-
-  always_comb begin
-    case(c$case_alt_selection_2542)
-      64'sd178 : c$case_alt_854 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_854 = stateSignal[1793:1771];
-    endcase
-  end
-
-  assign c$case_alt_selection_2545 = c$case_alt_selection_2544;
-
-  assign c$i_1098 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2544 = $unsigned({{(64-8) {1'b0}},c$i_1098});
-
-  always_comb begin
-    case(c$case_alt_selection_2545)
-      64'sd177 : c$case_alt_855 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_855 = stateSignal[1816:1794];
-    endcase
-  end
-
-  assign c$case_alt_selection_2548 = c$case_alt_selection_2547;
-
-  assign c$i_1099 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2547 = $unsigned({{(64-8) {1'b0}},c$i_1099});
-
-  always_comb begin
-    case(c$case_alt_selection_2548)
-      64'sd176 : c$case_alt_856 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_856 = stateSignal[1839:1817];
-    endcase
-  end
-
-  assign c$case_alt_selection_2551 = c$case_alt_selection_2550;
-
-  assign c$i_1100 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2550 = $unsigned({{(64-8) {1'b0}},c$i_1100});
-
-  always_comb begin
-    case(c$case_alt_selection_2551)
-      64'sd175 : c$case_alt_857 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_857 = stateSignal[1862:1840];
-    endcase
-  end
-
-  assign c$case_alt_selection_2554 = c$case_alt_selection_2553;
-
-  assign c$i_1101 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2553 = $unsigned({{(64-8) {1'b0}},c$i_1101});
-
-  always_comb begin
-    case(c$case_alt_selection_2554)
-      64'sd174 : c$case_alt_858 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_858 = stateSignal[1885:1863];
-    endcase
-  end
-
-  assign c$case_alt_selection_2557 = c$case_alt_selection_2556;
-
-  assign c$i_1102 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2556 = $unsigned({{(64-8) {1'b0}},c$i_1102});
-
-  always_comb begin
-    case(c$case_alt_selection_2557)
-      64'sd173 : c$case_alt_859 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_859 = stateSignal[1908:1886];
-    endcase
-  end
-
-  assign c$case_alt_selection_2560 = c$case_alt_selection_2559;
-
-  assign c$i_1103 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2559 = $unsigned({{(64-8) {1'b0}},c$i_1103});
-
-  always_comb begin
-    case(c$case_alt_selection_2560)
-      64'sd172 : c$case_alt_860 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_860 = stateSignal[1931:1909];
-    endcase
-  end
-
-  assign c$case_alt_selection_2563 = c$case_alt_selection_2562;
-
-  assign c$i_1104 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2562 = $unsigned({{(64-8) {1'b0}},c$i_1104});
-
-  always_comb begin
-    case(c$case_alt_selection_2563)
-      64'sd171 : c$case_alt_861 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_861 = stateSignal[1954:1932];
-    endcase
-  end
-
-  assign c$case_alt_selection_2566 = c$case_alt_selection_2565;
-
-  assign c$i_1105 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2565 = $unsigned({{(64-8) {1'b0}},c$i_1105});
-
-  always_comb begin
-    case(c$case_alt_selection_2566)
-      64'sd170 : c$case_alt_862 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_862 = stateSignal[1977:1955];
-    endcase
-  end
-
-  assign c$case_alt_selection_2569 = c$case_alt_selection_2568;
-
-  assign c$i_1106 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2568 = $unsigned({{(64-8) {1'b0}},c$i_1106});
-
-  always_comb begin
-    case(c$case_alt_selection_2569)
-      64'sd169 : c$case_alt_863 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_863 = stateSignal[2000:1978];
-    endcase
-  end
-
-  assign c$case_alt_selection_2572 = c$case_alt_selection_2571;
-
-  assign c$i_1107 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2571 = $unsigned({{(64-8) {1'b0}},c$i_1107});
-
-  always_comb begin
-    case(c$case_alt_selection_2572)
-      64'sd168 : c$case_alt_864 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_864 = stateSignal[2023:2001];
-    endcase
-  end
-
-  assign c$case_alt_selection_2575 = c$case_alt_selection_2574;
-
-  assign c$i_1108 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2574 = $unsigned({{(64-8) {1'b0}},c$i_1108});
-
-  always_comb begin
-    case(c$case_alt_selection_2575)
-      64'sd167 : c$case_alt_865 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_865 = stateSignal[2046:2024];
-    endcase
-  end
-
-  assign c$case_alt_selection_2578 = c$case_alt_selection_2577;
-
-  assign c$i_1109 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2577 = $unsigned({{(64-8) {1'b0}},c$i_1109});
-
-  always_comb begin
-    case(c$case_alt_selection_2578)
-      64'sd166 : c$case_alt_866 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_866 = stateSignal[2069:2047];
-    endcase
-  end
-
-  assign c$case_alt_selection_2581 = c$case_alt_selection_2580;
-
-  assign c$i_1110 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2580 = $unsigned({{(64-8) {1'b0}},c$i_1110});
-
-  always_comb begin
-    case(c$case_alt_selection_2581)
-      64'sd165 : c$case_alt_867 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_867 = stateSignal[2092:2070];
-    endcase
-  end
-
-  assign c$case_alt_selection_2584 = c$case_alt_selection_2583;
-
-  assign c$i_1111 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2583 = $unsigned({{(64-8) {1'b0}},c$i_1111});
-
-  always_comb begin
-    case(c$case_alt_selection_2584)
-      64'sd164 : c$case_alt_868 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_868 = stateSignal[2115:2093];
-    endcase
-  end
-
-  assign c$case_alt_selection_2587 = c$case_alt_selection_2586;
-
-  assign c$i_1112 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2586 = $unsigned({{(64-8) {1'b0}},c$i_1112});
-
-  always_comb begin
-    case(c$case_alt_selection_2587)
-      64'sd163 : c$case_alt_869 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_869 = stateSignal[2138:2116];
-    endcase
-  end
-
-  assign c$case_alt_selection_2590 = c$case_alt_selection_2589;
-
-  assign c$i_1113 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2589 = $unsigned({{(64-8) {1'b0}},c$i_1113});
-
-  always_comb begin
-    case(c$case_alt_selection_2590)
-      64'sd162 : c$case_alt_870 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_870 = stateSignal[2161:2139];
-    endcase
-  end
-
-  assign c$case_alt_selection_2593 = c$case_alt_selection_2592;
-
-  assign c$i_1114 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2592 = $unsigned({{(64-8) {1'b0}},c$i_1114});
-
-  always_comb begin
-    case(c$case_alt_selection_2593)
-      64'sd161 : c$case_alt_871 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_871 = stateSignal[2184:2162];
-    endcase
-  end
-
-  assign c$case_alt_selection_2596 = c$case_alt_selection_2595;
-
-  assign c$i_1115 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2595 = $unsigned({{(64-8) {1'b0}},c$i_1115});
-
-  always_comb begin
-    case(c$case_alt_selection_2596)
-      64'sd160 : c$case_alt_872 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_872 = stateSignal[2207:2185];
-    endcase
-  end
-
-  assign c$case_alt_selection_2599 = c$case_alt_selection_2598;
-
-  assign c$i_1116 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2598 = $unsigned({{(64-8) {1'b0}},c$i_1116});
-
-  always_comb begin
-    case(c$case_alt_selection_2599)
-      64'sd159 : c$case_alt_873 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_873 = stateSignal[2230:2208];
-    endcase
-  end
-
-  assign c$case_alt_selection_2602 = c$case_alt_selection_2601;
-
-  assign c$i_1117 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2601 = $unsigned({{(64-8) {1'b0}},c$i_1117});
-
-  always_comb begin
-    case(c$case_alt_selection_2602)
-      64'sd158 : c$case_alt_874 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_874 = stateSignal[2253:2231];
-    endcase
-  end
-
-  assign c$case_alt_selection_2605 = c$case_alt_selection_2604;
-
-  assign c$i_1118 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2604 = $unsigned({{(64-8) {1'b0}},c$i_1118});
-
-  always_comb begin
-    case(c$case_alt_selection_2605)
-      64'sd157 : c$case_alt_875 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_875 = stateSignal[2276:2254];
-    endcase
-  end
-
-  assign c$case_alt_selection_2608 = c$case_alt_selection_2607;
-
-  assign c$i_1119 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2607 = $unsigned({{(64-8) {1'b0}},c$i_1119});
-
-  always_comb begin
-    case(c$case_alt_selection_2608)
-      64'sd156 : c$case_alt_876 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_876 = stateSignal[2299:2277];
-    endcase
-  end
-
-  assign c$case_alt_selection_2611 = c$case_alt_selection_2610;
-
-  assign c$i_1120 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2610 = $unsigned({{(64-8) {1'b0}},c$i_1120});
-
-  always_comb begin
-    case(c$case_alt_selection_2611)
-      64'sd155 : c$case_alt_877 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_877 = stateSignal[2322:2300];
-    endcase
-  end
-
-  assign c$case_alt_selection_2614 = c$case_alt_selection_2613;
-
-  assign c$i_1121 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2613 = $unsigned({{(64-8) {1'b0}},c$i_1121});
-
-  always_comb begin
-    case(c$case_alt_selection_2614)
-      64'sd154 : c$case_alt_878 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_878 = stateSignal[2345:2323];
-    endcase
-  end
-
-  assign c$case_alt_selection_2617 = c$case_alt_selection_2616;
-
-  assign c$i_1122 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2616 = $unsigned({{(64-8) {1'b0}},c$i_1122});
-
-  always_comb begin
-    case(c$case_alt_selection_2617)
-      64'sd153 : c$case_alt_879 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_879 = stateSignal[2368:2346];
-    endcase
-  end
-
-  assign c$case_alt_selection_2620 = c$case_alt_selection_2619;
-
-  assign c$i_1123 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2619 = $unsigned({{(64-8) {1'b0}},c$i_1123});
-
-  always_comb begin
-    case(c$case_alt_selection_2620)
-      64'sd152 : c$case_alt_880 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_880 = stateSignal[2391:2369];
-    endcase
-  end
-
-  assign c$case_alt_selection_2623 = c$case_alt_selection_2622;
-
-  assign c$i_1124 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2622 = $unsigned({{(64-8) {1'b0}},c$i_1124});
-
-  always_comb begin
-    case(c$case_alt_selection_2623)
-      64'sd151 : c$case_alt_881 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_881 = stateSignal[2414:2392];
-    endcase
-  end
-
-  assign c$case_alt_selection_2626 = c$case_alt_selection_2625;
-
-  assign c$i_1125 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2625 = $unsigned({{(64-8) {1'b0}},c$i_1125});
-
-  always_comb begin
-    case(c$case_alt_selection_2626)
-      64'sd150 : c$case_alt_882 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_882 = stateSignal[2437:2415];
-    endcase
-  end
-
-  assign c$case_alt_selection_2629 = c$case_alt_selection_2628;
-
-  assign c$i_1126 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2628 = $unsigned({{(64-8) {1'b0}},c$i_1126});
-
-  always_comb begin
-    case(c$case_alt_selection_2629)
-      64'sd149 : c$case_alt_883 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_883 = stateSignal[2460:2438];
-    endcase
-  end
-
-  assign c$case_alt_selection_2632 = c$case_alt_selection_2631;
-
-  assign c$i_1127 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2631 = $unsigned({{(64-8) {1'b0}},c$i_1127});
-
-  always_comb begin
-    case(c$case_alt_selection_2632)
-      64'sd148 : c$case_alt_884 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_884 = stateSignal[2483:2461];
-    endcase
-  end
-
-  assign c$case_alt_selection_2635 = c$case_alt_selection_2634;
-
-  assign c$i_1128 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2634 = $unsigned({{(64-8) {1'b0}},c$i_1128});
-
-  always_comb begin
-    case(c$case_alt_selection_2635)
-      64'sd147 : c$case_alt_885 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_885 = stateSignal[2506:2484];
-    endcase
-  end
-
-  assign c$case_alt_selection_2638 = c$case_alt_selection_2637;
-
-  assign c$i_1129 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2637 = $unsigned({{(64-8) {1'b0}},c$i_1129});
-
-  always_comb begin
-    case(c$case_alt_selection_2638)
-      64'sd146 : c$case_alt_886 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_886 = stateSignal[2529:2507];
-    endcase
-  end
-
-  assign c$case_alt_selection_2641 = c$case_alt_selection_2640;
-
-  assign c$i_1130 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2640 = $unsigned({{(64-8) {1'b0}},c$i_1130});
-
-  always_comb begin
-    case(c$case_alt_selection_2641)
-      64'sd145 : c$case_alt_887 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_887 = stateSignal[2552:2530];
-    endcase
-  end
-
-  assign c$case_alt_selection_2644 = c$case_alt_selection_2643;
-
-  assign c$i_1131 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2643 = $unsigned({{(64-8) {1'b0}},c$i_1131});
-
-  always_comb begin
-    case(c$case_alt_selection_2644)
-      64'sd144 : c$case_alt_888 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_888 = stateSignal[2575:2553];
-    endcase
-  end
-
-  assign c$case_alt_selection_2647 = c$case_alt_selection_2646;
-
-  assign c$i_1132 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2646 = $unsigned({{(64-8) {1'b0}},c$i_1132});
-
-  always_comb begin
-    case(c$case_alt_selection_2647)
-      64'sd143 : c$case_alt_889 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_889 = stateSignal[2598:2576];
-    endcase
-  end
-
-  assign c$case_alt_selection_2650 = c$case_alt_selection_2649;
-
-  assign c$i_1133 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2649 = $unsigned({{(64-8) {1'b0}},c$i_1133});
-
-  always_comb begin
-    case(c$case_alt_selection_2650)
-      64'sd142 : c$case_alt_890 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_890 = stateSignal[2621:2599];
-    endcase
-  end
-
-  assign c$case_alt_selection_2653 = c$case_alt_selection_2652;
-
-  assign c$i_1134 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2652 = $unsigned({{(64-8) {1'b0}},c$i_1134});
-
-  always_comb begin
-    case(c$case_alt_selection_2653)
-      64'sd141 : c$case_alt_891 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_891 = stateSignal[2644:2622];
-    endcase
-  end
-
-  assign c$case_alt_selection_2656 = c$case_alt_selection_2655;
-
-  assign c$i_1135 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2655 = $unsigned({{(64-8) {1'b0}},c$i_1135});
-
-  always_comb begin
-    case(c$case_alt_selection_2656)
-      64'sd140 : c$case_alt_892 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_892 = stateSignal[2667:2645];
-    endcase
-  end
-
-  assign c$case_alt_selection_2659 = c$case_alt_selection_2658;
-
-  assign c$i_1136 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2658 = $unsigned({{(64-8) {1'b0}},c$i_1136});
-
-  always_comb begin
-    case(c$case_alt_selection_2659)
-      64'sd139 : c$case_alt_893 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_893 = stateSignal[2690:2668];
-    endcase
-  end
-
-  assign c$case_alt_selection_2662 = c$case_alt_selection_2661;
-
-  assign c$i_1137 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2661 = $unsigned({{(64-8) {1'b0}},c$i_1137});
-
-  always_comb begin
-    case(c$case_alt_selection_2662)
-      64'sd138 : c$case_alt_894 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_894 = stateSignal[2713:2691];
-    endcase
-  end
-
-  assign c$case_alt_selection_2665 = c$case_alt_selection_2664;
-
-  assign c$i_1138 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2664 = $unsigned({{(64-8) {1'b0}},c$i_1138});
-
-  always_comb begin
-    case(c$case_alt_selection_2665)
-      64'sd137 : c$case_alt_895 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_895 = stateSignal[2736:2714];
-    endcase
-  end
-
-  assign c$case_alt_selection_2668 = c$case_alt_selection_2667;
-
-  assign c$i_1139 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2667 = $unsigned({{(64-8) {1'b0}},c$i_1139});
-
-  always_comb begin
-    case(c$case_alt_selection_2668)
-      64'sd136 : c$case_alt_896 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_896 = stateSignal[2759:2737];
-    endcase
-  end
-
-  assign c$case_alt_selection_2671 = c$case_alt_selection_2670;
-
-  assign c$i_1140 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2670 = $unsigned({{(64-8) {1'b0}},c$i_1140});
-
-  always_comb begin
-    case(c$case_alt_selection_2671)
-      64'sd135 : c$case_alt_897 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_897 = stateSignal[2782:2760];
-    endcase
-  end
-
-  assign c$case_alt_selection_2674 = c$case_alt_selection_2673;
-
-  assign c$i_1141 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2673 = $unsigned({{(64-8) {1'b0}},c$i_1141});
-
-  always_comb begin
-    case(c$case_alt_selection_2674)
-      64'sd134 : c$case_alt_898 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_898 = stateSignal[2805:2783];
-    endcase
-  end
-
-  assign c$case_alt_selection_2677 = c$case_alt_selection_2676;
-
-  assign c$i_1142 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2676 = $unsigned({{(64-8) {1'b0}},c$i_1142});
-
-  always_comb begin
-    case(c$case_alt_selection_2677)
-      64'sd133 : c$case_alt_899 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_899 = stateSignal[2828:2806];
-    endcase
-  end
-
-  assign c$case_alt_selection_2680 = c$case_alt_selection_2679;
-
-  assign c$i_1143 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2679 = $unsigned({{(64-8) {1'b0}},c$i_1143});
-
-  always_comb begin
-    case(c$case_alt_selection_2680)
-      64'sd132 : c$case_alt_900 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_900 = stateSignal[2851:2829];
-    endcase
-  end
-
-  assign c$case_alt_selection_2683 = c$case_alt_selection_2682;
-
-  assign c$i_1144 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2682 = $unsigned({{(64-8) {1'b0}},c$i_1144});
-
-  always_comb begin
-    case(c$case_alt_selection_2683)
-      64'sd131 : c$case_alt_901 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_901 = stateSignal[2874:2852];
-    endcase
-  end
-
-  assign c$case_alt_selection_2686 = c$case_alt_selection_2685;
-
-  assign c$i_1145 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2685 = $unsigned({{(64-8) {1'b0}},c$i_1145});
-
-  always_comb begin
-    case(c$case_alt_selection_2686)
-      64'sd130 : c$case_alt_902 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_902 = stateSignal[2897:2875];
-    endcase
-  end
-
-  assign c$case_alt_selection_2689 = c$case_alt_selection_2688;
-
-  assign c$i_1146 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2688 = $unsigned({{(64-8) {1'b0}},c$i_1146});
-
-  always_comb begin
-    case(c$case_alt_selection_2689)
-      64'sd129 : c$case_alt_903 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_903 = stateSignal[2920:2898];
-    endcase
-  end
-
-  assign c$case_alt_selection_2692 = c$case_alt_selection_2691;
-
-  assign c$i_1147 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2691 = $unsigned({{(64-8) {1'b0}},c$i_1147});
-
-  always_comb begin
-    case(c$case_alt_selection_2692)
-      64'sd128 : c$case_alt_904 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_904 = stateSignal[2943:2921];
-    endcase
-  end
-
-  assign c$case_alt_selection_2695 = c$case_alt_selection_2694;
-
-  assign c$i_1148 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2694 = $unsigned({{(64-8) {1'b0}},c$i_1148});
-
-  always_comb begin
-    case(c$case_alt_selection_2695)
-      64'sd127 : c$case_alt_905 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_905 = stateSignal[2966:2944];
-    endcase
-  end
-
-  assign c$case_alt_selection_2698 = c$case_alt_selection_2697;
-
-  assign c$i_1149 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2697 = $unsigned({{(64-8) {1'b0}},c$i_1149});
-
-  always_comb begin
-    case(c$case_alt_selection_2698)
-      64'sd126 : c$case_alt_906 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_906 = stateSignal[2989:2967];
-    endcase
-  end
-
-  assign c$case_alt_selection_2701 = c$case_alt_selection_2700;
-
-  assign c$i_1150 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2700 = $unsigned({{(64-8) {1'b0}},c$i_1150});
-
-  always_comb begin
-    case(c$case_alt_selection_2701)
-      64'sd125 : c$case_alt_907 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_907 = stateSignal[3012:2990];
-    endcase
-  end
-
-  assign c$case_alt_selection_2704 = c$case_alt_selection_2703;
-
-  assign c$i_1151 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2703 = $unsigned({{(64-8) {1'b0}},c$i_1151});
-
-  always_comb begin
-    case(c$case_alt_selection_2704)
-      64'sd124 : c$case_alt_908 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_908 = stateSignal[3035:3013];
-    endcase
-  end
-
-  assign c$case_alt_selection_2707 = c$case_alt_selection_2706;
-
-  assign c$i_1152 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2706 = $unsigned({{(64-8) {1'b0}},c$i_1152});
-
-  always_comb begin
-    case(c$case_alt_selection_2707)
-      64'sd123 : c$case_alt_909 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_909 = stateSignal[3058:3036];
-    endcase
-  end
-
-  assign c$case_alt_selection_2710 = c$case_alt_selection_2709;
-
-  assign c$i_1153 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2709 = $unsigned({{(64-8) {1'b0}},c$i_1153});
-
-  always_comb begin
-    case(c$case_alt_selection_2710)
-      64'sd122 : c$case_alt_910 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_910 = stateSignal[3081:3059];
-    endcase
-  end
-
-  assign c$case_alt_selection_2713 = c$case_alt_selection_2712;
-
-  assign c$i_1154 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2712 = $unsigned({{(64-8) {1'b0}},c$i_1154});
-
-  always_comb begin
-    case(c$case_alt_selection_2713)
-      64'sd121 : c$case_alt_911 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_911 = stateSignal[3104:3082];
-    endcase
-  end
-
-  assign c$case_alt_selection_2716 = c$case_alt_selection_2715;
-
-  assign c$i_1155 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2715 = $unsigned({{(64-8) {1'b0}},c$i_1155});
-
-  always_comb begin
-    case(c$case_alt_selection_2716)
-      64'sd120 : c$case_alt_912 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_912 = stateSignal[3127:3105];
-    endcase
-  end
-
-  assign c$case_alt_selection_2719 = c$case_alt_selection_2718;
-
-  assign c$i_1156 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2718 = $unsigned({{(64-8) {1'b0}},c$i_1156});
-
-  always_comb begin
-    case(c$case_alt_selection_2719)
-      64'sd119 : c$case_alt_913 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_913 = stateSignal[3150:3128];
-    endcase
-  end
-
-  assign c$case_alt_selection_2722 = c$case_alt_selection_2721;
-
-  assign c$i_1157 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2721 = $unsigned({{(64-8) {1'b0}},c$i_1157});
-
-  always_comb begin
-    case(c$case_alt_selection_2722)
-      64'sd118 : c$case_alt_914 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_914 = stateSignal[3173:3151];
-    endcase
-  end
-
-  assign c$case_alt_selection_2725 = c$case_alt_selection_2724;
-
-  assign c$i_1158 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2724 = $unsigned({{(64-8) {1'b0}},c$i_1158});
-
-  always_comb begin
-    case(c$case_alt_selection_2725)
-      64'sd117 : c$case_alt_915 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_915 = stateSignal[3196:3174];
-    endcase
-  end
-
-  assign c$case_alt_selection_2728 = c$case_alt_selection_2727;
-
-  assign c$i_1159 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2727 = $unsigned({{(64-8) {1'b0}},c$i_1159});
-
-  always_comb begin
-    case(c$case_alt_selection_2728)
-      64'sd116 : c$case_alt_916 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_916 = stateSignal[3219:3197];
-    endcase
-  end
-
-  assign c$case_alt_selection_2731 = c$case_alt_selection_2730;
-
-  assign c$i_1160 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2730 = $unsigned({{(64-8) {1'b0}},c$i_1160});
-
-  always_comb begin
-    case(c$case_alt_selection_2731)
-      64'sd115 : c$case_alt_917 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_917 = stateSignal[3242:3220];
-    endcase
-  end
-
-  assign c$case_alt_selection_2734 = c$case_alt_selection_2733;
-
-  assign c$i_1161 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2733 = $unsigned({{(64-8) {1'b0}},c$i_1161});
-
-  always_comb begin
-    case(c$case_alt_selection_2734)
-      64'sd114 : c$case_alt_918 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_918 = stateSignal[3265:3243];
-    endcase
-  end
-
-  assign c$case_alt_selection_2737 = c$case_alt_selection_2736;
-
-  assign c$i_1162 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2736 = $unsigned({{(64-8) {1'b0}},c$i_1162});
-
-  always_comb begin
-    case(c$case_alt_selection_2737)
-      64'sd113 : c$case_alt_919 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_919 = stateSignal[3288:3266];
-    endcase
-  end
-
-  assign c$case_alt_selection_2740 = c$case_alt_selection_2739;
-
-  assign c$i_1163 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2739 = $unsigned({{(64-8) {1'b0}},c$i_1163});
-
-  always_comb begin
-    case(c$case_alt_selection_2740)
-      64'sd112 : c$case_alt_920 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_920 = stateSignal[3311:3289];
-    endcase
-  end
-
-  assign c$case_alt_selection_2743 = c$case_alt_selection_2742;
-
-  assign c$i_1164 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2742 = $unsigned({{(64-8) {1'b0}},c$i_1164});
-
-  always_comb begin
-    case(c$case_alt_selection_2743)
-      64'sd111 : c$case_alt_921 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_921 = stateSignal[3334:3312];
-    endcase
-  end
-
-  assign c$case_alt_selection_2746 = c$case_alt_selection_2745;
-
-  assign c$i_1165 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2745 = $unsigned({{(64-8) {1'b0}},c$i_1165});
-
-  always_comb begin
-    case(c$case_alt_selection_2746)
-      64'sd110 : c$case_alt_922 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_922 = stateSignal[3357:3335];
-    endcase
-  end
-
-  assign c$case_alt_selection_2749 = c$case_alt_selection_2748;
-
-  assign c$i_1166 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2748 = $unsigned({{(64-8) {1'b0}},c$i_1166});
-
-  always_comb begin
-    case(c$case_alt_selection_2749)
-      64'sd109 : c$case_alt_923 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_923 = stateSignal[3380:3358];
-    endcase
-  end
-
-  assign c$case_alt_selection_2752 = c$case_alt_selection_2751;
-
-  assign c$i_1167 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2751 = $unsigned({{(64-8) {1'b0}},c$i_1167});
-
-  always_comb begin
-    case(c$case_alt_selection_2752)
-      64'sd108 : c$case_alt_924 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_924 = stateSignal[3403:3381];
-    endcase
-  end
-
-  assign c$case_alt_selection_2755 = c$case_alt_selection_2754;
-
-  assign c$i_1168 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2754 = $unsigned({{(64-8) {1'b0}},c$i_1168});
-
-  always_comb begin
-    case(c$case_alt_selection_2755)
-      64'sd107 : c$case_alt_925 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_925 = stateSignal[3426:3404];
-    endcase
-  end
-
-  assign c$case_alt_selection_2758 = c$case_alt_selection_2757;
-
-  assign c$i_1169 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2757 = $unsigned({{(64-8) {1'b0}},c$i_1169});
-
-  always_comb begin
-    case(c$case_alt_selection_2758)
-      64'sd106 : c$case_alt_926 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_926 = stateSignal[3449:3427];
-    endcase
-  end
-
-  assign c$case_alt_selection_2761 = c$case_alt_selection_2760;
-
-  assign c$i_1170 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2760 = $unsigned({{(64-8) {1'b0}},c$i_1170});
-
-  always_comb begin
-    case(c$case_alt_selection_2761)
-      64'sd105 : c$case_alt_927 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_927 = stateSignal[3472:3450];
-    endcase
-  end
-
-  assign c$case_alt_selection_2764 = c$case_alt_selection_2763;
-
-  assign c$i_1171 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2763 = $unsigned({{(64-8) {1'b0}},c$i_1171});
-
-  always_comb begin
-    case(c$case_alt_selection_2764)
-      64'sd104 : c$case_alt_928 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_928 = stateSignal[3495:3473];
-    endcase
-  end
-
-  assign c$case_alt_selection_2767 = c$case_alt_selection_2766;
-
-  assign c$i_1172 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2766 = $unsigned({{(64-8) {1'b0}},c$i_1172});
-
-  always_comb begin
-    case(c$case_alt_selection_2767)
-      64'sd103 : c$case_alt_929 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_929 = stateSignal[3518:3496];
-    endcase
-  end
-
-  assign c$case_alt_selection_2770 = c$case_alt_selection_2769;
-
-  assign c$i_1173 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2769 = $unsigned({{(64-8) {1'b0}},c$i_1173});
-
-  always_comb begin
-    case(c$case_alt_selection_2770)
-      64'sd102 : c$case_alt_930 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_930 = stateSignal[3541:3519];
-    endcase
-  end
-
-  assign c$case_alt_selection_2773 = c$case_alt_selection_2772;
-
-  assign c$i_1174 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2772 = $unsigned({{(64-8) {1'b0}},c$i_1174});
-
-  always_comb begin
-    case(c$case_alt_selection_2773)
-      64'sd101 : c$case_alt_931 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_931 = stateSignal[3564:3542];
-    endcase
-  end
-
-  assign c$case_alt_selection_2776 = c$case_alt_selection_2775;
-
-  assign c$i_1175 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2775 = $unsigned({{(64-8) {1'b0}},c$i_1175});
-
-  always_comb begin
-    case(c$case_alt_selection_2776)
-      64'sd100 : c$case_alt_932 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_932 = stateSignal[3587:3565];
-    endcase
-  end
-
-  assign c$case_alt_selection_2779 = c$case_alt_selection_2778;
-
-  assign c$i_1176 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2778 = $unsigned({{(64-8) {1'b0}},c$i_1176});
-
-  always_comb begin
-    case(c$case_alt_selection_2779)
-      64'sd99 : c$case_alt_933 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_933 = stateSignal[3610:3588];
-    endcase
-  end
-
-  assign c$case_alt_selection_2782 = c$case_alt_selection_2781;
-
-  assign c$i_1177 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2781 = $unsigned({{(64-8) {1'b0}},c$i_1177});
-
-  always_comb begin
-    case(c$case_alt_selection_2782)
-      64'sd98 : c$case_alt_934 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_934 = stateSignal[3633:3611];
-    endcase
-  end
-
-  assign c$case_alt_selection_2785 = c$case_alt_selection_2784;
-
-  assign c$i_1178 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2784 = $unsigned({{(64-8) {1'b0}},c$i_1178});
-
-  always_comb begin
-    case(c$case_alt_selection_2785)
-      64'sd97 : c$case_alt_935 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_935 = stateSignal[3656:3634];
-    endcase
-  end
-
-  assign c$case_alt_selection_2788 = c$case_alt_selection_2787;
-
-  assign c$i_1179 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2787 = $unsigned({{(64-8) {1'b0}},c$i_1179});
-
-  always_comb begin
-    case(c$case_alt_selection_2788)
-      64'sd96 : c$case_alt_936 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_936 = stateSignal[3679:3657];
-    endcase
-  end
-
-  assign c$case_alt_selection_2791 = c$case_alt_selection_2790;
-
-  assign c$i_1180 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2790 = $unsigned({{(64-8) {1'b0}},c$i_1180});
-
-  always_comb begin
-    case(c$case_alt_selection_2791)
-      64'sd95 : c$case_alt_937 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_937 = stateSignal[3702:3680];
-    endcase
-  end
-
-  assign c$case_alt_selection_2794 = c$case_alt_selection_2793;
-
-  assign c$i_1181 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2793 = $unsigned({{(64-8) {1'b0}},c$i_1181});
-
-  always_comb begin
-    case(c$case_alt_selection_2794)
-      64'sd94 : c$case_alt_938 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_938 = stateSignal[3725:3703];
-    endcase
-  end
-
-  assign c$case_alt_selection_2797 = c$case_alt_selection_2796;
-
-  assign c$i_1182 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2796 = $unsigned({{(64-8) {1'b0}},c$i_1182});
-
-  always_comb begin
-    case(c$case_alt_selection_2797)
-      64'sd93 : c$case_alt_939 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_939 = stateSignal[3748:3726];
-    endcase
-  end
-
-  assign c$case_alt_selection_2800 = c$case_alt_selection_2799;
-
-  assign c$i_1183 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2799 = $unsigned({{(64-8) {1'b0}},c$i_1183});
-
-  always_comb begin
-    case(c$case_alt_selection_2800)
-      64'sd92 : c$case_alt_940 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_940 = stateSignal[3771:3749];
-    endcase
-  end
-
-  assign c$case_alt_selection_2803 = c$case_alt_selection_2802;
-
-  assign c$i_1184 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2802 = $unsigned({{(64-8) {1'b0}},c$i_1184});
-
-  always_comb begin
-    case(c$case_alt_selection_2803)
-      64'sd91 : c$case_alt_941 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_941 = stateSignal[3794:3772];
-    endcase
-  end
-
-  assign c$case_alt_selection_2806 = c$case_alt_selection_2805;
-
-  assign c$i_1185 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2805 = $unsigned({{(64-8) {1'b0}},c$i_1185});
-
-  always_comb begin
-    case(c$case_alt_selection_2806)
-      64'sd90 : c$case_alt_942 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_942 = stateSignal[3817:3795];
-    endcase
-  end
-
-  assign c$case_alt_selection_2809 = c$case_alt_selection_2808;
-
-  assign c$i_1186 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2808 = $unsigned({{(64-8) {1'b0}},c$i_1186});
-
-  always_comb begin
-    case(c$case_alt_selection_2809)
-      64'sd89 : c$case_alt_943 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_943 = stateSignal[3840:3818];
-    endcase
-  end
-
-  assign c$case_alt_selection_2812 = c$case_alt_selection_2811;
-
-  assign c$i_1187 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2811 = $unsigned({{(64-8) {1'b0}},c$i_1187});
-
-  always_comb begin
-    case(c$case_alt_selection_2812)
-      64'sd88 : c$case_alt_944 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_944 = stateSignal[3863:3841];
-    endcase
-  end
-
-  assign c$case_alt_selection_2815 = c$case_alt_selection_2814;
-
-  assign c$i_1188 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2814 = $unsigned({{(64-8) {1'b0}},c$i_1188});
-
-  always_comb begin
-    case(c$case_alt_selection_2815)
-      64'sd87 : c$case_alt_945 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_945 = stateSignal[3886:3864];
-    endcase
-  end
-
-  assign c$case_alt_selection_2818 = c$case_alt_selection_2817;
-
-  assign c$i_1189 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2817 = $unsigned({{(64-8) {1'b0}},c$i_1189});
-
-  always_comb begin
-    case(c$case_alt_selection_2818)
-      64'sd86 : c$case_alt_946 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_946 = stateSignal[3909:3887];
-    endcase
-  end
-
-  assign c$case_alt_selection_2821 = c$case_alt_selection_2820;
-
-  assign c$i_1190 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2820 = $unsigned({{(64-8) {1'b0}},c$i_1190});
-
-  always_comb begin
-    case(c$case_alt_selection_2821)
-      64'sd85 : c$case_alt_947 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_947 = stateSignal[3932:3910];
-    endcase
-  end
-
-  assign c$case_alt_selection_2824 = c$case_alt_selection_2823;
-
-  assign c$i_1191 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2823 = $unsigned({{(64-8) {1'b0}},c$i_1191});
-
-  always_comb begin
-    case(c$case_alt_selection_2824)
-      64'sd84 : c$case_alt_948 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_948 = stateSignal[3955:3933];
-    endcase
-  end
-
-  assign c$case_alt_selection_2827 = c$case_alt_selection_2826;
-
-  assign c$i_1192 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2826 = $unsigned({{(64-8) {1'b0}},c$i_1192});
-
-  always_comb begin
-    case(c$case_alt_selection_2827)
-      64'sd83 : c$case_alt_949 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_949 = stateSignal[3978:3956];
-    endcase
-  end
-
-  assign c$case_alt_selection_2830 = c$case_alt_selection_2829;
-
-  assign c$i_1193 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2829 = $unsigned({{(64-8) {1'b0}},c$i_1193});
-
-  always_comb begin
-    case(c$case_alt_selection_2830)
-      64'sd82 : c$case_alt_950 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_950 = stateSignal[4001:3979];
-    endcase
-  end
-
-  assign c$case_alt_selection_2833 = c$case_alt_selection_2832;
-
-  assign c$i_1194 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2832 = $unsigned({{(64-8) {1'b0}},c$i_1194});
-
-  always_comb begin
-    case(c$case_alt_selection_2833)
-      64'sd81 : c$case_alt_951 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_951 = stateSignal[4024:4002];
-    endcase
-  end
-
-  assign c$case_alt_selection_2836 = c$case_alt_selection_2835;
-
-  assign c$i_1195 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2835 = $unsigned({{(64-8) {1'b0}},c$i_1195});
-
-  always_comb begin
-    case(c$case_alt_selection_2836)
-      64'sd80 : c$case_alt_952 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_952 = stateSignal[4047:4025];
-    endcase
-  end
-
-  assign c$case_alt_selection_2839 = c$case_alt_selection_2838;
-
-  assign c$i_1196 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2838 = $unsigned({{(64-8) {1'b0}},c$i_1196});
-
-  always_comb begin
-    case(c$case_alt_selection_2839)
-      64'sd79 : c$case_alt_953 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_953 = stateSignal[4070:4048];
-    endcase
-  end
-
-  assign c$case_alt_selection_2842 = c$case_alt_selection_2841;
-
-  assign c$i_1197 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2841 = $unsigned({{(64-8) {1'b0}},c$i_1197});
-
-  always_comb begin
-    case(c$case_alt_selection_2842)
-      64'sd78 : c$case_alt_954 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_954 = stateSignal[4093:4071];
-    endcase
-  end
-
-  assign c$case_alt_selection_2845 = c$case_alt_selection_2844;
-
-  assign c$i_1198 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2844 = $unsigned({{(64-8) {1'b0}},c$i_1198});
-
-  always_comb begin
-    case(c$case_alt_selection_2845)
-      64'sd77 : c$case_alt_955 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_955 = stateSignal[4116:4094];
-    endcase
-  end
-
-  assign c$case_alt_selection_2848 = c$case_alt_selection_2847;
-
-  assign c$i_1199 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2847 = $unsigned({{(64-8) {1'b0}},c$i_1199});
-
-  always_comb begin
-    case(c$case_alt_selection_2848)
-      64'sd76 : c$case_alt_956 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_956 = stateSignal[4139:4117];
-    endcase
-  end
-
-  assign c$case_alt_selection_2851 = c$case_alt_selection_2850;
-
-  assign c$i_1200 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2850 = $unsigned({{(64-8) {1'b0}},c$i_1200});
-
-  always_comb begin
-    case(c$case_alt_selection_2851)
-      64'sd75 : c$case_alt_957 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_957 = stateSignal[4162:4140];
-    endcase
-  end
-
-  assign c$case_alt_selection_2854 = c$case_alt_selection_2853;
-
-  assign c$i_1201 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2853 = $unsigned({{(64-8) {1'b0}},c$i_1201});
-
-  always_comb begin
-    case(c$case_alt_selection_2854)
-      64'sd74 : c$case_alt_958 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_958 = stateSignal[4185:4163];
-    endcase
-  end
-
-  assign c$case_alt_selection_2857 = c$case_alt_selection_2856;
-
-  assign c$i_1202 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2856 = $unsigned({{(64-8) {1'b0}},c$i_1202});
-
-  always_comb begin
-    case(c$case_alt_selection_2857)
-      64'sd73 : c$case_alt_959 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_959 = stateSignal[4208:4186];
-    endcase
-  end
-
-  assign c$case_alt_selection_2860 = c$case_alt_selection_2859;
-
-  assign c$i_1203 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2859 = $unsigned({{(64-8) {1'b0}},c$i_1203});
-
-  always_comb begin
-    case(c$case_alt_selection_2860)
-      64'sd72 : c$case_alt_960 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_960 = stateSignal[4231:4209];
-    endcase
-  end
-
-  assign c$case_alt_selection_2863 = c$case_alt_selection_2862;
-
-  assign c$i_1204 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2862 = $unsigned({{(64-8) {1'b0}},c$i_1204});
-
-  always_comb begin
-    case(c$case_alt_selection_2863)
-      64'sd71 : c$case_alt_961 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_961 = stateSignal[4254:4232];
-    endcase
-  end
-
-  assign c$case_alt_selection_2866 = c$case_alt_selection_2865;
-
-  assign c$i_1205 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2865 = $unsigned({{(64-8) {1'b0}},c$i_1205});
-
-  always_comb begin
-    case(c$case_alt_selection_2866)
-      64'sd70 : c$case_alt_962 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_962 = stateSignal[4277:4255];
-    endcase
-  end
-
-  assign c$case_alt_selection_2869 = c$case_alt_selection_2868;
-
-  assign c$i_1206 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2868 = $unsigned({{(64-8) {1'b0}},c$i_1206});
-
-  always_comb begin
-    case(c$case_alt_selection_2869)
-      64'sd69 : c$case_alt_963 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_963 = stateSignal[4300:4278];
-    endcase
-  end
-
-  assign c$case_alt_selection_2872 = c$case_alt_selection_2871;
-
-  assign c$i_1207 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2871 = $unsigned({{(64-8) {1'b0}},c$i_1207});
-
-  always_comb begin
-    case(c$case_alt_selection_2872)
-      64'sd68 : c$case_alt_964 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_964 = stateSignal[4323:4301];
-    endcase
-  end
-
-  assign c$case_alt_selection_2875 = c$case_alt_selection_2874;
-
-  assign c$i_1208 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2874 = $unsigned({{(64-8) {1'b0}},c$i_1208});
-
-  always_comb begin
-    case(c$case_alt_selection_2875)
-      64'sd67 : c$case_alt_965 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_965 = stateSignal[4346:4324];
-    endcase
-  end
-
-  assign c$case_alt_selection_2878 = c$case_alt_selection_2877;
-
-  assign c$i_1209 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2877 = $unsigned({{(64-8) {1'b0}},c$i_1209});
-
-  always_comb begin
-    case(c$case_alt_selection_2878)
-      64'sd66 : c$case_alt_966 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_966 = stateSignal[4369:4347];
-    endcase
-  end
-
-  assign c$case_alt_selection_2881 = c$case_alt_selection_2880;
-
-  assign c$i_1210 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2880 = $unsigned({{(64-8) {1'b0}},c$i_1210});
-
-  always_comb begin
-    case(c$case_alt_selection_2881)
-      64'sd65 : c$case_alt_967 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_967 = stateSignal[4392:4370];
-    endcase
-  end
-
-  assign c$case_alt_selection_2884 = c$case_alt_selection_2883;
-
-  assign c$i_1211 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2883 = $unsigned({{(64-8) {1'b0}},c$i_1211});
-
-  always_comb begin
-    case(c$case_alt_selection_2884)
-      64'sd64 : c$case_alt_968 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_968 = stateSignal[4415:4393];
-    endcase
-  end
-
-  assign c$case_alt_selection_2887 = c$case_alt_selection_2886;
-
-  assign c$i_1212 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2886 = $unsigned({{(64-8) {1'b0}},c$i_1212});
-
-  always_comb begin
-    case(c$case_alt_selection_2887)
-      64'sd63 : c$case_alt_969 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_969 = stateSignal[4438:4416];
-    endcase
-  end
-
-  assign c$case_alt_selection_2890 = c$case_alt_selection_2889;
-
-  assign c$i_1213 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2889 = $unsigned({{(64-8) {1'b0}},c$i_1213});
-
-  always_comb begin
-    case(c$case_alt_selection_2890)
-      64'sd62 : c$case_alt_970 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_970 = stateSignal[4461:4439];
-    endcase
-  end
-
-  assign c$case_alt_selection_2893 = c$case_alt_selection_2892;
-
-  assign c$i_1214 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2892 = $unsigned({{(64-8) {1'b0}},c$i_1214});
-
-  always_comb begin
-    case(c$case_alt_selection_2893)
-      64'sd61 : c$case_alt_971 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_971 = stateSignal[4484:4462];
-    endcase
-  end
-
-  assign c$case_alt_selection_2896 = c$case_alt_selection_2895;
-
-  assign c$i_1215 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2895 = $unsigned({{(64-8) {1'b0}},c$i_1215});
-
-  always_comb begin
-    case(c$case_alt_selection_2896)
-      64'sd60 : c$case_alt_972 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_972 = stateSignal[4507:4485];
-    endcase
-  end
-
-  assign c$case_alt_selection_2899 = c$case_alt_selection_2898;
-
-  assign c$i_1216 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2898 = $unsigned({{(64-8) {1'b0}},c$i_1216});
-
-  always_comb begin
-    case(c$case_alt_selection_2899)
-      64'sd59 : c$case_alt_973 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_973 = stateSignal[4530:4508];
-    endcase
-  end
-
-  assign c$case_alt_selection_2902 = c$case_alt_selection_2901;
-
-  assign c$i_1217 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2901 = $unsigned({{(64-8) {1'b0}},c$i_1217});
-
-  always_comb begin
-    case(c$case_alt_selection_2902)
-      64'sd58 : c$case_alt_974 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_974 = stateSignal[4553:4531];
-    endcase
-  end
-
-  assign c$case_alt_selection_2905 = c$case_alt_selection_2904;
-
-  assign c$i_1218 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2904 = $unsigned({{(64-8) {1'b0}},c$i_1218});
-
-  always_comb begin
-    case(c$case_alt_selection_2905)
-      64'sd57 : c$case_alt_975 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_975 = stateSignal[4576:4554];
-    endcase
-  end
-
-  assign c$case_alt_selection_2908 = c$case_alt_selection_2907;
-
-  assign c$i_1219 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2907 = $unsigned({{(64-8) {1'b0}},c$i_1219});
-
-  always_comb begin
-    case(c$case_alt_selection_2908)
-      64'sd56 : c$case_alt_976 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_976 = stateSignal[4599:4577];
-    endcase
-  end
-
-  assign c$case_alt_selection_2911 = c$case_alt_selection_2910;
-
-  assign c$i_1220 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2910 = $unsigned({{(64-8) {1'b0}},c$i_1220});
-
-  always_comb begin
-    case(c$case_alt_selection_2911)
-      64'sd55 : c$case_alt_977 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_977 = stateSignal[4622:4600];
-    endcase
-  end
-
-  assign c$case_alt_selection_2914 = c$case_alt_selection_2913;
-
-  assign c$i_1221 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2913 = $unsigned({{(64-8) {1'b0}},c$i_1221});
-
-  always_comb begin
-    case(c$case_alt_selection_2914)
-      64'sd54 : c$case_alt_978 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_978 = stateSignal[4645:4623];
-    endcase
-  end
-
-  assign c$case_alt_selection_2917 = c$case_alt_selection_2916;
-
-  assign c$i_1222 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2916 = $unsigned({{(64-8) {1'b0}},c$i_1222});
-
-  always_comb begin
-    case(c$case_alt_selection_2917)
-      64'sd53 : c$case_alt_979 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_979 = stateSignal[4668:4646];
-    endcase
-  end
-
-  assign c$case_alt_selection_2920 = c$case_alt_selection_2919;
-
-  assign c$i_1223 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2919 = $unsigned({{(64-8) {1'b0}},c$i_1223});
-
-  always_comb begin
-    case(c$case_alt_selection_2920)
-      64'sd52 : c$case_alt_980 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_980 = stateSignal[4691:4669];
-    endcase
-  end
-
-  assign c$case_alt_selection_2923 = c$case_alt_selection_2922;
-
-  assign c$i_1224 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2922 = $unsigned({{(64-8) {1'b0}},c$i_1224});
-
-  always_comb begin
-    case(c$case_alt_selection_2923)
-      64'sd51 : c$case_alt_981 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_981 = stateSignal[4714:4692];
-    endcase
-  end
-
-  assign c$case_alt_selection_2926 = c$case_alt_selection_2925;
-
-  assign c$i_1225 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2925 = $unsigned({{(64-8) {1'b0}},c$i_1225});
-
-  always_comb begin
-    case(c$case_alt_selection_2926)
-      64'sd50 : c$case_alt_982 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_982 = stateSignal[4737:4715];
-    endcase
-  end
-
-  assign c$case_alt_selection_2929 = c$case_alt_selection_2928;
-
-  assign c$i_1226 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2928 = $unsigned({{(64-8) {1'b0}},c$i_1226});
-
-  always_comb begin
-    case(c$case_alt_selection_2929)
-      64'sd49 : c$case_alt_983 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_983 = stateSignal[4760:4738];
-    endcase
-  end
-
-  assign c$case_alt_selection_2932 = c$case_alt_selection_2931;
-
-  assign c$i_1227 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2931 = $unsigned({{(64-8) {1'b0}},c$i_1227});
-
-  always_comb begin
-    case(c$case_alt_selection_2932)
-      64'sd48 : c$case_alt_984 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_984 = stateSignal[4783:4761];
-    endcase
-  end
-
-  assign c$case_alt_selection_2935 = c$case_alt_selection_2934;
-
-  assign c$i_1228 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2934 = $unsigned({{(64-8) {1'b0}},c$i_1228});
-
-  always_comb begin
-    case(c$case_alt_selection_2935)
-      64'sd47 : c$case_alt_985 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_985 = stateSignal[4806:4784];
-    endcase
-  end
-
-  assign c$case_alt_selection_2938 = c$case_alt_selection_2937;
-
-  assign c$i_1229 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2937 = $unsigned({{(64-8) {1'b0}},c$i_1229});
-
-  always_comb begin
-    case(c$case_alt_selection_2938)
-      64'sd46 : c$case_alt_986 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_986 = stateSignal[4829:4807];
-    endcase
-  end
-
-  assign c$case_alt_selection_2941 = c$case_alt_selection_2940;
-
-  assign c$i_1230 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2940 = $unsigned({{(64-8) {1'b0}},c$i_1230});
-
-  always_comb begin
-    case(c$case_alt_selection_2941)
-      64'sd45 : c$case_alt_987 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_987 = stateSignal[4852:4830];
-    endcase
-  end
-
-  assign c$case_alt_selection_2944 = c$case_alt_selection_2943;
-
-  assign c$i_1231 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2943 = $unsigned({{(64-8) {1'b0}},c$i_1231});
-
-  always_comb begin
-    case(c$case_alt_selection_2944)
-      64'sd44 : c$case_alt_988 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_988 = stateSignal[4875:4853];
-    endcase
-  end
-
-  assign c$case_alt_selection_2947 = c$case_alt_selection_2946;
-
-  assign c$i_1232 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2946 = $unsigned({{(64-8) {1'b0}},c$i_1232});
-
-  always_comb begin
-    case(c$case_alt_selection_2947)
-      64'sd43 : c$case_alt_989 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_989 = stateSignal[4898:4876];
-    endcase
-  end
-
-  assign c$case_alt_selection_2950 = c$case_alt_selection_2949;
-
-  assign c$i_1233 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2949 = $unsigned({{(64-8) {1'b0}},c$i_1233});
-
-  always_comb begin
-    case(c$case_alt_selection_2950)
-      64'sd42 : c$case_alt_990 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_990 = stateSignal[4921:4899];
-    endcase
-  end
-
-  assign c$case_alt_selection_2953 = c$case_alt_selection_2952;
-
-  assign c$i_1234 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2952 = $unsigned({{(64-8) {1'b0}},c$i_1234});
-
-  always_comb begin
-    case(c$case_alt_selection_2953)
-      64'sd41 : c$case_alt_991 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_991 = stateSignal[4944:4922];
-    endcase
-  end
-
-  assign c$case_alt_selection_2956 = c$case_alt_selection_2955;
-
-  assign c$i_1235 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2955 = $unsigned({{(64-8) {1'b0}},c$i_1235});
-
-  always_comb begin
-    case(c$case_alt_selection_2956)
-      64'sd40 : c$case_alt_992 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_992 = stateSignal[4967:4945];
-    endcase
-  end
-
-  assign c$case_alt_selection_2959 = c$case_alt_selection_2958;
-
-  assign c$i_1236 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2958 = $unsigned({{(64-8) {1'b0}},c$i_1236});
-
-  always_comb begin
-    case(c$case_alt_selection_2959)
-      64'sd39 : c$case_alt_993 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_993 = stateSignal[4990:4968];
-    endcase
-  end
-
-  assign c$case_alt_selection_2962 = c$case_alt_selection_2961;
-
-  assign c$i_1237 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2961 = $unsigned({{(64-8) {1'b0}},c$i_1237});
-
-  always_comb begin
-    case(c$case_alt_selection_2962)
-      64'sd38 : c$case_alt_994 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_994 = stateSignal[5013:4991];
-    endcase
-  end
-
-  assign c$case_alt_selection_2965 = c$case_alt_selection_2964;
-
-  assign c$i_1238 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2964 = $unsigned({{(64-8) {1'b0}},c$i_1238});
-
-  always_comb begin
-    case(c$case_alt_selection_2965)
-      64'sd37 : c$case_alt_995 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_995 = stateSignal[5036:5014];
-    endcase
-  end
-
-  assign c$case_alt_selection_2968 = c$case_alt_selection_2967;
-
-  assign c$i_1239 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2967 = $unsigned({{(64-8) {1'b0}},c$i_1239});
-
-  always_comb begin
-    case(c$case_alt_selection_2968)
-      64'sd36 : c$case_alt_996 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_996 = stateSignal[5059:5037];
-    endcase
-  end
-
-  assign c$case_alt_selection_2971 = c$case_alt_selection_2970;
-
-  assign c$i_1240 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2970 = $unsigned({{(64-8) {1'b0}},c$i_1240});
-
-  always_comb begin
-    case(c$case_alt_selection_2971)
-      64'sd35 : c$case_alt_997 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_997 = stateSignal[5082:5060];
-    endcase
-  end
-
-  assign c$case_alt_selection_2974 = c$case_alt_selection_2973;
-
-  assign c$i_1241 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2973 = $unsigned({{(64-8) {1'b0}},c$i_1241});
-
-  always_comb begin
-    case(c$case_alt_selection_2974)
-      64'sd34 : c$case_alt_998 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_998 = stateSignal[5105:5083];
-    endcase
-  end
-
-  assign c$case_alt_selection_2977 = c$case_alt_selection_2976;
-
-  assign c$i_1242 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2976 = $unsigned({{(64-8) {1'b0}},c$i_1242});
-
-  always_comb begin
-    case(c$case_alt_selection_2977)
-      64'sd33 : c$case_alt_999 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_999 = stateSignal[5128:5106];
-    endcase
-  end
-
-  assign c$case_alt_selection_2980 = c$case_alt_selection_2979;
-
-  assign c$i_1243 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2979 = $unsigned({{(64-8) {1'b0}},c$i_1243});
-
-  always_comb begin
-    case(c$case_alt_selection_2980)
-      64'sd32 : c$case_alt_1000 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1000 = stateSignal[5151:5129];
-    endcase
-  end
-
-  assign c$case_alt_selection_2983 = c$case_alt_selection_2982;
-
-  assign c$i_1244 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2982 = $unsigned({{(64-8) {1'b0}},c$i_1244});
-
-  always_comb begin
-    case(c$case_alt_selection_2983)
-      64'sd31 : c$case_alt_1001 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1001 = stateSignal[5174:5152];
-    endcase
-  end
-
-  assign c$case_alt_selection_2986 = c$case_alt_selection_2985;
-
-  assign c$i_1245 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2985 = $unsigned({{(64-8) {1'b0}},c$i_1245});
-
-  always_comb begin
-    case(c$case_alt_selection_2986)
-      64'sd30 : c$case_alt_1002 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1002 = stateSignal[5197:5175];
-    endcase
-  end
-
-  assign c$case_alt_selection_2989 = c$case_alt_selection_2988;
-
-  assign c$i_1246 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2988 = $unsigned({{(64-8) {1'b0}},c$i_1246});
-
-  always_comb begin
-    case(c$case_alt_selection_2989)
-      64'sd29 : c$case_alt_1003 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1003 = stateSignal[5220:5198];
-    endcase
-  end
-
-  assign c$case_alt_selection_2992 = c$case_alt_selection_2991;
-
-  assign c$i_1247 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2991 = $unsigned({{(64-8) {1'b0}},c$i_1247});
-
-  always_comb begin
-    case(c$case_alt_selection_2992)
-      64'sd28 : c$case_alt_1004 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1004 = stateSignal[5243:5221];
-    endcase
-  end
-
-  assign c$case_alt_selection_2995 = c$case_alt_selection_2994;
-
-  assign c$i_1248 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2994 = $unsigned({{(64-8) {1'b0}},c$i_1248});
-
-  always_comb begin
-    case(c$case_alt_selection_2995)
-      64'sd27 : c$case_alt_1005 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1005 = stateSignal[5266:5244];
-    endcase
-  end
-
-  assign c$case_alt_selection_2998 = c$case_alt_selection_2997;
-
-  assign c$i_1249 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_2997 = $unsigned({{(64-8) {1'b0}},c$i_1249});
-
-  always_comb begin
-    case(c$case_alt_selection_2998)
-      64'sd26 : c$case_alt_1006 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1006 = stateSignal[5289:5267];
-    endcase
-  end
-
-  assign c$case_alt_selection_3001 = c$case_alt_selection_3000;
-
-  assign c$i_1250 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3000 = $unsigned({{(64-8) {1'b0}},c$i_1250});
-
-  always_comb begin
-    case(c$case_alt_selection_3001)
-      64'sd25 : c$case_alt_1007 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1007 = stateSignal[5312:5290];
-    endcase
-  end
-
-  assign c$case_alt_selection_3004 = c$case_alt_selection_3003;
-
-  assign c$i_1251 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3003 = $unsigned({{(64-8) {1'b0}},c$i_1251});
-
-  always_comb begin
-    case(c$case_alt_selection_3004)
-      64'sd24 : c$case_alt_1008 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1008 = stateSignal[5335:5313];
-    endcase
-  end
-
-  assign c$case_alt_selection_3007 = c$case_alt_selection_3006;
-
-  assign c$i_1252 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3006 = $unsigned({{(64-8) {1'b0}},c$i_1252});
-
-  always_comb begin
-    case(c$case_alt_selection_3007)
-      64'sd23 : c$case_alt_1009 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1009 = stateSignal[5358:5336];
-    endcase
-  end
-
-  assign c$case_alt_selection_3010 = c$case_alt_selection_3009;
-
-  assign c$i_1253 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3009 = $unsigned({{(64-8) {1'b0}},c$i_1253});
-
-  always_comb begin
-    case(c$case_alt_selection_3010)
-      64'sd22 : c$case_alt_1010 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1010 = stateSignal[5381:5359];
-    endcase
-  end
-
-  assign c$case_alt_selection_3013 = c$case_alt_selection_3012;
-
-  assign c$i_1254 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3012 = $unsigned({{(64-8) {1'b0}},c$i_1254});
-
-  always_comb begin
-    case(c$case_alt_selection_3013)
-      64'sd21 : c$case_alt_1011 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1011 = stateSignal[5404:5382];
-    endcase
-  end
-
-  assign c$case_alt_selection_3016 = c$case_alt_selection_3015;
-
-  assign c$i_1255 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3015 = $unsigned({{(64-8) {1'b0}},c$i_1255});
-
-  always_comb begin
-    case(c$case_alt_selection_3016)
-      64'sd20 : c$case_alt_1012 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1012 = stateSignal[5427:5405];
-    endcase
-  end
-
-  assign c$case_alt_selection_3019 = c$case_alt_selection_3018;
-
-  assign c$i_1256 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3018 = $unsigned({{(64-8) {1'b0}},c$i_1256});
-
-  always_comb begin
-    case(c$case_alt_selection_3019)
-      64'sd19 : c$case_alt_1013 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1013 = stateSignal[5450:5428];
-    endcase
-  end
-
-  assign c$case_alt_selection_3022 = c$case_alt_selection_3021;
-
-  assign c$i_1257 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3021 = $unsigned({{(64-8) {1'b0}},c$i_1257});
-
-  always_comb begin
-    case(c$case_alt_selection_3022)
-      64'sd18 : c$case_alt_1014 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1014 = stateSignal[5473:5451];
-    endcase
-  end
-
-  assign c$case_alt_selection_3025 = c$case_alt_selection_3024;
-
-  assign c$i_1258 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3024 = $unsigned({{(64-8) {1'b0}},c$i_1258});
-
-  always_comb begin
-    case(c$case_alt_selection_3025)
-      64'sd17 : c$case_alt_1015 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1015 = stateSignal[5496:5474];
-    endcase
-  end
-
-  assign c$case_alt_selection_3028 = c$case_alt_selection_3027;
-
-  assign c$i_1259 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3027 = $unsigned({{(64-8) {1'b0}},c$i_1259});
-
-  always_comb begin
-    case(c$case_alt_selection_3028)
-      64'sd16 : c$case_alt_1016 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1016 = stateSignal[5519:5497];
-    endcase
-  end
-
-  assign c$case_alt_selection_3031 = c$case_alt_selection_3030;
-
-  assign c$i_1260 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3030 = $unsigned({{(64-8) {1'b0}},c$i_1260});
-
-  always_comb begin
-    case(c$case_alt_selection_3031)
-      64'sd15 : c$case_alt_1017 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1017 = stateSignal[5542:5520];
-    endcase
-  end
-
-  assign c$case_alt_selection_3034 = c$case_alt_selection_3033;
-
-  assign c$i_1261 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3033 = $unsigned({{(64-8) {1'b0}},c$i_1261});
-
-  always_comb begin
-    case(c$case_alt_selection_3034)
-      64'sd14 : c$case_alt_1018 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1018 = stateSignal[5565:5543];
-    endcase
-  end
-
-  assign c$case_alt_selection_3037 = c$case_alt_selection_3036;
-
-  assign c$i_1262 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3036 = $unsigned({{(64-8) {1'b0}},c$i_1262});
-
-  always_comb begin
-    case(c$case_alt_selection_3037)
-      64'sd13 : c$case_alt_1019 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1019 = stateSignal[5588:5566];
-    endcase
-  end
-
-  assign c$case_alt_selection_3040 = c$case_alt_selection_3039;
-
-  assign c$i_1263 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3039 = $unsigned({{(64-8) {1'b0}},c$i_1263});
-
-  always_comb begin
-    case(c$case_alt_selection_3040)
-      64'sd12 : c$case_alt_1020 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1020 = stateSignal[5611:5589];
-    endcase
-  end
-
-  assign c$case_alt_selection_3043 = c$case_alt_selection_3042;
-
-  assign c$i_1264 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3042 = $unsigned({{(64-8) {1'b0}},c$i_1264});
-
-  always_comb begin
-    case(c$case_alt_selection_3043)
-      64'sd11 : c$case_alt_1021 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1021 = stateSignal[5634:5612];
-    endcase
-  end
-
-  assign c$case_alt_selection_3046 = c$case_alt_selection_3045;
-
-  assign c$i_1265 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3045 = $unsigned({{(64-8) {1'b0}},c$i_1265});
-
-  always_comb begin
-    case(c$case_alt_selection_3046)
-      64'sd10 : c$case_alt_1022 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1022 = stateSignal[5657:5635];
-    endcase
-  end
-
-  assign c$case_alt_selection_3049 = c$case_alt_selection_3048;
-
-  assign c$i_1266 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3048 = $unsigned({{(64-8) {1'b0}},c$i_1266});
-
-  always_comb begin
-    case(c$case_alt_selection_3049)
-      64'sd9 : c$case_alt_1023 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1023 = stateSignal[5680:5658];
-    endcase
-  end
-
-  assign c$case_alt_selection_3052 = c$case_alt_selection_3051;
-
-  assign c$i_1267 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3051 = $unsigned({{(64-8) {1'b0}},c$i_1267});
-
-  always_comb begin
-    case(c$case_alt_selection_3052)
-      64'sd8 : c$case_alt_1024 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1024 = stateSignal[5703:5681];
-    endcase
-  end
-
-  assign c$case_alt_selection_3055 = c$case_alt_selection_3054;
-
-  assign c$i_1268 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3054 = $unsigned({{(64-8) {1'b0}},c$i_1268});
-
-  always_comb begin
-    case(c$case_alt_selection_3055)
-      64'sd7 : c$case_alt_1025 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1025 = stateSignal[5726:5704];
-    endcase
-  end
-
-  assign c$case_alt_selection_3058 = c$case_alt_selection_3057;
-
-  assign c$i_1269 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3057 = $unsigned({{(64-8) {1'b0}},c$i_1269});
-
-  always_comb begin
-    case(c$case_alt_selection_3058)
-      64'sd6 : c$case_alt_1026 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1026 = stateSignal[5749:5727];
-    endcase
-  end
-
-  assign c$case_alt_selection_3061 = c$case_alt_selection_3060;
-
-  assign c$i_1270 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3060 = $unsigned({{(64-8) {1'b0}},c$i_1270});
-
-  always_comb begin
-    case(c$case_alt_selection_3061)
-      64'sd5 : c$case_alt_1027 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1027 = stateSignal[5772:5750];
-    endcase
-  end
-
-  assign c$case_alt_selection_3064 = c$case_alt_selection_3063;
-
-  assign c$i_1271 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3063 = $unsigned({{(64-8) {1'b0}},c$i_1271});
-
-  always_comb begin
-    case(c$case_alt_selection_3064)
-      64'sd4 : c$case_alt_1028 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1028 = stateSignal[5795:5773];
-    endcase
-  end
-
-  assign c$case_alt_selection_3067 = c$case_alt_selection_3066;
-
-  assign c$i_1272 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3066 = $unsigned({{(64-8) {1'b0}},c$i_1272});
-
-  always_comb begin
-    case(c$case_alt_selection_3067)
-      64'sd3 : c$case_alt_1029 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1029 = stateSignal[5818:5796];
-    endcase
-  end
-
-  assign c$case_alt_selection_3070 = c$case_alt_selection_3069;
-
-  assign c$i_1273 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3069 = $unsigned({{(64-8) {1'b0}},c$i_1273});
-
-  always_comb begin
-    case(c$case_alt_selection_3070)
-      64'sd2 : c$case_alt_1030 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1030 = stateSignal[5841:5819];
-    endcase
-  end
-
-  assign c$case_alt_selection_3073 = c$case_alt_selection_3072;
-
-  assign c$i_1274 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3072 = $unsigned({{(64-8) {1'b0}},c$i_1274});
-
-  always_comb begin
-    case(c$case_alt_selection_3073)
-      64'sd1 : c$case_alt_1031 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1031 = stateSignal[5864:5842];
-    endcase
-  end
-
-  assign c$case_alt_selection_3076 = c$case_alt_selection_3075;
-
-  assign c$i_1275 = response_2.ButterflyResponse_sel0;
-
-  assign c$case_alt_selection_3075 = $unsigned({{(64-8) {1'b0}},c$i_1275});
-
   always_comb begin
-    case(c$case_alt_selection_3076)
-      64'sd0 : c$case_alt_1032 = response_2.ButterflyResponse_sel2;
-      default : c$case_alt_1032 = stateSignal[5887:5865];
+    case(c$case_alt_selection_1541)
+      64'sd0 : c$case_alt_518 = outA;
+      default : c$case_alt_518 = stateSignal[11775:11753];
     endcase
   end
 
-  assign response_2 = {aIndex_0
-                      ,bIndex_0
-                      ,outA
-                      ,outB
-                      ,lastGroup};
+  assign c$case_alt_519 = stateSignal.NTTState_sel4 ? NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel5) : NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel6);
 
   assign result_0 = {stateSignal.NTTState_sel1
-                    ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel4))}};
+                    ,{NTT256_types::array_of_256_logic_vector_23_to_lv(c$case_alt_519)}};
+
+  assign valid = ds_1.Tuple4_sel0;
+
+  assign aIndex = ds_1.Tuple4_sel1;
+
+  assign bIndex = ds_1.Tuple4_sel2;
+
+  assign lastResult = ds_1.Tuple4_sel3;
+
+  assign outA = result_5.Tuple2_0_sel0;
+
+  assign outB = result_5.Tuple2_0_sel1;
+
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : ds_1_register
+    if ( rst) begin
+      ds_1 <= {1'b0,8'd0,8'd0,1'b0};
+    end else  if (en)  begin
+      ds_1 <= c$ds_app_arg_0;
+    end
+  end
+  // register end
 
   // register begin
   always_ff @(posedge clk or  posedge  rst) begin : stateSignal_register
@@ -21017,7 +8602,264 @@ module NTT256
       stateSignal <= {2'd0
   ,1'b0
   ,3'd0
-  ,9'd0
+  ,8'd0
+  ,1'b1
+  ,{NTT256_types::array_of_256_logic_vector_23_to_lv('{0: 23'd0
+                                                      ,1: 23'd0
+                                                      ,2: 23'd0
+                                                      ,3: 23'd0
+                                                      ,4: 23'd0
+                                                      ,5: 23'd0
+                                                      ,6: 23'd0
+                                                      ,7: 23'd0
+                                                      ,8: 23'd0
+                                                      ,9: 23'd0
+                                                      ,10: 23'd0
+                                                      ,11: 23'd0
+                                                      ,12: 23'd0
+                                                      ,13: 23'd0
+                                                      ,14: 23'd0
+                                                      ,15: 23'd0
+                                                      ,16: 23'd0
+                                                      ,17: 23'd0
+                                                      ,18: 23'd0
+                                                      ,19: 23'd0
+                                                      ,20: 23'd0
+                                                      ,21: 23'd0
+                                                      ,22: 23'd0
+                                                      ,23: 23'd0
+                                                      ,24: 23'd0
+                                                      ,25: 23'd0
+                                                      ,26: 23'd0
+                                                      ,27: 23'd0
+                                                      ,28: 23'd0
+                                                      ,29: 23'd0
+                                                      ,30: 23'd0
+                                                      ,31: 23'd0
+                                                      ,32: 23'd0
+                                                      ,33: 23'd0
+                                                      ,34: 23'd0
+                                                      ,35: 23'd0
+                                                      ,36: 23'd0
+                                                      ,37: 23'd0
+                                                      ,38: 23'd0
+                                                      ,39: 23'd0
+                                                      ,40: 23'd0
+                                                      ,41: 23'd0
+                                                      ,42: 23'd0
+                                                      ,43: 23'd0
+                                                      ,44: 23'd0
+                                                      ,45: 23'd0
+                                                      ,46: 23'd0
+                                                      ,47: 23'd0
+                                                      ,48: 23'd0
+                                                      ,49: 23'd0
+                                                      ,50: 23'd0
+                                                      ,51: 23'd0
+                                                      ,52: 23'd0
+                                                      ,53: 23'd0
+                                                      ,54: 23'd0
+                                                      ,55: 23'd0
+                                                      ,56: 23'd0
+                                                      ,57: 23'd0
+                                                      ,58: 23'd0
+                                                      ,59: 23'd0
+                                                      ,60: 23'd0
+                                                      ,61: 23'd0
+                                                      ,62: 23'd0
+                                                      ,63: 23'd0
+                                                      ,64: 23'd0
+                                                      ,65: 23'd0
+                                                      ,66: 23'd0
+                                                      ,67: 23'd0
+                                                      ,68: 23'd0
+                                                      ,69: 23'd0
+                                                      ,70: 23'd0
+                                                      ,71: 23'd0
+                                                      ,72: 23'd0
+                                                      ,73: 23'd0
+                                                      ,74: 23'd0
+                                                      ,75: 23'd0
+                                                      ,76: 23'd0
+                                                      ,77: 23'd0
+                                                      ,78: 23'd0
+                                                      ,79: 23'd0
+                                                      ,80: 23'd0
+                                                      ,81: 23'd0
+                                                      ,82: 23'd0
+                                                      ,83: 23'd0
+                                                      ,84: 23'd0
+                                                      ,85: 23'd0
+                                                      ,86: 23'd0
+                                                      ,87: 23'd0
+                                                      ,88: 23'd0
+                                                      ,89: 23'd0
+                                                      ,90: 23'd0
+                                                      ,91: 23'd0
+                                                      ,92: 23'd0
+                                                      ,93: 23'd0
+                                                      ,94: 23'd0
+                                                      ,95: 23'd0
+                                                      ,96: 23'd0
+                                                      ,97: 23'd0
+                                                      ,98: 23'd0
+                                                      ,99: 23'd0
+                                                      ,100: 23'd0
+                                                      ,101: 23'd0
+                                                      ,102: 23'd0
+                                                      ,103: 23'd0
+                                                      ,104: 23'd0
+                                                      ,105: 23'd0
+                                                      ,106: 23'd0
+                                                      ,107: 23'd0
+                                                      ,108: 23'd0
+                                                      ,109: 23'd0
+                                                      ,110: 23'd0
+                                                      ,111: 23'd0
+                                                      ,112: 23'd0
+                                                      ,113: 23'd0
+                                                      ,114: 23'd0
+                                                      ,115: 23'd0
+                                                      ,116: 23'd0
+                                                      ,117: 23'd0
+                                                      ,118: 23'd0
+                                                      ,119: 23'd0
+                                                      ,120: 23'd0
+                                                      ,121: 23'd0
+                                                      ,122: 23'd0
+                                                      ,123: 23'd0
+                                                      ,124: 23'd0
+                                                      ,125: 23'd0
+                                                      ,126: 23'd0
+                                                      ,127: 23'd0
+                                                      ,128: 23'd0
+                                                      ,129: 23'd0
+                                                      ,130: 23'd0
+                                                      ,131: 23'd0
+                                                      ,132: 23'd0
+                                                      ,133: 23'd0
+                                                      ,134: 23'd0
+                                                      ,135: 23'd0
+                                                      ,136: 23'd0
+                                                      ,137: 23'd0
+                                                      ,138: 23'd0
+                                                      ,139: 23'd0
+                                                      ,140: 23'd0
+                                                      ,141: 23'd0
+                                                      ,142: 23'd0
+                                                      ,143: 23'd0
+                                                      ,144: 23'd0
+                                                      ,145: 23'd0
+                                                      ,146: 23'd0
+                                                      ,147: 23'd0
+                                                      ,148: 23'd0
+                                                      ,149: 23'd0
+                                                      ,150: 23'd0
+                                                      ,151: 23'd0
+                                                      ,152: 23'd0
+                                                      ,153: 23'd0
+                                                      ,154: 23'd0
+                                                      ,155: 23'd0
+                                                      ,156: 23'd0
+                                                      ,157: 23'd0
+                                                      ,158: 23'd0
+                                                      ,159: 23'd0
+                                                      ,160: 23'd0
+                                                      ,161: 23'd0
+                                                      ,162: 23'd0
+                                                      ,163: 23'd0
+                                                      ,164: 23'd0
+                                                      ,165: 23'd0
+                                                      ,166: 23'd0
+                                                      ,167: 23'd0
+                                                      ,168: 23'd0
+                                                      ,169: 23'd0
+                                                      ,170: 23'd0
+                                                      ,171: 23'd0
+                                                      ,172: 23'd0
+                                                      ,173: 23'd0
+                                                      ,174: 23'd0
+                                                      ,175: 23'd0
+                                                      ,176: 23'd0
+                                                      ,177: 23'd0
+                                                      ,178: 23'd0
+                                                      ,179: 23'd0
+                                                      ,180: 23'd0
+                                                      ,181: 23'd0
+                                                      ,182: 23'd0
+                                                      ,183: 23'd0
+                                                      ,184: 23'd0
+                                                      ,185: 23'd0
+                                                      ,186: 23'd0
+                                                      ,187: 23'd0
+                                                      ,188: 23'd0
+                                                      ,189: 23'd0
+                                                      ,190: 23'd0
+                                                      ,191: 23'd0
+                                                      ,192: 23'd0
+                                                      ,193: 23'd0
+                                                      ,194: 23'd0
+                                                      ,195: 23'd0
+                                                      ,196: 23'd0
+                                                      ,197: 23'd0
+                                                      ,198: 23'd0
+                                                      ,199: 23'd0
+                                                      ,200: 23'd0
+                                                      ,201: 23'd0
+                                                      ,202: 23'd0
+                                                      ,203: 23'd0
+                                                      ,204: 23'd0
+                                                      ,205: 23'd0
+                                                      ,206: 23'd0
+                                                      ,207: 23'd0
+                                                      ,208: 23'd0
+                                                      ,209: 23'd0
+                                                      ,210: 23'd0
+                                                      ,211: 23'd0
+                                                      ,212: 23'd0
+                                                      ,213: 23'd0
+                                                      ,214: 23'd0
+                                                      ,215: 23'd0
+                                                      ,216: 23'd0
+                                                      ,217: 23'd0
+                                                      ,218: 23'd0
+                                                      ,219: 23'd0
+                                                      ,220: 23'd0
+                                                      ,221: 23'd0
+                                                      ,222: 23'd0
+                                                      ,223: 23'd0
+                                                      ,224: 23'd0
+                                                      ,225: 23'd0
+                                                      ,226: 23'd0
+                                                      ,227: 23'd0
+                                                      ,228: 23'd0
+                                                      ,229: 23'd0
+                                                      ,230: 23'd0
+                                                      ,231: 23'd0
+                                                      ,232: 23'd0
+                                                      ,233: 23'd0
+                                                      ,234: 23'd0
+                                                      ,235: 23'd0
+                                                      ,236: 23'd0
+                                                      ,237: 23'd0
+                                                      ,238: 23'd0
+                                                      ,239: 23'd0
+                                                      ,240: 23'd0
+                                                      ,241: 23'd0
+                                                      ,242: 23'd0
+                                                      ,243: 23'd0
+                                                      ,244: 23'd0
+                                                      ,245: 23'd0
+                                                      ,246: 23'd0
+                                                      ,247: 23'd0
+                                                      ,248: 23'd0
+                                                      ,249: 23'd0
+                                                      ,250: 23'd0
+                                                      ,251: 23'd0
+                                                      ,252: 23'd0
+                                                      ,253: 23'd0
+                                                      ,254: 23'd0
+                                                      ,255: 23'd0})}
   ,{NTT256_types::array_of_256_logic_vector_23_to_lv('{0: 23'd0
                                                       ,1: 23'd0
                                                       ,2: 23'd0
@@ -21275,14 +9117,308 @@ module NTT256
                                                       ,254: 23'd0
                                                       ,255: 23'd0})}};
     end else  if (en)  begin
-      stateSignal <= result_19;
+      stateSignal <= result_6;
     end
   end
   // register end
 
-  assign done = result_0.Tuple2_3_sel0;
+  assign c$i_1109 = c$packetSignal_app_arg.ReadRequest_sel1;
 
-  assign result_1 = NTT256_types::array_of_256_logic_vector_23_from_lv(result_0.Tuple2_3_sel1);
+  assign c$i_1110 = c$packetSignal_app_arg.ReadRequest_sel2;
+
+  assign c$vec = '{0: 64'sd0
+                  ,1: 64'sd294725
+                  ,2: 64'sd8304754
+                  ,3: 64'sd8280182
+                  ,4: 64'sd6155295
+                  ,5: 64'sd7591714
+                  ,6: 64'sd7067554
+                  ,7: 64'sd7203743
+                  ,8: 64'sd6979903
+                  ,9: 64'sd6981962
+                  ,10: 64'sd2715685
+                  ,11: 64'sd4214773
+                  ,12: 64'sd4562491
+                  ,13: 64'sd8074524
+                  ,14: 64'sd6002843
+                  ,15: 64'sd7114182
+                  ,16: 64'sd5510295
+                  ,17: 64'sd4717985
+                  ,18: 64'sd3007494
+                  ,19: 64'sd3942328
+                  ,20: 64'sd3664286
+                  ,21: 64'sd3138283
+                  ,22: 64'sd4986106
+                  ,23: 64'sd4345652
+                  ,24: 64'sd1366638
+                  ,25: 64'sd803323
+                  ,26: 64'sd289157
+                  ,27: 64'sd3391741
+                  ,28: 64'sd6652273
+                  ,29: 64'sd7267317
+                  ,30: 64'sd8363347
+                  ,31: 64'sd1932518
+                  ,32: 64'sd5019179
+                  ,33: 64'sd7333239
+                  ,34: 64'sd1681557
+                  ,35: 64'sd1945215
+                  ,36: 64'sd8275718
+                  ,37: 64'sd6926001
+                  ,38: 64'sd1430472
+                  ,39: 64'sd2666911
+                  ,40: 64'sd4011446
+                  ,41: 64'sd4309263
+                  ,42: 64'sd3483979
+                  ,43: 64'sd6241375
+                  ,44: 64'sd13828
+                  ,45: 64'sd5858571
+                  ,46: 64'sd3282775
+                  ,47: 64'sd5333862
+                  ,48: 64'sd6376883
+                  ,49: 64'sd1368491
+                  ,50: 64'sd7412031
+                  ,51: 64'sd5451984
+                  ,52: 64'sd6331749
+                  ,53: 64'sd7619127
+                  ,54: 64'sd5362453
+                  ,55: 64'sd3811828
+                  ,56: 64'sd2883940
+                  ,57: 64'sd3341148
+                  ,58: 64'sd4521296
+                  ,59: 64'sd5678489
+                  ,60: 64'sd6693382
+                  ,61: 64'sd6799101
+                  ,62: 64'sd5638686
+                  ,63: 64'sd6896368
+                  ,64: 64'sd868519
+                  ,65: 64'sd4151501
+                  ,66: 64'sd1589698
+                  ,67: 64'sd7550137
+                  ,68: 64'sd5330295
+                  ,69: 64'sd602826
+                  ,70: 64'sd1874454
+                  ,71: 64'sd2252592
+                  ,72: 64'sd4545392
+                  ,73: 64'sd4656088
+                  ,74: 64'sd4632561
+                  ,75: 64'sd323453
+                  ,76: 64'sd4177747
+                  ,77: 64'sd2672019
+                  ,78: 64'sd1033361
+                  ,79: 64'sd1768240
+                  ,80: 64'sd471633
+                  ,81: 64'sd4022687
+                  ,82: 64'sd6555591
+                  ,83: 64'sd3185999
+                  ,84: 64'sd3032856
+                  ,85: 64'sd5910789
+                  ,86: 64'sd4810587
+                  ,87: 64'sd8076117
+                  ,88: 64'sd4122115
+                  ,89: 64'sd7753634
+                  ,90: 64'sd6448903
+                  ,91: 64'sd289514
+                  ,92: 64'sd1144268
+                  ,93: 64'sd1445654
+                  ,94: 64'sd5146790
+                  ,95: 64'sd5166701
+                  ,96: 64'sd739868
+                  ,97: 64'sd524811
+                  ,98: 64'sd7629477
+                  ,99: 64'sd3940422
+                  ,100: 64'sd173
+                  ,101: 64'sd2156279
+                  ,102: 64'sd6157902
+                  ,103: 64'sd5449640
+                  ,104: 64'sd1753196
+                  ,105: 64'sd4255647
+                  ,106: 64'sd6029882
+                  ,107: 64'sd2082410
+                  ,108: 64'sd4854262
+                  ,109: 64'sd1079464
+                  ,110: 64'sd3112889
+                  ,111: 64'sd8113385
+                  ,112: 64'sd4845669
+                  ,113: 64'sd8104649
+                  ,114: 64'sd2041975
+                  ,115: 64'sd320128
+                  ,116: 64'sd3558813
+                  ,117: 64'sd1046859
+                  ,118: 64'sd8221876
+                  ,119: 64'sd3606200
+                  ,120: 64'sd7174207
+                  ,121: 64'sd1041361
+                  ,122: 64'sd6151194
+                  ,123: 64'sd8309321
+                  ,124: 64'sd3065391
+                  ,125: 64'sd3258440
+                  ,126: 64'sd5518209
+                  ,127: 64'sd1291704
+                  ,128: 64'sd3576395
+                  ,129: 64'sd5447488
+                  ,130: 64'sd1449433
+                  ,131: 64'sd276802
+                  ,132: 64'sd4635456
+                  ,133: 64'sd172446
+                  ,134: 64'sd3165836
+                  ,135: 64'sd7253477
+                  ,136: 64'sd361139
+                  ,137: 64'sd3970566
+                  ,138: 64'sd518949
+                  ,139: 64'sd5349692
+                  ,140: 64'sd3128905
+                  ,141: 64'sd116259
+                  ,142: 64'sd5560444
+                  ,143: 64'sd1100550
+                  ,144: 64'sd5306751
+                  ,145: 64'sd7536543
+                  ,146: 64'sd854689
+                  ,147: 64'sd5437376
+                  ,148: 64'sd4093936
+                  ,149: 64'sd3856547
+                  ,150: 64'sd8249304
+                  ,151: 64'sd128903
+                  ,152: 64'sd7297569
+                  ,153: 64'sd315163
+                  ,154: 64'sd4067201
+                  ,155: 64'sd4006320
+                  ,156: 64'sd4274522
+                  ,157: 64'sd1372861
+                  ,158: 64'sd3597958
+                  ,159: 64'sd2015586
+                  ,160: 64'sd7563354
+                  ,161: 64'sd7988706
+                  ,162: 64'sd6243054
+                  ,163: 64'sd7512593
+                  ,164: 64'sd831827
+                  ,165: 64'sd6435937
+                  ,166: 64'sd1872733
+                  ,167: 64'sd7202714
+                  ,168: 64'sd894975
+                  ,169: 64'sd3382322
+                  ,170: 64'sd6471611
+                  ,171: 64'sd4686190
+                  ,172: 64'sd7479650
+                  ,173: 64'sd4064138
+                  ,174: 64'sd5738513
+                  ,175: 64'sd6095131
+                  ,176: 64'sd7580038
+                  ,177: 64'sd2165461
+                  ,178: 64'sd3643993
+                  ,179: 64'sd3652572
+                  ,180: 64'sd3883889
+                  ,181: 64'sd6325350
+                  ,182: 64'sd5932652
+                  ,183: 64'sd2942135
+                  ,184: 64'sd2155369
+                  ,185: 64'sd7501378
+                  ,186: 64'sd6337823
+                  ,187: 64'sd6836238
+                  ,188: 64'sd914846
+                  ,189: 64'sd1871079
+                  ,190: 64'sd4104915
+                  ,191: 64'sd4771790
+                  ,192: 64'sd5658330
+                  ,193: 64'sd3379297
+                  ,194: 64'sd4442150
+                  ,195: 64'sd2711718
+                  ,196: 64'sd8222597
+                  ,197: 64'sd821436
+                  ,198: 64'sd794398
+                  ,199: 64'sd1617369
+                  ,200: 64'sd6676026
+                  ,201: 64'sd7976523
+                  ,202: 64'sd255360
+                  ,203: 64'sd5525170
+                  ,204: 64'sd7486450
+                  ,205: 64'sd7776621
+                  ,206: 64'sd1311761
+                  ,207: 64'sd7350847
+                  ,208: 64'sd5491783
+                  ,209: 64'sd3839614
+                  ,210: 64'sd2399316
+                  ,211: 64'sd3698525
+                  ,212: 64'sd3412190
+                  ,213: 64'sd3417705
+                  ,214: 64'sd2259509
+                  ,215: 64'sd2908788
+                  ,216: 64'sd2148141
+                  ,217: 64'sd7464445
+                  ,218: 64'sd8124843
+                  ,219: 64'sd4693022
+                  ,220: 64'sd2982141
+                  ,221: 64'sd3345528
+                  ,222: 64'sd4994178
+                  ,223: 64'sd6376493
+                  ,224: 64'sd6404386
+                  ,225: 64'sd6528230
+                  ,226: 64'sd7708066
+                  ,227: 64'sd2096158
+                  ,228: 64'sd303269
+                  ,229: 64'sd389020
+                  ,230: 64'sd825110
+                  ,231: 64'sd7923957
+                  ,232: 64'sd6119966
+                  ,233: 64'sd1578061
+                  ,234: 64'sd2677309
+                  ,235: 64'sd4983335
+                  ,236: 64'sd3398031
+                  ,237: 64'sd6706567
+                  ,238: 64'sd1242950
+                  ,239: 64'sd1196256
+                  ,240: 64'sd5095336
+                  ,241: 64'sd2642882
+                  ,242: 64'sd1144116
+                  ,243: 64'sd8076862
+                  ,244: 64'sd3568941
+                  ,245: 64'sd8212921
+                  ,246: 64'sd7011805
+                  ,247: 64'sd2834182
+                  ,248: 64'sd5759371
+                  ,249: 64'sd6955344
+                  ,250: 64'sd5826820
+                  ,251: 64'sd1074967
+                  ,252: 64'sd1783126
+                  ,253: 64'sd4981343
+                  ,254: 64'sd2419159
+                  ,255: 64'sd1644522};
+
+  // map begin
+  genvar n;
+  generate
+  for (n=0; n < $size(packetSignal_res); n = n + 1) begin : map
+    logic signed [63:0] map_in;
+    assign map_in = $signed(c$vec[n]);
+    logic [22:0] map_out;
+    assign map_out = $unsigned(map_in[0+:23]);
+
+
+    assign packetSignal_res[n] = map_out;
+  end
+  endgenerate
+  // map end
+
+  assign c$i_1111 = c$packetSignal_app_arg.ReadRequest_sel3;
+
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : packetSignal_register
+    if ( rst) begin
+      packetSignal <= {1'b0,8'd0,8'd0,23'd0,23'd0,23'd0,1'b0};
+    end else  if (en)  begin
+      packetSignal <= {c$packetSignal_app_arg.ReadRequest_sel0
+  ,c$packetSignal_app_arg.ReadRequest_sel1
+  ,c$packetSignal_app_arg.ReadRequest_sel2
+  ,c$sourcePoly_case_alt[($unsigned({{(64-8) {1'b0}},c$i_1109}))]
+  ,c$sourcePoly_case_alt[($unsigned({{(64-8) {1'b0}},c$i_1110}))]
+  ,packetSignal_res[($unsigned({{(64-8) {1'b0}},c$i_1111}))]
+  ,c$packetSignal_app_arg.ReadRequest_sel4};
+    end
+  end
+  // register end
+
+  assign done = result_0.Tuple2_2_sel0;
+
+  assign result_1 = NTT256_types::array_of_256_logic_vector_23_from_lv(result_0.Tuple2_2_sel1);
 
   assign result = NTT256_types::array_of_256_logic_vector_23_to_lv(result_1);
 
