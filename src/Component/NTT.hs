@@ -275,6 +275,22 @@ pipelineLane packetSignal =
     metaReg3 =
       register (False, 0, 0, False) metaReg2
 
+    metaReg4 :: Signal dom (Bool, Index 256, Index 256, Bool)
+    metaReg4 =
+      register (False, 0, 0, False) metaReg3
+
+    metaReg5 :: Signal dom (Bool, Index 256, Index 256, Bool)
+    metaReg5 =
+      register (False, 0, 0, False) metaReg4
+
+    metaReg6 :: Signal dom (Bool, Index 256, Index 256, Bool)
+    metaReg6 =
+      register (False, 0, 0, False) metaReg5
+
+    metaReg7 :: Signal dom (Bool, Index 256, Index 256, Bool)
+    metaReg7 =
+      register (False, 0, 0, False) metaReg6
+
     responseSignal :: Signal dom ButterflyResponse
     responseSignal =
       liftA2
@@ -288,7 +304,7 @@ pipelineLane packetSignal =
             , rspLast   = lastResult
             }
         )
-        metaReg3
+        metaReg7
         arithmeticOutput
 
 -- ------------------------------------------------------------------

@@ -36,31 +36,40 @@ module NTT256
   NTT256_types::array_of_256_logic_vector_23 c$sourcePoly_case_alt;
   NTT256_types::Tuple4 c$ds_app_arg = {1'b0,8'd0,8'd0,1'b0};
   NTT256_types::Tuple4 c$ds_app_arg_0 = {1'b0,8'd0,8'd0,1'b0};
-  NTT256_types::Tuple2_0 ds = {23'd0,23'd0};
+  NTT256_types::Tuple4 c$ds_app_arg_1 = {1'b0,8'd0,8'd0,1'b0};
+  NTT256_types::Tuple4 c$ds_app_arg_2 = {1'b0,8'd0,8'd0,1'b0};
+  NTT256_types::Tuple4 c$ds_app_arg_3 = {1'b0,8'd0,8'd0,1'b0};
+  NTT256_types::Tuple4 c$ds_app_arg_4 = {1'b0,8'd0,8'd0,1'b0};
   logic [22:0] a;
-  logic [22:0] t;
-  logic [22:0] c$app_arg_2;
-  logic [23:0] sumWide;
-  logic [22:0] result_3;
-  NTT256_types::Tuple2_1 ds_0 = {23'd0,46'd0};
-  logic [22:0] a_0;
-  logic [45:0] productWide;
-  logic [24:0] result_4;
-  logic [24:0] shifted;
-  logic [47:0] mWide;
-  logic [46:0] c$mWide_app_arg;
-  logic [23:0] xLow;
-  logic [22:0] a_1;
   logic [22:0] b;
   logic [22:0] zeta;
-  logic [45:0] c$ds_app_arg_1;
-  NTT256_types::Tuple2_0 result_5 = {23'd0,23'd0};
+  logic [33:0] c$app_arg_2;
+  logic [34:0] c$app_arg_3;
+  NTT256_types::MulPartial c$packet_app_arg = {23'd0,35'd0,34'd0};
+  NTT256_types::Tuple2_0 c$packet_app_arg_0 = {23'd0,46'd0};
+  logic [22:0] a_0;
+  logic [46:0] c$app_arg_4;
+  logic [23:0] xLow;
+  logic [45:0] x;
+  NTT256_types::Mont1 c$packet_app_arg_1 = {23'd0,46'd0,24'd0};
+  logic [47:0] mWide;
+  NTT256_types::Mont3 c$ds_app_arg_5 = {23'd0,49'd0};
+  logic [24:0] result_3;
+  logic [24:0] shifted;
+  logic [23:0] sumWide;
+  logic [22:0] result_4;
+  logic [22:0] c$app_arg_5;
+  NTT256_types::Mont2 packet = {23'd0,46'd0,48'd0};
+  logic [22:0] a_1;
+  logic [22:0] t;
+  NTT256_types::Tuple2_1 ds = {23'd0,23'd0};
+  NTT256_types::Tuple2_1 result_5 = {23'd0,23'd0};
   NTT256_types::NTTState result_6;
   NTT256_types::NTTState c$case_alt_0;
   NTT256_types::NTTState c$case_alt_1;
   NTT256_types::NTTState c$case_alt_2;
   NTT256_types::NTTState c$case_alt_3;
-  logic c$app_arg_3;
+  logic c$app_arg_6;
   logic [1:0] eta1;
   logic [7:0] stateOp1;
   NTT256_types::array_of_256_logic_vector_23 stateBufB1;
@@ -327,7 +336,7 @@ module NTT256
   logic [22:0] c$case_alt_260;
   logic [22:0] c$case_alt_261;
   NTT256_types::array_of_256_logic_vector_23 c$case_alt_262;
-  logic signed [63:0] c$app_arg_4;
+  logic signed [63:0] c$app_arg_7;
   logic [22:0] c$case_alt_263;
   logic [22:0] c$case_alt_264;
   logic [22:0] c$case_alt_265;
@@ -591,7 +600,7 @@ module NTT256
   logic lastResult;
   logic [22:0] outA;
   logic [22:0] outB;
-  NTT256_types::Tuple4 ds_1 = {1'b0,8'd0,8'd0,1'b0};
+  NTT256_types::Tuple4 ds_0 = {1'b0,8'd0,8'd0,1'b0};
   NTT256_types::NTTState stateSignal = {2'd0
 ,1'b0
 ,3'd0
@@ -1115,11 +1124,15 @@ module NTT256
   logic [8:0] c$i_0;
   logic [1:0] c$dtt_rhs_1;
   logic [7:0] c$bv;
-  logic [23:0] c$bv_0;
-  logic [47:0] c$bv_1;
-  logic [48:0] c$bv_2;
+  logic [22:0] c$bv_0;
+  logic [34:0] c$bv_1;
+  logic [33:0] c$bv_2;
   logic [46:0] c$bv_3;
   logic [23:0] c$bv_4;
+  logic [45:0] c$bv_5;
+  logic [47:0] c$bv_6;
+  logic [48:0] c$bv_7;
+  logic [23:0] c$bv_8;
   logic [1:0] result_selection_3;
   logic signed [63:0] c$case_alt_selection_8;
   logic signed [63:0] c$case_alt_selection_7;
@@ -2145,11 +2158,11 @@ module NTT256
   logic signed [63:0] c$case_alt_selection_1537;
   logic signed [63:0] c$case_alt_selection_1541;
   logic signed [63:0] c$case_alt_selection_1540;
-  logic [7:0] c$i_1109;
-  logic [7:0] c$i_1110;
+  logic [7:0] c$i_1147;
+  logic [7:0] c$i_1148;
   NTT256_types::array_of_256_logic_vector_23 packetSignal_res;
   NTT256_types::array_of_256_signed_64 c$vec;
-  logic [7:0] c$i_1111;
+  logic [7:0] c$i_1149;
   NTT256_types::Tuple2_2 result_0;
   NTT256_types::array_of_256_logic_vector_23 result_1;
 
@@ -2250,73 +2263,167 @@ module NTT256
   // register end
 
   // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : ds_register
+  always_ff @(posedge clk or  posedge  rst) begin : c$ds_app_arg_1_register
     if ( rst) begin
-      ds <= {23'd0,23'd0};
+      c$ds_app_arg_1 <= {1'b0,8'd0,8'd0,1'b0};
     end else  if (en)  begin
-      ds <= {a_0,result_4[0+:23]};
+      c$ds_app_arg_1 <= c$ds_app_arg_0;
     end
   end
   // register end
-
-  assign a = ds.Tuple2_0_sel0;
-
-  assign t = ds.Tuple2_0_sel1;
-
-  assign c$app_arg_2 = (a >= t) ? (a - t) : (23'd8380417 - (t - a));
-
-  assign sumWide = ({{(24-23) {1'b0}},a}) + ({{(24-23) {1'b0}},t});
-
-  assign c$bv_0 = (sumWide - 24'd8380417);
-
-  assign result_3 = (sumWide >= 24'd8380417) ? (c$bv_0[0+:23]) : (sumWide[0+:23]);
 
   // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : ds_0_register
+  always_ff @(posedge clk or  posedge  rst) begin : c$ds_app_arg_2_register
     if ( rst) begin
-      ds_0 <= {23'd0,46'd0};
+      c$ds_app_arg_2 <= {1'b0,8'd0,8'd0,1'b0};
     end else  if (en)  begin
-      ds_0 <= {a_1,c$ds_app_arg_1};
+      c$ds_app_arg_2 <= c$ds_app_arg_1;
     end
   end
   // register end
 
-  assign a_0 = ds_0.Tuple2_1_sel0;
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$ds_app_arg_3_register
+    if ( rst) begin
+      c$ds_app_arg_3 <= {1'b0,8'd0,8'd0,1'b0};
+    end else  if (en)  begin
+      c$ds_app_arg_3 <= c$ds_app_arg_2;
+    end
+  end
+  // register end
 
-  assign productWide = ds_0.Tuple2_1_sel1;
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$ds_app_arg_4_register
+    if ( rst) begin
+      c$ds_app_arg_4 <= {1'b0,8'd0,8'd0,1'b0};
+    end else  if (en)  begin
+      c$ds_app_arg_4 <= c$ds_app_arg_3;
+    end
+  end
+  // register end
 
-  assign result_4 = (shifted >= 25'd8380417) ? (shifted - 25'd8380417) : shifted;
-
-  assign c$bv_1 = (((mWide << (64'sd23)) - (mWide << (64'sd13))) + mWide);
-
-  assign c$bv_2 = ((({{(49-46) {1'b0}},productWide}) + ({{(49-48) {1'b0}},(((mWide << (64'sd23)) - (mWide << (64'sd13))) + mWide)})) >> (64'sd24));
-
-  assign shifted = c$bv_2[0+:25];
-
-  assign c$bv_3 = (((c$mWide_app_arg << (64'sd23)) - (c$mWide_app_arg << (64'sd13))) - c$mWide_app_arg);
-
-  assign c$bv_4 = (c$bv_3[0+:24]);
-
-  assign mWide = {{(48-24) {1'b0}},(c$bv_3[0+:24])};
-
-  assign c$mWide_app_arg = {{(47-24) {1'b0}},xLow};
-
-  assign xLow = productWide[0+:24];
-
-  assign a_1 = packetSignal.ButterflyPacket_sel3;
+  assign a = packetSignal.ButterflyPacket_sel3;
 
   assign b = packetSignal.ButterflyPacket_sel4;
 
   assign zeta = packetSignal.ButterflyPacket_sel5;
 
-  assign c$ds_app_arg_1 = zeta * b;
+  assign c$bv_0 = (b >> (64'sd12));
+
+  assign c$app_arg_2 = zeta * (c$bv_0[0+:11]);
+
+  assign c$app_arg_3 = zeta * (b[0+:12]);
+
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$packet_app_arg_register
+    if ( rst) begin
+      c$packet_app_arg <= {23'd0,35'd0,34'd0};
+    end else  if (en)  begin
+      c$packet_app_arg <= {a,c$app_arg_3,c$app_arg_2};
+    end
+  end
+  // register end
+
+  assign c$bv_1 = c$packet_app_arg.MulPartial_sel1;
+
+  assign c$bv_2 = c$packet_app_arg.MulPartial_sel2;
+
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$packet_app_arg_0_register
+    if ( rst) begin
+      c$packet_app_arg_0 <= {23'd0,46'd0};
+    end else  if (en)  begin
+      c$packet_app_arg_0 <= {c$packet_app_arg.MulPartial_sel0
+  ,({{(46-35) {1'b0}},c$packet_app_arg.MulPartial_sel1}) + (({{(46-34) {1'b0}},c$packet_app_arg.MulPartial_sel2}) << (64'sd12))};
+    end
+  end
+  // register end
+
+  assign a_0 = c$packet_app_arg_0.Tuple2_0_sel0;
+
+  assign c$app_arg_4 = {{(47-24) {1'b0}},xLow};
+
+  assign xLow = x[0+:24];
+
+  assign x = c$packet_app_arg_0.Tuple2_0_sel1;
+
+  assign c$bv_3 = (((c$app_arg_4 << (64'sd23)) - (c$app_arg_4 << (64'sd13))) - c$app_arg_4);
+
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$packet_app_arg_1_register
+    if ( rst) begin
+      c$packet_app_arg_1 <= {23'd0,46'd0,24'd0};
+    end else  if (en)  begin
+      c$packet_app_arg_1 <= {a_0,x,c$bv_3[0+:24]};
+    end
+  end
+  // register end
+
+  assign c$bv_4 = c$packet_app_arg_1.Mont1_sel2;
+
+  assign mWide = {{(48-24) {1'b0}},c$packet_app_arg_1.Mont1_sel2};
+
+  assign c$bv_5 = packet.Mont2_sel1;
+
+  assign c$bv_6 = packet.Mont2_sel2;
+
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$ds_app_arg_5_register
+    if ( rst) begin
+      c$ds_app_arg_5 <= {23'd0,49'd0};
+    end else  if (en)  begin
+      c$ds_app_arg_5 <= {packet.Mont2_sel0
+  ,({{(49-46) {1'b0}},packet.Mont2_sel1}) + ({{(49-48) {1'b0}},packet.Mont2_sel2})};
+    end
+  end
+  // register end
+
+  assign result_3 = (shifted >= 25'd8380417) ? (shifted - 25'd8380417) : shifted;
+
+  assign c$bv_7 = (c$ds_app_arg_5.Mont3_sel1 >> (64'sd24));
+
+  assign shifted = c$bv_7[0+:25];
+
+  assign sumWide = ({{(24-23) {1'b0}},a_1}) + ({{(24-23) {1'b0}},t});
+
+  assign c$bv_8 = (sumWide - 24'd8380417);
+
+  assign result_4 = (sumWide >= 24'd8380417) ? (c$bv_8[0+:23]) : (sumWide[0+:23]);
+
+  assign c$app_arg_5 = (a_1 >= t) ? (a_1 - t) : (23'd8380417 - (t - a_1));
+
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : packet_register
+    if ( rst) begin
+      packet <= {23'd0,46'd0,48'd0};
+    end else  if (en)  begin
+      packet <= {c$packet_app_arg_1.Mont1_sel0
+  ,c$packet_app_arg_1.Mont1_sel1
+  ,((mWide << (64'sd23)) - (mWide << (64'sd13))) + mWide};
+    end
+  end
+  // register end
+
+  assign a_1 = ds.Tuple2_1_sel0;
+
+  assign t = ds.Tuple2_1_sel1;
+
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : ds_register
+    if ( rst) begin
+      ds <= {23'd0,23'd0};
+    end else  if (en)  begin
+      ds <= {c$ds_app_arg_5.Mont3_sel0,result_3[0+:23]};
+    end
+  end
+  // register end
 
   // register begin
   always_ff @(posedge clk or  posedge  rst) begin : result_5_register
     if ( rst) begin
       result_5 <= {23'd0,23'd0};
     end else  if (en)  begin
-      result_5 <= {result_3,c$app_arg_2};
+      result_5 <= {result_4,c$app_arg_5};
     end
   end
   // register end
@@ -2371,17 +2478,17 @@ module NTT256
                                                               ,1'b1
                                                               ,stateStage1
                                                               ,8'd0
-                                                              ,c$app_arg_3
+                                                              ,c$app_arg_6
                                                               ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufA1)}
                                                               ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufB1)}} : {2'd1
                                                                                                                                  ,1'b0
                                                                                                                                  ,stateSignal.NTTState_sel2 + 3'd1
                                                                                                                                  ,8'd0
-                                                                                                                                 ,c$app_arg_3
+                                                                                                                                 ,c$app_arg_6
                                                                                                                                  ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufA1)}
                                                                                                                                  ,{NTT256_types::array_of_256_logic_vector_23_to_lv(stateBufB1)}};
 
-  assign c$app_arg_3 = ~ stateSignal.NTTState_sel4;
+  assign c$app_arg_6 = ~ stateSignal.NTTState_sel4;
 
   assign eta1 = result_7.NTTState_sel0;
 
@@ -2669,7 +2776,7 @@ module NTT256
    ,253: c$case_alt_8
    ,254: c$case_alt_7
    ,255: c$case_alt_6};
-    c$case_alt_5[c$app_arg_4] = outB;
+    c$case_alt_5[c$app_arg_7] = outB;
   end
   // replaceVec end
 
@@ -5747,11 +5854,11 @@ module NTT256
    ,253: c$case_alt_265
    ,254: c$case_alt_264
    ,255: c$case_alt_263};
-    c$case_alt_262[c$app_arg_4] = outB;
+    c$case_alt_262[c$app_arg_7] = outB;
   end
   // replaceVec end
 
-  assign c$app_arg_4 = $unsigned({{(64-8) {1'b0}},bIndex});
+  assign c$app_arg_7 = $unsigned({{(64-8) {1'b0}},bIndex});
 
   assign c$case_alt_selection_776 = c$case_alt_selection_775;
 
@@ -8574,24 +8681,24 @@ module NTT256
   assign result_0 = {stateSignal.NTTState_sel1
                     ,{NTT256_types::array_of_256_logic_vector_23_to_lv(c$case_alt_519)}};
 
-  assign valid = ds_1.Tuple4_sel0;
+  assign valid = ds_0.Tuple4_sel0;
 
-  assign aIndex = ds_1.Tuple4_sel1;
+  assign aIndex = ds_0.Tuple4_sel1;
 
-  assign bIndex = ds_1.Tuple4_sel2;
+  assign bIndex = ds_0.Tuple4_sel2;
 
-  assign lastResult = ds_1.Tuple4_sel3;
+  assign lastResult = ds_0.Tuple4_sel3;
 
-  assign outA = result_5.Tuple2_0_sel0;
+  assign outA = result_5.Tuple2_1_sel0;
 
-  assign outB = result_5.Tuple2_0_sel1;
+  assign outB = result_5.Tuple2_1_sel1;
 
   // register begin
-  always_ff @(posedge clk or  posedge  rst) begin : ds_1_register
+  always_ff @(posedge clk or  posedge  rst) begin : ds_0_register
     if ( rst) begin
-      ds_1 <= {1'b0,8'd0,8'd0,1'b0};
+      ds_0 <= {1'b0,8'd0,8'd0,1'b0};
     end else  if (en)  begin
-      ds_1 <= c$ds_app_arg_0;
+      ds_0 <= c$ds_app_arg_4;
     end
   end
   // register end
@@ -9122,9 +9229,9 @@ module NTT256
   end
   // register end
 
-  assign c$i_1109 = c$packetSignal_app_arg.ReadRequest_sel1;
+  assign c$i_1147 = c$packetSignal_app_arg.ReadRequest_sel1;
 
-  assign c$i_1110 = c$packetSignal_app_arg.ReadRequest_sel2;
+  assign c$i_1148 = c$packetSignal_app_arg.ReadRequest_sel2;
 
   assign c$vec = '{0: 64'sd0
                   ,1: 64'sd294725
@@ -9398,7 +9505,7 @@ module NTT256
   endgenerate
   // map end
 
-  assign c$i_1111 = c$packetSignal_app_arg.ReadRequest_sel3;
+  assign c$i_1149 = c$packetSignal_app_arg.ReadRequest_sel3;
 
   // register begin
   always_ff @(posedge clk or  posedge  rst) begin : packetSignal_register
@@ -9408,9 +9515,9 @@ module NTT256
       packetSignal <= {c$packetSignal_app_arg.ReadRequest_sel0
   ,c$packetSignal_app_arg.ReadRequest_sel1
   ,c$packetSignal_app_arg.ReadRequest_sel2
-  ,c$sourcePoly_case_alt[($unsigned({{(64-8) {1'b0}},c$i_1109}))]
-  ,c$sourcePoly_case_alt[($unsigned({{(64-8) {1'b0}},c$i_1110}))]
-  ,packetSignal_res[($unsigned({{(64-8) {1'b0}},c$i_1111}))]
+  ,c$sourcePoly_case_alt[($unsigned({{(64-8) {1'b0}},c$i_1147}))]
+  ,c$sourcePoly_case_alt[($unsigned({{(64-8) {1'b0}},c$i_1148}))]
+  ,packetSignal_res[($unsigned({{(64-8) {1'b0}},c$i_1149}))]
   ,c$packetSignal_app_arg.ReadRequest_sel4};
     end
   end

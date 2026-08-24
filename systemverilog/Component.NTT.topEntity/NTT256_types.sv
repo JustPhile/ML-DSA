@@ -1,8 +1,12 @@
 package NTT256_types;
   typedef struct packed {
-    logic [22:0] Tuple2_0_sel0;
-    logic [22:0] Tuple2_0_sel1;
-  } Tuple2_0;
+    logic [22:0] Mont3_sel0;
+    logic [48:0] Mont3_sel1;
+  } Mont3;
+  typedef struct packed {
+    logic [22:0] Tuple2_1_sel0;
+    logic [22:0] Tuple2_1_sel1;
+  } Tuple2_1;
   typedef logic signed [63:0] array_of_256_signed_64 [0:255];
   typedef struct packed {
     logic ReadRequest_sel0;
@@ -45,9 +49,24 @@ package NTT256_types;
     logic[0:255][22:0] NTTState_sel6;
   } NTTState;
   typedef struct packed {
-    logic [22:0] Tuple2_1_sel0;
-    logic [45:0] Tuple2_1_sel1;
-  } Tuple2_1;
+    logic [22:0] Tuple2_0_sel0;
+    logic [45:0] Tuple2_0_sel1;
+  } Tuple2_0;
+  typedef struct packed {
+    logic [22:0] Mont2_sel0;
+    logic [45:0] Mont2_sel1;
+    logic [47:0] Mont2_sel2;
+  } Mont2;
+  typedef struct packed {
+    logic [22:0] Mont1_sel0;
+    logic [45:0] Mont1_sel1;
+    logic [23:0] Mont1_sel2;
+  } Mont1;
+  typedef struct packed {
+    logic [22:0] MulPartial_sel0;
+    logic [34:0] MulPartial_sel1;
+    logic [33:0] MulPartial_sel2;
+  } MulPartial;
   function automatic logic [0:255][63:0] array_of_256_signed_64_to_lv(array_of_256_signed_64 i);
     for (int n = 0; n < 256; n=n+1)
       array_of_256_signed_64_to_lv[n] = i[n];

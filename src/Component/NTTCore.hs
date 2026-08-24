@@ -28,8 +28,92 @@ qCoeff = 8_380_417
 qInv :: MontWord
 qInv = 8_380_415
 
+data Mont1 = Mont1
+  { m1A :: Coeff
+  , m1X :: Product
+  , m1M :: MontWord
+  }
+  deriving (Generic, NFDataX)
 
--- Montgomery reduction
+data Mont2 = Mont2
+  { m2A   :: Coeff
+  , m2X   :: Product
+  , m2Mq  :: MontWide
+  }
+  deriving (Generic, NFDataX)
+
+data Mont3 = Mont3
+  { m3A   :: Coeff
+  , m3Sum :: Unsigned 49
+  }
+  deriving (Generic, NFDataX)
+
+montStage1 :: (Coeff, Product) -> Mont1
+montStage1 (a, x) =
+  Mont1 a x m
+  where
+    xLow :: MontWord
+    xLow =
+      truncateB x
+
+    mIntermediate :: Unsigned 47
+    mIntermediate =
+      (resize xLow `shiftL` 23)
+        - (resize xLow `shiftL` 13)
+        - resize xLow
+
+    m :: MontWord
+    m =
+      truncateB mIntermediate
+
+montStage2 :: Mont1 -> Mont2
+montStage2 packet =
+  Mont2
+    (m1A packet)
+    (m1X packet)
+    mq
+  where
+    mWide :: MontWide
+    mWide =
+      resize (m1M packet)
+
+    mq :: MontWide
+    mq =
+      (mWide `shiftL` 23)
+        - (mWide `shiftL` 13)
+        + mWide
+
+
+montStage3 :: Mont2 -> Mont3
+montStage3 packet =
+  Mont3
+    (m2A packet)
+    sumWide
+  where
+    sumWide :: Unsigned 49
+    sumWide =
+      resize (m2X packet)
+        + resize (m2Mq packet)
+
+finalReduce :: Mont3 -> (Coeff, Coeff)
+finalReduce packet =
+  (m3A packet, truncateB reduced)
+  where
+    shifted :: Unsigned 25
+    shifted =
+      truncateB
+        (shiftR (m3Sum packet) 24)
+
+    qWide :: Unsigned 25
+    qWide =
+      8_380_417
+
+    reduced :: Unsigned 25
+    reduced =
+      if shifted >= qWide
+        then shifted - qWide
+        else shifted
+
 montgomeryReduce :: Product -> Coeff
 montgomeryReduce x =
   let
@@ -77,6 +161,63 @@ montgomeryReduce x =
   in
     truncateB reduced
 
+data MulPartial = MulPartial
+  { mpA    :: Coeff
+  , mpLow  :: Unsigned 35
+  , mpHigh :: Unsigned 34
+  }
+  deriving (Generic, NFDataX)
+
+-- ============================================================
+-- Pipelined multiplier
+--
+-- b = bLow + (bHigh << 12)
+--
+-- zeta * b =
+--   zeta * bLow
+--   + ((zeta * bHigh) << 12)
+-- ============================================================
+
+mulStage1 :: (Coeff, Coeff, Coeff) -> MulPartial
+mulStage1 (a, b, zeta) =
+  MulPartial
+    { mpA    = a
+    , mpLow  = lowProduct
+    , mpHigh = highProduct
+    }
+  where
+    bLow :: Unsigned 12
+    bLow =
+      truncateB b
+
+    bHigh :: Unsigned 11
+    bHigh =
+      truncateB (shiftR b 12)
+
+    lowProduct :: Unsigned 35
+    lowProduct =
+      zeta `mul` bLow
+
+    highProduct :: Unsigned 34
+    highProduct =
+      zeta `mul` bHigh
+
+
+mulStage2 :: MulPartial -> (Coeff, Product)
+mulStage2 packet =
+  (mpA packet, productWide)
+  where
+    lowWide :: Product
+    lowWide =
+      resize (mpLow packet)
+
+    highWide :: Product
+    highWide =
+      resize (mpHigh packet) `shiftL` 12
+
+    productWide :: Product
+    productWide =
+      lowWide + highWide
 
 -- Montgomery multiplication
 montgomeryMul :: Coeff -> Coeff -> Coeff
@@ -120,7 +261,6 @@ butterfly (a, b, zeta) =
     , subModQ a t
     )
 
-
 -- Pipelined butterfly
 butterflyPipeline
   :: forall dom.
@@ -130,33 +270,71 @@ butterflyPipeline
 butterflyPipeline input =
   outputReg
   where
-    -- Pipeline Stage 1: 23 x 23 multiplication
-    mulStage :: Signal dom (Coeff, Product)
-    mulStage =
-      fmap
-        (\(a, b, zeta) ->
-          let
-            productWide :: Product
-            productWide = zeta `mul` b
-          in
-            (a, productWide)
-        )
-        input
+
+    -- Stage 1: two smaller multipliers: 23x12 and 23x11
+    mulPartialStage :: Signal dom MulPartial
+    mulPartialStage =
+      fmap mulStage1 input
+
+    mulPartialReg :: Signal dom MulPartial
+    mulPartialReg =
+      register
+        (MulPartial 0 0 0)
+        mulPartialStage
+
+
+    -- Stage 2: reconstruct 23x23 product from partial products
+    mulCombineStage :: Signal dom (Coeff, Product)
+    mulCombineStage =
+      fmap mulStage2 mulPartialReg
 
     mulReg :: Signal dom (Coeff, Product)
     mulReg =
       register
         (0, 0)
-        mulStage
+        mulCombineStage
 
-    -- Pipeline Stage 2: Montgomery reduction
+
+    -- Stage 3: Montgomery: calculate m
+    mont1Stage :: Signal dom Mont1
+    mont1Stage =
+      fmap montStage1 mulReg
+
+    mont1Reg :: Signal dom Mont1
+    mont1Reg =
+      register
+        (Mont1 0 0 0)
+        mont1Stage
+
+
+    -- Stage 4: Montgomery: calculate m*q
+    mont2Stage :: Signal dom Mont2
+    mont2Stage =
+      fmap montStage2 mont1Reg
+
+    mont2Reg :: Signal dom Mont2
+    mont2Reg =
+      register
+        (Mont2 0 0 0)
+        mont2Stage
+
+
+    -- Stage 5: Montgomery: x + mq
+    mont3Stage :: Signal dom Mont3
+    mont3Stage =
+      fmap montStage3 mont2Reg
+
+    mont3Reg :: Signal dom Mont3
+    mont3Reg =
+      register
+        (Mont3 0 0)
+        mont3Stage
+
+
+    -- Stage 6: shift + conditional subtract q
     reduceStage :: Signal dom (Coeff, Coeff)
     reduceStage =
-      fmap
-        (\(a, productWide) ->
-          (a, montgomeryReduce productWide)
-        )
-        mulReg
+      fmap finalReduce mont3Reg
 
     reduceReg :: Signal dom (Coeff, Coeff)
     reduceReg =
@@ -164,7 +342,9 @@ butterflyPipeline input =
         (0, 0)
         reduceStage
 
-    -- Pipeline Stage 3: Modular add/sub
+
+    -- Stage 7:
+    -- butterfly modular add/sub
     addSubStage :: Signal dom (Coeff, Coeff)
     addSubStage =
       fmap

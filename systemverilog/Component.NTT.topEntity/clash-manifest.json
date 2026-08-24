@@ -35,18 +35,18 @@
         },
         {
             "name": "NTT256_types.sv",
-            "sha256": "b0f5c0e45e93de38da83cf28d03e419c7a2651def4f8e714d1a8e329bd2a577e"
+            "sha256": "b4736702d7c1e8fb754030de3716ca88377bae1fcaa058248d295f1ee62905d9"
         },
         {
             "name": "NTT256.sv",
-            "sha256": "614227156835c1169aeebd28bc9286cb3eaff91485f3c6fae6bfd64ea1385665"
+            "sha256": "04ddabf5d84fe8059f7157062ef4f20d751e8e71f7b53b0c6f3007c6fb7c19ce"
         }
     ],
     "flags": [
         20,
         20
     ],
-    "hash": "d2b79882d63956b2daf852096eaf033225d783eb617f8bcddc9096378d47ceeb",
+    "hash": "0a86d15e1282656f11cb59c922c21421560cbec787f4c17b3500af809cc955a9",
     "top_component": {
         "name": "NTT256",
         "ports_flat": [
