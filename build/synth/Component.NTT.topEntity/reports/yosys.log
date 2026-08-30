@@ -6039,7 +6039,7 @@ ABC: UC Berkeley, ABC 1.01 (compiled Jan  1 1980 00:00:00)
 ABC: abc 01> empty
 ABC: abc 01> source <abc-temp-dir>/abc.script
 ABC: + read_blif <abc-temp-dir>/input.blif 
-ABC: + read_scl /tmp/nix-shell.KthL8U/nix-shell.JI9R8r/yosys-liberty-scl-cache/yosys_merged_cc566cb1.scl 
+ABC: + read_scl /tmp/nix-shell.hgdtiz/nix-shell.C6Pq4p/yosys-liberty-scl-cache/yosys_merged_cc566cb1.scl 
 ABC: Warning: Detected 2 multi-output cells (for example, "FA_X1").
 ABC: + read_constr -v /home/user/ML-DSA/build/synth/abc.constr 
 ABC: Setting driving cell to be "BUF_X4".
@@ -6205,6 +6205,6 @@ Dumping module `\NTT256'.
    Chip area for module '\NTT256': 159357.940000
      of which used for sequential elements: 66845.800000 (41.95%)
 
-End of script. Logfile hash: e645a06478, time: 81.21s, user: 57.58s, system: 0.40s, MEM: 534.41 MB peak
+End of script. Logfile hash: b312fc53c6, time: 81.94s, user: 58.01s, system: 0.41s, MEM: 533.35 MB peak
 Yosys 0.67+post (git sha1 v0.67, Release, GNU /nix/store/vdaz6sk455r8sbpi7wzaf9vlz5i9yyvx-gcc-wrapper-15.2.0/bin/g++ 15.2.0)
 Time spent: 55% 23x opt_dff (46 sec), 33% 1x abc (28 sec), ...

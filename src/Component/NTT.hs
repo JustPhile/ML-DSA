@@ -262,7 +262,7 @@ pipelineLane packetSignal =
         )
         packetSignal
 
-    -- butterflyPipeline currently has three register stages.
+    -- butterflyPipeline currently has seven register stages.
     metaReg1 :: Signal dom (Bool, Index 256, Index 256, Bool)
     metaReg1 =
       register (False, 0, 0, False) metadata
