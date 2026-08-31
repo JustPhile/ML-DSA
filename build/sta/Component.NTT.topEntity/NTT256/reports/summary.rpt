@@ -1,6 +1,6 @@
 Design Type:     Sequential (With Registers)
 
-Critical Path:   1.79 ns
+Critical Path:   1.38 ns
 WNS (max):       0.000 ns
 TNS (max):       0.000 ns
-Worst Slack:     3.18 ns
+Worst Slack:     3.58 ns

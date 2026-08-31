@@ -43,36 +43,51 @@ module NTT256
   reg [17:0] c$ds_app_arg_2 = {1'b0,   8'd0,   8'd0,   1'b0};
   reg [17:0] c$ds_app_arg_3 = {1'b0,   8'd0,   8'd0,   1'b0};
   reg [17:0] c$ds_app_arg_4 = {1'b0,   8'd0,   8'd0,   1'b0};
+  reg [17:0] c$ds_app_arg_5 = {1'b0,   8'd0,   8'd0,   1'b0};
+  reg [17:0] c$ds_app_arg_6 = {1'b0,   8'd0,   8'd0,   1'b0};
+  reg [17:0] c$ds_app_arg_7 = {1'b0,   8'd0,   8'd0,   1'b0};
+  reg [45:0] ds = {23'd0,   23'd0};
   wire [22:0] a;
+  wire [22:0] t;
+  wire [22:0] c$app_arg_2;
+  wire [23:0] sumWide;
+  wire [22:0] result_2;
+  wire [24:0] result_3;
+  wire [24:0] shifted;
+  reg [71:0] c$ds_app_arg_8 = {23'd0,   49'd0};
+  reg [93:0] c$ds_app_arg_9 = {23'd0,   22'd0,   24'd0,   24'd0,   1'd0};
+  wire [47:0] mq;
+  wire [45:0] x;
+  wire [24:0] lowSum;
+  reg [116:0] c$ds_app_arg_10 = {23'd0,   46'd0,   48'd0};
+  wire [47:0] mWide;
+  reg [92:0] c$ds_app_arg_11 = {23'd0,   46'd0,   24'd0};
+  wire [22:0] a_0;
+  wire [46:0] c$app_arg_3;
+  wire [23:0] xLow;
+  wire [45:0] x_0;
+  reg [68:0] c$ds_app_arg_12 = {23'd0,   46'd0};
+  reg [91:0] c$ds_app_arg_13 = {23'd0,   35'd0,   34'd0};
+  reg [137:0] c$ds_app_arg_14 = {23'd0,   29'd0,   29'd0,   29'd0,   28'd0};
+  reg [229:0] c$ds_app_arg_15 = {23'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   25'd0};
+  wire [22:0] a_1;
   wire [22:0] b;
   wire [22:0] zeta;
-  wire [33:0] c$app_arg_2;
-  wire [34:0] c$app_arg_3;
-  reg [91:0] c$packet_app_arg = {23'd0,   35'd0,   34'd0};
-  reg [68:0] c$packet_app_arg_0 = {23'd0,   46'd0};
-  wire [22:0] a_0;
-  wire [46:0] c$app_arg_4;
-  wire [23:0] xLow;
-  wire [45:0] x;
-  reg [92:0] c$packet_app_arg_1 = {23'd0,   46'd0,   24'd0};
-  wire [47:0] mWide;
-  reg [71:0] c$ds_app_arg_5 = {23'd0,   49'd0};
-  wire [24:0] result_2;
-  wire [24:0] shifted;
-  wire [23:0] sumWide;
-  wire [22:0] result_3;
-  wire [22:0] c$app_arg_5;
-  reg [116:0] packet = {23'd0,   46'd0,   48'd0};
-  wire [22:0] a_1;
-  wire [22:0] t;
-  reg [45:0] ds = {23'd0,   23'd0};
+  wire [24:0] c$app_arg_4;
+  wire [25:0] c$app_arg_5;
+  wire [25:0] c$app_arg_6;
+  wire [25:0] c$app_arg_7;
+  wire [25:0] c$app_arg_8;
+  wire [25:0] c$app_arg_9;
+  wire [25:0] c$app_arg_10;
+  wire [25:0] c$app_arg_11;
   reg [45:0] result_4 = {23'd0,   23'd0};
   reg [11790:0] result_5;
   wire [11790:0] c$case_alt_3;
   wire [11790:0] c$case_alt_4;
   wire [11790:0] c$case_alt_5;
   wire [11790:0] c$case_alt_6;
-  wire  c$app_arg_6;
+  wire  c$app_arg_12;
   wire [1:0] eta1;
   wire [7:0] stateOp1;
   wire [5887:0] stateBufB1;
@@ -339,7 +354,7 @@ module NTT256
   reg [22:0] c$case_alt_263;
   reg [22:0] c$case_alt_264;
   wire [5887:0] c$case_alt_265;
-  wire signed [63:0] c$app_arg_7;
+  wire signed [63:0] c$app_arg_13;
   reg [22:0] c$case_alt_266;
   reg [22:0] c$case_alt_267;
   reg [22:0] c$case_alt_268;
@@ -710,15 +725,39 @@ module NTT256
   wire [7:0] c$i_33;
   wire [7:0] c$i_34;
   wire [7:0] c$i_35;
-  wire [22:0] c$bv_0;
-  wire [34:0] c$bv_1;
-  wire [33:0] c$bv_2;
-  wire [46:0] c$bv_3;
-  wire [23:0] c$bv_4;
+  wire [23:0] c$bv_0;
+  wire [48:0] c$bv_1;
+  wire [21:0] c$bv_2;
+  wire [23:0] c$bv_3;
+  wire [0:0] c$bv_4;
   wire [45:0] c$bv_5;
   wire [47:0] c$bv_6;
-  wire [48:0] c$bv_7;
+  wire [24:0] c$bv_7;
   wire [23:0] c$bv_8;
+  wire [23:0] c$bv_9;
+  wire [23:0] c$bv_10;
+  wire [46:0] c$bv_11;
+  wire [34:0] c$bv_12;
+  wire [33:0] c$bv_13;
+  wire [28:0] c$bv_14;
+  wire [28:0] c$bv_15;
+  wire [28:0] c$bv_16;
+  wire [27:0] c$bv_17;
+  wire [25:0] c$bv_18;
+  wire [25:0] c$bv_19;
+  wire [25:0] c$bv_20;
+  wire [25:0] c$bv_21;
+  wire [25:0] c$bv_22;
+  wire [25:0] c$bv_23;
+  wire [25:0] c$bv_24;
+  wire [24:0] c$bv_25;
+  wire [22:0] c$bv_26;
+  wire [22:0] c$bv_27;
+  wire [22:0] c$bv_28;
+  wire [22:0] c$bv_29;
+  wire [22:0] c$bv_30;
+  wire [22:0] c$bv_31;
+  wire [22:0] c$bv_32;
   wire [1:0] result_selection_3;
   wire [5887:0] c$vec_0;
   wire signed [63:0] c$case_alt_selection_8;
@@ -2019,127 +2058,261 @@ module NTT256
   end
   // register end
 
-  assign a = packetSignal[69:47];
-
-  assign b = packetSignal[46:24];
-
-  assign zeta = packetSignal[23:1];
-
-  assign c$bv_0 = (b >> (64'sd12));
-
-  assign c$app_arg_2 = zeta * (c$bv_0[0+:11]);
-
-  assign c$app_arg_3 = zeta * (b[0+:12]);
-
-  // register begin
-  always @(posedge clk or  posedge  rst) begin : c$packet_app_arg_register
-    if ( rst) begin
-      c$packet_app_arg <= {23'd0,   35'd0,   34'd0};
-    end else if (en) begin
-      c$packet_app_arg <= {a,   c$app_arg_3,   c$app_arg_2};
-    end
-  end
-  // register end
-
-  assign c$bv_1 = c$packet_app_arg[68:34];
-
-  assign c$bv_2 = c$packet_app_arg[33:0];
-
-  // register begin
-  always @(posedge clk or  posedge  rst) begin : c$packet_app_arg_0_register
-    if ( rst) begin
-      c$packet_app_arg_0 <= {23'd0,   46'd0};
-    end else if (en) begin
-      c$packet_app_arg_0 <= {c$packet_app_arg[91:69],
-   ({{(46-35) {1'b0}},c$packet_app_arg[68:34]}) + (({{(46-34) {1'b0}},c$packet_app_arg[33:0]}) << (64'sd12))};
-    end
-  end
-  // register end
-
-  assign a_0 = c$packet_app_arg_0[68:46];
-
-  assign c$app_arg_4 = {{(47-24) {1'b0}},xLow};
-
-  assign xLow = x[0+:24];
-
-  assign x = c$packet_app_arg_0[45:0];
-
-  assign c$bv_3 = (((c$app_arg_4 << (64'sd23)) - (c$app_arg_4 << (64'sd13))) - c$app_arg_4);
-
-  // register begin
-  always @(posedge clk or  posedge  rst) begin : c$packet_app_arg_1_register
-    if ( rst) begin
-      c$packet_app_arg_1 <= {23'd0,   46'd0,   24'd0};
-    end else if (en) begin
-      c$packet_app_arg_1 <= {a_0,   x,   c$bv_3[0+:24]};
-    end
-  end
-  // register end
-
-  assign c$bv_4 = c$packet_app_arg_1[23:0];
-
-  assign mWide = {{(48-24) {1'b0}},c$packet_app_arg_1[23:0]};
-
-  assign c$bv_5 = packet[93:48];
-
-  assign c$bv_6 = packet[47:0];
-
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_5_register
     if ( rst) begin
-      c$ds_app_arg_5 <= {23'd0,   49'd0};
+      c$ds_app_arg_5 <= {1'b0,   8'd0,   8'd0,   1'b0};
     end else if (en) begin
-      c$ds_app_arg_5 <= {packet[116:94],
-   ({{(49-46) {1'b0}},packet[93:48]}) + ({{(49-48) {1'b0}},packet[47:0]})};
+      c$ds_app_arg_5 <= c$ds_app_arg_4;
     end
   end
   // register end
-
-  assign result_2 = (shifted >= 25'd8380417) ? (shifted - 25'd8380417) : shifted;
-
-  assign c$bv_7 = (c$ds_app_arg_5[48:0] >> (64'sd24));
-
-  assign shifted = c$bv_7[0+:25];
-
-  assign sumWide = ({{(24-23) {1'b0}},a_1}) + ({{(24-23) {1'b0}},t});
-
-  assign c$bv_8 = (sumWide - 24'd8380417);
-
-  assign result_3 = (sumWide >= 24'd8380417) ? (c$bv_8[0+:23]) : (sumWide[0+:23]);
-
-  assign c$app_arg_5 = (a_1 >= t) ? (a_1 - t) : (23'd8380417 - (t - a_1));
 
   // register begin
-  always @(posedge clk or  posedge  rst) begin : packet_register
+  always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_6_register
     if ( rst) begin
-      packet <= {23'd0,   46'd0,   48'd0};
+      c$ds_app_arg_6 <= {1'b0,   8'd0,   8'd0,   1'b0};
     end else if (en) begin
-      packet <= {c$packet_app_arg_1[92:70],   c$packet_app_arg_1[69:24],
-   ((mWide << (64'sd23)) - (mWide << (64'sd13))) + mWide};
+      c$ds_app_arg_6 <= c$ds_app_arg_5;
     end
   end
   // register end
 
-  assign a_1 = ds[45:23];
-
-  assign t = ds[22:0];
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_7_register
+    if ( rst) begin
+      c$ds_app_arg_7 <= {1'b0,   8'd0,   8'd0,   1'b0};
+    end else if (en) begin
+      c$ds_app_arg_7 <= c$ds_app_arg_6;
+    end
+  end
+  // register end
 
   // register begin
   always @(posedge clk or  posedge  rst) begin : ds_register
     if ( rst) begin
       ds <= {23'd0,   23'd0};
     end else if (en) begin
-      ds <= {c$ds_app_arg_5[71:49],   result_2[0+:23]};
+      ds <= {c$ds_app_arg_8[71:49],   result_3[0+:23]};
     end
   end
   // register end
+
+  assign a = ds[45:23];
+
+  assign t = ds[22:0];
+
+  assign c$app_arg_2 = (a >= t) ? (a - t) : (23'd8380417 - (t - a));
+
+  assign sumWide = ({{(24-23) {1'b0}},a}) + ({{(24-23) {1'b0}},t});
+
+  assign c$bv_0 = (sumWide - 24'd8380417);
+
+  assign result_2 = (sumWide >= 24'd8380417) ? (c$bv_0[0+:23]) : (sumWide[0+:23]);
+
+  assign result_3 = (shifted >= 25'd8380417) ? (shifted - 25'd8380417) : shifted;
+
+  assign c$bv_1 = (c$ds_app_arg_8[48:0] >> (64'sd24));
+
+  assign shifted = c$bv_1[0+:25];
+
+  assign c$bv_2 = c$ds_app_arg_9[70:49];
+
+  assign c$bv_3 = c$ds_app_arg_9[48:25];
+
+  assign c$bv_4 = c$ds_app_arg_9[0:0];
+
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_8_register
+    if ( rst) begin
+      c$ds_app_arg_8 <= {23'd0,   49'd0};
+    end else if (en) begin
+      c$ds_app_arg_8 <= {c$ds_app_arg_9[93:71],
+   ({((((({{(25-22) {1'b0}},c$ds_app_arg_9[70:49]}) + ({{(25-24) {1'b0}},c$ds_app_arg_9[48:25]})) + ({{(25-1) {1'b0}},c$ds_app_arg_9[0:0]})))),((c$ds_app_arg_9[24:1]))})};
+    end
+  end
+  // register end
+
+  assign c$bv_5 = (x >> (64'sd24));
+
+  assign c$bv_6 = (mq >> (64'sd24));
+
+  assign c$bv_7 = (lowSum >> (64'sd24));
+
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_9_register
+    if ( rst) begin
+      c$ds_app_arg_9 <= {23'd0,   22'd0,   24'd0,   24'd0,   1'd0};
+    end else if (en) begin
+      c$ds_app_arg_9 <= {c$ds_app_arg_10[116:94],   c$bv_5[0+:22],   c$bv_6[0+:24],   lowSum[0+:24],
+   c$bv_7[0+:1]};
+    end
+  end
+  // register end
+
+  assign mq = c$ds_app_arg_10[47:0];
+
+  assign x = c$ds_app_arg_10[93:48];
+
+  assign c$bv_8 = (x[0+:24]);
+
+  assign c$bv_9 = (mq[0+:24]);
+
+  assign lowSum = ({{(25-24) {1'b0}},(x[0+:24])}) + ({{(25-24) {1'b0}},(mq[0+:24])});
+
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_10_register
+    if ( rst) begin
+      c$ds_app_arg_10 <= {23'd0,   46'd0,   48'd0};
+    end else if (en) begin
+      c$ds_app_arg_10 <= {c$ds_app_arg_11[92:70],   c$ds_app_arg_11[69:24],
+   ((mWide << (64'sd23)) - (mWide << (64'sd13))) + mWide};
+    end
+  end
+  // register end
+
+  assign c$bv_10 = c$ds_app_arg_11[23:0];
+
+  assign mWide = {{(48-24) {1'b0}},c$ds_app_arg_11[23:0]};
+
+  assign c$bv_11 = (((c$app_arg_3 << (64'sd23)) - (c$app_arg_3 << (64'sd13))) - c$app_arg_3);
+
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_11_register
+    if ( rst) begin
+      c$ds_app_arg_11 <= {23'd0,   46'd0,   24'd0};
+    end else if (en) begin
+      c$ds_app_arg_11 <= {a_0,   x_0,   c$bv_11[0+:24]};
+    end
+  end
+  // register end
+
+  assign a_0 = c$ds_app_arg_12[68:46];
+
+  assign c$app_arg_3 = {{(47-24) {1'b0}},xLow};
+
+  assign xLow = x_0[0+:24];
+
+  assign x_0 = c$ds_app_arg_12[45:0];
+
+  assign c$bv_12 = c$ds_app_arg_13[68:34];
+
+  assign c$bv_13 = c$ds_app_arg_13[33:0];
+
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_12_register
+    if ( rst) begin
+      c$ds_app_arg_12 <= {23'd0,   46'd0};
+    end else if (en) begin
+      c$ds_app_arg_12 <= {c$ds_app_arg_13[91:69],
+   ({{(46-35) {1'b0}},c$ds_app_arg_13[68:34]}) + (({{(46-34) {1'b0}},c$ds_app_arg_13[33:0]}) << (64'sd12))};
+    end
+  end
+  // register end
+
+  assign c$bv_14 = c$ds_app_arg_14[114:86];
+
+  assign c$bv_15 = c$ds_app_arg_14[85:57];
+
+  assign c$bv_16 = c$ds_app_arg_14[56:28];
+
+  assign c$bv_17 = c$ds_app_arg_14[27:0];
+
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_13_register
+    if ( rst) begin
+      c$ds_app_arg_13 <= {23'd0,   35'd0,   34'd0};
+    end else if (en) begin
+      c$ds_app_arg_13 <= {c$ds_app_arg_14[137:115],
+   ({{(35-29) {1'b0}},c$ds_app_arg_14[114:86]}) + (({{(35-29) {1'b0}},c$ds_app_arg_14[85:57]}) << (64'sd6)),
+   ({{(34-29) {1'b0}},c$ds_app_arg_14[56:28]}) + (({{(34-28) {1'b0}},c$ds_app_arg_14[27:0]}) << (64'sd6))};
+    end
+  end
+  // register end
+
+  assign c$bv_18 = c$ds_app_arg_15[206:181];
+
+  assign c$bv_19 = c$ds_app_arg_15[180:155];
+
+  assign c$bv_20 = c$ds_app_arg_15[154:129];
+
+  assign c$bv_21 = c$ds_app_arg_15[128:103];
+
+  assign c$bv_22 = c$ds_app_arg_15[102:77];
+
+  assign c$bv_23 = c$ds_app_arg_15[76:51];
+
+  assign c$bv_24 = c$ds_app_arg_15[50:25];
+
+  assign c$bv_25 = c$ds_app_arg_15[24:0];
+
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_14_register
+    if ( rst) begin
+      c$ds_app_arg_14 <= {23'd0,   29'd0,   29'd0,   29'd0,   28'd0};
+    end else if (en) begin
+      c$ds_app_arg_14 <= {c$ds_app_arg_15[229:207],
+   ({{(29-26) {1'b0}},c$ds_app_arg_15[206:181]}) + (({{(29-26) {1'b0}},c$ds_app_arg_15[180:155]}) << (64'sd3)),
+   ({{(29-26) {1'b0}},c$ds_app_arg_15[154:129]}) + (({{(29-26) {1'b0}},c$ds_app_arg_15[128:103]}) << (64'sd3)),
+   ({{(29-26) {1'b0}},c$ds_app_arg_15[102:77]}) + (({{(29-26) {1'b0}},c$ds_app_arg_15[76:51]}) << (64'sd3)),
+   ({{(28-26) {1'b0}},c$ds_app_arg_15[50:25]}) + (({{(28-25) {1'b0}},c$ds_app_arg_15[24:0]}) << (64'sd3))};
+    end
+  end
+  // register end
+
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_15_register
+    if ( rst) begin
+      c$ds_app_arg_15 <= {23'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   25'd0};
+    end else if (en) begin
+      c$ds_app_arg_15 <= {a_1,   c$app_arg_11,   c$app_arg_10,   c$app_arg_9,   c$app_arg_8,
+   c$app_arg_7,   c$app_arg_6,   c$app_arg_5,   c$app_arg_4};
+    end
+  end
+  // register end
+
+  assign a_1 = packetSignal[69:47];
+
+  assign b = packetSignal[46:24];
+
+  assign zeta = packetSignal[23:1];
+
+  assign c$bv_26 = (b >> (64'sd21));
+
+  assign c$app_arg_4 = zeta * (c$bv_26[0+:2]);
+
+  assign c$bv_27 = (b >> (64'sd18));
+
+  assign c$app_arg_5 = zeta * (c$bv_27[0+:3]);
+
+  assign c$bv_28 = (b >> (64'sd15));
+
+  assign c$app_arg_6 = zeta * (c$bv_28[0+:3]);
+
+  assign c$bv_29 = (b >> (64'sd12));
+
+  assign c$app_arg_7 = zeta * (c$bv_29[0+:3]);
+
+  assign c$bv_30 = (b >> (64'sd9));
+
+  assign c$app_arg_8 = zeta * (c$bv_30[0+:3]);
+
+  assign c$bv_31 = (b >> (64'sd6));
+
+  assign c$app_arg_9 = zeta * (c$bv_31[0+:3]);
+
+  assign c$bv_32 = (b >> (64'sd3));
+
+  assign c$app_arg_10 = zeta * (c$bv_32[0+:3]);
+
+  assign c$app_arg_11 = zeta * (b[0+:3]);
 
   // register begin
   always @(posedge clk or  posedge  rst) begin : result_4_register
     if ( rst) begin
       result_4 <= {23'd0,   23'd0};
     end else if (en) begin
-      result_4 <= {result_3,   c$app_arg_5};
+      result_4 <= {result_2,   c$app_arg_2};
     end
   end
   // register end
@@ -2176,13 +2349,13 @@ module NTT256
                                                    stateSignal[5887:0]};
 
   assign c$case_alt_6 = (stateSignal[11787:11785] == 3'd7) ? {2'd0,
-                                                              1'b1,   stateStage1,   8'd0,   c$app_arg_6,
+                                                              1'b1,   stateStage1,   8'd0,   c$app_arg_12,
                                                               stateBufA1,   stateBufB1} : {2'd1,   1'b0,
                                                                                            stateSignal[11787:11785] + 3'd1,
-                                                                                           8'd0,   c$app_arg_6,
+                                                                                           8'd0,   c$app_arg_12,
                                                                                            stateBufA1,   stateBufB1};
 
-  assign c$app_arg_6 = ~ stateSignal[11776:11776];
+  assign c$app_arg_12 = ~ stateSignal[11776:11776];
 
   assign eta1 = result_6[11790:11789];
 
@@ -2343,7 +2516,7 @@ module NTT256
   genvar i_3;
   generate
   for (i_3=0;i_3<256;i_3=i_3+1) begin : vector_replace
-    assign c$case_alt_8[(255-i_3)*23+:23] = c$app_arg_7 == i_3 ? outB : c$vec_0[(255-i_3)*23+:23];
+    assign c$case_alt_8[(255-i_3)*23+:23] = c$app_arg_13 == i_3 ? outB : c$vec_0[(255-i_3)*23+:23];
   end
   endgenerate
   // vector replace end
@@ -5298,12 +5471,12 @@ module NTT256
   genvar i_4;
   generate
   for (i_4=0;i_4<256;i_4=i_4+1) begin : vector_replace_0
-    assign c$case_alt_265[(255-i_4)*23+:23] = c$app_arg_7 == i_4 ? outB : c$vec_1[(255-i_4)*23+:23];
+    assign c$case_alt_265[(255-i_4)*23+:23] = c$app_arg_13 == i_4 ? outB : c$vec_1[(255-i_4)*23+:23];
   end
   endgenerate
   // vector replace end
 
-  assign c$app_arg_7 = $unsigned({{(64-8) {1'b0}},bIndex});
+  assign c$app_arg_13 = $unsigned({{(64-8) {1'b0}},bIndex});
 
   assign c$case_alt_selection_776 = c$case_alt_selection_775;
 
@@ -8143,7 +8316,7 @@ module NTT256
     if ( rst) begin
       ds_0 <= {1'b0,   8'd0,   8'd0,   1'b0};
     end else if (en) begin
-      ds_0 <= c$ds_app_arg_4;
+      ds_0 <= c$ds_app_arg_7;
     end
   end
   // register end

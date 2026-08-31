@@ -42,9 +42,20 @@ data Mont2 = Mont2
   }
   deriving (Generic, NFDataX)
 
+
+
 data Mont3 = Mont3
   { m3A   :: Coeff
   , m3Sum :: Unsigned 49
+  }
+  deriving (Generic, NFDataX)
+
+data Mont3Low = Mont3Low
+  { m3lA      :: Coeff
+  , m3lXHigh  :: Unsigned 22
+  , m3lMqHigh :: Unsigned 24
+  , m3lLow    :: Unsigned 24
+  , m3lCarry  :: Unsigned 1
   }
   deriving (Generic, NFDataX)
 
@@ -83,17 +94,80 @@ montStage2 packet =
         - (mWide `shiftL` 13)
         + mWide
 
-
-montStage3 :: Mont2 -> Mont3
-montStage3 packet =
-  Mont3
-    (m2A packet)
-    sumWide
+montStage3Low :: Mont2 -> Mont3Low
+montStage3Low packet =
+  Mont3Low
+    { m3lA      = m2A packet
+    , m3lXHigh  = xHigh
+    , m3lMqHigh = mqHigh
+    , m3lLow    = lowResult
+    , m3lCarry  = carryOut
+    }
   where
-    sumWide :: Unsigned 49
-    sumWide =
-      resize (m2X packet)
-        + resize (m2Mq packet)
+    x :: Product
+    x =
+      m2X packet
+
+    mq :: MontWide
+    mq =
+      m2Mq packet
+
+    -- Lower 24 bits
+    xLow :: Unsigned 24
+    xLow =
+      truncateB x
+
+    mqLow :: Unsigned 24
+    mqLow =
+      truncateB mq
+
+    -- 25 bits so we preserve the carry
+    lowSum :: Unsigned 25
+    lowSum =
+      resize xLow + resize mqLow
+
+    lowResult :: Unsigned 24
+    lowResult =
+      truncateB lowSum
+
+    carryOut :: Unsigned 1
+    carryOut =
+      truncateB (shiftR lowSum 24)
+
+    -- Upper bits
+    xHigh :: Unsigned 22
+    xHigh =
+      truncateB (shiftR x 24)
+
+    mqHigh :: Unsigned 24
+    mqHigh =
+      truncateB (shiftR mq 24)
+
+montStage3High :: Mont3Low -> Mont3
+montStage3High packet =
+  Mont3
+    { m3A   = m3lA packet
+    , m3Sum = fullSum
+    }
+  where
+    highSum :: Unsigned 25
+    highSum =
+      resize (m3lXHigh packet)
+        + resize (m3lMqHigh packet)
+        + resize (m3lCarry packet)
+
+    -- Concatenate:
+    --
+    -- highSum[24:0] ++ low[23:0]
+    --
+    -- 25 + 24 = 49 bits
+    fullBits :: BitVector 49
+    fullBits =
+      pack highSum ++# pack (m3lLow packet)
+
+    fullSum :: Unsigned 49
+    fullSum =
+      unpack fullBits
 
 finalReduce :: Mont3 -> (Coeff, Coeff)
 finalReduce packet =
@@ -170,50 +244,201 @@ data MulPartial = MulPartial
 
 -- ============================================================
 -- Pipelined multiplier
---
--- b = bLow + (bHigh << 12)
---
--- zeta * b =
---   zeta * bLow
---   + ((zeta * bHigh) << 12)
 -- ============================================================
 
-mulStage1 :: (Coeff, Coeff, Coeff) -> MulPartial
+data MulPartial1 = MulPartial1
+  { mp1A    :: Coeff
+  , mp1P00  :: Unsigned 26
+  , mp1P01  :: Unsigned 26
+  , mp1P10  :: Unsigned 26
+  , mp1P11  :: Unsigned 26
+  , mp1P20  :: Unsigned 26
+  , mp1P21  :: Unsigned 26
+  , mp1P30  :: Unsigned 26
+  , mp1P31  :: Unsigned 25
+  }
+  deriving (Generic, NFDataX)
+
+
+data MulPartial2 = MulPartial2
+  { mp2A  :: Coeff
+  , mp2P0 :: Unsigned 29
+  , mp2P1 :: Unsigned 29
+  , mp2P2 :: Unsigned 29
+  , mp2P3 :: Unsigned 28
+  }
+  deriving (Generic, NFDataX)
+
+
+data MulPartial3 = MulPartial3
+  { mp3A    :: Coeff
+  , mp3Low  :: Unsigned 35
+  , mp3High :: Unsigned 34
+  }
+  deriving (Generic, NFDataX)
+
+mulStage1 :: (Coeff, Coeff, Coeff) -> MulPartial1
 mulStage1 (a, b, zeta) =
-  MulPartial
-    { mpA    = a
-    , mpLow  = lowProduct
-    , mpHigh = highProduct
+  MulPartial1
+    { mp1A   = a
+    , mp1P00 = zeta `mul` b00
+    , mp1P01 = zeta `mul` b01
+    , mp1P10 = zeta `mul` b10
+    , mp1P11 = zeta `mul` b11
+    , mp1P20 = zeta `mul` b20
+    , mp1P21 = zeta `mul` b21
+    , mp1P30 = zeta `mul` b30
+    , mp1P31 = zeta `mul` b31
     }
   where
-    bLow :: Unsigned 12
-    bLow =
+    -- b[5:0]
+    b00 :: Unsigned 3
+    b00 =
       truncateB b
 
-    bHigh :: Unsigned 11
-    bHigh =
+    b01 :: Unsigned 3
+    b01 =
+      truncateB (shiftR b 3)
+
+    -- b[11:6]
+    b10 :: Unsigned 3
+    b10 =
+      truncateB (shiftR b 6)
+
+    b11 :: Unsigned 3
+    b11 =
+      truncateB (shiftR b 9)
+
+    -- b[17:12]
+    b20 :: Unsigned 3
+    b20 =
       truncateB (shiftR b 12)
 
-    lowProduct :: Unsigned 35
-    lowProduct =
-      zeta `mul` bLow
+    b21 :: Unsigned 3
+    b21 =
+      truncateB (shiftR b 15)
 
-    highProduct :: Unsigned 34
-    highProduct =
-      zeta `mul` bHigh
+    -- b[22:18] = 3 + 2
+    b30 :: Unsigned 3
+    b30 =
+      truncateB (shiftR b 18)
+
+    b31 :: Unsigned 2
+    b31 =
+      truncateB (shiftR b 21)
 
 
-mulStage2 :: MulPartial -> (Coeff, Product)
+mulStage2 :: MulPartial1 -> MulPartial2
 mulStage2 packet =
-  (mpA packet, productWide)
+  MulPartial2
+    { mp2A  = mp1A packet
+    , mp2P0 = p0
+    , mp2P1 = p1
+    , mp2P2 = p2
+    , mp2P3 = p3
+    }
+  where
+    -- chunk0: b[5:0]
+    p00Wide :: Unsigned 29
+    p00Wide =
+      resize (mp1P00 packet)
+
+    p01Wide :: Unsigned 29
+    p01Wide =
+      resize (mp1P01 packet) `shiftL` 3
+
+    p0 :: Unsigned 29
+    p0 =
+      p00Wide + p01Wide
+
+
+    -- chunk1: b[11:6]
+    p10Wide :: Unsigned 29
+    p10Wide =
+      resize (mp1P10 packet)
+
+    p11Wide :: Unsigned 29
+    p11Wide =
+      resize (mp1P11 packet) `shiftL` 3
+
+    p1 :: Unsigned 29
+    p1 =
+      p10Wide + p11Wide
+
+
+    -- chunk2: b[17:12]
+    p20Wide :: Unsigned 29
+    p20Wide =
+      resize (mp1P20 packet)
+
+    p21Wide :: Unsigned 29
+    p21Wide =
+      resize (mp1P21 packet) `shiftL` 3
+
+    p2 :: Unsigned 29
+    p2 =
+      p20Wide + p21Wide
+
+
+    -- chunk3: b[22:18]
+    p30Wide :: Unsigned 28
+    p30Wide =
+      resize (mp1P30 packet)
+
+    p31Wide :: Unsigned 28
+    p31Wide =
+      resize (mp1P31 packet) `shiftL` 3
+
+    p3 :: Unsigned 28
+    p3 =
+      p30Wide + p31Wide
+
+mulStage3 :: MulPartial2 -> MulPartial3
+mulStage3 packet =
+  MulPartial3
+    { mp3A    = mp2A packet
+    , mp3Low  = lowCombined
+    , mp3High = highCombined
+    }
+  where
+    -- P0 + (P1 << 6)
+    p0Wide :: Unsigned 35
+    p0Wide =
+      resize (mp2P0 packet)
+
+    p1Wide :: Unsigned 35
+    p1Wide =
+      resize (mp2P1 packet) `shiftL` 6
+
+    lowCombined :: Unsigned 35
+    lowCombined =
+      p0Wide + p1Wide
+
+
+    -- P2 + (P3 << 6)
+    p2Wide :: Unsigned 34
+    p2Wide =
+      resize (mp2P2 packet)
+
+    p3Wide :: Unsigned 34
+    p3Wide =
+      resize (mp2P3 packet) `shiftL` 6
+
+    highCombined :: Unsigned 34
+    highCombined =
+      p2Wide + p3Wide
+
+mulStage4 :: MulPartial3 -> (Coeff, Product)
+mulStage4 packet =
+  (mp3A packet, productWide)
   where
     lowWide :: Product
     lowWide =
-      resize (mpLow packet)
+      resize (mp3Low packet)
 
     highWide :: Product
     highWide =
-      resize (mpHigh packet) `shiftL` 12
+      resize (mp3High packet) `shiftL` 12
 
     productWide :: Product
     productWide =
@@ -271,29 +496,49 @@ butterflyPipeline input =
   outputReg
   where
 
-    -- Stage 1: two smaller multipliers: 23x12 and 23x11
-    mulPartialStage :: Signal dom MulPartial
-    mulPartialStage =
+    -- Stage 1: eight small partial multipliers. 7 x (23x3) + 1 x (23x2)
+    mulPartial1Stage :: Signal dom MulPartial1
+    mulPartial1Stage =
       fmap mulStage1 input
 
-    mulPartialReg :: Signal dom MulPartial
-    mulPartialReg =
+    mulPartial1Reg :: Signal dom MulPartial1
+    mulPartial1Reg =
       register
-        (MulPartial 0 0 0)
-        mulPartialStage
+        (MulPartial1 0 0 0 0 0 0 0 0 0)
+        mulPartial1Stage
 
+    -- Stage 2: reconstruct 6-bit / 5-bit products
+    mulPartial2Stage :: Signal dom MulPartial2
+    mulPartial2Stage =
+      fmap mulStage2 mulPartial1Reg
 
-    -- Stage 2: reconstruct 23x23 product from partial products
+    mulPartial2Reg :: Signal dom MulPartial2
+    mulPartial2Reg =
+      register
+        (MulPartial2 0 0 0 0 0)
+        mulPartial2Stage
+
+    -- Stage 3: combine into low-12 / high-11 products
+    mulPartial3Stage :: Signal dom MulPartial3
+    mulPartial3Stage =
+      fmap mulStage3 mulPartial2Reg
+
+    mulPartial3Reg :: Signal dom MulPartial3
+    mulPartial3Reg =
+      register
+        (MulPartial3 0 0 0)
+        mulPartial3Stage
+
+    -- Stage 4: full 23x23 product reconstruction
     mulCombineStage :: Signal dom (Coeff, Product)
     mulCombineStage =
-      fmap mulStage2 mulPartialReg
+      fmap mulStage4 mulPartial3Reg
 
     mulReg :: Signal dom (Coeff, Product)
     mulReg =
       register
         (0, 0)
         mulCombineStage
-
 
     -- Stage 3: Montgomery: calculate m
     mont1Stage :: Signal dom Mont1
@@ -319,19 +564,31 @@ butterflyPipeline input =
         mont2Stage
 
 
-    -- Stage 5: Montgomery: x + mq
-    mont3Stage :: Signal dom Mont3
-    mont3Stage =
-      fmap montStage3 mont2Reg
+    -- Stage 5: Montgomery x + mq: calculate lower 24 bits and carry
+    mont3LowStage :: Signal dom Mont3Low
+    mont3LowStage =
+      fmap montStage3Low mont2Reg
+
+    mont3LowReg :: Signal dom Mont3Low
+    mont3LowReg =
+      register
+        (Mont3Low 0 0 0 0 0)
+        mont3LowStage
+
+
+    -- Stage 6: Montgomery x + mq: calculate upper bits using registered carry
+    mont3HighStage :: Signal dom Mont3
+    mont3HighStage =
+      fmap montStage3High mont3LowReg
 
     mont3Reg :: Signal dom Mont3
     mont3Reg =
       register
         (Mont3 0 0)
-        mont3Stage
+        mont3HighStage
 
 
-    -- Stage 6: shift + conditional subtract q
+    -- Stage 7: shift + conditional subtract q
     reduceStage :: Signal dom (Coeff, Coeff)
     reduceStage =
       fmap finalReduce mont3Reg
@@ -343,8 +600,7 @@ butterflyPipeline input =
         reduceStage
 
 
-    -- Stage 7:
-    -- butterfly modular add/sub
+    -- Stage 8: butterfly modular add/sub
     addSubStage :: Signal dom (Coeff, Coeff)
     addSubStage =
       fmap
