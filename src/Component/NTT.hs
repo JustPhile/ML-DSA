@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TemplateHaskell #-}
 
 module Component.NTT
   ( topEntity
@@ -17,10 +18,18 @@ import Component.NTTCore
   , butterflyPipeline
   , montgomeryMul
   )
+import Component.NTTTH (makePipelineDelay)
 import GHC.Generics (Generic)
 import Prelude hiding ((!!), repeat, not, (&&))
 
 type Poly = Vec 256 Coeff
+
+type ButterflyMeta =
+  ( Bool
+  , Index 256
+  , Index 256
+  , Bool
+  )
 
 -- ------------------------------------------------------------------
 -- Controller state
@@ -44,6 +53,12 @@ data NTTState = NTTState
   , stateBufB  :: Poly
   }
   deriving (Generic, NFDataX)
+
+zeroMeta :: ButterflyMeta
+zeroMeta =
+  (False, 0, 0, False)
+
+$(makePipelineDelay "delay10" 10)
 
 initialState :: NTTState
 initialState =
@@ -250,7 +265,7 @@ pipelineLane packetSignal =
     arithmeticOutput =
       butterflyPipeline arithmeticInput
 
-    metadata :: Signal dom (Bool, Index 256, Index 256, Bool)
+    metadata :: Signal dom ButterflyMeta
     metadata =
       fmap
         (\packet ->
@@ -262,46 +277,9 @@ pipelineLane packetSignal =
         )
         packetSignal
 
-    -- butterflyPipeline currently has seven register stages.
-    metaReg1 :: Signal dom (Bool, Index 256, Index 256, Bool)
-    metaReg1 =
-      register (False, 0, 0, False) metadata
-
-    metaReg2 :: Signal dom (Bool, Index 256, Index 256, Bool)
-    metaReg2 =
-      register (False, 0, 0, False) metaReg1
-
-    metaReg3 :: Signal dom (Bool, Index 256, Index 256, Bool)
-    metaReg3 =
-      register (False, 0, 0, False) metaReg2
-
-    metaReg4 :: Signal dom (Bool, Index 256, Index 256, Bool)
-    metaReg4 =
-      register (False, 0, 0, False) metaReg3
-
-    metaReg5 :: Signal dom (Bool, Index 256, Index 256, Bool)
-    metaReg5 =
-      register (False, 0, 0, False) metaReg4
-
-    metaReg6 :: Signal dom (Bool, Index 256, Index 256, Bool)
-    metaReg6 =
-      register (False, 0, 0, False) metaReg5
-
-    metaReg7 :: Signal dom (Bool, Index 256, Index 256, Bool)
-    metaReg7 =
-      register (False, 0, 0, False) metaReg6
-
-    metaReg8 :: Signal dom (Bool, Index 256, Index 256, Bool)
-    metaReg8 =
-      register (False, 0, 0, False) metaReg7
-
-    metaReg9 :: Signal dom (Bool, Index 256, Index 256, Bool)
-    metaReg9 =
-      register (False, 0, 0, False) metaReg8
-
-    metaReg10 :: Signal dom (Bool, Index 256, Index 256, Bool)
-    metaReg10 =
-      register (False, 0, 0, False) metaReg9
+    metaDelayed :: Signal dom ButterflyMeta
+    metaDelayed =
+      delay10 zeroMeta metadata
 
     responseSignal :: Signal dom ButterflyResponse
     responseSignal =
@@ -316,7 +294,7 @@ pipelineLane packetSignal =
             , rspLast   = lastResult
             }
         )
-        metaReg10
+        metaDelayed
         arithmeticOutput
 
 -- ------------------------------------------------------------------

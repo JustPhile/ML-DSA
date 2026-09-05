@@ -14,7 +14,9 @@ library
                         MLDSA.Polynomial,
                         Component.NTT,
                         Component.NTTConstants,
-                        Component.NTTCore
+                        Component.NTTCore,
+                        Component.NTTTH,
+                        
                         
     hs-source-dirs:     .
                         src
@@ -27,7 +29,8 @@ library
                         clash-prelude,
                         ghc-typelits-knownnat,
                         ghc-typelits-extra,
-                        ghc-typelits-natnormalise
+                        ghc-typelits-natnormalise,
+                        template-haskell,
 
     build-tool-depends: clash-ghc:clash
 

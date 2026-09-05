@@ -42,8 +42,6 @@ data Mont2 = Mont2
   }
   deriving (Generic, NFDataX)
 
-
-
 data Mont3 = Mont3
   { m3A   :: Coeff
   , m3Sum :: Unsigned 49
@@ -234,13 +232,6 @@ montgomeryReduce x =
         else shifted
   in
     truncateB reduced
-
-data MulPartial = MulPartial
-  { mpA    :: Coeff
-  , mpLow  :: Unsigned 35
-  , mpHigh :: Unsigned 34
-  }
-  deriving (Generic, NFDataX)
 
 -- ============================================================
 -- Pipelined multiplier
@@ -540,7 +531,7 @@ butterflyPipeline input =
         (0, 0)
         mulCombineStage
 
-    -- Stage 3: Montgomery: calculate m
+    -- Stage 5: Montgomery: calculate m
     mont1Stage :: Signal dom Mont1
     mont1Stage =
       fmap montStage1 mulReg
@@ -551,8 +542,7 @@ butterflyPipeline input =
         (Mont1 0 0 0)
         mont1Stage
 
-
-    -- Stage 4: Montgomery: calculate m*q
+    -- Stage 6 : m * q
     mont2Stage :: Signal dom Mont2
     mont2Stage =
       fmap montStage2 mont1Reg
@@ -564,7 +554,7 @@ butterflyPipeline input =
         mont2Stage
 
 
-    -- Stage 5: Montgomery x + mq: calculate lower 24 bits and carry
+    -- Stage 7: Montgomery x + mq: calculate lower 24 bits and carry
     mont3LowStage :: Signal dom Mont3Low
     mont3LowStage =
       fmap montStage3Low mont2Reg
@@ -576,7 +566,7 @@ butterflyPipeline input =
         mont3LowStage
 
 
-    -- Stage 6: Montgomery x + mq: calculate upper bits using registered carry
+    -- Stage 8 : Montgomery x + mq: calculate upper bits using registered carry
     mont3HighStage :: Signal dom Mont3
     mont3HighStage =
       fmap montStage3High mont3LowReg
@@ -588,7 +578,7 @@ butterflyPipeline input =
         mont3HighStage
 
 
-    -- Stage 7: shift + conditional subtract q
+    -- Stage 9: shift + conditional subtract q
     reduceStage :: Signal dom (Coeff, Coeff)
     reduceStage =
       fmap finalReduce mont3Reg
@@ -600,7 +590,7 @@ butterflyPipeline input =
         reduceStage
 
 
-    -- Stage 8: butterfly modular add/sub
+    -- Stage 10: butterfly modular add/sub
     addSubStage :: Signal dom (Coeff, Coeff)
     addSubStage =
       fmap
