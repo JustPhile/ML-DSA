@@ -5,45 +5,26 @@ module Component.NTTTH
   ) where
 
 import Clash.Prelude
-import Language.Haskell.TH
+import qualified Language.Haskell.TH as TH
 import qualified Prelude as P
 
--- Generates:
---
--- delay10 initValue sig =
---   register initValue
---     (register initValue
---       ...
---         sig)
---
-makePipelineDelay
-  :: String
-  -> Int
-  -> Q [Dec]
+
+-- ============================================================
+-- Generic pipeline delay
+-- ============================================================
+
+makePipelineDelay :: String -> Int -> TH.Q [TH.Dec]
 makePipelineDelay functionName stages = do
-  initName <- newName "initValue"
-  sigName  <- newName "sig"
+  initName <- TH.newName "initValue"
+  sigName  <- TH.newName "sig"
 
-  let fnName = mkName functionName
+  let
+    fnName = TH.mkName functionName
 
-      delayOne input =
-        AppE
-          (AppE
-            (VarE 'register)
-            (VarE initName))
-          input
+    delayOne :: TH.Exp -> TH.Exp
+    delayOne input = TH.AppE (TH.AppE (TH.VarE 'register) (TH.VarE initName)) input
 
-      body =
-        P.iterate delayOne (VarE sigName) P.!! stages
+    body :: TH.Exp
+    body = P.iterate delayOne (TH.VarE sigName) P.!! stages
 
-  pure
-    [ FunD
-        fnName
-        [ Clause
-            [ VarP initName
-            , VarP sigName
-            ]
-            (NormalB body)
-            []
-        ]
-    ]
+  pure [TH.FunD fnName [TH.Clause [TH.VarP initName, TH.VarP sigName] (TH.NormalB body) []]]
