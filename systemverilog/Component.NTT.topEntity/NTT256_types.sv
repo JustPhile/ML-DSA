@@ -1,8 +1,11 @@
 package NTT256_types;
   typedef struct packed {
-    logic [22:0] Mont3_sel0;
-    logic [48:0] Mont3_sel1;
-  } Mont3;
+    logic [22:0] Mont2_sel0;
+    logic [21:0] Mont2_sel1;
+    logic [23:0] Mont2_sel2;
+    logic [25:0] Mont2_sel3;
+    logic [23:0] Mont2_sel4;
+  } Mont2;
   typedef struct packed {
     logic [22:0] MulPartial1_sel0;
     logic [25:0] MulPartial1_sel1;
@@ -14,6 +17,10 @@ package NTT256_types;
     logic [25:0] MulPartial1_sel7;
     logic [24:0] MulPartial1_sel8;
   } MulPartial1;
+  typedef struct packed {
+    logic [22:0] Mont3_sel0;
+    logic [24:0] Mont3_sel1;
+  } Mont3;
   typedef struct packed {
     logic [22:0] MulPartial2_sel0;
     logic [28:0] MulPartial2_sel1;
@@ -27,16 +34,9 @@ package NTT256_types;
     logic [33:0] MulPartial3_sel2;
   } MulPartial3;
   typedef struct packed {
-    logic [22:0] Tuple2_0_sel0;
-    logic [22:0] Tuple2_0_sel1;
-  } Tuple2_0;
-  typedef struct packed {
-    logic [22:0] Mont3Low_sel0;
-    logic [21:0] Mont3Low_sel1;
-    logic [23:0] Mont3Low_sel2;
-    logic [23:0] Mont3Low_sel3;
-    logic [0:0] Mont3Low_sel4;
-  } Mont3Low;
+    logic [22:0] Tuple2_1_sel0;
+    logic [22:0] Tuple2_1_sel1;
+  } Tuple2_1;
   typedef logic signed [63:0] array_of_256_signed_64 [0:255];
   typedef struct packed {
     logic ReadRequest_sel0;
@@ -79,19 +79,19 @@ package NTT256_types;
     logic[0:255][22:0] NTTState_sel6;
   } NTTState;
   typedef struct packed {
-    logic [22:0] Tuple2_1_sel0;
-    logic [45:0] Tuple2_1_sel1;
-  } Tuple2_1;
-  typedef struct packed {
-    logic [22:0] Mont2_sel0;
-    logic [45:0] Mont2_sel1;
-    logic [47:0] Mont2_sel2;
-  } Mont2;
+    logic [22:0] Tuple2_0_sel0;
+    logic [45:0] Tuple2_0_sel1;
+  } Tuple2_0;
   typedef struct packed {
     logic [22:0] Mont1_sel0;
     logic [45:0] Mont1_sel1;
     logic [23:0] Mont1_sel2;
   } Mont1;
+  typedef struct packed {
+    logic [22:0] Mont3Low_sel0;
+    logic [24:0] Mont3Low_sel1;
+    logic [1:0] Mont3Low_sel2;
+  } Mont3Low;
   function automatic logic [0:255][63:0] array_of_256_signed_64_to_lv(array_of_256_signed_64 i);
     for (int n = 0; n < 256; n=n+1)
       array_of_256_signed_64_to_lv[n] = i[n];

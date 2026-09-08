@@ -19,14 +19,8 @@ type Coeff = Unsigned 23
 type Product = Unsigned 46
 
 type MontWord = Unsigned 24
-type MontWide = Unsigned 48
-
 qCoeff :: Coeff
 qCoeff = 8_380_417
-
--- -q^(-1) mod 2^24
-qInv :: MontWord
-qInv = 8_380_415
 
 data Mont1 = Mont1
   { m1A :: Coeff
@@ -35,150 +29,163 @@ data Mont1 = Mont1
   }
   deriving (Generic, NFDataX)
 
+-- Stage 6 carries only the pieces needed for REDC.  We never build the
+-- full 48-bit m*q product.  For q = 2^23 - 2^13 + 1 and R = 2^24:
+--
+--   floor (m*q / R) = (m >> 1) - (m >> 11) + carryLow
+--
+-- where carryLow is obtained from the low 24-bit part.
 data Mont2 = Mont2
-  { m2A   :: Coeff
-  , m2X   :: Product
-  , m2Mq  :: MontWide
+  { m2A          :: Coeff
+  , m2XHigh      :: Unsigned 22
+  , m2HighDelta  :: Unsigned 24
+  , m2LowPos     :: Unsigned 26
+  , m2LowSub     :: Unsigned 24
   }
   deriving (Generic, NFDataX)
 
-data Mont3 = Mont3
-  { m3A   :: Coeff
-  , m3Sum :: Unsigned 49
-  }
-  deriving (Generic, NFDataX)
-
+-- Stage 7 has reduced the low-half arithmetic to a tiny carry (0, 1, or 2)
+-- and formed the upper REDC base.
 data Mont3Low = Mont3Low
-  { m3lA      :: Coeff
-  , m3lXHigh  :: Unsigned 22
-  , m3lMqHigh :: Unsigned 24
-  , m3lLow    :: Unsigned 24
-  , m3lCarry  :: Unsigned 1
+  { m3lA        :: Coeff
+  , m3lHighBase :: Unsigned 25
+  , m3lCarry    :: Unsigned 2
   }
   deriving (Generic, NFDataX)
+
+-- Stage 8 result before the final conditional subtraction of q.
+data Mont3 = Mont3
+  { m3A       :: Coeff
+  , m3Shifted :: Unsigned 25
+  }
+  deriving (Generic, NFDataX)
+
+-- Compute m = xLow * (-q^-1) mod 2^24.
+-- qInv = 2^23 - 2^13 - 1.  Because the result is modulo 2^24, only
+-- xLow[0] contributes to <<23 and only xLow[10:0] contributes to <<13.
+montgomeryM :: MontWord -> MontWord
+montgomeryM xLow =
+  term23 - term13 - xLow
+  where
+    term23 :: MontWord
+    term23 =
+      if testBit xLow 0
+        then bit 23
+        else 0
+
+    low11 :: Unsigned 11
+    low11 = truncateB xLow
+
+    term13 :: MontWord
+    term13 = resize low11 `shiftL` 13
 
 montStage1 :: (Coeff, Product) -> Mont1
 montStage1 (a, x) =
-  Mont1 a x m
+  Mont1 a x (montgomeryM xLow)
   where
     xLow :: MontWord
-    xLow =
-      truncateB x
+    xLow = truncateB x
 
-    mIntermediate :: Unsigned 47
-    mIntermediate =
-      (resize xLow `shiftL` 23)
-        - (resize xLow `shiftL` 13)
-        - resize xLow
-
-    m :: MontWord
-    m =
-      truncateB mIntermediate
-
+-- Direct high/low Montgomery decomposition.
+--
+-- Let x = xHigh*R + xLow and q = 2^23 - 2^13 + 1.
+-- For m chosen by montgomeryM:
+--
+--   xLow + (m[0] << 23) - (m[10:0] << 13) + m = carryLow * R
+--
+-- exactly, with carryLow in {0,1,2}.  The high part is therefore:
+--
+--   REDC(x) = xHigh + (m >> 1) - (m >> 11) + carryLow
+--
+-- This avoids constructing m*q as a 48-bit value.
 montStage2 :: Mont1 -> Mont2
 montStage2 packet =
   Mont2
-    (m1A packet)
-    (m1X packet)
-    mq
+    { m2A         = m1A packet
+    , m2XHigh     = xHigh
+    , m2HighDelta = highDelta
+    , m2LowPos    = lowPos
+    , m2LowSub    = lowSub
+    }
   where
-    mWide :: MontWide
-    mWide =
-      resize (m1M packet)
+    x :: Product
+    x = m1X packet
 
-    mq :: MontWide
-    mq =
-      (mWide `shiftL` 23)
-        - (mWide `shiftL` 13)
-        + mWide
+    xLow :: MontWord
+    xLow = truncateB x
+
+    xHigh :: Unsigned 22
+    xHigh = truncateB (shiftR x 24)
+
+    m :: MontWord
+    m = m1M packet
+
+    mHalf :: Unsigned 23
+    mHalf = truncateB (shiftR m 1)
+
+    mOver2048 :: Unsigned 13
+    mOver2048 = truncateB (shiftR m 11)
+
+    highDelta :: Unsigned 24
+    highDelta = resize mHalf - resize mOver2048
+
+    term23 :: Unsigned 24
+    term23 =
+      if testBit m 0
+        then bit 23
+        else 0
+
+    low11 :: Unsigned 11
+    low11 = truncateB m
+
+    lowSub :: Unsigned 24
+    lowSub = resize low11 `shiftL` 13
+
+    -- Up to < 2^26.  This is intentionally kept narrow.
+    lowPos :: Unsigned 26
+    lowPos = resize xLow + resize m + resize term23
 
 montStage3Low :: Mont2 -> Mont3Low
 montStage3Low packet =
   Mont3Low
-    { m3lA      = m2A packet
-    , m3lXHigh  = xHigh
-    , m3lMqHigh = mqHigh
-    , m3lLow    = lowResult
-    , m3lCarry  = carryOut
+    { m3lA        = m2A packet
+    , m3lHighBase = highBase
+    , m3lCarry    = carryLow
     }
   where
-    x :: Product
-    x =
-      m2X packet
+    -- For a valid Montgomery m this subtraction is always non-negative and
+    -- is exactly 0*R, 1*R, or 2*R.
+    lowExpr :: Unsigned 26
+    lowExpr = m2LowPos packet - resize (m2LowSub packet)
 
-    mq :: MontWide
-    mq =
-      m2Mq packet
+    carryLow :: Unsigned 2
+    carryLow = truncateB (shiftR lowExpr 24)
 
-    -- Lower 24 bits
-    xLow :: Unsigned 24
-    xLow =
-      truncateB x
-
-    mqLow :: Unsigned 24
-    mqLow =
-      truncateB mq
-
-    -- 25 bits so we preserve the carry
-    lowSum :: Unsigned 25
-    lowSum =
-      resize xLow + resize mqLow
-
-    lowResult :: Unsigned 24
-    lowResult =
-      truncateB lowSum
-
-    carryOut :: Unsigned 1
-    carryOut =
-      truncateB (shiftR lowSum 24)
-
-    -- Upper bits
-    xHigh :: Unsigned 22
-    xHigh =
-      truncateB (shiftR x 24)
-
-    mqHigh :: Unsigned 24
-    mqHigh =
-      truncateB (shiftR mq 24)
+    highBase :: Unsigned 25
+    highBase =
+      resize (m2XHigh packet)
+        + resize (m2HighDelta packet)
 
 montStage3High :: Mont3Low -> Mont3
 montStage3High packet =
   Mont3
-    { m3A   = m3lA packet
-    , m3Sum = fullSum
+    { m3A       = m3lA packet
+    , m3Shifted = shifted
     }
   where
-    highSum :: Unsigned 25
-    highSum =
-      resize (m3lXHigh packet)
-        + resize (m3lMqHigh packet)
-        + resize (m3lCarry packet)
-
-    -- Concatenate:
-    --
-    -- highSum[24:0] ++ low[23:0]
-    --
-    -- 25 + 24 = 49 bits
-    fullBits :: BitVector 49
-    fullBits =
-      pack highSum ++# pack (m3lLow packet)
-
-    fullSum :: Unsigned 49
-    fullSum =
-      unpack fullBits
+    shifted :: Unsigned 25
+    shifted =
+      m3lHighBase packet + resize (m3lCarry packet)
 
 finalReduce :: Mont3 -> (Coeff, Coeff)
 finalReduce packet =
   (m3A packet, truncateB reduced)
   where
     shifted :: Unsigned 25
-    shifted =
-      truncateB
-        (shiftR (m3Sum packet) 24)
+    shifted = m3Shifted packet
 
     qWide :: Unsigned 25
-    qWide =
-      8_380_417
+    qWide = 8_380_417
 
     reduced :: Unsigned 25
     reduced =
@@ -186,52 +193,65 @@ finalReduce packet =
         then shifted - qWide
         else shifted
 
+-- Combinational reference Montgomery reduction using the same direct
+-- R=2^24 decomposition as the pipeline above.
 montgomeryReduce :: Product -> Coeff
 montgomeryReduce x =
-  let
+  truncateB reduced
+  where
     xLow :: MontWord
-    xLow =
-      truncateB x
+    xLow = truncateB x
 
-    mIntermediate :: Unsigned 47
-    mIntermediate =
-      (resize xLow `shiftL` 23)
-        - (resize xLow `shiftL` 13)
-        - resize xLow
+    xHigh :: Unsigned 22
+    xHigh = truncateB (shiftR x 24)
 
     m :: MontWord
-    m =
-      truncateB mIntermediate
+    m = montgomeryM xLow
 
-    mWide :: MontWide
-    mWide =
-      resize m
+    term23 :: Unsigned 24
+    term23 =
+      if testBit m 0
+        then bit 23
+        else 0
 
-    mq :: MontWide
-    mq =
-      (mWide `shiftL` 23)
-        - (mWide `shiftL` 13)
-        + mWide
+    low11 :: Unsigned 11
+    low11 = truncateB m
 
-    sumWide :: Unsigned 49
-    sumWide =
-      resize x + resize mq
+    term13 :: Unsigned 24
+    term13 = resize low11 `shiftL` 13
+
+    lowPos :: Unsigned 26
+    lowPos = resize xLow + resize m + resize term23
+
+    lowExpr :: Unsigned 26
+    lowExpr = lowPos - resize term13
+
+    carryLow :: Unsigned 2
+    carryLow = truncateB (shiftR lowExpr 24)
+
+    mHalf :: Unsigned 23
+    mHalf = truncateB (shiftR m 1)
+
+    mOver2048 :: Unsigned 13
+    mOver2048 = truncateB (shiftR m 11)
+
+    highDelta :: Unsigned 24
+    highDelta = resize mHalf - resize mOver2048
 
     shifted :: Unsigned 25
     shifted =
-      truncateB (shiftR sumWide 24)
+      resize xHigh
+        + resize highDelta
+        + resize carryLow
 
     qWide :: Unsigned 25
-    qWide =
-      8_380_417
+    qWide = 8_380_417
 
     reduced :: Unsigned 25
     reduced =
       if shifted >= qWide
         then shifted - qWide
         else shifted
-  in
-    truncateB reduced
 
 -- ============================================================
 -- Pipelined multiplier
@@ -542,7 +562,7 @@ butterflyPipeline input =
         (Mont1 0 0 0)
         mont1Stage
 
-    -- Stage 6 : m * q
+    -- Stage 6: direct q-specific Montgomery high/low decomposition
     mont2Stage :: Signal dom Mont2
     mont2Stage =
       fmap montStage2 mont1Reg
@@ -550,11 +570,11 @@ butterflyPipeline input =
     mont2Reg :: Signal dom Mont2
     mont2Reg =
       register
-        (Mont2 0 0 0)
+        (Mont2 0 0 0 0 0)
         mont2Stage
 
 
-    -- Stage 7: Montgomery x + mq: calculate lower 24 bits and carry
+    -- Stage 7: finish low-half arithmetic and form REDC high base
     mont3LowStage :: Signal dom Mont3Low
     mont3LowStage =
       fmap montStage3Low mont2Reg
@@ -562,11 +582,11 @@ butterflyPipeline input =
     mont3LowReg :: Signal dom Mont3Low
     mont3LowReg =
       register
-        (Mont3Low 0 0 0 0 0)
+        (Mont3Low 0 0 0)
         mont3LowStage
 
 
-    -- Stage 8 : Montgomery x + mq: calculate upper bits using registered carry
+    -- Stage 8: add the tiny low-half carry to the REDC high result
     mont3HighStage :: Signal dom Mont3
     mont3HighStage =
       fmap montStage3High mont3LowReg

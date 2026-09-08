@@ -6,7 +6,6 @@ module Component.NTTTH
 
 import Clash.Prelude
 import qualified Language.Haskell.TH as TH
-import qualified Prelude as P
 
 
 -- ============================================================
@@ -15,16 +14,36 @@ import qualified Prelude as P
 
 makePipelineDelay :: String -> Int -> TH.Q [TH.Dec]
 makePipelineDelay functionName stages = do
+  let fnName = TH.mkName functionName
+
   initName <- TH.newName "initValue"
   sigName  <- TH.newName "sig"
 
-  let
-    fnName = TH.mkName functionName
+  body <-
+    makeDelayChain
+      stages
+      (TH.varE initName)
+      (TH.varE sigName)
 
-    delayOne :: TH.Exp -> TH.Exp
-    delayOne input = TH.AppE (TH.AppE (TH.VarE 'register) (TH.VarE initName)) input
+  declaration <-
+    TH.funD
+      fnName
+      [ TH.clause
+          [TH.varP initName, TH.varP sigName]
+          (TH.normalB body)
+          []
+      ]
 
-    body :: TH.Exp
-    body = P.iterate delayOne (TH.VarE sigName) P.!! stages
+  pure [declaration]
 
-  pure [TH.FunD fnName [TH.Clause [TH.VarP initName, TH.VarP sigName] (TH.NormalB body) []]]
+
+makeDelayChain :: Int -> TH.ExpQ -> TH.ExpQ -> TH.ExpQ
+makeDelayChain 0 _ sig =
+  sig
+
+makeDelayChain stages initValue sig =
+  [|
+    register
+      $initValue
+      $(makeDelayChain (stages - 1) initValue sig)
+  |]

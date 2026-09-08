@@ -29,3 +29,6 @@ clash.env
 .idea/
 
 # Logs
+
+# other
+TH.hs
