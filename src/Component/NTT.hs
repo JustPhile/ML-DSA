@@ -14,13 +14,16 @@ import Clash.Prelude
 import Component.NTTConstants (zetasMont)
 import Component.NTTCore
   ( Coeff
+  , PECount
+  , PEInput
+  , PEOutput
   , butterfly
-  , butterflyPipeline
   , montgomeryMul
+  , peArray2
   )
 import Component.NTTTH (makePipelineDelay)
 import GHC.Generics (Generic)
-import Prelude hiding ((!!), repeat, not, (&&))
+import Prelude hiding ((!!), map, not, repeat, zipWith, (&&))
 
 type Poly = Vec 256 Coeff
 
@@ -157,20 +160,37 @@ zeroReadRequest =
     , rrLast      = False
     }
 
-makeReadRequest :: NTTState -> ReadRequest
-makeReadRequest state =
+makeReadRequest
+  :: NTTState
+  -> Index PECount
+  -> ReadRequest
+makeReadRequest state lane =
   ReadRequest
     { rrValid     = statePhase state == Issue
     , rrAIndex    = aIndex
     , rrBIndex    = bIndex
     , rrZetaIndex = zetaIndex
-    , rrLast      = stateOp state == 127
+    , rrLast      = opNumber == 127
     }
   where
+    laneOffset :: Unsigned 8
+    laneOffset =
+      fromIntegral lane
+
+    opNumber :: Unsigned 8
+    opNumber =
+      stateOp state + laneOffset
+
     (aIndex, bIndex, zetaIndex) =
       makeIndices
         (stateStage state)
-        (stateOp state)
+        opNumber
+
+makeReadRequests
+  :: NTTState
+  -> Vec PECount ReadRequest
+makeReadRequests state =
+  map (makeReadRequest state) indicesI
 
 -- ------------------------------------------------------------------
 -- Registered coefficient packet
@@ -218,6 +238,13 @@ readPacket state request =
         then stateBufA state
         else stateBufB state
 
+readPackets
+  :: NTTState
+  -> Vec PECount ReadRequest
+  -> Vec PECount ButterflyPacket
+readPackets state requests =
+  map (readPacket state) requests
+
 -- ------------------------------------------------------------------
 -- Pipeline response
 -- ------------------------------------------------------------------
@@ -231,71 +258,76 @@ data ButterflyResponse = ButterflyResponse
   }
   deriving (Generic, NFDataX)
 
-zeroButterflyResponse :: ButterflyResponse
-zeroButterflyResponse =
-  ButterflyResponse
-    { rspValid  = False
-    , rspAIndex = 0
-    , rspBIndex = 0
-    , rspA      = 0
-    , rspB      = 0
-    , rspLast   = False
-    }
-
-pipelineLane
+pipelinePair
   :: forall dom.
      HiddenClockResetEnable dom
-  => Signal dom ButterflyPacket
-  -> Signal dom ButterflyResponse
-pipelineLane packetSignal =
+  => Signal dom (Vec PECount ButterflyPacket)
+  -> Signal dom (Vec PECount ButterflyResponse)
+pipelinePair packetSignal =
   responseSignal
   where
-    arithmeticInput :: Signal dom (Coeff, Coeff, Coeff)
-    arithmeticInput =
+    arithmeticInputs
+      :: Signal dom (Vec PECount PEInput)
+    arithmeticInputs =
       fmap
-        (\packet ->
-          ( bpA packet
-          , bpB packet
-          , bpZeta packet
+        (map
+          (\packet ->
+            ( bpA packet
+            , bpB packet
+            , bpZeta packet
+            )
           )
         )
         packetSignal
 
-    arithmeticOutput :: Signal dom (Coeff, Coeff)
-    arithmeticOutput =
-      butterflyPipeline arithmeticInput
+    arithmeticOutputs
+      :: Signal dom (Vec PECount PEOutput)
+    arithmeticOutputs =
+      peArray2 arithmeticInputs
 
-    metadata :: Signal dom ButterflyMeta
+    metadata
+      :: Signal dom (Vec PECount ButterflyMeta)
     metadata =
       fmap
-        (\packet ->
-          ( bpValid packet
-          , bpAIndex packet
-          , bpBIndex packet
-          , bpLast packet
+        (map
+          (\packet ->
+            ( bpValid packet
+            , bpAIndex packet
+            , bpBIndex packet
+            , bpLast packet
+            )
           )
         )
         packetSignal
 
-    metaDelayed :: Signal dom ButterflyMeta
+    metaDelayed
+      :: Signal dom (Vec PECount ButterflyMeta)
     metaDelayed =
-      delay10 zeroMeta metadata
+      delay10
+        (repeat zeroMeta)
+        metadata
 
-    responseSignal :: Signal dom ButterflyResponse
     responseSignal =
       liftA2
-        (\(valid, aIndex, bIndex, lastResult) (outA, outB) ->
-          ButterflyResponse
-            { rspValid  = valid
-            , rspAIndex = aIndex
-            , rspBIndex = bIndex
-            , rspA      = outA
-            , rspB      = outB
-            , rspLast   = lastResult
-            }
-        )
+        (zipWith makeResponse)
         metaDelayed
-        arithmeticOutput
+        arithmeticOutputs
+
+    makeResponse
+      :: ButterflyMeta
+      -> PEOutput
+      -> ButterflyResponse
+    makeResponse
+      (valid, aIndex, bIndex, lastResult)
+      (outA, outB) =
+        ButterflyResponse
+          { rspValid  = valid
+          , rspAIndex = aIndex
+          , rspBIndex = bIndex
+          , rspA      = outA
+          , rspB      = outB
+          , rspLast   = lastResult
+          }
 
 -- ------------------------------------------------------------------
 -- Ping-pong writeback
@@ -334,15 +366,26 @@ writeResponse response state
                 (stateBufA state))
         }
 
+writeResponses
+  :: Vec PECount ButterflyResponse
+  -> NTTState
+  -> NTTState
+writeResponses responses state =
+  writeResponse
+    (responses !! 1)
+    (writeResponse
+      (responses !! 0)
+      state)
+
 -- ------------------------------------------------------------------
 -- Controller
 -- ------------------------------------------------------------------
 nttNextState
   :: NTTState
   -> (Bool, Poly)
-  -> ButterflyResponse
+  -> Vec PECount ButterflyResponse
   -> NTTState
-nttNextState state (start, inputPoly) response =
+nttNextState state (start, inputPoly) responses =
   case statePhase state of
     Idle ->
       if start
@@ -364,10 +407,10 @@ nttNextState state (start, inputPoly) response =
     Issue ->
       let
         stateAfterWrite =
-          writeResponse response state
+          writeResponses responses state
 
         lastIssue =
-          stateOp state == 127
+          stateOp state == 126
       in
         if lastIssue
           then
@@ -379,16 +422,20 @@ nttNextState state (start, inputPoly) response =
             stateAfterWrite
               { statePhase = Issue
               , stateDone  = False
-              , stateOp    = stateOp state + 1
+              , stateOp    = stateOp state + 2
               }
 
     Drain ->
       let
         stateAfterWrite =
-          writeResponse response state
+          writeResponses responses state
+
+        lastResponse =
+          responses !! 1
 
         finalReturned =
-          rspValid response && rspLast response
+          rspValid lastResponse
+            && rspLast lastResponse
 
         lastStage =
           stateStage state == 7
@@ -397,8 +444,6 @@ nttNextState state (start, inputPoly) response =
           then
             if lastStage
               then
-                -- Toggle once more so stateUseA points to the
-                -- buffer that now contains the final result.
                 stateAfterWrite
                   { statePhase = Idle
                   , stateDone  = True
@@ -430,7 +475,7 @@ currentResult state =
 -- issue request
 --   -> request register
 --   -> coefficient read/register
---   -> 3-cycle butterfly pipeline
+--   -> 10-cycle 2-PE butterfly pipeline
 --   -> writeback
 --
 -- ------------------------------------------------------------------
@@ -445,35 +490,38 @@ nttPipelined inputSignal =
     , fmap currentResult stateSignal
     )
   where
+
     stateSignal :: Signal dom NTTState
     stateSignal =
       register initialState nextStateSignal
 
-    requestSignal :: Signal dom ReadRequest
+    requestSignal :: Signal dom (Vec PECount ReadRequest)
     requestSignal =
-      fmap makeReadRequest stateSignal
+      fmap makeReadRequests stateSignal
 
-    -- Stage A: register address/control.
-    requestReg :: Signal dom ReadRequest
+    requestReg :: Signal dom (Vec PECount ReadRequest)
     requestReg =
-      register zeroReadRequest requestSignal
+      register
+        (repeat zeroReadRequest)
+        requestSignal
 
-    -- Stage B: dynamic coefficient read, then register it.
-    packetCombinational :: Signal dom ButterflyPacket
+    packetCombinational
+      :: Signal dom (Vec PECount ButterflyPacket)
     packetCombinational =
       liftA2
-        readPacket
+        readPackets
         stateSignal
         requestReg
 
-    packetReg :: Signal dom ButterflyPacket
+    packetReg :: Signal dom (Vec PECount ButterflyPacket)
     packetReg =
-      register zeroButterflyPacket packetCombinational
+      register
+        (repeat zeroButterflyPacket)
+        packetCombinational
 
-    -- Stages C/D/E: arithmetic pipeline in NTTCore.
-    responseSignal :: Signal dom ButterflyResponse
+    responseSignal :: Signal dom (Vec PECount ButterflyResponse)
     responseSignal =
-      pipelineLane packetReg
+      pipelinePair packetReg
 
     nextStateSignal :: Signal dom NTTState
     nextStateSignal =

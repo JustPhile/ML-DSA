@@ -5,18 +5,29 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
 module Component.NTTCore
-  ( Coeff
-  , Product
-  , butterfly
-  , butterflyPipeline
-  , montgomeryMul
-  ) where
+( Coeff
+, Product
+, PEInput
+, PEOutput
+, PECount
+, nttPE
+, nttPEPipeline
+, peArray2
+, butterfly
+, butterflyPipeline
+, montgomeryMul
+) where
 
 import Clash.Prelude
 import GHC.Generics (Generic)
+import Prelude hiding (map)
 
 type Coeff = Unsigned 23
 type Product = Unsigned 46
+
+type PEInput = (Coeff, Coeff, Coeff)
+type PEOutput = (Coeff, Coeff)
+type PECount = 2
 
 type MontWord = Unsigned 24
 qCoeff :: Coeff
@@ -484,26 +495,26 @@ subModQ a b =
     then a - b
     else qCoeff - (b - a)
 
--- Original combinational butterfly
-butterfly
-  :: (Coeff, Coeff, Coeff)
-  -> (Coeff, Coeff)
-butterfly (a, b, zeta) =
-  let
-    t =
-      montgomeryMul zeta b
-  in
-    ( addModQ a t
-    , subModQ a t
-    )
+nttPE :: PEInput -> PEOutput
+nttPE (op0, op1, w) =
+   let
+     t =
+      montgomeryMul w op1
+   in
+    ( addModQ op0 t
+    , subModQ op0 t
+     )
+
+butterfly :: PEInput -> PEOutput
+butterfly = nttPE
 
 -- Pipelined butterfly
-butterflyPipeline
+nttPEPipeline
   :: forall dom.
      HiddenClockResetEnable dom
-  => Signal dom (Coeff, Coeff, Coeff)
-  -> Signal dom (Coeff, Coeff)
-butterflyPipeline input =
+  => Signal dom PEInput
+  -> Signal dom PEOutput
+nttPEPipeline input =
   outputReg
   where
 
@@ -626,3 +637,22 @@ butterflyPipeline input =
       register
         (0, 0)
         addSubStage
+
+-- Two-PE array (L = 2). Both PEs share the same clock/reset/enable but
+-- have independent operand, twiddle, and result paths. Once full,
+-- the array accepts and returns two butterflies per cycle.
+peArray2
+  :: forall dom.
+     HiddenClockResetEnable dom
+  => Signal dom (Vec PECount PEInput)
+  -> Signal dom (Vec PECount PEOutput)
+peArray2 inputs =
+  bundle (map nttPEPipeline (unbundle inputs))
+
+-- Backwards-compatible single-PE pipeline name.
+butterflyPipeline
+  :: forall dom.
+     HiddenClockResetEnable dom
+  => Signal dom PEInput
+  -> Signal dom PEOutput
+butterflyPipeline = nttPEPipeline

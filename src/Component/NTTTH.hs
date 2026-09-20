@@ -19,17 +19,19 @@ makePipelineDelay functionName stages = do
   initName <- TH.newName "initValue"
   sigName  <- TH.newName "sig"
 
-  body <-
-    makeDelayChain
-      stages
-      (TH.varE initName)
-      (TH.varE sigName)
+  let body =
+        makeDelayChain
+          stages
+          (TH.varE initName)
+          (TH.varE sigName)
 
   declaration <-
     TH.funD
       fnName
       [ TH.clause
-          [TH.varP initName, TH.varP sigName]
+          [ TH.varP initName
+          , TH.varP sigName
+          ]
           (TH.normalB body)
           []
       ]
