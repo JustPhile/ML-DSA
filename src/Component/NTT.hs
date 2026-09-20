@@ -21,18 +21,31 @@ import Component.NTTCore
   , montgomeryMul
   , peArray2
   )
+
+import Component.NTTCoeffController
+  ( IssueIndex
+  , CoeffControl(..)
+  , zeroCoeffControl
+  , makeCoeffControl
+  , makePEInputs
+  , makeWriteCommands
+  )
+
+import Component.NTTCoeffMem
+  ( LogicalRow
+  , ReadAddresses
+  , ReadResults
+  , RowIndex
+  , WriteCommands
+  , coeffMemory
+  , nextBase
+  , physicalRow
+  )
 import Component.NTTTH (makePipelineDelay)
 import GHC.Generics (Generic)
 import Prelude hiding ((!!), map, not, repeat, zipWith, (&&))
 
 type Poly = Vec 256 Coeff
-
-type ButterflyMeta =
-  ( Bool
-  , Index 256
-  , Index 256
-  , Bool
-  )
 
 -- ------------------------------------------------------------------
 -- Controller state
@@ -42,432 +55,272 @@ type ButterflyMeta =
 
 data NTTPhase
   = Idle
+  | Load
   | Issue
   | Drain
+  | UnloadIssue
+  | UnloadDrain
   deriving (Generic, NFDataX, Eq)
 
 data NTTState = NTTState
-  { statePhase :: NTTPhase
-  , stateDone  :: Bool
-  , stateStage :: Index 8
-  , stateOp    :: Unsigned 8
-  , stateUseA  :: Bool
-  , stateBufA  :: Poly
-  , stateBufB  :: Poly
+  { statePhase     :: NTTPhase
+  , stateDone      :: Bool
+  , stateStage     :: Index 8
+  , stateIssue     :: IssueIndex
+  , stateBase      :: Unsigned 6
+  , stateLoadRow   :: Index 32
+  , stateUnloadRow :: Index 32
+  , stateInput     :: Poly
+  , stateOutput    :: Poly
   }
   deriving (Generic, NFDataX)
-
-zeroMeta :: ButterflyMeta
-zeroMeta =
-  (False, 0, 0, False)
 
 $(makePipelineDelay "delay10" 10)
 
 initialState :: NTTState
 initialState =
   NTTState
-    { statePhase = Idle
-    , stateDone  = False
-    , stateStage = 0
-    , stateOp    = 0
-    , stateUseA  = True
-    , stateBufA  = repeat 0
-    , stateBufB  = repeat 0
+    { statePhase     = Idle
+    , stateDone      = False
+    , stateStage     = 0
+    , stateIssue     = 0
+    , stateBase      = 0
+    , stateLoadRow   = 0
+    , stateUnloadRow = 0
+    , stateInput     = repeat 0
+    , stateOutput    = repeat 0
     }
 
--- ------------------------------------------------------------------
--- NTT stage addressing
--- ------------------------------------------------------------------
-stageParameters
-  :: Index 8
-  -> (Unsigned 9, Unsigned 9)
-stageParameters stage =
-  case stage of
-    0 -> (128,   1)
-    1 -> ( 64,   2)
-    2 -> ( 32,   4)
-    3 -> ( 16,   8)
-    4 -> (  8,  16)
-    5 -> (  4,  32)
-    6 -> (  2,  64)
-    7 -> (  1, 128)
+type UnloadMeta =
+  (Bool, Index 32)
 
-makeIndices
-  :: Index 8
-  -> Unsigned 8
-  -> (Index 256, Index 256, Index 256)
-makeIndices stage opNumber =
-  (aIndex, bIndex, zetaIndex)
+zeroUnloadMeta :: UnloadMeta
+zeroUnloadMeta =
+  (False, 0)
+
+makeLoadCommands
+  :: Index 32
+  -> Poly
+  -> WriteCommands
+makeLoadCommands loadRow poly =
+  Just (physicalMemoryRow, poly !! index0)
+    :> Just (physicalMemoryRow, poly !! index1)
+    :> Just (physicalMemoryRow, poly !! index2)
+    :> Just (physicalMemoryRow, poly !! index3)
+    :> Just (physicalMemoryRow, poly !! index4)
+    :> Just (physicalMemoryRow, poly !! index5)
+    :> Just (physicalMemoryRow, poly !! index6)
+    :> Just (physicalMemoryRow, poly !! index7)
+    :> Nil
   where
-    (len, zetaBase) =
-      stageParameters stage
+    physicalMemoryRow :: RowIndex
+    physicalMemoryRow =
+      fromIntegral loadRow
 
-    opWide :: Unsigned 9
-    opWide =
-      resize opNumber
+    rowWide :: Unsigned 8
+    rowWide =
+      resize
+        (fromIntegral loadRow :: Unsigned 5)
 
-    groupIndex :: Unsigned 9
-    groupIndex =
-      opWide `div` len
+    lowerBase :: Unsigned 8
+    lowerBase =
+      shiftL rowWide 2
 
-    position :: Unsigned 9
-    position =
-      opWide `mod` len
+    upperBase :: Unsigned 8
+    upperBase =
+      lowerBase + 128
 
-    groupSize :: Unsigned 9
-    groupSize =
-      2 * len
+    index0, index1, index2, index3 :: Index 256
+    index4, index5, index6, index7 :: Index 256
 
-    aRaw :: Unsigned 9
-    aRaw =
-      groupIndex * groupSize + position
+    index0 = fromIntegral lowerBase
+    index1 = fromIntegral (lowerBase + 1)
+    index2 = fromIntegral (lowerBase + 2)
+    index3 = fromIntegral (lowerBase + 3)
 
-    bRaw :: Unsigned 9
-    bRaw =
-      aRaw + len
+    index4 = fromIntegral upperBase
+    index5 = fromIntegral (upperBase + 1)
+    index6 = fromIntegral (upperBase + 2)
+    index7 = fromIntegral (upperBase + 3)
 
-    aIndex :: Index 256
-    aIndex =
-      fromIntegral aRaw
-
-    bIndex :: Index 256
-    bIndex =
-      fromIntegral bRaw
-
-    zetaIndex :: Index 256
-    zetaIndex =
-      fromIntegral (zetaBase + groupIndex)
-
--- ------------------------------------------------------------------
--- Registered address request
--- ------------------------------------------------------------------
-data ReadRequest = ReadRequest
-  { rrValid     :: Bool
-  , rrAIndex    :: Index 256
-  , rrBIndex    :: Index 256
-  , rrZetaIndex :: Index 256
-  , rrLast      :: Bool
-  }
-  deriving (Generic, NFDataX)
-
-zeroReadRequest :: ReadRequest
-zeroReadRequest =
-  ReadRequest
-    { rrValid     = False
-    , rrAIndex    = 0
-    , rrBIndex    = 0
-    , rrZetaIndex = 0
-    , rrLast      = False
-    }
-
-makeReadRequest
-  :: NTTState
-  -> Index PECount
-  -> ReadRequest
-makeReadRequest state lane =
-  ReadRequest
-    { rrValid     = statePhase state == Issue
-    , rrAIndex    = aIndex
-    , rrBIndex    = bIndex
-    , rrZetaIndex = zetaIndex
-    , rrLast      = opNumber == 127
-    }
+makeUnloadReadAddresses
+  :: Unsigned 6
+  -> Index 32
+  -> ReadAddresses
+makeUnloadReadAddresses sourceBase unloadRow =
+  repeat row
   where
-    laneOffset :: Unsigned 8
-    laneOffset =
-      fromIntegral lane
+    logicalRow :: LogicalRow
+    logicalRow =
+      fromIntegral unloadRow
 
-    opNumber :: Unsigned 8
-    opNumber =
-      stateOp state + laneOffset
+    row :: RowIndex
+    row =
+      physicalRow sourceBase logicalRow
 
-    (aIndex, bIndex, zetaIndex) =
-      makeIndices
-        (stateStage state)
-        opNumber
-
-makeReadRequests
-  :: NTTState
-  -> Vec PECount ReadRequest
-makeReadRequests state =
-  map (makeReadRequest state) indicesI
-
--- ------------------------------------------------------------------
--- Registered coefficient packet
--- ------------------------------------------------------------------
-data ButterflyPacket = ButterflyPacket
-  { bpValid  :: Bool
-  , bpAIndex :: Index 256
-  , bpBIndex :: Index 256
-  , bpA      :: Coeff
-  , bpB      :: Coeff
-  , bpZeta   :: Coeff
-  , bpLast   :: Bool
-  }
-  deriving (Generic, NFDataX)
-
-zeroButterflyPacket :: ButterflyPacket
-zeroButterflyPacket =
-  ButterflyPacket
-    { bpValid  = False
-    , bpAIndex = 0
-    , bpBIndex = 0
-    , bpA      = 0
-    , bpB      = 0
-    , bpZeta   = 0
-    , bpLast   = False
-    }
-
-readPacket
-  :: NTTState
-  -> ReadRequest
-  -> ButterflyPacket
-readPacket state request =
-  ButterflyPacket
-    { bpValid  = rrValid request
-    , bpAIndex = rrAIndex request
-    , bpBIndex = rrBIndex request
-    , bpA      = sourcePoly !! rrAIndex request
-    , bpB      = sourcePoly !! rrBIndex request
-    , bpZeta   = zetasMont !! rrZetaIndex request
-    , bpLast   = rrLast request
-    }
-  where
-    sourcePoly =
-      if stateUseA state
-        then stateBufA state
-        else stateBufB state
-
-readPackets
-  :: NTTState
-  -> Vec PECount ReadRequest
-  -> Vec PECount ButterflyPacket
-readPackets state requests =
-  map (readPacket state) requests
-
--- ------------------------------------------------------------------
--- Pipeline response
--- ------------------------------------------------------------------
-data ButterflyResponse = ButterflyResponse
-  { rspValid  :: Bool
-  , rspAIndex :: Index 256
-  , rspBIndex :: Index 256
-  , rspA      :: Coeff
-  , rspB      :: Coeff
-  , rspLast   :: Bool
-  }
-  deriving (Generic, NFDataX)
-
-pipelinePair
-  :: forall dom.
-     HiddenClockResetEnable dom
-  => Signal dom (Vec PECount ButterflyPacket)
-  -> Signal dom (Vec PECount ButterflyResponse)
-pipelinePair packetSignal =
-  responseSignal
-  where
-    arithmeticInputs
-      :: Signal dom (Vec PECount PEInput)
-    arithmeticInputs =
-      fmap
-        (map
-          (\packet ->
-            ( bpA packet
-            , bpB packet
-            , bpZeta packet
-            )
-          )
-        )
-        packetSignal
-
-    arithmeticOutputs
-      :: Signal dom (Vec PECount PEOutput)
-    arithmeticOutputs =
-      peArray2 arithmeticInputs
-
-    metadata
-      :: Signal dom (Vec PECount ButterflyMeta)
-    metadata =
-      fmap
-        (map
-          (\packet ->
-            ( bpValid packet
-            , bpAIndex packet
-            , bpBIndex packet
-            , bpLast packet
-            )
-          )
-        )
-        packetSignal
-
-    metaDelayed
-      :: Signal dom (Vec PECount ButterflyMeta)
-    metaDelayed =
-      delay10
-        (repeat zeroMeta)
-        metadata
-
-    responseSignal =
-      liftA2
-        (zipWith makeResponse)
-        metaDelayed
-        arithmeticOutputs
-
-    makeResponse
-      :: ButterflyMeta
-      -> PEOutput
-      -> ButterflyResponse
-    makeResponse
-      (valid, aIndex, bIndex, lastResult)
-      (outA, outB) =
-        ButterflyResponse
-          { rspValid  = valid
-          , rspAIndex = aIndex
-          , rspBIndex = bIndex
-          , rspA      = outA
-          , rspB      = outB
-          , rspLast   = lastResult
-          }
-
--- ------------------------------------------------------------------
--- Ping-pong writeback
--- ------------------------------------------------------------------
-writeResponse
-  :: ButterflyResponse
+collectUnloadRow
+  :: UnloadMeta
+  -> ReadResults
   -> NTTState
   -> NTTState
-writeResponse response state
-  | not (rspValid response) =
+collectUnloadRow (valid, unloadRow) ramOutputs state
+  | not valid =
       state
-
-  | stateUseA state =
-      -- source A -> destination B
-      state
-        { stateBufB =
-            replace
-              (rspBIndex response)
-              (rspB response)
-              (replace
-                (rspAIndex response)
-                (rspA response)
-                (stateBufB state))
-        }
 
   | otherwise =
-      -- source B -> destination A
       state
-        { stateBufA =
-            replace
-              (rspBIndex response)
-              (rspB response)
-              (replace
-                (rspAIndex response)
-                (rspA response)
-                (stateBufA state))
+        { stateOutput =
+            replace index7 (ramOutputs !! 7) $
+            replace index6 (ramOutputs !! 6) $
+            replace index5 (ramOutputs !! 5) $
+            replace index4 (ramOutputs !! 4) $
+            replace index3 (ramOutputs !! 3) $
+            replace index2 (ramOutputs !! 2) $
+            replace index1 (ramOutputs !! 1) $
+            replace index0 (ramOutputs !! 0) $
+            stateOutput state
         }
+  where
+    rowWide :: Unsigned 8
+    rowWide =
+      resize
+        (fromIntegral unloadRow :: Unsigned 5)
 
-writeResponses
-  :: Vec PECount ButterflyResponse
-  -> NTTState
-  -> NTTState
-writeResponses responses state =
-  writeResponse
-    (responses !! 1)
-    (writeResponse
-      (responses !! 0)
-      state)
+    lowerBase :: Unsigned 8
+    lowerBase =
+      shiftL rowWide 2
 
--- ------------------------------------------------------------------
--- Controller
--- ------------------------------------------------------------------
+    upperBase :: Unsigned 8
+    upperBase =
+      lowerBase + 128
+
+    index0, index1, index2, index3 :: Index 256
+    index4, index5, index6, index7 :: Index 256
+
+    index0 = fromIntegral lowerBase
+    index1 = fromIntegral (lowerBase + 1)
+    index2 = fromIntegral (lowerBase + 2)
+    index3 = fromIntegral (lowerBase + 3)
+
+    index4 = fromIntegral upperBase
+    index5 = fromIntegral (upperBase + 1)
+    index6 = fromIntegral (upperBase + 2)
+    index7 = fromIntegral (upperBase + 3)
+
 nttNextState
   :: NTTState
   -> (Bool, Poly)
-  -> Vec PECount ButterflyResponse
+  -> Bool
+  -> UnloadMeta
+  -> ReadResults
   -> NTTState
-nttNextState state (start, inputPoly) responses =
-  case statePhase state of
-    Idle ->
-      if start
-        then
-          NTTState
-            { statePhase = Issue
-            , stateDone  = False
-            , stateStage = 0
-            , stateOp    = 0
-            , stateUseA  = True
-            , stateBufA  = inputPoly
-            , stateBufB  = repeat 0
-            }
-        else
-          state
-            { stateDone = False
-            }
-
-    Issue ->
-      let
-        stateAfterWrite =
-          writeResponses responses state
-
-        lastIssue =
-          stateOp state == 126
-      in
-        if lastIssue
+nttNextState
+  state
+  (start, inputPoly)
+  finalReturned
+  unloadMeta
+  memoryOutputs =
+    case statePhase stateAfterUnload of
+      Idle ->
+        if start
           then
-            stateAfterWrite
+            stateAfterUnload
+              { statePhase     = Load
+              , stateDone      = False
+              , stateStage     = 0
+              , stateIssue     = 0
+              , stateBase      = 0
+              , stateLoadRow   = 0
+              , stateUnloadRow = 0
+              , stateInput     = inputPoly
+              , stateOutput    = repeat 0
+              }
+          else
+            stateAfterUnload
+              { stateDone = False
+              }
+
+      Load ->
+        if stateLoadRow stateAfterUnload == 31
+          then
+            stateAfterUnload
+              { statePhase = Issue
+              , stateIssue = 0
+              , stateDone  = False
+              }
+          else
+            stateAfterUnload
+              { stateLoadRow =
+                  stateLoadRow stateAfterUnload + 1
+              , stateDone = False
+              }
+
+      Issue ->
+        if stateIssue stateAfterUnload == 63
+          then
+            stateAfterUnload
               { statePhase = Drain
               , stateDone  = False
               }
           else
-            stateAfterWrite
-              { statePhase = Issue
-              , stateDone  = False
-              , stateOp    = stateOp state + 2
+            stateAfterUnload
+              { stateIssue =
+                  stateIssue stateAfterUnload + 1
+              , stateDone = False
               }
 
-    Drain ->
-      let
-        stateAfterWrite =
-          writeResponses responses state
-
-        lastResponse =
-          responses !! 1
-
-        finalReturned =
-          rspValid lastResponse
-            && rspLast lastResponse
-
-        lastStage =
-          stateStage state == 7
-      in
+      Drain ->
         if finalReturned
           then
-            if lastStage
+            if stateStage stateAfterUnload == 7
               then
-                stateAfterWrite
-                  { statePhase = Idle
-                  , stateDone  = True
-                  , stateOp    = 0
-                  , stateUseA  = not (stateUseA state)
+                stateAfterUnload
+                  { statePhase     = UnloadIssue
+                  , stateDone      = False
+                  , stateBase      =
+                      nextBase (stateBase stateAfterUnload)
+                  , stateUnloadRow = 0
                   }
               else
-                stateAfterWrite
+                stateAfterUnload
                   { statePhase = Issue
                   , stateDone  = False
-                  , stateStage = stateStage state + 1
-                  , stateOp    = 0
-                  , stateUseA  = not (stateUseA state)
+                  , stateStage =
+                      stateStage stateAfterUnload + 1
+                  , stateIssue = 0
+                  , stateBase =
+                      nextBase (stateBase stateAfterUnload)
                   }
           else
-            stateAfterWrite
+            stateAfterUnload
               { stateDone = False
               }
 
-currentResult :: NTTState -> Poly
-currentResult state =
-  if stateUseA state
-    then stateBufA state
-    else stateBufB state
+      UnloadIssue ->
+        if stateUnloadRow stateAfterUnload == 31
+          then
+            stateAfterUnload
+              { statePhase = UnloadDrain
+              , stateDone  = False
+              }
+          else
+            stateAfterUnload
+              { stateUnloadRow =
+                  stateUnloadRow stateAfterUnload + 1
+              , stateDone = False
+              }
+
+      UnloadDrain ->
+        stateAfterUnload
+          { statePhase = Idle
+          , stateDone  = True
+          }
+  where
+    stateAfterUnload =
+      collectUnloadRow
+        unloadMeta
+        memoryOutputs
+        state
 
 -- ------------------------------------------------------------------
 -- Complete pipelined NTT
@@ -487,49 +340,131 @@ nttPipelined
 nttPipelined inputSignal =
   bundle
     ( fmap stateDone stateSignal
-    , fmap currentResult stateSignal
+    , fmap stateOutput stateSignal
     )
   where
+
+    controlSignal :: Signal dom CoeffControl
+    controlSignal =
+      fmap
+        (\state ->
+          makeCoeffControl
+            (statePhase state == Issue)
+            (stateStage state)
+            (stateBase state)
+            (stateIssue state)
+        )
+        stateSignal
+
+    memoryReadAddresses :: Signal dom ReadAddresses
+    memoryReadAddresses =
+      liftA2
+        selectReadAddresses
+        stateSignal
+        controlSignal
+
+    selectReadAddresses :: NTTState -> CoeffControl -> ReadAddresses
+    selectReadAddresses state control =
+      case statePhase state of
+        UnloadIssue ->
+          makeUnloadReadAddresses
+            (stateBase state)
+            (stateUnloadRow state)
+
+        _ ->
+          ccReadAddresses control
+
+    -- blockRam has one-cycle read latency.
+    readControlReg :: Signal dom CoeffControl
+    readControlReg =
+      register zeroCoeffControl controlSignal
+
+    memoryOutputs :: Signal dom ReadResults
+    memoryOutputs =
+      coeffMemory
+        memoryReadAddresses
+        memoryWriteCommands
+
+    peInputSignal :: Signal dom (Vec 2 PEInput)
+    peInputSignal =
+      liftA2
+        makePEInputs
+        readControlReg
+        memoryOutputs
+
+    peOutputSignal :: Signal dom (Vec 2 PEOutput)
+    peOutputSignal =
+      peArray2 peInputSignal
+
+    -- Align write metadata with the 10-cycle PE pipeline.
+    writeControlSignal :: Signal dom CoeffControl
+    writeControlSignal =
+      delay10
+        zeroCoeffControl
+        readControlReg
+
+    computeWriteCommands :: Signal dom WriteCommands
+    computeWriteCommands =
+      liftA2
+        makeWriteCommands
+        writeControlSignal
+        peOutputSignal
+
+    memoryWriteCommands :: Signal dom WriteCommands
+    memoryWriteCommands =
+      liftA2
+        selectWriteCommands
+        stateSignal
+        computeWriteCommands
+
+    selectWriteCommands :: NTTState -> WriteCommands -> WriteCommands
+    selectWriteCommands state computeCommands =
+      case statePhase state of
+        Load ->
+          makeLoadCommands
+            (stateLoadRow state)
+            (stateInput state)
+
+        _ ->
+          computeCommands
+
+    finalReturned :: Signal dom Bool
+    finalReturned =
+      fmap
+        (\control ->
+          ccValid control && ccLast control
+        )
+        writeControlSignal
 
     stateSignal :: Signal dom NTTState
     stateSignal =
       register initialState nextStateSignal
 
-    requestSignal :: Signal dom (Vec PECount ReadRequest)
-    requestSignal =
-      fmap makeReadRequests stateSignal
-
-    requestReg :: Signal dom (Vec PECount ReadRequest)
-    requestReg =
-      register
-        (repeat zeroReadRequest)
-        requestSignal
-
-    packetCombinational
-      :: Signal dom (Vec PECount ButterflyPacket)
-    packetCombinational =
-      liftA2
-        readPackets
+    unloadMetaSignal :: Signal dom UnloadMeta
+    unloadMetaSignal =
+      fmap
+        (\state ->
+          (
+            statePhase state == UnloadIssue,
+            stateUnloadRow state
+          )
+        )
         stateSignal
-        requestReg
 
-    packetReg :: Signal dom (Vec PECount ButterflyPacket)
-    packetReg =
+    unloadMetaReg :: Signal dom UnloadMeta
+    unloadMetaReg =
       register
-        (repeat zeroButterflyPacket)
-        packetCombinational
-
-    responseSignal :: Signal dom (Vec PECount ButterflyResponse)
-    responseSignal =
-      pipelinePair packetReg
+        zeroUnloadMeta
+        unloadMetaSignal
 
     nextStateSignal :: Signal dom NTTState
     nextStateSignal =
-      liftA3
-        nttNextState
-        stateSignal
-        inputSignal
-        responseSignal
+      nttNextState
+        <$> stateSignal
+        <*> inputSignal
+        <*> finalReturned
+        <*> unloadMetaReg
+        <*> memoryOutputs
 
 -- ------------------------------------------------------------------
 -- Top entity

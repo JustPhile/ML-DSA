@@ -448,6 +448,11 @@ def build_yosys_commands(
         f"hierarchy -check -top {top_q}",
         "proc",
         "opt",
+        # Convert inferred block RAMs into FFs and muxes because
+        # Nangate45 does not provide an SRAM macro.
+        "memory_dff",
+        "memory_map",
+        "opt_clean",
         "techmap",
         f"dfflibmap -liberty {liberty_q}",
         f"abc -D {ABC_DELAY_PS} -constr {abc_constraints_q} -liberty {liberty_q}",

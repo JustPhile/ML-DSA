@@ -25,7 +25,7 @@ module Component.NTTCoeffMem
 import Clash.Prelude
 import Component.NTTCore (Coeff)
 import GHC.Generics (Generic)
-import Prelude hiding (repeat, zipWith3)
+import Prelude hiding ((!!), repeat)
 
 type BankIndex  = Index 4
 type BlockIndex = Index 2
@@ -49,14 +49,6 @@ data PhysicalAddress = PhysicalAddress
   , addressRow   :: RowIndex
   }
   deriving (Generic, NFDataX, Eq, Show)
-
-initialRam :: RamContents
-initialRam =
-  repeat 0
-
-initialMemory :: Vec 8 RamContents
-initialMemory =
-  repeat initialRam
 
 physicalRamIndex
   :: PhysicalAddress
@@ -85,7 +77,17 @@ coeffMemory
   -> Signal dom WriteCommands
   -> Signal dom ReadResults
 coeffMemory readAddressSignal writeCommandSignal =
-  bundle ramOutputs
+  bundle
+    ( ram0
+    :> ram1
+    :> ram2
+    :> ram3
+    :> ram4
+    :> ram5
+    :> ram6
+    :> ram7
+    :> Nil
+    )
   where
     readAddressSignals
       :: Vec 8 (Signal dom RowIndex)
@@ -97,14 +99,56 @@ coeffMemory readAddressSignal writeCommandSignal =
     writeCommandSignals =
       unbundle writeCommandSignal
 
-    ramOutputs
-      :: Vec 8 (Signal dom Coeff)
-    ramOutputs =
-      zipWith3
-        blockRam
-        initialMemory
-        readAddressSignals
-        writeCommandSignals
+    ram0, ram1, ram2, ram3 :: Signal dom Coeff
+    ram4, ram5, ram6, ram7 :: Signal dom Coeff
+
+    ram0 =
+      blockRam
+        (repeat 0 :: RamContents)
+        (readAddressSignals !! 0)
+        (writeCommandSignals !! 0)
+
+    ram1 =
+      blockRam
+        (repeat 0 :: RamContents)
+        (readAddressSignals !! 1)
+        (writeCommandSignals !! 1)
+
+    ram2 =
+      blockRam
+        (repeat 0 :: RamContents)
+        (readAddressSignals !! 2)
+        (writeCommandSignals !! 2)
+
+    ram3 =
+      blockRam
+        (repeat 0 :: RamContents)
+        (readAddressSignals !! 3)
+        (writeCommandSignals !! 3)
+
+    ram4 =
+      blockRam
+        (repeat 0 :: RamContents)
+        (readAddressSignals !! 4)
+        (writeCommandSignals !! 4)
+
+    ram5 =
+      blockRam
+        (repeat 0 :: RamContents)
+        (readAddressSignals !! 5)
+        (writeCommandSignals !! 5)
+
+    ram6 =
+      blockRam
+        (repeat 0 :: RamContents)
+        (readAddressSignals !! 6)
+        (writeCommandSignals !! 6)
+
+    ram7 =
+      blockRam
+        (repeat 0 :: RamContents)
+        (readAddressSignals !! 7)
+        (writeCommandSignals !! 7)
 
 -- Initial placement of one logical coefficient.
 initialAddress :: Index 256 -> PhysicalAddress
