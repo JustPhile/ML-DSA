@@ -11,10 +11,8 @@ module Component.NTT
   ) where
 
 import Clash.Prelude
-import Component.NTTConstants (zetasMont)
 import Component.NTTCore
   ( Coeff
-  , PECount
   , PEInput
   , PEOutput
   , butterfly
@@ -29,6 +27,7 @@ import Component.NTTCoeffController
   , makeCoeffControl
   , makePEInputs
   , makeWriteCommands
+  , makeTwiddleAddresses
   )
 
 import Component.NTTCoeffMem
@@ -40,6 +39,11 @@ import Component.NTTCoeffMem
   , coeffMemory
   , nextBase
   , physicalRow
+  )
+import Component.NTTTwiddleMem
+  ( TwiddleAddresses
+  , TwiddleResults
+  , twiddleMemory
   )
 import Component.NTTTH (makePipelineDelay)
 import GHC.Generics (Generic)
@@ -75,7 +79,7 @@ data NTTState = NTTState
   }
   deriving (Generic, NFDataX)
 
-$(makePipelineDelay "delay10" 10)
+$(makePipelineDelay "delay11" 11)
 
 initialState :: NTTState
 initialState =
@@ -358,23 +362,22 @@ nttPipelined inputSignal =
 
     memoryReadAddresses :: Signal dom ReadAddresses
     memoryReadAddresses =
-      liftA2
-        selectReadAddresses
-        stateSignal
-        controlSignal
+      liftA2 selectReadAddresses stateSignal controlSignal
 
     selectReadAddresses :: NTTState -> CoeffControl -> ReadAddresses
     selectReadAddresses state control =
       case statePhase state of
         UnloadIssue ->
-          makeUnloadReadAddresses
-            (stateBase state)
-            (stateUnloadRow state)
+          makeUnloadReadAddresses (stateBase state) (stateUnloadRow state)
 
         _ ->
           ccReadAddresses control
 
-    -- blockRam has one-cycle read latency.
+    twiddleAddressSignal :: Signal dom TwiddleAddresses
+    twiddleAddressSignal =
+      fmap makeTwiddleAddresses controlSignal
+
+    -- Metadata matching the one-cycle memory latency.
     readControlReg :: Signal dom CoeffControl
     readControlReg =
       register zeroCoeffControl controlSignal
@@ -385,45 +388,49 @@ nttPipelined inputSignal =
         memoryReadAddresses
         memoryWriteCommands
 
-    peInputSignal :: Signal dom (Vec 2 PEInput)
-    peInputSignal =
-      liftA2
+    twiddleOutputs :: Signal dom TwiddleResults
+    twiddleOutputs =
+      twiddleMemory twiddleAddressSignal
+
+    peInputCombinational :: Signal dom (Vec 2 PEInput)
+    peInputCombinational =
+      liftA3
         makePEInputs
         readControlReg
         memoryOutputs
+        twiddleOutputs
+
+    -- Timing-isolation register before multiplier stage 1.
+    peInputSignal :: Signal dom (Vec 2 PEInput)
+    peInputSignal =
+      register
+        (repeat (0, 0, 0))
+        peInputCombinational
 
     peOutputSignal :: Signal dom (Vec 2 PEOutput)
     peOutputSignal =
       peArray2 peInputSignal
 
-    -- Align write metadata with the 10-cycle PE pipeline.
+    -- 10 PE cycles plus the new PE-input register.
     writeControlSignal :: Signal dom CoeffControl
     writeControlSignal =
-      delay10
+      delay11
         zeroCoeffControl
         readControlReg
 
     computeWriteCommands :: Signal dom WriteCommands
     computeWriteCommands =
-      liftA2
-        makeWriteCommands
-        writeControlSignal
-        peOutputSignal
+      liftA2 makeWriteCommands writeControlSignal peOutputSignal
 
     memoryWriteCommands :: Signal dom WriteCommands
     memoryWriteCommands =
-      liftA2
-        selectWriteCommands
-        stateSignal
-        computeWriteCommands
+      liftA2 selectWriteCommands stateSignal computeWriteCommands
 
     selectWriteCommands :: NTTState -> WriteCommands -> WriteCommands
     selectWriteCommands state computeCommands =
       case statePhase state of
         Load ->
-          makeLoadCommands
-            (stateLoadRow state)
-            (stateInput state)
+          makeLoadCommands (stateLoadRow state) (stateInput state)
 
         _ ->
           computeCommands

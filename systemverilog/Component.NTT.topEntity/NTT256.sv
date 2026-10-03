@@ -2407,24 +2407,30 @@ module NTT256
   NTT256_types::Tuple2_0 ds8;
   NTT256_types::Tuple2_0 ds9;
   NTT256_types::array_of_2_Tuple2_0 result_17;
+  NTT256_types::array_of_2_Tuple3 c$computeCommands_app_arg = '{0: {23'd0,23'd0,23'd0},1: {23'd0,23'd0,23'd0}};
+  logic [22:0] c$app_arg_7;
+  logic [22:0] c$app_arg_8;
+  logic [22:0] c$app_arg_9;
+  logic [22:0] c$app_arg_10;
+  NTT256_types::array_of_2_Tuple3 c$case_alt_5;
+  NTT256_types::array_of_2_logic_vector_23 result_18;
   logic signed [63:0] c$input0_app_arg;
-  logic [7:0] inputNumber;
-  logic [7:0] result_18;
   logic [7:0] result_19;
-  logic [7:0] c$case_alt_5;
-  logic signed [63:0] c$app_arg_7;
-  logic [7:0] c$case_alt_6;
-  logic signed [63:0] c$app_arg_8;
-  logic [7:0] c$case_alt_7;
-  logic signed [63:0] c$app_arg_9;
-  logic [7:0] c$case_alt_8;
-  logic signed [63:0] c$app_arg_10;
-  logic [7:0] c$case_alt_9;
-  logic signed [63:0] c$app_arg_11;
-  logic [7:0] c$case_alt_10;
-  logic signed [63:0] c$app_arg_12;
-  logic signed [63:0] c$app_arg_13;
   logic [7:0] result_20;
+  logic [7:0] c$case_alt_6;
+  logic signed [63:0] c$app_arg_11;
+  logic [7:0] c$case_alt_7;
+  logic signed [63:0] c$app_arg_12;
+  logic [7:0] c$case_alt_8;
+  logic signed [63:0] c$app_arg_13;
+  logic [7:0] c$case_alt_9;
+  logic signed [63:0] c$app_arg_14;
+  logic [7:0] c$case_alt_10;
+  logic signed [63:0] c$app_arg_15;
+  logic [7:0] c$case_alt_11;
+  logic signed [63:0] c$app_arg_16;
+  logic signed [63:0] c$app_arg_17;
+  logic [7:0] result_21;
   logic [7:0] \c$rem#_arg2 ;
   logic [7:0] \c$rem#_arg2_case_alt ;
   logic [7:0] \c$rem#_arg2_case_alt_0 ;
@@ -2435,22 +2441,23 @@ module NTT256
   logic \c$rem#_arg2_case_scrut_1 ;
   logic \c$rem#_arg2_case_scrut_2 ;
   logic \c$rem#_arg2_case_scrut_3 ;
-  logic [7:0] result_21;
+  logic [7:0] inputNumber;
   logic [7:0] result_22;
-  logic [7:0] c$case_alt_11;
-  logic signed [63:0] c$app_arg_14;
-  logic [7:0] c$case_alt_12;
-  logic signed [63:0] c$app_arg_15;
-  logic [7:0] c$case_alt_13;
-  logic signed [63:0] c$app_arg_16;
-  logic [7:0] c$case_alt_14;
-  logic signed [63:0] c$app_arg_17;
-  logic [7:0] c$case_alt_15;
-  logic signed [63:0] c$app_arg_18;
-  logic [7:0] c$case_alt_16;
-  logic signed [63:0] c$app_arg_19;
-  logic signed [63:0] c$app_arg_20;
   logic [7:0] result_23;
+  logic [7:0] c$case_alt_12;
+  logic signed [63:0] c$app_arg_18;
+  logic [7:0] c$case_alt_13;
+  logic signed [63:0] c$app_arg_19;
+  logic [7:0] c$case_alt_14;
+  logic signed [63:0] c$app_arg_20;
+  logic [7:0] c$case_alt_15;
+  logic signed [63:0] c$app_arg_21;
+  logic [7:0] c$case_alt_16;
+  logic signed [63:0] c$app_arg_22;
+  logic [7:0] c$case_alt_17;
+  logic signed [63:0] c$app_arg_23;
+  logic signed [63:0] c$app_arg_24;
+  logic [7:0] result_24;
   logic [7:0] \c$rem#_arg2_0 ;
   logic [7:0] \c$rem#_arg2_case_alt_3 ;
   logic [7:0] \c$rem#_arg2_case_alt_4 ;
@@ -2461,11 +2468,8 @@ module NTT256
   logic \c$rem#_arg2_case_scrut_6 ;
   logic \c$rem#_arg2_case_scrut_7 ;
   logic \c$rem#_arg2_case_scrut_8 ;
-  NTT256_types::array_of_2_Tuple3 result_24;
+  NTT256_types::array_of_2_logic_vector_8 c$case_alt_18;
   logic [7:0] input0;
-  logic [22:0] zeta1;
-  logic [22:0] zeta0;
-  NTT256_types::array_of_2_Tuple3 result_25;
   logic signed [63:0] c$memoryOutputs_app_arg;
   logic signed [63:0] c$memoryOutputs_app_arg_0;
   logic signed [63:0] c$memoryOutputs_app_arg_1;
@@ -2480,9 +2484,9 @@ module NTT256
   logic signed [63:0] c$lowerBase_app_arg_0;
   NTT256_types::array_of_8_logic_vector_6 c$memoryOutputs_case_alt_0;
   logic [5:0] value;
-  logic signed [63:0] c$app_arg_21;
-  logic signed [63:0] c$app_arg_22;
-  logic [5:0] result_26;
+  logic signed [63:0] c$app_arg_25;
+  logic signed [63:0] c$app_arg_26;
+  logic [5:0] result_25;
   logic signed [63:0] c$memoryOutputs_app_arg_7;
   logic signed [63:0] c$memoryOutputs_app_arg_8;
   NTT256_types::Tuple2_1 c$stateSignal_app_arg = {1'b0,5'd0};
@@ -2638,6 +2642,21 @@ module NTT256
 ,1'b0
 ,6'd0
 ,1'b0};
+  NTT256_types::CoeffControl c$writeControlSignal_app_arg_8 = {1'b0
+,3'd0
+,6'd0
+,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
+                                                 ,1: 6'd0
+                                                 ,2: 6'd0
+                                                 ,3: 6'd0
+                                                 ,4: 6'd0
+                                                 ,5: 6'd0
+                                                 ,6: 6'd0
+                                                 ,7: 6'd0})}
+,1'b0
+,1'b0
+,6'd0
+,1'b0};
   NTT256_types::CoeffControl readControlReg = {1'b0
 ,3'd0
 ,6'd0
@@ -2654,19 +2673,19 @@ module NTT256
 ,6'd0
 ,1'b0};
   logic [5:0] value_0;
-  logic signed [63:0] c$app_arg_23;
-  logic signed [63:0] c$app_arg_24;
-  logic [5:0] result_27;
-  logic signed [63:0] c$app_arg_25;
-  logic signed [63:0] c$app_arg_26;
-  logic [5:0] c$case_alt_17;
-  logic [5:0] result_28;
-  logic [5:0] c$app_arg_27;
-  logic [5:0] value_1;
+  logic signed [63:0] c$app_arg_27;
   logic signed [63:0] c$app_arg_28;
+  logic [5:0] result_26;
   logic signed [63:0] c$app_arg_29;
-  logic [5:0] result_29;
   logic signed [63:0] c$app_arg_30;
+  logic [5:0] c$case_alt_19;
+  logic [5:0] result_27;
+  logic [5:0] c$app_arg_31;
+  logic [5:0] value_1;
+  logic signed [63:0] c$app_arg_32;
+  logic signed [63:0] c$app_arg_33;
+  logic [5:0] result_28;
+  logic signed [63:0] c$app_arg_34;
   logic [4:0] logicalRow;
   logic signed [63:0] c$logicalRow_app_arg;
   logic [5:0] issueWide;
@@ -8093,21 +8112,6 @@ module NTT256
   logic [7:0] c$i_3268;
   NTT256_types::array_of_256_logic_vector_23 c$vec_7;
   NTT256_types::array_of_2_Tuple3 c$vec_8;
-  logic [5:0] c$i_3350;
-  logic [7:0] c$i_3355;
-  logic [7:0] c$i_3357;
-  logic [7:0] c$i_3359;
-  logic [7:0] c$i_3361;
-  logic [7:0] c$i_3364;
-  logic [7:0] c$i_3367;
-  logic [7:0] c$i_3369;
-  logic [7:0] c$i_3384;
-  logic [7:0] c$i_3386;
-  logic [7:0] c$i_3388;
-  logic [7:0] c$i_3390;
-  logic [7:0] c$i_3393;
-  logic [7:0] c$i_3396;
-  logic [7:0] c$i_3398;
   NTT256_types::array_of_8_logic_vector_23 c$vec_9;
   NTT256_types::array_of_8_logic_vector_23 c$vec_10;
   NTT256_types::array_of_8_logic_vector_23 c$vec_11;
@@ -8116,32 +8120,44 @@ module NTT256
   NTT256_types::array_of_8_logic_vector_23 c$vec_14;
   NTT256_types::array_of_8_logic_vector_23 c$vec_15;
   NTT256_types::array_of_8_logic_vector_23 c$vec_16;
-  NTT256_types::array_of_256_logic_vector_23 zeta1_res;
-  NTT256_types::array_of_256_signed_64 c$vec_17;
-  NTT256_types::array_of_256_logic_vector_23 zeta0_res;
-  NTT256_types::array_of_256_signed_64 c$vec_18;
-  logic [7:0] c$i_3414;
-  logic [7:0] c$i_3416;
-  logic [7:0] c$i_3418;
-  logic [7:0] c$i_3421;
-  logic [7:0] c$i_3423;
-  logic [7:0] c$i_3425;
-  logic [4:0] c$bv_38;
-  logic [4:0] c$i_3426;
-  logic [2:0] c$memoryOutputs_case_alt_selection_4;
+  logic [5:0] c$i_3365;
+  logic [7:0] c$i_3369;
+  logic [7:0] c$i_3371;
+  logic [7:0] c$i_3373;
+  logic [7:0] c$i_3375;
+  logic [7:0] c$i_3378;
+  logic [7:0] c$i_3381;
+  logic [7:0] c$i_3383;
+  logic [7:0] c$i_3399;
+  logic [7:0] c$i_3401;
+  logic [7:0] c$i_3403;
+  logic [7:0] c$i_3405;
+  logic [7:0] c$i_3408;
+  logic [7:0] c$i_3411;
+  logic [7:0] c$i_3413;
+  logic [5:0] c$bv_38;
+  logic [7:0] c$i_3427;
+  logic [7:0] c$i_3429;
+  logic [7:0] c$i_3431;
+  logic [7:0] c$i_3434;
+  logic [7:0] c$i_3436;
+  logic [7:0] c$i_3438;
   logic [4:0] c$bv_39;
-  logic [5:0] c$i_3428;
-  logic [4:0] c$i_3430;
-  logic [4:0] c$i_3431;
-  logic [2:0] c$dtt_rhs_1;
+  logic [4:0] c$i_3439;
+  logic [2:0] c$memoryOutputs_case_alt_selection_4;
   logic [4:0] c$bv_40;
-  logic [5:0] c$i_3678;
-  logic [4:0] c$i_3680;
-  logic [4:0] c$i_3681;
+  logic [5:0] c$i_3441;
+  logic [4:0] c$i_3443;
+  logic [4:0] c$i_3444;
+  logic [2:0] c$dtt_rhs_1;
   logic [4:0] c$bv_41;
-  logic [5:0] c$i_3688;
-  logic [5:0] c$i_3690;
-  logic [5:0] c$i_3691;
+  logic [5:0] c$i_3713;
+  logic [4:0] c$i_3715;
+  logic [4:0] c$i_3716;
+  logic [4:0] c$bv_42;
+  logic [5:0] c$i_3723;
+  logic [5:0] c$i_3725;
+  logic [5:0] c$i_3726;
   NTT256_types::Tuple2_2 result_0;
   NTT256_types::array_of_256_logic_vector_23 result_1;
 
@@ -33154,7 +33170,7 @@ module NTT256
 
   assign ds9 = result_17[(64'sd0)];
 
-  assign c$vec_8 = (result_25);
+  assign c$vec_8 = (c$computeCommands_app_arg);
 
   // map begin
   genvar n;
@@ -33166,28 +33182,28 @@ module NTT256
     logic [22:0] a;
     logic [22:0] b;
     logic [22:0] zeta;
-    logic [24:0] c$app_arg_34;
-    logic [25:0] c$app_arg_35;
-    logic [25:0] c$app_arg_36;
-    logic [25:0] c$app_arg_37;
-    logic [25:0] c$app_arg_38;
+    logic [24:0] c$app_arg_38;
     logic [25:0] c$app_arg_39;
     logic [25:0] c$app_arg_40;
     logic [25:0] c$app_arg_41;
+    logic [25:0] c$app_arg_42;
+    logic [25:0] c$app_arg_43;
+    logic [25:0] c$app_arg_44;
+    logic [25:0] c$app_arg_45;
     NTT256_types::MulPartial1 c$ds_app_arg = {23'd0,26'd0,26'd0,26'd0,26'd0,26'd0,26'd0,26'd0,25'd0};
     NTT256_types::MulPartial2 c$ds_app_arg_0 = {23'd0,29'd0,29'd0,29'd0,28'd0};
     NTT256_types::MulPartial3 c$ds_app_arg_1 = {23'd0,35'd0,34'd0};
-    logic [23:0] c$app_arg_42;
+    logic [23:0] c$app_arg_46;
     NTT256_types::Mont1 c$packet_app_arg = {23'd0,46'd0,24'd0};
-    logic [23:0] c$app_arg_43;
+    logic [23:0] c$app_arg_47;
     logic [23:0] m;
     logic [45:0] x;
     NTT256_types::Mont2 c$packet_app_arg_0 = {23'd0,22'd0,24'd0,26'd0,24'd0};
     NTT256_types::Mont3 c$ds_app_arg_2 = {23'd0,25'd0};
-    logic [24:0] c$case_alt_21;
+    logic [24:0] c$case_alt_23;
     logic [23:0] sumWide;
-    logic [22:0] result_32;
-    logic [22:0] c$app_arg_44;
+    logic [22:0] result_31;
+    logic [22:0] c$app_arg_48;
     logic [22:0] a_0;
     logic [45:0] x_0;
     NTT256_types::Mont3Low packet = {23'd0,25'd0,2'd0};
@@ -33195,8 +33211,8 @@ module NTT256
     logic [22:0] t;
     NTT256_types::Tuple2_3 ds_10 = {23'd0,46'd0};
     NTT256_types::Tuple2_0 ds_11 = {23'd0,23'd0};
-    NTT256_types::Tuple2_0 result_31 = {23'd0,23'd0};
-    NTT256_types::Tuple2_0 result_30;
+    NTT256_types::Tuple2_0 result_30 = {23'd0,23'd0};
+    NTT256_types::Tuple2_0 result_29;
     logic [22:0] c$bv_0;
     logic [22:0] c$bv_1;
     logic [22:0] c$bv_2;
@@ -33235,7 +33251,7 @@ module NTT256
     logic [25:0] c$bv_35;
     logic [34:0] c$bv_36;
     logic [33:0] c$bv_37;
-    assign map_out = result_30;
+    assign map_out = result_29;
 
     assign a = map_in.Tuple3_sel0;
 
@@ -33245,33 +33261,33 @@ module NTT256
 
     assign c$bv_0 = (b >> (64'sd21));
 
-    assign c$app_arg_34 = zeta * (c$bv_0[0+:2]);
+    assign c$app_arg_38 = zeta * (c$bv_0[0+:2]);
 
     assign c$bv_1 = (b >> (64'sd18));
 
-    assign c$app_arg_35 = zeta * (c$bv_1[0+:3]);
+    assign c$app_arg_39 = zeta * (c$bv_1[0+:3]);
 
     assign c$bv_2 = (b >> (64'sd15));
 
-    assign c$app_arg_36 = zeta * (c$bv_2[0+:3]);
+    assign c$app_arg_40 = zeta * (c$bv_2[0+:3]);
 
     assign c$bv_3 = (b >> (64'sd12));
 
-    assign c$app_arg_37 = zeta * (c$bv_3[0+:3]);
+    assign c$app_arg_41 = zeta * (c$bv_3[0+:3]);
 
     assign c$bv_4 = (b >> (64'sd9));
 
-    assign c$app_arg_38 = zeta * (c$bv_4[0+:3]);
+    assign c$app_arg_42 = zeta * (c$bv_4[0+:3]);
 
     assign c$bv_5 = (b >> (64'sd6));
 
-    assign c$app_arg_39 = zeta * (c$bv_5[0+:3]);
+    assign c$app_arg_43 = zeta * (c$bv_5[0+:3]);
 
     assign c$bv_6 = (b >> (64'sd3));
 
-    assign c$app_arg_40 = zeta * (c$bv_6[0+:3]);
+    assign c$app_arg_44 = zeta * (c$bv_6[0+:3]);
 
-    assign c$app_arg_41 = zeta * (b[0+:3]);
+    assign c$app_arg_45 = zeta * (b[0+:3]);
 
     // register begin
     always_ff @(posedge clk or  posedge  rst) begin : c$ds_app_arg_register
@@ -33279,14 +33295,14 @@ module NTT256
         c$ds_app_arg <= {23'd0,26'd0,26'd0,26'd0,26'd0,26'd0,26'd0,26'd0,25'd0};
       end else  if (en)  begin
         c$ds_app_arg <= {a
+    ,c$app_arg_45
+    ,c$app_arg_44
+    ,c$app_arg_43
+    ,c$app_arg_42
     ,c$app_arg_41
     ,c$app_arg_40
     ,c$app_arg_39
-    ,c$app_arg_38
-    ,c$app_arg_37
-    ,c$app_arg_36
-    ,c$app_arg_35
-    ,c$app_arg_34};
+    ,c$app_arg_38};
       end
     end
     // register end
@@ -33343,7 +33359,7 @@ module NTT256
 
     assign c$bv_19 = (((x_0[0+:24])));
 
-    assign c$app_arg_42 = ((c$bv_19[(64'sd0)]) == (1'b1)) ? 24'd8388608 : 24'd0;
+    assign c$app_arg_46 = ((c$bv_19[(64'sd0)]) == (1'b1)) ? 24'd8388608 : 24'd0;
 
     assign c$bv_20 = (x_0[0+:24]);
 
@@ -33356,14 +33372,14 @@ module NTT256
       end else  if (en)  begin
         c$packet_app_arg <= {a_0
     ,x_0
-    ,(c$app_arg_42 - (({{(24-11) {1'b0}},(c$bv_20[0+:11])}) << (64'sd13))) - (x_0[0+:24])};
+    ,(c$app_arg_46 - (({{(24-11) {1'b0}},(c$bv_20[0+:11])}) << (64'sd13))) - (x_0[0+:24])};
       end
     end
     // register end
 
     assign c$bv_22 = ((m));
 
-    assign c$app_arg_43 = ((c$bv_22[(64'sd0)]) == (1'b1)) ? 24'd8388608 : 24'd0;
+    assign c$app_arg_47 = ((c$bv_22[(64'sd0)]) == (1'b1)) ? 24'd8388608 : 24'd0;
 
     assign m = c$packet_app_arg.Mont1_sel2;
 
@@ -33391,7 +33407,7 @@ module NTT256
         c$packet_app_arg_0 <= {c$packet_app_arg.Mont1_sel0
     ,c$bv_23[0+:22]
     ,({{(24-23) {1'b0}},(c$bv_24[0+:23])}) - ({{(24-13) {1'b0}},(c$bv_26[0+:13])})
-    ,(({{(26-24) {1'b0}},(x[0+:24])}) + ({{(26-24) {1'b0}},m})) + ({{(26-24) {1'b0}},c$app_arg_43})
+    ,(({{(26-24) {1'b0}},(x[0+:24])}) + ({{(26-24) {1'b0}},m})) + ({{(26-24) {1'b0}},c$app_arg_47})
     ,({{(24-11) {1'b0}},(m[0+:11])}) << (64'sd13)};
       end
     end
@@ -33410,15 +33426,15 @@ module NTT256
     end
     // register end
 
-    assign c$case_alt_21 = (c$ds_app_arg_2.Mont3_sel1 >= 25'd8380417) ? (c$ds_app_arg_2.Mont3_sel1 - 25'd8380417) : c$ds_app_arg_2.Mont3_sel1;
+    assign c$case_alt_23 = (c$ds_app_arg_2.Mont3_sel1 >= 25'd8380417) ? (c$ds_app_arg_2.Mont3_sel1 - 25'd8380417) : c$ds_app_arg_2.Mont3_sel1;
 
     assign sumWide = ({{(24-23) {1'b0}},a_1}) + ({{(24-23) {1'b0}},t});
 
     assign c$bv_31 = (sumWide - 24'd8380417);
 
-    assign result_32 = (sumWide >= 24'd8380417) ? (c$bv_31[0+:23]) : (sumWide[0+:23]);
+    assign result_31 = (sumWide >= 24'd8380417) ? (c$bv_31[0+:23]) : (sumWide[0+:23]);
 
-    assign c$app_arg_44 = (a_1 >= t) ? (a_1 - t) : (23'd8380417 - (t - a_1));
+    assign c$app_arg_48 = (a_1 >= t) ? (a_1 - t) : (23'd8380417 - (t - a_1));
 
     assign a_0 = ds_10.Tuple2_3_sel0;
 
@@ -33468,22 +33484,22 @@ module NTT256
       if ( rst) begin
         ds_11 <= {23'd0,23'd0};
       end else  if (en)  begin
-        ds_11 <= {c$ds_app_arg_2.Mont3_sel0,c$case_alt_21[0+:23]};
+        ds_11 <= {c$ds_app_arg_2.Mont3_sel0,c$case_alt_23[0+:23]};
       end
     end
     // register end
 
     // register begin
-    always_ff @(posedge clk or  posedge  rst) begin : result_31_register
+    always_ff @(posedge clk or  posedge  rst) begin : result_30_register
       if ( rst) begin
-        result_31 <= {23'd0,23'd0};
+        result_30 <= {23'd0,23'd0};
       end else  if (en)  begin
-        result_31 <= {result_32,c$app_arg_44};
+        result_30 <= {result_31,c$app_arg_48};
       end
     end
     // register end
 
-    assign result_30 = result_31;
+    assign result_29 = result_30;
 
 
     assign result_17[n] = map_out;
@@ -33491,143 +33507,15 @@ module NTT256
   endgenerate
   // map end
 
-  assign c$i_3350 = readControlReg.CoeffControl_sel2;
-
-  assign c$input0_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3350});
-
-  assign inputNumber = input0 + 8'd1;
-
-  assign result_18 = (readControlReg.CoeffControl_sel1 == 3'd0) ? 8'd1 : result_19;
-
-  assign result_19 = \c$rem#_arg2_case_scrut_3  ? ($unsigned(c$app_arg_7[0+:8])) : c$case_alt_5;
-
-  assign c$case_alt_5 = \c$rem#_arg2_case_scrut_2  ? ($unsigned(c$app_arg_8[0+:8])) : c$case_alt_6;
-
-  assign c$i_3355 = (8'd2 + result_20);
-
-  assign c$app_arg_7 = $unsigned({{(64-8) {1'b0}},c$i_3355});
-
-  assign c$case_alt_6 = \c$rem#_arg2_case_scrut_1  ? ($unsigned(c$app_arg_9[0+:8])) : c$case_alt_7;
-
-  assign c$i_3357 = (8'd4 + result_20);
-
-  assign c$app_arg_8 = $unsigned({{(64-8) {1'b0}},c$i_3357});
-
-  assign c$case_alt_7 = \c$rem#_arg2_case_scrut_0  ? ($unsigned(c$app_arg_10[0+:8])) : c$case_alt_8;
-
-  assign c$i_3359 = (8'd8 + result_20);
-
-  assign c$app_arg_9 = $unsigned({{(64-8) {1'b0}},c$i_3359});
-
-  assign c$case_alt_8 = \c$rem#_arg2_case_scrut  ? ($unsigned(c$app_arg_11[0+:8])) : c$case_alt_9;
-
-  assign c$i_3361 = (8'd16 + result_20);
-
-  assign c$app_arg_10 = $unsigned({{(64-8) {1'b0}},c$i_3361});
-
-  assign c$case_alt_9 = (readControlReg.CoeffControl_sel1 == 3'd6) ? ($unsigned(c$app_arg_12[0+:8])) : c$case_alt_10;
-
-  assign c$i_3364 = (8'd32 + result_20);
-
-  assign c$app_arg_11 = $unsigned({{(64-8) {1'b0}},c$i_3364});
-
-  assign c$case_alt_10 = (readControlReg.CoeffControl_sel1 == 3'd7) ? ($unsigned(c$app_arg_13[0+:8])) : ({8 {1'bx}});
-
-  assign c$i_3367 = (8'd64 + result_20);
-
-  assign c$app_arg_12 = $unsigned({{(64-8) {1'b0}},c$i_3367});
-
-  assign c$i_3369 = (8'd128 + inputNumber);
-
-  assign c$app_arg_13 = $unsigned({{(64-8) {1'b0}},c$i_3369});
-
-  assign result_20 = inputNumber % \c$rem#_arg2 ;
-
-  assign \c$rem#_arg2  = \c$rem#_arg2_case_scrut_3  ? 8'd2 : \c$rem#_arg2_case_alt ;
-
-  assign \c$rem#_arg2_case_alt  = \c$rem#_arg2_case_scrut_2  ? 8'd4 : \c$rem#_arg2_case_alt_0 ;
-
-  assign \c$rem#_arg2_case_alt_0  = \c$rem#_arg2_case_scrut_1  ? 8'd8 : \c$rem#_arg2_case_alt_1 ;
-
-  assign \c$rem#_arg2_case_alt_1  = \c$rem#_arg2_case_scrut_0  ? 8'd16 : \c$rem#_arg2_case_alt_2 ;
-
-  assign \c$rem#_arg2_case_alt_2  = \c$rem#_arg2_case_scrut  ? 8'd32 : 8'd64;
-
-  assign \c$rem#_arg2_case_scrut  = readControlReg.CoeffControl_sel1 == 3'd5;
-
-  assign \c$rem#_arg2_case_scrut_0  = readControlReg.CoeffControl_sel1 == 3'd4;
-
-  assign \c$rem#_arg2_case_scrut_1  = readControlReg.CoeffControl_sel1 == 3'd3;
-
-  assign \c$rem#_arg2_case_scrut_2  = readControlReg.CoeffControl_sel1 == 3'd2;
-
-  assign \c$rem#_arg2_case_scrut_3  = readControlReg.CoeffControl_sel1 == 3'd1;
-
-  assign result_21 = (readControlReg.CoeffControl_sel1 == 3'd0) ? 8'd1 : result_22;
-
-  assign result_22 = \c$rem#_arg2_case_scrut_8  ? ($unsigned(c$app_arg_14[0+:8])) : c$case_alt_11;
-
-  assign c$case_alt_11 = \c$rem#_arg2_case_scrut_7  ? ($unsigned(c$app_arg_15[0+:8])) : c$case_alt_12;
-
-  assign c$i_3384 = (8'd2 + result_23);
-
-  assign c$app_arg_14 = $unsigned({{(64-8) {1'b0}},c$i_3384});
-
-  assign c$case_alt_12 = \c$rem#_arg2_case_scrut_6  ? ($unsigned(c$app_arg_16[0+:8])) : c$case_alt_13;
-
-  assign c$i_3386 = (8'd4 + result_23);
-
-  assign c$app_arg_15 = $unsigned({{(64-8) {1'b0}},c$i_3386});
-
-  assign c$case_alt_13 = \c$rem#_arg2_case_scrut_5  ? ($unsigned(c$app_arg_17[0+:8])) : c$case_alt_14;
-
-  assign c$i_3388 = (8'd8 + result_23);
-
-  assign c$app_arg_16 = $unsigned({{(64-8) {1'b0}},c$i_3388});
-
-  assign c$case_alt_14 = \c$rem#_arg2_case_scrut_4  ? ($unsigned(c$app_arg_18[0+:8])) : c$case_alt_15;
-
-  assign c$i_3390 = (8'd16 + result_23);
-
-  assign c$app_arg_17 = $unsigned({{(64-8) {1'b0}},c$i_3390});
-
-  assign c$case_alt_15 = (readControlReg.CoeffControl_sel1 == 3'd6) ? ($unsigned(c$app_arg_19[0+:8])) : c$case_alt_16;
-
-  assign c$i_3393 = (8'd32 + result_23);
-
-  assign c$app_arg_18 = $unsigned({{(64-8) {1'b0}},c$i_3393});
-
-  assign c$case_alt_16 = (readControlReg.CoeffControl_sel1 == 3'd7) ? ($unsigned(c$app_arg_20[0+:8])) : ({8 {1'bx}});
-
-  assign c$i_3396 = (8'd64 + result_23);
-
-  assign c$app_arg_19 = $unsigned({{(64-8) {1'b0}},c$i_3396});
-
-  assign c$i_3398 = (8'd128 + input0);
-
-  assign c$app_arg_20 = $unsigned({{(64-8) {1'b0}},c$i_3398});
-
-  assign result_23 = input0 % \c$rem#_arg2_0 ;
-
-  assign \c$rem#_arg2_0  = \c$rem#_arg2_case_scrut_8  ? 8'd2 : \c$rem#_arg2_case_alt_3 ;
-
-  assign \c$rem#_arg2_case_alt_3  = \c$rem#_arg2_case_scrut_7  ? 8'd4 : \c$rem#_arg2_case_alt_4 ;
-
-  assign \c$rem#_arg2_case_alt_4  = \c$rem#_arg2_case_scrut_6  ? 8'd8 : \c$rem#_arg2_case_alt_5 ;
-
-  assign \c$rem#_arg2_case_alt_5  = \c$rem#_arg2_case_scrut_5  ? 8'd16 : \c$rem#_arg2_case_alt_6 ;
-
-  assign \c$rem#_arg2_case_alt_6  = \c$rem#_arg2_case_scrut_4  ? 8'd32 : 8'd64;
-
-  assign \c$rem#_arg2_case_scrut_4  = readControlReg.CoeffControl_sel1 == 3'd5;
-
-  assign \c$rem#_arg2_case_scrut_5  = readControlReg.CoeffControl_sel1 == 3'd4;
-
-  assign \c$rem#_arg2_case_scrut_6  = readControlReg.CoeffControl_sel1 == 3'd3;
-
-  assign \c$rem#_arg2_case_scrut_7  = readControlReg.CoeffControl_sel1 == 3'd2;
-
-  assign \c$rem#_arg2_case_scrut_8  = readControlReg.CoeffControl_sel1 == 3'd1;
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$computeCommands_app_arg_register
+    if ( rst) begin
+      c$computeCommands_app_arg <= '{0: {23'd0,23'd0,23'd0},1: {23'd0,23'd0,23'd0}};
+    end else  if (en)  begin
+      c$computeCommands_app_arg <= c$case_alt_5;
+    end
+  end
+  // register end
 
   assign c$vec_9 = '{0: result_7
                     ,1: result_8
@@ -33647,6 +33535,8 @@ module NTT256
                      ,6: result_13
                      ,7: result_14};
 
+  assign c$app_arg_7 = readControlReg.CoeffControl_sel4 ? (c$vec_9[(64'sd2)]) : (c$vec_10[(64'sd0)]);
+
   assign c$vec_11 = '{0: result_7
                      ,1: result_8
                      ,2: result_9
@@ -33664,6 +33554,8 @@ module NTT256
                      ,5: result_12
                      ,6: result_13
                      ,7: result_14};
+
+  assign c$app_arg_8 = readControlReg.CoeffControl_sel4 ? (c$vec_11[(64'sd6)]) : (c$vec_12[(64'sd4)]);
 
   assign c$vec_13 = '{0: result_7
                      ,1: result_8
@@ -33683,6 +33575,8 @@ module NTT256
                      ,6: result_13
                      ,7: result_14};
 
+  assign c$app_arg_9 = readControlReg.CoeffControl_sel4 ? (c$vec_13[(64'sd3)]) : (c$vec_14[(64'sd1)]);
+
   assign c$vec_15 = '{0: result_7
                      ,1: result_8
                      ,2: result_9
@@ -33701,638 +33595,235 @@ module NTT256
                      ,6: result_13
                      ,7: result_14};
 
-  assign result_24 = readControlReg.CoeffControl_sel4 ? '{0: {c$vec_9[(64'sd2)]
-                                                             ,c$vec_10[(64'sd6)]
-                                                             ,zeta0}
-                                                         ,1: {c$vec_11[(64'sd3)]
-                                                             ,c$vec_12[(64'sd7)]
-                                                             ,zeta1}} : '{0: {c$vec_13[(64'sd0)]
-                                                                             ,c$vec_14[(64'sd4)]
-                                                                             ,zeta0}
-                                                                         ,1: {c$vec_15[(64'sd1)]
-                                                                             ,c$vec_16[(64'sd5)]
-                                                                             ,zeta1}};
+  assign c$app_arg_10 = readControlReg.CoeffControl_sel4 ? (c$vec_15[(64'sd7)]) : (c$vec_16[(64'sd5)]);
 
-  assign input0 = ($unsigned(c$input0_app_arg[0+:8])) << (64'sd1);
+  assign c$case_alt_5 = readControlReg.CoeffControl_sel0 ? '{0: {c$app_arg_7
+                                                                ,c$app_arg_8
+                                                                ,result_18[(64'sd0)]}
+                                                            ,1: {c$app_arg_9
+                                                                ,c$app_arg_10
+                                                                ,result_18[(64'sd1)]}} : ('{2 {{23'd0,23'd0,23'd0}}});
 
-  assign c$vec_17 = '{0: 64'sd0
-                     ,1: 64'sd294725
-                     ,2: 64'sd8304754
-                     ,3: 64'sd8280182
-                     ,4: 64'sd6155295
-                     ,5: 64'sd7591714
-                     ,6: 64'sd7067554
-                     ,7: 64'sd7203743
-                     ,8: 64'sd6979903
-                     ,9: 64'sd6981962
-                     ,10: 64'sd2715685
-                     ,11: 64'sd4214773
-                     ,12: 64'sd4562491
-                     ,13: 64'sd8074524
-                     ,14: 64'sd6002843
-                     ,15: 64'sd7114182
-                     ,16: 64'sd5510295
-                     ,17: 64'sd4717985
-                     ,18: 64'sd3007494
-                     ,19: 64'sd3942328
-                     ,20: 64'sd3664286
-                     ,21: 64'sd3138283
-                     ,22: 64'sd4986106
-                     ,23: 64'sd4345652
-                     ,24: 64'sd1366638
-                     ,25: 64'sd803323
-                     ,26: 64'sd289157
-                     ,27: 64'sd3391741
-                     ,28: 64'sd6652273
-                     ,29: 64'sd7267317
-                     ,30: 64'sd8363347
-                     ,31: 64'sd1932518
-                     ,32: 64'sd5019179
-                     ,33: 64'sd7333239
-                     ,34: 64'sd1681557
-                     ,35: 64'sd1945215
-                     ,36: 64'sd8275718
-                     ,37: 64'sd6926001
-                     ,38: 64'sd1430472
-                     ,39: 64'sd2666911
-                     ,40: 64'sd4011446
-                     ,41: 64'sd4309263
-                     ,42: 64'sd3483979
-                     ,43: 64'sd6241375
-                     ,44: 64'sd13828
-                     ,45: 64'sd5858571
-                     ,46: 64'sd3282775
-                     ,47: 64'sd5333862
-                     ,48: 64'sd6376883
-                     ,49: 64'sd1368491
-                     ,50: 64'sd7412031
-                     ,51: 64'sd5451984
-                     ,52: 64'sd6331749
-                     ,53: 64'sd7619127
-                     ,54: 64'sd5362453
-                     ,55: 64'sd3811828
-                     ,56: 64'sd2883940
-                     ,57: 64'sd3341148
-                     ,58: 64'sd4521296
-                     ,59: 64'sd5678489
-                     ,60: 64'sd6693382
-                     ,61: 64'sd6799101
-                     ,62: 64'sd5638686
-                     ,63: 64'sd6896368
-                     ,64: 64'sd868519
-                     ,65: 64'sd4151501
-                     ,66: 64'sd1589698
-                     ,67: 64'sd7550137
-                     ,68: 64'sd5330295
-                     ,69: 64'sd602826
-                     ,70: 64'sd1874454
-                     ,71: 64'sd2252592
-                     ,72: 64'sd4545392
-                     ,73: 64'sd4656088
-                     ,74: 64'sd4632561
-                     ,75: 64'sd323453
-                     ,76: 64'sd4177747
-                     ,77: 64'sd2672019
-                     ,78: 64'sd1033361
-                     ,79: 64'sd1768240
-                     ,80: 64'sd471633
-                     ,81: 64'sd4022687
-                     ,82: 64'sd6555591
-                     ,83: 64'sd3185999
-                     ,84: 64'sd3032856
-                     ,85: 64'sd5910789
-                     ,86: 64'sd4810587
-                     ,87: 64'sd8076117
-                     ,88: 64'sd4122115
-                     ,89: 64'sd7753634
-                     ,90: 64'sd6448903
-                     ,91: 64'sd289514
-                     ,92: 64'sd1144268
-                     ,93: 64'sd1445654
-                     ,94: 64'sd5146790
-                     ,95: 64'sd5166701
-                     ,96: 64'sd739868
-                     ,97: 64'sd524811
-                     ,98: 64'sd7629477
-                     ,99: 64'sd3940422
-                     ,100: 64'sd173
-                     ,101: 64'sd2156279
-                     ,102: 64'sd6157902
-                     ,103: 64'sd5449640
-                     ,104: 64'sd1753196
-                     ,105: 64'sd4255647
-                     ,106: 64'sd6029882
-                     ,107: 64'sd2082410
-                     ,108: 64'sd4854262
-                     ,109: 64'sd1079464
-                     ,110: 64'sd3112889
-                     ,111: 64'sd8113385
-                     ,112: 64'sd4845669
-                     ,113: 64'sd8104649
-                     ,114: 64'sd2041975
-                     ,115: 64'sd320128
-                     ,116: 64'sd3558813
-                     ,117: 64'sd1046859
-                     ,118: 64'sd8221876
-                     ,119: 64'sd3606200
-                     ,120: 64'sd7174207
-                     ,121: 64'sd1041361
-                     ,122: 64'sd6151194
-                     ,123: 64'sd8309321
-                     ,124: 64'sd3065391
-                     ,125: 64'sd3258440
-                     ,126: 64'sd5518209
-                     ,127: 64'sd1291704
-                     ,128: 64'sd3576395
-                     ,129: 64'sd5447488
-                     ,130: 64'sd1449433
-                     ,131: 64'sd276802
-                     ,132: 64'sd4635456
-                     ,133: 64'sd172446
-                     ,134: 64'sd3165836
-                     ,135: 64'sd7253477
-                     ,136: 64'sd361139
-                     ,137: 64'sd3970566
-                     ,138: 64'sd518949
-                     ,139: 64'sd5349692
-                     ,140: 64'sd3128905
-                     ,141: 64'sd116259
-                     ,142: 64'sd5560444
-                     ,143: 64'sd1100550
-                     ,144: 64'sd5306751
-                     ,145: 64'sd7536543
-                     ,146: 64'sd854689
-                     ,147: 64'sd5437376
-                     ,148: 64'sd4093936
-                     ,149: 64'sd3856547
-                     ,150: 64'sd8249304
-                     ,151: 64'sd128903
-                     ,152: 64'sd7297569
-                     ,153: 64'sd315163
-                     ,154: 64'sd4067201
-                     ,155: 64'sd4006320
-                     ,156: 64'sd4274522
-                     ,157: 64'sd1372861
-                     ,158: 64'sd3597958
-                     ,159: 64'sd2015586
-                     ,160: 64'sd7563354
-                     ,161: 64'sd7988706
-                     ,162: 64'sd6243054
-                     ,163: 64'sd7512593
-                     ,164: 64'sd831827
-                     ,165: 64'sd6435937
-                     ,166: 64'sd1872733
-                     ,167: 64'sd7202714
-                     ,168: 64'sd894975
-                     ,169: 64'sd3382322
-                     ,170: 64'sd6471611
-                     ,171: 64'sd4686190
-                     ,172: 64'sd7479650
-                     ,173: 64'sd4064138
-                     ,174: 64'sd5738513
-                     ,175: 64'sd6095131
-                     ,176: 64'sd7580038
-                     ,177: 64'sd2165461
-                     ,178: 64'sd3643993
-                     ,179: 64'sd3652572
-                     ,180: 64'sd3883889
-                     ,181: 64'sd6325350
-                     ,182: 64'sd5932652
-                     ,183: 64'sd2942135
-                     ,184: 64'sd2155369
-                     ,185: 64'sd7501378
-                     ,186: 64'sd6337823
-                     ,187: 64'sd6836238
-                     ,188: 64'sd914846
-                     ,189: 64'sd1871079
-                     ,190: 64'sd4104915
-                     ,191: 64'sd4771790
-                     ,192: 64'sd5658330
-                     ,193: 64'sd3379297
-                     ,194: 64'sd4442150
-                     ,195: 64'sd2711718
-                     ,196: 64'sd8222597
-                     ,197: 64'sd821436
-                     ,198: 64'sd794398
-                     ,199: 64'sd1617369
-                     ,200: 64'sd6676026
-                     ,201: 64'sd7976523
-                     ,202: 64'sd255360
-                     ,203: 64'sd5525170
-                     ,204: 64'sd7486450
-                     ,205: 64'sd7776621
-                     ,206: 64'sd1311761
-                     ,207: 64'sd7350847
-                     ,208: 64'sd5491783
-                     ,209: 64'sd3839614
-                     ,210: 64'sd2399316
-                     ,211: 64'sd3698525
-                     ,212: 64'sd3412190
-                     ,213: 64'sd3417705
-                     ,214: 64'sd2259509
-                     ,215: 64'sd2908788
-                     ,216: 64'sd2148141
-                     ,217: 64'sd7464445
-                     ,218: 64'sd8124843
-                     ,219: 64'sd4693022
-                     ,220: 64'sd2982141
-                     ,221: 64'sd3345528
-                     ,222: 64'sd4994178
-                     ,223: 64'sd6376493
-                     ,224: 64'sd6404386
-                     ,225: 64'sd6528230
-                     ,226: 64'sd7708066
-                     ,227: 64'sd2096158
-                     ,228: 64'sd303269
-                     ,229: 64'sd389020
-                     ,230: 64'sd825110
-                     ,231: 64'sd7923957
-                     ,232: 64'sd6119966
-                     ,233: 64'sd1578061
-                     ,234: 64'sd2677309
-                     ,235: 64'sd4983335
-                     ,236: 64'sd3398031
-                     ,237: 64'sd6706567
-                     ,238: 64'sd1242950
-                     ,239: 64'sd1196256
-                     ,240: 64'sd5095336
-                     ,241: 64'sd2642882
-                     ,242: 64'sd1144116
-                     ,243: 64'sd8076862
-                     ,244: 64'sd3568941
-                     ,245: 64'sd8212921
-                     ,246: 64'sd7011805
-                     ,247: 64'sd2834182
-                     ,248: 64'sd5759371
-                     ,249: 64'sd6955344
-                     ,250: 64'sd5826820
-                     ,251: 64'sd1074967
-                     ,252: 64'sd1783126
-                     ,253: 64'sd4981343
-                     ,254: 64'sd2419159
-                     ,255: 64'sd1644522};
+  Component_NTT_topEntity_twiddleMemory Component_NTT_topEntity_twiddleMemory_result_18
+    ( .result (result_18)
+    , .c$computeCommands_bindCsr (clk)
+    , .c$computeCommands_bindCsr_0 (rst)
+    , .c$computeCommands_bindCsr_1 (en)
+    , .addressSignal (c$case_alt_18) );
 
-  // map begin
-  genvar n_0;
-  generate
-  for (n_0=0; n_0 < $size(zeta1_res); n_0 = n_0 + 1) begin : map_0
-    logic signed [63:0] map_in_0;
-    assign map_in_0 = $signed(c$vec_17[n_0]);
-    logic [22:0] map_out_0;
-    assign map_out_0 = $unsigned(map_in_0[0+:23]);
+  assign c$i_3365 = stateSignal.NTTState_sel3;
 
+  assign c$input0_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3365});
 
-    assign zeta1_res[n_0] = map_out_0;
-  end
-  endgenerate
-  // map end
+  assign result_19 = (stateSignal.NTTState_sel2 == 3'd0) ? 8'd1 : result_20;
 
-  assign zeta1 = zeta1_res[($unsigned({{(64-8) {1'b0}},result_18}))];
+  assign result_20 = \c$rem#_arg2_case_scrut_3  ? ($unsigned(c$app_arg_11[0+:8])) : c$case_alt_6;
 
-  assign c$vec_18 = '{0: 64'sd0
-                     ,1: 64'sd294725
-                     ,2: 64'sd8304754
-                     ,3: 64'sd8280182
-                     ,4: 64'sd6155295
-                     ,5: 64'sd7591714
-                     ,6: 64'sd7067554
-                     ,7: 64'sd7203743
-                     ,8: 64'sd6979903
-                     ,9: 64'sd6981962
-                     ,10: 64'sd2715685
-                     ,11: 64'sd4214773
-                     ,12: 64'sd4562491
-                     ,13: 64'sd8074524
-                     ,14: 64'sd6002843
-                     ,15: 64'sd7114182
-                     ,16: 64'sd5510295
-                     ,17: 64'sd4717985
-                     ,18: 64'sd3007494
-                     ,19: 64'sd3942328
-                     ,20: 64'sd3664286
-                     ,21: 64'sd3138283
-                     ,22: 64'sd4986106
-                     ,23: 64'sd4345652
-                     ,24: 64'sd1366638
-                     ,25: 64'sd803323
-                     ,26: 64'sd289157
-                     ,27: 64'sd3391741
-                     ,28: 64'sd6652273
-                     ,29: 64'sd7267317
-                     ,30: 64'sd8363347
-                     ,31: 64'sd1932518
-                     ,32: 64'sd5019179
-                     ,33: 64'sd7333239
-                     ,34: 64'sd1681557
-                     ,35: 64'sd1945215
-                     ,36: 64'sd8275718
-                     ,37: 64'sd6926001
-                     ,38: 64'sd1430472
-                     ,39: 64'sd2666911
-                     ,40: 64'sd4011446
-                     ,41: 64'sd4309263
-                     ,42: 64'sd3483979
-                     ,43: 64'sd6241375
-                     ,44: 64'sd13828
-                     ,45: 64'sd5858571
-                     ,46: 64'sd3282775
-                     ,47: 64'sd5333862
-                     ,48: 64'sd6376883
-                     ,49: 64'sd1368491
-                     ,50: 64'sd7412031
-                     ,51: 64'sd5451984
-                     ,52: 64'sd6331749
-                     ,53: 64'sd7619127
-                     ,54: 64'sd5362453
-                     ,55: 64'sd3811828
-                     ,56: 64'sd2883940
-                     ,57: 64'sd3341148
-                     ,58: 64'sd4521296
-                     ,59: 64'sd5678489
-                     ,60: 64'sd6693382
-                     ,61: 64'sd6799101
-                     ,62: 64'sd5638686
-                     ,63: 64'sd6896368
-                     ,64: 64'sd868519
-                     ,65: 64'sd4151501
-                     ,66: 64'sd1589698
-                     ,67: 64'sd7550137
-                     ,68: 64'sd5330295
-                     ,69: 64'sd602826
-                     ,70: 64'sd1874454
-                     ,71: 64'sd2252592
-                     ,72: 64'sd4545392
-                     ,73: 64'sd4656088
-                     ,74: 64'sd4632561
-                     ,75: 64'sd323453
-                     ,76: 64'sd4177747
-                     ,77: 64'sd2672019
-                     ,78: 64'sd1033361
-                     ,79: 64'sd1768240
-                     ,80: 64'sd471633
-                     ,81: 64'sd4022687
-                     ,82: 64'sd6555591
-                     ,83: 64'sd3185999
-                     ,84: 64'sd3032856
-                     ,85: 64'sd5910789
-                     ,86: 64'sd4810587
-                     ,87: 64'sd8076117
-                     ,88: 64'sd4122115
-                     ,89: 64'sd7753634
-                     ,90: 64'sd6448903
-                     ,91: 64'sd289514
-                     ,92: 64'sd1144268
-                     ,93: 64'sd1445654
-                     ,94: 64'sd5146790
-                     ,95: 64'sd5166701
-                     ,96: 64'sd739868
-                     ,97: 64'sd524811
-                     ,98: 64'sd7629477
-                     ,99: 64'sd3940422
-                     ,100: 64'sd173
-                     ,101: 64'sd2156279
-                     ,102: 64'sd6157902
-                     ,103: 64'sd5449640
-                     ,104: 64'sd1753196
-                     ,105: 64'sd4255647
-                     ,106: 64'sd6029882
-                     ,107: 64'sd2082410
-                     ,108: 64'sd4854262
-                     ,109: 64'sd1079464
-                     ,110: 64'sd3112889
-                     ,111: 64'sd8113385
-                     ,112: 64'sd4845669
-                     ,113: 64'sd8104649
-                     ,114: 64'sd2041975
-                     ,115: 64'sd320128
-                     ,116: 64'sd3558813
-                     ,117: 64'sd1046859
-                     ,118: 64'sd8221876
-                     ,119: 64'sd3606200
-                     ,120: 64'sd7174207
-                     ,121: 64'sd1041361
-                     ,122: 64'sd6151194
-                     ,123: 64'sd8309321
-                     ,124: 64'sd3065391
-                     ,125: 64'sd3258440
-                     ,126: 64'sd5518209
-                     ,127: 64'sd1291704
-                     ,128: 64'sd3576395
-                     ,129: 64'sd5447488
-                     ,130: 64'sd1449433
-                     ,131: 64'sd276802
-                     ,132: 64'sd4635456
-                     ,133: 64'sd172446
-                     ,134: 64'sd3165836
-                     ,135: 64'sd7253477
-                     ,136: 64'sd361139
-                     ,137: 64'sd3970566
-                     ,138: 64'sd518949
-                     ,139: 64'sd5349692
-                     ,140: 64'sd3128905
-                     ,141: 64'sd116259
-                     ,142: 64'sd5560444
-                     ,143: 64'sd1100550
-                     ,144: 64'sd5306751
-                     ,145: 64'sd7536543
-                     ,146: 64'sd854689
-                     ,147: 64'sd5437376
-                     ,148: 64'sd4093936
-                     ,149: 64'sd3856547
-                     ,150: 64'sd8249304
-                     ,151: 64'sd128903
-                     ,152: 64'sd7297569
-                     ,153: 64'sd315163
-                     ,154: 64'sd4067201
-                     ,155: 64'sd4006320
-                     ,156: 64'sd4274522
-                     ,157: 64'sd1372861
-                     ,158: 64'sd3597958
-                     ,159: 64'sd2015586
-                     ,160: 64'sd7563354
-                     ,161: 64'sd7988706
-                     ,162: 64'sd6243054
-                     ,163: 64'sd7512593
-                     ,164: 64'sd831827
-                     ,165: 64'sd6435937
-                     ,166: 64'sd1872733
-                     ,167: 64'sd7202714
-                     ,168: 64'sd894975
-                     ,169: 64'sd3382322
-                     ,170: 64'sd6471611
-                     ,171: 64'sd4686190
-                     ,172: 64'sd7479650
-                     ,173: 64'sd4064138
-                     ,174: 64'sd5738513
-                     ,175: 64'sd6095131
-                     ,176: 64'sd7580038
-                     ,177: 64'sd2165461
-                     ,178: 64'sd3643993
-                     ,179: 64'sd3652572
-                     ,180: 64'sd3883889
-                     ,181: 64'sd6325350
-                     ,182: 64'sd5932652
-                     ,183: 64'sd2942135
-                     ,184: 64'sd2155369
-                     ,185: 64'sd7501378
-                     ,186: 64'sd6337823
-                     ,187: 64'sd6836238
-                     ,188: 64'sd914846
-                     ,189: 64'sd1871079
-                     ,190: 64'sd4104915
-                     ,191: 64'sd4771790
-                     ,192: 64'sd5658330
-                     ,193: 64'sd3379297
-                     ,194: 64'sd4442150
-                     ,195: 64'sd2711718
-                     ,196: 64'sd8222597
-                     ,197: 64'sd821436
-                     ,198: 64'sd794398
-                     ,199: 64'sd1617369
-                     ,200: 64'sd6676026
-                     ,201: 64'sd7976523
-                     ,202: 64'sd255360
-                     ,203: 64'sd5525170
-                     ,204: 64'sd7486450
-                     ,205: 64'sd7776621
-                     ,206: 64'sd1311761
-                     ,207: 64'sd7350847
-                     ,208: 64'sd5491783
-                     ,209: 64'sd3839614
-                     ,210: 64'sd2399316
-                     ,211: 64'sd3698525
-                     ,212: 64'sd3412190
-                     ,213: 64'sd3417705
-                     ,214: 64'sd2259509
-                     ,215: 64'sd2908788
-                     ,216: 64'sd2148141
-                     ,217: 64'sd7464445
-                     ,218: 64'sd8124843
-                     ,219: 64'sd4693022
-                     ,220: 64'sd2982141
-                     ,221: 64'sd3345528
-                     ,222: 64'sd4994178
-                     ,223: 64'sd6376493
-                     ,224: 64'sd6404386
-                     ,225: 64'sd6528230
-                     ,226: 64'sd7708066
-                     ,227: 64'sd2096158
-                     ,228: 64'sd303269
-                     ,229: 64'sd389020
-                     ,230: 64'sd825110
-                     ,231: 64'sd7923957
-                     ,232: 64'sd6119966
-                     ,233: 64'sd1578061
-                     ,234: 64'sd2677309
-                     ,235: 64'sd4983335
-                     ,236: 64'sd3398031
-                     ,237: 64'sd6706567
-                     ,238: 64'sd1242950
-                     ,239: 64'sd1196256
-                     ,240: 64'sd5095336
-                     ,241: 64'sd2642882
-                     ,242: 64'sd1144116
-                     ,243: 64'sd8076862
-                     ,244: 64'sd3568941
-                     ,245: 64'sd8212921
-                     ,246: 64'sd7011805
-                     ,247: 64'sd2834182
-                     ,248: 64'sd5759371
-                     ,249: 64'sd6955344
-                     ,250: 64'sd5826820
-                     ,251: 64'sd1074967
-                     ,252: 64'sd1783126
-                     ,253: 64'sd4981343
-                     ,254: 64'sd2419159
-                     ,255: 64'sd1644522};
+  assign c$case_alt_6 = \c$rem#_arg2_case_scrut_2  ? ($unsigned(c$app_arg_12[0+:8])) : c$case_alt_7;
 
-  // map begin
-  genvar n_1;
-  generate
-  for (n_1=0; n_1 < $size(zeta0_res); n_1 = n_1 + 1) begin : map_1
-    logic signed [63:0] map_in_1;
-    assign map_in_1 = $signed(c$vec_18[n_1]);
-    logic [22:0] map_out_1;
-    assign map_out_1 = $unsigned(map_in_1[0+:23]);
+  assign c$i_3369 = (8'd2 + result_21);
 
+  assign c$app_arg_11 = $unsigned({{(64-8) {1'b0}},c$i_3369});
 
-    assign zeta0_res[n_1] = map_out_1;
-  end
-  endgenerate
-  // map end
+  assign c$case_alt_7 = \c$rem#_arg2_case_scrut_1  ? ($unsigned(c$app_arg_13[0+:8])) : c$case_alt_8;
 
-  assign zeta0 = zeta0_res[($unsigned({{(64-8) {1'b0}},result_21}))];
+  assign c$i_3371 = (8'd4 + result_21);
 
-  assign result_25 = (~ readControlReg.CoeffControl_sel0) ? ('{2 {{23'd0,23'd0,23'd0}}}) : result_24;
+  assign c$app_arg_12 = $unsigned({{(64-8) {1'b0}},c$i_3371});
 
-  assign c$i_3414 = (upperBase_0 + 8'd3);
+  assign c$case_alt_8 = \c$rem#_arg2_case_scrut_0  ? ($unsigned(c$app_arg_14[0+:8])) : c$case_alt_9;
 
-  assign c$memoryOutputs_app_arg = $unsigned({{(64-8) {1'b0}},c$i_3414});
+  assign c$i_3373 = (8'd8 + result_21);
 
-  assign c$i_3416 = (upperBase_0 + 8'd2);
+  assign c$app_arg_13 = $unsigned({{(64-8) {1'b0}},c$i_3373});
 
-  assign c$memoryOutputs_app_arg_0 = $unsigned({{(64-8) {1'b0}},c$i_3416});
+  assign c$case_alt_9 = \c$rem#_arg2_case_scrut  ? ($unsigned(c$app_arg_15[0+:8])) : c$case_alt_10;
 
-  assign c$i_3418 = (upperBase_0 + 8'd1);
+  assign c$i_3375 = (8'd16 + result_21);
 
-  assign c$memoryOutputs_app_arg_1 = $unsigned({{(64-8) {1'b0}},c$i_3418});
+  assign c$app_arg_14 = $unsigned({{(64-8) {1'b0}},c$i_3375});
+
+  assign c$case_alt_10 = (stateSignal.NTTState_sel2 == 3'd6) ? ($unsigned(c$app_arg_16[0+:8])) : c$case_alt_11;
+
+  assign c$i_3378 = (8'd32 + result_21);
+
+  assign c$app_arg_15 = $unsigned({{(64-8) {1'b0}},c$i_3378});
+
+  assign c$case_alt_11 = (stateSignal.NTTState_sel2 == 3'd7) ? ($unsigned(c$app_arg_17[0+:8])) : ({8 {1'bx}});
+
+  assign c$i_3381 = (8'd64 + result_21);
+
+  assign c$app_arg_16 = $unsigned({{(64-8) {1'b0}},c$i_3381});
+
+  assign c$i_3383 = (8'd128 + input0);
+
+  assign c$app_arg_17 = $unsigned({{(64-8) {1'b0}},c$i_3383});
+
+  assign result_21 = input0 % \c$rem#_arg2 ;
+
+  assign \c$rem#_arg2  = \c$rem#_arg2_case_scrut_3  ? 8'd2 : \c$rem#_arg2_case_alt ;
+
+  assign \c$rem#_arg2_case_alt  = \c$rem#_arg2_case_scrut_2  ? 8'd4 : \c$rem#_arg2_case_alt_0 ;
+
+  assign \c$rem#_arg2_case_alt_0  = \c$rem#_arg2_case_scrut_1  ? 8'd8 : \c$rem#_arg2_case_alt_1 ;
+
+  assign \c$rem#_arg2_case_alt_1  = \c$rem#_arg2_case_scrut_0  ? 8'd16 : \c$rem#_arg2_case_alt_2 ;
+
+  assign \c$rem#_arg2_case_alt_2  = \c$rem#_arg2_case_scrut  ? 8'd32 : 8'd64;
+
+  assign \c$rem#_arg2_case_scrut  = stateSignal.NTTState_sel2 == 3'd5;
+
+  assign \c$rem#_arg2_case_scrut_0  = stateSignal.NTTState_sel2 == 3'd4;
+
+  assign \c$rem#_arg2_case_scrut_1  = stateSignal.NTTState_sel2 == 3'd3;
+
+  assign \c$rem#_arg2_case_scrut_2  = stateSignal.NTTState_sel2 == 3'd2;
+
+  assign \c$rem#_arg2_case_scrut_3  = stateSignal.NTTState_sel2 == 3'd1;
+
+  assign inputNumber = input0 + 8'd1;
+
+  assign result_22 = (stateSignal.NTTState_sel2 == 3'd0) ? 8'd1 : result_23;
+
+  assign result_23 = \c$rem#_arg2_case_scrut_8  ? ($unsigned(c$app_arg_18[0+:8])) : c$case_alt_12;
+
+  assign c$case_alt_12 = \c$rem#_arg2_case_scrut_7  ? ($unsigned(c$app_arg_19[0+:8])) : c$case_alt_13;
+
+  assign c$i_3399 = (8'd2 + result_24);
+
+  assign c$app_arg_18 = $unsigned({{(64-8) {1'b0}},c$i_3399});
+
+  assign c$case_alt_13 = \c$rem#_arg2_case_scrut_6  ? ($unsigned(c$app_arg_20[0+:8])) : c$case_alt_14;
+
+  assign c$i_3401 = (8'd4 + result_24);
+
+  assign c$app_arg_19 = $unsigned({{(64-8) {1'b0}},c$i_3401});
+
+  assign c$case_alt_14 = \c$rem#_arg2_case_scrut_5  ? ($unsigned(c$app_arg_21[0+:8])) : c$case_alt_15;
+
+  assign c$i_3403 = (8'd8 + result_24);
+
+  assign c$app_arg_20 = $unsigned({{(64-8) {1'b0}},c$i_3403});
+
+  assign c$case_alt_15 = \c$rem#_arg2_case_scrut_4  ? ($unsigned(c$app_arg_22[0+:8])) : c$case_alt_16;
+
+  assign c$i_3405 = (8'd16 + result_24);
+
+  assign c$app_arg_21 = $unsigned({{(64-8) {1'b0}},c$i_3405});
+
+  assign c$case_alt_16 = (stateSignal.NTTState_sel2 == 3'd6) ? ($unsigned(c$app_arg_23[0+:8])) : c$case_alt_17;
+
+  assign c$i_3408 = (8'd32 + result_24);
+
+  assign c$app_arg_22 = $unsigned({{(64-8) {1'b0}},c$i_3408});
+
+  assign c$case_alt_17 = (stateSignal.NTTState_sel2 == 3'd7) ? ($unsigned(c$app_arg_24[0+:8])) : ({8 {1'bx}});
+
+  assign c$i_3411 = (8'd64 + result_24);
+
+  assign c$app_arg_23 = $unsigned({{(64-8) {1'b0}},c$i_3411});
+
+  assign c$i_3413 = (8'd128 + inputNumber);
+
+  assign c$app_arg_24 = $unsigned({{(64-8) {1'b0}},c$i_3413});
+
+  assign result_24 = inputNumber % \c$rem#_arg2_0 ;
+
+  assign \c$rem#_arg2_0  = \c$rem#_arg2_case_scrut_8  ? 8'd2 : \c$rem#_arg2_case_alt_3 ;
+
+  assign \c$rem#_arg2_case_alt_3  = \c$rem#_arg2_case_scrut_7  ? 8'd4 : \c$rem#_arg2_case_alt_4 ;
+
+  assign \c$rem#_arg2_case_alt_4  = \c$rem#_arg2_case_scrut_6  ? 8'd8 : \c$rem#_arg2_case_alt_5 ;
+
+  assign \c$rem#_arg2_case_alt_5  = \c$rem#_arg2_case_scrut_5  ? 8'd16 : \c$rem#_arg2_case_alt_6 ;
+
+  assign \c$rem#_arg2_case_alt_6  = \c$rem#_arg2_case_scrut_4  ? 8'd32 : 8'd64;
+
+  assign \c$rem#_arg2_case_scrut_4  = stateSignal.NTTState_sel2 == 3'd5;
+
+  assign \c$rem#_arg2_case_scrut_5  = stateSignal.NTTState_sel2 == 3'd4;
+
+  assign \c$rem#_arg2_case_scrut_6  = stateSignal.NTTState_sel2 == 3'd3;
+
+  assign \c$rem#_arg2_case_scrut_7  = stateSignal.NTTState_sel2 == 3'd2;
+
+  assign \c$rem#_arg2_case_scrut_8  = stateSignal.NTTState_sel2 == 3'd1;
+
+  assign c$case_alt_18 = c$controlSignal_case_alt ? '{0: result_19
+                                                     ,1: result_22} : ('{2 {8'd0}});
+
+  assign c$bv_38 = ($unsigned(c$input0_app_arg[0+:6]));
+
+  assign input0 = ({{(8-6) {1'b0}},($unsigned(c$input0_app_arg[0+:6]))}) << (64'sd1);
+
+  assign c$i_3427 = (upperBase_0 + 8'd3);
+
+  assign c$memoryOutputs_app_arg = $unsigned({{(64-8) {1'b0}},c$i_3427});
+
+  assign c$i_3429 = (upperBase_0 + 8'd2);
+
+  assign c$memoryOutputs_app_arg_0 = $unsigned({{(64-8) {1'b0}},c$i_3429});
+
+  assign c$i_3431 = (upperBase_0 + 8'd1);
+
+  assign c$memoryOutputs_app_arg_1 = $unsigned({{(64-8) {1'b0}},c$i_3431});
 
   assign c$memoryOutputs_app_arg_2 = $unsigned({{(64-8) {1'b0}},upperBase_0});
 
   assign upperBase_0 = lowerBase_0 + 8'd128;
 
-  assign c$i_3421 = (lowerBase_0 + 8'd3);
+  assign c$i_3434 = (lowerBase_0 + 8'd3);
 
-  assign c$memoryOutputs_app_arg_3 = $unsigned({{(64-8) {1'b0}},c$i_3421});
+  assign c$memoryOutputs_app_arg_3 = $unsigned({{(64-8) {1'b0}},c$i_3434});
 
-  assign c$i_3423 = (lowerBase_0 + 8'd2);
+  assign c$i_3436 = (lowerBase_0 + 8'd2);
 
-  assign c$memoryOutputs_app_arg_4 = $unsigned({{(64-8) {1'b0}},c$i_3423});
+  assign c$memoryOutputs_app_arg_4 = $unsigned({{(64-8) {1'b0}},c$i_3436});
 
-  assign c$i_3425 = (lowerBase_0 + 8'd1);
+  assign c$i_3438 = (lowerBase_0 + 8'd1);
 
-  assign c$memoryOutputs_app_arg_5 = $unsigned({{(64-8) {1'b0}},c$i_3425});
+  assign c$memoryOutputs_app_arg_5 = $unsigned({{(64-8) {1'b0}},c$i_3438});
 
   assign physicalMemoryRow = $unsigned(c$lowerBase_app_arg_0[0+:6]);
 
   assign c$memoryOutputs_app_arg_6 = $unsigned({{(64-8) {1'b0}},lowerBase_0});
 
-  assign c$bv_38 = ($unsigned(c$lowerBase_app_arg_0[0+:5]));
+  assign c$bv_39 = ($unsigned(c$lowerBase_app_arg_0[0+:5]));
 
   assign lowerBase_0 = ({{(8-5) {1'b0}},($unsigned(c$lowerBase_app_arg_0[0+:5]))}) << (64'sd2);
 
-  assign c$i_3426 = stateSignal.NTTState_sel5;
+  assign c$i_3439 = stateSignal.NTTState_sel5;
 
-  assign c$lowerBase_app_arg_0 = $unsigned({{(64-5) {1'b0}},c$i_3426});
+  assign c$lowerBase_app_arg_0 = $unsigned({{(64-5) {1'b0}},c$i_3439});
 
   assign c$memoryOutputs_case_alt_selection_4 = stateSignal.NTTState_sel0;
 
   always_comb begin
     case(c$memoryOutputs_case_alt_selection_4)
-      3'b100 : c$memoryOutputs_case_alt_0 = '{8 {result_26}};
-      default : c$memoryOutputs_case_alt_0 = '{8 {result_29}};
+      3'b100 : c$memoryOutputs_case_alt_0 = '{8 {result_25}};
+      default : c$memoryOutputs_case_alt_0 = '{8 {result_28}};
     endcase
   end
 
-  assign c$bv_39 = ($unsigned(c$memoryOutputs_app_arg_7[0+:5]));
+  assign c$bv_40 = ($unsigned(c$memoryOutputs_app_arg_7[0+:5]));
 
   assign value = stateSignal.NTTState_sel4 + ({{(6-5) {1'b0}},($unsigned(c$memoryOutputs_app_arg_7[0+:5]))});
 
-  assign c$i_3428 = (value - 6'd48);
+  assign c$i_3441 = (value - 6'd48);
 
-  assign c$app_arg_21 = $unsigned({{(64-6) {1'b0}},c$i_3428});
+  assign c$app_arg_25 = $unsigned({{(64-6) {1'b0}},c$i_3441});
 
-  assign c$app_arg_22 = $unsigned({{(64-6) {1'b0}},value});
+  assign c$app_arg_26 = $unsigned({{(64-6) {1'b0}},value});
 
-  assign result_26 = (value >= 6'd48) ? ($unsigned(c$app_arg_21[0+:6])) : ($unsigned(c$app_arg_22[0+:6]));
+  assign result_25 = (value >= 6'd48) ? ($unsigned(c$app_arg_25[0+:6])) : ($unsigned(c$app_arg_26[0+:6]));
 
-  assign c$i_3430 = ($unsigned(c$memoryOutputs_app_arg_8[0+:5]));
+  assign c$i_3443 = ($unsigned(c$memoryOutputs_app_arg_8[0+:5]));
 
-  assign c$memoryOutputs_app_arg_7 = $unsigned({{(64-5) {1'b0}},c$i_3430});
+  assign c$memoryOutputs_app_arg_7 = $unsigned({{(64-5) {1'b0}},c$i_3443});
 
-  assign c$i_3431 = stateSignal.NTTState_sel6;
+  assign c$i_3444 = stateSignal.NTTState_sel6;
 
-  assign c$memoryOutputs_app_arg_8 = $unsigned({{(64-5) {1'b0}},c$i_3431});
+  assign c$memoryOutputs_app_arg_8 = $unsigned({{(64-5) {1'b0}},c$i_3444});
 
   // register begin
   always_ff @(posedge clk or  posedge  rst) begin : c$stateSignal_app_arg_register
@@ -34590,7 +34081,31 @@ module NTT256
   ,6'd0
   ,1'b0};
     end else  if (en)  begin
-      c$writeControlSignal_app_arg_7 <= readControlReg;
+      c$writeControlSignal_app_arg_7 <= c$writeControlSignal_app_arg_8;
+    end
+  end
+  // register end
+
+  // register begin
+  always_ff @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_8_register
+    if ( rst) begin
+      c$writeControlSignal_app_arg_8 <= {1'b0
+  ,3'd0
+  ,6'd0
+  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
+                                                   ,1: 6'd0
+                                                   ,2: 6'd0
+                                                   ,3: 6'd0
+                                                   ,4: 6'd0
+                                                   ,5: 6'd0
+                                                   ,6: 6'd0
+                                                   ,7: 6'd0})}
+  ,1'b0
+  ,1'b0
+  ,6'd0
+  ,1'b0};
+    end else  if (en)  begin
+      c$writeControlSignal_app_arg_8 <= readControlReg;
     end
   end
   // register end
@@ -34617,66 +34132,66 @@ module NTT256
       readControlReg <= {c$controlSignal_case_alt
   ,stateSignal.NTTState_sel2
   ,stateSignal.NTTState_sel3
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{8 {result_29}})}
-  ,(c$app_arg_27[(64'sd0)]) == (1'b1)
-  ,(c$app_arg_27[(64'sd5)]) == (1'b1)
-  ,result_27
+  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{8 {result_28}})}
+  ,(c$app_arg_31[(64'sd0)]) == (1'b1)
+  ,(c$app_arg_31[(64'sd5)]) == (1'b1)
+  ,result_26
   ,stateSignal.NTTState_sel3 == 6'd63};
     end
   end
   // register end
 
-  assign c$bv_40 = ($unsigned(c$app_arg_25[0+:5]));
+  assign c$bv_41 = ($unsigned(c$app_arg_29[0+:5]));
 
-  assign value_0 = result_28 + ({{(6-5) {1'b0}},($unsigned(c$app_arg_25[0+:5]))});
+  assign value_0 = result_27 + ({{(6-5) {1'b0}},($unsigned(c$app_arg_29[0+:5]))});
 
-  assign c$i_3678 = (value_0 - 6'd48);
+  assign c$i_3713 = (value_0 - 6'd48);
 
-  assign c$app_arg_23 = $unsigned({{(64-6) {1'b0}},c$i_3678});
+  assign c$app_arg_27 = $unsigned({{(64-6) {1'b0}},c$i_3713});
 
-  assign c$app_arg_24 = $unsigned({{(64-6) {1'b0}},value_0});
+  assign c$app_arg_28 = $unsigned({{(64-6) {1'b0}},value_0});
 
-  assign result_27 = (value_0 >= 6'd48) ? ($unsigned(c$app_arg_23[0+:6])) : ($unsigned(c$app_arg_24[0+:6]));
+  assign result_26 = (value_0 >= 6'd48) ? ($unsigned(c$app_arg_27[0+:6])) : ($unsigned(c$app_arg_28[0+:6]));
 
-  assign c$i_3680 = ($unsigned(c$app_arg_26[0+:5]));
+  assign c$i_3715 = ($unsigned(c$app_arg_30[0+:5]));
 
-  assign c$app_arg_25 = $unsigned({{(64-5) {1'b0}},c$i_3680});
+  assign c$app_arg_29 = $unsigned({{(64-5) {1'b0}},c$i_3715});
 
-  assign c$i_3681 = (issueWide[0+:5]);
+  assign c$i_3716 = (issueWide[0+:5]);
 
-  assign c$app_arg_26 = $unsigned({{(64-5) {1'b0}},c$i_3681});
+  assign c$app_arg_30 = $unsigned({{(64-5) {1'b0}},c$i_3716});
 
-  assign c$case_alt_17 = (stateSignal.NTTState_sel4 == 6'd32) ? 6'd16 : 6'd0;
+  assign c$case_alt_19 = (stateSignal.NTTState_sel4 == 6'd32) ? 6'd16 : 6'd0;
 
-  assign result_28 = (stateSignal.NTTState_sel4 == 6'd0) ? 6'd32 : c$case_alt_17;
+  assign result_27 = (stateSignal.NTTState_sel4 == 6'd0) ? 6'd32 : c$case_alt_19;
 
-  assign c$app_arg_27 = (issueWide);
+  assign c$app_arg_31 = (issueWide);
 
-  assign c$bv_41 = ($unsigned(c$app_arg_30[0+:5]));
+  assign c$bv_42 = ($unsigned(c$app_arg_34[0+:5]));
 
-  assign value_1 = stateSignal.NTTState_sel4 + ({{(6-5) {1'b0}},($unsigned(c$app_arg_30[0+:5]))});
+  assign value_1 = stateSignal.NTTState_sel4 + ({{(6-5) {1'b0}},($unsigned(c$app_arg_34[0+:5]))});
 
-  assign c$i_3688 = (value_1 - 6'd48);
+  assign c$i_3723 = (value_1 - 6'd48);
 
-  assign c$app_arg_28 = $unsigned({{(64-6) {1'b0}},c$i_3688});
+  assign c$app_arg_32 = $unsigned({{(64-6) {1'b0}},c$i_3723});
 
-  assign c$app_arg_29 = $unsigned({{(64-6) {1'b0}},value_1});
+  assign c$app_arg_33 = $unsigned({{(64-6) {1'b0}},value_1});
 
-  assign result_29 = (value_1 >= 6'd48) ? ($unsigned(c$app_arg_28[0+:6])) : ($unsigned(c$app_arg_29[0+:6]));
+  assign result_28 = (value_1 >= 6'd48) ? ($unsigned(c$app_arg_32[0+:6])) : ($unsigned(c$app_arg_33[0+:6]));
 
-  assign c$app_arg_30 = $unsigned({{(64-5) {1'b0}},logicalRow});
+  assign c$app_arg_34 = $unsigned({{(64-5) {1'b0}},logicalRow});
 
   assign logicalRow = $unsigned(c$logicalRow_app_arg[0+:5]);
 
-  assign c$i_3690 = (issueWide >> (64'sd1));
+  assign c$i_3725 = (issueWide >> (64'sd1));
 
-  assign c$logicalRow_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3690});
+  assign c$logicalRow_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3725});
 
   assign issueWide = $unsigned(c$issueWide_app_arg[0+:6]);
 
-  assign c$i_3691 = stateSignal.NTTState_sel3;
+  assign c$i_3726 = stateSignal.NTTState_sel3;
 
-  assign c$issueWide_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3691});
+  assign c$issueWide_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3726});
 
   always_comb begin
     case(c$stateSignal_case_scrut)

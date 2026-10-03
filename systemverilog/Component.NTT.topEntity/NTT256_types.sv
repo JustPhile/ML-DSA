@@ -40,7 +40,6 @@ package NTT256_types;
     logic [22:0] Tuple2_0_sel1;
   } Tuple2_0;
   typedef Tuple2_0  array_of_2_Tuple2_0 [0:1];
-  typedef logic signed [63:0] array_of_256_signed_64 [0:255];
   typedef struct packed {
     logic [5:0] Tuple2_sel0;
     logic [22:0] Tuple2_sel1;
@@ -67,6 +66,7 @@ package NTT256_types;
     logic [4:0] Tuple2_1_sel1;
   } Tuple2_1;
   typedef Tuple3  array_of_2_Tuple3 [0:1];
+  typedef logic [7:0] array_of_2_logic_vector_8 [0:1];
   typedef logic [22:0] array_of_256_logic_vector_23 [0:255];
   typedef struct packed {
     logic Tuple2_2_sel0;
@@ -108,6 +108,7 @@ package NTT256_types;
     logic [24:0] Mont3Low_sel1;
     logic [1:0] Mont3Low_sel2;
   } Mont3Low;
+  typedef logic [22:0] array_of_2_logic_vector_23 [0:1];
   function automatic logic [0:47][22:0] array_of_48_logic_vector_23_to_lv(array_of_48_logic_vector_23 i);
     for (int n = 0; n < 48; n=n+1)
       array_of_48_logic_vector_23_to_lv[n] = i[n];
@@ -143,18 +144,6 @@ package NTT256_types;
   function automatic array_of_2_Tuple2_0 array_of_2_Tuple2_0_cons(Tuple2_0 x,Tuple2_0  xs [0:0]);
     array_of_2_Tuple2_0_cons[0] = x;
     array_of_2_Tuple2_0_cons[1:1] = xs;
-  endfunction
-  function automatic logic [0:255][63:0] array_of_256_signed_64_to_lv(array_of_256_signed_64 i);
-    for (int n = 0; n < 256; n=n+1)
-      array_of_256_signed_64_to_lv[n] = i[n];
-  endfunction
-  function automatic array_of_256_signed_64 array_of_256_signed_64_from_lv(logic [0:255][63:0] i);
-    for (int n = 0; n < 256; n=n+1)
-      array_of_256_signed_64_from_lv[n] = i[n];
-  endfunction
-  function automatic array_of_256_signed_64 array_of_256_signed_64_cons(logic signed [63:0] x,logic signed [63:0] xs [0:254]);
-    array_of_256_signed_64_cons[0] = x;
-    array_of_256_signed_64_cons[1:255] = xs;
   endfunction
   function automatic logic [0:7][5:0] array_of_8_logic_vector_6_to_lv(array_of_8_logic_vector_6 i);
     for (int n = 0; n < 8; n=n+1)
@@ -192,6 +181,18 @@ package NTT256_types;
     array_of_2_Tuple3_cons[0] = x;
     array_of_2_Tuple3_cons[1:1] = xs;
   endfunction
+  function automatic logic [0:1][7:0] array_of_2_logic_vector_8_to_lv(array_of_2_logic_vector_8 i);
+    for (int n = 0; n < 2; n=n+1)
+      array_of_2_logic_vector_8_to_lv[n] = i[n];
+  endfunction
+  function automatic array_of_2_logic_vector_8 array_of_2_logic_vector_8_from_lv(logic [0:1][7:0] i);
+    for (int n = 0; n < 2; n=n+1)
+      array_of_2_logic_vector_8_from_lv[n] = i[n];
+  endfunction
+  function automatic array_of_2_logic_vector_8 array_of_2_logic_vector_8_cons(logic [7:0] x,logic [7:0] xs [0:0]);
+    array_of_2_logic_vector_8_cons[0] = x;
+    array_of_2_logic_vector_8_cons[1:1] = xs;
+  endfunction
   function automatic logic [0:255][22:0] array_of_256_logic_vector_23_to_lv(array_of_256_logic_vector_23 i);
     for (int n = 0; n < 256; n=n+1)
       array_of_256_logic_vector_23_to_lv[n] = i[n];
@@ -203,6 +204,18 @@ package NTT256_types;
   function automatic array_of_256_logic_vector_23 array_of_256_logic_vector_23_cons(logic [22:0] x,logic [22:0] xs [0:254]);
     array_of_256_logic_vector_23_cons[0] = x;
     array_of_256_logic_vector_23_cons[1:255] = xs;
+  endfunction
+  function automatic logic [0:1][22:0] array_of_2_logic_vector_23_to_lv(array_of_2_logic_vector_23 i);
+    for (int n = 0; n < 2; n=n+1)
+      array_of_2_logic_vector_23_to_lv[n] = i[n];
+  endfunction
+  function automatic array_of_2_logic_vector_23 array_of_2_logic_vector_23_from_lv(logic [0:1][22:0] i);
+    for (int n = 0; n < 2; n=n+1)
+      array_of_2_logic_vector_23_from_lv[n] = i[n];
+  endfunction
+  function automatic array_of_2_logic_vector_23 array_of_2_logic_vector_23_cons(logic [22:0] x,logic [22:0] xs [0:0]);
+    array_of_2_logic_vector_23_cons[0] = x;
+    array_of_2_logic_vector_23_cons[1:1] = xs;
   endfunction
 endpackage : NTT256_types
 

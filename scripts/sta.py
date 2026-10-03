@@ -197,20 +197,41 @@ def _sanitize_netlist_for_opensta(
 
     text = source.read_text(encoding="utf-8")
 
-    # OpenSTA 3.1.0 fails on Clash/Yosys escaped identifiers such as:
+    # Convert Verilog escaped identifiers into ordinary identifiers.
     #
-    #   \c$aIndex_app_arg
+    # Example:
+    #   \c$app_arg_1_RAM[0]
     #
-    # Convert them to ordinary Verilog identifiers.
-    escaped_count = text.count(r"\c$")
-    text = text.replace(r"\c$", "c_")
+    # becomes:
+    #   __esc_c_24_app_arg_1_RAM_5b_0_5d_
+    def sanitize_escaped_identifier(
+        match: re.Match[str],
+    ) -> str:
+        original = match.group(1)
+        encoded: list[str] = []
 
-    # OpenSTA also fails on declarations such as:
-    #
-    #   wire signed [63:0] foo;
-    #
-    # At this point arithmetic is already mapped to standard cells,
-    # so signedness is no longer needed for timing connectivity.
+        for character in original:
+            if (
+                "a" <= character <= "z"
+                or "A" <= character <= "Z"
+                or "0" <= character <= "9"
+                or character == "_"
+            ):
+                encoded.append(character)
+            else:
+                encoded.append(
+                    f"_{ord(character):02x}_"
+                )
+
+        return "__esc_" + "".join(encoded)
+
+    text, escaped_count = re.subn(
+        r"\\(\S+)",
+        sanitize_escaped_identifier,
+        text,
+    )
+
+    # Signedness is unnecessary after standard-cell mapping.
     text, signed_count = re.subn(
         r"\b(wire|input|output|reg)\s+signed\b",
         r"\1",

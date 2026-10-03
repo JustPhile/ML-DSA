@@ -9,6 +9,7 @@ module Component.NTTCoeffController
   , makeCoeffControl
   , makePEInputs
   , makeWriteCommands
+  , makeTwiddleAddresses
   ) where
 
 import Clash.Prelude
@@ -18,6 +19,7 @@ import Component.NTTCore
   , PEInput
   , PEOutput
   )
+
 import Component.NTTCoeffMem
   ( LogicalRow
   , ReadAddresses
@@ -27,6 +29,12 @@ import Component.NTTCoeffMem
   , nextBase
   , physicalRow
   )
+
+import Component.NTTTwiddleMem
+  ( TwiddleAddresses
+  , TwiddleResults
+  )
+  
 import GHC.Generics (Generic)
 import Prelude hiding ((!!), not, repeat)
 
@@ -130,41 +138,73 @@ cgZetaIndex stage inputNumber =
 makePEInputs
   :: CoeffControl
   -> ReadResults
+  -> TwiddleResults
   -> Vec 2 PEInput
-makePEInputs control ramOutputs
-  | not (ccValid control) =
+makePEInputs control memoryResults twiddleResults =
+  if ccValid control
+    then
+      (operand00, operand01, twiddleResults !! 0)
+        :>
+      (operand10, operand11, twiddleResults !! 1)
+        :>
+      Nil
+    else
       repeat (0, 0, 0)
+  where
+    -- Even issue:
+    --
+    -- PE0 reads RAM 0 and RAM 4.
+    -- PE1 reads RAM 1 and RAM 5.
+    --
+    -- Odd issue:
+    --
+    -- PE0 reads RAM 2 and RAM 6.
+    -- PE1 reads RAM 3 and RAM 7.
 
-  | ccOddBanks control =
-      ( ramOutputs !! 2
-      , ramOutputs !! 6
-      , zeta0
-      )
-        :>
-      ( ramOutputs !! 3
-      , ramOutputs !! 7
-      , zeta1
-      )
-        :>
-      Nil
+    operand00 :: Coeff
+    operand00 =
+      if ccOddBanks control
+        then memoryResults !! 2
+        else memoryResults !! 0
 
-  | otherwise =
-      ( ramOutputs !! 0
-      , ramOutputs !! 4
-      , zeta0
-      )
-        :>
-      ( ramOutputs !! 1
-      , ramOutputs !! 5
-      , zeta1
-      )
-        :>
-      Nil
+    operand01 :: Coeff
+    operand01 =
+      if ccOddBanks control
+        then memoryResults !! 6
+        else memoryResults !! 4
+
+    operand10 :: Coeff
+    operand10 =
+      if ccOddBanks control
+        then memoryResults !! 3
+        else memoryResults !! 1
+
+    operand11 :: Coeff
+    operand11 =
+      if ccOddBanks control
+        then memoryResults !! 7
+        else memoryResults !! 5
+
+
+-- Produce the two synchronous twiddle-ROM addresses.
+makeTwiddleAddresses
+  :: CoeffControl
+  -> TwiddleAddresses
+makeTwiddleAddresses control =
+  if ccValid control
+    then
+      zetaIndex0
+        :> zetaIndex1
+        :> Nil
+    else
+      repeat 0
   where
     issueWide :: Unsigned 8
     issueWide =
-      fromIntegral (ccIssue control)
+      resize
+        (fromIntegral (ccIssue control) :: Unsigned 6)
 
+    -- Two butterflies are issued each cycle.
     input0 :: Unsigned 8
     input0 =
       shiftL issueWide 1
@@ -173,13 +213,17 @@ makePEInputs control ramOutputs
     input1 =
       input0 + 1
 
-    zeta0 :: Coeff
-    zeta0 =
-      zetasMont !! cgZetaIndex (ccStage control) input0
+    zetaIndex0 :: Index 256
+    zetaIndex0 =
+      cgZetaIndex
+        (ccStage control)
+        input0
 
-    zeta1 :: Coeff
-    zeta1 =
-      zetasMont !! cgZetaIndex (ccStage control) input1
+    zetaIndex1 :: Index 256
+    zetaIndex1 =
+      cgZetaIndex
+        (ccStage control)
+        input1
 
 -- Route four PE outputs back to one memory cluster.
 makeWriteCommands

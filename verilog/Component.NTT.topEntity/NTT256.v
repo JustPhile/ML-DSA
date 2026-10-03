@@ -2057,24 +2057,40 @@ module NTT256
   wire [45:0] ds8;
   wire [45:0] ds9;
   wire [91:0] result_16;
+  reg [137:0] c$computeCommands_app_arg = {{23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,   23'd0}};
+  wire [22:0] c$case_alt_5;
+  wire [22:0] c$case_alt_6;
+  wire [22:0] c$app_arg_15;
+  wire [22:0] c$case_alt_7;
+  wire [22:0] c$case_alt_8;
+  wire [22:0] c$app_arg_16;
+  wire [22:0] c$app_arg_17;
+  wire [22:0] c$case_alt_9;
+  wire [22:0] c$case_alt_10;
+  wire [22:0] c$app_arg_18;
+  wire [22:0] c$case_alt_11;
+  wire [22:0] c$case_alt_12;
+  wire [22:0] c$app_arg_19;
+  wire [22:0] c$app_arg_20;
+  wire [137:0] c$case_alt_13;
+  wire [45:0] result_17;
   wire signed [63:0] c$input0_app_arg;
-  wire [7:0] inputNumber;
-  wire [7:0] result_17;
   wire [7:0] result_18;
-  wire [7:0] c$case_alt_5;
-  wire signed [63:0] c$app_arg_15;
-  wire [7:0] c$case_alt_6;
-  wire signed [63:0] c$app_arg_16;
-  wire [7:0] c$case_alt_7;
-  wire signed [63:0] c$app_arg_17;
-  wire [7:0] c$case_alt_8;
-  wire signed [63:0] c$app_arg_18;
-  wire [7:0] c$case_alt_9;
-  wire signed [63:0] c$app_arg_19;
-  wire [7:0] c$case_alt_10;
-  wire signed [63:0] c$app_arg_20;
-  wire signed [63:0] c$app_arg_21;
   wire [7:0] result_19;
+  wire [7:0] c$case_alt_14;
+  wire signed [63:0] c$app_arg_21;
+  wire [7:0] c$case_alt_15;
+  wire signed [63:0] c$app_arg_22;
+  wire [7:0] c$case_alt_16;
+  wire signed [63:0] c$app_arg_23;
+  wire [7:0] c$case_alt_17;
+  wire signed [63:0] c$app_arg_24;
+  wire [7:0] c$case_alt_18;
+  wire signed [63:0] c$app_arg_25;
+  wire [7:0] c$case_alt_19;
+  wire signed [63:0] c$app_arg_26;
+  wire signed [63:0] c$app_arg_27;
+  wire [7:0] result_20;
   wire [7:0] \c$rem#_arg2 ;
   wire [7:0] \c$rem#_arg2_case_alt ;
   wire [7:0] \c$rem#_arg2_case_alt_0 ;
@@ -2085,22 +2101,23 @@ module NTT256
   wire  \c$rem#_arg2_case_scrut_1 ;
   wire  \c$rem#_arg2_case_scrut_2 ;
   wire  \c$rem#_arg2_case_scrut_3 ;
-  wire [7:0] result_20;
+  wire [7:0] inputNumber;
   wire [7:0] result_21;
-  wire [7:0] c$case_alt_11;
-  wire signed [63:0] c$app_arg_22;
-  wire [7:0] c$case_alt_12;
-  wire signed [63:0] c$app_arg_23;
-  wire [7:0] c$case_alt_13;
-  wire signed [63:0] c$app_arg_24;
-  wire [7:0] c$case_alt_14;
-  wire signed [63:0] c$app_arg_25;
-  wire [7:0] c$case_alt_15;
-  wire signed [63:0] c$app_arg_26;
-  wire [7:0] c$case_alt_16;
-  wire signed [63:0] c$app_arg_27;
-  wire signed [63:0] c$app_arg_28;
   wire [7:0] result_22;
+  wire [7:0] c$case_alt_20;
+  wire signed [63:0] c$app_arg_28;
+  wire [7:0] c$case_alt_21;
+  wire signed [63:0] c$app_arg_29;
+  wire [7:0] c$case_alt_22;
+  wire signed [63:0] c$app_arg_30;
+  wire [7:0] c$case_alt_23;
+  wire signed [63:0] c$app_arg_31;
+  wire [7:0] c$case_alt_24;
+  wire signed [63:0] c$app_arg_32;
+  wire [7:0] c$case_alt_25;
+  wire signed [63:0] c$app_arg_33;
+  wire signed [63:0] c$app_arg_34;
+  wire [7:0] result_23;
   wire [7:0] \c$rem#_arg2_0 ;
   wire [7:0] \c$rem#_arg2_case_alt_3 ;
   wire [7:0] \c$rem#_arg2_case_alt_4 ;
@@ -2111,19 +2128,8 @@ module NTT256
   wire  \c$rem#_arg2_case_scrut_6 ;
   wire  \c$rem#_arg2_case_scrut_7 ;
   wire  \c$rem#_arg2_case_scrut_8 ;
-  wire [22:0] c$app_arg_29;
-  wire [22:0] c$app_arg_30;
-  wire [22:0] c$app_arg_31;
-  wire [22:0] c$app_arg_32;
-  wire [22:0] c$app_arg_33;
-  wire [22:0] c$app_arg_34;
-  wire [22:0] c$app_arg_35;
-  wire [22:0] c$app_arg_36;
-  wire [137:0] result_23;
+  wire [15:0] c$case_alt_26;
   wire [7:0] input0;
-  wire [22:0] zeta1;
-  wire [22:0] zeta0;
-  wire [137:0] result_24;
   wire [22:0] c$memoryOutputs_app_arg;
   wire signed [63:0] c$memoryOutputs_app_arg_0;
   wire [22:0] c$memoryOutputs_app_arg_1;
@@ -2146,9 +2152,9 @@ module NTT256
   wire signed [63:0] c$lowerBase_app_arg_0;
   reg [47:0] c$memoryOutputs_case_alt_0;
   wire [5:0] value;
-  wire signed [63:0] c$app_arg_37;
-  wire signed [63:0] c$app_arg_38;
-  wire [5:0] result_25;
+  wire signed [63:0] c$app_arg_35;
+  wire signed [63:0] c$app_arg_36;
+  wire [5:0] result_24;
   wire signed [63:0] c$memoryOutputs_app_arg_15;
   wire signed [63:0] c$memoryOutputs_app_arg_16;
   reg [5:0] c$stateSignal_app_arg = {1'b0,   5'd0};
@@ -2174,22 +2180,24 @@ module NTT256
                           6'd0},   1'b0,   1'b0,   6'd0,   1'b0};
   reg [66:0] c$writeControlSignal_app_arg_7 = {1'b0,   3'd0,   6'd0,   {6'd0,   6'd0,   6'd0,   6'd0,   6'd0,   6'd0,   6'd0,
                           6'd0},   1'b0,   1'b0,   6'd0,   1'b0};
+  reg [66:0] c$writeControlSignal_app_arg_8 = {1'b0,   3'd0,   6'd0,   {6'd0,   6'd0,   6'd0,   6'd0,   6'd0,   6'd0,   6'd0,
+                          6'd0},   1'b0,   1'b0,   6'd0,   1'b0};
   reg [66:0] readControlReg = {1'b0,   3'd0,   6'd0,   {6'd0,   6'd0,   6'd0,   6'd0,   6'd0,   6'd0,   6'd0,
                           6'd0},   1'b0,   1'b0,   6'd0,   1'b0};
   wire [5:0] value_0;
+  wire signed [63:0] c$app_arg_37;
+  wire signed [63:0] c$app_arg_38;
+  wire [5:0] result_25;
   wire signed [63:0] c$app_arg_39;
   wire signed [63:0] c$app_arg_40;
+  wire [5:0] c$case_alt_27;
   wire [5:0] result_26;
-  wire signed [63:0] c$app_arg_41;
-  wire signed [63:0] c$app_arg_42;
-  wire [5:0] c$case_alt_17;
-  wire [5:0] result_27;
-  wire [5:0] c$app_arg_43;
+  wire [5:0] c$app_arg_41;
   wire [5:0] value_1;
+  wire signed [63:0] c$app_arg_42;
+  wire signed [63:0] c$app_arg_43;
+  wire [5:0] result_27;
   wire signed [63:0] c$app_arg_44;
-  wire signed [63:0] c$app_arg_45;
-  wire [5:0] result_28;
-  wire signed [63:0] c$app_arg_46;
   wire [4:0] logicalRow;
   wire signed [63:0] c$logicalRow_app_arg;
   wire [5:0] issueWide;
@@ -7592,21 +7600,6 @@ module NTT256
   wire [5:0] c$i_3252;
   wire [2:0] c$memoryOutputs_case_alt_selection_1;
   wire [137:0] c$vec_1;
-  wire [5:0] c$i_3334;
-  wire [7:0] c$i_3339;
-  wire [7:0] c$i_3341;
-  wire [7:0] c$i_3343;
-  wire [7:0] c$i_3345;
-  wire [7:0] c$i_3348;
-  wire [7:0] c$i_3351;
-  wire [7:0] c$i_3353;
-  wire [7:0] c$i_3368;
-  wire [7:0] c$i_3370;
-  wire [7:0] c$i_3372;
-  wire [7:0] c$i_3374;
-  wire [7:0] c$i_3377;
-  wire [7:0] c$i_3380;
-  wire [7:0] c$i_3382;
   wire [183:0] c$vec_2;
   wire [183:0] c$vec_3;
   wire [183:0] c$vec_4;
@@ -7615,48 +7608,60 @@ module NTT256
   wire [183:0] c$vec_7;
   wire [183:0] c$vec_8;
   wire [183:0] c$vec_9;
-  wire [5887:0] zeta1_res;
-  wire [16383:0] c$vec_10;
-  wire [5887:0] zeta0_res;
-  wire [16383:0] c$vec_11;
+  wire [5:0] c$i_3349;
+  wire [7:0] c$i_3353;
+  wire [7:0] c$i_3355;
+  wire [7:0] c$i_3357;
+  wire [7:0] c$i_3359;
+  wire [7:0] c$i_3362;
+  wire [7:0] c$i_3365;
+  wire [7:0] c$i_3367;
+  wire [7:0] c$i_3383;
+  wire [7:0] c$i_3385;
+  wire [7:0] c$i_3387;
+  wire [7:0] c$i_3389;
+  wire [7:0] c$i_3392;
+  wire [7:0] c$i_3395;
   wire [7:0] c$i_3397;
-  wire [5887:0] c$vecFlat;
-  wire [7:0] c$i_3399;
-  wire [7:0] c$i_3400;
-  wire [5887:0] c$vecFlat_0;
-  wire [7:0] c$i_3402;
-  wire [7:0] c$i_3403;
-  wire [5887:0] c$vecFlat_1;
-  wire [7:0] c$i_3405;
-  wire [7:0] c$i_3406;
-  wire [5887:0] c$vecFlat_2;
-  wire [7:0] c$i_3408;
-  wire [5887:0] c$vecFlat_3;
+  wire [5:0] c$bv_38;
   wire [7:0] c$i_3410;
-  wire [7:0] c$i_3411;
-  wire [5887:0] c$vecFlat_4;
+  wire [5887:0] c$vecFlat;
+  wire [7:0] c$i_3412;
   wire [7:0] c$i_3413;
-  wire [7:0] c$i_3414;
-  wire [5887:0] c$vecFlat_5;
+  wire [5887:0] c$vecFlat_0;
+  wire [7:0] c$i_3415;
   wire [7:0] c$i_3416;
-  wire [7:0] c$i_3417;
+  wire [5887:0] c$vecFlat_1;
+  wire [7:0] c$i_3418;
+  wire [7:0] c$i_3419;
+  wire [5887:0] c$vecFlat_2;
+  wire [7:0] c$i_3421;
+  wire [5887:0] c$vecFlat_3;
+  wire [7:0] c$i_3423;
+  wire [7:0] c$i_3424;
+  wire [5887:0] c$vecFlat_4;
+  wire [7:0] c$i_3426;
+  wire [7:0] c$i_3427;
+  wire [5887:0] c$vecFlat_5;
+  wire [7:0] c$i_3429;
+  wire [7:0] c$i_3430;
   wire [5887:0] c$vecFlat_6;
-  wire [4:0] c$bv_38;
-  wire [4:0] c$i_3418;
-  wire [2:0] c$memoryOutputs_case_alt_selection_4;
   wire [4:0] c$bv_39;
-  wire [5:0] c$i_3420;
-  wire [4:0] c$i_3422;
-  wire [4:0] c$i_3423;
-  wire [2:0] c$dtt_rhs_1;
+  wire [4:0] c$i_3431;
+  wire [2:0] c$memoryOutputs_case_alt_selection_4;
   wire [4:0] c$bv_40;
-  wire [5:0] c$i_3670;
-  wire [4:0] c$i_3672;
-  wire [4:0] c$i_3673;
+  wire [5:0] c$i_3433;
+  wire [4:0] c$i_3435;
+  wire [4:0] c$i_3436;
+  wire [2:0] c$dtt_rhs_1;
   wire [4:0] c$bv_41;
-  wire [5:0] c$i_3680;
-  wire [5:0] c$i_3682;
-  wire [5:0] c$i_3683;
+  wire [5:0] c$i_3705;
+  wire [4:0] c$i_3707;
+  wire [4:0] c$i_3708;
+  wire [4:0] c$bv_42;
+  wire [5:0] c$i_3715;
+  wire [5:0] c$i_3717;
+  wire [5:0] c$i_3718;
   wire [5888:0] result_0;
 
   assign result_0 = {stateSignal[11801:11801],
@@ -31958,7 +31963,7 @@ module NTT256
 
   assign ds9 = result_16[91:46];
 
-  assign c$vec_1 = (result_24);
+  assign c$vec_1 = (c$computeCommands_app_arg);
 
   // map begin
   genvar i_8;
@@ -31971,28 +31976,28 @@ module NTT256
     wire [22:0] a;
     wire [22:0] b;
     wire [22:0] zeta;
-    wire [24:0] c$app_arg_47;
+    wire [24:0] c$app_arg_45;
+    wire [25:0] c$app_arg_46;
+    wire [25:0] c$app_arg_47;
     wire [25:0] c$app_arg_48;
     wire [25:0] c$app_arg_49;
     wire [25:0] c$app_arg_50;
     wire [25:0] c$app_arg_51;
     wire [25:0] c$app_arg_52;
-    wire [25:0] c$app_arg_53;
-    wire [25:0] c$app_arg_54;
     reg [229:0] c$ds_app_arg = {23'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   25'd0};
     reg [137:0] c$ds_app_arg_0 = {23'd0,   29'd0,   29'd0,   29'd0,   28'd0};
     reg [91:0] c$ds_app_arg_1 = {23'd0,   35'd0,   34'd0};
-    wire [23:0] c$app_arg_55;
+    wire [23:0] c$app_arg_53;
     reg [92:0] c$packet_app_arg = {23'd0,   46'd0,   24'd0};
-    wire [23:0] c$app_arg_56;
+    wire [23:0] c$app_arg_54;
     wire [23:0] m;
     wire [45:0] x;
     reg [118:0] c$packet_app_arg_0 = {23'd0,   22'd0,   24'd0,   26'd0,   24'd0};
     reg [47:0] c$ds_app_arg_2 = {23'd0,   25'd0};
-    wire [24:0] c$case_alt_21;
+    wire [24:0] c$case_alt_31;
     wire [23:0] sumWide;
-    wire [22:0] result_31;
-    wire [22:0] c$app_arg_57;
+    wire [22:0] result_30;
+    wire [22:0] c$app_arg_55;
     wire [22:0] a_0;
     wire [45:0] x_0;
     reg [49:0] packet = {23'd0,   25'd0,   2'd0};
@@ -32000,8 +32005,8 @@ module NTT256
     wire [22:0] t;
     reg [68:0] ds_10 = {23'd0,   46'd0};
     reg [45:0] ds_11 = {23'd0,   23'd0};
-    reg [45:0] result_30 = {23'd0,   23'd0};
-    wire [45:0] result_29;
+    reg [45:0] result_29 = {23'd0,   23'd0};
+    wire [45:0] result_28;
     wire [22:0] c$bv_0;
     wire [22:0] c$bv_1;
     wire [22:0] c$bv_2;
@@ -32040,7 +32045,7 @@ module NTT256
     wire [25:0] c$bv_35;
     wire [34:0] c$bv_36;
     wire [33:0] c$bv_37;
-    assign map_out = result_29;
+    assign map_out = result_28;
 
     assign a = map_in[68:46];
 
@@ -32050,41 +32055,41 @@ module NTT256
 
     assign c$bv_0 = (b >> (64'sd21));
 
-    assign c$app_arg_47 = zeta * (c$bv_0[0+:2]);
+    assign c$app_arg_45 = zeta * (c$bv_0[0+:2]);
 
     assign c$bv_1 = (b >> (64'sd18));
 
-    assign c$app_arg_48 = zeta * (c$bv_1[0+:3]);
+    assign c$app_arg_46 = zeta * (c$bv_1[0+:3]);
 
     assign c$bv_2 = (b >> (64'sd15));
 
-    assign c$app_arg_49 = zeta * (c$bv_2[0+:3]);
+    assign c$app_arg_47 = zeta * (c$bv_2[0+:3]);
 
     assign c$bv_3 = (b >> (64'sd12));
 
-    assign c$app_arg_50 = zeta * (c$bv_3[0+:3]);
+    assign c$app_arg_48 = zeta * (c$bv_3[0+:3]);
 
     assign c$bv_4 = (b >> (64'sd9));
 
-    assign c$app_arg_51 = zeta * (c$bv_4[0+:3]);
+    assign c$app_arg_49 = zeta * (c$bv_4[0+:3]);
 
     assign c$bv_5 = (b >> (64'sd6));
 
-    assign c$app_arg_52 = zeta * (c$bv_5[0+:3]);
+    assign c$app_arg_50 = zeta * (c$bv_5[0+:3]);
 
     assign c$bv_6 = (b >> (64'sd3));
 
-    assign c$app_arg_53 = zeta * (c$bv_6[0+:3]);
+    assign c$app_arg_51 = zeta * (c$bv_6[0+:3]);
 
-    assign c$app_arg_54 = zeta * (b[0+:3]);
+    assign c$app_arg_52 = zeta * (b[0+:3]);
 
     // register begin
     always @(posedge clk or  posedge  rst) begin : c$ds_app_arg_register
       if ( rst) begin
         c$ds_app_arg <= {23'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   26'd0,   25'd0};
       end else if (en) begin
-        c$ds_app_arg <= {a,   c$app_arg_54,   c$app_arg_53,   c$app_arg_52,   c$app_arg_51,
-     c$app_arg_50,   c$app_arg_49,   c$app_arg_48,   c$app_arg_47};
+        c$ds_app_arg <= {a,   c$app_arg_52,   c$app_arg_51,   c$app_arg_50,   c$app_arg_49,
+     c$app_arg_48,   c$app_arg_47,   c$app_arg_46,   c$app_arg_45};
       end
     end
     // register end
@@ -32141,7 +32146,7 @@ module NTT256
 
     assign c$bv_19 = (((x_0[0+:24])));
 
-    assign c$app_arg_55 = ((c$bv_19[(64'sd0)]) == (1'b1)) ? 24'd8388608 : 24'd0;
+    assign c$app_arg_53 = ((c$bv_19[(64'sd0)]) == (1'b1)) ? 24'd8388608 : 24'd0;
 
     assign c$bv_20 = (x_0[0+:24]);
 
@@ -32153,14 +32158,14 @@ module NTT256
         c$packet_app_arg <= {23'd0,   46'd0,   24'd0};
       end else if (en) begin
         c$packet_app_arg <= {a_0,   x_0,
-     (c$app_arg_55 - (({{(24-11) {1'b0}},(c$bv_20[0+:11])}) << (64'sd13))) - (x_0[0+:24])};
+     (c$app_arg_53 - (({{(24-11) {1'b0}},(c$bv_20[0+:11])}) << (64'sd13))) - (x_0[0+:24])};
       end
     end
     // register end
 
     assign c$bv_22 = ((m));
 
-    assign c$app_arg_56 = ((c$bv_22[(64'sd0)]) == (1'b1)) ? 24'd8388608 : 24'd0;
+    assign c$app_arg_54 = ((c$bv_22[(64'sd0)]) == (1'b1)) ? 24'd8388608 : 24'd0;
 
     assign m = c$packet_app_arg[23:0];
 
@@ -32187,7 +32192,7 @@ module NTT256
       end else if (en) begin
         c$packet_app_arg_0 <= {c$packet_app_arg[92:70],   c$bv_23[0+:22],
      ({{(24-23) {1'b0}},(c$bv_24[0+:23])}) - ({{(24-13) {1'b0}},(c$bv_26[0+:13])}),
-     (({{(26-24) {1'b0}},(x[0+:24])}) + ({{(26-24) {1'b0}},m})) + ({{(26-24) {1'b0}},c$app_arg_56}),
+     (({{(26-24) {1'b0}},(x[0+:24])}) + ({{(26-24) {1'b0}},m})) + ({{(26-24) {1'b0}},c$app_arg_54}),
      ({{(24-11) {1'b0}},(m[0+:11])}) << (64'sd13)};
       end
     end
@@ -32205,15 +32210,15 @@ module NTT256
     end
     // register end
 
-    assign c$case_alt_21 = (c$ds_app_arg_2[24:0] >= 25'd8380417) ? (c$ds_app_arg_2[24:0] - 25'd8380417) : c$ds_app_arg_2[24:0];
+    assign c$case_alt_31 = (c$ds_app_arg_2[24:0] >= 25'd8380417) ? (c$ds_app_arg_2[24:0] - 25'd8380417) : c$ds_app_arg_2[24:0];
 
     assign sumWide = ({{(24-23) {1'b0}},a_1}) + ({{(24-23) {1'b0}},t});
 
     assign c$bv_31 = (sumWide - 24'd8380417);
 
-    assign result_31 = (sumWide >= 24'd8380417) ? (c$bv_31[0+:23]) : (sumWide[0+:23]);
+    assign result_30 = (sumWide >= 24'd8380417) ? (c$bv_31[0+:23]) : (sumWide[0+:23]);
 
-    assign c$app_arg_57 = (a_1 >= t) ? (a_1 - t) : (23'd8380417 - (t - a_1));
+    assign c$app_arg_55 = (a_1 >= t) ? (a_1 - t) : (23'd8380417 - (t - a_1));
 
     assign a_0 = ds_10[68:46];
 
@@ -32263,22 +32268,22 @@ module NTT256
       if ( rst) begin
         ds_11 <= {23'd0,   23'd0};
       end else if (en) begin
-        ds_11 <= {c$ds_app_arg_2[47:25],   c$case_alt_21[0+:23]};
+        ds_11 <= {c$ds_app_arg_2[47:25],   c$case_alt_31[0+:23]};
       end
     end
     // register end
 
     // register begin
-    always @(posedge clk or  posedge  rst) begin : result_30_register
+    always @(posedge clk or  posedge  rst) begin : result_29_register
       if ( rst) begin
-        result_30 <= {23'd0,   23'd0};
+        result_29 <= {23'd0,   23'd0};
       end else if (en) begin
-        result_30 <= {result_31,   c$app_arg_57};
+        result_29 <= {result_30,   c$app_arg_55};
       end
     end
     // register end
 
-    assign result_29 = result_30;
+    assign result_28 = result_29;
 
 
     assign result_16[vec_index*46+:46] = map_out;
@@ -32286,57 +32291,153 @@ module NTT256
   endgenerate
   // map end
 
-  assign c$i_3334 = readControlReg[62:57];
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$computeCommands_app_arg_register
+    if ( rst) begin
+      c$computeCommands_app_arg <= {{23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,   23'd0}};
+    end else if (en) begin
+      c$computeCommands_app_arg <= c$case_alt_13;
+    end
+  end
+  // register end
 
-  assign c$input0_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3334});
+  assign c$vec_2 = {result_6,   result_7,
+                    result_8,   result_9,   result_10,
+                    result_11,   result_12,   result_13};
 
-  assign inputNumber = input0 + 8'd1;
+  // index lit begin
+  assign c$case_alt_5 = c$vec_2[184-1-0*23 -: 23];
+  // index lit end
 
-  assign result_17 = (readControlReg[65:63] == 3'd0) ? 8'd1 : result_18;
+  assign c$vec_3 = {result_6,   result_7,
+                    result_8,   result_9,   result_10,
+                    result_11,   result_12,   result_13};
 
-  assign result_18 = \c$rem#_arg2_case_scrut_3  ? ($unsigned(c$app_arg_15[0+:8])) : c$case_alt_5;
+  // index lit begin
+  assign c$case_alt_6 = c$vec_3[184-1-2*23 -: 23];
+  // index lit end
 
-  assign c$case_alt_5 = \c$rem#_arg2_case_scrut_2  ? ($unsigned(c$app_arg_16[0+:8])) : c$case_alt_6;
+  assign c$app_arg_15 = readControlReg[8:8] ? c$case_alt_6 : c$case_alt_5;
 
-  assign c$i_3339 = (8'd2 + result_19);
+  assign c$vec_4 = {result_6,   result_7,
+                    result_8,   result_9,   result_10,
+                    result_11,   result_12,   result_13};
 
-  assign c$app_arg_15 = $unsigned({{(64-8) {1'b0}},c$i_3339});
+  // index lit begin
+  assign c$case_alt_7 = c$vec_4[184-1-4*23 -: 23];
+  // index lit end
 
-  assign c$case_alt_6 = \c$rem#_arg2_case_scrut_1  ? ($unsigned(c$app_arg_17[0+:8])) : c$case_alt_7;
+  assign c$vec_5 = {result_6,   result_7,
+                    result_8,   result_9,   result_10,
+                    result_11,   result_12,   result_13};
 
-  assign c$i_3341 = (8'd4 + result_19);
+  // index lit begin
+  assign c$case_alt_8 = c$vec_5[184-1-6*23 -: 23];
+  // index lit end
 
-  assign c$app_arg_16 = $unsigned({{(64-8) {1'b0}},c$i_3341});
+  assign c$app_arg_16 = readControlReg[8:8] ? c$case_alt_8 : c$case_alt_7;
 
-  assign c$case_alt_7 = \c$rem#_arg2_case_scrut_0  ? ($unsigned(c$app_arg_18[0+:8])) : c$case_alt_8;
+  assign c$app_arg_17 = result_17[45:23];
 
-  assign c$i_3343 = (8'd8 + result_19);
+  assign c$vec_6 = {result_6,   result_7,
+                    result_8,   result_9,   result_10,
+                    result_11,   result_12,   result_13};
 
-  assign c$app_arg_17 = $unsigned({{(64-8) {1'b0}},c$i_3343});
+  // index lit begin
+  assign c$case_alt_9 = c$vec_6[184-1-1*23 -: 23];
+  // index lit end
 
-  assign c$case_alt_8 = \c$rem#_arg2_case_scrut  ? ($unsigned(c$app_arg_19[0+:8])) : c$case_alt_9;
+  assign c$vec_7 = {result_6,   result_7,
+                    result_8,   result_9,   result_10,
+                    result_11,   result_12,   result_13};
 
-  assign c$i_3345 = (8'd16 + result_19);
+  // index lit begin
+  assign c$case_alt_10 = c$vec_7[184-1-3*23 -: 23];
+  // index lit end
 
-  assign c$app_arg_18 = $unsigned({{(64-8) {1'b0}},c$i_3345});
+  assign c$app_arg_18 = readControlReg[8:8] ? c$case_alt_10 : c$case_alt_9;
 
-  assign c$case_alt_9 = (readControlReg[65:63] == 3'd6) ? ($unsigned(c$app_arg_20[0+:8])) : c$case_alt_10;
+  assign c$vec_8 = {result_6,   result_7,
+                    result_8,   result_9,   result_10,
+                    result_11,   result_12,   result_13};
 
-  assign c$i_3348 = (8'd32 + result_19);
+  // index lit begin
+  assign c$case_alt_11 = c$vec_8[184-1-5*23 -: 23];
+  // index lit end
 
-  assign c$app_arg_19 = $unsigned({{(64-8) {1'b0}},c$i_3348});
+  assign c$vec_9 = {result_6,   result_7,
+                    result_8,   result_9,   result_10,
+                    result_11,   result_12,   result_13};
 
-  assign c$case_alt_10 = (readControlReg[65:63] == 3'd7) ? ($unsigned(c$app_arg_21[0+:8])) : ({8 {1'bx}});
+  // index lit begin
+  assign c$case_alt_12 = c$vec_9[184-1-7*23 -: 23];
+  // index lit end
 
-  assign c$i_3351 = (8'd64 + result_19);
+  assign c$app_arg_19 = readControlReg[8:8] ? c$case_alt_12 : c$case_alt_11;
 
-  assign c$app_arg_20 = $unsigned({{(64-8) {1'b0}},c$i_3351});
+  assign c$app_arg_20 = result_17[22:0];
 
-  assign c$i_3353 = (8'd128 + inputNumber);
+  assign c$case_alt_13 = readControlReg[66:66] ? {{c$app_arg_15,
+                                                   c$app_arg_16,   c$app_arg_17},
+                                                  {c$app_arg_18,   c$app_arg_19,
+                                                   c$app_arg_20}} : ({2 {{23'd0,   23'd0,   23'd0}}});
+
+  Component_NTT_topEntity_twiddleMemory Component_NTT_topEntity_twiddleMemory_result_17
+    ( .result (result_17)
+    , .c$computeCommands_bindCsr (clk)
+    , .c$computeCommands_bindCsr_0 (rst)
+    , .c$computeCommands_bindCsr_1 (en)
+    , .addressSignal (c$case_alt_26) );
+
+  assign c$i_3349 = stateSignal[11797:11792];
+
+  assign c$input0_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3349});
+
+  assign result_18 = (stateSignal[11800:11798] == 3'd0) ? 8'd1 : result_19;
+
+  assign result_19 = \c$rem#_arg2_case_scrut_3  ? ($unsigned(c$app_arg_21[0+:8])) : c$case_alt_14;
+
+  assign c$case_alt_14 = \c$rem#_arg2_case_scrut_2  ? ($unsigned(c$app_arg_22[0+:8])) : c$case_alt_15;
+
+  assign c$i_3353 = (8'd2 + result_20);
 
   assign c$app_arg_21 = $unsigned({{(64-8) {1'b0}},c$i_3353});
 
-  assign result_19 = inputNumber % \c$rem#_arg2 ;
+  assign c$case_alt_15 = \c$rem#_arg2_case_scrut_1  ? ($unsigned(c$app_arg_23[0+:8])) : c$case_alt_16;
+
+  assign c$i_3355 = (8'd4 + result_20);
+
+  assign c$app_arg_22 = $unsigned({{(64-8) {1'b0}},c$i_3355});
+
+  assign c$case_alt_16 = \c$rem#_arg2_case_scrut_0  ? ($unsigned(c$app_arg_24[0+:8])) : c$case_alt_17;
+
+  assign c$i_3357 = (8'd8 + result_20);
+
+  assign c$app_arg_23 = $unsigned({{(64-8) {1'b0}},c$i_3357});
+
+  assign c$case_alt_17 = \c$rem#_arg2_case_scrut  ? ($unsigned(c$app_arg_25[0+:8])) : c$case_alt_18;
+
+  assign c$i_3359 = (8'd16 + result_20);
+
+  assign c$app_arg_24 = $unsigned({{(64-8) {1'b0}},c$i_3359});
+
+  assign c$case_alt_18 = (stateSignal[11800:11798] == 3'd6) ? ($unsigned(c$app_arg_26[0+:8])) : c$case_alt_19;
+
+  assign c$i_3362 = (8'd32 + result_20);
+
+  assign c$app_arg_25 = $unsigned({{(64-8) {1'b0}},c$i_3362});
+
+  assign c$case_alt_19 = (stateSignal[11800:11798] == 3'd7) ? ($unsigned(c$app_arg_27[0+:8])) : ({8 {1'bx}});
+
+  assign c$i_3365 = (8'd64 + result_20);
+
+  assign c$app_arg_26 = $unsigned({{(64-8) {1'b0}},c$i_3365});
+
+  assign c$i_3367 = (8'd128 + input0);
+
+  assign c$app_arg_27 = $unsigned({{(64-8) {1'b0}},c$i_3367});
+
+  assign result_20 = input0 % \c$rem#_arg2 ;
 
   assign \c$rem#_arg2  = \c$rem#_arg2_case_scrut_3  ? 8'd2 : \c$rem#_arg2_case_alt ;
 
@@ -32348,61 +32449,63 @@ module NTT256
 
   assign \c$rem#_arg2_case_alt_2  = \c$rem#_arg2_case_scrut  ? 8'd32 : 8'd64;
 
-  assign \c$rem#_arg2_case_scrut  = readControlReg[65:63] == 3'd5;
+  assign \c$rem#_arg2_case_scrut  = stateSignal[11800:11798] == 3'd5;
 
-  assign \c$rem#_arg2_case_scrut_0  = readControlReg[65:63] == 3'd4;
+  assign \c$rem#_arg2_case_scrut_0  = stateSignal[11800:11798] == 3'd4;
 
-  assign \c$rem#_arg2_case_scrut_1  = readControlReg[65:63] == 3'd3;
+  assign \c$rem#_arg2_case_scrut_1  = stateSignal[11800:11798] == 3'd3;
 
-  assign \c$rem#_arg2_case_scrut_2  = readControlReg[65:63] == 3'd2;
+  assign \c$rem#_arg2_case_scrut_2  = stateSignal[11800:11798] == 3'd2;
 
-  assign \c$rem#_arg2_case_scrut_3  = readControlReg[65:63] == 3'd1;
+  assign \c$rem#_arg2_case_scrut_3  = stateSignal[11800:11798] == 3'd1;
 
-  assign result_20 = (readControlReg[65:63] == 3'd0) ? 8'd1 : result_21;
+  assign inputNumber = input0 + 8'd1;
 
-  assign result_21 = \c$rem#_arg2_case_scrut_8  ? ($unsigned(c$app_arg_22[0+:8])) : c$case_alt_11;
+  assign result_21 = (stateSignal[11800:11798] == 3'd0) ? 8'd1 : result_22;
 
-  assign c$case_alt_11 = \c$rem#_arg2_case_scrut_7  ? ($unsigned(c$app_arg_23[0+:8])) : c$case_alt_12;
+  assign result_22 = \c$rem#_arg2_case_scrut_8  ? ($unsigned(c$app_arg_28[0+:8])) : c$case_alt_20;
 
-  assign c$i_3368 = (8'd2 + result_22);
+  assign c$case_alt_20 = \c$rem#_arg2_case_scrut_7  ? ($unsigned(c$app_arg_29[0+:8])) : c$case_alt_21;
 
-  assign c$app_arg_22 = $unsigned({{(64-8) {1'b0}},c$i_3368});
+  assign c$i_3383 = (8'd2 + result_23);
 
-  assign c$case_alt_12 = \c$rem#_arg2_case_scrut_6  ? ($unsigned(c$app_arg_24[0+:8])) : c$case_alt_13;
+  assign c$app_arg_28 = $unsigned({{(64-8) {1'b0}},c$i_3383});
 
-  assign c$i_3370 = (8'd4 + result_22);
+  assign c$case_alt_21 = \c$rem#_arg2_case_scrut_6  ? ($unsigned(c$app_arg_30[0+:8])) : c$case_alt_22;
 
-  assign c$app_arg_23 = $unsigned({{(64-8) {1'b0}},c$i_3370});
+  assign c$i_3385 = (8'd4 + result_23);
 
-  assign c$case_alt_13 = \c$rem#_arg2_case_scrut_5  ? ($unsigned(c$app_arg_25[0+:8])) : c$case_alt_14;
+  assign c$app_arg_29 = $unsigned({{(64-8) {1'b0}},c$i_3385});
 
-  assign c$i_3372 = (8'd8 + result_22);
+  assign c$case_alt_22 = \c$rem#_arg2_case_scrut_5  ? ($unsigned(c$app_arg_31[0+:8])) : c$case_alt_23;
 
-  assign c$app_arg_24 = $unsigned({{(64-8) {1'b0}},c$i_3372});
+  assign c$i_3387 = (8'd8 + result_23);
 
-  assign c$case_alt_14 = \c$rem#_arg2_case_scrut_4  ? ($unsigned(c$app_arg_26[0+:8])) : c$case_alt_15;
+  assign c$app_arg_30 = $unsigned({{(64-8) {1'b0}},c$i_3387});
 
-  assign c$i_3374 = (8'd16 + result_22);
+  assign c$case_alt_23 = \c$rem#_arg2_case_scrut_4  ? ($unsigned(c$app_arg_32[0+:8])) : c$case_alt_24;
 
-  assign c$app_arg_25 = $unsigned({{(64-8) {1'b0}},c$i_3374});
+  assign c$i_3389 = (8'd16 + result_23);
 
-  assign c$case_alt_15 = (readControlReg[65:63] == 3'd6) ? ($unsigned(c$app_arg_27[0+:8])) : c$case_alt_16;
+  assign c$app_arg_31 = $unsigned({{(64-8) {1'b0}},c$i_3389});
 
-  assign c$i_3377 = (8'd32 + result_22);
+  assign c$case_alt_24 = (stateSignal[11800:11798] == 3'd6) ? ($unsigned(c$app_arg_33[0+:8])) : c$case_alt_25;
 
-  assign c$app_arg_26 = $unsigned({{(64-8) {1'b0}},c$i_3377});
+  assign c$i_3392 = (8'd32 + result_23);
 
-  assign c$case_alt_16 = (readControlReg[65:63] == 3'd7) ? ($unsigned(c$app_arg_28[0+:8])) : ({8 {1'bx}});
+  assign c$app_arg_32 = $unsigned({{(64-8) {1'b0}},c$i_3392});
 
-  assign c$i_3380 = (8'd64 + result_22);
+  assign c$case_alt_25 = (stateSignal[11800:11798] == 3'd7) ? ($unsigned(c$app_arg_34[0+:8])) : ({8 {1'bx}});
 
-  assign c$app_arg_27 = $unsigned({{(64-8) {1'b0}},c$i_3380});
+  assign c$i_3395 = (8'd64 + result_23);
 
-  assign c$i_3382 = (8'd128 + input0);
+  assign c$app_arg_33 = $unsigned({{(64-8) {1'b0}},c$i_3395});
 
-  assign c$app_arg_28 = $unsigned({{(64-8) {1'b0}},c$i_3382});
+  assign c$i_3397 = (8'd128 + inputNumber);
 
-  assign result_22 = input0 % \c$rem#_arg2_0 ;
+  assign c$app_arg_34 = $unsigned({{(64-8) {1'b0}},c$i_3397});
+
+  assign result_23 = inputNumber % \c$rem#_arg2_0 ;
 
   assign \c$rem#_arg2_0  = \c$rem#_arg2_case_scrut_8  ? 8'd2 : \c$rem#_arg2_case_alt_3 ;
 
@@ -32414,509 +32517,211 @@ module NTT256
 
   assign \c$rem#_arg2_case_alt_6  = \c$rem#_arg2_case_scrut_4  ? 8'd32 : 8'd64;
 
-  assign \c$rem#_arg2_case_scrut_4  = readControlReg[65:63] == 3'd5;
+  assign \c$rem#_arg2_case_scrut_4  = stateSignal[11800:11798] == 3'd5;
 
-  assign \c$rem#_arg2_case_scrut_5  = readControlReg[65:63] == 3'd4;
+  assign \c$rem#_arg2_case_scrut_5  = stateSignal[11800:11798] == 3'd4;
 
-  assign \c$rem#_arg2_case_scrut_6  = readControlReg[65:63] == 3'd3;
+  assign \c$rem#_arg2_case_scrut_6  = stateSignal[11800:11798] == 3'd3;
 
-  assign \c$rem#_arg2_case_scrut_7  = readControlReg[65:63] == 3'd2;
+  assign \c$rem#_arg2_case_scrut_7  = stateSignal[11800:11798] == 3'd2;
 
-  assign \c$rem#_arg2_case_scrut_8  = readControlReg[65:63] == 3'd1;
+  assign \c$rem#_arg2_case_scrut_8  = stateSignal[11800:11798] == 3'd1;
 
-  assign c$vec_2 = {result_6,   result_7,
-                    result_8,   result_9,   result_10,
-                    result_11,   result_12,   result_13};
+  assign c$case_alt_26 = c$controlSignal_case_alt ? {result_18,
+                                                     result_21} : ({2 {8'd0}});
 
-  // index lit begin
-  assign c$app_arg_29 = c$vec_2[184-1-0*23 -: 23];
-  // index lit end
+  assign c$bv_38 = ($unsigned(c$input0_app_arg[0+:6]));
 
-  assign c$vec_3 = {result_6,   result_7,
-                    result_8,   result_9,   result_10,
-                    result_11,   result_12,   result_13};
+  assign input0 = ({{(8-6) {1'b0}},($unsigned(c$input0_app_arg[0+:6]))}) << (64'sd1);
 
-  // index lit begin
-  assign c$app_arg_30 = c$vec_3[184-1-4*23 -: 23];
-  // index lit end
-
-  assign c$vec_4 = {result_6,   result_7,
-                    result_8,   result_9,   result_10,
-                    result_11,   result_12,   result_13};
-
-  // index lit begin
-  assign c$app_arg_31 = c$vec_4[184-1-1*23 -: 23];
-  // index lit end
-
-  assign c$vec_5 = {result_6,   result_7,
-                    result_8,   result_9,   result_10,
-                    result_11,   result_12,   result_13};
-
-  // index lit begin
-  assign c$app_arg_32 = c$vec_5[184-1-5*23 -: 23];
-  // index lit end
-
-  assign c$vec_6 = {result_6,   result_7,
-                    result_8,   result_9,   result_10,
-                    result_11,   result_12,   result_13};
-
-  // index lit begin
-  assign c$app_arg_33 = c$vec_6[184-1-2*23 -: 23];
-  // index lit end
-
-  assign c$vec_7 = {result_6,   result_7,
-                    result_8,   result_9,   result_10,
-                    result_11,   result_12,   result_13};
-
-  // index lit begin
-  assign c$app_arg_34 = c$vec_7[184-1-6*23 -: 23];
-  // index lit end
-
-  assign c$vec_8 = {result_6,   result_7,
-                    result_8,   result_9,   result_10,
-                    result_11,   result_12,   result_13};
-
-  // index lit begin
-  assign c$app_arg_35 = c$vec_8[184-1-3*23 -: 23];
-  // index lit end
-
-  assign c$vec_9 = {result_6,   result_7,
-                    result_8,   result_9,   result_10,
-                    result_11,   result_12,   result_13};
-
-  // index lit begin
-  assign c$app_arg_36 = c$vec_9[184-1-7*23 -: 23];
-  // index lit end
-
-  assign result_23 = readControlReg[8:8] ? {{c$app_arg_33,
-                                             c$app_arg_34,   zeta0},   {c$app_arg_35,
-                                                                        c$app_arg_36,   zeta1}} : {{c$app_arg_29,
-                                                                                                    c$app_arg_30,
-                                                                                                    zeta0},
-                                                                                                   {c$app_arg_31,
-                                                                                                    c$app_arg_32,
-                                                                                                    zeta1}};
-
-  assign input0 = ($unsigned(c$input0_app_arg[0+:8])) << (64'sd1);
-
-  assign c$vec_10 = {64'sd0,   64'sd294725,
-                     64'sd8304754,   64'sd8280182,   64'sd6155295,
-                     64'sd7591714,   64'sd7067554,   64'sd7203743,
-                     64'sd6979903,   64'sd6981962,   64'sd2715685,
-                     64'sd4214773,   64'sd4562491,   64'sd8074524,
-                     64'sd6002843,   64'sd7114182,   64'sd5510295,
-                     64'sd4717985,   64'sd3007494,   64'sd3942328,
-                     64'sd3664286,   64'sd3138283,   64'sd4986106,
-                     64'sd4345652,   64'sd1366638,   64'sd803323,
-                     64'sd289157,   64'sd3391741,   64'sd6652273,
-                     64'sd7267317,   64'sd8363347,   64'sd1932518,
-                     64'sd5019179,   64'sd7333239,   64'sd1681557,
-                     64'sd1945215,   64'sd8275718,   64'sd6926001,
-                     64'sd1430472,   64'sd2666911,   64'sd4011446,
-                     64'sd4309263,   64'sd3483979,   64'sd6241375,
-                     64'sd13828,   64'sd5858571,   64'sd3282775,
-                     64'sd5333862,   64'sd6376883,   64'sd1368491,
-                     64'sd7412031,   64'sd5451984,   64'sd6331749,
-                     64'sd7619127,   64'sd5362453,   64'sd3811828,
-                     64'sd2883940,   64'sd3341148,   64'sd4521296,
-                     64'sd5678489,   64'sd6693382,   64'sd6799101,
-                     64'sd5638686,   64'sd6896368,   64'sd868519,
-                     64'sd4151501,   64'sd1589698,   64'sd7550137,
-                     64'sd5330295,   64'sd602826,   64'sd1874454,
-                     64'sd2252592,   64'sd4545392,   64'sd4656088,
-                     64'sd4632561,   64'sd323453,   64'sd4177747,
-                     64'sd2672019,   64'sd1033361,   64'sd1768240,
-                     64'sd471633,   64'sd4022687,   64'sd6555591,
-                     64'sd3185999,   64'sd3032856,   64'sd5910789,
-                     64'sd4810587,   64'sd8076117,   64'sd4122115,
-                     64'sd7753634,   64'sd6448903,   64'sd289514,
-                     64'sd1144268,   64'sd1445654,   64'sd5146790,
-                     64'sd5166701,   64'sd739868,   64'sd524811,
-                     64'sd7629477,   64'sd3940422,   64'sd173,
-                     64'sd2156279,   64'sd6157902,   64'sd5449640,
-                     64'sd1753196,   64'sd4255647,   64'sd6029882,
-                     64'sd2082410,   64'sd4854262,   64'sd1079464,
-                     64'sd3112889,   64'sd8113385,   64'sd4845669,
-                     64'sd8104649,   64'sd2041975,   64'sd320128,
-                     64'sd3558813,   64'sd1046859,   64'sd8221876,
-                     64'sd3606200,   64'sd7174207,   64'sd1041361,
-                     64'sd6151194,   64'sd8309321,   64'sd3065391,
-                     64'sd3258440,   64'sd5518209,   64'sd1291704,
-                     64'sd3576395,   64'sd5447488,   64'sd1449433,
-                     64'sd276802,   64'sd4635456,   64'sd172446,
-                     64'sd3165836,   64'sd7253477,   64'sd361139,
-                     64'sd3970566,   64'sd518949,   64'sd5349692,
-                     64'sd3128905,   64'sd116259,   64'sd5560444,
-                     64'sd1100550,   64'sd5306751,   64'sd7536543,
-                     64'sd854689,   64'sd5437376,   64'sd4093936,
-                     64'sd3856547,   64'sd8249304,   64'sd128903,
-                     64'sd7297569,   64'sd315163,   64'sd4067201,
-                     64'sd4006320,   64'sd4274522,   64'sd1372861,
-                     64'sd3597958,   64'sd2015586,   64'sd7563354,
-                     64'sd7988706,   64'sd6243054,   64'sd7512593,
-                     64'sd831827,   64'sd6435937,   64'sd1872733,
-                     64'sd7202714,   64'sd894975,   64'sd3382322,
-                     64'sd6471611,   64'sd4686190,   64'sd7479650,
-                     64'sd4064138,   64'sd5738513,   64'sd6095131,
-                     64'sd7580038,   64'sd2165461,   64'sd3643993,
-                     64'sd3652572,   64'sd3883889,   64'sd6325350,
-                     64'sd5932652,   64'sd2942135,   64'sd2155369,
-                     64'sd7501378,   64'sd6337823,   64'sd6836238,
-                     64'sd914846,   64'sd1871079,   64'sd4104915,
-                     64'sd4771790,   64'sd5658330,   64'sd3379297,
-                     64'sd4442150,   64'sd2711718,   64'sd8222597,
-                     64'sd821436,   64'sd794398,   64'sd1617369,
-                     64'sd6676026,   64'sd7976523,   64'sd255360,
-                     64'sd5525170,   64'sd7486450,   64'sd7776621,
-                     64'sd1311761,   64'sd7350847,   64'sd5491783,
-                     64'sd3839614,   64'sd2399316,   64'sd3698525,
-                     64'sd3412190,   64'sd3417705,   64'sd2259509,
-                     64'sd2908788,   64'sd2148141,   64'sd7464445,
-                     64'sd8124843,   64'sd4693022,   64'sd2982141,
-                     64'sd3345528,   64'sd4994178,   64'sd6376493,
-                     64'sd6404386,   64'sd6528230,   64'sd7708066,
-                     64'sd2096158,   64'sd303269,   64'sd389020,
-                     64'sd825110,   64'sd7923957,   64'sd6119966,
-                     64'sd1578061,   64'sd2677309,   64'sd4983335,
-                     64'sd3398031,   64'sd6706567,   64'sd1242950,
-                     64'sd1196256,   64'sd5095336,   64'sd2642882,
-                     64'sd1144116,   64'sd8076862,   64'sd3568941,
-                     64'sd8212921,   64'sd7011805,   64'sd2834182,
-                     64'sd5759371,   64'sd6955344,   64'sd5826820,
-                     64'sd1074967,   64'sd1783126,   64'sd4981343,
-                     64'sd2419159,   64'sd1644522};
-
-  // map begin
-  genvar i_9;
-  generate
-  for (i_9=0; i_9 < 256; i_9 = i_9 + 1) begin : map_0
-    localparam vec_index_0 = 255 - i_9;
-    wire signed [63:0] map_in_0;
-    assign map_in_0 = c$vec_10[vec_index_0*64+:64];
-    wire [22:0] map_out_0;
-    assign map_out_0 = $unsigned(map_in_0[0+:23]);
-
-
-    assign zeta1_res[vec_index_0*23+:23] = map_out_0;
-  end
-  endgenerate
-  // map end
-
-  // index begin
-  wire [22:0] vecArray [0:256-1];
-  genvar i_10;
-  generate
-  for (i_10=0; i_10 < 256; i_10=i_10+1) begin : mk_array
-    assign vecArray[(256-1)-i_10] = zeta1_res[i_10*23+:23];
-  end
-  endgenerate
-  assign zeta1 = vecArray[($unsigned({{(64-8) {1'b0}},result_17}))];
-  // index end
-
-  assign c$vec_11 = {64'sd0,   64'sd294725,
-                     64'sd8304754,   64'sd8280182,   64'sd6155295,
-                     64'sd7591714,   64'sd7067554,   64'sd7203743,
-                     64'sd6979903,   64'sd6981962,   64'sd2715685,
-                     64'sd4214773,   64'sd4562491,   64'sd8074524,
-                     64'sd6002843,   64'sd7114182,   64'sd5510295,
-                     64'sd4717985,   64'sd3007494,   64'sd3942328,
-                     64'sd3664286,   64'sd3138283,   64'sd4986106,
-                     64'sd4345652,   64'sd1366638,   64'sd803323,
-                     64'sd289157,   64'sd3391741,   64'sd6652273,
-                     64'sd7267317,   64'sd8363347,   64'sd1932518,
-                     64'sd5019179,   64'sd7333239,   64'sd1681557,
-                     64'sd1945215,   64'sd8275718,   64'sd6926001,
-                     64'sd1430472,   64'sd2666911,   64'sd4011446,
-                     64'sd4309263,   64'sd3483979,   64'sd6241375,
-                     64'sd13828,   64'sd5858571,   64'sd3282775,
-                     64'sd5333862,   64'sd6376883,   64'sd1368491,
-                     64'sd7412031,   64'sd5451984,   64'sd6331749,
-                     64'sd7619127,   64'sd5362453,   64'sd3811828,
-                     64'sd2883940,   64'sd3341148,   64'sd4521296,
-                     64'sd5678489,   64'sd6693382,   64'sd6799101,
-                     64'sd5638686,   64'sd6896368,   64'sd868519,
-                     64'sd4151501,   64'sd1589698,   64'sd7550137,
-                     64'sd5330295,   64'sd602826,   64'sd1874454,
-                     64'sd2252592,   64'sd4545392,   64'sd4656088,
-                     64'sd4632561,   64'sd323453,   64'sd4177747,
-                     64'sd2672019,   64'sd1033361,   64'sd1768240,
-                     64'sd471633,   64'sd4022687,   64'sd6555591,
-                     64'sd3185999,   64'sd3032856,   64'sd5910789,
-                     64'sd4810587,   64'sd8076117,   64'sd4122115,
-                     64'sd7753634,   64'sd6448903,   64'sd289514,
-                     64'sd1144268,   64'sd1445654,   64'sd5146790,
-                     64'sd5166701,   64'sd739868,   64'sd524811,
-                     64'sd7629477,   64'sd3940422,   64'sd173,
-                     64'sd2156279,   64'sd6157902,   64'sd5449640,
-                     64'sd1753196,   64'sd4255647,   64'sd6029882,
-                     64'sd2082410,   64'sd4854262,   64'sd1079464,
-                     64'sd3112889,   64'sd8113385,   64'sd4845669,
-                     64'sd8104649,   64'sd2041975,   64'sd320128,
-                     64'sd3558813,   64'sd1046859,   64'sd8221876,
-                     64'sd3606200,   64'sd7174207,   64'sd1041361,
-                     64'sd6151194,   64'sd8309321,   64'sd3065391,
-                     64'sd3258440,   64'sd5518209,   64'sd1291704,
-                     64'sd3576395,   64'sd5447488,   64'sd1449433,
-                     64'sd276802,   64'sd4635456,   64'sd172446,
-                     64'sd3165836,   64'sd7253477,   64'sd361139,
-                     64'sd3970566,   64'sd518949,   64'sd5349692,
-                     64'sd3128905,   64'sd116259,   64'sd5560444,
-                     64'sd1100550,   64'sd5306751,   64'sd7536543,
-                     64'sd854689,   64'sd5437376,   64'sd4093936,
-                     64'sd3856547,   64'sd8249304,   64'sd128903,
-                     64'sd7297569,   64'sd315163,   64'sd4067201,
-                     64'sd4006320,   64'sd4274522,   64'sd1372861,
-                     64'sd3597958,   64'sd2015586,   64'sd7563354,
-                     64'sd7988706,   64'sd6243054,   64'sd7512593,
-                     64'sd831827,   64'sd6435937,   64'sd1872733,
-                     64'sd7202714,   64'sd894975,   64'sd3382322,
-                     64'sd6471611,   64'sd4686190,   64'sd7479650,
-                     64'sd4064138,   64'sd5738513,   64'sd6095131,
-                     64'sd7580038,   64'sd2165461,   64'sd3643993,
-                     64'sd3652572,   64'sd3883889,   64'sd6325350,
-                     64'sd5932652,   64'sd2942135,   64'sd2155369,
-                     64'sd7501378,   64'sd6337823,   64'sd6836238,
-                     64'sd914846,   64'sd1871079,   64'sd4104915,
-                     64'sd4771790,   64'sd5658330,   64'sd3379297,
-                     64'sd4442150,   64'sd2711718,   64'sd8222597,
-                     64'sd821436,   64'sd794398,   64'sd1617369,
-                     64'sd6676026,   64'sd7976523,   64'sd255360,
-                     64'sd5525170,   64'sd7486450,   64'sd7776621,
-                     64'sd1311761,   64'sd7350847,   64'sd5491783,
-                     64'sd3839614,   64'sd2399316,   64'sd3698525,
-                     64'sd3412190,   64'sd3417705,   64'sd2259509,
-                     64'sd2908788,   64'sd2148141,   64'sd7464445,
-                     64'sd8124843,   64'sd4693022,   64'sd2982141,
-                     64'sd3345528,   64'sd4994178,   64'sd6376493,
-                     64'sd6404386,   64'sd6528230,   64'sd7708066,
-                     64'sd2096158,   64'sd303269,   64'sd389020,
-                     64'sd825110,   64'sd7923957,   64'sd6119966,
-                     64'sd1578061,   64'sd2677309,   64'sd4983335,
-                     64'sd3398031,   64'sd6706567,   64'sd1242950,
-                     64'sd1196256,   64'sd5095336,   64'sd2642882,
-                     64'sd1144116,   64'sd8076862,   64'sd3568941,
-                     64'sd8212921,   64'sd7011805,   64'sd2834182,
-                     64'sd5759371,   64'sd6955344,   64'sd5826820,
-                     64'sd1074967,   64'sd1783126,   64'sd4981343,
-                     64'sd2419159,   64'sd1644522};
-
-  // map begin
-  genvar i_11;
-  generate
-  for (i_11=0; i_11 < 256; i_11 = i_11 + 1) begin : map_1
-    localparam vec_index_1 = 255 - i_11;
-    wire signed [63:0] map_in_1;
-    assign map_in_1 = c$vec_11[vec_index_1*64+:64];
-    wire [22:0] map_out_1;
-    assign map_out_1 = $unsigned(map_in_1[0+:23]);
-
-
-    assign zeta0_res[vec_index_1*23+:23] = map_out_1;
-  end
-  endgenerate
-  // map end
-
-  // index begin
-  wire [22:0] vecArray_0 [0:256-1];
-  genvar i_12;
-  generate
-  for (i_12=0; i_12 < 256; i_12=i_12+1) begin : mk_array_0
-    assign vecArray_0[(256-1)-i_12] = zeta0_res[i_12*23+:23];
-  end
-  endgenerate
-  assign zeta0 = vecArray_0[($unsigned({{(64-8) {1'b0}},result_20}))];
-  // index end
-
-  assign result_24 = (~ readControlReg[66:66]) ? ({2 {{23'd0,   23'd0,   23'd0}}}) : result_23;
-
-  assign c$i_3397 = ($unsigned(c$memoryOutputs_app_arg_0[0+:8]));
+  assign c$i_3410 = ($unsigned(c$memoryOutputs_app_arg_0[0+:8]));
 
   assign c$vecFlat = stateSignal[11775:5888];
 
   // index begin
-  wire [22:0] vecArray_1 [0:256-1];
-  genvar i_13;
+  wire [22:0] vecArray [0:256-1];
+  genvar i_9;
   generate
-  for (i_13=0; i_13 < 256; i_13=i_13+1) begin : mk_array_1
-    assign vecArray_1[(256-1)-i_13] = c$vecFlat[i_13*23+:23];
+  for (i_9=0; i_9 < 256; i_9=i_9+1) begin : mk_array
+    assign vecArray[(256-1)-i_9] = c$vecFlat[i_9*23+:23];
   end
   endgenerate
-  assign c$memoryOutputs_app_arg = vecArray_1[($unsigned({{(64-8) {1'b0}},c$i_3397}))];
+  assign c$memoryOutputs_app_arg = vecArray[($unsigned({{(64-8) {1'b0}},c$i_3410}))];
   // index end
 
-  assign c$i_3399 = (upperBase_0 + 8'd3);
+  assign c$i_3412 = (upperBase_0 + 8'd3);
 
-  assign c$memoryOutputs_app_arg_0 = $unsigned({{(64-8) {1'b0}},c$i_3399});
+  assign c$memoryOutputs_app_arg_0 = $unsigned({{(64-8) {1'b0}},c$i_3412});
 
-  assign c$i_3400 = ($unsigned(c$memoryOutputs_app_arg_2[0+:8]));
+  assign c$i_3413 = ($unsigned(c$memoryOutputs_app_arg_2[0+:8]));
 
   assign c$vecFlat_0 = stateSignal[11775:5888];
 
   // index begin
-  wire [22:0] vecArray_2 [0:256-1];
-  genvar i_14;
+  wire [22:0] vecArray_0 [0:256-1];
+  genvar i_10;
   generate
-  for (i_14=0; i_14 < 256; i_14=i_14+1) begin : mk_array_2
-    assign vecArray_2[(256-1)-i_14] = c$vecFlat_0[i_14*23+:23];
+  for (i_10=0; i_10 < 256; i_10=i_10+1) begin : mk_array_0
+    assign vecArray_0[(256-1)-i_10] = c$vecFlat_0[i_10*23+:23];
   end
   endgenerate
-  assign c$memoryOutputs_app_arg_1 = vecArray_2[($unsigned({{(64-8) {1'b0}},c$i_3400}))];
+  assign c$memoryOutputs_app_arg_1 = vecArray_0[($unsigned({{(64-8) {1'b0}},c$i_3413}))];
   // index end
 
-  assign c$i_3402 = (upperBase_0 + 8'd2);
+  assign c$i_3415 = (upperBase_0 + 8'd2);
 
-  assign c$memoryOutputs_app_arg_2 = $unsigned({{(64-8) {1'b0}},c$i_3402});
+  assign c$memoryOutputs_app_arg_2 = $unsigned({{(64-8) {1'b0}},c$i_3415});
 
-  assign c$i_3403 = ($unsigned(c$memoryOutputs_app_arg_4[0+:8]));
+  assign c$i_3416 = ($unsigned(c$memoryOutputs_app_arg_4[0+:8]));
 
   assign c$vecFlat_1 = stateSignal[11775:5888];
 
   // index begin
-  wire [22:0] vecArray_3 [0:256-1];
-  genvar i_15;
+  wire [22:0] vecArray_1 [0:256-1];
+  genvar i_11;
   generate
-  for (i_15=0; i_15 < 256; i_15=i_15+1) begin : mk_array_3
-    assign vecArray_3[(256-1)-i_15] = c$vecFlat_1[i_15*23+:23];
+  for (i_11=0; i_11 < 256; i_11=i_11+1) begin : mk_array_1
+    assign vecArray_1[(256-1)-i_11] = c$vecFlat_1[i_11*23+:23];
   end
   endgenerate
-  assign c$memoryOutputs_app_arg_3 = vecArray_3[($unsigned({{(64-8) {1'b0}},c$i_3403}))];
+  assign c$memoryOutputs_app_arg_3 = vecArray_1[($unsigned({{(64-8) {1'b0}},c$i_3416}))];
   // index end
 
-  assign c$i_3405 = (upperBase_0 + 8'd1);
+  assign c$i_3418 = (upperBase_0 + 8'd1);
 
-  assign c$memoryOutputs_app_arg_4 = $unsigned({{(64-8) {1'b0}},c$i_3405});
+  assign c$memoryOutputs_app_arg_4 = $unsigned({{(64-8) {1'b0}},c$i_3418});
 
-  assign c$i_3406 = ($unsigned(c$memoryOutputs_app_arg_6[0+:8]));
+  assign c$i_3419 = ($unsigned(c$memoryOutputs_app_arg_6[0+:8]));
 
   assign c$vecFlat_2 = stateSignal[11775:5888];
 
   // index begin
-  wire [22:0] vecArray_4 [0:256-1];
-  genvar i_16;
+  wire [22:0] vecArray_2 [0:256-1];
+  genvar i_12;
   generate
-  for (i_16=0; i_16 < 256; i_16=i_16+1) begin : mk_array_4
-    assign vecArray_4[(256-1)-i_16] = c$vecFlat_2[i_16*23+:23];
+  for (i_12=0; i_12 < 256; i_12=i_12+1) begin : mk_array_2
+    assign vecArray_2[(256-1)-i_12] = c$vecFlat_2[i_12*23+:23];
   end
   endgenerate
-  assign c$memoryOutputs_app_arg_5 = vecArray_4[($unsigned({{(64-8) {1'b0}},c$i_3406}))];
+  assign c$memoryOutputs_app_arg_5 = vecArray_2[($unsigned({{(64-8) {1'b0}},c$i_3419}))];
   // index end
 
   assign c$memoryOutputs_app_arg_6 = $unsigned({{(64-8) {1'b0}},upperBase_0});
 
   assign upperBase_0 = lowerBase_0 + 8'd128;
 
-  assign c$i_3408 = ($unsigned(c$memoryOutputs_app_arg_8[0+:8]));
+  assign c$i_3421 = ($unsigned(c$memoryOutputs_app_arg_8[0+:8]));
 
   assign c$vecFlat_3 = stateSignal[11775:5888];
 
   // index begin
-  wire [22:0] vecArray_5 [0:256-1];
-  genvar i_17;
+  wire [22:0] vecArray_3 [0:256-1];
+  genvar i_13;
   generate
-  for (i_17=0; i_17 < 256; i_17=i_17+1) begin : mk_array_5
-    assign vecArray_5[(256-1)-i_17] = c$vecFlat_3[i_17*23+:23];
+  for (i_13=0; i_13 < 256; i_13=i_13+1) begin : mk_array_3
+    assign vecArray_3[(256-1)-i_13] = c$vecFlat_3[i_13*23+:23];
   end
   endgenerate
-  assign c$memoryOutputs_app_arg_7 = vecArray_5[($unsigned({{(64-8) {1'b0}},c$i_3408}))];
+  assign c$memoryOutputs_app_arg_7 = vecArray_3[($unsigned({{(64-8) {1'b0}},c$i_3421}))];
   // index end
 
-  assign c$i_3410 = (lowerBase_0 + 8'd3);
+  assign c$i_3423 = (lowerBase_0 + 8'd3);
 
-  assign c$memoryOutputs_app_arg_8 = $unsigned({{(64-8) {1'b0}},c$i_3410});
+  assign c$memoryOutputs_app_arg_8 = $unsigned({{(64-8) {1'b0}},c$i_3423});
 
-  assign c$i_3411 = ($unsigned(c$memoryOutputs_app_arg_10[0+:8]));
+  assign c$i_3424 = ($unsigned(c$memoryOutputs_app_arg_10[0+:8]));
 
   assign c$vecFlat_4 = stateSignal[11775:5888];
 
   // index begin
-  wire [22:0] vecArray_6 [0:256-1];
-  genvar i_18;
+  wire [22:0] vecArray_4 [0:256-1];
+  genvar i_14;
   generate
-  for (i_18=0; i_18 < 256; i_18=i_18+1) begin : mk_array_6
-    assign vecArray_6[(256-1)-i_18] = c$vecFlat_4[i_18*23+:23];
+  for (i_14=0; i_14 < 256; i_14=i_14+1) begin : mk_array_4
+    assign vecArray_4[(256-1)-i_14] = c$vecFlat_4[i_14*23+:23];
   end
   endgenerate
-  assign c$memoryOutputs_app_arg_9 = vecArray_6[($unsigned({{(64-8) {1'b0}},c$i_3411}))];
+  assign c$memoryOutputs_app_arg_9 = vecArray_4[($unsigned({{(64-8) {1'b0}},c$i_3424}))];
   // index end
 
-  assign c$i_3413 = (lowerBase_0 + 8'd2);
+  assign c$i_3426 = (lowerBase_0 + 8'd2);
 
-  assign c$memoryOutputs_app_arg_10 = $unsigned({{(64-8) {1'b0}},c$i_3413});
+  assign c$memoryOutputs_app_arg_10 = $unsigned({{(64-8) {1'b0}},c$i_3426});
 
-  assign c$i_3414 = ($unsigned(c$memoryOutputs_app_arg_12[0+:8]));
+  assign c$i_3427 = ($unsigned(c$memoryOutputs_app_arg_12[0+:8]));
 
   assign c$vecFlat_5 = stateSignal[11775:5888];
 
   // index begin
-  wire [22:0] vecArray_7 [0:256-1];
-  genvar i_19;
+  wire [22:0] vecArray_5 [0:256-1];
+  genvar i_15;
   generate
-  for (i_19=0; i_19 < 256; i_19=i_19+1) begin : mk_array_7
-    assign vecArray_7[(256-1)-i_19] = c$vecFlat_5[i_19*23+:23];
+  for (i_15=0; i_15 < 256; i_15=i_15+1) begin : mk_array_5
+    assign vecArray_5[(256-1)-i_15] = c$vecFlat_5[i_15*23+:23];
   end
   endgenerate
-  assign c$memoryOutputs_app_arg_11 = vecArray_7[($unsigned({{(64-8) {1'b0}},c$i_3414}))];
+  assign c$memoryOutputs_app_arg_11 = vecArray_5[($unsigned({{(64-8) {1'b0}},c$i_3427}))];
   // index end
 
-  assign c$i_3416 = (lowerBase_0 + 8'd1);
+  assign c$i_3429 = (lowerBase_0 + 8'd1);
 
-  assign c$memoryOutputs_app_arg_12 = $unsigned({{(64-8) {1'b0}},c$i_3416});
+  assign c$memoryOutputs_app_arg_12 = $unsigned({{(64-8) {1'b0}},c$i_3429});
 
   assign physicalMemoryRow = $unsigned(c$lowerBase_app_arg_0[0+:6]);
 
-  assign c$i_3417 = ($unsigned(c$memoryOutputs_app_arg_14[0+:8]));
+  assign c$i_3430 = ($unsigned(c$memoryOutputs_app_arg_14[0+:8]));
 
   assign c$vecFlat_6 = stateSignal[11775:5888];
 
   // index begin
-  wire [22:0] vecArray_8 [0:256-1];
-  genvar i_20;
+  wire [22:0] vecArray_6 [0:256-1];
+  genvar i_16;
   generate
-  for (i_20=0; i_20 < 256; i_20=i_20+1) begin : mk_array_8
-    assign vecArray_8[(256-1)-i_20] = c$vecFlat_6[i_20*23+:23];
+  for (i_16=0; i_16 < 256; i_16=i_16+1) begin : mk_array_6
+    assign vecArray_6[(256-1)-i_16] = c$vecFlat_6[i_16*23+:23];
   end
   endgenerate
-  assign c$memoryOutputs_app_arg_13 = vecArray_8[($unsigned({{(64-8) {1'b0}},c$i_3417}))];
+  assign c$memoryOutputs_app_arg_13 = vecArray_6[($unsigned({{(64-8) {1'b0}},c$i_3430}))];
   // index end
 
   assign c$memoryOutputs_app_arg_14 = $unsigned({{(64-8) {1'b0}},lowerBase_0});
 
-  assign c$bv_38 = ($unsigned(c$lowerBase_app_arg_0[0+:5]));
+  assign c$bv_39 = ($unsigned(c$lowerBase_app_arg_0[0+:5]));
 
   assign lowerBase_0 = ({{(8-5) {1'b0}},($unsigned(c$lowerBase_app_arg_0[0+:5]))}) << (64'sd2);
 
-  assign c$i_3418 = stateSignal[11785:11781];
+  assign c$i_3431 = stateSignal[11785:11781];
 
-  assign c$lowerBase_app_arg_0 = $unsigned({{(64-5) {1'b0}},c$i_3418});
+  assign c$lowerBase_app_arg_0 = $unsigned({{(64-5) {1'b0}},c$i_3431});
 
   assign c$memoryOutputs_case_alt_selection_4 = stateSignal[11804:11802];
 
   always @(*) begin
     case(c$memoryOutputs_case_alt_selection_4)
-      3'b100 : c$memoryOutputs_case_alt_0 = {8 {result_25}};
-      default : c$memoryOutputs_case_alt_0 = {8 {result_28}};
+      3'b100 : c$memoryOutputs_case_alt_0 = {8 {result_24}};
+      default : c$memoryOutputs_case_alt_0 = {8 {result_27}};
     endcase
   end
 
-  assign c$bv_39 = ($unsigned(c$memoryOutputs_app_arg_15[0+:5]));
+  assign c$bv_40 = ($unsigned(c$memoryOutputs_app_arg_15[0+:5]));
 
   assign value = stateSignal[11791:11786] + ({{(6-5) {1'b0}},($unsigned(c$memoryOutputs_app_arg_15[0+:5]))});
 
-  assign c$i_3420 = (value - 6'd48);
+  assign c$i_3433 = (value - 6'd48);
 
-  assign c$app_arg_37 = $unsigned({{(64-6) {1'b0}},c$i_3420});
+  assign c$app_arg_35 = $unsigned({{(64-6) {1'b0}},c$i_3433});
 
-  assign c$app_arg_38 = $unsigned({{(64-6) {1'b0}},value});
+  assign c$app_arg_36 = $unsigned({{(64-6) {1'b0}},value});
 
-  assign result_25 = (value >= 6'd48) ? ($unsigned(c$app_arg_37[0+:6])) : ($unsigned(c$app_arg_38[0+:6]));
+  assign result_24 = (value >= 6'd48) ? ($unsigned(c$app_arg_35[0+:6])) : ($unsigned(c$app_arg_36[0+:6]));
 
-  assign c$i_3422 = ($unsigned(c$memoryOutputs_app_arg_16[0+:5]));
+  assign c$i_3435 = ($unsigned(c$memoryOutputs_app_arg_16[0+:5]));
 
-  assign c$memoryOutputs_app_arg_15 = $unsigned({{(64-5) {1'b0}},c$i_3422});
+  assign c$memoryOutputs_app_arg_15 = $unsigned({{(64-5) {1'b0}},c$i_3435});
 
-  assign c$i_3423 = stateSignal[11780:11776];
+  assign c$i_3436 = stateSignal[11780:11776];
 
-  assign c$memoryOutputs_app_arg_16 = $unsigned({{(64-5) {1'b0}},c$i_3423});
+  assign c$memoryOutputs_app_arg_16 = $unsigned({{(64-5) {1'b0}},c$i_3436});
 
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$stateSignal_app_arg_register
@@ -33044,7 +32849,18 @@ module NTT256
       c$writeControlSignal_app_arg_7 <= {1'b0,   3'd0,   6'd0,   {6'd0,   6'd0,   6'd0,   6'd0,   6'd0,   6'd0,   6'd0,
                             6'd0},   1'b0,   1'b0,   6'd0,   1'b0};
     end else if (en) begin
-      c$writeControlSignal_app_arg_7 <= readControlReg;
+      c$writeControlSignal_app_arg_7 <= c$writeControlSignal_app_arg_8;
+    end
+  end
+  // register end
+
+  // register begin
+  always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_8_register
+    if ( rst) begin
+      c$writeControlSignal_app_arg_8 <= {1'b0,   3'd0,   6'd0,   {6'd0,   6'd0,   6'd0,   6'd0,   6'd0,   6'd0,   6'd0,
+                            6'd0},   1'b0,   1'b0,   6'd0,   1'b0};
+    end else if (en) begin
+      c$writeControlSignal_app_arg_8 <= readControlReg;
     end
   end
   // register end
@@ -33056,64 +32872,64 @@ module NTT256
                             6'd0},   1'b0,   1'b0,   6'd0,   1'b0};
     end else if (en) begin
       readControlReg <= {c$controlSignal_case_alt,   stateSignal[11800:11798],
-   stateSignal[11797:11792],   {8 {result_28}},
-   (c$app_arg_43[(64'sd0)]) == (1'b1),   (c$app_arg_43[(64'sd5)]) == (1'b1),
-   result_26,   stateSignal[11797:11792] == 6'd63};
+   stateSignal[11797:11792],   {8 {result_27}},
+   (c$app_arg_41[(64'sd0)]) == (1'b1),   (c$app_arg_41[(64'sd5)]) == (1'b1),
+   result_25,   stateSignal[11797:11792] == 6'd63};
     end
   end
   // register end
 
-  assign c$bv_40 = ($unsigned(c$app_arg_41[0+:5]));
+  assign c$bv_41 = ($unsigned(c$app_arg_39[0+:5]));
 
-  assign value_0 = result_27 + ({{(6-5) {1'b0}},($unsigned(c$app_arg_41[0+:5]))});
+  assign value_0 = result_26 + ({{(6-5) {1'b0}},($unsigned(c$app_arg_39[0+:5]))});
 
-  assign c$i_3670 = (value_0 - 6'd48);
+  assign c$i_3705 = (value_0 - 6'd48);
 
-  assign c$app_arg_39 = $unsigned({{(64-6) {1'b0}},c$i_3670});
+  assign c$app_arg_37 = $unsigned({{(64-6) {1'b0}},c$i_3705});
 
-  assign c$app_arg_40 = $unsigned({{(64-6) {1'b0}},value_0});
+  assign c$app_arg_38 = $unsigned({{(64-6) {1'b0}},value_0});
 
-  assign result_26 = (value_0 >= 6'd48) ? ($unsigned(c$app_arg_39[0+:6])) : ($unsigned(c$app_arg_40[0+:6]));
+  assign result_25 = (value_0 >= 6'd48) ? ($unsigned(c$app_arg_37[0+:6])) : ($unsigned(c$app_arg_38[0+:6]));
 
-  assign c$i_3672 = ($unsigned(c$app_arg_42[0+:5]));
+  assign c$i_3707 = ($unsigned(c$app_arg_40[0+:5]));
 
-  assign c$app_arg_41 = $unsigned({{(64-5) {1'b0}},c$i_3672});
+  assign c$app_arg_39 = $unsigned({{(64-5) {1'b0}},c$i_3707});
 
-  assign c$i_3673 = (issueWide[0+:5]);
+  assign c$i_3708 = (issueWide[0+:5]);
 
-  assign c$app_arg_42 = $unsigned({{(64-5) {1'b0}},c$i_3673});
+  assign c$app_arg_40 = $unsigned({{(64-5) {1'b0}},c$i_3708});
 
-  assign c$case_alt_17 = (stateSignal[11791:11786] == 6'd32) ? 6'd16 : 6'd0;
+  assign c$case_alt_27 = (stateSignal[11791:11786] == 6'd32) ? 6'd16 : 6'd0;
 
-  assign result_27 = (stateSignal[11791:11786] == 6'd0) ? 6'd32 : c$case_alt_17;
+  assign result_26 = (stateSignal[11791:11786] == 6'd0) ? 6'd32 : c$case_alt_27;
 
-  assign c$app_arg_43 = (issueWide);
+  assign c$app_arg_41 = (issueWide);
 
-  assign c$bv_41 = ($unsigned(c$app_arg_46[0+:5]));
+  assign c$bv_42 = ($unsigned(c$app_arg_44[0+:5]));
 
-  assign value_1 = stateSignal[11791:11786] + ({{(6-5) {1'b0}},($unsigned(c$app_arg_46[0+:5]))});
+  assign value_1 = stateSignal[11791:11786] + ({{(6-5) {1'b0}},($unsigned(c$app_arg_44[0+:5]))});
 
-  assign c$i_3680 = (value_1 - 6'd48);
+  assign c$i_3715 = (value_1 - 6'd48);
 
-  assign c$app_arg_44 = $unsigned({{(64-6) {1'b0}},c$i_3680});
+  assign c$app_arg_42 = $unsigned({{(64-6) {1'b0}},c$i_3715});
 
-  assign c$app_arg_45 = $unsigned({{(64-6) {1'b0}},value_1});
+  assign c$app_arg_43 = $unsigned({{(64-6) {1'b0}},value_1});
 
-  assign result_28 = (value_1 >= 6'd48) ? ($unsigned(c$app_arg_44[0+:6])) : ($unsigned(c$app_arg_45[0+:6]));
+  assign result_27 = (value_1 >= 6'd48) ? ($unsigned(c$app_arg_42[0+:6])) : ($unsigned(c$app_arg_43[0+:6]));
 
-  assign c$app_arg_46 = $unsigned({{(64-5) {1'b0}},logicalRow});
+  assign c$app_arg_44 = $unsigned({{(64-5) {1'b0}},logicalRow});
 
   assign logicalRow = $unsigned(c$logicalRow_app_arg[0+:5]);
 
-  assign c$i_3682 = (issueWide >> (64'sd1));
+  assign c$i_3717 = (issueWide >> (64'sd1));
 
-  assign c$logicalRow_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3682});
+  assign c$logicalRow_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3717});
 
   assign issueWide = $unsigned(c$issueWide_app_arg[0+:6]);
 
-  assign c$i_3683 = stateSignal[11797:11792];
+  assign c$i_3718 = stateSignal[11797:11792];
 
-  assign c$issueWide_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3683});
+  assign c$issueWide_app_arg = $unsigned({{(64-6) {1'b0}},c$i_3718});
 
   always @(*) begin
     case(c$stateSignal_case_scrut)
