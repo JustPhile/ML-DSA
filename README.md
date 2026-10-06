@@ -33,16 +33,6 @@ The repository contains:
 - Nix development environment
 - Clash/Yosys synthesis, benchmark, and STA scripts
 
-### In progress
-
-- Remaining ML-DSA signing and verification operations
-- Hardware inverse NTT support
-- Exact latency assertions for the complete controller
-- Streaming input/output to replace the wide `Vec 256` top-level interface
-- FPGA BRAM/ROM inference and device-specific timing optimization
-- ASIC SRAM-macro integration and post-layout evaluation
-- Further optimization under tighter clock constraints
-
 ## Main modules
 
 ### Software implementation
