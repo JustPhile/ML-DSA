@@ -9,18 +9,34 @@ module Component.NTTTwiddleMem
   ) where
 
 import Clash.Prelude
-import Component.NTTCore (Coeff)
+import qualified Clash.Prelude as C
+
+import Component.NTTConfig (PECount)
 import Component.NTTConstants (zetasMont)
-import Prelude hiding ((!!))
+import Component.NTTCore (Coeff)
 
-type TwiddleAddress = Index 256
-type TwiddleAddresses = Vec 2 TwiddleAddress
-type TwiddleResults = Vec 2 Coeff
+type TwiddleAddress =
+  Index 256
 
--- Two synchronous read lanes.
---
--- blockRam has one-cycle read latency. Because blockRam is single-read-port,
--- the constant twiddle table is duplicated to provide two simultaneous reads.
+type TwiddleAddresses =
+  Vec PECount TwiddleAddress
+
+type TwiddleResults =
+  Vec PECount Coeff
+
+oneTwiddleRom
+  :: forall dom.
+     HiddenClockResetEnable dom
+  => Signal dom TwiddleAddress
+  -> Signal dom Coeff
+oneTwiddleRom address =
+  blockRam
+    zetasMont
+    address
+    (pure Nothing)
+
+{-# INLINE oneTwiddleRom #-}
+
 twiddleMemory
   :: forall dom.
      HiddenClockResetEnable dom
@@ -28,38 +44,11 @@ twiddleMemory
   -> Signal dom TwiddleResults
 twiddleMemory addressSignal =
   bundle
-    (twiddle0 :> twiddle1 :> Nil)
+    (C.map oneTwiddleRom addressSignals)
   where
-    addressSignals :: Vec 2 (Signal dom TwiddleAddress)
+    addressSignals
+      :: Vec PECount (Signal dom TwiddleAddress)
     addressSignals =
       unbundle addressSignal
-
-    address0 :: Signal dom TwiddleAddress
-    address0 =
-      addressSignals !! 0
-
-    address1 :: Signal dom TwiddleAddress
-    address1 =
-      addressSignals !! 1
-
-    noWrite
-      :: Signal dom
-           (Maybe (TwiddleAddress, Coeff))
-    noWrite =
-      pure Nothing
-
-    twiddle0 :: Signal dom Coeff
-    twiddle0 =
-      blockRam
-        zetasMont
-        address0
-        noWrite
-
-    twiddle1 :: Signal dom Coeff
-    twiddle1 =
-      blockRam
-        zetasMont
-        address1
-        noWrite
 
 {-# NOINLINE twiddleMemory #-}

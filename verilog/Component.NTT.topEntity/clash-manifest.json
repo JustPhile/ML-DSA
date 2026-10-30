@@ -1,6 +1,7 @@
 {
     "components": [
         "Component_NTT_topEntity_twiddleMemory",
+        "Component_NTT_topEntity_coeffMemory",
         "NTT256"
     ],
     "dependencies": {
@@ -36,18 +37,22 @@
         },
         {
             "name": "Component_NTT_topEntity_twiddleMemory.v",
-            "sha256": "252586a7d98d520806db52a32f82ad60ac2e2a0fd7908f22112a69c69d34d0d8"
+            "sha256": "af1795079ca5d9a368035c2d1ec428d46bab2fdba0b42e34d85080371b3ca9a0"
+        },
+        {
+            "name": "Component_NTT_topEntity_coeffMemory.v",
+            "sha256": "543526c9b6867e4b0e55ba49bc4064377aa5a76c1f0ac774c2b0f978ec392caf"
         },
         {
             "name": "NTT256.v",
-            "sha256": "58de15918a319ca3966c2441eb6dac2ca4dd2eecb128285ff3efe0c21885483c"
+            "sha256": "b02298312ab27863c73f481e3262533f9144c06156cc6f4879c2eb278b69dc8c"
         }
     ],
     "flags": [
         20,
         20
     ],
-    "hash": "7434c7ea0fe51f0cf24a57172b7a5c3fd2c0272325283de252361d3c27b4fd16",
+    "hash": "4904632a3d9de4986d9b8c2021cebb93103c175161cadac346fd04ea747fbd8e",
     "top_component": {
         "name": "NTT256",
         "ports_flat": [

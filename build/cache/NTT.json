@@ -6,20 +6,22 @@
         "/home/user/ML-DSA/systemverilog/Component.NTT.topEntity/NTT256.sdc",
         "/home/user/ML-DSA/systemverilog/Component.NTT.topEntity/NTT256_types.sv",
         "/home/user/ML-DSA/systemverilog/Component.NTT.topEntity/Component_NTT_topEntity_twiddleMemory.sv",
+        "/home/user/ML-DSA/systemverilog/Component.NTT.topEntity/Component_NTT_topEntity_coeffMemory.sv",
         "/home/user/ML-DSA/systemverilog/Component.NTT.topEntity/NTT256.sv",
         "/home/user/ML-DSA/verilog/Component.NTT.topEntity/clash-manifest.json",
         "/home/user/ML-DSA/verilog/Component.NTT.topEntity/NTT256.sdc",
         "/home/user/ML-DSA/verilog/Component.NTT.topEntity/Component_NTT_topEntity_twiddleMemory.v",
+        "/home/user/ML-DSA/verilog/Component.NTT.topEntity/Component_NTT_topEntity_coeffMemory.v",
         "/home/user/ML-DSA/verilog/Component.NTT.topEntity/NTT256.v"
       ],
-      "key": "66c8f911e10e3d0b5df3a87d3a4f5edf46b79d79b21fc180744fd9fbae2b5eea",
+      "key": "6cb397f1743161a9ecd3da2efef79f5144c36ebdaa5ccdb5338cbdbec696b195",
       "success": true
     },
     "sta": {
       "artifacts": [
         "/home/user/ML-DSA/build/bench-sta/Component.NTT.topEntity/reports/summary.rpt"
       ],
-      "key": "5990b338562068cb23f0068b59caf56f02c8f74bc46a760b4dede4f7cee31f2f",
+      "key": "e204f0c81a48043f884b7203e1c96caa2d93c838930b3e15ad34c2f71b9588a3",
       "success": true
     },
     "synth": {
@@ -27,7 +29,7 @@
         "/home/user/ML-DSA/build/synth/Component.NTT.topEntity/netlist/NTT256.mapped.v",
         "/home/user/ML-DSA/build/synth/Component.NTT.topEntity/reports/yosys.log"
       ],
-      "key": "0a485212599c9b2cf6291e1d301cbd8a8fbfc1368c3af28ac7aece128626b5dc",
+      "key": "140a6fa70e195c576b75be2c2b643bc896ac557c961c36d520f40e8cf82c673a",
       "success": true
     }
   },

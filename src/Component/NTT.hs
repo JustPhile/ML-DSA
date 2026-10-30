@@ -3,6 +3,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeApplications #-}
 
 module Component.NTT
   ( topEntity
@@ -10,15 +11,21 @@ module Component.NTT
   , montgomeryMul
   ) where
 
-import Clash.Prelude
-import Component.NTTCore
-  ( Coeff
-  , PEInput
-  , PEOutput
-  , butterfly
-  , montgomeryMul
-  , peArray2
+import Component.NTTConfig
+  ( PECount
   )
+
+import Component.NTTCore
+  ( Coeff,
+    PEInput,
+    PEOutput,
+    butterfly,
+    montgomeryMul,
+    peArray
+  )
+
+import Clash.Prelude
+import qualified Clash.Prelude as C
 
 import Component.NTTCoeffController
   ( IssueIndex
@@ -32,6 +39,7 @@ import Component.NTTCoeffController
 
 import Component.NTTCoeffMem
   ( LogicalRow
+  , RamIndex
   , ReadAddresses
   , ReadResults
   , RowIndex
@@ -72,8 +80,8 @@ data NTTState = NTTState
   , stateStage     :: Index 8
   , stateIssue     :: IssueIndex
   , stateBase      :: Unsigned 6
-  , stateLoadRow   :: Index 32
-  , stateUnloadRow :: Index 32
+  , stateLoadRow   :: LogicalRow
+  , stateUnloadRow :: LogicalRow
   , stateInput     :: Poly
   , stateOutput    :: Poly
   }
@@ -96,71 +104,85 @@ initialState =
     }
 
 type UnloadMeta =
-  (Bool, Index 32)
+  (Bool, LogicalRow)
 
 zeroUnloadMeta :: UnloadMeta
 zeroUnloadMeta =
   (False, 0)
 
+memoryCoefficientIndex
+  :: LogicalRow
+  -> RamIndex
+  -> Index 256
+memoryCoefficientIndex logicalRow ramIndex =
+  fromIntegral coefficientNumber
+  where
+    peCountWide :: Unsigned 8
+    peCountWide =
+      natToNum @PECount
+
+    rowWide :: Unsigned 8
+    rowWide =
+      fromIntegral logicalRow
+
+    ramWide :: Unsigned 8
+    ramWide =
+      fromIntegral ramIndex
+
+    bankNumber :: Unsigned 8
+    bankNumber =
+      ramWide `div` peCountWide
+
+    blockNumber :: Unsigned 8
+    blockNumber =
+      ramWide `mod` peCountWide
+
+    clusterNumber :: Unsigned 8
+    clusterNumber =
+      bankNumber `div` 2
+
+    bankWithinCluster :: Unsigned 8
+    bankWithinCluster =
+      bankNumber `mod` 2
+
+    withinHalf :: Unsigned 8
+    withinHalf =
+      rowWide * (2 * peCountWide)
+        + bankWithinCluster * peCountWide
+        + blockNumber
+
+    coefficientNumber :: Unsigned 8
+    coefficientNumber =
+      clusterNumber * 128 + withinHalf
+
 makeLoadCommands
-  :: Index 32
+  :: LogicalRow
   -> Poly
   -> WriteCommands
 makeLoadCommands loadRow poly =
-  Just (physicalMemoryRow, poly !! index0)
-    :> Just (physicalMemoryRow, poly !! index1)
-    :> Just (physicalMemoryRow, poly !! index2)
-    :> Just (physicalMemoryRow, poly !! index3)
-    :> Just (physicalMemoryRow, poly !! index4)
-    :> Just (physicalMemoryRow, poly !! index5)
-    :> Just (physicalMemoryRow, poly !! index6)
-    :> Just (physicalMemoryRow, poly !! index7)
-    :> Nil
+  imap makeCommand (repeat Nothing)
   where
     physicalMemoryRow :: RowIndex
     physicalMemoryRow =
       fromIntegral loadRow
 
-    rowWide :: Unsigned 8
-    rowWide =
-      resize
-        (fromIntegral loadRow :: Unsigned 5)
-
-    lowerBase :: Unsigned 8
-    lowerBase =
-      shiftL rowWide 2
-
-    upperBase :: Unsigned 8
-    upperBase =
-      lowerBase + 128
-
-    index0, index1, index2, index3 :: Index 256
-    index4, index5, index6, index7 :: Index 256
-
-    index0 = fromIntegral lowerBase
-    index1 = fromIntegral (lowerBase + 1)
-    index2 = fromIntegral (lowerBase + 2)
-    index3 = fromIntegral (lowerBase + 3)
-
-    index4 = fromIntegral upperBase
-    index5 = fromIntegral (upperBase + 1)
-    index6 = fromIntegral (upperBase + 2)
-    index7 = fromIntegral (upperBase + 3)
+    makeCommand
+      :: RamIndex
+      -> Maybe (RowIndex, Coeff)
+      -> Maybe (RowIndex, Coeff)
+    makeCommand ramIndex _ =
+      Just
+        ( physicalMemoryRow
+        , poly !! memoryCoefficientIndex loadRow ramIndex
+        )
 
 makeUnloadReadAddresses
   :: Unsigned 6
-  -> Index 32
+  -> LogicalRow
   -> ReadAddresses
 makeUnloadReadAddresses sourceBase unloadRow =
-  repeat row
-  where
-    logicalRow :: LogicalRow
-    logicalRow =
-      fromIntegral unloadRow
-
-    row :: RowIndex
-    row =
-      physicalRow sourceBase logicalRow
+  repeat
+    (physicalRow sourceBase unloadRow)
 
 collectUnloadRow
   :: UnloadMeta
@@ -174,42 +196,21 @@ collectUnloadRow (valid, unloadRow) ramOutputs state
   | otherwise =
       state
         { stateOutput =
-            replace index7 (ramOutputs !! 7) $
-            replace index6 (ramOutputs !! 6) $
-            replace index5 (ramOutputs !! 5) $
-            replace index4 (ramOutputs !! 4) $
-            replace index3 (ramOutputs !! 3) $
-            replace index2 (ramOutputs !! 2) $
-            replace index1 (ramOutputs !! 1) $
-            replace index0 (ramOutputs !! 0) $
-            stateOutput state
+            C.foldl
+              storeCoefficient
+              (stateOutput state)
+              (C.zip C.indicesI ramOutputs)
         }
   where
-    rowWide :: Unsigned 8
-    rowWide =
-      resize
-        (fromIntegral unloadRow :: Unsigned 5)
-
-    lowerBase :: Unsigned 8
-    lowerBase =
-      shiftL rowWide 2
-
-    upperBase :: Unsigned 8
-    upperBase =
-      lowerBase + 128
-
-    index0, index1, index2, index3 :: Index 256
-    index4, index5, index6, index7 :: Index 256
-
-    index0 = fromIntegral lowerBase
-    index1 = fromIntegral (lowerBase + 1)
-    index2 = fromIntegral (lowerBase + 2)
-    index3 = fromIntegral (lowerBase + 3)
-
-    index4 = fromIntegral upperBase
-    index5 = fromIntegral (upperBase + 1)
-    index6 = fromIntegral (upperBase + 2)
-    index7 = fromIntegral (upperBase + 3)
+    storeCoefficient
+      :: Poly
+      -> (RamIndex, Coeff)
+      -> Poly
+    storeCoefficient poly (ramIndex, coefficient) =
+      replace
+        (memoryCoefficientIndex unloadRow ramIndex)
+        coefficient
+        poly
 
 nttNextState
   :: NTTState
@@ -245,7 +246,7 @@ nttNextState
               }
 
       Load ->
-        if stateLoadRow stateAfterUnload == 31
+        if stateLoadRow stateAfterUnload == maxBound
           then
             stateAfterUnload
               { statePhase = Issue
@@ -260,7 +261,7 @@ nttNextState
               }
 
       Issue ->
-        if stateIssue stateAfterUnload == 63
+        if stateIssue stateAfterUnload == maxBound
           then
             stateAfterUnload
               { statePhase = Drain
@@ -301,7 +302,7 @@ nttNextState
               }
 
       UnloadIssue ->
-        if stateUnloadRow stateAfterUnload == 31
+        if stateUnloadRow stateAfterUnload == maxBound
           then
             stateAfterUnload
               { statePhase = UnloadDrain
@@ -392,7 +393,7 @@ nttPipelined inputSignal =
     twiddleOutputs =
       twiddleMemory twiddleAddressSignal
 
-    peInputCombinational :: Signal dom (Vec 2 PEInput)
+    peInputCombinational :: Signal dom (Vec PECount PEInput)
     peInputCombinational =
       liftA3
         makePEInputs
@@ -401,15 +402,15 @@ nttPipelined inputSignal =
         twiddleOutputs
 
     -- Timing-isolation register before multiplier stage 1.
-    peInputSignal :: Signal dom (Vec 2 PEInput)
+    peInputSignal :: Signal dom (Vec PECount PEInput)
     peInputSignal =
       register
         (repeat (0, 0, 0))
         peInputCombinational
 
-    peOutputSignal :: Signal dom (Vec 2 PEOutput)
+    peOutputSignal :: Signal dom (Vec PECount PEOutput)
     peOutputSignal =
-      peArray2 peInputSignal
+      peArray peInputSignal
 
     -- 10 PE cycles plus the new PE-input register.
     writeControlSignal :: Signal dom CoeffControl

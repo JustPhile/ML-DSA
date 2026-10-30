@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TypeApplications #-}
 
 module Component.NTTCoeffMem
   ( BankIndex
@@ -22,26 +23,48 @@ module Component.NTTCoeffMem
   , coeffMemory
   ) where
 
+import Component.NTTConfig
+  ( PECount
+  , CoeffRamCount
+  , CoeffRamDepth
+  , LogicalRowCount
+  )
+
 import Clash.Prelude
+import qualified Clash.Prelude as C
 import Component.NTTCore (Coeff)
 import GHC.Generics (Generic)
 import Prelude hiding ((!!), repeat)
 
-type BankIndex  = Index 4
-type BlockIndex = Index 2
-type RowIndex   = Index 48
-type LogicalRow = Index 32
-type RamIndex   = Index 8
+type BankIndex =
+  Index 4
 
-type RamContents = Vec 48 Coeff
+type BlockIndex =
+  Index PECount
 
-type ReadAddresses = Vec 8 RowIndex
+type RowIndex =
+  Index CoeffRamDepth
 
-type WriteCommand = Maybe (RowIndex, Coeff)
+type LogicalRow =
+  Index LogicalRowCount
 
-type WriteCommands = Vec 8 WriteCommand
+type RamIndex =
+  Index CoeffRamCount
 
-type ReadResults = Vec 8 Coeff
+type RamContents =
+  Vec CoeffRamDepth Coeff
+
+type ReadAddresses =
+  Vec CoeffRamCount RowIndex
+
+type WriteCommand =
+  Maybe (RowIndex, Coeff)
+
+type WriteCommands =
+  Vec CoeffRamCount WriteCommand
+
+type ReadResults =
+  Vec CoeffRamCount Coeff
 
 data PhysicalAddress = PhysicalAddress
   { addressBank  :: BankIndex
@@ -56,19 +79,35 @@ physicalRamIndex
 physicalRamIndex address =
   fromIntegral ramNumber
   where
-    bankWide :: Unsigned 3
+    bankWide :: Unsigned 8
     bankWide =
-      resize
-        (fromIntegral (addressBank address) :: Unsigned 2)
+      fromIntegral (addressBank address)
 
-    blockWide :: Unsigned 3
+    blockWide :: Unsigned 8
     blockWide =
-      resize
-        (fromIntegral (addressBlock address) :: Unsigned 1)
+      fromIntegral (addressBlock address)
 
-    ramNumber :: Unsigned 3
+    peCountWide :: Unsigned 8
+    peCountWide =
+      natToNum @PECount
+
+    ramNumber :: Unsigned 8
     ramNumber =
-      shiftL bankWide 1 + blockWide
+      bankWide * peCountWide + blockWide
+
+oneCoeffRam
+  :: forall dom.
+     HiddenClockResetEnable dom
+  => Signal dom RowIndex
+  -> Signal dom WriteCommand
+  -> Signal dom Coeff
+oneCoeffRam readAddress writeCommand =
+  blockRam
+    (repeat 0 :: RamContents)
+    readAddress
+    writeCommand
+
+{-# INLINE oneCoeffRam #-}
 
 coeffMemory
   :: forall dom.
@@ -77,81 +116,31 @@ coeffMemory
   -> Signal dom WriteCommands
   -> Signal dom ReadResults
 coeffMemory readAddressSignal writeCommandSignal =
-  bundle
-    ( ram0
-    :> ram1
-    :> ram2
-    :> ram3
-    :> ram4
-    :> ram5
-    :> ram6
-    :> ram7
-    :> Nil
-    )
+  bundle ramOutputs
   where
     readAddressSignals
-      :: Vec 8 (Signal dom RowIndex)
+      :: Vec CoeffRamCount (Signal dom RowIndex)
     readAddressSignals =
       unbundle readAddressSignal
 
     writeCommandSignals
-      :: Vec 8 (Signal dom WriteCommand)
+      :: Vec CoeffRamCount (Signal dom WriteCommand)
     writeCommandSignals =
       unbundle writeCommandSignal
 
-    ram0, ram1, ram2, ram3 :: Signal dom Coeff
-    ram4, ram5, ram6, ram7 :: Signal dom Coeff
+    ramOutputs
+      :: Vec CoeffRamCount (Signal dom Coeff)
+    ramOutputs =
+      C.zipWith
+        oneCoeffRam
+        readAddressSignals
+        writeCommandSignals
 
-    ram0 =
-      blockRam
-        (repeat 0 :: RamContents)
-        (readAddressSignals !! 0)
-        (writeCommandSignals !! 0)
+{-# NOINLINE coeffMemory #-}
 
-    ram1 =
-      blockRam
-        (repeat 0 :: RamContents)
-        (readAddressSignals !! 1)
-        (writeCommandSignals !! 1)
-
-    ram2 =
-      blockRam
-        (repeat 0 :: RamContents)
-        (readAddressSignals !! 2)
-        (writeCommandSignals !! 2)
-
-    ram3 =
-      blockRam
-        (repeat 0 :: RamContents)
-        (readAddressSignals !! 3)
-        (writeCommandSignals !! 3)
-
-    ram4 =
-      blockRam
-        (repeat 0 :: RamContents)
-        (readAddressSignals !! 4)
-        (writeCommandSignals !! 4)
-
-    ram5 =
-      blockRam
-        (repeat 0 :: RamContents)
-        (readAddressSignals !! 5)
-        (writeCommandSignals !! 5)
-
-    ram6 =
-      blockRam
-        (repeat 0 :: RamContents)
-        (readAddressSignals !! 6)
-        (writeCommandSignals !! 6)
-
-    ram7 =
-      blockRam
-        (repeat 0 :: RamContents)
-        (readAddressSignals !! 7)
-        (writeCommandSignals !! 7)
-
--- Initial placement of one logical coefficient.
-initialAddress :: Index 256 -> PhysicalAddress
+initialAddress
+  :: Index 256
+  -> PhysicalAddress
 initialAddress logicalIndex =
   PhysicalAddress
     { addressBank  = bank
@@ -165,53 +154,82 @@ initialAddress logicalIndex =
 
     secondHalf :: Bool
     secondHalf =
-      testBit indexWide 7
+      indexWide >= 128
 
-    -- Original logical index bit 1.
-    bankWithinCluster :: Unsigned 1
-    bankWithinCluster =
-      truncateB (shiftR indexWide 1)
-
-    -- Clash uses banks 0–3, corresponding to paper Banks 1–4.
-    bank :: BankIndex
-    bank =
+    withinHalf :: Unsigned 8
+    withinHalf =
       if secondHalf
-        then
-          fromIntegral
-            (2 + resize bankWithinCluster :: Unsigned 3)
-        else
-          fromIntegral
-            (resize bankWithinCluster :: Unsigned 3)
+        then indexWide - 128
+        else indexWide
 
-    -- Original logical index bit 0.
+    peCountWide :: Unsigned 8
+    peCountWide =
+      natToNum @PECount
+
     block :: BlockIndex
     block =
       fromIntegral
-        (truncateB indexWide :: Unsigned 1)
+        (withinHalf `mod` peCountWide)
 
-    -- Original logical index bits 6–2.
+    bankWithinCluster :: Unsigned 1
+    bankWithinCluster =
+      truncateB
+        (withinHalf `div` peCountWide)
+
+    bankBase :: Unsigned 3
+    bankBase =
+      if secondHalf
+        then 2
+        else 0
+
+    bank :: BankIndex
+    bank =
+      fromIntegral
+        (bankBase + resize bankWithinCluster)
+
     row :: RowIndex
     row =
       fromIntegral
-        (truncateB (shiftR indexWide 2) :: Unsigned 5)
+        (withinHalf `div` (2 * peCountWide))
 
--- The 32 live coefficients rotate through the 48-row memory.
-nextBase :: Unsigned 6 -> Unsigned 6
-nextBase base =
-  case base of
-    0  -> 32
-    32 -> 16
-    16 -> 0
-    _  -> 0
+nextBase
+  :: Unsigned 6
+  -> Unsigned 6
+nextBase base
+  | base == 0 =
+      logicalRows
 
--- The maximum input is 32 + 31 = 63, so one subtraction is enough.
-wrapRow48 :: Unsigned 6 -> RowIndex
+  | base == logicalRows =
+      halfRows
+
+  | otherwise =
+      0
+  where
+    logicalRows :: Unsigned 6
+    logicalRows =
+      fromIntegral
+        (natToNum @LogicalRowCount)
+
+    halfRows :: Unsigned 6
+    halfRows =
+      shiftR logicalRows 1
+
+wrapRow48
+  :: Unsigned 6
+  -> RowIndex
 wrapRow48 value =
-  if value >= 48
-    then fromIntegral (value - 48)
+  if value >= ramDepth
+    then fromIntegral (value - ramDepth)
     else fromIntegral value
+  where
+    ramDepth :: Unsigned 6
+    ramDepth =
+      natToNum @CoeffRamDepth
 
-physicalRow :: Unsigned 6 -> LogicalRow -> RowIndex
+physicalRow
+  :: Unsigned 6
+  -> LogicalRow
+  -> RowIndex
 physicalRow base logicalRow =
   wrapRow48
-    (base + resize (fromIntegral logicalRow :: Unsigned 5))
+    (base + fromIntegral logicalRow)

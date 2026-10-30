@@ -18,7 +18,8 @@ library
                         Component.NTTTH,
                         Component.NTTCoeffMem,
                         Component.NTTCoeffController,  
-                        Component.NTTTwiddleMem                      
+                        Component.NTTTwiddleMem,    
+                        Component.NTTConfig                 
     hs-source-dirs:     .
                         src
 

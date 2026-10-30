@@ -6,28 +6,27 @@
 
 module Component.NTTCore
 ( Coeff
-, Product
 , PEInput
 , PEOutput
-, PECount
-, nttPE
 , nttPEPipeline
-, peArray2
 , butterfly
 , butterflyPipeline
 , montgomeryMul
+, peArray
 ) where
 
+import qualified Clash.Prelude as C
 import Clash.Prelude
 import GHC.Generics (Generic)
 import Prelude hiding (map)
+import Component.NTTConfig (PECount)
 
 type Coeff = Unsigned 23
 type Product = Unsigned 46
 
 type PEInput = (Coeff, Coeff, Coeff)
 type PEOutput = (Coeff, Coeff)
-type PECount = 2
+type PECount = 4
 
 type MontWord = Unsigned 24
 qCoeff :: Coeff
@@ -638,16 +637,17 @@ nttPEPipeline input =
         (0, 0)
         addSubStage
 
--- Two-PE array (L = 2). Both PEs share the same clock/reset/enable but
--- have independent operand, twiddle, and result paths. Once full,
--- the array accepts and returns two butterflies per cycle.
-peArray2
-  :: forall dom.
-     HiddenClockResetEnable dom
-  => Signal dom (Vec PECount PEInput)
-  -> Signal dom (Vec PECount PEOutput)
-peArray2 inputs =
-  bundle (map nttPEPipeline (unbundle inputs))
+peArray :: forall peCount dom.
+     ( KnownNat peCount
+     , HiddenClockResetEnable dom
+     )
+  => Signal dom (Vec peCount PEInput)
+  -> Signal dom (Vec peCount PEOutput)
+peArray inputs =
+  bundle
+    (C.map nttPEPipeline (unbundle inputs))
+
+{-# INLINE peArray #-}
 
 -- Backwards-compatible single-PE pipeline name.
 butterflyPipeline

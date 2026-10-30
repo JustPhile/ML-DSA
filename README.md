@@ -225,19 +225,13 @@ The Boolean input is `start`. The Boolean output is a one-cycle `done` indicatio
 
 The current Nangate45 standard-cell benchmark reports:
 
-| Metric | Previous banked 2-PE design | Current design |
+| Metric | 2PE design | 4PE design |
 |---|---:|---:|
-| Area | 209,573.420 um^2 | 212,708.762 um^2 |
-| Critical path | 1.86 ns | 1.30 ns |
-| Worst slack at a 5 ns constraint | 3.10 ns | 3.66 ns |
+| Area | 212,708.762 um^2 | 2458191.464um^2 |
+| Critical path | 1.30 ns | 1.34 ns |
+| Worst slack at a 5 ns constraint | 3.66 ns | 3.62 ns |
 | WNS | 0.000 ns | 0.000 ns |
 | TNS | 0.000 ns | 0.000 ns |
-
-The synchronous twiddle memory and PE-input register reduced the reported critical path by approximately 30.1%, while area increased by approximately 1.5%.
-
-The raw reciprocal of the reported 1.30 ns data-path delay is approximately 769 MHz. This is not a sign-off frequency: the current SDC constrains the design to 5 ns (200 MHz), and the report is pre-layout with an ideal clock. Setup time, placement, routing, clock-tree delay, process variation, and memory implementation must be included before claiming a final maximum frequency.
-
-The Nangate45 flow does not contain the final FPGA BRAMs or ASIC SRAM macros. When memories are mapped into standard-cell registers and multiplexers, the reported area is not representative of a macro-based memory implementation.
 
 ## Development environment
 

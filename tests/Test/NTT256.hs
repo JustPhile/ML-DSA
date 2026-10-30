@@ -20,8 +20,7 @@ q = 8380417
 type Coeff = Unsigned 23
 type Poly = Vec 256 Coeff
 
--- Number of clocks we allow a complete hardware NTT to take.
--- The current 4-lane / 3-stage butterfly design should finish well before this.
+-- The configurable multi-PE design should finish well before this.
 maxSimulationCycles :: P.Int
 maxSimulationCycles = 2048
 
