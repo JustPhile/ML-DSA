@@ -37,22 +37,22 @@
         },
         {
             "name": "Component_NTT_topEntity_twiddleMemory.v",
-            "sha256": "af1795079ca5d9a368035c2d1ec428d46bab2fdba0b42e34d85080371b3ca9a0"
+            "sha256": "a81ba6c3adb09ec4df2f7460fe3a155757863ce27d22fcbd0aac90968a419394"
         },
         {
             "name": "Component_NTT_topEntity_coeffMemory.v",
-            "sha256": "543526c9b6867e4b0e55ba49bc4064377aa5a76c1f0ac774c2b0f978ec392caf"
+            "sha256": "4c38084c9c70af1e1182585b53d804575589ddbafa12a95661364fc25d40b14a"
         },
         {
             "name": "NTT256.v",
-            "sha256": "b02298312ab27863c73f481e3262533f9144c06156cc6f4879c2eb278b69dc8c"
+            "sha256": "a8e4bfaf0d9237603198494d7a4c88bf063a674087759e4bc0b8ce03ed108362"
         }
     ],
     "flags": [
         20,
         20
     ],
-    "hash": "4904632a3d9de4986d9b8c2021cebb93103c175161cadac346fd04ea747fbd8e",
+    "hash": "d097646e230266216defa4bd5f46dc939821b572f5524e64163382fbbcc5522b",
     "top_component": {
         "name": "NTT256",
         "ports_flat": [

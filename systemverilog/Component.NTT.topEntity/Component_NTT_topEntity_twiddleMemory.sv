@@ -8,12 +8,12 @@ module Component_NTT_topEntity_twiddleMemory
       input wire logic c$x_bindCsr  // clock
     , input wire logic c$x_bindCsr_0  // reset
     , input wire logic c$x_bindCsr_1  // enable
-    , input wire NTT256_types::array_of_4_logic_vector_8 eta
+    , input wire NTT256_types::array_of_2_logic_vector_8 eta
 
       // Outputs
-    , output NTT256_types::array_of_4_logic_vector_23 result
+    , output NTT256_types::array_of_2_logic_vector_23 result
     );
-  NTT256_types::array_of_4_logic_vector_8 c$vec;
+  NTT256_types::array_of_2_logic_vector_8 c$vec;
 
   assign c$vec = (eta);
 

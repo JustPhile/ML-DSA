@@ -28,6 +28,7 @@ import Component.NTTConfig
   , CoeffRamCount
   , CoeffRamDepth
   , LogicalRowCount
+  , BankCount
   )
 
 import Clash.Prelude
@@ -37,7 +38,7 @@ import GHC.Generics (Generic)
 import Prelude hiding ((!!), repeat)
 
 type BankIndex =
-  Index 4
+  Index BankCount
 
 type BlockIndex =
   Index PECount

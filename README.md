@@ -225,13 +225,13 @@ The Boolean input is `start`. The Boolean output is a one-cycle `done` indicatio
 
 The current Nangate45 standard-cell benchmark reports:
 
-| Metric | 2PE design | 4PE design |
+| Metric | Previous 2 PE design | 2 PE design | 4 PE design |
 |---|---:|---:|
-| Area | 212,708.762 um^2 | 2458191.464um^2 |
-| Critical path | 1.30 ns | 1.34 ns |
-| Worst slack at a 5 ns constraint | 3.66 ns | 3.62 ns |
-| WNS | 0.000 ns | 0.000 ns |
-| TNS | 0.000 ns | 0.000 ns |
+| Area | 212,708.762 um^2 | 213215.226um^2 | 2458191.464um^2 |
+| Critical path | 1.30 ns | 1.28 ns | 1.34 ns |
+| Worst slack at a 5 ns constraint | 3.66 ns | 3.68 ns | 3.62 ns |
+| WNS | 0.000 ns | 0.000 ns | 0.000 ns |
+| TNS | 0.000 ns | 0.000 ns | 0.000 ns |
 
 ## Development environment
 

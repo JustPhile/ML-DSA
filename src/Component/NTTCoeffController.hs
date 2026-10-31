@@ -40,6 +40,7 @@ import Component.NTTTwiddleMem
 import Component.NTTConfig
   ( PECount
   , IssueCount
+  , BankCount
   )
   
 import GHC.Generics (Generic)
@@ -165,15 +166,11 @@ makePEInputs control memoryResults twiddleResults
         operands1
         twiddleResults
   where
-    -- ReadResults is laid out as:
-    --
-    -- bank 0: PECount RAMs
-    -- bank 1: PECount RAMs
-    -- bank 2: PECount RAMs
-    -- bank 3: PECount RAMs
-    ramBanks :: Vec 4 (Vec PECount Coeff)
+    ramBanks :: Vec BankCount (Vec PECount Coeff)
     ramBanks =
-      unconcat d4 memoryResults
+      unconcat
+        (SNat @PECount)
+        memoryResults
 
     operands0 :: Vec PECount Coeff
     operands0 =

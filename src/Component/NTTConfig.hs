@@ -4,8 +4,12 @@
 
 module Component.NTTConfig
   ( PECount
-  , IssueCount
+  , ClusterCount
+  , BanksPerCluster
+  , BankCount
+  , RamsPerCluster
   , CoeffRamCount
+  , IssueCount
   , CoeffRamDepth
   , LogicalRowCount
   ) where
@@ -13,17 +17,26 @@ module Component.NTTConfig
 import Clash.Prelude
 import GHC.TypeNats (Div)
 
--- Change this one line to 2, 4, or 8.
-type PECount = 4
+type PECount = 2
 
--- 128 butterflies per NTT stage.
-type IssueCount = Div 128 PECount
+type ClusterCount = 2
 
--- Paper architecture: four banks, each containing PECount blocks.
-type CoeffRamCount = 4 * PECount
+type BanksPerCluster = 2
 
--- Total coefficient capacity remains 384 = 1.5N.
-type CoeffRamDepth = Div 96 PECount
+type BankCount =
+  ClusterCount * BanksPerCluster
 
--- Number of live logical rows in each memory rotation.
-type LogicalRowCount = Div 64 PECount
+type RamsPerCluster =
+  BanksPerCluster * PECount
+
+type CoeffRamCount =
+  ClusterCount * RamsPerCluster
+
+type IssueCount =
+  Div 128 PECount
+
+type LogicalRowCount =
+  Div 64 PECount
+
+type CoeffRamDepth =
+  Div 96 PECount
