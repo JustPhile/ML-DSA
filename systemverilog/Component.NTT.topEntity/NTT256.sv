@@ -15,23 +15,30 @@ module NTT256
     , output logic done
     , output logic [5887:0] result
     );
-  NTT256_types::array_of_2_Tuple3 c$x_app_arg = '{0: {23'd0,23'd0,23'd0},1: {23'd0,23'd0,23'd0}};
-  NTT256_types::array_of_2_logic_vector_23 c$zipWith_arg5;
-  NTT256_types::array_of_2_logic_vector_23 c$zipWith_arg5_0;
-  NTT256_types::array_of_2_Tuple2_0 result_3;
-  NTT256_types::array_of_2_Tuple3 result_4;
-  NTT256_types::array_of_4_array_of_2_logic_vector_23 ramBanks;
-  NTT256_types::array_of_2_Tuple3 result_5;
-  NTT256_types::array_of_2_logic_vector_23 result_6;
+  NTT256_types::array_of_8_Tuple3 c$x_app_arg = '{0: {23'd0,23'd0,23'd0}
+ ,1: {23'd0,23'd0,23'd0}
+ ,2: {23'd0,23'd0,23'd0}
+ ,3: {23'd0,23'd0,23'd0}
+ ,4: {23'd0,23'd0,23'd0}
+ ,5: {23'd0,23'd0,23'd0}
+ ,6: {23'd0,23'd0,23'd0}
+ ,7: {23'd0,23'd0,23'd0}};
+  NTT256_types::array_of_8_logic_vector_23 c$zipWith_arg5;
+  NTT256_types::array_of_8_logic_vector_23 c$zipWith_arg5_0;
+  NTT256_types::array_of_8_Tuple2_0 result_3;
+  NTT256_types::array_of_8_Tuple3 result_4;
+  NTT256_types::array_of_4_array_of_8_logic_vector_23 ramBanks;
+  NTT256_types::array_of_8_Tuple3 result_5;
+  NTT256_types::array_of_8_logic_vector_23 result_6;
   logic signed [63:0] c$inputBase_case_alt;
-  NTT256_types::array_of_2_logic_vector_8 result_7;
+  NTT256_types::array_of_8_logic_vector_8 result_7;
   logic [7:0] inputBase;
-  NTT256_types::array_of_2_logic_vector_8 result_8;
+  NTT256_types::array_of_8_logic_vector_8 result_8;
   logic [7:0] issueWide;
   logic [5:0] value;
   logic signed [63:0] c$app_arg;
   logic signed [63:0] c$app_arg_0;
-  logic [5:0] result_9;
+  logic [3:0] result_9;
   logic signed [63:0] c$app_arg_1;
   logic signed [63:0] c$app_arg_2;
   logic [5:0] c$case_alt;
@@ -39,7 +46,7 @@ module NTT256
   logic [5:0] value_0;
   logic signed [63:0] c$app_arg_3;
   logic signed [63:0] c$app_arg_4;
-  logic [5:0] result_11;
+  logic [3:0] result_11;
   logic signed [63:0] c$app_arg_5;
   logic signed [63:0] c$app_arg_6;
   logic signed [63:0] c$issueWide_app_arg;
@@ -47,10 +54,10 @@ module NTT256
   NTT256_types::NTTState stateSignal = {3'd0
 ,1'b0
 ,3'd0
+,4'd0
 ,6'd0
-,6'd0
-,5'd0
-,5'd0
+,3'd0
+,3'd0
 ,{NTT256_types::array_of_256_logic_vector_23_to_lv('{0: 23'd0
                                                     ,1: 23'd0
                                                     ,2: 23'd0
@@ -576,236 +583,524 @@ module NTT256
   NTT256_types::Tuple9 c$nttNextState_$j_tupIn;
   logic valid;
   NTT256_types::array_of_256_logic_vector_23 stateInput1;
-  logic [4:0] stateUnloadRow1;
-  logic [4:0] stateLoadRow1;
+  logic [2:0] stateUnloadRow1;
+  logic [2:0] stateLoadRow1;
   logic [5:0] stateBase1;
-  logic [5:0] stateIssue1;
+  logic [3:0] stateIssue1;
   logic [2:0] stateStage1;
   logic stateDone1;
   logic [2:0] eta1;
-  NTT256_types::array_of_9_array_of_256_logic_vector_23 ws;
-  NTT256_types::array_of_8_array_of_256_logic_vector_23 ws1;
-  NTT256_types::array_of_8_Tuple2_1 xs0;
-  logic [4:0] unloadRow;
-  NTT256_types::array_of_8_logic_vector_23 result_15;
-  NTT256_types::array_of_8_logic_vector_30 c$memoryOutputs_case_alt;
-  NTT256_types::array_of_8_logic_vector_30 result_16;
-  logic [5:0] row;
-  NTT256_types::array_of_8_logic_vector_30 result_17;
-  NTT256_types::array_of_2_Tuple2_0 c$computeCommands_app_arg;
-  NTT256_types::array_of_8_logic_vector_30 result_18;
-  logic [5:0] physicalMemoryRow;
+  NTT256_types::array_of_33_array_of_256_logic_vector_23 ws;
+  NTT256_types::array_of_32_array_of_256_logic_vector_23 ws1;
+  NTT256_types::array_of_32_Tuple2_1 xs0;
+  logic [2:0] unloadRow;
+  NTT256_types::array_of_32_logic_vector_23 result_15;
+  NTT256_types::array_of_32_logic_vector_28 c$memoryOutputs_case_alt;
+  NTT256_types::array_of_32_logic_vector_28 result_16;
+  logic [3:0] row;
+  NTT256_types::array_of_32_logic_vector_28 result_17;
+  NTT256_types::array_of_8_Tuple2_0 c$computeCommands_app_arg;
+  NTT256_types::array_of_32_logic_vector_28 result_18;
+  logic [3:0] physicalMemoryRow;
   logic signed [63:0] c$physicalMemoryRow_app_arg;
-  NTT256_types::array_of_8_logic_vector_6 c$memoryOutputs_case_alt_0;
+  NTT256_types::array_of_32_logic_vector_4 c$memoryOutputs_case_alt_0;
   logic [5:0] value_1;
   logic signed [63:0] c$app_arg_7;
   logic signed [63:0] c$app_arg_8;
-  logic [5:0] result_19;
+  logic [3:0] result_19;
   logic signed [63:0] c$memoryOutputs_app_arg;
-  NTT256_types::Tuple2_2 c$stateSignal_app_arg = {1'b0,5'd0};
+  NTT256_types::Tuple2_2 c$stateSignal_app_arg = {1'b0,3'd0};
   logic c$stateSignal_case_alt;
   logic signed [63:0] c$stateSignal_case_scrut;
   NTT256_types::CoeffControl writeControlSignal = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl c$writeControlSignal_app_arg = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl c$writeControlSignal_app_arg_0 = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl c$writeControlSignal_app_arg_1 = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl c$writeControlSignal_app_arg_2 = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl c$writeControlSignal_app_arg_3 = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl c$writeControlSignal_app_arg_4 = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl c$writeControlSignal_app_arg_5 = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl c$writeControlSignal_app_arg_6 = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl c$writeControlSignal_app_arg_7 = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl c$writeControlSignal_app_arg_8 = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::CoeffControl readControlReg = {1'b0
 ,3'd0
-,6'd0
-,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                 ,1: 6'd0
-                                                 ,2: 6'd0
-                                                 ,3: 6'd0
-                                                 ,4: 6'd0
-                                                 ,5: 6'd0
-                                                 ,6: 6'd0
-                                                 ,7: 6'd0})}
+,4'd0
+,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                  ,1: 4'd0
+                                                  ,2: 4'd0
+                                                  ,3: 4'd0
+                                                  ,4: 4'd0
+                                                  ,5: 4'd0
+                                                  ,6: 4'd0
+                                                  ,7: 4'd0
+                                                  ,8: 4'd0
+                                                  ,9: 4'd0
+                                                  ,10: 4'd0
+                                                  ,11: 4'd0
+                                                  ,12: 4'd0
+                                                  ,13: 4'd0
+                                                  ,14: 4'd0
+                                                  ,15: 4'd0
+                                                  ,16: 4'd0
+                                                  ,17: 4'd0
+                                                  ,18: 4'd0
+                                                  ,19: 4'd0
+                                                  ,20: 4'd0
+                                                  ,21: 4'd0
+                                                  ,22: 4'd0
+                                                  ,23: 4'd0
+                                                  ,24: 4'd0
+                                                  ,25: 4'd0
+                                                  ,26: 4'd0
+                                                  ,27: 4'd0
+                                                  ,28: 4'd0
+                                                  ,29: 4'd0
+                                                  ,30: 4'd0
+                                                  ,31: 4'd0})}
 ,1'b0
 ,1'b0
-,6'd0
+,4'd0
 ,1'b0};
   NTT256_types::array_of_256_logic_vector_23 poly_0;
-  logic [5:0] c$i_14;
-  NTT256_types::array_of_2_signed_64 c$vec;
-  logic [5:0] c$i_47;
-  logic [4:0] c$i_49;
-  logic [7:0] c$i_51;
-  logic [5:0] c$i_58;
-  logic [4:0] c$i_60;
-  logic [7:0] c$i_61;
-  logic [5:0] c$i_62;
+  logic [3:0] c$i_50;
+  NTT256_types::array_of_8_signed_64 c$vec;
+  logic [5:0] c$i_83;
+  logic [2:0] c$i_85;
+  logic [7:0] c$i_87;
+  logic [5:0] c$i_94;
+  logic [2:0] c$i_96;
+  logic [7:0] c$i_97;
+  logic [3:0] c$i_98;
   logic [2:0] result_selection_9;
-  NTT256_types::array_of_8_array_of_256_logic_vector_23 c$vec2;
-  NTT256_types::array_of_8_logic_vector_3 xs0_res;
+  NTT256_types::array_of_32_array_of_256_logic_vector_23 c$vec2;
+  NTT256_types::array_of_32_logic_vector_5 xs0_res;
   logic [2:0] c$memoryOutputs_case_alt_selection_1;
-  NTT256_types::array_of_8_logic_vector_30 c$vec_0;
-  NTT256_types::array_of_2_Tuple3 c$vec_1;
-  NTT256_types::array_of_8_logic_vector_30 c$vec_3;
-  logic [4:0] c$i_1223;
+  NTT256_types::array_of_32_logic_vector_28 c$vec_0;
+  NTT256_types::array_of_8_Tuple3 c$vec_1;
+  NTT256_types::array_of_32_logic_vector_28 c$vec_3;
+  logic [2:0] c$i_1259;
   logic [2:0] c$memoryOutputs_case_alt_selection_4;
-  logic [5:0] c$i_1225;
-  logic [4:0] c$i_1227;
+  logic [5:0] c$i_1261;
+  logic [2:0] c$i_1263;
   logic [2:0] c$dtt_rhs_4;
   logic [7:0] c$bv_38;
   NTT256_types::Tuple2_3 result_0;
@@ -819,16 +1114,23 @@ module NTT256
   // register begin
   always_ff @(posedge clk or  posedge  rst) begin : c$x_app_arg_register
     if ( rst) begin
-      c$x_app_arg <= '{0: {23'd0,23'd0,23'd0},1: {23'd0,23'd0,23'd0}};
+      c$x_app_arg <= '{0: {23'd0,23'd0,23'd0}
+   ,1: {23'd0,23'd0,23'd0}
+   ,2: {23'd0,23'd0,23'd0}
+   ,3: {23'd0,23'd0,23'd0}
+   ,4: {23'd0,23'd0,23'd0}
+   ,5: {23'd0,23'd0,23'd0}
+   ,6: {23'd0,23'd0,23'd0}
+   ,7: {23'd0,23'd0,23'd0}};
     end else  if (en)  begin
       c$x_app_arg <= result_5;
     end
   end
   // register end
 
-  assign c$zipWith_arg5 = readControlReg.CoeffControl_sel4 ? (NTT256_types::array_of_2_logic_vector_23_from_lv(ramBanks[(64'sd3)])) : (NTT256_types::array_of_2_logic_vector_23_from_lv(ramBanks[(64'sd2)]));
+  assign c$zipWith_arg5 = readControlReg.CoeffControl_sel4 ? (NTT256_types::array_of_8_logic_vector_23_from_lv(ramBanks[(64'sd3)])) : (NTT256_types::array_of_8_logic_vector_23_from_lv(ramBanks[(64'sd2)]));
 
-  assign c$zipWith_arg5_0 = readControlReg.CoeffControl_sel4 ? (NTT256_types::array_of_2_logic_vector_23_from_lv(ramBanks[(64'sd1)])) : (NTT256_types::array_of_2_logic_vector_23_from_lv(ramBanks[(64'sd0)]));
+  assign c$zipWith_arg5_0 = readControlReg.CoeffControl_sel4 ? (NTT256_types::array_of_8_logic_vector_23_from_lv(ramBanks[(64'sd1)])) : (NTT256_types::array_of_8_logic_vector_23_from_lv(ramBanks[(64'sd0)]));
 
   // zipWith begin
   genvar n;
@@ -877,12 +1179,12 @@ module NTT256
   genvar n_1;
   generate
     for (n_1 = 0; n_1 < $size(ramBanks); n_1 = n_1 + 1) begin : unconcat
-      assign ramBanks[n_1] = {NTT256_types::array_of_2_logic_vector_23_to_lv(result_15[(n_1 * 2) : ((n_1 * 2) + 2 - 1)])};
+      assign ramBanks[n_1] = {NTT256_types::array_of_8_logic_vector_23_to_lv(result_15[(n_1 * 8) : ((n_1 * 8) + 8 - 1)])};
     end
   endgenerate
   // unconcat end
 
-  assign result_5 = (~ readControlReg.CoeffControl_sel0) ? ('{2 {{23'd0,23'd0,23'd0}}}) : result_4;
+  assign result_5 = (~ readControlReg.CoeffControl_sel0) ? ('{8 {{23'd0,23'd0,23'd0}}}) : result_4;
 
   Component_NTT_topEntity_twiddleMemory Component_NTT_topEntity_twiddleMemory_result_6
     ( .result (result_6)
@@ -891,17 +1193,17 @@ module NTT256
     , .c$x_bindCsr_1 (en)
     , .eta (result_8) );
 
-  assign c$i_14 = stateSignal.NTTState_sel3;
+  assign c$i_50 = stateSignal.NTTState_sel3;
 
-  assign c$inputBase_case_alt = $unsigned({{(64-6) {1'b0}},c$i_14});
+  assign c$inputBase_case_alt = $unsigned({{(64-4) {1'b0}},c$i_50});
 
-  assign c$vec = ('{2 {64'sd0}});
+  assign c$vec = ('{8 {64'sd0}});
 
   // imap begin
   genvar n_2;
   generate
   for (n_2=0; n_2 < $size(result_7); n_2 = n_2 + 1) begin : imap
-    logic [0:0] i;
+    logic [2:0] i;
     assign i = n_2;
     logic signed [63:0] imap_in;
     assign imap_in = $signed(c$vec[n_2]);
@@ -934,13 +1236,13 @@ module NTT256
     logic \c$rem#_arg2_case_scrut_1 ;
     logic \c$rem#_arg2_case_scrut_2 ;
     logic \c$rem#_arg2_case_scrut_3 ;
-    logic [7:0] c$i_18;
-    logic [7:0] c$i_20;
-    logic [7:0] c$i_22;
-    logic [7:0] c$i_24;
-    logic [7:0] c$i_27;
-    logic [7:0] c$i_30;
-    logic [7:0] c$i_32;
+    logic [7:0] c$i_54;
+    logic [7:0] c$i_56;
+    logic [7:0] c$i_58;
+    logic [7:0] c$i_60;
+    logic [7:0] c$i_63;
+    logic [7:0] c$i_66;
+    logic [7:0] c$i_68;
     assign imap_out = c$case_alt_7;
 
     assign c$case_alt_7 = (stateSignal.NTTState_sel2 == 3'd0) ? 8'd1 : result_20;
@@ -949,49 +1251,49 @@ module NTT256
 
     assign c$case_alt_8 = \c$rem#_arg2_case_scrut_2  ? ($unsigned(c$app_arg_10[0+:8])) : c$case_alt_9;
 
-    assign c$i_18 = (8'd2 + result_21);
+    assign c$i_54 = (8'd2 + result_21);
 
-    assign c$app_arg_9 = $unsigned({{(64-8) {1'b0}},c$i_18});
+    assign c$app_arg_9 = $unsigned({{(64-8) {1'b0}},c$i_54});
 
     assign c$case_alt_9 = \c$rem#_arg2_case_scrut_1  ? ($unsigned(c$app_arg_11[0+:8])) : c$case_alt_10;
 
-    assign c$i_20 = (8'd4 + result_21);
+    assign c$i_56 = (8'd4 + result_21);
 
-    assign c$app_arg_10 = $unsigned({{(64-8) {1'b0}},c$i_20});
+    assign c$app_arg_10 = $unsigned({{(64-8) {1'b0}},c$i_56});
 
     assign c$case_alt_10 = \c$rem#_arg2_case_scrut_0  ? ($unsigned(c$app_arg_12[0+:8])) : c$case_alt_11;
 
-    assign c$i_22 = (8'd8 + result_21);
+    assign c$i_58 = (8'd8 + result_21);
 
-    assign c$app_arg_11 = $unsigned({{(64-8) {1'b0}},c$i_22});
+    assign c$app_arg_11 = $unsigned({{(64-8) {1'b0}},c$i_58});
 
     assign c$case_alt_11 = \c$rem#_arg2_case_scrut  ? ($unsigned(c$app_arg_13[0+:8])) : c$case_alt_12;
 
-    assign c$i_24 = (8'd16 + result_21);
+    assign c$i_60 = (8'd16 + result_21);
 
-    assign c$app_arg_12 = $unsigned({{(64-8) {1'b0}},c$i_24});
+    assign c$app_arg_12 = $unsigned({{(64-8) {1'b0}},c$i_60});
 
     assign c$case_alt_12 = (stateSignal.NTTState_sel2 == 3'd6) ? ($unsigned(c$app_arg_14[0+:8])) : c$case_alt_13;
 
-    assign c$i_27 = (8'd32 + result_21);
+    assign c$i_63 = (8'd32 + result_21);
 
-    assign c$app_arg_13 = $unsigned({{(64-8) {1'b0}},c$i_27});
+    assign c$app_arg_13 = $unsigned({{(64-8) {1'b0}},c$i_63});
 
     assign c$case_alt_13 = (stateSignal.NTTState_sel2 == 3'd7) ? ($unsigned(c$app_arg_15[0+:8])) : ({8 {1'bx}});
 
-    assign c$i_30 = (8'd64 + result_21);
+    assign c$i_66 = (8'd64 + result_21);
 
-    assign c$app_arg_14 = $unsigned({{(64-8) {1'b0}},c$i_30});
+    assign c$app_arg_14 = $unsigned({{(64-8) {1'b0}},c$i_66});
 
-    assign c$i_32 = (8'd128 + \c$rem#_out_app_arg );
+    assign c$i_68 = (8'd128 + \c$rem#_out_app_arg );
 
-    assign c$app_arg_15 = $unsigned({{(64-8) {1'b0}},c$i_32});
+    assign c$app_arg_15 = $unsigned({{(64-8) {1'b0}},c$i_68});
 
     assign result_21 = \c$rem#_out_app_arg  % \c$rem#_arg2 ;
 
     assign \c$rem#_out_app_arg  = inputBase + ($unsigned(\c$rem#_out_app_arg_0 [0+:8]));
 
-    assign \c$rem#_out_app_arg_0  = $unsigned({{(64-1) {1'b0}},i});
+    assign \c$rem#_out_app_arg_0  = $unsigned({{(64-3) {1'b0}},i});
 
     assign \c$rem#_arg2  = \c$rem#_arg2_case_scrut_3  ? 8'd2 : \c$rem#_arg2_case_alt ;
 
@@ -1019,55 +1321,55 @@ module NTT256
   endgenerate
   // imap end
 
-  assign inputBase = ($unsigned(c$inputBase_case_alt[0+:8])) * 8'd2;
+  assign inputBase = ($unsigned(c$inputBase_case_alt[0+:8])) * 8'd8;
 
-  assign result_8 = (~ c$controlSignal_case_alt) ? ('{2 {8'd0}}) : result_7;
+  assign result_8 = (~ c$controlSignal_case_alt) ? ('{8 {8'd0}}) : result_7;
 
   assign issueWide = $unsigned(c$issueWide_app_arg[0+:8]);
 
   assign value = result_10 + ($unsigned(c$app_arg_1[0+:6]));
 
-  assign c$i_47 = (value - 6'd48);
+  assign c$i_83 = (value - 6'd12);
 
-  assign c$app_arg = $unsigned({{(64-6) {1'b0}},c$i_47});
+  assign c$app_arg = $unsigned({{(64-6) {1'b0}},c$i_83});
 
   assign c$app_arg_0 = $unsigned({{(64-6) {1'b0}},value});
 
-  assign result_9 = (value >= 6'd48) ? ($unsigned(c$app_arg[0+:6])) : ($unsigned(c$app_arg_0[0+:6]));
+  assign result_9 = (value >= 6'd12) ? ($unsigned(c$app_arg[0+:4])) : ($unsigned(c$app_arg_0[0+:4]));
 
-  assign c$i_49 = ($unsigned(c$app_arg_2[0+:5]));
+  assign c$i_85 = ($unsigned(c$app_arg_2[0+:3]));
 
-  assign c$app_arg_1 = $unsigned({{(64-5) {1'b0}},c$i_49});
+  assign c$app_arg_1 = $unsigned({{(64-3) {1'b0}},c$i_85});
 
-  assign c$i_51 = (issueWide % 8'd32);
+  assign c$i_87 = (issueWide % 8'd8);
 
-  assign c$app_arg_2 = $unsigned({{(64-8) {1'b0}},c$i_51});
+  assign c$app_arg_2 = $unsigned({{(64-8) {1'b0}},c$i_87});
 
-  assign c$case_alt = (stateSignal.NTTState_sel4 == 6'd32) ? 6'd16 : 6'd0;
+  assign c$case_alt = (stateSignal.NTTState_sel4 == 6'd8) ? 6'd4 : 6'd0;
 
-  assign result_10 = (stateSignal.NTTState_sel4 == 6'd0) ? 6'd32 : c$case_alt;
+  assign result_10 = (stateSignal.NTTState_sel4 == 6'd0) ? 6'd8 : c$case_alt;
 
   assign value_0 = stateSignal.NTTState_sel4 + ($unsigned(c$app_arg_5[0+:6]));
 
-  assign c$i_58 = (value_0 - 6'd48);
+  assign c$i_94 = (value_0 - 6'd12);
 
-  assign c$app_arg_3 = $unsigned({{(64-6) {1'b0}},c$i_58});
+  assign c$app_arg_3 = $unsigned({{(64-6) {1'b0}},c$i_94});
 
   assign c$app_arg_4 = $unsigned({{(64-6) {1'b0}},value_0});
 
-  assign result_11 = (value_0 >= 6'd48) ? ($unsigned(c$app_arg_3[0+:6])) : ($unsigned(c$app_arg_4[0+:6]));
+  assign result_11 = (value_0 >= 6'd12) ? ($unsigned(c$app_arg_3[0+:4])) : ($unsigned(c$app_arg_4[0+:4]));
 
-  assign c$i_60 = ($unsigned(c$app_arg_6[0+:5]));
+  assign c$i_96 = ($unsigned(c$app_arg_6[0+:3]));
 
-  assign c$app_arg_5 = $unsigned({{(64-5) {1'b0}},c$i_60});
+  assign c$app_arg_5 = $unsigned({{(64-3) {1'b0}},c$i_96});
 
-  assign c$i_61 = (issueWide >> (64'sd1));
+  assign c$i_97 = (issueWide >> (64'sd1));
 
-  assign c$app_arg_6 = $unsigned({{(64-8) {1'b0}},c$i_61});
+  assign c$app_arg_6 = $unsigned({{(64-8) {1'b0}},c$i_97});
 
-  assign c$i_62 = stateSignal.NTTState_sel3;
+  assign c$i_98 = stateSignal.NTTState_sel3;
 
-  assign c$issueWide_app_arg = $unsigned({{(64-6) {1'b0}},c$i_62});
+  assign c$issueWide_app_arg = $unsigned({{(64-4) {1'b0}},c$i_98});
 
   always_comb begin
     case(c$stateSignal_case_scrut)
@@ -1082,10 +1384,10 @@ module NTT256
       stateSignal <= {3'd0
   ,1'b0
   ,3'd0
+  ,4'd0
   ,6'd0
-  ,6'd0
-  ,5'd0
-  ,5'd0
+  ,3'd0
+  ,3'd0
   ,{NTT256_types::array_of_256_logic_vector_23_to_lv('{0: 23'd0
                                                       ,1: 23'd0
                                                       ,2: 23'd0
@@ -1627,23 +1929,23 @@ module NTT256
     endcase
   end
 
-  assign c$case_alt_0 = (c$nttNextState_$j_tupIn.Tuple9_sel6 == 5'd31) ? {3'd5
-                                                                         ,1'b0
-                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel2
-                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel3
-                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel4
-                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel5
-                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel6
-                                                                         ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
-                                                                         ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}} : {3'd4
-                                                                                                                                                                                                                         ,1'b0
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel2
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel3
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel4
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel5
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel6 + 5'd1
-                                                                                                                                                                                                                         ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
-                                                                                                                                                                                                                         ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}};
+  assign c$case_alt_0 = (c$nttNextState_$j_tupIn.Tuple9_sel6 == 3'd7) ? {3'd5
+                                                                        ,1'b0
+                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel2
+                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel3
+                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel4
+                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel5
+                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel6
+                                                                        ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
+                                                                        ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}} : {3'd4
+                                                                                                                                                                                                                        ,1'b0
+                                                                                                                                                                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel2
+                                                                                                                                                                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel3
+                                                                                                                                                                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel4
+                                                                                                                                                                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel5
+                                                                                                                                                                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel6 + 3'd1
+                                                                                                                                                                                                                        ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
+                                                                                                                                                                                                                        ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}};
 
   assign c$case_alt_1 = finalReturned ? result_13 : {3'd3
                                                     ,1'b0
@@ -1655,7 +1957,7 @@ module NTT256
                                                     ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
                                                     ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}};
 
-  assign c$case_alt_2 = (c$nttNextState_$j_tupIn.Tuple9_sel3 == 6'd63) ? {3'd3
+  assign c$case_alt_2 = (c$nttNextState_$j_tupIn.Tuple9_sel3 == 4'd15) ? {3'd3
                                                                          ,1'b0
                                                                          ,c$nttNextState_$j_tupIn.Tuple9_sel2
                                                                          ,c$nttNextState_$j_tupIn.Tuple9_sel3
@@ -1666,38 +1968,38 @@ module NTT256
                                                                          ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}} : {3'd2
                                                                                                                                                                                                                          ,1'b0
                                                                                                                                                                                                                          ,c$nttNextState_$j_tupIn.Tuple9_sel2
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel3 + 6'd1
+                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel3 + 4'd1
                                                                                                                                                                                                                          ,c$nttNextState_$j_tupIn.Tuple9_sel4
                                                                                                                                                                                                                          ,c$nttNextState_$j_tupIn.Tuple9_sel5
                                                                                                                                                                                                                          ,c$nttNextState_$j_tupIn.Tuple9_sel6
                                                                                                                                                                                                                          ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
                                                                                                                                                                                                                          ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}};
 
-  assign c$case_alt_3 = (c$nttNextState_$j_tupIn.Tuple9_sel5 == 5'd31) ? {3'd2
-                                                                         ,1'b0
-                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel2
-                                                                         ,6'd0
-                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel4
-                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel5
-                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel6
-                                                                         ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
-                                                                         ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}} : {3'd1
-                                                                                                                                                                                                                         ,1'b0
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel2
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel3
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel4
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel5 + 5'd1
-                                                                                                                                                                                                                         ,c$nttNextState_$j_tupIn.Tuple9_sel6
-                                                                                                                                                                                                                         ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
-                                                                                                                                                                                                                         ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}};
+  assign c$case_alt_3 = (c$nttNextState_$j_tupIn.Tuple9_sel5 == 3'd7) ? {3'd2
+                                                                        ,1'b0
+                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel2
+                                                                        ,4'd0
+                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel4
+                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel5
+                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel6
+                                                                        ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
+                                                                        ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}} : {3'd1
+                                                                                                                                                                                                                        ,1'b0
+                                                                                                                                                                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel2
+                                                                                                                                                                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel3
+                                                                                                                                                                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel4
+                                                                                                                                                                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel5 + 3'd1
+                                                                                                                                                                                                                        ,c$nttNextState_$j_tupIn.Tuple9_sel6
+                                                                                                                                                                                                                        ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
+                                                                                                                                                                                                                        ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}};
 
   assign c$case_alt_4 = start ? {3'd1
                                 ,1'b0
                                 ,3'd0
+                                ,4'd0
                                 ,6'd0
-                                ,6'd0
-                                ,5'd0
-                                ,5'd0
+                                ,3'd0
+                                ,3'd0
                                 ,{NTT256_types::array_of_256_logic_vector_23_to_lv(poly_0)}
                                 ,{NTT256_types::array_of_256_logic_vector_23_to_lv('{256 {23'd0}})}} : {3'd0
                                                                                                        ,1'b0
@@ -1715,21 +2017,21 @@ module NTT256
                                                                      ,c$nttNextState_$j_tupIn.Tuple9_sel3
                                                                      ,result_14
                                                                      ,c$nttNextState_$j_tupIn.Tuple9_sel5
-                                                                     ,5'd0
+                                                                     ,3'd0
                                                                      ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
                                                                      ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}} : {3'd2
                                                                                                                                                                                                                      ,1'b0
                                                                                                                                                                                                                      ,c$nttNextState_$j_tupIn.Tuple9_sel2 + 3'd1
-                                                                                                                                                                                                                     ,6'd0
+                                                                                                                                                                                                                     ,4'd0
                                                                                                                                                                                                                      ,result_14
                                                                                                                                                                                                                      ,c$nttNextState_$j_tupIn.Tuple9_sel5
                                                                                                                                                                                                                      ,c$nttNextState_$j_tupIn.Tuple9_sel6
                                                                                                                                                                                                                      ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel7))}
                                                                                                                                                                                                                      ,{NTT256_types::array_of_256_logic_vector_23_to_lv(NTT256_types::array_of_256_logic_vector_23_from_lv(c$nttNextState_$j_tupIn.Tuple9_sel8))}};
 
-  assign c$case_alt_5 = (c$nttNextState_$j_tupIn.Tuple9_sel4 == 6'd32) ? 6'd16 : 6'd0;
+  assign c$case_alt_5 = (c$nttNextState_$j_tupIn.Tuple9_sel4 == 6'd8) ? 6'd4 : 6'd0;
 
-  assign result_14 = (c$nttNextState_$j_tupIn.Tuple9_sel4 == 6'd0) ? 6'd32 : c$case_alt_5;
+  assign result_14 = (c$nttNextState_$j_tupIn.Tuple9_sel4 == 6'd0) ? 6'd8 : c$case_alt_5;
 
   assign c$nttNextState_$j_tupIn = (~ valid) ? {eta1
                                                ,stateDone1
@@ -1767,7 +2069,7 @@ module NTT256
 
   assign eta1 = stateSignal.NTTState_sel0;
 
-  assign ws = NTT256_types::array_of_9_array_of_256_logic_vector_23_cons(NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel8), ws1);
+  assign ws = NTT256_types::array_of_33_array_of_256_logic_vector_23_cons(NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel8), ws1);
 
   assign c$vec2 = (ws[0 : $high(ws) - 1]);
 
@@ -1780,7 +2082,7 @@ module NTT256
     NTT256_types::array_of_256_logic_vector_23 zipWith_in2_1;
     assign zipWith_in2_1 = NTT256_types::array_of_256_logic_vector_23_from_lv(c$vec2[n_3]);
     NTT256_types::array_of_256_logic_vector_23 zipWith_out_1;
-    logic [2:0] ramIndex;
+    logic [4:0] ramIndex;
     logic [22:0] coefficient;
     NTT256_types::array_of_256_logic_vector_23 c$case_alt_17;
     logic [7:0] ramWide;
@@ -1788,34 +2090,34 @@ module NTT256
     logic signed [63:0] result_22;
     logic signed [63:0] c$app_arg_16;
     logic signed [63:0] c$ramWide_app_arg;
-    logic [7:0] c$i_1119;
-    logic [7:0] c$i_1127;
+    logic [7:0] c$i_1155;
+    logic [7:0] c$i_1163;
     assign zipWith_out_1 = c$case_alt_17;
 
     assign ramIndex = zipWith_in1_1.Tuple2_1_sel0;
 
     assign coefficient = zipWith_in1_1.Tuple2_1_sel1;
 
-    assign c$i_1119 = ($unsigned(result_22[0+:8]));
+    assign c$i_1155 = ($unsigned(result_22[0+:8]));
 
     // replaceVec start
     always_comb begin
       c$case_alt_17 = zipWith_in2_1;
-      c$case_alt_17[($unsigned({{(64-8) {1'b0}},c$i_1119}))] = coefficient;
+      c$case_alt_17[($unsigned({{(64-8) {1'b0}},c$i_1155}))] = coefficient;
     end
     // replaceVec end
 
     assign ramWide = $unsigned(c$ramWide_app_arg[0+:8]);
 
-    assign bankNumber = ramWide / 8'd2;
+    assign bankNumber = ramWide / 8'd8;
 
-    assign c$i_1127 = (((bankNumber / 8'd2) * 8'd128) + (((($unsigned(c$app_arg_16[0+:8])) * 8'd4) + ((bankNumber % 8'd2) * 8'd2)) + (ramWide % 8'd2)));
+    assign c$i_1163 = (((bankNumber / 8'd2) * 8'd128) + (((($unsigned(c$app_arg_16[0+:8])) * 8'd16) + ((bankNumber % 8'd2) * 8'd8)) + (ramWide % 8'd8)));
 
-    assign result_22 = $unsigned({{(64-8) {1'b0}},c$i_1127});
+    assign result_22 = $unsigned({{(64-8) {1'b0}},c$i_1163});
 
-    assign c$app_arg_16 = $unsigned({{(64-5) {1'b0}},unloadRow});
+    assign c$app_arg_16 = $unsigned({{(64-3) {1'b0}},unloadRow});
 
-    assign c$ramWide_app_arg = $unsigned({{(64-3) {1'b0}},ramIndex});
+    assign c$ramWide_app_arg = $unsigned({{(64-5) {1'b0}},ramIndex});
 
 
     assign ws1[n_3] = {NTT256_types::array_of_256_logic_vector_23_to_lv(zipWith_out_1)};
@@ -1827,9 +2129,9 @@ module NTT256
   genvar n_4;
   generate
   for (n_4=0; n_4 < $size(xs0_res); n_4 = n_4 + 1) begin : imap_0
-    logic [2:0] i_0;
+    logic [4:0] i_0;
     assign i_0 = n_4;
-    logic [2:0] imap_out_0;
+    logic [4:0] imap_out_0;
     assign imap_out_0 = i_0;
 
 
@@ -1842,7 +2144,7 @@ module NTT256
   genvar n_5;
   generate
   for (n_5 = 0; n_5 < $size(xs0); n_5 = n_5 + 1) begin : zipWith_2
-    logic [2:0] zipWith_in1_2;
+    logic [4:0] zipWith_in1_2;
     assign zipWith_in1_2 = xs0_res[n_5];
     logic [22:0] zipWith_in2_2;
     assign zipWith_in2_2 = result_15[n_5];
@@ -1874,39 +2176,39 @@ module NTT256
     endcase
   end
 
-  assign c$vec_0 = ('{8 {{1'b0,29'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}}});
+  assign c$vec_0 = ('{32 {{1'b0,27'bxxxxxxxxxxxxxxxxxxxxxxxxxxx}}});
 
   // imap begin
   genvar n_6;
   generate
   for (n_6=0; n_6 < $size(result_16); n_6 = n_6 + 1) begin : imap_1
-    logic [2:0] i_1;
+    logic [4:0] i_1;
     assign i_1 = n_6;
-    logic [29:0] imap_in_1;
+    logic [27:0] imap_in_1;
     assign imap_in_1 = c$vec_0[n_6];
-    logic [29:0] imap_out_1;
+    logic [27:0] imap_out_1;
     logic signed [63:0] c$ramNumber_app_arg;
     logic signed [63:0] c$ds9_app_arg;
     logic [22:0] c$app_arg_17;
-    logic [29:0] result_23;
+    logic [27:0] result_23;
     logic signed [63:0] \a# ;
     logic signed [63:0] \b# ;
     logic [7:0] ramNumber;
     logic ramIsUpper;
     logic [7:0] localRamNumber;
     NTT256_types::Tuple2_0 ds9;
-    logic [7:0] c$i_1128;
+    logic [7:0] c$i_1164;
     logic [7:0] c$bv;
     logic signed [63:0] result_selection_res;
     logic c$dtt_rhs_1;
-    logic [0:0] c$i_1131;
+    logic [2:0] c$i_1167;
     assign imap_out_1 = result_23;
 
-    assign c$ramNumber_app_arg = $unsigned({{(64-3) {1'b0}},i_1});
+    assign c$ramNumber_app_arg = $unsigned({{(64-5) {1'b0}},i_1});
 
-    assign c$i_1128 = (localRamNumber >> (64'sd1));
+    assign c$i_1164 = (localRamNumber >> (64'sd1));
 
-    assign c$ds9_app_arg = $unsigned({{(64-8) {1'b0}},c$i_1128});
+    assign c$ds9_app_arg = $unsigned({{(64-8) {1'b0}},c$i_1164});
 
     assign c$bv = ((localRamNumber));
 
@@ -1918,7 +2220,7 @@ module NTT256
       case(result_selection_res)
         64'sd1 : result_23 = {1'b1,{row
                                    ,c$app_arg_17}};
-        default : result_23 = {1'b0,29'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxx};
+        default : result_23 = {1'b0,27'bxxxxxxxxxxxxxxxxxxxxxxxxxxx};
       endcase
     end
 
@@ -1932,13 +2234,13 @@ module NTT256
 
     assign ramNumber = $unsigned(c$ramNumber_app_arg[0+:8]);
 
-    assign ramIsUpper = ramNumber >= 8'd4;
+    assign ramIsUpper = ramNumber >= 8'd16;
 
-    assign localRamNumber = ramIsUpper ? (ramNumber - 8'd4) : ramNumber;
+    assign localRamNumber = ramIsUpper ? (ramNumber - 8'd16) : ramNumber;
 
-    assign c$i_1131 = ($unsigned(c$ds9_app_arg[0+:1]));
+    assign c$i_1167 = ($unsigned(c$ds9_app_arg[0+:3]));
 
-    assign ds9 = c$computeCommands_app_arg[($unsigned({{(64-1) {1'b0}},c$i_1131}))];
+    assign ds9 = c$computeCommands_app_arg[($unsigned({{(64-3) {1'b0}},c$i_1167}))];
 
 
     assign result_16[n_6] = imap_out_1;
@@ -1948,7 +2250,7 @@ module NTT256
 
   assign row = writeControlSignal.CoeffControl_sel6;
 
-  assign result_17 = (~ writeControlSignal.CoeffControl_sel0) ? ('{8 {{1'b0,29'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}}}) : result_16;
+  assign result_17 = (~ writeControlSignal.CoeffControl_sel0) ? ('{32 {{1'b0,27'bxxxxxxxxxxxxxxxxxxxxxxxxxxx}}}) : result_16;
 
   assign c$vec_1 = (c$x_app_arg);
 
@@ -2287,49 +2589,49 @@ module NTT256
   endgenerate
   // map end
 
-  assign c$vec_3 = ('{8 {{1'b0,29'bxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}}});
+  assign c$vec_3 = ('{32 {{1'b0,27'bxxxxxxxxxxxxxxxxxxxxxxxxxxx}}});
 
   // imap begin
   genvar n_8;
   generate
   for (n_8=0; n_8 < $size(result_18); n_8 = n_8 + 1) begin : imap_2
-    logic [2:0] i_2;
+    logic [4:0] i_2;
     assign i_2 = n_8;
-    logic [29:0] imap_in_2;
+    logic [27:0] imap_in_2;
     assign imap_in_2 = c$vec_3[n_8];
-    logic [29:0] imap_out_2;
+    logic [27:0] imap_out_2;
     logic [7:0] ramWide_0;
     logic [7:0] bankNumber_0;
     logic signed [63:0] result_28;
     logic signed [63:0] c$app_arg_29;
     logic signed [63:0] c$ramWide_app_arg_0;
-    logic [29:0] result_27;
-    logic [7:0] c$i_1220;
-    logic [4:0] c$i_1221;
-    logic [7:0] c$i_1222;
+    logic [27:0] result_27;
+    logic [7:0] c$i_1256;
+    logic [2:0] c$i_1257;
+    logic [7:0] c$i_1258;
     NTT256_types::array_of_256_logic_vector_23 c$vec_2;
     assign imap_out_2 = result_27;
 
     assign ramWide_0 = $unsigned(c$ramWide_app_arg_0[0+:8]);
 
-    assign bankNumber_0 = ramWide_0 / 8'd2;
+    assign bankNumber_0 = ramWide_0 / 8'd8;
 
-    assign c$i_1220 = (((bankNumber_0 / 8'd2) * 8'd128) + (((($unsigned(c$app_arg_29[0+:8])) * 8'd4) + ((bankNumber_0 % 8'd2) * 8'd2)) + (ramWide_0 % 8'd2)));
+    assign c$i_1256 = (((bankNumber_0 / 8'd2) * 8'd128) + (((($unsigned(c$app_arg_29[0+:8])) * 8'd16) + ((bankNumber_0 % 8'd2) * 8'd8)) + (ramWide_0 % 8'd8)));
 
-    assign result_28 = $unsigned({{(64-8) {1'b0}},c$i_1220});
+    assign result_28 = $unsigned({{(64-8) {1'b0}},c$i_1256});
 
-    assign c$i_1221 = stateSignal.NTTState_sel5;
+    assign c$i_1257 = stateSignal.NTTState_sel5;
 
-    assign c$app_arg_29 = $unsigned({{(64-5) {1'b0}},c$i_1221});
+    assign c$app_arg_29 = $unsigned({{(64-3) {1'b0}},c$i_1257});
 
-    assign c$ramWide_app_arg_0 = $unsigned({{(64-3) {1'b0}},i_2});
+    assign c$ramWide_app_arg_0 = $unsigned({{(64-5) {1'b0}},i_2});
 
-    assign c$i_1222 = ($unsigned(result_28[0+:8]));
+    assign c$i_1258 = ($unsigned(result_28[0+:8]));
 
     assign c$vec_2 = NTT256_types::array_of_256_logic_vector_23_from_lv(stateSignal.NTTState_sel7);
 
     assign result_27 = {1'b1,{physicalMemoryRow
-                             ,c$vec_2[($unsigned({{(64-8) {1'b0}},c$i_1222}))]}};
+                             ,c$vec_2[($unsigned({{(64-8) {1'b0}},c$i_1258}))]}};
 
 
     assign result_18[n_8] = imap_out_2;
@@ -2337,39 +2639,39 @@ module NTT256
   endgenerate
   // imap end
 
-  assign physicalMemoryRow = $unsigned(c$physicalMemoryRow_app_arg[0+:6]);
+  assign physicalMemoryRow = $unsigned(c$physicalMemoryRow_app_arg[0+:4]);
 
-  assign c$i_1223 = stateSignal.NTTState_sel5;
+  assign c$i_1259 = stateSignal.NTTState_sel5;
 
-  assign c$physicalMemoryRow_app_arg = $unsigned({{(64-5) {1'b0}},c$i_1223});
+  assign c$physicalMemoryRow_app_arg = $unsigned({{(64-3) {1'b0}},c$i_1259});
 
   assign c$memoryOutputs_case_alt_selection_4 = stateSignal.NTTState_sel0;
 
   always_comb begin
     case(c$memoryOutputs_case_alt_selection_4)
-      3'b100 : c$memoryOutputs_case_alt_0 = '{8 {result_19}};
-      default : c$memoryOutputs_case_alt_0 = '{8 {result_11}};
+      3'b100 : c$memoryOutputs_case_alt_0 = '{32 {result_19}};
+      default : c$memoryOutputs_case_alt_0 = '{32 {result_11}};
     endcase
   end
 
   assign value_1 = stateSignal.NTTState_sel4 + ($unsigned(c$memoryOutputs_app_arg[0+:6]));
 
-  assign c$i_1225 = (value_1 - 6'd48);
+  assign c$i_1261 = (value_1 - 6'd12);
 
-  assign c$app_arg_7 = $unsigned({{(64-6) {1'b0}},c$i_1225});
+  assign c$app_arg_7 = $unsigned({{(64-6) {1'b0}},c$i_1261});
 
   assign c$app_arg_8 = $unsigned({{(64-6) {1'b0}},value_1});
 
-  assign result_19 = (value_1 >= 6'd48) ? ($unsigned(c$app_arg_7[0+:6])) : ($unsigned(c$app_arg_8[0+:6]));
+  assign result_19 = (value_1 >= 6'd12) ? ($unsigned(c$app_arg_7[0+:4])) : ($unsigned(c$app_arg_8[0+:4]));
 
-  assign c$i_1227 = stateSignal.NTTState_sel6;
+  assign c$i_1263 = stateSignal.NTTState_sel6;
 
-  assign c$memoryOutputs_app_arg = $unsigned({{(64-5) {1'b0}},c$i_1227});
+  assign c$memoryOutputs_app_arg = $unsigned({{(64-3) {1'b0}},c$i_1263});
 
   // register begin
   always_ff @(posedge clk or  posedge  rst) begin : c$stateSignal_app_arg_register
     if ( rst) begin
-      c$stateSignal_app_arg <= {1'b0,5'd0};
+      c$stateSignal_app_arg <= {1'b0,3'd0};
     end else  if (en)  begin
       c$stateSignal_app_arg <= {c$stateSignal_case_alt,stateSignal.NTTState_sel6};
     end
@@ -2392,18 +2694,42 @@ module NTT256
     if ( rst) begin
       writeControlSignal <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       writeControlSignal <= c$writeControlSignal_app_arg;
@@ -2416,18 +2742,42 @@ module NTT256
     if ( rst) begin
       c$writeControlSignal_app_arg <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       c$writeControlSignal_app_arg <= c$writeControlSignal_app_arg_0;
@@ -2440,18 +2790,42 @@ module NTT256
     if ( rst) begin
       c$writeControlSignal_app_arg_0 <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       c$writeControlSignal_app_arg_0 <= c$writeControlSignal_app_arg_1;
@@ -2464,18 +2838,42 @@ module NTT256
     if ( rst) begin
       c$writeControlSignal_app_arg_1 <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       c$writeControlSignal_app_arg_1 <= c$writeControlSignal_app_arg_2;
@@ -2488,18 +2886,42 @@ module NTT256
     if ( rst) begin
       c$writeControlSignal_app_arg_2 <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       c$writeControlSignal_app_arg_2 <= c$writeControlSignal_app_arg_3;
@@ -2512,18 +2934,42 @@ module NTT256
     if ( rst) begin
       c$writeControlSignal_app_arg_3 <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       c$writeControlSignal_app_arg_3 <= c$writeControlSignal_app_arg_4;
@@ -2536,18 +2982,42 @@ module NTT256
     if ( rst) begin
       c$writeControlSignal_app_arg_4 <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       c$writeControlSignal_app_arg_4 <= c$writeControlSignal_app_arg_5;
@@ -2560,18 +3030,42 @@ module NTT256
     if ( rst) begin
       c$writeControlSignal_app_arg_5 <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       c$writeControlSignal_app_arg_5 <= c$writeControlSignal_app_arg_6;
@@ -2584,18 +3078,42 @@ module NTT256
     if ( rst) begin
       c$writeControlSignal_app_arg_6 <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       c$writeControlSignal_app_arg_6 <= c$writeControlSignal_app_arg_7;
@@ -2608,18 +3126,42 @@ module NTT256
     if ( rst) begin
       c$writeControlSignal_app_arg_7 <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       c$writeControlSignal_app_arg_7 <= c$writeControlSignal_app_arg_8;
@@ -2632,18 +3174,42 @@ module NTT256
     if ( rst) begin
       c$writeControlSignal_app_arg_8 <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       c$writeControlSignal_app_arg_8 <= readControlReg;
@@ -2658,28 +3224,52 @@ module NTT256
     if ( rst) begin
       readControlReg <= {1'b0
   ,3'd0
-  ,6'd0
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{0: 6'd0
-                                                   ,1: 6'd0
-                                                   ,2: 6'd0
-                                                   ,3: 6'd0
-                                                   ,4: 6'd0
-                                                   ,5: 6'd0
-                                                   ,6: 6'd0
-                                                   ,7: 6'd0})}
+  ,4'd0
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{0: 4'd0
+                                                    ,1: 4'd0
+                                                    ,2: 4'd0
+                                                    ,3: 4'd0
+                                                    ,4: 4'd0
+                                                    ,5: 4'd0
+                                                    ,6: 4'd0
+                                                    ,7: 4'd0
+                                                    ,8: 4'd0
+                                                    ,9: 4'd0
+                                                    ,10: 4'd0
+                                                    ,11: 4'd0
+                                                    ,12: 4'd0
+                                                    ,13: 4'd0
+                                                    ,14: 4'd0
+                                                    ,15: 4'd0
+                                                    ,16: 4'd0
+                                                    ,17: 4'd0
+                                                    ,18: 4'd0
+                                                    ,19: 4'd0
+                                                    ,20: 4'd0
+                                                    ,21: 4'd0
+                                                    ,22: 4'd0
+                                                    ,23: 4'd0
+                                                    ,24: 4'd0
+                                                    ,25: 4'd0
+                                                    ,26: 4'd0
+                                                    ,27: 4'd0
+                                                    ,28: 4'd0
+                                                    ,29: 4'd0
+                                                    ,30: 4'd0
+                                                    ,31: 4'd0})}
   ,1'b0
   ,1'b0
-  ,6'd0
+  ,4'd0
   ,1'b0};
     end else  if (en)  begin
       readControlReg <= {c$controlSignal_case_alt
   ,stateSignal.NTTState_sel2
   ,stateSignal.NTTState_sel3
-  ,{NTT256_types::array_of_8_logic_vector_6_to_lv('{8 {result_11}})}
+  ,{NTT256_types::array_of_32_logic_vector_4_to_lv('{32 {result_11}})}
   ,(c$bv_38[(64'sd0)]) == (1'b1)
-  ,issueWide >= 8'd32
+  ,issueWide >= 8'd8
   ,result_9
-  ,stateSignal.NTTState_sel3 == 6'd63};
+  ,stateSignal.NTTState_sel3 == 4'd15};
     end
   end
   // register end

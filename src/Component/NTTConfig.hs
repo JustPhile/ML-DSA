@@ -17,7 +17,7 @@ module Component.NTTConfig
 import Clash.Prelude
 import GHC.TypeNats (Div)
 
-type PECount = 2
+type PECount = 16
 
 type ClusterCount = 2
 
