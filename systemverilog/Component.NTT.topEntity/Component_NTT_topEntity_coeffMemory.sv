@@ -8,14 +8,14 @@ module Component_NTT_topEntity_coeffMemory
       input wire logic c$memoryOutputs_bindCsr  // clock
     , input wire logic c$memoryOutputs_bindCsr_0  // reset
     , input wire logic c$memoryOutputs_bindCsr_1  // enable
-    , input wire NTT256_types::array_of_32_logic_vector_4 eta
-    , input wire NTT256_types::array_of_32_logic_vector_28 eta1
+    , input wire NTT256_types::array_of_16_logic_vector_5 eta
+    , input wire NTT256_types::array_of_16_logic_vector_29 eta1
 
       // Outputs
-    , output NTT256_types::array_of_32_logic_vector_23 result
+    , output NTT256_types::array_of_16_logic_vector_23 result
     );
-  NTT256_types::array_of_32_logic_vector_4 c$vec1;
-  NTT256_types::array_of_32_logic_vector_28 c$vec2;
+  NTT256_types::array_of_16_logic_vector_5 c$vec1;
+  NTT256_types::array_of_16_logic_vector_29 c$vec2;
 
   assign c$vec1 = (eta);
 
@@ -25,24 +25,24 @@ module Component_NTT_topEntity_coeffMemory
   genvar n;
   generate
   for (n = 0; n < $size(result); n = n + 1) begin : zipWith
-    logic [3:0] zipWith_in1;
+    logic [4:0] zipWith_in1;
     assign zipWith_in1 = c$vec1[n];
-    logic [27:0] zipWith_in2;
+    logic [28:0] zipWith_in2;
     assign zipWith_in2 = c$vec2[n];
     logic [22:0] zipWith_out;
     logic c$app_arg;
     logic [22:0] result_0;
     NTT256_types::Tuple2 a1;
     NTT256_types::Tuple2 ds;
-    logic [3:0] c$i_11;
+    logic [4:0] c$i_23;
     assign zipWith_out = result_0;
 
-    assign c$app_arg = zipWith_in2[27:27] ? 1'b1 : 1'b0;
+    assign c$app_arg = zipWith_in2[28:28] ? 1'b1 : 1'b0;
 
-    assign c$i_11 = ds.Tuple2_sel0;
+    assign c$i_23 = ds.Tuple2_sel0;
 
     // blockRam begin
-    NTT256_types::array_of_12_logic_vector_23 RAM;
+    NTT256_types::array_of_24_logic_vector_23 RAM;
     logic [23-1:0] result_0_q;
     initial begin
       RAM = '{0: 23'd0
@@ -56,22 +56,34 @@ module Component_NTT_topEntity_coeffMemory
      ,8: 23'd0
      ,9: 23'd0
      ,10: 23'd0
-     ,11: 23'd0};
+     ,11: 23'd0
+     ,12: 23'd0
+     ,13: 23'd0
+     ,14: 23'd0
+     ,15: 23'd0
+     ,16: 23'd0
+     ,17: 23'd0
+     ,18: 23'd0
+     ,19: 23'd0
+     ,20: 23'd0
+     ,21: 23'd0
+     ,22: 23'd0
+     ,23: 23'd0};
     end
     always @(posedge c$memoryOutputs_bindCsr) begin : Component_NTT_topEntity_coeffMemory_blockRam
       if (c$app_arg & c$memoryOutputs_bindCsr_1) begin
-        RAM[($unsigned({{(64-4) {1'b0}},c$i_11}))] <= ds.Tuple2_sel1;
+        RAM[($unsigned({{(64-5) {1'b0}},c$i_23}))] <= ds.Tuple2_sel1;
       end
       if (c$memoryOutputs_bindCsr_1) begin
-        result_0_q <= RAM[($unsigned({{(64-4) {1'b0}},zipWith_in1}))];
+        result_0_q <= RAM[($unsigned({{(64-5) {1'b0}},zipWith_in1}))];
       end
     end
     assign result_0 = result_0_q;
     // blockRam end
 
-    assign a1 = zipWith_in2[26:0];
+    assign a1 = zipWith_in2[27:0];
 
-    assign ds = zipWith_in2[27:27] ? a1 : {{4 {1'bx}}
+    assign ds = zipWith_in2[28:28] ? a1 : {{5 {1'bx}}
                                           ,{23 {1'bx}}};
 
 

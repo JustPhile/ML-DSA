@@ -38,6 +38,17 @@ library
 
     default-language:   Haskell2010
 
+executable ntt-cycles
+    main-is:            NTTCycles.hs
+    hs-source-dirs:     bench
+
+    build-depends:      base >= 4.14 && < 5,
+                        ml-dsa,
+                        clash-prelude,
+                        vector
+
+    default-language:   Haskell2010
+
 test-suite ml-dsa-tests
     type:               exitcode-stdio-1.0
     main-is:            Main.hs

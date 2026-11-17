@@ -6,10 +6,10 @@ The repository contains:
 
 - a software 256-point NTT and inverse NTT in Haskell;
 - ML-DSA key-generation and polynomial-support modules;
-- a controller-driven, two-PE NTT accelerator in Clash;
+- a controller-driven NTT accelerator with a configurable number of processing elements (PEs);
 - pipelined Montgomery modular multiplication;
 - conflict-free banked coefficient memory;
-- two synchronous twiddle-factor read lanes;
+- one synchronous twiddle-factor read lane per PE;
 - Hspec and QuickCheck tests comparing the hardware output with the software reference;
 - Nix, Stack, Clash, Yosys, synthesis, benchmarking, and static-timing-analysis tooling.
 
@@ -24,14 +24,15 @@ The repository contains:
 - Modular addition and subtraction
 - Montgomery reduction and multiplication
 - Ten-stage pipelined NTT processing element
-- Two parallel NTT processing elements
+- Configurable parallel NTT processing elements (`PECount`; latest reported benchmark: 8 PEs)
 - Iterative eight-stage, 256-point NTT controller
-- Four-bank, eight-block coefficient memory
-- Two synchronous twiddle-factor ROM read lanes
+- Four-bank coefficient memory with `4 * PECount` synchronous RAM blocks
+- `PECount` synchronous twiddle-factor ROM read lanes
 - Load, issue, drain, unload, and done control phases
 - Hardware-to-software NTT comparison tests
 - Nix development environment
 - Clash/Yosys synthesis, benchmark, and STA scripts
+- Simulation-based NTT cycle counting with a software-reference output check
 
 ## Main modules
 
@@ -50,10 +51,11 @@ The repository contains:
 | Module | Purpose |
 |---|---|
 | `Component.NTT` | Top-level interface, controller state machine, load/unload logic, and module integration |
-| `Component.NTTCore` | Modular arithmetic, pipelined PE, and two-PE array |
-| `Component.NTTCoeffMem` | Conflict-free coefficient memory with eight synchronous RAM blocks |
+| `Component.NTTCore` | Modular arithmetic, ten-stage pipelined PE, and generic PE array |
+| `Component.NTTCoeffMem` | Conflict-free coefficient memory with `4 * PECount` synchronous RAM blocks |
 | `Component.NTTCoeffController` | Coefficient addresses, twiddle addresses, PE operand routing, and writeback control |
-| `Component.NTTTwiddleMem` | Two synchronous twiddle-factor ROM read lanes |
+| `Component.NTTTwiddleMem` | One synchronous twiddle-factor ROM read lane per PE |
+| `Component.NTTConfig` | PE count and derived issue counts and memory dimensions |
 | `Component.NTTConstants` | Montgomery-domain ML-DSA twiddle-factor table |
 | `Component.NTTTH` | Template Haskell helpers for fixed pipeline delays |
 
@@ -72,8 +74,8 @@ The transform contains:
 8 radix-2 stages
 128 butterflies per stage
 1024 butterfly operations in total
-2 butterflies issued per cycle
-64 issue cycles per stage
+PECount butterflies issued per cycle
+128 / PECount issue cycles per stage
 ```
 
 The forward transform uses the following logical stage lengths:
@@ -136,22 +138,33 @@ toMontgomeryInteger x =
 
 ## Current hardware architecture
 
-The current design is an iterative, memory-backed NTT accelerator with two parallel processing elements:
+The design is an iterative, memory-backed NTT accelerator. Its parallelism is
+set in `src/Component/NTTConfig.hs`. The latest user-reported benchmark uses
+the following configuration:
 
-```text
-Controller
-  |-- coefficient addresses --> 8 coefficient RAM blocks
-  |-- twiddle addresses -----> 2 synchronous twiddle ROM lanes
-  |-- aligned metadata ------> writeback control
-
-Coefficient RAM outputs + twiddle ROM outputs
-  -> PE-input register
-  -> two ten-stage pipelined PEs
-  -> four coefficient results
-  -> conflict-free memory writeback
+```haskell
+type PECount = 8
 ```
 
-Each PE computes one radix-2 butterfly. The two-PE array therefore accepts two butterflies per cycle and produces two results per cycle after the pipeline fills.
+The controller issues coefficient-memory addresses, twiddle-ROM addresses, and
+writeback metadata. Synchronous memory outputs pass through a PE-input register
+and then the ten-stage butterfly pipelines before returning to coefficient memory.
+Each PE computes one radix-2 butterfly, producing two coefficient values.
+After the pipeline fills, the array can produce `PECount` butterfly results
+(`2 * PECount` coefficient values) per cycle during a stage's output stream.
+The controller drains the pipeline between stages.
+
+| Parameter | Formula | 2 PEs | 4 PEs | 8 PEs | 16 PEs |
+|---|---|---:|---:|---:|---:|
+| Issue cycles per stage | `128 / PECount` | 64 | 32 | 16 | 8 |
+| Total butterfly issue cycles | `1024 / PECount` | 512 | 256 | 128 | 64 |
+| Coefficient RAM blocks | `4 * PECount` | 8 | 16 | 32 | 64 |
+| Depth per RAM block | `96 / PECount` | 48 | 24 | 12 | 6 |
+| Logical load/unload rows | `64 / PECount` | 32 | 16 | 8 | 4 |
+| Twiddle read lanes | `PECount` | 2 | 4 | 8 | 16 |
+
+These are configuration dimensions, not measured total latencies. Run functional
+tests and cycle simulation after changing the PE count.
 
 ### Controller phases
 
@@ -160,46 +173,46 @@ Each PE computes one radix-2 butterfly. The two-PE array therefore accepts two b
 | Phase | Purpose |
 |---|---|
 | `Idle` | Wait for `start` |
-| `Load` | Load eight coefficients per cycle into coefficient memory |
-| `Issue` | Issue two butterflies per cycle |
+| `Load` | Load `4 * PECount` coefficients per cycle into coefficient memory |
+| `Issue` | Issue `PECount` butterflies per cycle |
 | `Drain` | Wait for the final pipelined result of a stage |
-| `UnloadIssue` | Read eight final coefficients per cycle |
+| `UnloadIssue` | Read `4 * PECount` final coefficients per cycle |
 | `UnloadDrain` | Capture the final synchronous-memory output and assert completion |
 
-The transform requires 64 issue cycles per stage. Including input loading, eight pipeline drains, and output unloading, the current complete operation takes approximately 673 cycles. The exact interface-visible latency should be checked by simulation whenever pipeline depth or controller sequencing changes.
+The transform requires `128 / PECount` issue cycles per stage, with `PECount`
+defined in `Component.NTTConfig`. The two-PE configuration requires 64 issue
+cycles per stage. Complete operation latency also includes input loading,
+eight pipeline drains, and output unloading. `bench NTT` measures the exact
+interface-visible latency by simulation whenever it runs.
 
 ### Coefficient memory
 
-The coefficient store follows the paper-inspired conflict-free organization:
+The coefficient store uses four banks with `PECount` RAM blocks per bank.
+Its total capacity remains:
 
 ```text
-4 banks
-2 RAM blocks per bank
-8 RAM blocks in total
-48 rows per RAM block
-384 coefficient locations = 1.5N
+4 * PECount * (96 / PECount) = 384 coefficient locations = 1.5N
 ```
 
-The 32 live logical rows rotate through the 48 physical rows using base offsets:
-
-```text
-0 -> 32 -> 16 -> 0
-```
-
-This replaces a two-full-polynomial ping-pong arrangement requiring `2N = 512` coefficient locations.
+The `64 / PECount` live logical rows rotate through `96 / PECount` physical
+rows. Base offsets follow `0`, `64 / PECount`, `32 / PECount`, then `0` again.
+For two PEs these offsets are 0, 32, and 16; for 16 PEs they are 0, 4, and 2.
+This arrangement uses fewer coefficient locations than two full polynomial
+buffers (`2N = 512`). Physical implementation area still depends on the target
+technology and memory mapping.
 
 ### Twiddle memory and timing isolation
 
 Earlier versions selected twiddle factors combinationally inside the coefficient controller. That created a path through stage decoding, a large twiddle multiplexer, and the first multiplication stage.
 
-The current version uses two synchronous twiddle ROM read lanes and a PE-input register. Coefficients, twiddles, and metadata are aligned after the one-cycle memory read:
+The current version uses one synchronous twiddle ROM read lane per PE and a PE-input register. Coefficients, twiddles, and metadata are aligned after the one-cycle memory read:
 
-```text
-cycle n:     issue coefficient and twiddle addresses
-cycle n+1:   receive memory outputs and aligned read control
-cycle n+2:   register complete PE inputs
-cycle n+12:  receive PE results with aligned write metadata
-```
+| Cycle | Event |
+|---|---|
+| `n` | Issue coefficient and twiddle addresses |
+| `n + 1` | Receive memory outputs and aligned read control |
+| `n + 2` | Register complete PE inputs |
+| `n + 12` | Receive PE results with aligned write metadata |
 
 The PE-input register adds one cycle of latency per stage drain but does not reduce throughput.
 
@@ -219,16 +232,26 @@ topEntity
      )
 ```
 
-The Boolean input is `start`. The Boolean output is a one-cycle `done` indication, and the vector output contains the completed 256-point transform.
+The Boolean input is `start`. Pulse it for one enabled cycle while the controller
+is idle; requests during an active transform are ignored. The Boolean output is
+a one-cycle `done` indication when enable remains high, and the vector output
+contains the completed 256-point transform. Hold enable high throughout the
+benchmark measurement.
 
 ## Synthesis and timing results
 
-The current Nangate45 standard-cell benchmark reports:
+### Architecture comparison
+
+The following historical Nangate45 standard-cell results were recorded in the
+original README. They are retained as reported; the 8-PE area and timing
+match the latest reported benchmark above. Other configurations were not
+remeasured in that invocation:
 
 | Metric | Previous 2 PE design | 2 PE design | 4 PE design | 8 PE design |
 |---|---:|---:|---:|---:|
 | Area | 212,708.762 um^2 | 213215.226 um^2 | 2458191.464 um^2 | 310231.544 um^2 |
 | Critical path | 1.30 ns | 1.28 ns | 1.34 ns | 1.36 ns |
+| Start-to-done latency | Not recorded | Not recorded | 386 cycles | 242 cycles |
 | Worst slack at a 5 ns constraint | 3.66 ns | 3.68 ns | 3.62 ns | 3.60 ns |
 | WNS | 0.000 ns | 0.000 ns | 0.000 ns | 0.000 ns |
 | TNS | 0.000 ns | 0.000 ns | 0.000 ns | 0.000 ns |
@@ -330,9 +353,64 @@ bench NTT
 The benchmark performs:
 
 1. Haskell build;
-2. Clash HDL generation;
-3. Yosys synthesis;
-4. OpenSTA static timing analysis.
+2. NTT cycle simulation and a ramp-polynomial check against `MLDSA.NTT`;
+3. Clash HDL generation;
+4. Yosys synthesis;
+5. OpenSTA static timing analysis.
+
+For `NTT` (or `Component.NTT.topEntity`), the final metrics include `latency`
+in clock cycles. This is `doneCycle - startCycle`: elapsed clock periods from
+the single-cycle `start` pulse while idle to the first asserted `done`, with
+enable held high. It includes input capture, loading, all eight stages and
+their pipeline drains, and output unloading; reset and idle warm-up are excluded.
+The counter exists only in the simulation executable, so synthesis area and
+timing are unaffected. Other benchmark targets keep their existing metrics.
+
+Run just the measurement, without synthesis or STA, inside `nix develop`:
+
+```bash
+stack run ntt-cycles
+```
+
+It prints `NTT_CYCLES=<count>` on success and fails on a missing `done` within
+2048 cycles or a reference-output mismatch. The simulation runs even when HDL,
+synthesis, and STA results are cached, so a previous measurement is never reused
+after a PE-count or pipeline change.
+
+The cycle-counting workflow requires `bench/NTTCycles.hs`, the `ntt-cycles`
+executable stanza in `ml-dsa.cabal`, and its integration in `scripts/bench.py`.
+These are the cycle-counting additions described below; an older checkout
+without those additions only performs build, HDL generation, synthesis, and STA.
+
+### Cycle-counting files
+
+| File | Responsibility |
+|---|---|
+| `bench/NTTCycles.hs` | Simulate `Component.NTT.topEntity`, find the first `done`, and compare the ramp-polynomial output with `MLDSA.NTT.ntt` |
+| `ml-dsa.cabal` | Define the `ntt-cycles` executable and its dependencies |
+| `scripts/bench.py` | Run the measurement for NTT targets and display the `latency` metric |
+
+The printed stage durations in seconds measure tool execution time. The
+`latency` metric measures simulated hardware clock cycles; it is independent
+of how quickly the host runs the simulation. The latest reported measurement is 242 cycles for 8 PEs; cycle counts for
+other configurations must be measured separately.
+
+### Troubleshooting
+
+If the coefficient-memory configuration test rejects `16` while
+`Component.NTTConfig` selects 16 PEs, update the whitelist in
+`tests/Test/NTTCoeffMem.hs` from `[2, 4, 8]` to `[2, 4, 8, 16]`, then rerun
+`stack test`. This aligns the configuration check with the selected PE count;
+the transform and memory tests must still pass.
+
+For `IndentationError: unexpected indent` in `scripts/bench.py`, keep
+`cycles = None` inside `bench()`, aligned with the build call at four spaces.
+The `if resolved_target ...` statement also starts at four spaces, and its body
+starts at eight spaces. Use spaces consistently and check syntax before benchmarking:
+
+```bash
+python3 -m py_compile scripts/bench.py
+```
 
 Before comparing architectural changes, run the functional tests. A successful synthesis or timing report proves that the circuit was generated and analyzed; it does not prove that the NTT result is mathematically correct.
 
@@ -365,8 +443,8 @@ The key-generation work includes functions and operations for:
 - seed generation and expansion;
 - matrix generation;
 - uniform polynomial sampling;
-- public-key construction and encoding;
-- private-key construction and encoding;
+- public-key polynomial construction;
+- seed expansion and key-generation intermediate values;
 - polynomial and NTT support used by key generation.
 
 Relevant modules include:
@@ -384,7 +462,7 @@ MLDSA/NTT.hs
 - The hardware currently implements the forward NTT datapath; hardware inverse NTT support remains future work.
 - The wide `Vec 256` input and output interface creates large top-level registers and routing.
 - The design waits for the pipeline to drain between stages rather than overlapping adjacent stages.
-- The synchronous twiddle table is duplicated to provide two simultaneous reads.
+- The synchronous twiddle table is replicated to provide one simultaneous read per PE.
 - The current standard-cell results are pre-layout and do not include clock-tree or routing effects.
 - FPGA resource use and frequency must be measured with the target vendor tools.
 - ASIC memory area and timing must be measured using the intended SRAM/ROM macros.
@@ -393,10 +471,10 @@ MLDSA/NTT.hs
 
 Compared with the earlier fully combinational implementation, the current design:
 
-- reuses two pipelined butterfly PEs across all eight NTT stages;
-- issues two butterfly operations per cycle;
+- reuses `PECount` pipelined butterfly PEs across all eight NTT stages;
+- issues `PECount` butterfly operations per issue cycle;
 - stores coefficients in a conflict-free `1.5N` memory organization;
-- reads two twiddle factors synchronously per cycle;
+- reads `PECount` twiddle factors synchronously per issue cycle;
 - aligns coefficient data, twiddle data, and write metadata through explicit pipeline delays;
 - provides `start` and `done` control;
 - reduces the critical path while avoiding full combinational expansion of all 1024 butterfly operations.

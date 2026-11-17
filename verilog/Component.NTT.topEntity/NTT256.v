@@ -15,34 +15,30 @@ module NTT256
     , output wire  done
     , output wire [5887:0] result
     );
-  reg [551:0] c$x_app_arg = {{23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,
-                                                            23'd0},   {23'd0,
-                                                                       23'd0,
-                                                                       23'd0},
- {23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,
+  reg [275:0] c$x_app_arg = {{23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,
                                                             23'd0},   {23'd0,
                                                                        23'd0,
                                                                        23'd0}};
-  wire [183:0] c$zipWith_arg5;
-  wire [183:0] c$zipWith_arg5_0;
-  wire [183:0] c$zipWith_arg5_case_alt;
-  wire [183:0] c$zipWith_arg5_case_alt_0;
-  wire [367:0] result_2;
-  wire [183:0] c$zipWith_arg5_case_alt_1;
-  wire [183:0] c$zipWith_arg5_case_alt_2;
-  wire [551:0] result_3;
-  wire [735:0] ramBanks;
-  wire [551:0] result_4;
-  wire [183:0] result_5;
+  wire [91:0] c$zipWith_arg5;
+  wire [91:0] c$zipWith_arg5_0;
+  wire [91:0] c$zipWith_arg5_case_alt;
+  wire [91:0] c$zipWith_arg5_case_alt_0;
+  wire [183:0] result_2;
+  wire [91:0] c$zipWith_arg5_case_alt_1;
+  wire [91:0] c$zipWith_arg5_case_alt_2;
+  wire [275:0] result_3;
+  wire [367:0] ramBanks;
+  wire [275:0] result_4;
+  wire [91:0] result_5;
   wire signed [63:0] c$inputBase_case_alt;
-  wire [63:0] result_6;
+  wire [31:0] result_6;
   wire [7:0] inputBase;
-  wire [63:0] result_7;
+  wire [31:0] result_7;
   wire [7:0] issueWide;
   wire [5:0] value;
   wire signed [63:0] c$app_arg;
   wire signed [63:0] c$app_arg_0;
-  wire [3:0] result_8;
+  wire [4:0] result_8;
   wire signed [63:0] c$app_arg_1;
   wire signed [63:0] c$app_arg_2;
   wire [5:0] c$case_alt;
@@ -50,12 +46,12 @@ module NTT256
   wire [5:0] value_0;
   wire signed [63:0] c$app_arg_3;
   wire signed [63:0] c$app_arg_4;
-  wire [3:0] result_10;
+  wire [4:0] result_10;
   wire signed [63:0] c$app_arg_5;
   wire signed [63:0] c$app_arg_6;
   wire signed [63:0] c$issueWide_app_arg;
   reg  c$controlSignal_case_alt;
-  reg [11798:0] stateSignal = {3'd0,   1'b0,   3'd0,   4'd0,   6'd0,   3'd0,   3'd0,   {23'd0,   23'd0,
+  reg [11801:0] stateSignal = {3'd0,   1'b0,   3'd0,   5'd0,   6'd0,   4'd0,   4'd0,   {23'd0,   23'd0,
                                                           23'd0,   23'd0,
                                                           23'd0,   23'd0,
                                                           23'd0,   23'd0,
@@ -216,154 +212,114 @@ module NTT256
   23'd0,   23'd0,   23'd0,   23'd0,   23'd0,   23'd0,   23'd0,   23'd0,
   23'd0,   23'd0,   23'd0,   23'd0,   23'd0,   23'd0,   23'd0,   23'd0}};
   wire  finalReturned;
-  reg [11798:0] result_11;
-  wire [11798:0] c$case_alt_0;
-  wire [11798:0] c$case_alt_1;
-  wire [11798:0] c$case_alt_2;
-  wire [11798:0] c$case_alt_3;
-  wire [11798:0] c$case_alt_4;
-  wire [11798:0] result_12;
+  reg [11801:0] result_11;
+  wire [11801:0] c$case_alt_0;
+  wire [11801:0] c$case_alt_1;
+  wire [11801:0] c$case_alt_2;
+  wire [11801:0] c$case_alt_3;
+  wire [11801:0] c$case_alt_4;
+  wire [11801:0] result_12;
   wire [5:0] c$case_alt_5;
   wire [5:0] result_13;
-  wire [11798:0] c$nttNextState_$j_tupIn;
+  wire [11801:0] c$nttNextState_$j_tupIn;
   wire  valid;
   wire [5887:0] stateInput1;
-  wire [2:0] stateUnloadRow1;
-  wire [2:0] stateLoadRow1;
+  wire [3:0] stateUnloadRow1;
+  wire [3:0] stateLoadRow1;
   wire [5:0] stateBase1;
-  wire [3:0] stateIssue1;
+  wire [4:0] stateIssue1;
   wire [2:0] stateStage1;
   wire  stateDone1;
   wire [2:0] eta1;
-  wire [194303:0] ws;
-  wire [188415:0] ws1;
-  wire [895:0] xs0;
-  wire [2:0] unloadRow;
-  wire [735:0] result_14;
-  reg [895:0] c$memoryOutputs_case_alt;
-  wire [895:0] result_15;
-  wire [3:0] row;
-  wire [895:0] result_16;
-  wire [367:0] c$computeCommands_app_arg;
-  wire [895:0] result_17;
-  wire [3:0] physicalMemoryRow;
+  wire [100095:0] ws;
+  wire [94207:0] ws1;
+  wire [431:0] xs0;
+  wire [3:0] unloadRow;
+  wire [367:0] result_14;
+  reg [463:0] c$memoryOutputs_case_alt;
+  wire [463:0] result_15;
+  wire [4:0] row;
+  wire [463:0] result_16;
+  wire [183:0] c$computeCommands_app_arg;
+  wire [463:0] result_17;
+  wire [4:0] physicalMemoryRow;
   wire signed [63:0] c$physicalMemoryRow_app_arg;
-  reg [127:0] c$memoryOutputs_case_alt_0;
+  reg [79:0] c$memoryOutputs_case_alt_0;
   wire [5:0] value_1;
   wire signed [63:0] c$app_arg_7;
   wire signed [63:0] c$app_arg_8;
-  wire [3:0] result_18;
+  wire [4:0] result_18;
   wire signed [63:0] c$memoryOutputs_app_arg;
-  reg [3:0] c$stateSignal_app_arg = {1'b0,   3'd0};
+  reg [4:0] c$stateSignal_app_arg = {1'b0,   4'd0};
   reg  c$stateSignal_case_alt;
   wire signed [63:0] c$stateSignal_case_scrut;
-  reg [142:0] writeControlSignal = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] c$writeControlSignal_app_arg = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] c$writeControlSignal_app_arg_0 = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] c$writeControlSignal_app_arg_1 = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] c$writeControlSignal_app_arg_2 = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] c$writeControlSignal_app_arg_3 = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] c$writeControlSignal_app_arg_4 = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] c$writeControlSignal_app_arg_5 = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] c$writeControlSignal_app_arg_6 = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] c$writeControlSignal_app_arg_7 = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] c$writeControlSignal_app_arg_8 = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  reg [142:0] readControlReg = {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                          4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
- 4'd0,   1'b0};
-  wire [3:0] c$i_50;
-  wire [511:0] c$vec;
-  wire [5:0] c$i_83;
-  wire [2:0] c$i_85;
-  wire [7:0] c$i_87;
-  wire [5:0] c$i_94;
-  wire [2:0] c$i_96;
-  wire [7:0] c$i_97;
-  wire [3:0] c$i_98;
+  reg [96:0] writeControlSignal = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] c$writeControlSignal_app_arg = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] c$writeControlSignal_app_arg_0 = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] c$writeControlSignal_app_arg_1 = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] c$writeControlSignal_app_arg_2 = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] c$writeControlSignal_app_arg_3 = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] c$writeControlSignal_app_arg_4 = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] c$writeControlSignal_app_arg_5 = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] c$writeControlSignal_app_arg_6 = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] c$writeControlSignal_app_arg_7 = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] c$writeControlSignal_app_arg_8 = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  reg [96:0] readControlReg = {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                          5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
+  wire [4:0] c$i_26;
+  wire [255:0] c$vec;
+  wire [5:0] c$i_59;
+  wire [3:0] c$i_61;
+  wire [7:0] c$i_63;
+  wire [5:0] c$i_70;
+  wire [3:0] c$i_72;
+  wire [7:0] c$i_73;
+  wire [4:0] c$i_74;
   wire [2:0] result_selection_9;
-  wire [188415:0] c$vec2;
-  wire [159:0] xs0_res;
+  wire [94207:0] c$vec2;
+  wire [63:0] xs0_res;
   wire [2:0] c$memoryOutputs_case_alt_selection_1;
-  wire [895:0] c$vec_0;
-  wire [551:0] c$vec_1;
-  wire [895:0] c$vec_2;
-  wire [2:0] c$i_1259;
+  wire [463:0] c$vec_0;
+  wire [275:0] c$vec_1;
+  wire [463:0] c$vec_2;
+  wire [3:0] c$i_1235;
   wire [2:0] c$memoryOutputs_case_alt_selection_4;
-  wire [5:0] c$i_1261;
-  wire [2:0] c$i_1263;
+  wire [5:0] c$i_1237;
+  wire [3:0] c$i_1239;
   wire [2:0] c$dtt_rhs_4;
   wire [7:0] c$bv_38;
   wire [5888:0] result_0;
 
-  assign result_0 = {stateSignal[11795:11795],
+  assign result_0 = {stateSignal[11798:11798],
                      stateSignal[5887:0]};
 
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$x_app_arg_register
     if ( rst) begin
       c$x_app_arg <= {{23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,
-                                                              23'd0},   {23'd0,
-                                                                         23'd0,
-                                                                         23'd0},
-   {23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,   23'd0},   {23'd0,   23'd0,
                                                               23'd0},   {23'd0,
                                                                          23'd0,
                                                                          23'd0}};
@@ -373,19 +329,19 @@ module NTT256
   end
   // register end
 
-  assign c$zipWith_arg5 = readControlReg[6:6] ? c$zipWith_arg5_case_alt_0 : c$zipWith_arg5_case_alt;
+  assign c$zipWith_arg5 = readControlReg[7:7] ? c$zipWith_arg5_case_alt_0 : c$zipWith_arg5_case_alt;
 
-  assign c$zipWith_arg5_0 = readControlReg[6:6] ? c$zipWith_arg5_case_alt_2 : c$zipWith_arg5_case_alt_1;
+  assign c$zipWith_arg5_0 = readControlReg[7:7] ? c$zipWith_arg5_case_alt_2 : c$zipWith_arg5_case_alt_1;
 
-  assign c$zipWith_arg5_case_alt = ramBanks[367:184];
+  assign c$zipWith_arg5_case_alt = ramBanks[183:92];
 
-  assign c$zipWith_arg5_case_alt_0 = ramBanks[183:0];
+  assign c$zipWith_arg5_case_alt_0 = ramBanks[91:0];
 
   // zipWith start
   genvar i;
   generate
-  for (i = 0; i < 8; i = i + 1) begin : zipWith
-    localparam vec_index = 7 - i;
+  for (i = 0; i < 4; i = i + 1) begin : zipWith
+    localparam vec_index = 3 - i;
     wire [22:0] zipWith_in1;
     assign zipWith_in1 = c$zipWith_arg5[vec_index*23+:23];
     wire [22:0] zipWith_in2;
@@ -399,15 +355,15 @@ module NTT256
   endgenerate
   // zipWith end
 
-  assign c$zipWith_arg5_case_alt_1 = ramBanks[735:552];
+  assign c$zipWith_arg5_case_alt_1 = ramBanks[367:276];
 
-  assign c$zipWith_arg5_case_alt_2 = ramBanks[551:368];
+  assign c$zipWith_arg5_case_alt_2 = ramBanks[275:184];
 
   // zipWith start
   genvar i_0;
   generate
-  for (i_0 = 0; i_0 < 8; i_0 = i_0 + 1) begin : zipWith_0
-    localparam vec_index_0 = 7 - i_0;
+  for (i_0 = 0; i_0 < 4; i_0 = i_0 + 1) begin : zipWith_0
+    localparam vec_index_0 = 3 - i_0;
     wire [22:0] zipWith_in1_0;
     assign zipWith_in1_0 = c$zipWith_arg5_0[vec_index_0*23+:23];
     wire [45:0] zipWith_in2_0;
@@ -432,7 +388,7 @@ module NTT256
 
   assign ramBanks = result_14;
 
-  assign result_4 = (~ readControlReg[142:142]) ? ({8 {{23'd0,   23'd0,   23'd0}}}) : result_3;
+  assign result_4 = (~ readControlReg[96:96]) ? ({4 {{23'd0,   23'd0,   23'd0}}}) : result_3;
 
   Component_NTT_topEntity_twiddleMemory Component_NTT_topEntity_twiddleMemory_result_5
     ( .result (result_5)
@@ -441,23 +397,23 @@ module NTT256
     , .c$x_bindCsr_1 (en)
     , .eta (result_7) );
 
-  assign c$i_50 = stateSignal[11791:11788];
+  assign c$i_26 = stateSignal[11794:11790];
 
-  assign c$inputBase_case_alt = $unsigned({{(64-4) {1'b0}},c$i_50});
+  assign c$inputBase_case_alt = $unsigned({{(64-5) {1'b0}},c$i_26});
 
-  assign c$vec = ({8 {64'sd0}});
+  assign c$vec = ({4 {64'sd0}});
 
   // imap begin
   genvar i_1;
   generate
-  for (i_1=0; i_1 < 8; i_1 = i_1 + 1) begin : imap
-    localparam vec_index_1 = 7 - i_1;
-    wire [3-1:0] map_index;
+  for (i_1=0; i_1 < 4; i_1 = i_1 + 1) begin : imap
+    localparam vec_index_1 = 3 - i_1;
+    wire [2-1:0] map_index;
     wire signed [63:0] map_in;
     assign map_in = c$vec[vec_index_1*64+:64];
     wire [7:0] map_out;
 
-    assign map_index = i_1[0+:3];
+    assign map_index = i_1[0+:2];
     wire [7:0] c$case_alt_7;
     wire [7:0] result_19;
     wire [7:0] c$case_alt_8;
@@ -486,64 +442,64 @@ module NTT256
     wire  \c$rem#_arg2_case_scrut_1 ;
     wire  \c$rem#_arg2_case_scrut_2 ;
     wire  \c$rem#_arg2_case_scrut_3 ;
-    wire [7:0] c$i_54;
-    wire [7:0] c$i_56;
-    wire [7:0] c$i_58;
-    wire [7:0] c$i_60;
-    wire [7:0] c$i_63;
-    wire [7:0] c$i_66;
-    wire [7:0] c$i_68;
+    wire [7:0] c$i_30;
+    wire [7:0] c$i_32;
+    wire [7:0] c$i_34;
+    wire [7:0] c$i_36;
+    wire [7:0] c$i_39;
+    wire [7:0] c$i_42;
+    wire [7:0] c$i_44;
     assign map_out = c$case_alt_7;
 
-    assign c$case_alt_7 = (stateSignal[11794:11792] == 3'd0) ? 8'd1 : result_19;
+    assign c$case_alt_7 = (stateSignal[11797:11795] == 3'd0) ? 8'd1 : result_19;
 
     assign result_19 = \c$rem#_arg2_case_scrut_3  ? ($unsigned(c$app_arg_9[0+:8])) : c$case_alt_8;
 
     assign c$case_alt_8 = \c$rem#_arg2_case_scrut_2  ? ($unsigned(c$app_arg_10[0+:8])) : c$case_alt_9;
 
-    assign c$i_54 = (8'd2 + result_20);
+    assign c$i_30 = (8'd2 + result_20);
 
-    assign c$app_arg_9 = $unsigned({{(64-8) {1'b0}},c$i_54});
+    assign c$app_arg_9 = $unsigned({{(64-8) {1'b0}},c$i_30});
 
     assign c$case_alt_9 = \c$rem#_arg2_case_scrut_1  ? ($unsigned(c$app_arg_11[0+:8])) : c$case_alt_10;
 
-    assign c$i_56 = (8'd4 + result_20);
+    assign c$i_32 = (8'd4 + result_20);
 
-    assign c$app_arg_10 = $unsigned({{(64-8) {1'b0}},c$i_56});
+    assign c$app_arg_10 = $unsigned({{(64-8) {1'b0}},c$i_32});
 
     assign c$case_alt_10 = \c$rem#_arg2_case_scrut_0  ? ($unsigned(c$app_arg_12[0+:8])) : c$case_alt_11;
 
-    assign c$i_58 = (8'd8 + result_20);
+    assign c$i_34 = (8'd8 + result_20);
 
-    assign c$app_arg_11 = $unsigned({{(64-8) {1'b0}},c$i_58});
+    assign c$app_arg_11 = $unsigned({{(64-8) {1'b0}},c$i_34});
 
     assign c$case_alt_11 = \c$rem#_arg2_case_scrut  ? ($unsigned(c$app_arg_13[0+:8])) : c$case_alt_12;
 
-    assign c$i_60 = (8'd16 + result_20);
+    assign c$i_36 = (8'd16 + result_20);
 
-    assign c$app_arg_12 = $unsigned({{(64-8) {1'b0}},c$i_60});
+    assign c$app_arg_12 = $unsigned({{(64-8) {1'b0}},c$i_36});
 
-    assign c$case_alt_12 = (stateSignal[11794:11792] == 3'd6) ? ($unsigned(c$app_arg_14[0+:8])) : c$case_alt_13;
+    assign c$case_alt_12 = (stateSignal[11797:11795] == 3'd6) ? ($unsigned(c$app_arg_14[0+:8])) : c$case_alt_13;
 
-    assign c$i_63 = (8'd32 + result_20);
+    assign c$i_39 = (8'd32 + result_20);
 
-    assign c$app_arg_13 = $unsigned({{(64-8) {1'b0}},c$i_63});
+    assign c$app_arg_13 = $unsigned({{(64-8) {1'b0}},c$i_39});
 
-    assign c$case_alt_13 = (stateSignal[11794:11792] == 3'd7) ? ($unsigned(c$app_arg_15[0+:8])) : ({8 {1'bx}});
+    assign c$case_alt_13 = (stateSignal[11797:11795] == 3'd7) ? ($unsigned(c$app_arg_15[0+:8])) : ({8 {1'bx}});
 
-    assign c$i_66 = (8'd64 + result_20);
+    assign c$i_42 = (8'd64 + result_20);
 
-    assign c$app_arg_14 = $unsigned({{(64-8) {1'b0}},c$i_66});
+    assign c$app_arg_14 = $unsigned({{(64-8) {1'b0}},c$i_42});
 
-    assign c$i_68 = (8'd128 + \c$rem#_out_app_arg );
+    assign c$i_44 = (8'd128 + \c$rem#_out_app_arg );
 
-    assign c$app_arg_15 = $unsigned({{(64-8) {1'b0}},c$i_68});
+    assign c$app_arg_15 = $unsigned({{(64-8) {1'b0}},c$i_44});
 
     assign result_20 = \c$rem#_out_app_arg  % \c$rem#_arg2 ;
 
     assign \c$rem#_out_app_arg  = inputBase + ($unsigned(\c$rem#_out_app_arg_0 [0+:8]));
 
-    assign \c$rem#_out_app_arg_0  = $unsigned({{(64-3) {1'b0}},map_index});
+    assign \c$rem#_out_app_arg_0  = $unsigned({{(64-2) {1'b0}},map_index});
 
     assign \c$rem#_arg2  = \c$rem#_arg2_case_scrut_3  ? 8'd2 : \c$rem#_arg2_case_alt ;
 
@@ -555,15 +511,15 @@ module NTT256
 
     assign \c$rem#_arg2_case_alt_2  = \c$rem#_arg2_case_scrut  ? 8'd32 : 8'd64;
 
-    assign \c$rem#_arg2_case_scrut  = stateSignal[11794:11792] == 3'd5;
+    assign \c$rem#_arg2_case_scrut  = stateSignal[11797:11795] == 3'd5;
 
-    assign \c$rem#_arg2_case_scrut_0  = stateSignal[11794:11792] == 3'd4;
+    assign \c$rem#_arg2_case_scrut_0  = stateSignal[11797:11795] == 3'd4;
 
-    assign \c$rem#_arg2_case_scrut_1  = stateSignal[11794:11792] == 3'd3;
+    assign \c$rem#_arg2_case_scrut_1  = stateSignal[11797:11795] == 3'd3;
 
-    assign \c$rem#_arg2_case_scrut_2  = stateSignal[11794:11792] == 3'd2;
+    assign \c$rem#_arg2_case_scrut_2  = stateSignal[11797:11795] == 3'd2;
 
-    assign \c$rem#_arg2_case_scrut_3  = stateSignal[11794:11792] == 3'd1;
+    assign \c$rem#_arg2_case_scrut_3  = stateSignal[11797:11795] == 3'd1;
 
 
     assign result_6[vec_index_1*8+:8] = map_out;
@@ -571,55 +527,55 @@ module NTT256
   endgenerate
   // imap end
 
-  assign inputBase = ($unsigned(c$inputBase_case_alt[0+:8])) * 8'd8;
+  assign inputBase = ($unsigned(c$inputBase_case_alt[0+:8])) * 8'd4;
 
-  assign result_7 = (~ c$controlSignal_case_alt) ? ({8 {8'd0}}) : result_6;
+  assign result_7 = (~ c$controlSignal_case_alt) ? ({4 {8'd0}}) : result_6;
 
   assign issueWide = $unsigned(c$issueWide_app_arg[0+:8]);
 
   assign value = result_9 + ($unsigned(c$app_arg_1[0+:6]));
 
-  assign c$i_83 = (value - 6'd12);
+  assign c$i_59 = (value - 6'd24);
 
-  assign c$app_arg = $unsigned({{(64-6) {1'b0}},c$i_83});
+  assign c$app_arg = $unsigned({{(64-6) {1'b0}},c$i_59});
 
   assign c$app_arg_0 = $unsigned({{(64-6) {1'b0}},value});
 
-  assign result_8 = (value >= 6'd12) ? ($unsigned(c$app_arg[0+:4])) : ($unsigned(c$app_arg_0[0+:4]));
+  assign result_8 = (value >= 6'd24) ? ($unsigned(c$app_arg[0+:5])) : ($unsigned(c$app_arg_0[0+:5]));
 
-  assign c$i_85 = ($unsigned(c$app_arg_2[0+:3]));
+  assign c$i_61 = ($unsigned(c$app_arg_2[0+:4]));
 
-  assign c$app_arg_1 = $unsigned({{(64-3) {1'b0}},c$i_85});
+  assign c$app_arg_1 = $unsigned({{(64-4) {1'b0}},c$i_61});
 
-  assign c$i_87 = (issueWide % 8'd8);
+  assign c$i_63 = (issueWide % 8'd16);
 
-  assign c$app_arg_2 = $unsigned({{(64-8) {1'b0}},c$i_87});
+  assign c$app_arg_2 = $unsigned({{(64-8) {1'b0}},c$i_63});
 
-  assign c$case_alt = (stateSignal[11787:11782] == 6'd8) ? 6'd4 : 6'd0;
+  assign c$case_alt = (stateSignal[11789:11784] == 6'd16) ? 6'd8 : 6'd0;
 
-  assign result_9 = (stateSignal[11787:11782] == 6'd0) ? 6'd8 : c$case_alt;
+  assign result_9 = (stateSignal[11789:11784] == 6'd0) ? 6'd16 : c$case_alt;
 
-  assign value_0 = stateSignal[11787:11782] + ($unsigned(c$app_arg_5[0+:6]));
+  assign value_0 = stateSignal[11789:11784] + ($unsigned(c$app_arg_5[0+:6]));
 
-  assign c$i_94 = (value_0 - 6'd12);
+  assign c$i_70 = (value_0 - 6'd24);
 
-  assign c$app_arg_3 = $unsigned({{(64-6) {1'b0}},c$i_94});
+  assign c$app_arg_3 = $unsigned({{(64-6) {1'b0}},c$i_70});
 
   assign c$app_arg_4 = $unsigned({{(64-6) {1'b0}},value_0});
 
-  assign result_10 = (value_0 >= 6'd12) ? ($unsigned(c$app_arg_3[0+:4])) : ($unsigned(c$app_arg_4[0+:4]));
+  assign result_10 = (value_0 >= 6'd24) ? ($unsigned(c$app_arg_3[0+:5])) : ($unsigned(c$app_arg_4[0+:5]));
 
-  assign c$i_96 = ($unsigned(c$app_arg_6[0+:3]));
+  assign c$i_72 = ($unsigned(c$app_arg_6[0+:4]));
 
-  assign c$app_arg_5 = $unsigned({{(64-3) {1'b0}},c$i_96});
+  assign c$app_arg_5 = $unsigned({{(64-4) {1'b0}},c$i_72});
 
-  assign c$i_97 = (issueWide >> (64'sd1));
+  assign c$i_73 = (issueWide >> (64'sd1));
 
-  assign c$app_arg_6 = $unsigned({{(64-8) {1'b0}},c$i_97});
+  assign c$app_arg_6 = $unsigned({{(64-8) {1'b0}},c$i_73});
 
-  assign c$i_98 = stateSignal[11791:11788];
+  assign c$i_74 = stateSignal[11794:11790];
 
-  assign c$issueWide_app_arg = $unsigned({{(64-4) {1'b0}},c$i_98});
+  assign c$issueWide_app_arg = $unsigned({{(64-5) {1'b0}},c$i_74});
 
   always @(*) begin
     case(c$stateSignal_case_scrut)
@@ -631,7 +587,7 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : stateSignal_register
     if ( rst) begin
-      stateSignal <= {3'd0,   1'b0,   3'd0,   4'd0,   6'd0,   3'd0,   3'd0,   {23'd0,   23'd0,
+      stateSignal <= {3'd0,   1'b0,   3'd0,   5'd0,   6'd0,   4'd0,   4'd0,   {23'd0,   23'd0,
                                                             23'd0,   23'd0,
                                                             23'd0,   23'd0,
                                                             23'd0,   23'd0,
@@ -797,9 +753,9 @@ module NTT256
   end
   // register end
 
-  assign finalReturned = writeControlSignal[142:142] & writeControlSignal[0:0];
+  assign finalReturned = writeControlSignal[96:96] & writeControlSignal[0:0];
 
-  assign result_selection_9 = c$nttNextState_$j_tupIn[11798:11796];
+  assign result_selection_9 = c$nttNextState_$j_tupIn[11801:11799];
 
   always @(*) begin
     case(result_selection_9)
@@ -809,106 +765,109 @@ module NTT256
       3'b011 : result_11 = c$case_alt_1;
       3'b100 : result_11 = c$case_alt_0;
       default : result_11 = {3'd0,   1'b1,
-                             c$nttNextState_$j_tupIn[11794:11792],
-                             c$nttNextState_$j_tupIn[11791:11788],
-                             c$nttNextState_$j_tupIn[11787:11782],
-                             c$nttNextState_$j_tupIn[11781:11779],
-                             c$nttNextState_$j_tupIn[11778:11776],
+                             c$nttNextState_$j_tupIn[11797:11795],
+                             c$nttNextState_$j_tupIn[11794:11790],
+                             c$nttNextState_$j_tupIn[11789:11784],
+                             c$nttNextState_$j_tupIn[11783:11780],
+                             c$nttNextState_$j_tupIn[11779:11776],
                              c$nttNextState_$j_tupIn[11775:5888],
                              c$nttNextState_$j_tupIn[5887:0]};
     endcase
   end
 
-  assign c$case_alt_0 = (c$nttNextState_$j_tupIn[11778:11776] == 3'd7) ? {3'd5,
-                                                                          1'b0,   c$nttNextState_$j_tupIn[11794:11792],
-                                                                          c$nttNextState_$j_tupIn[11791:11788],
-                                                                          c$nttNextState_$j_tupIn[11787:11782],
-                                                                          c$nttNextState_$j_tupIn[11781:11779],
-                                                                          c$nttNextState_$j_tupIn[11778:11776],
-                                                                          c$nttNextState_$j_tupIn[11775:5888],
-                                                                          c$nttNextState_$j_tupIn[5887:0]} : {3'd4,
-                                                                                                              1'b0,
-                                                                                                              c$nttNextState_$j_tupIn[11794:11792],
-                                                                                                              c$nttNextState_$j_tupIn[11791:11788],
-                                                                                                              c$nttNextState_$j_tupIn[11787:11782],
-                                                                                                              c$nttNextState_$j_tupIn[11781:11779],
-                                                                                                              c$nttNextState_$j_tupIn[11778:11776] + 3'd1,
-                                                                                                              c$nttNextState_$j_tupIn[11775:5888],
-                                                                                                              c$nttNextState_$j_tupIn[5887:0]};
-
-  assign c$case_alt_1 = finalReturned ? result_12 : {3'd3,
-                                                     1'b0,   c$nttNextState_$j_tupIn[11794:11792],
-                                                     c$nttNextState_$j_tupIn[11791:11788],
-                                                     c$nttNextState_$j_tupIn[11787:11782],
-                                                     c$nttNextState_$j_tupIn[11781:11779],
-                                                     c$nttNextState_$j_tupIn[11778:11776],
-                                                     c$nttNextState_$j_tupIn[11775:5888],
-                                                     c$nttNextState_$j_tupIn[5887:0]};
-
-  assign c$case_alt_2 = (c$nttNextState_$j_tupIn[11791:11788] == 4'd15) ? {3'd3,
+  assign c$case_alt_0 = (c$nttNextState_$j_tupIn[11779:11776] == 4'd15) ? {3'd5,
                                                                            1'b0,
-                                                                           c$nttNextState_$j_tupIn[11794:11792],
-                                                                           c$nttNextState_$j_tupIn[11791:11788],
-                                                                           c$nttNextState_$j_tupIn[11787:11782],
-                                                                           c$nttNextState_$j_tupIn[11781:11779],
-                                                                           c$nttNextState_$j_tupIn[11778:11776],
+                                                                           c$nttNextState_$j_tupIn[11797:11795],
+                                                                           c$nttNextState_$j_tupIn[11794:11790],
+                                                                           c$nttNextState_$j_tupIn[11789:11784],
+                                                                           c$nttNextState_$j_tupIn[11783:11780],
+                                                                           c$nttNextState_$j_tupIn[11779:11776],
                                                                            c$nttNextState_$j_tupIn[11775:5888],
-                                                                           c$nttNextState_$j_tupIn[5887:0]} : {3'd2,
+                                                                           c$nttNextState_$j_tupIn[5887:0]} : {3'd4,
                                                                                                                1'b0,
-                                                                                                               c$nttNextState_$j_tupIn[11794:11792],
-                                                                                                               c$nttNextState_$j_tupIn[11791:11788] + 4'd1,
-                                                                                                               c$nttNextState_$j_tupIn[11787:11782],
-                                                                                                               c$nttNextState_$j_tupIn[11781:11779],
-                                                                                                               c$nttNextState_$j_tupIn[11778:11776],
+                                                                                                               c$nttNextState_$j_tupIn[11797:11795],
+                                                                                                               c$nttNextState_$j_tupIn[11794:11790],
+                                                                                                               c$nttNextState_$j_tupIn[11789:11784],
+                                                                                                               c$nttNextState_$j_tupIn[11783:11780],
+                                                                                                               c$nttNextState_$j_tupIn[11779:11776] + 4'd1,
                                                                                                                c$nttNextState_$j_tupIn[11775:5888],
                                                                                                                c$nttNextState_$j_tupIn[5887:0]};
 
-  assign c$case_alt_3 = (c$nttNextState_$j_tupIn[11781:11779] == 3'd7) ? {3'd2,
-                                                                          1'b0,   c$nttNextState_$j_tupIn[11794:11792],
-                                                                          4'd0,   c$nttNextState_$j_tupIn[11787:11782],
-                                                                          c$nttNextState_$j_tupIn[11781:11779],
-                                                                          c$nttNextState_$j_tupIn[11778:11776],
-                                                                          c$nttNextState_$j_tupIn[11775:5888],
-                                                                          c$nttNextState_$j_tupIn[5887:0]} : {3'd1,
-                                                                                                              1'b0,
-                                                                                                              c$nttNextState_$j_tupIn[11794:11792],
-                                                                                                              c$nttNextState_$j_tupIn[11791:11788],
-                                                                                                              c$nttNextState_$j_tupIn[11787:11782],
-                                                                                                              c$nttNextState_$j_tupIn[11781:11779] + 3'd1,
-                                                                                                              c$nttNextState_$j_tupIn[11778:11776],
-                                                                                                              c$nttNextState_$j_tupIn[11775:5888],
-                                                                                                              c$nttNextState_$j_tupIn[5887:0]};
+  assign c$case_alt_1 = finalReturned ? result_12 : {3'd3,
+                                                     1'b0,   c$nttNextState_$j_tupIn[11797:11795],
+                                                     c$nttNextState_$j_tupIn[11794:11790],
+                                                     c$nttNextState_$j_tupIn[11789:11784],
+                                                     c$nttNextState_$j_tupIn[11783:11780],
+                                                     c$nttNextState_$j_tupIn[11779:11776],
+                                                     c$nttNextState_$j_tupIn[11775:5888],
+                                                     c$nttNextState_$j_tupIn[5887:0]};
+
+  assign c$case_alt_2 = (c$nttNextState_$j_tupIn[11794:11790] == 5'd31) ? {3'd3,
+                                                                           1'b0,
+                                                                           c$nttNextState_$j_tupIn[11797:11795],
+                                                                           c$nttNextState_$j_tupIn[11794:11790],
+                                                                           c$nttNextState_$j_tupIn[11789:11784],
+                                                                           c$nttNextState_$j_tupIn[11783:11780],
+                                                                           c$nttNextState_$j_tupIn[11779:11776],
+                                                                           c$nttNextState_$j_tupIn[11775:5888],
+                                                                           c$nttNextState_$j_tupIn[5887:0]} : {3'd2,
+                                                                                                               1'b0,
+                                                                                                               c$nttNextState_$j_tupIn[11797:11795],
+                                                                                                               c$nttNextState_$j_tupIn[11794:11790] + 5'd1,
+                                                                                                               c$nttNextState_$j_tupIn[11789:11784],
+                                                                                                               c$nttNextState_$j_tupIn[11783:11780],
+                                                                                                               c$nttNextState_$j_tupIn[11779:11776],
+                                                                                                               c$nttNextState_$j_tupIn[11775:5888],
+                                                                                                               c$nttNextState_$j_tupIn[5887:0]};
+
+  assign c$case_alt_3 = (c$nttNextState_$j_tupIn[11783:11780] == 4'd15) ? {3'd2,
+                                                                           1'b0,
+                                                                           c$nttNextState_$j_tupIn[11797:11795],
+                                                                           5'd0,
+                                                                           c$nttNextState_$j_tupIn[11789:11784],
+                                                                           c$nttNextState_$j_tupIn[11783:11780],
+                                                                           c$nttNextState_$j_tupIn[11779:11776],
+                                                                           c$nttNextState_$j_tupIn[11775:5888],
+                                                                           c$nttNextState_$j_tupIn[5887:0]} : {3'd1,
+                                                                                                               1'b0,
+                                                                                                               c$nttNextState_$j_tupIn[11797:11795],
+                                                                                                               c$nttNextState_$j_tupIn[11794:11790],
+                                                                                                               c$nttNextState_$j_tupIn[11789:11784],
+                                                                                                               c$nttNextState_$j_tupIn[11783:11780] + 4'd1,
+                                                                                                               c$nttNextState_$j_tupIn[11779:11776],
+                                                                                                               c$nttNextState_$j_tupIn[11775:5888],
+                                                                                                               c$nttNextState_$j_tupIn[5887:0]};
 
   assign c$case_alt_4 = start ? {3'd1,   1'b0,
-                                 3'd0,   4'd0,   6'd0,   3'd0,   3'd0,   poly,
+                                 3'd0,   5'd0,   6'd0,   4'd0,   4'd0,   poly,
                                  {256 {23'd0}}} : {3'd0,   1'b0,
-                                                   c$nttNextState_$j_tupIn[11794:11792],
-                                                   c$nttNextState_$j_tupIn[11791:11788],
-                                                   c$nttNextState_$j_tupIn[11787:11782],
-                                                   c$nttNextState_$j_tupIn[11781:11779],
-                                                   c$nttNextState_$j_tupIn[11778:11776],
+                                                   c$nttNextState_$j_tupIn[11797:11795],
+                                                   c$nttNextState_$j_tupIn[11794:11790],
+                                                   c$nttNextState_$j_tupIn[11789:11784],
+                                                   c$nttNextState_$j_tupIn[11783:11780],
+                                                   c$nttNextState_$j_tupIn[11779:11776],
                                                    c$nttNextState_$j_tupIn[11775:5888],
                                                    c$nttNextState_$j_tupIn[5887:0]};
 
-  assign result_12 = (c$nttNextState_$j_tupIn[11794:11792] == 3'd7) ? {3'd4,
-                                                                       1'b0,   c$nttNextState_$j_tupIn[11794:11792],
-                                                                       c$nttNextState_$j_tupIn[11791:11788],
+  assign result_12 = (c$nttNextState_$j_tupIn[11797:11795] == 3'd7) ? {3'd4,
+                                                                       1'b0,   c$nttNextState_$j_tupIn[11797:11795],
+                                                                       c$nttNextState_$j_tupIn[11794:11790],
                                                                        result_13,
-                                                                       c$nttNextState_$j_tupIn[11781:11779],   3'd0,
+                                                                       c$nttNextState_$j_tupIn[11783:11780],   4'd0,
                                                                        c$nttNextState_$j_tupIn[11775:5888],
                                                                        c$nttNextState_$j_tupIn[5887:0]} : {3'd2,
                                                                                                            1'b0,
-                                                                                                           c$nttNextState_$j_tupIn[11794:11792] + 3'd1,
-                                                                                                           4'd0,
+                                                                                                           c$nttNextState_$j_tupIn[11797:11795] + 3'd1,
+                                                                                                           5'd0,
                                                                                                            result_13,
-                                                                                                           c$nttNextState_$j_tupIn[11781:11779],
-                                                                                                           c$nttNextState_$j_tupIn[11778:11776],
+                                                                                                           c$nttNextState_$j_tupIn[11783:11780],
+                                                                                                           c$nttNextState_$j_tupIn[11779:11776],
                                                                                                            c$nttNextState_$j_tupIn[11775:5888],
                                                                                                            c$nttNextState_$j_tupIn[5887:0]};
 
-  assign c$case_alt_5 = (c$nttNextState_$j_tupIn[11787:11782] == 6'd8) ? 6'd4 : 6'd0;
+  assign c$case_alt_5 = (c$nttNextState_$j_tupIn[11789:11784] == 6'd16) ? 6'd8 : 6'd0;
 
-  assign result_13 = (c$nttNextState_$j_tupIn[11787:11782] == 6'd0) ? 6'd8 : c$case_alt_5;
+  assign result_13 = (c$nttNextState_$j_tupIn[11789:11784] == 6'd0) ? 6'd16 : c$case_alt_5;
 
   assign c$nttNextState_$j_tupIn = (~ valid) ? {eta1,
                                                 stateDone1,   stateStage1,   stateIssue1,
@@ -919,39 +878,39 @@ module NTT256
                                                                         stateLoadRow1,   stateUnloadRow1,
                                                                         stateInput1,   ws[5888-1:0]};
 
-  assign valid = c$stateSignal_app_arg[3:3];
+  assign valid = c$stateSignal_app_arg[4:4];
 
   assign stateInput1 = stateSignal[11775:5888];
 
-  assign stateUnloadRow1 = stateSignal[11778:11776];
+  assign stateUnloadRow1 = stateSignal[11779:11776];
 
-  assign stateLoadRow1 = stateSignal[11781:11779];
+  assign stateLoadRow1 = stateSignal[11783:11780];
 
-  assign stateBase1 = stateSignal[11787:11782];
+  assign stateBase1 = stateSignal[11789:11784];
 
-  assign stateIssue1 = stateSignal[11791:11788];
+  assign stateIssue1 = stateSignal[11794:11790];
 
-  assign stateStage1 = stateSignal[11794:11792];
+  assign stateStage1 = stateSignal[11797:11795];
 
-  assign stateDone1 = stateSignal[11795:11795];
+  assign stateDone1 = stateSignal[11798:11798];
 
-  assign eta1 = stateSignal[11798:11796];
+  assign eta1 = stateSignal[11801:11799];
 
   assign ws = {stateSignal[5887:0],   ws1};
 
-  assign c$vec2 = (ws[194304-1 : 5888]);
+  assign c$vec2 = (ws[100096-1 : 5888]);
 
   // zipWith start
   genvar i_3;
   generate
-  for (i_3 = 0; i_3 < 32; i_3 = i_3 + 1) begin : zipWith_1
-    localparam vec_index_2 = 31 - i_3;
-    wire [27:0] zipWith_in1_1;
-    assign zipWith_in1_1 = xs0[vec_index_2*28+:28];
+  for (i_3 = 0; i_3 < 16; i_3 = i_3 + 1) begin : zipWith_1
+    localparam vec_index_2 = 15 - i_3;
+    wire [26:0] zipWith_in1_1;
+    assign zipWith_in1_1 = xs0[vec_index_2*27+:27];
     wire [5887:0] zipWith_in2_1;
     assign zipWith_in2_1 = c$vec2[vec_index_2*5888+:5888];
     wire [5887:0] zip_out_1;
-    wire [4:0] ramIndex;
+    wire [3:0] ramIndex;
     wire [22:0] coefficient;
     wire [5887:0] c$case_alt_17;
     wire [7:0] ramWide;
@@ -959,36 +918,36 @@ module NTT256
     wire signed [63:0] result_21;
     wire signed [63:0] c$app_arg_16;
     wire signed [63:0] c$ramWide_app_arg;
-    wire [7:0] c$i_1155;
-    wire [7:0] c$i_1163;
+    wire [7:0] c$i_1131;
+    wire [7:0] c$i_1139;
     assign zip_out_1 = c$case_alt_17;
 
-    assign ramIndex = zipWith_in1_1[27:23];
+    assign ramIndex = zipWith_in1_1[26:23];
 
     assign coefficient = zipWith_in1_1[22:0];
 
-    assign c$i_1155 = ($unsigned(result_21[0+:8]));
+    assign c$i_1131 = ($unsigned(result_21[0+:8]));
 
     // vector replace begin
     genvar i_2;
 
     for (i_2=0;i_2<256;i_2=i_2+1) begin : vector_replace
-      assign c$case_alt_17[(255-i_2)*23+:23] = ($unsigned({{(64-8) {1'b0}},c$i_1155})) == i_2 ? coefficient : zipWith_in2_1[(255-i_2)*23+:23];
+      assign c$case_alt_17[(255-i_2)*23+:23] = ($unsigned({{(64-8) {1'b0}},c$i_1131})) == i_2 ? coefficient : zipWith_in2_1[(255-i_2)*23+:23];
     end
 
     // vector replace end
 
     assign ramWide = $unsigned(c$ramWide_app_arg[0+:8]);
 
-    assign bankNumber = ramWide / 8'd8;
+    assign bankNumber = ramWide / 8'd4;
 
-    assign c$i_1163 = (((bankNumber / 8'd2) * 8'd128) + (((($unsigned(c$app_arg_16[0+:8])) * 8'd16) + ((bankNumber % 8'd2) * 8'd8)) + (ramWide % 8'd8)));
+    assign c$i_1139 = (((bankNumber / 8'd2) * 8'd128) + (((($unsigned(c$app_arg_16[0+:8])) * 8'd8) + ((bankNumber % 8'd2) * 8'd4)) + (ramWide % 8'd4)));
 
-    assign result_21 = $unsigned({{(64-8) {1'b0}},c$i_1163});
+    assign result_21 = $unsigned({{(64-8) {1'b0}},c$i_1139});
 
-    assign c$app_arg_16 = $unsigned({{(64-3) {1'b0}},unloadRow});
+    assign c$app_arg_16 = $unsigned({{(64-4) {1'b0}},unloadRow});
 
-    assign c$ramWide_app_arg = $unsigned({{(64-5) {1'b0}},ramIndex});
+    assign c$ramWide_app_arg = $unsigned({{(64-4) {1'b0}},ramIndex});
 
 
     assign ws1[vec_index_2*5888+:5888] = zip_out_1;
@@ -999,16 +958,16 @@ module NTT256
   // imap begin
   genvar i_4;
   generate
-  for (i_4=0; i_4 < 32; i_4 = i_4 + 1) begin : imap_0
-    localparam vec_index_3 = 31 - i_4;
-    wire [5-1:0] map_index_0;
-    wire [4:0] map_out_0;
+  for (i_4=0; i_4 < 16; i_4 = i_4 + 1) begin : imap_0
+    localparam vec_index_3 = 15 - i_4;
+    wire [4-1:0] map_index_0;
+    wire [3:0] map_out_0;
 
-    assign map_index_0 = i_4[0+:5];
+    assign map_index_0 = i_4[0+:4];
     assign map_out_0 = map_index_0;
 
 
-    assign xs0_res[vec_index_3*5+:5] = map_out_0;
+    assign xs0_res[vec_index_3*4+:4] = map_out_0;
   end
   endgenerate
   // imap end
@@ -1016,22 +975,22 @@ module NTT256
   // zipWith start
   genvar i_5;
   generate
-  for (i_5 = 0; i_5 < 32; i_5 = i_5 + 1) begin : zipWith_2
-    localparam vec_index_4 = 31 - i_5;
-    wire [4:0] zipWith_in1_2;
-    assign zipWith_in1_2 = xs0_res[vec_index_4*5+:5];
+  for (i_5 = 0; i_5 < 16; i_5 = i_5 + 1) begin : zipWith_2
+    localparam vec_index_4 = 15 - i_5;
+    wire [3:0] zipWith_in1_2;
+    assign zipWith_in1_2 = xs0_res[vec_index_4*4+:4];
     wire [22:0] zipWith_in2_2;
     assign zipWith_in2_2 = result_14[vec_index_4*23+:23];
-    wire [27:0] zip_out_2;
+    wire [26:0] zip_out_2;
     assign zip_out_2 = {zipWith_in1_2,   zipWith_in2_2};
 
 
-    assign xs0[vec_index_4*28+:28] = zip_out_2;
+    assign xs0[vec_index_4*27+:27] = zip_out_2;
   end
   endgenerate
   // zipWith end
 
-  assign unloadRow = c$stateSignal_app_arg[2:0];
+  assign unloadRow = c$stateSignal_app_arg[3:0];
 
   Component_NTT_topEntity_coeffMemory Component_NTT_topEntity_coeffMemory_result_14
     ( .result (result_14)
@@ -1041,7 +1000,7 @@ module NTT256
     , .eta (c$memoryOutputs_case_alt_0)
     , .eta1 (c$memoryOutputs_case_alt) );
 
-  assign c$memoryOutputs_case_alt_selection_1 = stateSignal[11798:11796];
+  assign c$memoryOutputs_case_alt_selection_1 = stateSignal[11801:11799];
 
   always @(*) begin
     case(c$memoryOutputs_case_alt_selection_1)
@@ -1050,41 +1009,41 @@ module NTT256
     endcase
   end
 
-  assign c$vec_0 = ({32 {{1'b0,27'bxxxxxxxxxxxxxxxxxxxxxxxxxxx}}});
+  assign c$vec_0 = ({16 {{1'b0,28'bxxxxxxxxxxxxxxxxxxxxxxxxxxxx}}});
 
   // imap begin
   genvar i_7;
   generate
-  for (i_7=0; i_7 < 32; i_7 = i_7 + 1) begin : imap_1
-    localparam vec_index_5 = 31 - i_7;
-    wire [5-1:0] map_index_1;
-    wire [27:0] map_in_1;
-    assign map_in_1 = c$vec_0[vec_index_5*28+:28];
-    wire [27:0] map_out_1;
+  for (i_7=0; i_7 < 16; i_7 = i_7 + 1) begin : imap_1
+    localparam vec_index_5 = 15 - i_7;
+    wire [4-1:0] map_index_1;
+    wire [28:0] map_in_1;
+    assign map_in_1 = c$vec_0[vec_index_5*29+:29];
+    wire [28:0] map_out_1;
 
-    assign map_index_1 = i_7[0+:5];
+    assign map_index_1 = i_7[0+:4];
     wire signed [63:0] c$ramNumber_app_arg;
     wire signed [63:0] c$ds9_app_arg;
     wire [22:0] c$app_arg_17;
-    reg [27:0] result_22;
+    reg [28:0] result_22;
     wire signed [63:0] \a# ;
     wire signed [63:0] \b# ;
     wire [7:0] ramNumber;
     wire  ramIsUpper;
     wire [7:0] localRamNumber;
     wire [45:0] ds9;
-    wire [7:0] c$i_1164;
+    wire [7:0] c$i_1140;
     wire [7:0] c$bv;
     wire signed [63:0] result_selection_res;
     wire  c$dtt_rhs_1;
-    wire [2:0] c$i_1167;
+    wire [1:0] c$i_1143;
     assign map_out_1 = result_22;
 
-    assign c$ramNumber_app_arg = $unsigned({{(64-5) {1'b0}},map_index_1});
+    assign c$ramNumber_app_arg = $unsigned({{(64-4) {1'b0}},map_index_1});
 
-    assign c$i_1164 = (localRamNumber >> (64'sd1));
+    assign c$i_1140 = (localRamNumber >> (64'sd1));
 
-    assign c$ds9_app_arg = $unsigned({{(64-8) {1'b0}},c$i_1164});
+    assign c$ds9_app_arg = $unsigned({{(64-8) {1'b0}},c$i_1140});
 
     assign c$bv = ((localRamNumber));
 
@@ -1096,54 +1055,54 @@ module NTT256
       case(result_selection_res)
         64'sd1 : result_22 = {1'b1,{row,
                                     c$app_arg_17}};
-        default : result_22 = {1'b0,27'bxxxxxxxxxxxxxxxxxxxxxxxxxxx};
+        default : result_22 = {1'b0,28'bxxxxxxxxxxxxxxxxxxxxxxxxxxxx};
       endcase
     end
 
     assign \a#  = $unsigned({{63 {1'b0}},
                              ramIsUpper});
 
-    assign c$dtt_rhs_1 = writeControlSignal[5:5];
+    assign c$dtt_rhs_1 = writeControlSignal[6:6];
 
     assign \b#  = $unsigned({{63 {1'b0}},
                              c$dtt_rhs_1});
 
     assign ramNumber = $unsigned(c$ramNumber_app_arg[0+:8]);
 
-    assign ramIsUpper = ramNumber >= 8'd16;
+    assign ramIsUpper = ramNumber >= 8'd8;
 
-    assign localRamNumber = ramIsUpper ? (ramNumber - 8'd16) : ramNumber;
+    assign localRamNumber = ramIsUpper ? (ramNumber - 8'd8) : ramNumber;
 
-    assign c$i_1167 = ($unsigned(c$ds9_app_arg[0+:3]));
+    assign c$i_1143 = ($unsigned(c$ds9_app_arg[0+:2]));
 
     // index begin
-    wire [45:0] vecArray [0:8-1];
+    wire [45:0] vecArray [0:4-1];
     genvar i_6;
 
-    for (i_6=0; i_6 < 8; i_6=i_6+1) begin : mk_array
-      assign vecArray[(8-1)-i_6] = c$computeCommands_app_arg[i_6*46+:46];
+    for (i_6=0; i_6 < 4; i_6=i_6+1) begin : mk_array
+      assign vecArray[(4-1)-i_6] = c$computeCommands_app_arg[i_6*46+:46];
     end
 
-    assign ds9 = vecArray[($unsigned({{(64-3) {1'b0}},c$i_1167}))];
+    assign ds9 = vecArray[($unsigned({{(64-2) {1'b0}},c$i_1143}))];
     // index end
 
 
-    assign result_15[vec_index_5*28+:28] = map_out_1;
+    assign result_15[vec_index_5*29+:29] = map_out_1;
   end
   endgenerate
   // imap end
 
-  assign row = writeControlSignal[4:1];
+  assign row = writeControlSignal[5:1];
 
-  assign result_16 = (~ writeControlSignal[142:142]) ? ({32 {{1'b0,27'bxxxxxxxxxxxxxxxxxxxxxxxxxxx}}}) : result_15;
+  assign result_16 = (~ writeControlSignal[96:96]) ? ({16 {{1'b0,28'bxxxxxxxxxxxxxxxxxxxxxxxxxxxx}}}) : result_15;
 
   assign c$vec_1 = (c$x_app_arg);
 
   // map begin
   genvar i_8;
   generate
-  for (i_8=0; i_8 < 8; i_8 = i_8 + 1) begin : map
-    localparam vec_index_6 = 7 - i_8;
+  for (i_8=0; i_8 < 4; i_8 = i_8 + 1) begin : map
+    localparam vec_index_6 = 3 - i_8;
     wire [68:0] map_in_2;
     assign map_in_2 = c$vec_1[vec_index_6*69+:69];
     wire [45:0] map_out_2;
@@ -1465,33 +1424,33 @@ module NTT256
   endgenerate
   // map end
 
-  assign c$vec_2 = ({32 {{1'b0,27'bxxxxxxxxxxxxxxxxxxxxxxxxxxx}}});
+  assign c$vec_2 = ({16 {{1'b0,28'bxxxxxxxxxxxxxxxxxxxxxxxxxxxx}}});
 
   // imap begin
   genvar i_10;
   generate
-  for (i_10=0; i_10 < 32; i_10 = i_10 + 1) begin : imap_2
-    localparam vec_index_7 = 31 - i_10;
-    wire [5-1:0] map_index_2;
-    wire [27:0] map_in_3;
-    assign map_in_3 = c$vec_2[vec_index_7*28+:28];
-    wire [27:0] map_out_3;
+  for (i_10=0; i_10 < 16; i_10 = i_10 + 1) begin : imap_2
+    localparam vec_index_7 = 15 - i_10;
+    wire [4-1:0] map_index_2;
+    wire [28:0] map_in_3;
+    assign map_in_3 = c$vec_2[vec_index_7*29+:29];
+    wire [28:0] map_out_3;
 
-    assign map_index_2 = i_10[0+:5];
+    assign map_index_2 = i_10[0+:4];
     wire [22:0] c$app_arg_29;
     wire [7:0] ramWide_0;
     wire [7:0] bankNumber_0;
     wire signed [63:0] result_27;
     wire signed [63:0] c$app_arg_30;
     wire signed [63:0] c$ramWide_app_arg_0;
-    wire [27:0] result_26;
-    wire [7:0] c$i_1249;
+    wire [28:0] result_26;
+    wire [7:0] c$i_1225;
     wire [5887:0] c$vecFlat;
-    wire [7:0] c$i_1257;
-    wire [2:0] c$i_1258;
+    wire [7:0] c$i_1233;
+    wire [3:0] c$i_1234;
     assign map_out_3 = result_26;
 
-    assign c$i_1249 = ($unsigned(result_27[0+:8]));
+    assign c$i_1225 = ($unsigned(result_27[0+:8]));
 
     assign c$vecFlat = stateSignal[11775:5888];
 
@@ -1503,67 +1462,67 @@ module NTT256
       assign vecArray_0[(256-1)-i_9] = c$vecFlat[i_9*23+:23];
     end
 
-    assign c$app_arg_29 = vecArray_0[($unsigned({{(64-8) {1'b0}},c$i_1249}))];
+    assign c$app_arg_29 = vecArray_0[($unsigned({{(64-8) {1'b0}},c$i_1225}))];
     // index end
 
     assign ramWide_0 = $unsigned(c$ramWide_app_arg_0[0+:8]);
 
-    assign bankNumber_0 = ramWide_0 / 8'd8;
+    assign bankNumber_0 = ramWide_0 / 8'd4;
 
-    assign c$i_1257 = (((bankNumber_0 / 8'd2) * 8'd128) + (((($unsigned(c$app_arg_30[0+:8])) * 8'd16) + ((bankNumber_0 % 8'd2) * 8'd8)) + (ramWide_0 % 8'd8)));
+    assign c$i_1233 = (((bankNumber_0 / 8'd2) * 8'd128) + (((($unsigned(c$app_arg_30[0+:8])) * 8'd8) + ((bankNumber_0 % 8'd2) * 8'd4)) + (ramWide_0 % 8'd4)));
 
-    assign result_27 = $unsigned({{(64-8) {1'b0}},c$i_1257});
+    assign result_27 = $unsigned({{(64-8) {1'b0}},c$i_1233});
 
-    assign c$i_1258 = stateSignal[11781:11779];
+    assign c$i_1234 = stateSignal[11783:11780];
 
-    assign c$app_arg_30 = $unsigned({{(64-3) {1'b0}},c$i_1258});
+    assign c$app_arg_30 = $unsigned({{(64-4) {1'b0}},c$i_1234});
 
-    assign c$ramWide_app_arg_0 = $unsigned({{(64-5) {1'b0}},map_index_2});
+    assign c$ramWide_app_arg_0 = $unsigned({{(64-4) {1'b0}},map_index_2});
 
     assign result_26 = {1'b1,{physicalMemoryRow,
                               c$app_arg_29}};
 
 
-    assign result_17[vec_index_7*28+:28] = map_out_3;
+    assign result_17[vec_index_7*29+:29] = map_out_3;
   end
   endgenerate
   // imap end
 
-  assign physicalMemoryRow = $unsigned(c$physicalMemoryRow_app_arg[0+:4]);
+  assign physicalMemoryRow = $unsigned(c$physicalMemoryRow_app_arg[0+:5]);
 
-  assign c$i_1259 = stateSignal[11781:11779];
+  assign c$i_1235 = stateSignal[11783:11780];
 
-  assign c$physicalMemoryRow_app_arg = $unsigned({{(64-3) {1'b0}},c$i_1259});
+  assign c$physicalMemoryRow_app_arg = $unsigned({{(64-4) {1'b0}},c$i_1235});
 
-  assign c$memoryOutputs_case_alt_selection_4 = stateSignal[11798:11796];
+  assign c$memoryOutputs_case_alt_selection_4 = stateSignal[11801:11799];
 
   always @(*) begin
     case(c$memoryOutputs_case_alt_selection_4)
-      3'b100 : c$memoryOutputs_case_alt_0 = {32 {result_18}};
-      default : c$memoryOutputs_case_alt_0 = {32 {result_10}};
+      3'b100 : c$memoryOutputs_case_alt_0 = {16 {result_18}};
+      default : c$memoryOutputs_case_alt_0 = {16 {result_10}};
     endcase
   end
 
-  assign value_1 = stateSignal[11787:11782] + ($unsigned(c$memoryOutputs_app_arg[0+:6]));
+  assign value_1 = stateSignal[11789:11784] + ($unsigned(c$memoryOutputs_app_arg[0+:6]));
 
-  assign c$i_1261 = (value_1 - 6'd12);
+  assign c$i_1237 = (value_1 - 6'd24);
 
-  assign c$app_arg_7 = $unsigned({{(64-6) {1'b0}},c$i_1261});
+  assign c$app_arg_7 = $unsigned({{(64-6) {1'b0}},c$i_1237});
 
   assign c$app_arg_8 = $unsigned({{(64-6) {1'b0}},value_1});
 
-  assign result_18 = (value_1 >= 6'd12) ? ($unsigned(c$app_arg_7[0+:4])) : ($unsigned(c$app_arg_8[0+:4]));
+  assign result_18 = (value_1 >= 6'd24) ? ($unsigned(c$app_arg_7[0+:5])) : ($unsigned(c$app_arg_8[0+:5]));
 
-  assign c$i_1263 = stateSignal[11778:11776];
+  assign c$i_1239 = stateSignal[11779:11776];
 
-  assign c$memoryOutputs_app_arg = $unsigned({{(64-3) {1'b0}},c$i_1263});
+  assign c$memoryOutputs_app_arg = $unsigned({{(64-4) {1'b0}},c$i_1239});
 
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$stateSignal_app_arg_register
     if ( rst) begin
-      c$stateSignal_app_arg <= {1'b0,   3'd0};
+      c$stateSignal_app_arg <= {1'b0,   4'd0};
     end else if (en) begin
-      c$stateSignal_app_arg <= {c$stateSignal_case_alt,   stateSignal[11778:11776]};
+      c$stateSignal_app_arg <= {c$stateSignal_case_alt,   stateSignal[11779:11776]};
     end
   end
   // register end
@@ -1575,19 +1534,16 @@ module NTT256
     endcase
   end
 
-  assign c$dtt_rhs_4 = stateSignal[11798:11796];
+  assign c$dtt_rhs_4 = stateSignal[11801:11799];
 
   assign c$stateSignal_case_scrut = $unsigned(c$dtt_rhs_4);
 
   // register begin
   always @(posedge clk or  posedge  rst) begin : writeControlSignal_register
     if ( rst) begin
-      writeControlSignal <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      writeControlSignal <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       writeControlSignal <= c$writeControlSignal_app_arg;
     end
@@ -1597,12 +1553,9 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_register
     if ( rst) begin
-      c$writeControlSignal_app_arg <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      c$writeControlSignal_app_arg <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       c$writeControlSignal_app_arg <= c$writeControlSignal_app_arg_0;
     end
@@ -1612,12 +1565,9 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_0_register
     if ( rst) begin
-      c$writeControlSignal_app_arg_0 <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      c$writeControlSignal_app_arg_0 <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       c$writeControlSignal_app_arg_0 <= c$writeControlSignal_app_arg_1;
     end
@@ -1627,12 +1577,9 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_1_register
     if ( rst) begin
-      c$writeControlSignal_app_arg_1 <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      c$writeControlSignal_app_arg_1 <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       c$writeControlSignal_app_arg_1 <= c$writeControlSignal_app_arg_2;
     end
@@ -1642,12 +1589,9 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_2_register
     if ( rst) begin
-      c$writeControlSignal_app_arg_2 <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      c$writeControlSignal_app_arg_2 <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       c$writeControlSignal_app_arg_2 <= c$writeControlSignal_app_arg_3;
     end
@@ -1657,12 +1601,9 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_3_register
     if ( rst) begin
-      c$writeControlSignal_app_arg_3 <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      c$writeControlSignal_app_arg_3 <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       c$writeControlSignal_app_arg_3 <= c$writeControlSignal_app_arg_4;
     end
@@ -1672,12 +1613,9 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_4_register
     if ( rst) begin
-      c$writeControlSignal_app_arg_4 <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      c$writeControlSignal_app_arg_4 <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       c$writeControlSignal_app_arg_4 <= c$writeControlSignal_app_arg_5;
     end
@@ -1687,12 +1625,9 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_5_register
     if ( rst) begin
-      c$writeControlSignal_app_arg_5 <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      c$writeControlSignal_app_arg_5 <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       c$writeControlSignal_app_arg_5 <= c$writeControlSignal_app_arg_6;
     end
@@ -1702,12 +1637,9 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_6_register
     if ( rst) begin
-      c$writeControlSignal_app_arg_6 <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      c$writeControlSignal_app_arg_6 <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       c$writeControlSignal_app_arg_6 <= c$writeControlSignal_app_arg_7;
     end
@@ -1717,12 +1649,9 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_7_register
     if ( rst) begin
-      c$writeControlSignal_app_arg_7 <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      c$writeControlSignal_app_arg_7 <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       c$writeControlSignal_app_arg_7 <= c$writeControlSignal_app_arg_8;
     end
@@ -1732,12 +1661,9 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : c$writeControlSignal_app_arg_8_register
     if ( rst) begin
-      c$writeControlSignal_app_arg_8 <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      c$writeControlSignal_app_arg_8 <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
       c$writeControlSignal_app_arg_8 <= readControlReg;
     end
@@ -1749,16 +1675,13 @@ module NTT256
   // register begin
   always @(posedge clk or  posedge  rst) begin : readControlReg_register
     if ( rst) begin
-      readControlReg <= {1'b0,   3'd0,   4'd0,   {4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,   4'd0,
-                            4'd0,   4'd0,   4'd0,   4'd0},   1'b0,   1'b0,
-   4'd0,   1'b0};
+      readControlReg <= {1'b0,   3'd0,   5'd0,   {5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,   5'd0,
+                            5'd0,   5'd0},   1'b0,   1'b0,   5'd0,   1'b0};
     end else if (en) begin
-      readControlReg <= {c$controlSignal_case_alt,   stateSignal[11794:11792],
-   stateSignal[11791:11788],   {32 {result_10}},   (c$bv_38[(64'sd0)]) == (1'b1),
-   issueWide >= 8'd8,   result_8,   stateSignal[11791:11788] == 4'd15};
+      readControlReg <= {c$controlSignal_case_alt,   stateSignal[11797:11795],
+   stateSignal[11794:11790],   {16 {result_10}},   (c$bv_38[(64'sd0)]) == (1'b1),
+   issueWide >= 8'd16,   result_8,   stateSignal[11794:11790] == 5'd31};
     end
   end
   // register end

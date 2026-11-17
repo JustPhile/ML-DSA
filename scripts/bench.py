@@ -663,16 +663,59 @@ def load_cached_synth_metrics(target: str):
 def load_cached_sta_metrics(target: str):
     return parse_sta_summary(resolve_sta_summary_path(target).read_text(encoding="utf-8"))
 
+def run_ntt_cycles() -> int:
+    """Measure topEntity start-to-done latency using the current Clash model."""
+    output = run_cmd(
+        ["stack", "run", "ntt-cycles"],
+        "NTT cycle simulation",
+    )
 
-def render_metrics(area, sta: dict[str, str]) -> None:
-    critical_path = sta.get("Critical Path") or sta.get("Combinational Delay") or "N/A"
+    matches = re.findall(
+        r"^NTT_CYCLES=([0-9]+)$",
+        output,
+        re.MULTILINE,
+    )
+
+    if len(matches) != 1 or int(matches[0]) <= 0:
+        sys.exit(
+            "[bench] ERROR: missing or invalid NTT cycle count from simulation"
+        )
+
+    return int(matches[0])
+
+def render_metrics(
+    area,
+    sta: dict[str, str],
+    cycles: int | None = None,
+) -> None:
+    critical_path = (
+        sta.get("Critical Path")
+        or sta.get("Combinational Delay")
+        or "N/A"
+    )
     wns = sta.get("WNS (max)", "N/A")
     tns = sta.get("TNS (max)", "N/A")
     worst_slack = sta.get("Worst Slack", "N/A")
+
     print()
     print_metric("area", fmt_area(area), "um^2", emphasize=True)
+
     cp_value, cp_unit = split_value_unit(critical_path)
-    print_metric("critical path", cp_value, cp_unit, emphasize=True)
+    print_metric(
+        "critical path",
+        cp_value,
+        cp_unit,
+        emphasize=True,
+    )
+
+    if cycles is not None:
+        print_metric(
+            "latency",
+            str(cycles),
+            "cycles",
+            emphasize=True,
+        )
+
     print_metric("wns", *split_value_unit(wns))
     print_metric("tns", *split_value_unit(tns))
     print_metric("worst slack", *split_value_unit(worst_slack))
@@ -759,28 +802,91 @@ def bench(target_label: str):
 
     if requested_target in VHDL_TARGETS:
         hdl_current = hdl_stage_current(requested_target)
-        area, sta, _timings, hdl_current, synth_current, sta_current, top = run_bench_target(
+
+        (
+            area,
+            sta,
+            _timings,
+            hdl_current,
+            synth_current,
+            sta_current,
+            top,
+        ) = run_bench_target(
             requested_target,
             cache,
             hdl_current,
         )
-        save_target_cache(cache_path, requested_target, top, hdl_current, synth_current, sta_current)
+
+        save_target_cache(
+            cache_path,
+            requested_target,
+            top,
+            hdl_current,
+            synth_current,
+            sta_current,
+        )
+
         render_metrics(area, sta)
         return
 
     resolved_target = ALIASES.get(requested_target, requested_target)
     module_name, main_is = parse_clash_target(resolved_target)
-    run_timed_stage("build", lambda: run_cmd(["stack", "build", "ml-dsa:lib"], "stack build ml-dsa:lib"))
-    hdl_current = hdl_stage_current(requested_target, module_name, main_is)
-    area, sta, _timings, hdl_current, synth_current, sta_current, top = run_bench_target(
+
+    run_timed_stage(
+        "build",
+        lambda: run_cmd(
+            ["stack", "build", "ml-dsa:lib"],
+            "stack build ml-dsa:lib",
+        ),
+    )
+
+    cycles = None
+
+    if resolved_target in (
+        "Component.NTT",
+        "Component.NTT.topEntity",
+    ):
+        cycles, _ = run_timed_stage(
+            "simulation",
+            run_ntt_cycles,
+        )
+
+    hdl_current = hdl_stage_current(
+        requested_target,
+        module_name,
+        main_is,
+    )
+
+    (
+        area,
+        sta,
+        _timings,
+        hdl_current,
+        synth_current,
+        sta_current,
+        top,
+    ) = run_bench_target(
         requested_target,
         cache,
         hdl_current,
-        ensure_hdl=lambda: run_hdl(requested_target, module_name, main_is),
+        ensure_hdl=lambda: run_hdl(
+            requested_target,
+            module_name,
+            main_is,
+        ),
         hdl_args=(module_name, main_is),
     )
-    save_target_cache(cache_path, requested_target, top, hdl_current, synth_current, sta_current)
-    render_metrics(area, sta)
+
+    save_target_cache(
+        cache_path,
+        requested_target,
+        top,
+        hdl_current,
+        synth_current,
+        sta_current,
+    )
+
+    render_metrics(area, sta, cycles)
 
 
 def split_value_unit(text: str) -> tuple[str, str]:

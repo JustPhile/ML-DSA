@@ -86,7 +86,7 @@ spec =
     describe "configuration" P.$ do
       it "uses a supported power-of-two PE count" P.$ do
         peCountValue `shouldSatisfy`
-          (`P.elem` [2, 4, 8])
+          (`P.elem` [2, 4, 8, 16])
 
       it "maintains 384 coefficient storage locations" P.$ do
         (4 P.* peCountValue P.* ramDepthValue)
