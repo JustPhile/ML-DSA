@@ -247,14 +247,14 @@ original README. They are retained as reported; the 8-PE area and timing
 match the latest reported benchmark above. Other configurations were not
 remeasured in that invocation:
 
-| Metric | Previous 2 PE design | 2 PE design | 4 PE design | 8 PE design |
+| Metric | 2 PE design | 4 PE design | 8 PE design |
 |---|---:|---:|---:|---:|
-| Area | 212,708.762 um^2 | 213215.226 um^2 | 2458191.464 um^2 | 310231.544 um^2 |
-| Critical path | 1.30 ns | 1.28 ns | 1.34 ns | 1.36 ns |
-| Start-to-done latency | Not recorded | Not recorded | 386 cycles | 242 cycles |
-| Worst slack at a 5 ns constraint | 3.66 ns | 3.68 ns | 3.62 ns | 3.60 ns |
-| WNS | 0.000 ns | 0.000 ns | 0.000 ns | 0.000 ns |
-| TNS | 0.000 ns | 0.000 ns | 0.000 ns | 0.000 ns |
+| Area | 213215.226 um^2 | 2458191.464 um^2 | 310231.544 um^2 |
+| Critical path | 1.28 ns | 1.34 ns | 1.36 ns |
+| Start-to-done latency | 674 cycles | 386 cycles | 242 cycles |
+| Worst slack at a 5 ns constraint | 3.68 ns | 3.62 ns | 3.60 ns |
+| WNS | 0.000 ns | 0.000 ns | 0.000 ns |
+| TNS | 0.000 ns | 0.000 ns | 0.000 ns |
 
 ## Development environment
 
